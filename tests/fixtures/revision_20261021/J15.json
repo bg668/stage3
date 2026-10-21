@@ -1,0 +1,1069 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J15.json",
+        "sha256": "865d1c44e360fdd60234a61936e17c6fbbfe95a3035d4b36465ffa69dc8a327e"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J15/analyzer/validated_result.json",
+        "sha256": "656051ab0e7bba10be0281385671903062c5d52bb796a2e16b82b7d1ea4c3541"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J15/reviewer/validated_result.json",
+        "sha256": "ee1d2dced8fbc0a77019b1a0d0949c3734dbb1850411cb2bf350c34160c8c163"
+      },
+      "packet": {
+        "path": "testdata/packets/J15.md",
+        "sha256": "c962c3f41406d22d7ea6797e7d1a0b550f00a676bb64a23b28311027d688cdea"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J15/reviser/validated_result.json",
+        "sha256": "576772fdbf90132ef5dfb253d2d33d13d7b5b87a04868a7dbc2ef33ce9e6d9b1"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J15/reviser/revision_scope.json",
+        "sha256": "fe0eb84c5d986cd04523bfc75d1e46533c0d3b9a1d0b81e93b0cee477ad7df1f"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J15",
+  "packet_text": "# J15 独立的远程删除分支\n任务来源：J13 的 F495:L85-96 调用 F489；F489 把 F486 作为回调传给 F488。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0489 sub_40AFB0，原文件 L0001–L0035 / 共 35 行\n```text\nL0001: int *sub_40AFB0()\nL0002: {\nL0003:   char *n3; // esi\nL0004:   HWND hWnd; // eax\nL0005:   HANDLE hProcess; // ebx\nL0006:   SIZE_T nSize; // eax\nL0007:   void *lpParameter; // eax\nL0008:   unsigned int v6[2]; // [esp-Ch] [ebp-24h] BYREF\nL0009:   int *v7; // [esp-4h] [ebp-1Ch]\nL0010:   char *v8; // [esp+8h] [ebp-10h] BYREF\nL0011:   char *v9; // [esp+Ch] [ebp-Ch] BYREF\nL0012:   void *Buffer; // [esp+10h] [ebp-8h] BYREF\nL0013:   DWORD dwProcessId; // [esp+14h] [ebp-4h] BYREF\nL0014:   int savedregs; // [esp+18h] [ebp+0h] BYREF\nL0015: \nL0016:   v8 = 0;\nL0017:   v9 = 0;\nL0018:   v7 = &savedregs;\nL0019:   v6[1] = (unsigned int)&loc_40B062;\nL0020:   v6[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0021:   __writefsdword(0, (unsigned int)v6);\nL0022:   sub_4013A4(0, (int *)&v9);\nL0023:   n3 = sub_401F48(v9);\nL0024:   hWnd = FindWindowA(\"Shell_TrayWnd\", 0);\nL0025:   GetWindowThreadProcessId(hWnd, &dwProcessId);\nL0026:   hProcess = OpenProcess(0x1F0FFFu, 0, dwProcessId);\nL0027:   sub_401CAC(&v8, n3);\nL0028:   nSize = sub_401D50((int)v8);\nL0029:   Buffer = sub_40AEBC(nSize, n3, hProcess);\nL0030:   lpParameter = sub_40AEBC(4u, &Buffer, hProcess);\nL0031:   sub_40AF08(hProcess, (DWORD (__stdcall *)(LPVOID))sub_40AE94, lpParameter);\nL0032:   __writefsdword(0, v6[0]);\nL0033:   v7 = (int *)&loc_40B069;\nL0034:   return sub_401AE4((int *)&v8, 2);\nL0035: }\n```\n\n## F-0486 sub_40AE94，原文件 L0001–L0013 / 共 13 行\n```text\nL0001: BOOL __stdcall sub_40AE94(LPCSTR *a1)\nL0002: {\nL0003:   BOOL result; // eax\nL0004: \nL0005:   while ( 1 )\nL0006:   {\nL0007:     result = DeleteFileA(*a1);\nL0008:     if ( result )\nL0009:       break;\nL0010:     Sleep(0x64u);\nL0011:   }\nL0012:   return result;\nL0013: }\n```\n\n## F-0487 sub_40AEBC，原文件 L0001–L0012 / 共 12 行\n```text\nL0001: void *__usercall sub_40AEBC@<eax>(SIZE_T nSize@<ecx>, LPCVOID lpBuffer@<edx>, void *hProcess@<eax>)\nL0002: {\nL0003:   void *lpAddress; // ebx\nL0004:   SIZE_T lpNumberOfBytesWritten_; // [esp+0h] [ebp-18h] BYREF\nL0005:   DWORD flOldProtect[5]; // [esp+4h] [ebp-14h] BYREF\nL0006: \nL0007:   lpAddress = VirtualAllocEx(hProcess, 0, nSize, 0x3000u, 0x40u);\nL0008:   VirtualProtectEx(hProcess, lpAddress, nSize, 0x40u, flOldProtect);\nL0009:   if ( lpAddress && !WriteProcessMemory(hProcess, lpAddress, lpBuffer, nSize, &lpNumberOfBytesWritten_) )\nL0010:     return 0;\nL0011:   return lpAddress;\nL0012: }\n```\n\n## F-0488 sub_40AF08，原文件 L0001–L0035 / 共 35 行\n```text\nL0001: LPVOID __usercall sub_40AF08@<eax>(\nL0002:         void *hProcess@<eax>,\nL0003:         DWORD (__stdcall *lpStartAddress_1)(LPVOID lpThreadParameter)@<edx>,\nL0004:         void *lpParameter_1@<ecx>)\nL0005: {\nL0006:   HMODULE ModuleHandleA_0; // eax\nL0007:   char *v5; // eax\nL0008:   SIZE_T dwSize; // esi\nL0009:   void *lpAddress; // edi\nL0010:   LPVOID v8; // ebp\nL0011:   HMODULE lpBuffer; // eax\nL0012:   int v13; // [esp+10h] [ebp-1Ch]\nL0013:   SIZE_T NumberOfBytesWritten; // [esp+14h] [ebp-18h] BYREF\nL0014:   DWORD ThreadId[5]; // [esp+18h] [ebp-14h] BYREF\nL0015: \nL0016:   v13 = 0;\nL0017:   ModuleHandleA_0 = GetModuleHandleA_0(0);\nL0018:   v5 = (char *)ModuleHandleA_0 + *((_DWORD *)ModuleHandleA_0 + 15);\nL0019:   dwSize = *((_DWORD *)v5 + 20);\nL0020:   lpAddress = (void *)*((_DWORD *)v5 + 13);\nL0021:   VirtualFreeEx(hProcess, lpAddress, 0, 0x8000u);\nL0022:   v8 = VirtualAllocEx(hProcess, lpAddress, dwSize, 0x3000u, 0x40u);\nL0023:   if ( v8 )\nL0024:   {\nL0025:     lpBuffer = GetModuleHandleA_0(0);\nL0026:     WriteProcessMemory(hProcess, lpAddress, lpBuffer, dwSize, &NumberOfBytesWritten);\nL0027:     if ( dwSize <= NumberOfBytesWritten )\nL0028:     {\nL0029:       CreateRemoteThread(hProcess, 0, 0, lpStartAddress_1, lpParameter_1, 0, ThreadId);\nL0030:       CloseHandle(hProcess);\nL0031:       return v8;\nL0032:     }\nL0033:   }\nL0034:   return (LPVOID)v13;\nL0035: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了一个远程删除/自删除辅助分支：程序获取并处理当前模块路径，打开 Shell_TrayWnd 对应进程，向该进程写入路径相关参数及当前模块映像，并创建远程线程执行删除回调。删除回调会持续重试 DeleteFileA，直到成功。路径构造和远程参数布局仍依赖包外辅助函数，因而不能确认最终删除目标必然是当前模块文件或运行时必然成功。",
+    "claims": [
+      {
+        "behavior": "程序向 Shell_TrayWnd 对应进程写入路径相关参数及当前模块映像，并创建远程线程执行删除回调。",
+        "condition": "sub_40AFB0 被调用，且 FindWindowA/GetWindowThreadProcessId/OpenProcess、VirtualAllocEx/WriteProcessMemory 和 CreateRemoteThread 操作成功到达相应分支。",
+        "source": "当前模块路径经 sub_4013A4(0) 和 sub_401F48 处理后的数据，以及当前进程模块的 PE 映像。",
+        "action": "sub_40AFB0 通过 sub_40AEBC 在目标进程中分配并写入路径相关缓冲区和参数指针；sub_40AF08 释放目标地址处旧映像、在相同地址分配内存、写入当前模块映像，并以 sub_40AE94 作为线程入口创建远程线程。",
+        "sink": "由 Shell_TrayWnd 窗口所属进程 ID 打开的目标进程远程地址空间及其远程线程。",
+        "evidence": [
+          {
+            "location": "F-0489 sub_40AFB0 原文件 L0022-L0031",
+            "observation": "读取并处理当前模块路径，定位 Shell_TrayWnd 所属进程并调用 OpenProcess；随后两次调用 sub_40AEBC 写入数据，最后调用 sub_40AF08 创建远程线程，线程入口为 sub_40AE94。"
+          },
+          {
+            "location": "F-0487 sub_40AEBC 原文件 L0007-L0011",
+            "observation": "在指定进程中调用 VirtualAllocEx、VirtualProtectEx 和 WriteProcessMemory 写入给定缓冲区。"
+          },
+          {
+            "location": "F-0488 sub_40AF08 原文件 L0017-L0031",
+            "observation": "获取当前模块基址和 PE 头字段，向目标进程分配并写入当前模块映像，然后调用 CreateRemoteThread。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码证明了远程映像写入和远程线程创建能力，但不能证明 OpenProcess、内存操作或线程执行在运行时一定成功。",
+          "sub_401CAC 生成的路径相关缓冲区布局及 sub_401F48 的精确转换结果未在本包中提供。"
+        ]
+      },
+      {
+        "behavior": "远程线程回调持续尝试删除其参数指向的文件，删除失败时每 100 毫秒重试。",
+        "condition": "sub_40AF08 成功创建以 sub_40AE94 为入口的远程线程，并且线程参数指向有效的 LPCSTR 指针。",
+        "source": "远程线程参数 lpParameter_1；该参数在 sub_40AFB0 中由写入目标进程的 Buffer 指针构造，Buffer 来自路径相关数据。",
+        "action": "sub_40AE94 解引用线程参数得到文件名，循环调用 DeleteFileA；失败后调用 Sleep(0x64)，成功后退出循环。",
+        "sink": "DeleteFileA 指定的文件对象。",
+        "evidence": [
+          {
+            "location": "F-0489 sub_40AFB0 原文件 L0027-L0031",
+            "observation": "将 Buffer 写入目标进程，再将 Buffer 的地址写入第二个远程缓冲区，并把该远程参数传给以 sub_40AE94 为入口的 CreateRemoteThread。"
+          },
+          {
+            "location": "F-0486 sub_40AE94 原文件 L0001-L0011",
+            "observation": "回调反复执行 DeleteFileA(*a1)，失败时 Sleep(0x64)，直到 DeleteFileA 返回成功。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "当前包未提供 sub_401CAC 的实现，因此只能确认删除目标来自路径相关参数，不能直接确认其必然是当前模块文件。",
+          "静态代码不能证明删除最终成功；若目标无效或持续不可删除，回调可无限重试。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "process",
+        "value": "explorer.exe",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "上游路径将 Shell_TrayWnd 所属进程作为宿主；当前函数通过窗口类名获取其进程 ID 并打开进程句柄，依赖摘要将该宿主识别为 explorer.exe。",
+        "evidence": [
+          {
+            "location": "F-0489 sub_40AFB0 原文件 L0024-L0026",
+            "observation": "调用 FindWindowA(\"Shell_TrayWnd\", 0)、GetWindowThreadProcessId 和 OpenProcess 获取窗口所属进程句柄。"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "kind": "string",
+        "value": "Shell_TrayWnd",
+        "role": "environment_probe",
+        "detection_specificity": "none",
+        "meaning": "用于定位宿主窗口的通用窗口类名，不是特异性恶意制品。",
+        "evidence": [
+          {
+            "location": "F-0489 sub_40AFB0 原文件 L0024",
+            "observation": "FindWindowA 使用固定字符串 Shell_TrayWnd 查找窗口。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "当前模块文件路径",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "作为路径相关数据源读取并处理；本包未显示固定文件名或路径值。",
+        "evidence": [
+          {
+            "location": "F-0489 sub_40AFB0 原文件 L0022-L0023",
+            "observation": "调用 sub_4013A4(0) 获取数据，再将返回值传给 sub_401F48。"
+          },
+          {
+            "location": "dependency J01: sub_4013A4 原文件 L0009-L0027",
+            "observation": "已验证零参数分支获取当前模块文件名并经 sub_401BAC 处理后返回。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_401CAC 生成的 v8 内容和 Buffer 的确切布局是什么，DeleteFileA(*a1) 最终接收的字符串是否就是当前模块路径？",
+        "reason": "当前包只显示 sub_401CAC 的调用及其结果被写入远程内存，未提供该函数实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "capability",
+        "question": "远程线程执行后是否成功删除目标文件，以及 sub_40AF08 的模块覆盖是否改变目标进程的后续执行？",
+        "reason": "源码显示调用能力和失败重试逻辑，但没有运行时结果或远程入口最终语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC",
+        "reason": "解析路径相关缓冲区及远程参数布局。",
+        "expected_value": "确认远程删除回调接收的确切文件路径和参数结构。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401F48",
+        "reason": "解析当前模块路径到 n3 的转换。",
+        "expected_value": "确认传入 sub_401CAC 的数据是否仍为当前模块文件路径或其派生值。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_401CAC",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认写入远程进程的路径数据、Buffer 内容及传给 DeleteFileA 的最终字符串。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0489 sub_40AFB0 原文件 L0027-L0030",
+            "observation": "sub_401CAC 生成 v8，随后其结果经 sub_401D50、sub_40AEBC 写入远程进程，并由第二个远程缓冲区间接传给删除线程。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401F48",
+        "targets": [
+          {
+            "identifier": "sub_401F48",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认当前模块路径处理结果 n3 的具体含义。",
+        "impact": "minor",
+        "evidence": [
+          {
+            "location": "F-0489 sub_40AFB0 原文件 L0022-L0027",
+            "observation": "sub_4013A4 返回值经 sub_401F48 转换后作为 sub_401CAC 的输入。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "所有 claim、artifact 和 material_need 的 evidence.location 都写成了“F-xxxx sub_x 原文件 L...”，不符合当前结果要求的 `F-xxxx Lx-Ly` 可解析格式；验证器因此将 11 条引用全部判为 invalid，导致两条核心 claim 及其制品/补料需求在结果中没有可用的证据定位。源码本身能支持这些结论，但必须修正引用格式，不能通过改写 observation 规避。",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L31",
+            "observation": "当前材料直接显示 sub_40AFB0 从路径处理、定位 Shell_TrayWnd 所属进程，到两次远程写入并调用 sub_40AF08。"
+          },
+          {
+            "location": "F-0487 L7-L11",
+            "observation": "当前材料直接显示 VirtualAllocEx、VirtualProtectEx 和 WriteProcessMemory 的远程写入逻辑。"
+          },
+          {
+            "location": "F-0488 L17-L31",
+            "observation": "当前材料直接显示当前模块映像被写入目标进程，并以传入回调调用 CreateRemoteThread。"
+          },
+          {
+            "location": "F-0486 L1-L11",
+            "observation": "当前材料直接显示 DeleteFileA(*a1) 失败后每 100 毫秒重试，直到成功。"
+          }
+        ],
+        "required_fix": "仅把现有 evidence.location 改成可解析的 `F-xxxx Lx-Ly` 格式，并保持对应 observation 与证据范围一致。F-0489、F-0487、F-0488、F-0486 的函数名不要拼入 location；依赖 J01 的引用应使用依赖摘要中实际给出的格式（例如 F-0038 L9-L27），不得继续使用“dependency J01: sub_...”作为源码位置。不得借此扩大 claim、artifact 或 material_need 的内容。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/2/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/evidence/0/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "第二条 claim 的 evidence_level 标为 suspected，但其所描述的回调内部行为（解引用参数、调用 DeleteFileA、失败后 Sleep 并重试）已由当前包的 F-0486 直接闭合；未闭合的是参数最终指向哪个具体路径以及运行时是否成功，不是该回调行为本身。当前写法没有把行为夸大为运行时必然成功，但会低估已确认的静态能力。",
+        "evidence": [
+          {
+            "location": "F-0486 L5-L11",
+            "observation": "回调循环直接调用 DeleteFileA(*a1)，失败时 Sleep(0x64)，成功后退出循环。"
+          },
+          {
+            "location": "F-0489 L27-L31",
+            "observation": "Buffer 指针被写入远程参数并传给以 sub_40AE94 为入口的远程线程。"
+          }
+        ],
+        "required_fix": "可将 /claims/1/evidence_level 改为 confirmed，同时保留现有 condition 和 limitations，明确仅确认回调的删除尝试/重试能力，不能确认具体目标路径或运行时最终成功。若维持 suspected，则必须在 claim 或 limitations 中明确 suspected 仅针对参数路径闭合/运行效果，而非 DeleteFileA 重试逻辑本身。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence_level"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/limitations"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心远程删除、自删除回调、远程映像写入和线程创建的覆盖总体充分，未发现当前包内核心 source→action→sink 被遗漏或反向表达。主要阻断项是全部证据位置格式无效，需先修正引用；另建议把已由回调源码直接确认的删除重试能力从 suspected 调整为 confirmed，并保留路径和运行时结果限制。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "所有 claim、artifact 和 material_need 的 evidence.location 都写成了“F-xxxx sub_x 原文件 L...”，不符合当前结果要求的 `F-xxxx Lx-Ly` 可解析格式；验证器因此将 11 条引用全部判为 invalid，导致两条核心 claim 及其制品/补料需求在结果中没有可用的证据定位。源码本身能支持这些结论，但必须修正引用格式，不能通过改写 observation 规避。",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L31",
+            "observation": "当前材料直接显示 sub_40AFB0 从路径处理、定位 Shell_TrayWnd 所属进程，到两次远程写入并调用 sub_40AF08。"
+          },
+          {
+            "location": "F-0487 L7-L11",
+            "observation": "当前材料直接显示 VirtualAllocEx、VirtualProtectEx 和 WriteProcessMemory 的远程写入逻辑。"
+          },
+          {
+            "location": "F-0488 L17-L31",
+            "observation": "当前材料直接显示当前模块映像被写入目标进程，并以传入回调调用 CreateRemoteThread。"
+          },
+          {
+            "location": "F-0486 L1-L11",
+            "observation": "当前材料直接显示 DeleteFileA(*a1) 失败后每 100 毫秒重试，直到成功。"
+          }
+        ],
+        "required_fix": "仅把现有 evidence.location 改成可解析的 `F-xxxx Lx-Ly` 格式，并保持对应 observation 与证据范围一致。F-0489、F-0487、F-0488、F-0486 的函数名不要拼入 location；依赖 J01 的引用应使用依赖摘要中实际给出的格式（例如 F-0038 L9-L27），不得继续使用“dependency J01: sub_...”作为源码位置。不得借此扩大 claim、artifact 或 material_need 的内容。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/2/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/evidence/0/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "第二条 claim 的 evidence_level 标为 suspected，但其所描述的回调内部行为（解引用参数、调用 DeleteFileA、失败后 Sleep 并重试）已由当前包的 F-0486 直接闭合；未闭合的是参数最终指向哪个具体路径以及运行时是否成功，不是该回调行为本身。当前写法没有把行为夸大为运行时必然成功，但会低估已确认的静态能力。",
+        "evidence": [
+          {
+            "location": "F-0486 L5-L11",
+            "observation": "回调循环直接调用 DeleteFileA(*a1)，失败时 Sleep(0x64)，成功后退出循环。"
+          },
+          {
+            "location": "F-0489 L27-L31",
+            "observation": "Buffer 指针被写入远程参数并传给以 sub_40AE94 为入口的远程线程。"
+          }
+        ],
+        "required_fix": "可将 /claims/1/evidence_level 改为 confirmed，同时保留现有 condition 和 limitations，明确仅确认回调的删除尝试/重试能力，不能确认具体目标路径或运行时最终成功。若维持 suspected，则必须在 claim 或 limitations 中明确 suspected 仅针对参数路径闭合/运行效果，而非 DeleteFileA 重试逻辑本身。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence_level"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/limitations"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心远程删除、自删除回调、远程映像写入和线程创建的覆盖总体充分，未发现当前包内核心 source→action→sink 被遗漏或反向表达。主要阻断项是全部证据位置格式无效，需先修正引用；另建议把已由回调源码直接确认的删除重试能力从 suspected 调整为 confirmed，并保留路径和运行时结果限制。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了一个远程删除/自删除辅助分支：程序获取并处理当前模块路径，打开 Shell_TrayWnd 对应进程，向该进程写入路径相关参数及当前模块映像，并创建远程线程执行删除回调。删除回调会持续重试 DeleteFileA，直到成功。路径构造和远程参数布局仍依赖包外辅助函数，因而不能确认最终删除目标必然是当前模块文件或运行时必然成功。",
+    "claims": [
+      {
+        "behavior": "程序向 Shell_TrayWnd 对应进程写入路径相关参数及当前模块映像，并创建远程线程执行删除回调。",
+        "condition": "sub_40AFB0 被调用，且 FindWindowA/GetWindowThreadProcessId/OpenProcess、VirtualAllocEx/WriteProcessMemory 和 CreateRemoteThread 操作成功到达相应分支。",
+        "source": "当前模块路径经 sub_4013A4(0) 和 sub_401F48 处理后的数据，以及当前进程模块的 PE 映像。",
+        "action": "sub_40AFB0 通过 sub_40AEBC 在目标进程中分配并写入路径相关缓冲区和参数指针；sub_40AF08 释放目标地址处旧映像、在相同地址分配内存、写入当前模块映像，并以 sub_40AE94 作为线程入口创建远程线程。",
+        "sink": "由 Shell_TrayWnd 窗口所属进程 ID 打开的目标进程远程地址空间及其远程线程。",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L31",
+            "observation": "读取并处理当前模块路径，定位 Shell_TrayWnd 所属进程并调用 OpenProcess；随后两次调用 sub_40AEBC 写入数据，最后调用 sub_40AF08 创建远程线程，线程入口为 sub_40AE94。"
+          },
+          {
+            "location": "F-0487 L7-L11",
+            "observation": "在指定进程中调用 VirtualAllocEx、VirtualProtectEx 和 WriteProcessMemory 写入给定缓冲区。"
+          },
+          {
+            "location": "F-0488 L17-L31",
+            "observation": "获取当前模块基址和 PE 头字段，向目标进程分配并写入当前模块映像，然后调用 CreateRemoteThread。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码证明了远程映像写入和远程线程创建能力，但不能证明 OpenProcess、内存操作或线程执行在运行时一定成功。",
+          "sub_401CAC 生成的路径相关缓冲区布局及 sub_401F48 的精确转换结果未在本包中提供。"
+        ]
+      },
+      {
+        "behavior": "远程线程回调持续尝试删除其参数指向的文件，删除失败时每 100 毫秒重试。",
+        "condition": "sub_40AF08 成功创建以 sub_40AE94 为入口的远程线程，并且线程参数指向有效的 LPCSTR 指针。",
+        "source": "远程线程参数 lpParameter_1；该参数在 sub_40AFB0 中由写入目标进程的 Buffer 指针构造，Buffer 来自路径相关数据。",
+        "action": "sub_40AE94 解引用线程参数得到文件名，循环调用 DeleteFileA；失败后调用 Sleep(0x64)，成功后退出循环。",
+        "sink": "DeleteFileA 指定的文件对象。",
+        "evidence": [
+          {
+            "location": "F-0489 L27-L31",
+            "observation": "将 Buffer 写入目标进程，再将 Buffer 的地址写入第二个远程缓冲区，并把该远程参数传给以 sub_40AE94 为入口的 CreateRemoteThread。"
+          },
+          {
+            "location": "F-0486 L1-L11",
+            "observation": "回调反复执行 DeleteFileA(*a1)，失败时 Sleep(0x64)，直到 DeleteFileA 返回成功。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包未提供 sub_401CAC 的实现，因此只能确认删除目标来自路径相关参数，不能直接确认其必然是当前模块文件。",
+          "静态代码不能证明删除最终成功；若目标无效或持续不可删除，回调可无限重试。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "process",
+        "value": "explorer.exe",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "上游路径将 Shell_TrayWnd 所属进程作为宿主；当前函数通过窗口类名获取其进程 ID 并打开进程句柄，依赖摘要将该宿主识别为 explorer.exe。",
+        "evidence": [
+          {
+            "location": "F-0489 L24-L26",
+            "observation": "调用 FindWindowA(\"Shell_TrayWnd\", 0)、GetWindowThreadProcessId 和 OpenProcess 获取窗口所属进程句柄。"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "kind": "string",
+        "value": "Shell_TrayWnd",
+        "role": "environment_probe",
+        "detection_specificity": "none",
+        "meaning": "用于定位宿主窗口的通用窗口类名，不是特异性恶意制品。",
+        "evidence": [
+          {
+            "location": "F-0489 L24",
+            "observation": "FindWindowA 使用固定字符串 Shell_TrayWnd 查找窗口。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "当前模块文件路径",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "作为路径相关数据源读取并处理；本包未显示固定文件名或路径值。",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L23",
+            "observation": "调用 sub_4013A4(0) 获取数据，再将返回值传给 sub_401F48。"
+          },
+          {
+            "location": "F-0038 L9-L27",
+            "observation": "已验证 sub_4013A4 的零参数分支获取当前模块文件名并经 sub_401BAC 处理后返回。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_401CAC 生成的 v8 内容和 Buffer 的确切布局是什么，DeleteFileA(*a1) 最终接收的字符串是否就是当前模块路径？",
+        "reason": "当前包只显示 sub_401CAC 的调用及其结果被写入远程内存，未提供该函数实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "capability",
+        "question": "远程线程执行后是否成功删除目标文件，以及 sub_40AF08 的模块覆盖是否改变目标进程的后续执行？",
+        "reason": "源码显示调用能力和失败重试逻辑，但没有运行时结果或远程入口最终语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC",
+        "reason": "解析路径相关缓冲区及远程参数布局。",
+        "expected_value": "确认远程删除回调接收的确切文件路径和参数结构。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401F48",
+        "reason": "解析当前模块路径到 n3 的转换。",
+        "expected_value": "确认传入 sub_401CAC 的数据是否仍为当前模块文件路径或其派生值。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_401CAC",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认写入远程进程的路径数据、Buffer 内容及传给 DeleteFileA 的最终字符串。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0489 L27-L30",
+            "observation": "sub_401CAC 生成 v8，随后其结果经 sub_401D50、sub_40AEBC 写入远程进程，并由第二个远程缓冲区间接传给删除线程。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401F48",
+        "targets": [
+          {
+            "identifier": "sub_401F48",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认当前模块路径处理结果 n3 的具体含义。",
+        "impact": "minor",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L27",
+            "observation": "sub_4013A4 返回值经 sub_401F48 转换后作为 sub_401CAC 的输入。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了一个远程删除/自删除辅助分支：程序获取并处理当前模块路径，打开 Shell_TrayWnd 对应进程，向该进程写入路径相关参数及当前模块映像，并创建远程线程执行删除回调。删除回调会持续重试 DeleteFileA，直到成功。路径构造和远程参数布局仍依赖包外辅助函数，因而不能确认最终删除目标必然是当前模块文件或运行时必然成功。",
+    "claims": [
+      {
+        "behavior": "程序向 Shell_TrayWnd 对应进程写入路径相关参数及当前模块映像，并创建远程线程执行删除回调。",
+        "condition": "sub_40AFB0 被调用，且 FindWindowA/GetWindowThreadProcessId/OpenProcess、VirtualAllocEx/WriteProcessMemory 和 CreateRemoteThread 操作成功到达相应分支。",
+        "source": "当前模块路径经 sub_4013A4(0) 和 sub_401F48 处理后的数据，以及当前进程模块的 PE 映像。",
+        "action": "sub_40AFB0 通过 sub_40AEBC 在目标进程中分配并写入路径相关缓冲区和参数指针；sub_40AF08 释放目标地址处旧映像、在相同地址分配内存、写入当前模块映像，并以 sub_40AE94 作为线程入口创建远程线程。",
+        "sink": "由 Shell_TrayWnd 窗口所属进程 ID 打开的目标进程远程地址空间及其远程线程。",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L31",
+            "observation": "读取并处理当前模块路径，定位 Shell_TrayWnd 所属进程并调用 OpenProcess；随后两次调用 sub_40AEBC 写入数据，最后调用 sub_40AF08 创建远程线程，线程入口为 sub_40AE94。"
+          },
+          {
+            "location": "F-0487 L7-L11",
+            "observation": "在指定进程中调用 VirtualAllocEx、VirtualProtectEx 和 WriteProcessMemory 写入给定缓冲区。"
+          },
+          {
+            "location": "F-0488 L17-L31",
+            "observation": "获取当前模块基址和 PE 头字段，向目标进程分配并写入当前模块映像，然后调用 CreateRemoteThread。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码证明了远程映像写入和远程线程创建能力，但不能证明 OpenProcess、内存操作或线程执行在运行时一定成功。",
+          "sub_401CAC 生成的路径相关缓冲区布局及 sub_401F48 的精确转换结果未在本包中提供。"
+        ]
+      },
+      {
+        "behavior": "远程线程回调持续尝试删除其参数指向的文件，删除失败时每 100 毫秒重试。",
+        "condition": "sub_40AF08 成功创建以 sub_40AE94 为入口的远程线程，并且线程参数指向有效的 LPCSTR 指针。",
+        "source": "远程线程参数 lpParameter_1；该参数在 sub_40AFB0 中由写入目标进程的 Buffer 指针构造，Buffer 来自路径相关数据。",
+        "action": "sub_40AE94 解引用线程参数得到文件名，循环调用 DeleteFileA；失败后调用 Sleep(0x64)，成功后退出循环。",
+        "sink": "DeleteFileA 指定的文件对象。",
+        "evidence": [
+          {
+            "location": "F-0489 L27-L31",
+            "observation": "将 Buffer 写入目标进程，再将 Buffer 的地址写入第二个远程缓冲区，并把该远程参数传给以 sub_40AE94 为入口的 CreateRemoteThread。"
+          },
+          {
+            "location": "F-0486 L1-L11",
+            "observation": "回调反复执行 DeleteFileA(*a1)，失败时 Sleep(0x64)，直到 DeleteFileA 返回成功。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包未提供 sub_401CAC 的实现，因此只能确认删除目标来自路径相关参数，不能直接确认其必然是当前模块文件。",
+          "静态代码不能证明删除最终成功；若目标无效或持续不可删除，回调可无限重试。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "process",
+        "value": "explorer.exe",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "上游路径将 Shell_TrayWnd 所属进程作为宿主；当前函数通过窗口类名获取其进程 ID 并打开进程句柄，依赖摘要将该宿主识别为 explorer.exe。",
+        "evidence": [
+          {
+            "location": "F-0489 L24-L26",
+            "observation": "调用 FindWindowA(\"Shell_TrayWnd\", 0)、GetWindowThreadProcessId 和 OpenProcess 获取窗口所属进程句柄。"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "kind": "string",
+        "value": "Shell_TrayWnd",
+        "role": "environment_probe",
+        "detection_specificity": "none",
+        "meaning": "用于定位宿主窗口的通用窗口类名，不是特异性恶意制品。",
+        "evidence": [
+          {
+            "location": "F-0489 L24",
+            "observation": "FindWindowA 使用固定字符串 Shell_TrayWnd 查找窗口。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "当前模块文件路径",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "作为路径相关数据源读取并处理；本包未显示固定文件名或路径值。",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L23",
+            "observation": "调用 sub_4013A4(0) 获取数据，再将返回值传给 sub_401F48。"
+          },
+          {
+            "location": "F-0038 L9-L27",
+            "observation": "已验证零参数分支获取当前模块文件名并经 sub_401BAC 处理后返回。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_401CAC 生成的 v8 内容和 Buffer 的确切布局是什么，DeleteFileA(*a1) 最终接收的字符串是否就是当前模块路径？",
+        "reason": "当前包只显示 sub_401CAC 的调用及其结果被写入远程内存，未提供该函数实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "capability",
+        "question": "远程线程执行后是否成功删除目标文件，以及 sub_40AF08 的模块覆盖是否改变目标进程的后续执行？",
+        "reason": "源码显示调用能力和失败重试逻辑，但没有运行时结果或远程入口最终语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC",
+        "reason": "解析路径相关缓冲区及远程参数布局。",
+        "expected_value": "确认远程删除回调接收的确切文件路径和参数结构。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401F48",
+        "reason": "解析当前模块路径到 n3 的转换。",
+        "expected_value": "确认传入 sub_401CAC 的数据是否仍为当前模块文件路径或其派生值。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_401CAC",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认写入远程进程的路径数据、Buffer 内容及传给 DeleteFileA 的最终字符串。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0489 L27-L30",
+            "observation": "sub_401CAC 生成 v8，随后其结果经 sub_401D50、sub_40AEBC 写入远程进程，并由第二个远程缓冲区间接传给删除线程。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401F48",
+        "targets": [
+          {
+            "identifier": "sub_401F48",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认当前模块路径处理结果 n3 的具体含义。",
+        "impact": "minor",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L27",
+            "observation": "sub_4013A4 返回值经 sub_401F48 转换后作为 sub_401CAC 的输入。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/2/evidence/1/location",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence_level",
+      "/claims/1/limitations",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/1/evidence/0/location"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [],
+    "applied_paths": [
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence_level",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/2/evidence/1/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/1/evidence/0/location"
+    ],
+    "ignored_paths": [
+      "/artifacts/2/evidence/1/observation",
+      "/artifacts/2/confidence"
+    ],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "所有 claim、artifact 和 material_need 的 evidence.location 都写成了“F-xxxx sub_x 原文件 L...”，不符合当前结果要求的 `F-xxxx Lx-Ly` 可解析格式；验证器因此将 11 条引用全部判为 invalid，导致两条核心 claim 及其制品/补料需求在结果中没有可用的证据定位。源码本身能支持这些结论，但必须修正引用格式，不能通过改写 observation 规避。",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L31",
+            "observation": "当前材料直接显示 sub_40AFB0 从路径处理、定位 Shell_TrayWnd 所属进程，到两次远程写入并调用 sub_40AF08。"
+          },
+          {
+            "location": "F-0487 L7-L11",
+            "observation": "当前材料直接显示 VirtualAllocEx、VirtualProtectEx 和 WriteProcessMemory 的远程写入逻辑。"
+          },
+          {
+            "location": "F-0488 L17-L31",
+            "observation": "当前材料直接显示当前模块映像被写入目标进程，并以传入回调调用 CreateRemoteThread。"
+          },
+          {
+            "location": "F-0486 L1-L11",
+            "observation": "当前材料直接显示 DeleteFileA(*a1) 失败后每 100 毫秒重试，直到成功。"
+          }
+        ],
+        "required_fix": "仅把现有 evidence.location 改成可解析的 `F-xxxx Lx-Ly` 格式，并保持对应 observation 与证据范围一致。F-0489、F-0487、F-0488、F-0486 的函数名不要拼入 location；依赖 J01 的引用应使用依赖摘要中实际给出的格式（例如 F-0038 L9-L27），不得继续使用“dependency J01: sub_...”作为源码位置。不得借此扩大 claim、artifact 或 material_need 的内容。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/0/evidence/0",
+              "/claims/0/evidence/1",
+              "/claims/0/evidence/2",
+              "/claims/1/evidence/0",
+              "/claims/1/evidence/1",
+              "/artifacts/0/evidence/0",
+              "/artifacts/1/evidence/0",
+              "/artifacts/2/evidence/0",
+              "/artifacts/2/evidence/1",
+              "/material_needs/0/evidence/0",
+              "/material_needs/1/evidence/0"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "第二条 claim 的 evidence_level 标为 suspected，但其所描述的回调内部行为（解引用参数、调用 DeleteFileA、失败后 Sleep 并重试）已由当前包的 F-0486 直接闭合；未闭合的是参数最终指向哪个具体路径以及运行时是否成功，不是该回调行为本身。当前写法没有把行为夸大为运行时必然成功，但会低估已确认的静态能力。",
+        "evidence": [
+          {
+            "location": "F-0486 L5-L11",
+            "observation": "回调循环直接调用 DeleteFileA(*a1)，失败时 Sleep(0x64)，成功后退出循环。"
+          },
+          {
+            "location": "F-0489 L27-L31",
+            "observation": "Buffer 指针被写入远程参数并传给以 sub_40AE94 为入口的远程线程。"
+          }
+        ],
+        "required_fix": "可将 /claims/1/evidence_level 改为 confirmed，同时保留现有 condition 和 limitations，明确仅确认回调的删除尝试/重试能力，不能确认具体目标路径或运行时最终成功。若维持 suspected，则必须在 claim 或 limitations 中明确 suspected 仅针对参数路径闭合/运行效果，而非 DeleteFileA 重试逻辑本身。",
+        "fixes": [
+          {
+            "type": "claim_revision",
+            "targets": [
+              "/claims/1"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心远程删除、自删除回调、远程映像写入和线程创建的覆盖总体充分，未发现当前包内核心 source→action→sink 被遗漏或反向表达。主要阻断项是全部证据位置格式无效，需先修正引用；另建议把已由回调源码直接确认的删除重试能力从 suspected 调整为 confirmed，并保留路径和运行时结果限制。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了一个远程删除/自删除辅助分支：程序获取并处理当前模块路径，打开 Shell_TrayWnd 对应进程，向该进程写入路径相关参数及当前模块映像，并创建远程线程执行删除回调。删除回调会持续重试 DeleteFileA，直到成功。路径构造和远程参数布局仍依赖包外辅助函数，因而不能确认最终删除目标必然是当前模块文件或运行时必然成功。",
+    "claims": [
+      {
+        "behavior": "程序向 Shell_TrayWnd 对应进程写入路径相关参数及当前模块映像，并创建远程线程执行删除回调。",
+        "condition": "sub_40AFB0 被调用，且 FindWindowA/GetWindowThreadProcessId/OpenProcess、VirtualAllocEx/WriteProcessMemory 和 CreateRemoteThread 操作成功到达相应分支。",
+        "source": "当前模块路径经 sub_4013A4(0) 和 sub_401F48 处理后的数据，以及当前进程模块的 PE 映像。",
+        "action": "sub_40AFB0 通过 sub_40AEBC 在目标进程中分配并写入路径相关缓冲区和参数指针；sub_40AF08 释放目标地址处旧映像、在相同地址分配内存、写入当前模块映像，并以 sub_40AE94 作为线程入口创建远程线程。",
+        "sink": "由 Shell_TrayWnd 窗口所属进程 ID 打开的目标进程远程地址空间及其远程线程。",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L31",
+            "observation": "读取并处理当前模块路径，定位 Shell_TrayWnd 所属进程并调用 OpenProcess；随后两次调用 sub_40AEBC 写入数据，最后调用 sub_40AF08 创建远程线程，线程入口为 sub_40AE94。"
+          },
+          {
+            "location": "F-0487 L7-L11",
+            "observation": "在指定进程中调用 VirtualAllocEx、VirtualProtectEx 和 WriteProcessMemory 写入给定缓冲区。"
+          },
+          {
+            "location": "F-0488 L17-L31",
+            "observation": "获取当前模块基址和 PE 头字段，向目标进程分配并写入当前模块映像，然后调用 CreateRemoteThread。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码证明了远程映像写入和远程线程创建能力，但不能证明 OpenProcess、内存操作或线程执行在运行时一定成功。",
+          "sub_401CAC 生成的路径相关缓冲区布局及 sub_401F48 的精确转换结果未在本包中提供。"
+        ]
+      },
+      {
+        "behavior": "远程线程回调持续尝试删除其参数指向的文件，删除失败时每 100 毫秒重试。",
+        "condition": "sub_40AF08 成功创建以 sub_40AE94 为入口的远程线程，并且线程参数指向有效的 LPCSTR 指针。",
+        "source": "远程线程参数 lpParameter_1；该参数在 sub_40AFB0 中由写入目标进程的 Buffer 指针构造，Buffer 来自路径相关数据。",
+        "action": "sub_40AE94 解引用线程参数得到文件名，循环调用 DeleteFileA；失败后调用 Sleep(0x64)，成功后退出循环。",
+        "sink": "DeleteFileA 指定的文件对象。",
+        "evidence": [
+          {
+            "location": "F-0489 L27-L31",
+            "observation": "将 Buffer 写入目标进程，再将 Buffer 的地址写入第二个远程缓冲区，并把该远程参数传给以 sub_40AE94 为入口的 CreateRemoteThread。"
+          },
+          {
+            "location": "F-0486 L1-L11",
+            "observation": "回调反复执行 DeleteFileA(*a1)，失败时 Sleep(0x64)，直到 DeleteFileA 返回成功。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包未提供 sub_401CAC 的实现，因此只能确认删除目标来自路径相关参数，不能直接确认其必然是当前模块文件。",
+          "静态代码不能证明删除最终成功；若目标无效或持续不可删除，回调可无限重试。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "process",
+        "value": "explorer.exe",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "上游路径将 Shell_TrayWnd 所属进程作为宿主；当前函数通过窗口类名获取其进程 ID 并打开进程句柄，依赖摘要将该宿主识别为 explorer.exe。",
+        "evidence": [
+          {
+            "location": "F-0489 L24-L26",
+            "observation": "调用 FindWindowA(\"Shell_TrayWnd\", 0)、GetWindowThreadProcessId 和 OpenProcess 获取窗口所属进程句柄。"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "kind": "string",
+        "value": "Shell_TrayWnd",
+        "role": "environment_probe",
+        "detection_specificity": "none",
+        "meaning": "用于定位宿主窗口的通用窗口类名，不是特异性恶意制品。",
+        "evidence": [
+          {
+            "location": "F-0489 L24",
+            "observation": "FindWindowA 使用固定字符串 Shell_TrayWnd 查找窗口。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "当前模块文件路径",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "作为路径相关数据源读取并处理；本包未显示固定文件名或路径值。",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L23",
+            "observation": "调用 sub_4013A4(0) 获取数据，再将返回值传给 sub_401F48。"
+          },
+          {
+            "location": "F-0038 L9-L27",
+            "observation": "已验证零参数分支获取当前模块文件名并经 sub_401BAC 处理后返回。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_401CAC 生成的 v8 内容和 Buffer 的确切布局是什么，DeleteFileA(*a1) 最终接收的字符串是否就是当前模块路径？",
+        "reason": "当前包只显示 sub_401CAC 的调用及其结果被写入远程内存，未提供该函数实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "capability",
+        "question": "远程线程执行后是否成功删除目标文件，以及 sub_40AF08 的模块覆盖是否改变目标进程的后续执行？",
+        "reason": "源码显示调用能力和失败重试逻辑，但没有运行时结果或远程入口最终语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC",
+        "reason": "解析路径相关缓冲区及远程参数布局。",
+        "expected_value": "确认远程删除回调接收的确切文件路径和参数结构。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401F48",
+        "reason": "解析当前模块路径到 n3 的转换。",
+        "expected_value": "确认传入 sub_401CAC 的数据是否仍为当前模块文件路径或其派生值。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_401CAC",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认写入远程进程的路径数据、Buffer 内容及传给 DeleteFileA 的最终字符串。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0489 L27-L30",
+            "observation": "sub_401CAC 生成 v8，随后其结果经 sub_401D50、sub_40AEBC 写入远程进程，并由第二个远程缓冲区间接传给删除线程。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401F48",
+        "targets": [
+          {
+            "identifier": "sub_401F48",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认当前模块路径处理结果 n3 的具体含义。",
+        "impact": "minor",
+        "evidence": [
+          {
+            "location": "F-0489 L22-L27",
+            "observation": "sub_4013A4 返回值经 sub_401F48 转换后作为 sub_401CAC 的输入。"
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": [
+    "/artifacts/2/evidence/1/observation",
+    "/artifacts/2/confidence"
+  ]
+}

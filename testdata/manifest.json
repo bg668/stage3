@@ -1,0 +1,168 @@
+{
+  "purpose": "example3 bounded-investigation agent test",
+  "packet_count": 16,
+  "notes": [
+    "标准答案、人工核对结果、gold comparison 均未包含在本包中。",
+    "每个 Jxx.md 是一个有界调查材料包；任务方向保留，结论需要由 Agent 从源码自行得出。",
+    "worker_contract.md 定义统一输出要求。"
+  ],
+  "jobs": [
+    {
+      "job_id": "J00",
+      "title": "共同调用者：模式分派与输出绑定",
+      "depends_on": [],
+      "source_chars": 8069,
+      "source_count": 4
+    },
+    {
+      "job_id": "J01",
+      "title": "共享运行时语义摘要",
+      "depends_on": [
+        "J00"
+      ],
+      "source_chars": 8077,
+      "source_count": 11
+    },
+    {
+      "job_id": "J02",
+      "title": "配置读取、转换与写回",
+      "depends_on": [
+        "J00",
+        "J01"
+      ],
+      "source_chars": 9887,
+      "source_count": 9
+    },
+    {
+      "job_id": "J03",
+      "title": "环境检查与输入分支",
+      "depends_on": [
+        "J00",
+        "J01"
+      ],
+      "source_chars": 10689,
+      "source_count": 26
+    },
+    {
+      "job_id": "J04",
+      "title": "安装、自复制、注册表写入",
+      "depends_on": [
+        "J00",
+        "J01"
+      ],
+      "source_chars": 12390,
+      "source_count": 6
+    },
+    {
+      "job_id": "J05",
+      "title": "安装路径辅助",
+      "depends_on": [
+        "J04",
+        "J01"
+      ],
+      "source_chars": 6492,
+      "source_count": 8
+    },
+    {
+      "job_id": "J06",
+      "title": "No-IP 与 Windows Live 数据提取",
+      "depends_on": [
+        "J00",
+        "J01"
+      ],
+      "source_chars": 9217,
+      "source_count": 7
+    },
+    {
+      "job_id": "J07",
+      "title": "RAS 收集与私有数据",
+      "depends_on": [
+        "J00",
+        "J01"
+      ],
+      "source_chars": 13020,
+      "source_count": 11
+    },
+    {
+      "job_id": "J08",
+      "title": "Protected Storage 收集",
+      "depends_on": [
+        "J00",
+        "J01"
+      ],
+      "source_chars": 12603,
+      "source_count": 10
+    },
+    {
+      "job_id": "J09",
+      "title": "Storage2 及 URL 派生",
+      "depends_on": [
+        "J00",
+        "J01"
+      ],
+      "source_chars": 12980,
+      "source_count": 7
+    },
+    {
+      "job_id": "J10",
+      "title": "Credential Manager 与可选熵",
+      "depends_on": [
+        "J00",
+        "J01",
+        "J09"
+      ],
+      "source_chars": 4611,
+      "source_count": 2
+    },
+    {
+      "job_id": "J11",
+      "title": "Firefox 前半：定位及初始化",
+      "depends_on": [
+        "J00",
+        "J01"
+      ],
+      "source_chars": 12544,
+      "source_count": 1
+    },
+    {
+      "job_id": "J12",
+      "title": "Firefox 后半：读取、解密与返回",
+      "depends_on": [
+        "J11",
+        "J01"
+      ],
+      "source_chars": 10255,
+      "source_count": 1
+    },
+    {
+      "job_id": "J13",
+      "title": "宿主选择与 PE 映射主路径",
+      "depends_on": [
+        "J00",
+        "J01"
+      ],
+      "source_chars": 10595,
+      "source_count": 5
+    },
+    {
+      "job_id": "J14",
+      "title": "PE 导入、重定位及远程辅助",
+      "depends_on": [
+        "J13",
+        "J01"
+      ],
+      "source_chars": 8528,
+      "source_count": 12
+    },
+    {
+      "job_id": "J15",
+      "title": "独立的远程删除分支",
+      "depends_on": [
+        "J13",
+        "J01"
+      ],
+      "source_chars": 2981,
+      "source_count": 4
+    }
+  ]
+}

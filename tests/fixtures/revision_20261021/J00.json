@@ -1,0 +1,1965 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J00.json",
+        "sha256": "b5be4af13a4fd7308912512bec78128aa0b74cda5d9774ef25453d76f65fe6a4"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J00/analyzer/validated_result.json",
+        "sha256": "7304bdf94a129896868e9c40d55d933b376823bfaa777e355c0eb97c60aafbbe"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J00/reviewer/validated_result.json",
+        "sha256": "35f3308e4c195241646dcf28f166e9340fc04853e1fcc484bc208610209e4468"
+      },
+      "packet": {
+        "path": "testdata/packets/J00.md",
+        "sha256": "9147df07c6b4f01608f7dc2e116c5e325467cbb54b14d31618bebaa91d25b606"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J00/reviser/validated_result.json",
+        "sha256": "00fc964d974e92a99ffe22d5e87b60e899cb97fb7de1d175108b376f3727547d"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J00/reviser/revision_scope.json",
+        "sha256": "d73a80d85760d5da0f28781959f1441044579e3e783cb2435c338aff4a2e131b"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate; classification-only update: recover the actual candidate kind for /artifacts/10/kind",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J00",
+  "packet_text": "# J00 共同调用者：模式分派与输出绑定\n任务来源：七个既有 HIGH,owner 的调用者聚合；F500 同时直接调用其中三个。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0500 start，原文件 L0001–L0196 / 共 196 行\n```text\nL0001: void __usercall __noreturn start(int a1@<edi>, int a2@<esi>)\nL0002: {\nL0003:   HANDLE hObject; // ebx\nL0004:   HANDLE hObject_1; // ebx\nL0005:   HANDLE hObject_2; // ebx\nL0006:   int v5; // ecx\nL0007:   char v6; // zf\nL0008:   char *lpName; // eax\nL0009:   HANDLE hObject_3; // ebx\nL0010:   char *lpName_1; // eax\nL0011:   char *lpName_2; // eax\nL0012:   char *lpName_3; // eax\nL0013:   DWORD nNumberOfBytesToWrite; // [esp-10h] [ebp-6Ch]\nL0014:   DWORD nNumberOfBytesToWrite_1; // [esp-10h] [ebp-6Ch]\nL0015:   DWORD nNumberOfBytesToWrite_2; // [esp-10h] [ebp-6Ch]\nL0016:   DWORD nNumberOfBytesToWrite_3; // [esp-10h] [ebp-6Ch]\nL0017:   DWORD nNumberOfBytesToWrite_4; // [esp-10h] [ebp-6Ch]\nL0018:   DWORD nNumberOfBytesToWrite_5; // [esp-10h] [ebp-6Ch]\nL0019:   DWORD nNumberOfBytesToWrite_6; // [esp-10h] [ebp-6Ch]\nL0020:   unsigned int v19[2]; // [esp-Ch] [ebp-68h] BYREF\nL0021:   int *v20; // [esp-4h] [ebp-60h]\nL0022:   char *dst_4; // [esp+4h] [ebp-58h] BYREF\nL0023:   char *dst_2; // [esp+8h] [ebp-54h] BYREF\nL0024:   __int32 dst_3; // [esp+Ch] [ebp-50h] BYREF\nL0025:   int v24; // [esp+10h] [ebp-4Ch] BYREF\nL0026:   char *v25; // [esp+14h] [ebp-48h] BYREF\nL0027:   __int32 dst__4; // [esp+18h] [ebp-44h] BYREF\nL0028:   char *v27; // [esp+1Ch] [ebp-40h] BYREF\nL0029:   __int32 dst_1; // [esp+20h] [ebp-3Ch] BYREF\nL0030:   char *v29; // [esp+24h] [ebp-38h] BYREF\nL0031:   __int32 dst__3; // [esp+28h] [ebp-34h] BYREF\nL0032:   char *v31; // [esp+2Ch] [ebp-30h] BYREF\nL0033:   __int32 dst__2; // [esp+30h] [ebp-2Ch] BYREF\nL0034:   char *v33; // [esp+34h] [ebp-28h] BYREF\nL0035:   __int32 dst; // [esp+38h] [ebp-24h] BYREF\nL0036:   char *v35; // [esp+3Ch] [ebp-20h] BYREF\nL0037:   __int32 dst__1; // [esp+40h] [ebp-1Ch] BYREF\nL0038:   char *v37; // [esp+44h] [ebp-18h] BYREF\nL0039:   __int32 dst_[5]; // [esp+48h] [ebp-14h] BYREF\nL0040:   int savedregs; // [esp+5Ch] [ebp+0h] BYREF\nL0041: \nL0042:   sub_403418((int)&dword_40BB04);\nL0043:   v20 = &savedregs;\nL0044:   v19[1] = (unsigned int)&loc_40C0C4;\nL0045:   v19[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0046:   __writefsdword(0, (unsigned int)v19);\nL0047:   hObject = CreateMutexA_w(0, 0, \"_x_X_UPDATE_X_x_\");\nL0048:   if ( GetLastError() == 183 )\nL0049:   {\nL0050:     CloseHandle(hObject);\nL0051:     Sleep(0x2EE0u);\nL0052:   }\nL0053:   else\nL0054:   {\nL0055:     CloseHandle(hObject);\nL0056:   }\nL0057:   hObject_1 = CreateMutexA_w(0, 0, \"_x_X_PASSWORDLIST_X_x_\");\nL0058:   if ( GetLastError() == 183 )\nL0059:   {\nL0060:     CloseHandle(hObject_1);\nL0061:     sub_409AD4(dst_, (int)hObject_1);\nL0062:     sub_401B14(&dword_40F1EC, dst_[0]);\nL0063:     if ( dword_40F1EC )\nL0064:     {\nL0065:       nNumberOfBytesToWrite = sub_401D50(dword_40F1EC);\nL0066:       sub_406008(&v37);\nL0067:       sub_401D58((volatile __int32 *)&v37, (__int32)\"NOIP.abc\");\nL0068:       sub_405D70(nNumberOfBytesToWrite, v37, dword_40F1EC);\nL0069:     }\nL0070:     sub_409D28((HMODULE *)&dst__1, (int)hObject_1, a1, a2);\nL0071:     sub_401B14(&dword_40F1EC, dst__1);\nL0072:     if ( dword_40F1EC )\nL0073:     {\nL0074:       nNumberOfBytesToWrite_1 = sub_401D50(dword_40F1EC);\nL0075:       sub_406008(&v35);\nL0076:       sub_401D58((volatile __int32 *)&v35, (__int32)\"MSN.abc\");\nL0077:       sub_405D70(nNumberOfBytesToWrite_1, v35, dword_40F1EC);\nL0078:     }\nL0079:     sub_409EF8(&dst);\nL0080:     sub_401B14(&dword_40F1EC, dst);\nL0081:     if ( dword_40F1EC )\nL0082:     {\nL0083:       nNumberOfBytesToWrite_2 = sub_401D50(dword_40F1EC);\nL0084:       sub_406008(&v33);\nL0085:       sub_401D58((volatile __int32 *)&v33, (__int32)\"FIREFOX.abc\");\nL0086:       sub_405D70(nNumberOfBytesToWrite_2, v33, dword_40F1EC);\nL0087:     }\nL0088:     sub_409A84(&dst__2, a1, a2);\nL0089:     sub_401B14(&dword_40F1EC, dst__2);\nL0090:     if ( dword_40F1EC )\nL0091:     {\nL0092:       nNumberOfBytesToWrite_3 = sub_401D50(dword_40F1EC);\nL0093:       sub_406008(&v31);\nL0094:       sub_401D58((volatile __int32 *)&v31, (__int32)\"IELOGIN.abc\");\nL0095:       sub_405D70(nNumberOfBytesToWrite_3, v31, dword_40F1EC);\nL0096:     }\nL0097:     sub_409A90(&dst__3);\nL0098:     sub_401B14(&dword_40F1EC, dst__3);\nL0099:     if ( dword_40F1EC )\nL0100:     {\nL0101:       nNumberOfBytesToWrite_4 = sub_401D50(dword_40F1EC);\nL0102:       sub_406008(&v29);\nL0103:       sub_401D58((volatile __int32 *)&v29, (__int32)\"IEPASS.abc\");\nL0104:       sub_405D70(nNumberOfBytesToWrite_4, v29, dword_40F1EC);\nL0105:     }\nL0106:     sub_409A9C(&dst_1);\nL0107:     sub_401B14(&dword_40F1EC, dst_1);\nL0108:     if ( dword_40F1EC )\nL0109:     {\nL0110:       nNumberOfBytesToWrite_5 = sub_401D50(dword_40F1EC);\nL0111:       sub_406008(&v27);\nL0112:       sub_401D58((volatile __int32 *)&v27, (__int32)\"IEAUTO.abc\");\nL0113:       sub_405D70(nNumberOfBytesToWrite_5, v27, dword_40F1EC);\nL0114:     }\nL0115:     sub_409AB8(&dst__4);\nL0116:     sub_401B14(&dword_40F1EC, dst__4);\nL0117:     if ( dword_40F1EC )\nL0118:     {\nL0119:       nNumberOfBytesToWrite_6 = sub_401D50(dword_40F1EC);\nL0120:       sub_406008(&v25);\nL0121:       sub_401D58((volatile __int32 *)&v25, (__int32)\"IEWEB.abc\");\nL0122:       sub_405D70(nNumberOfBytesToWrite_6, v25, dword_40F1EC);\nL0123:     }\nL0124:   }\nL0125:   else\nL0126:   {\nL0127:     CloseHandle(hObject_1);\nL0128:     hObject_2 = CreateMutexA_w(0, 0, \"_x_X_BLOCKMOUSE_X_x_\");\nL0129:     if ( GetLastError() == 183 )\nL0130:     {\nL0131:       CloseHandle(hObject_2);\nL0132:       SetWindowsHookExA(13, (HOOKPROC)fn, hmod, 0);\nL0133:       SetWindowsHookExA(14, (HOOKPROC)sub_40B108, hmod, 0);\nL0134:       while ( !sub_40BA84() )\nL0135:         sub_405918();\nL0136:       ExitProcess_0(0);\nL0137:     }\nL0138:     CloseHandle(hObject_2);\nL0139:     sub_4013A4(1, &v24);\nL0140:     sub_401E94(v24, (int *)\"Restart\");\nL0141:     if ( !v6 )\nL0142:       Sleep(0x3E8u);\nL0143:     sub_404604(v5, (int)hObject_2, a2);\nL0144:     sub_40491C();\nL0145:     sub_40B118((signed int)hObject_2, a1, a2);\nL0146:     lpName = sub_401F48(*(char **)off_40D204[0]);\nL0147:     hObject_3 = CreateMutexA_w(0, 0, lpName);\nL0148:     if ( GetLastError() == 183 )\nL0149:     {\nL0150:       CloseHandle(hObject_3);\nL0151:       Sleep(0x3E8u);\nL0152:       lpName_1 = sub_401F48(*(char **)off_40D204[0]);\nL0153:       hObject_3 = CreateMutexA_w(0, 0, lpName_1);\nL0154:       if ( GetLastError() == 183 )\nL0155:       {\nL0156:         CloseHandle(hObject_3);\nL0157:         Sleep(0x3E8u);\nL0158:         lpName_2 = sub_401F48(*(char **)off_40D204[0]);\nL0159:         hObject_3 = CreateMutexA_w(0, 0, lpName_2);\nL0160:         if ( GetLastError() == 183 )\nL0161:         {\nL0162:           CloseHandle(hObject_3);\nL0163:           Sleep(0x3E8u);\nL0164:           lpName_3 = sub_401F48(*(char **)off_40D204[0]);\nL0165:           hObject_3 = CreateMutexA_w(0, 0, lpName_3);\nL0166:           if ( GetLastError() == 183 )\nL0167:             ExitProcess_0(0);\nL0168:         }\nL0169:       }\nL0170:     }\nL0171:     CloseHandle(hObject_3);\nL0172:     if ( *off_40D1DC[0] == 1 )\nL0173:     {\nL0174:       sub_4013A4(0, (int *)&dst_2);\nL0175:       sub_406B54(dst_2, &dst_3);\nL0176:       sub_401B14(&dst__12, dst_3);\nL0177:     }\nL0178:     else\nL0179:     {\nL0180:       sub_4013A4(0, &dst__12);\nL0181:     }\nL0182:     sub_406008(&dst_4);\nL0183:     sub_401D58((volatile __int32 *)&dst_4, (__int32)\"XX--XX--XX.txt\");\nL0184:     sub_40B93C(dst__12, dst_4, (int)hObject_3, a2);\nL0185:     if ( *off_40D214[0] == 1 )\nL0186:     {\nL0187:       sub_40B7FC();\nL0188:       Sleep(0x3E8u);\nL0189:     }\nL0190:     sub_40B3C0((int)hObject_3);\nL0191:   }\nL0192:   __writefsdword(0, v19[0]);\nL0193:   v20 = (int *)&loc_40C0CB;\nL0194:   sub_401AE4((int *)&dst_4, 18);\nL0195:   sub_4019D8();\nL0196: }\n```\n\n## F-0373 sub_406008，原文件 L0001–L0007 / 共 7 行\n```text\nL0001: _DWORD *__usercall sub_406008@<eax>(char **a1@<eax>)\nL0002: {\nL0003:   CHAR lpBuffer_[268]; // [esp+0h] [ebp-10Ch] BYREF\nL0004: \nL0005:   sub_405EAC(0x105u, lpBuffer_);\nL0006:   return sub_401D24(a1, (unsigned int)lpBuffer_, 261);\nL0007: }\n```\n\n## F-0370 sub_405EAC，原文件 L0001–L0009 / 共 9 行\n```text\nL0001: DWORD __usercall sub_405EAC@<eax>(DWORD nBufferLength@<eax>, CHAR *lpBuffer@<edx>)\nL0002: {\nL0003:   HMODULE hModule; // eax\nL0004:   DWORD (__stdcall *GetTempPathA)(DWORD, LPSTR); // eax\nL0005: \nL0006:   hModule = LoadLibraryA(\"kernel32.dll\");\nL0007:   GetTempPathA = (DWORD (__stdcall *)(DWORD, LPSTR))GetProcAddress(hModule, \"GetTempPathA\");\nL0008:   return GetTempPathA(nBufferLength, lpBuffer);\nL0009: }\n```\n\n## F-0367 sub_405D70，原文件 L0001–L0036 / 共 36 行\n```text\nL0001: int *__usercall sub_405D70@<eax>(DWORD nNumberOfBytesToWrite@<ecx>, char *a2@<eax>, int a3@<edx>)\nL0002: {\nL0003:   char *lpFileName; // eax\nL0004:   HANDLE hFile; // eax\nL0005:   void *hFile_1; // ebx\nL0006:   const void *lpBuffer; // eax\nL0007:   unsigned int v9[2]; // [esp-Ch] [ebp-20h] BYREF\nL0008:   int *v10; // [esp-4h] [ebp-18h]\nL0009:   DWORD NumberOfBytesWritten; // [esp+8h] [ebp-Ch] BYREF\nL0010:   int v12; // [esp+Ch] [ebp-8h] BYREF\nL0011:   char *v13; // [esp+10h] [ebp-4h]\nL0012:   int savedregs; // [esp+14h] [ebp+0h] BYREF\nL0013: \nL0014:   v12 = a3;\nL0015:   v13 = a2;\nL0016:   sub_401F38((int)a2);\nL0017:   sub_401F38(v12);\nL0018:   v10 = &savedregs;\nL0019:   v9[1] = (unsigned int)&loc_405E0A;\nL0020:   v9[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0021:   __writefsdword(0, (unsigned int)v9);\nL0022:   lpFileName = sub_401F48(v13);\nL0023:   hFile = CreateFileA(lpFileName, 0x40000000u, 2u, 0, 2u, 0, 0);\nL0024:   hFile_1 = hFile;\nL0025:   if ( hFile != (HANDLE)-1 )\nL0026:   {\nL0027:     if ( nNumberOfBytesToWrite == -1 )\nL0028:       SetFilePointer(hFile, 0, 0, 0);\nL0029:     lpBuffer = (const void *)sub_401F9C((unsigned int *)&v12);\nL0030:     WriteFile(hFile_1, lpBuffer, nNumberOfBytesToWrite, &NumberOfBytesWritten, 0);\nL0031:     CloseHandle(hFile_1);\nL0032:   }\nL0033:   __writefsdword(0, v9[0]);\nL0034:   v10 = (int *)&loc_405E11;\nL0035:   return sub_401AE4(&v12, 2);\nL0036: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "F-0500 is a mode dispatcher guarded by named mutexes. One branch, entered when the password-list mutex already exists, invokes seven data-producing routines and binds their returned data to fixed .abc filenames under the process temporary path before writing them. Another branch installs global hooks when the block-mouse mutex already exists; otherwise it performs additional mutex gating and writes data to a fixed .txt output after helper processing. The packet directly proves file-write and hook capabilities, but not the semantics of the helper routines, the contents of the outputs, or runtime success.",
+    "claims": [
+      {
+        "behavior": "When the named password-list mutex already exists, the dispatcher invokes seven routines and writes each returned result to a distinct fixed-name file in the process temporary directory: NOIP.abc, MSN.abc, FIREFOX.abc, IELOGIN.abc, IEPASS.abc, IEAUTO.abc, and IEWEB.abc.",
+        "condition": "CreateMutexA_w for _x_X_PASSWORDLIST_X_x_ reports ERROR_ALREADY_EXISTS (GetLastError()==183).",
+        "source": "Return values/state produced by sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, and sub_409AB8, after size/extraction operations via sub_401B14 and sub_401D50.",
+        "action": "For each result, obtain the temporary path via sub_406008, append a fixed filename via sub_401D58, and call sub_405D70 to create/open the target and WriteFile the result.",
+        "sink": "Files named NOIP.abc, MSN.abc, FIREFOX.abc, IELOGIN.abc, IEPASS.abc, IEAUTO.abc, and IEWEB.abc in the process temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123",
+            "observation": "On ERROR_ALREADY_EXISTS for _x_X_PASSWORDLIST_X_x_, seven helper calls are followed by repeated size calculation, temporary-path construction, fixed filename binding, and sub_405D70 calls for the seven listed names."
+          },
+          {
+            "location": "F-0373 L1-L7",
+            "observation": "sub_406008 obtains a temporary path through sub_405EAC and passes it to sub_401D24 for path construction."
+          },
+          {
+            "location": "F-0370 L1-L9",
+            "observation": "sub_405EAC dynamically resolves and calls GetTempPathA."
+          },
+          {
+            "location": "F-0367 L22-L31",
+            "observation": "sub_405D70 resolves the filename, calls CreateFileA with write access, obtains a buffer, calls WriteFile, and closes the handle."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The packet does not provide the seven producer implementations, so it cannot establish what data they return or whether each call succeeds at runtime.",
+          "The code shows attempted writes and does not prove successful file creation or complete writes."
+        ]
+      },
+      {
+        "behavior": "When the block-mouse mutex already exists, the dispatcher installs two system-wide hooks and repeatedly executes a loop until sub_40BA84 returns nonzero, then terminates the process.",
+        "condition": "CreateMutexA_w for _x_X_BLOCKMOUSE_X_x_ reports ERROR_ALREADY_EXISTS (GetLastError()==183).",
+        "source": "The branch condition and the hook procedures fn and sub_40B108 supplied to SetWindowsHookExA.",
+        "action": "Calls SetWindowsHookExA with hook identifiers 13 and 14, then loops over sub_405918 while sub_40BA84 is false.",
+        "sink": "Installed Windows hooks and subsequent ExitProcess_0(0).",
+        "evidence": [
+          {
+            "location": "F-0500 L128-L137",
+            "observation": "On an existing _x_X_BLOCKMOUSE_X_x_ mutex, the code calls SetWindowsHookExA(13, fn, ...) and SetWindowsHookExA(14, sub_40B108, ...), loops until sub_40BA84 succeeds, and exits."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The packet does not include fn, sub_40B108, sub_40BA84, or sub_405918, so the hooks' actual effects and loop termination condition are unresolved.",
+          "Static code establishes hook-installation capability, not successful installation or observed input blocking."
+        ]
+      },
+      {
+        "behavior": "In the non-password-list and non-block-mouse path, the dispatcher creates a mutex with a derived name, retries creation up to four times after collisions, and exits if the fourth attempt also reports an existing mutex.",
+        "condition": "The _x_X_PASSWORDLIST_X_x_ mutex is not reported as existing and the _x_X_BLOCKMOUSE_X_x_ mutex is not reported as existing.",
+        "source": "The name returned by sub_401F48(*(char **)off_40D204[0]) and the ERROR_ALREADY_EXISTS results from CreateMutexA_w.",
+        "action": "Create the derived-name mutex, retry after 1-second sleeps when collisions occur, and call ExitProcess_0(0) after the final collision.",
+        "sink": "Named mutex state and process termination on repeated collision.",
+        "evidence": [
+          {
+            "location": "F-0500 L145-L171",
+            "observation": "The code derives a mutex name, calls CreateMutexA_w, retries three additional times after ERROR_ALREADY_EXISTS with Sleep(0x3E8), and exits on the final collision."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The implementation of sub_401F48 and the value behind off_40D204 are absent, so the actual mutex name is unknown."
+        ]
+      },
+      {
+        "behavior": "After the derived-mutex gating path, the code selects a value through sub_4013A4/sub_406B54 or sub_4013A4 alone, binds it to XX--XX--XX.txt under the process temporary path, and invokes sub_40B93C with that output path.",
+        "condition": "The password-list and block-mouse collision branches were not taken and the derived mutex did not cause process termination.",
+        "source": "Value produced by sub_4013A4, optionally transformed by sub_406B54, and the temporary path constructed by sub_406008.",
+        "action": "Append the fixed filename XX--XX--XX.txt and call sub_40B93C with the selected value and output path.",
+        "sink": "The path/value arguments passed to sub_40B93C, with XX--XX--XX.txt as the bound filename.",
+        "evidence": [
+          {
+            "location": "F-0500 L172-L190",
+            "observation": "The code selects dst__12 based on off_40D1DC, obtains a temporary path, appends XX--XX--XX.txt, passes it to sub_40B93C, and conditionally calls sub_40B7FC before sub_40B3C0."
+          },
+          {
+            "location": "F-0373 L1-L7",
+            "observation": "sub_406008 constructs a path from the process temporary path."
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_40B93C, sub_4013A4, and sub_406B54 are not provided, so the selected data's origin and whether sub_40B93C writes or transmits the file cannot be closed from this packet.",
+          "The condition values at off_40D1DC and off_40D214 are unresolved."
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "mutex",
+        "value": "_x_X_UPDATE_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex used for an update-related collision check and a 12-second sleep on collision.",
+        "evidence": [
+          {
+            "location": "F-0500 L47-L56",
+            "observation": "CreateMutexA_w is called with the fixed name and ERROR_ALREADY_EXISTS causes handle close and Sleep(0x2EE0)."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "mutex",
+        "value": "_x_X_PASSWORDLIST_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex whose existing-instance branch dispatches seven output-producing routines.",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L69",
+            "observation": "CreateMutexA_w uses the fixed name; collision enters the first seven-output branch."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "mutex",
+        "value": "_x_X_BLOCKMOUSE_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex whose existing-instance branch installs two hooks.",
+        "evidence": [
+          {
+            "location": "F-0500 L128-L137",
+            "observation": "CreateMutexA_w uses the fixed name; collision enters the hook-installation branch."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "NOIP.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409AD4 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L61-L69",
+            "observation": "The result associated with sub_409AD4 is bound to NOIP.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "MSN.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409D28 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L70-L78",
+            "observation": "The result associated with sub_409D28 is bound to MSN.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "FIREFOX.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409EF8 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L79-L87",
+            "observation": "The result associated with sub_409EF8 is bound to FIREFOX.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IELOGIN.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A84 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L88-L96",
+            "observation": "The result associated with sub_409A84 is bound to IELOGIN.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEPASS.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A90 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L97-L105",
+            "observation": "The result associated with sub_409A90 is bound to IEPASS.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEAUTO.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A9C in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L106-L114",
+            "observation": "The result associated with sub_409A9C is bound to IEAUTO.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEWEB.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409AB8 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L115-L123",
+            "observation": "The result associated with sub_409AB8 is bound to IEWEB.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "XX--XX--XX.txt",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed filename bound in the alternate processing path under the process temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L182-L190",
+            "observation": "The code appends XX--XX--XX.txt to a temporary path and passes it to sub_40B93C."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "GetTempPathA",
+        "role": "system_path",
+        "detection_specificity": "none",
+        "meaning": "API used to obtain the base temporary directory for output path construction.",
+        "evidence": [
+          {
+            "location": "F-0370 L6-L8",
+            "observation": "GetTempPathA is resolved and called by sub_405EAC."
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "What do the seven producer routines return and what are the semantics of the data written to the .abc files?",
+        "reason": "Their implementations are absent; only their call sites and output bindings are visible.",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "What are the actual effects of fn and sub_40B108 and the termination predicate in sub_40BA84?",
+        "reason": "The hook targets and loop helper are not included.",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "Does sub_40B93C create/write/transmit XX--XX--XX.txt, and what is the selected source value?",
+        "reason": "The callee and value-producing helpers are absent.",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "producer helpers sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "Resolve the source and meaning of the seven data outputs.",
+        "expected_value": "Direct source-to-output semantics for each .abc file and trigger details.",
+        "priority": "high"
+      },
+      {
+        "target": "sub_40B93C, sub_4013A4, sub_406B54",
+        "reason": "Resolve the alternate path's data source and output side effect.",
+        "expected_value": "Whether XX--XX--XX.txt is written, transmitted, or otherwise processed, and from what data.",
+        "priority": "high"
+      },
+      {
+        "target": "fn, sub_40B108, sub_40BA84, sub_405918",
+        "reason": "Resolve hook behavior and loop termination.",
+        "expected_value": "Concrete input-monitoring/blocking effects and runtime control flow.",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_409AD4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409D28",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "Needed to identify the actual data sources behind the seven fixed output files; current evidence only shows returned values are written.",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123",
+            "observation": "Each listed helper is called and its returned value is subsequently written to a distinct fixed filename, but the helper bodies are not present."
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_40B93C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_4013A4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_406B54",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "Needed to determine the alternate path's source data and whether the XX--XX--XX.txt argument results in file creation or another side effect.",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0500 L172-L190",
+            "observation": "The code prepares a value and fixed temporary path, then passes both to sub_40B93C; the callee is absent."
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "gap_error",
+        "description": "Claim 1 omits the per-output success/availability gate. Each helper call is followed by sub_401B14 and an `if ( dword_40F1EC )` check; the file write is conditional, so the claim's wording that all seven returned results are written is too strong.",
+        "evidence": [
+          {
+            "location": "F-0500 L61-L69",
+            "observation": "After the first producer and state update, the call to sub_405D70 occurs only inside `if ( dword_40F1EC )`."
+          },
+          {
+            "location": "F-0500 L70-L123",
+            "observation": "The same nonzero dword_40F1EC gate is repeated for the remaining six producer/output pairs."
+          }
+        ],
+        "required_fix": "Limit the claim's condition and action to outputs for which the post-helper dword_40F1EC check is nonzero. Preserve the distinction between attempted writes and guaranteed successful writes.",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0/condition"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/source"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/sink"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/limitations"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "wrong_claim",
+        "description": "Claim 3 gives the wrong retry count: the code makes one initial derived-name mutex attempt and only three additional attempts after collisions, not up to four retries after collisions.",
+        "evidence": [
+          {
+            "location": "F-0500 L146-L171",
+            "observation": "CreateMutexA_w is called initially at L147, then again at L153, L159, and L165 after three collision/sleep cycles; a collision at the fourth total attempt exits at L167."
+          }
+        ],
+        "required_fix": "State the exact gating behavior as four total creation attempts (one initial attempt plus three retries), with ExitProcess on collision at the fourth attempt.",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/2/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/limitations"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "artifact_role_error",
+        "description": "The fixed string XX--XX--XX.txt is classified as a created_output even though this packet only shows it being appended to a temporary path and passed to sub_40B93C; file creation or writing is explicitly unresolved. This misclassifies a path argument as a confirmed output artifact.",
+        "evidence": [
+          {
+            "location": "F-0500 L182-L190",
+            "observation": "The code constructs a temporary-path-plus-filename value and passes it to sub_40B93C, but no file API is visible in this material for that path."
+          },
+          {
+            "location": "F-0367 L22-L31",
+            "observation": "The packet demonstrates what an actual write sink looks like—CreateFileA followed by WriteFile—but that sink is only directly linked to the .abc branch, not to sub_40B93C."
+          }
+        ],
+        "required_fix": "Change the artifact role from created_output to a non-output role such as other, and revise its meaning to say that the fixed filename is an argument/path binding to sub_40B93C; do not claim file creation. Retain the unresolved side effect in claim 4 limitations/gaps.",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/10/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/10/meaning"
+          }
+        ]
+      },
+      {
+        "issue_id": "R4",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "The GetTempPathA API name is recorded as a system_path artifact. It is an API/helper used to obtain a temporary directory, not itself a system path or a distinct IOC; this adds a misleading artifact without changing the core claims.",
+        "evidence": [
+          {
+            "location": "F-0370 L6-L8",
+            "observation": "The code dynamically resolves and calls GetTempPathA; the actual returned directory string is not present as a fixed artifact."
+          }
+        ],
+        "required_fix": "Delete this helper/API artifact, or replace it with a properly supported environment_probe artifact whose value is the temporary-directory behavior rather than the API name. Deletion is preferred because the behavior is already covered by claim evidence.",
+        "revision_targets": [
+          {
+            "operation": "delete",
+            "path": "/artifacts/11"
+          }
+        ]
+      }
+    ],
+    "review_summary": "Coverage is otherwise strong: the mutex-gated branches, seven conditional .abc write paths, hook-installation capability, alternate-path uncertainty, and relevant gaps are covered with valid packet evidence. Revision is required for the omitted per-output gate, the incorrect derived-mutex retry count, and the unsupported created_output role for XX--XX--XX.txt."
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "gap_error",
+        "description": "Claim 1 omits the per-output success/availability gate. Each helper call is followed by sub_401B14 and an `if ( dword_40F1EC )` check; the file write is conditional, so the claim's wording that all seven returned results are written is too strong.",
+        "evidence": [
+          {
+            "location": "F-0500 L61-L69",
+            "observation": "After the first producer and state update, the call to sub_405D70 occurs only inside `if ( dword_40F1EC )`."
+          },
+          {
+            "location": "F-0500 L70-L123",
+            "observation": "The same nonzero dword_40F1EC gate is repeated for the remaining six producer/output pairs."
+          }
+        ],
+        "required_fix": "Limit the claim's condition and action to outputs for which the post-helper dword_40F1EC check is nonzero. Preserve the distinction between attempted writes and guaranteed successful writes.",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0/condition"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/source"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/sink"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/limitations"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "wrong_claim",
+        "description": "Claim 3 gives the wrong retry count: the code makes one initial derived-name mutex attempt and only three additional attempts after collisions, not up to four retries after collisions.",
+        "evidence": [
+          {
+            "location": "F-0500 L146-L171",
+            "observation": "CreateMutexA_w is called initially at L147, then again at L153, L159, and L165 after three collision/sleep cycles; a collision at the fourth total attempt exits at L167."
+          }
+        ],
+        "required_fix": "State the exact gating behavior as four total creation attempts (one initial attempt plus three retries), with ExitProcess on collision at the fourth attempt.",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/2/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/limitations"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "artifact_role_error",
+        "description": "The fixed string XX--XX--XX.txt is classified as a created_output even though this packet only shows it being appended to a temporary path and passed to sub_40B93C; file creation or writing is explicitly unresolved. This misclassifies a path argument as a confirmed output artifact.",
+        "evidence": [
+          {
+            "location": "F-0500 L182-L190",
+            "observation": "The code constructs a temporary-path-plus-filename value and passes it to sub_40B93C, but no file API is visible in this material for that path."
+          },
+          {
+            "location": "F-0367 L22-L31",
+            "observation": "The packet demonstrates what an actual write sink looks like—CreateFileA followed by WriteFile—but that sink is only directly linked to the .abc branch, not to sub_40B93C."
+          }
+        ],
+        "required_fix": "Change the artifact role from created_output to a non-output role such as other, and revise its meaning to say that the fixed filename is an argument/path binding to sub_40B93C; do not claim file creation. Retain the unresolved side effect in claim 4 limitations/gaps.",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/10/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/10/meaning"
+          }
+        ]
+      },
+      {
+        "issue_id": "R4",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "The GetTempPathA API name is recorded as a system_path artifact. It is an API/helper used to obtain a temporary directory, not itself a system path or a distinct IOC; this adds a misleading artifact without changing the core claims.",
+        "evidence": [
+          {
+            "location": "F-0370 L6-L8",
+            "observation": "The code dynamically resolves and calls GetTempPathA; the actual returned directory string is not present as a fixed artifact."
+          }
+        ],
+        "required_fix": "Delete this helper/API artifact, or replace it with a properly supported environment_probe artifact whose value is the temporary-directory behavior rather than the API name. Deletion is preferred because the behavior is already covered by claim evidence.",
+        "revision_targets": [
+          {
+            "operation": "delete",
+            "path": "/artifacts/11"
+          }
+        ]
+      }
+    ],
+    "review_summary": "Coverage is otherwise strong: the mutex-gated branches, seven conditional .abc write paths, hook-installation capability, alternate-path uncertainty, and relevant gaps are covered with valid packet evidence. Revision is required for the omitted per-output gate, the incorrect derived-mutex retry count, and the unsupported created_output role for XX--XX--XX.txt."
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "F-0500 is a mode dispatcher guarded by named mutexes. One branch, entered when the password-list mutex already exists, invokes seven data-producing routines and conditionally binds available returned data to fixed .abc filenames under the process temporary path before attempting to write them. Another branch installs global hooks when the block-mouse mutex already exists; otherwise it performs additional mutex gating and passes data and a fixed .txt path to a helper after processing. The packet directly proves file-write and hook capabilities, but not the semantics of the helper routines, the contents of the outputs, or runtime success.",
+    "claims": [
+      {
+        "behavior": "When the named password-list mutex already exists, each of seven producer results is eligible for a distinct fixed-name file write only when the post-helper dword_40F1EC check is nonzero: NOIP.abc, MSN.abc, FIREFOX.abc, IELOGIN.abc, IEPASS.abc, IEAUTO.abc, and IEWEB.abc.",
+        "condition": "CreateMutexA_w for _x_X_PASSWORDLIST_X_x_ reports ERROR_ALREADY_EXISTS (GetLastError()==183), and for an individual producer/output pair the subsequent dword_40F1EC check is nonzero.",
+        "source": "Return values/state produced by sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, and sub_409AB8, after size/extraction operations via sub_401B14 and sub_401D50.",
+        "action": "For each pair passing the dword_40F1EC gate, obtain the temporary path via sub_406008, append its fixed filename via sub_401D58, and call sub_405D70 to attempt a write of the result.",
+        "sink": "An attempted file write to the corresponding fixed filename in the process temporary directory: NOIP.abc, MSN.abc, FIREFOX.abc, IELOGIN.abc, IEPASS.abc, IEAUTO.abc, or IEWEB.abc.",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123",
+            "observation": "On ERROR_ALREADY_EXISTS for _x_X_PASSWORDLIST_X_x_, seven helper calls are followed by sub_401B14 and repeated `if ( dword_40F1EC )` gates; only inside each nonzero gate are temporary-path construction, fixed filename binding, and sub_405D70 calls performed for the seven listed names."
+          },
+          {
+            "location": "F-0373 L1-L7",
+            "observation": "sub_406008 obtains a temporary path through sub_405EAC and passes it to sub_401D24 for path construction."
+          },
+          {
+            "location": "F-0370 L1-L9",
+            "observation": "sub_405EAC dynamically resolves and calls GetTempPathA."
+          },
+          {
+            "location": "F-0367 L22-L31",
+            "observation": "sub_405D70 resolves the filename, calls CreateFileA with write access, obtains a buffer, calls WriteFile, and closes the handle."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The packet does not provide the seven producer implementations, so it cannot establish what data they return or whether each gated call succeeds at runtime.",
+          "The code shows conditional attempted writes and does not prove successful file creation or complete writes."
+        ]
+      },
+      {
+        "behavior": "When the block-mouse mutex already exists, the dispatcher installs two system-wide hooks and repeatedly executes a loop until sub_40BA84 returns nonzero, then terminates the process.",
+        "condition": "CreateMutexA_w for _x_X_BLOCKMOUSE_X_x_ reports ERROR_ALREADY_EXISTS (GetLastError()==183).",
+        "source": "The branch condition and the hook procedures fn and sub_40B108 supplied to SetWindowsHookExA.",
+        "action": "Calls SetWindowsHookExA with hook identifiers 13 and 14, then loops over sub_405918 while sub_40BA84 is false.",
+        "sink": "Installed Windows hooks and subsequent ExitProcess_0(0).",
+        "evidence": [
+          {
+            "location": "F-0500 L128-L137",
+            "observation": "On an existing _x_X_BLOCKMOUSE_X_x_ mutex, the code calls SetWindowsHookExA(13, fn, ...) and SetWindowsHookExA(14, sub_40B108, ...), loops until sub_40BA84 succeeds, and exits."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The packet does not include fn, sub_40B108, sub_40BA84, or sub_405918, so the hooks' actual effects and loop termination condition are unresolved.",
+          "Static code establishes hook-installation capability, not successful installation or observed input blocking."
+        ]
+      },
+      {
+        "behavior": "In the non-password-list and non-block-mouse path, the dispatcher creates a mutex with a derived name, makes one initial creation attempt and up to three additional attempts after collisions, and exits if the fourth total attempt also reports an existing mutex.",
+        "condition": "The _x_X_PASSWORDLIST_X_x_ mutex is not reported as existing and the _x_X_BLOCKMOUSE_X_x_ mutex is not reported as existing.",
+        "source": "The name returned by sub_401F48(*(char **)off_40D204[0]) and the ERROR_ALREADY_EXISTS results from CreateMutexA_w.",
+        "action": "Creates the derived-name mutex, retries three additional times after collisions with 1-second sleeps, and calls ExitProcess_0(0) when the fourth total attempt also reports a collision.",
+        "sink": "Named mutex state and process termination on repeated collision.",
+        "evidence": [
+          {
+            "location": "F-0500 L145-L171",
+            "observation": "The code derives a mutex name and calls CreateMutexA_w initially at L147, then again at L153, L159, and L165 after three collision/sleep cycles; a collision at the fourth total attempt exits at L167."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The implementation of sub_401F48 and the value behind off_40D204 are absent, so the actual mutex name is unknown."
+        ]
+      },
+      {
+        "behavior": "After the derived-mutex gating path, the code selects a value through sub_4013A4/sub_406B54 or sub_4013A4 alone, binds it to XX--XX--XX.txt under the process temporary path, and invokes sub_40B93C with that output path.",
+        "condition": "The password-list and block-mouse collision branches were not taken and the derived mutex did not cause process termination.",
+        "source": "Value produced by sub_4013A4, optionally transformed by sub_406B54, and the temporary path constructed by sub_406008.",
+        "action": "Append the fixed filename XX--XX--XX.txt and call sub_40B93C with the selected value and output path.",
+        "sink": "The path/value arguments passed to sub_40B93C, with XX--XX--XX.txt as the bound filename.",
+        "evidence": [
+          {
+            "location": "F-0500 L172-L190",
+            "observation": "The code selects dst__12 based on off_40D1DC, obtains a temporary path, appends XX--XX--XX.txt, passes it to sub_40B93C, and conditionally calls sub_40B7FC before sub_40B3C0."
+          },
+          {
+            "location": "F-0373 L1-L7",
+            "observation": "sub_406008 constructs a path from the process temporary path."
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_40B93C, sub_4013A4, and sub_406B54 are not provided, so the selected data's origin and whether sub_40B93C writes or transmits the file cannot be closed from this packet.",
+          "The condition values at off_40D1DC and off_40D214 are unresolved."
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "mutex",
+        "value": "_x_X_UPDATE_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex used for an update-related collision check and a 12-second sleep on collision.",
+        "evidence": [
+          {
+            "location": "F-0500 L47-L56",
+            "observation": "CreateMutexA_w is called with the fixed name and ERROR_ALREADY_EXISTS causes handle close and Sleep(0x2EE0)."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "mutex",
+        "value": "_x_X_PASSWORDLIST_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex whose existing-instance branch dispatches seven output-producing routines.",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L69",
+            "observation": "CreateMutexA_w uses the fixed name; collision enters the first seven-output branch."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "mutex",
+        "value": "_x_X_BLOCKMOUSE_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex whose existing-instance branch installs two hooks.",
+        "evidence": [
+          {
+            "location": "F-0500 L128-L137",
+            "observation": "CreateMutexA_w uses the fixed name; collision enters the hook-installation branch."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "NOIP.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409AD4 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L61-L69",
+            "observation": "The result associated with sub_409AD4 is bound to NOIP.abc and passed to sub_405D70 inside the dword_40F1EC gate."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "MSN.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409D28 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L70-L78",
+            "observation": "The result associated with sub_409D28 is bound to MSN.abc and passed to sub_405D70 inside the dword_40F1EC gate."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "FIREFOX.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409EF8 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L79-L87",
+            "observation": "The result associated with sub_409EF8 is bound to FIREFOX.abc and passed to sub_405D70 inside the dword_40F1EC gate."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IELOGIN.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A84 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L88-L96",
+            "observation": "The result associated with sub_409A84 is bound to IELOGIN.abc and passed to sub_405D70 inside the dword_40F1EC gate."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEPASS.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A90 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L97-L105",
+            "observation": "The result associated with sub_409A90 is bound to IEPASS.abc and passed to sub_405D70 inside the dword_40F1EC gate."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEAUTO.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A9C in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L106-L114",
+            "observation": "The result associated with sub_409A9C is bound to IEAUTO.abc and passed to sub_405D70 inside the dword_40F1EC gate."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEWEB.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409AB8 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L115-L123",
+            "observation": "The result associated with sub_409AB8 is bound to IEWEB.abc and passed to sub_405D70 inside the dword_40F1EC gate."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "XX--XX--XX.txt",
+        "role": "other",
+        "detection_specificity": "high",
+        "meaning": "Fixed filename appended to a temporary path and passed as an argument to sub_40B93C; this packet does not establish file creation or writing for it.",
+        "evidence": [
+          {
+            "location": "F-0500 L182-L190",
+            "observation": "The code appends XX--XX--XX.txt to a temporary path and passes it to sub_40B93C."
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "What do the seven producer routines return and what are the semantics of the data written to the .abc files?",
+        "reason": "Their implementations are absent; only their call sites, per-output gates, and output bindings are visible.",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "What are the actual effects of fn and sub_40B108 and the termination predicate in sub_40BA84?",
+        "reason": "The hook targets and loop helper are not included.",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "Does sub_40B93C create/write/transmit XX--XX--XX.txt, and what is the selected source value?",
+        "reason": "The callee and value-producing helpers are absent.",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "producer helpers sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "Resolve the source and meaning of the seven data outputs.",
+        "expected_value": "Direct source-to-output semantics for each .abc file and trigger details.",
+        "priority": "high"
+      },
+      {
+        "target": "sub_40B93C, sub_4013A4, sub_406B54",
+        "reason": "Resolve the alternate path's data source and output side effect.",
+        "expected_value": "Whether XX--XX--XX.txt is written, transmitted, or otherwise processed, and from what data.",
+        "priority": "high"
+      },
+      {
+        "target": "fn, sub_40B108, sub_40BA84, sub_405918",
+        "reason": "Resolve hook behavior and loop termination.",
+        "expected_value": "Concrete input-monitoring/blocking effects and runtime control flow.",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_409AD4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409D28",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "Needed to identify the actual data sources behind the seven fixed output files; current evidence only shows conditionally gated returned values are written.",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123",
+            "observation": "Each listed helper is called, followed by a dword_40F1EC gate, and its returned value is subsequently passed to a distinct fixed filename and sub_405D70 when the gate is nonzero; the helper bodies are not present."
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_40B93C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_4013A4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_406B54",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "Needed to determine the alternate path's source data and whether the XX--XX--XX.txt argument results in file creation or another side effect.",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0500 L172-L190",
+            "observation": "The code prepares a value and fixed temporary path, then passes both to sub_40B93C; the callee is absent."
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "F-0500 is a mode dispatcher guarded by named mutexes. One branch, entered when the password-list mutex already exists, invokes seven data-producing routines and binds their returned data to fixed .abc filenames under the process temporary path before writing them. Another branch installs global hooks when the block-mouse mutex already exists; otherwise it performs additional mutex gating and writes data to a fixed .txt output after helper processing. The packet directly proves file-write and hook capabilities, but not the semantics of the helper routines, the contents of the outputs, or runtime success.",
+    "claims": [
+      {
+        "behavior": "When the named password-list mutex already exists, the dispatcher invokes seven routines and writes each returned result to a distinct fixed-name file in the process temporary directory: NOIP.abc, MSN.abc, FIREFOX.abc, IELOGIN.abc, IEPASS.abc, IEAUTO.abc, and IEWEB.abc.",
+        "condition": "CreateMutexA_w for _x_X_PASSWORDLIST_X_x_ reports ERROR_ALREADY_EXISTS (GetLastError()==183), and for an individual producer/output pair the subsequent dword_40F1EC check is nonzero.",
+        "source": "Return values/state produced by sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, and sub_409AB8, after size/extraction operations via sub_401B14 and sub_401D50.",
+        "action": "For each pair passing the dword_40F1EC gate, obtain the temporary path via sub_406008, append its fixed filename via sub_401D58, and call sub_405D70 to attempt a write of the result.",
+        "sink": "An attempted file write to the corresponding fixed filename in the process temporary directory: NOIP.abc, MSN.abc, FIREFOX.abc, IELOGIN.abc, IEPASS.abc, IEAUTO.abc, or IEWEB.abc.",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123",
+            "observation": "On ERROR_ALREADY_EXISTS for _x_X_PASSWORDLIST_X_x_, seven helper calls are followed by repeated size calculation, temporary-path construction, fixed filename binding, and sub_405D70 calls for the seven listed names."
+          },
+          {
+            "location": "F-0373 L1-L7",
+            "observation": "sub_406008 obtains a temporary path through sub_405EAC and passes it to sub_401D24 for path construction."
+          },
+          {
+            "location": "F-0370 L1-L9",
+            "observation": "sub_405EAC dynamically resolves and calls GetTempPathA."
+          },
+          {
+            "location": "F-0367 L22-L31",
+            "observation": "sub_405D70 resolves the filename, calls CreateFileA with write access, obtains a buffer, calls WriteFile, and closes the handle."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The packet does not provide the seven producer implementations, so it cannot establish what data they return or whether each gated call succeeds at runtime.",
+          "The code shows conditional attempted writes and does not prove successful file creation or complete writes."
+        ]
+      },
+      {
+        "behavior": "When the block-mouse mutex already exists, the dispatcher installs two system-wide hooks and repeatedly executes a loop until sub_40BA84 returns nonzero, then terminates the process.",
+        "condition": "CreateMutexA_w for _x_X_BLOCKMOUSE_X_x_ reports ERROR_ALREADY_EXISTS (GetLastError()==183).",
+        "source": "The branch condition and the hook procedures fn and sub_40B108 supplied to SetWindowsHookExA.",
+        "action": "Calls SetWindowsHookExA with hook identifiers 13 and 14, then loops over sub_405918 while sub_40BA84 is false.",
+        "sink": "Installed Windows hooks and subsequent ExitProcess_0(0).",
+        "evidence": [
+          {
+            "location": "F-0500 L128-L137",
+            "observation": "On an existing _x_X_BLOCKMOUSE_X_x_ mutex, the code calls SetWindowsHookExA(13, fn, ...) and SetWindowsHookExA(14, sub_40B108, ...), loops until sub_40BA84 succeeds, and exits."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The packet does not include fn, sub_40B108, sub_40BA84, or sub_405918, so the hooks' actual effects and loop termination condition are unresolved.",
+          "Static code establishes hook-installation capability, not successful installation or observed input blocking."
+        ]
+      },
+      {
+        "behavior": "In the non-password-list and non-block-mouse path, the dispatcher creates a mutex with a derived name, retries creation up to four times after collisions, and exits if the fourth attempt also reports an existing mutex.",
+        "condition": "The _x_X_PASSWORDLIST_X_x_ mutex is not reported as existing and the _x_X_BLOCKMOUSE_X_x_ mutex is not reported as existing.",
+        "source": "The name returned by sub_401F48(*(char **)off_40D204[0]) and the ERROR_ALREADY_EXISTS results from CreateMutexA_w.",
+        "action": "Creates the derived-name mutex, retries three additional times after collisions with 1-second sleeps, and calls ExitProcess_0(0) when the fourth total attempt also reports a collision.",
+        "sink": "Named mutex state and process termination on repeated collision.",
+        "evidence": [
+          {
+            "location": "F-0500 L145-L171",
+            "observation": "The code derives a mutex name, calls CreateMutexA_w, retries three additional times after ERROR_ALREADY_EXISTS with Sleep(0x3E8), and exits on the final collision."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The implementation of sub_401F48 and the value behind off_40D204 are absent, so the actual mutex name is unknown."
+        ]
+      },
+      {
+        "behavior": "After the derived-mutex gating path, the code selects a value through sub_4013A4/sub_406B54 or sub_4013A4 alone, binds it to XX--XX--XX.txt under the process temporary path, and invokes sub_40B93C with that output path.",
+        "condition": "The password-list and block-mouse collision branches were not taken and the derived mutex did not cause process termination.",
+        "source": "Value produced by sub_4013A4, optionally transformed by sub_406B54, and the temporary path constructed by sub_406008.",
+        "action": "Append the fixed filename XX--XX--XX.txt and call sub_40B93C with the selected value and output path.",
+        "sink": "The path/value arguments passed to sub_40B93C, with XX--XX--XX.txt as the bound filename.",
+        "evidence": [
+          {
+            "location": "F-0500 L172-L190",
+            "observation": "The code selects dst__12 based on off_40D1DC, obtains a temporary path, appends XX--XX--XX.txt, passes it to sub_40B93C, and conditionally calls sub_40B7FC before sub_40B3C0."
+          },
+          {
+            "location": "F-0373 L1-L7",
+            "observation": "sub_406008 constructs a path from the process temporary path."
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_40B93C, sub_4013A4, and sub_406B54 are not provided, so the selected data's origin and whether sub_40B93C writes or transmits the file cannot be closed from this packet.",
+          "The condition values at off_40D1DC and off_40D214 are unresolved."
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "mutex",
+        "value": "_x_X_UPDATE_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex used for an update-related collision check and a 12-second sleep on collision.",
+        "evidence": [
+          {
+            "location": "F-0500 L47-L56",
+            "observation": "CreateMutexA_w is called with the fixed name and ERROR_ALREADY_EXISTS causes handle close and Sleep(0x2EE0)."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "mutex",
+        "value": "_x_X_PASSWORDLIST_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex whose existing-instance branch dispatches seven output-producing routines.",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L69",
+            "observation": "CreateMutexA_w uses the fixed name; collision enters the first seven-output branch."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "mutex",
+        "value": "_x_X_BLOCKMOUSE_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex whose existing-instance branch installs two hooks.",
+        "evidence": [
+          {
+            "location": "F-0500 L128-L137",
+            "observation": "CreateMutexA_w uses the fixed name; collision enters the hook-installation branch."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "NOIP.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409AD4 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L61-L69",
+            "observation": "The result associated with sub_409AD4 is bound to NOIP.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "MSN.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409D28 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L70-L78",
+            "observation": "The result associated with sub_409D28 is bound to MSN.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "FIREFOX.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409EF8 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L79-L87",
+            "observation": "The result associated with sub_409EF8 is bound to FIREFOX.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IELOGIN.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A84 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L88-L96",
+            "observation": "The result associated with sub_409A84 is bound to IELOGIN.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEPASS.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A90 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L97-L105",
+            "observation": "The result associated with sub_409A90 is bound to IEPASS.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEAUTO.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A9C in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L106-L114",
+            "observation": "The result associated with sub_409A9C is bound to IEAUTO.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEWEB.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409AB8 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L115-L123",
+            "observation": "The result associated with sub_409AB8 is bound to IEWEB.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "XX--XX--XX.txt",
+        "role": "other",
+        "detection_specificity": "high",
+        "meaning": "Fixed filename appended to a temporary path and passed as an argument to sub_40B93C; this packet does not establish file creation or writing for it.",
+        "evidence": [
+          {
+            "location": "F-0500 L182-L190",
+            "observation": "The code appends XX--XX--XX.txt to a temporary path and passes it to sub_40B93C."
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "What do the seven producer routines return and what are the semantics of the data written to the .abc files?",
+        "reason": "Their implementations are absent; only their call sites and output bindings are visible.",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "What are the actual effects of fn and sub_40B108 and the termination predicate in sub_40BA84?",
+        "reason": "The hook targets and loop helper are not included.",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "Does sub_40B93C create/write/transmit XX--XX--XX.txt, and what is the selected source value?",
+        "reason": "The callee and value-producing helpers are absent.",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "producer helpers sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "Resolve the source and meaning of the seven data outputs.",
+        "expected_value": "Direct source-to-output semantics for each .abc file and trigger details.",
+        "priority": "high"
+      },
+      {
+        "target": "sub_40B93C, sub_4013A4, sub_406B54",
+        "reason": "Resolve the alternate path's data source and output side effect.",
+        "expected_value": "Whether XX--XX--XX.txt is written, transmitted, or otherwise processed, and from what data.",
+        "priority": "high"
+      },
+      {
+        "target": "fn, sub_40B108, sub_40BA84, sub_405918",
+        "reason": "Resolve hook behavior and loop termination.",
+        "expected_value": "Concrete input-monitoring/blocking effects and runtime control flow.",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_409AD4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409D28",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "Needed to identify the actual data sources behind the seven fixed output files; current evidence only shows returned values are written.",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123",
+            "observation": "Each listed helper is called and its returned value is subsequently written to a distinct fixed filename, but the helper bodies are not present."
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_40B93C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_4013A4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_406B54",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "Needed to determine the alternate path's source data and whether the XX--XX--XX.txt argument results in file creation or another side effect.",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0500 L172-L190",
+            "observation": "The code prepares a value and fixed temporary path, then passes both to sub_40B93C; the callee is absent."
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/10/meaning",
+      "/artifacts/10/role",
+      "/claims/0/action",
+      "/claims/0/condition",
+      "/claims/0/limitations",
+      "/claims/0/sink",
+      "/claims/0/source",
+      "/claims/2/action",
+      "/claims/2/limitations"
+    ],
+    "deleted_paths": [
+      "/artifacts/11"
+    ],
+    "appended_paths": [],
+    "applied_paths": [
+      "/claims/0/condition",
+      "/claims/0/action",
+      "/claims/0/sink",
+      "/claims/0/limitations/0",
+      "/claims/0/limitations/1",
+      "/claims/2/action",
+      "/artifacts"
+    ],
+    "ignored_paths": [
+      "/summary",
+      "/claims/0/behavior",
+      "/claims/0/evidence/0/observation",
+      "/claims/2/behavior",
+      "/claims/2/evidence/0/observation",
+      "/artifacts/3/evidence/0/observation",
+      "/artifacts/4/evidence/0/observation",
+      "/artifacts/5/evidence/0/observation",
+      "/artifacts/6/evidence/0/observation",
+      "/artifacts/7/evidence/0/observation",
+      "/artifacts/8/evidence/0/observation",
+      "/artifacts/9/evidence/0/observation",
+      "/artifacts/10/kind",
+      "/gaps/0/reason",
+      "/material_needs/0/reason",
+      "/material_needs/0/evidence/0/observation"
+    ],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "gap_error",
+        "description": "Claim 1 omits the per-output success/availability gate. Each helper call is followed by sub_401B14 and an `if ( dword_40F1EC )` check; the file write is conditional, so the claim's wording that all seven returned results are written is too strong.",
+        "evidence": [
+          {
+            "location": "F-0500 L61-L69",
+            "observation": "After the first producer and state update, the call to sub_405D70 occurs only inside `if ( dword_40F1EC )`."
+          },
+          {
+            "location": "F-0500 L70-L123",
+            "observation": "The same nonzero dword_40F1EC gate is repeated for the remaining six producer/output pairs."
+          }
+        ],
+        "required_fix": "Limit the claim's condition and action to outputs for which the post-helper dword_40F1EC check is nonzero. Preserve the distinction between attempted writes and guaranteed successful writes.",
+        "fixes": [
+          {
+            "type": "claim_revision",
+            "targets": [
+              "/claims/0"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "wrong_claim",
+        "description": "Claim 3 gives the wrong retry count: the code makes one initial derived-name mutex attempt and only three additional attempts after collisions, not up to four retries after collisions.",
+        "evidence": [
+          {
+            "location": "F-0500 L146-L171",
+            "observation": "CreateMutexA_w is called initially at L147, then again at L153, L159, and L165 after three collision/sleep cycles; a collision at the fourth total attempt exits at L167."
+          }
+        ],
+        "required_fix": "State the exact gating behavior as four total creation attempts (one initial attempt plus three retries), with ExitProcess on collision at the fourth attempt.",
+        "fixes": [
+          {
+            "type": "claim_revision",
+            "targets": [
+              "/claims/2"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "artifact_role_error",
+        "description": "The fixed string XX--XX--XX.txt is classified as a created_output even though this packet only shows it being appended to a temporary path and passed to sub_40B93C; file creation or writing is explicitly unresolved. This misclassifies a path argument as a confirmed output artifact.",
+        "evidence": [
+          {
+            "location": "F-0500 L182-L190",
+            "observation": "The code constructs a temporary-path-plus-filename value and passes it to sub_40B93C, but no file API is visible in this material for that path."
+          },
+          {
+            "location": "F-0367 L22-L31",
+            "observation": "The packet demonstrates what an actual write sink looks like—CreateFileA followed by WriteFile—but that sink is only directly linked to the .abc branch, not to sub_40B93C."
+          }
+        ],
+        "required_fix": "Change the artifact role from created_output to a non-output role such as other, and revise its meaning to say that the fixed filename is an argument/path binding to sub_40B93C; do not claim file creation. Retain the unresolved side effect in claim 4 limitations/gaps.",
+        "fixes": [
+          {
+            "type": "artifact_classification",
+            "targets": [
+              "/artifacts/10"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R4",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "The GetTempPathA API name is recorded as a system_path artifact. It is an API/helper used to obtain a temporary directory, not itself a system path or a distinct IOC; this adds a misleading artifact without changing the core claims.",
+        "evidence": [
+          {
+            "location": "F-0370 L6-L8",
+            "observation": "The code dynamically resolves and calls GetTempPathA; the actual returned directory string is not present as a fixed artifact."
+          }
+        ],
+        "required_fix": "Delete this helper/API artifact, or replace it with a properly supported environment_probe artifact whose value is the temporary-directory behavior rather than the API name. Deletion is preferred because the behavior is already covered by claim evidence.",
+        "fixes": [
+          {
+            "type": "delete_item",
+            "targets": [
+              "/artifacts/11"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "Coverage is otherwise strong: the mutex-gated branches, seven conditional .abc write paths, hook-installation capability, alternate-path uncertainty, and relevant gaps are covered with valid packet evidence. Revision is required for the omitted per-output gate, the incorrect derived-mutex retry count, and the unsupported created_output role for XX--XX--XX.txt."
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "F-0500 is a mode dispatcher guarded by named mutexes. One branch, entered when the password-list mutex already exists, invokes seven data-producing routines and conditionally binds available returned data to fixed .abc filenames under the process temporary path before attempting to write them. Another branch installs global hooks when the block-mouse mutex already exists; otherwise it performs additional mutex gating and passes data and a fixed .txt path to a helper after processing. The packet directly proves file-write and hook capabilities, but not the semantics of the helper routines, the contents of the outputs, or runtime success.",
+    "claims": [
+      {
+        "behavior": "When the named password-list mutex already exists, each of seven producer results is eligible for a distinct fixed-name file write only when the post-helper dword_40F1EC check is nonzero: NOIP.abc, MSN.abc, FIREFOX.abc, IELOGIN.abc, IEPASS.abc, IEAUTO.abc, and IEWEB.abc.",
+        "condition": "CreateMutexA_w for _x_X_PASSWORDLIST_X_x_ reports ERROR_ALREADY_EXISTS (GetLastError()==183), and for an individual producer/output pair the subsequent dword_40F1EC check is nonzero.",
+        "source": "Return values/state produced by sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, and sub_409AB8, after size/extraction operations via sub_401B14 and sub_401D50.",
+        "action": "For each pair passing the dword_40F1EC gate, obtain the temporary path via sub_406008, append its fixed filename via sub_401D58, and call sub_405D70 to attempt a write of the result.",
+        "sink": "An attempted file write to the corresponding fixed filename in the process temporary directory: NOIP.abc, MSN.abc, FIREFOX.abc, IELOGIN.abc, IEPASS.abc, IEAUTO.abc, or IEWEB.abc.",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123",
+            "observation": "On ERROR_ALREADY_EXISTS for _x_X_PASSWORDLIST_X_x_, seven helper calls are followed by repeated size calculation, temporary-path construction, fixed filename binding, and sub_405D70 calls for the seven listed names."
+          },
+          {
+            "location": "F-0373 L1-L7",
+            "observation": "sub_406008 obtains a temporary path through sub_405EAC and passes it to sub_401D24 for path construction."
+          },
+          {
+            "location": "F-0370 L1-L9",
+            "observation": "sub_405EAC dynamically resolves and calls GetTempPathA."
+          },
+          {
+            "location": "F-0367 L22-L31",
+            "observation": "sub_405D70 resolves the filename, calls CreateFileA with write access, obtains a buffer, calls WriteFile, and closes the handle."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The packet does not provide the seven producer implementations, so it cannot establish what data they return or whether each gated call succeeds at runtime.",
+          "The code shows conditional attempted writes and does not prove successful file creation or complete writes."
+        ]
+      },
+      {
+        "behavior": "When the block-mouse mutex already exists, the dispatcher installs two system-wide hooks and repeatedly executes a loop until sub_40BA84 returns nonzero, then terminates the process.",
+        "condition": "CreateMutexA_w for _x_X_BLOCKMOUSE_X_x_ reports ERROR_ALREADY_EXISTS (GetLastError()==183).",
+        "source": "The branch condition and the hook procedures fn and sub_40B108 supplied to SetWindowsHookExA.",
+        "action": "Calls SetWindowsHookExA with hook identifiers 13 and 14, then loops over sub_405918 while sub_40BA84 is false.",
+        "sink": "Installed Windows hooks and subsequent ExitProcess_0(0).",
+        "evidence": [
+          {
+            "location": "F-0500 L128-L137",
+            "observation": "On an existing _x_X_BLOCKMOUSE_X_x_ mutex, the code calls SetWindowsHookExA(13, fn, ...) and SetWindowsHookExA(14, sub_40B108, ...), loops until sub_40BA84 succeeds, and exits."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The packet does not include fn, sub_40B108, sub_40BA84, or sub_405918, so the hooks' actual effects and loop termination condition are unresolved.",
+          "Static code establishes hook-installation capability, not successful installation or observed input blocking."
+        ]
+      },
+      {
+        "behavior": "In the non-password-list and non-block-mouse path, the dispatcher creates a mutex with a derived name, makes one initial creation attempt and up to three additional attempts after collisions, and exits if the fourth total attempt also reports an existing mutex.",
+        "condition": "The _x_X_PASSWORDLIST_X_x_ mutex is not reported as existing and the _x_X_BLOCKMOUSE_X_x_ mutex is not reported as existing.",
+        "source": "The name returned by sub_401F48(*(char **)off_40D204[0]) and the ERROR_ALREADY_EXISTS results from CreateMutexA_w.",
+        "action": "Creates the derived-name mutex, retries three additional times after collisions with 1-second sleeps, and calls ExitProcess_0(0) when the fourth total attempt also reports a collision.",
+        "sink": "Named mutex state and process termination on repeated collision.",
+        "evidence": [
+          {
+            "location": "F-0500 L145-L171",
+            "observation": "The code derives a mutex name, calls CreateMutexA_w, retries three additional times after ERROR_ALREADY_EXISTS with Sleep(0x3E8), and exits on the final collision."
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "The implementation of sub_401F48 and the value behind off_40D204 are absent, so the actual mutex name is unknown."
+        ]
+      },
+      {
+        "behavior": "After the derived-mutex gating path, the code selects a value through sub_4013A4/sub_406B54 or sub_4013A4 alone, binds it to XX--XX--XX.txt under the process temporary path, and invokes sub_40B93C with that output path.",
+        "condition": "The password-list and block-mouse collision branches were not taken and the derived mutex did not cause process termination.",
+        "source": "Value produced by sub_4013A4, optionally transformed by sub_406B54, and the temporary path constructed by sub_406008.",
+        "action": "Append the fixed filename XX--XX--XX.txt and call sub_40B93C with the selected value and output path.",
+        "sink": "The path/value arguments passed to sub_40B93C, with XX--XX--XX.txt as the bound filename.",
+        "evidence": [
+          {
+            "location": "F-0500 L172-L190",
+            "observation": "The code selects dst__12 based on off_40D1DC, obtains a temporary path, appends XX--XX--XX.txt, passes it to sub_40B93C, and conditionally calls sub_40B7FC before sub_40B3C0."
+          },
+          {
+            "location": "F-0373 L1-L7",
+            "observation": "sub_406008 constructs a path from the process temporary path."
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_40B93C, sub_4013A4, and sub_406B54 are not provided, so the selected data's origin and whether sub_40B93C writes or transmits the file cannot be closed from this packet.",
+          "The condition values at off_40D1DC and off_40D214 are unresolved."
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "mutex",
+        "value": "_x_X_UPDATE_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex used for an update-related collision check and a 12-second sleep on collision.",
+        "evidence": [
+          {
+            "location": "F-0500 L47-L56",
+            "observation": "CreateMutexA_w is called with the fixed name and ERROR_ALREADY_EXISTS causes handle close and Sleep(0x2EE0)."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "mutex",
+        "value": "_x_X_PASSWORDLIST_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex whose existing-instance branch dispatches seven output-producing routines.",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L69",
+            "observation": "CreateMutexA_w uses the fixed name; collision enters the first seven-output branch."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "mutex",
+        "value": "_x_X_BLOCKMOUSE_X_x_",
+        "role": "created_mutex",
+        "detection_specificity": "high",
+        "meaning": "Named mutex whose existing-instance branch installs two hooks.",
+        "evidence": [
+          {
+            "location": "F-0500 L128-L137",
+            "observation": "CreateMutexA_w uses the fixed name; collision enters the hook-installation branch."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "NOIP.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409AD4 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L61-L69",
+            "observation": "The result associated with sub_409AD4 is bound to NOIP.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "MSN.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409D28 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L70-L78",
+            "observation": "The result associated with sub_409D28 is bound to MSN.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "FIREFOX.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409EF8 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L79-L87",
+            "observation": "The result associated with sub_409EF8 is bound to FIREFOX.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IELOGIN.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A84 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L88-L96",
+            "observation": "The result associated with sub_409A84 is bound to IELOGIN.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEPASS.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A90 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L97-L105",
+            "observation": "The result associated with sub_409A90 is bound to IEPASS.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEAUTO.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409A9C in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L106-L114",
+            "observation": "The result associated with sub_409A9C is bound to IEAUTO.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEWEB.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Fixed output filename bound to the result of sub_409AB8 in the temporary directory.",
+        "evidence": [
+          {
+            "location": "F-0500 L115-L123",
+            "observation": "The result associated with sub_409AB8 is bound to IEWEB.abc and passed to sub_405D70."
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "XX--XX--XX.txt",
+        "role": "other",
+        "detection_specificity": "high",
+        "meaning": "Fixed filename appended to a temporary path and passed as an argument to sub_40B93C; this packet does not establish file creation or writing for it.",
+        "evidence": [
+          {
+            "location": "F-0500 L182-L190",
+            "observation": "The code appends XX--XX--XX.txt to a temporary path and passes it to sub_40B93C."
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "What do the seven producer routines return and what are the semantics of the data written to the .abc files?",
+        "reason": "Their implementations are absent; only their call sites and output bindings are visible.",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "What are the actual effects of fn and sub_40B108 and the termination predicate in sub_40BA84?",
+        "reason": "The hook targets and loop helper are not included.",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "Does sub_40B93C create/write/transmit XX--XX--XX.txt, and what is the selected source value?",
+        "reason": "The callee and value-producing helpers are absent.",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "producer helpers sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "Resolve the source and meaning of the seven data outputs.",
+        "expected_value": "Direct source-to-output semantics for each .abc file and trigger details.",
+        "priority": "high"
+      },
+      {
+        "target": "sub_40B93C, sub_4013A4, sub_406B54",
+        "reason": "Resolve the alternate path's data source and output side effect.",
+        "expected_value": "Whether XX--XX--XX.txt is written, transmitted, or otherwise processed, and from what data.",
+        "priority": "high"
+      },
+      {
+        "target": "fn, sub_40B108, sub_40BA84, sub_405918",
+        "reason": "Resolve hook behavior and loop termination.",
+        "expected_value": "Concrete input-monitoring/blocking effects and runtime control flow.",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_409AD4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409D28",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "Needed to identify the actual data sources behind the seven fixed output files; current evidence only shows returned values are written.",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123",
+            "observation": "Each listed helper is called and its returned value is subsequently written to a distinct fixed filename, but the helper bodies are not present."
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_40B93C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_4013A4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_406B54",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "Needed to determine the alternate path's source data and whether the XX--XX--XX.txt argument results in file creation or another side effect.",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0500 L172-L190",
+            "observation": "The code prepares a value and fixed temporary path, then passes both to sub_40B93C; the callee is absent."
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [
+    "/summary",
+    "/claims/0/behavior",
+    "/claims/2/behavior"
+  ],
+  "expected_ignored_paths": [
+    "/claims/0/evidence/0/observation",
+    "/claims/2/evidence/0/observation",
+    "/artifacts/3/evidence/0/observation",
+    "/artifacts/4/evidence/0/observation",
+    "/artifacts/5/evidence/0/observation",
+    "/artifacts/6/evidence/0/observation",
+    "/artifacts/7/evidence/0/observation",
+    "/artifacts/8/evidence/0/observation",
+    "/artifacts/9/evidence/0/observation",
+    "/gaps/0/reason",
+    "/material_needs/0/reason",
+    "/material_needs/0/evidence/0/observation"
+  ],
+  "classification_recovered_paths": [
+    "/artifacts/10/kind"
+  ]
+}

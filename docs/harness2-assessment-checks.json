@@ -1,0 +1,59 @@
+{
+  "checked_on": "2026-10-21",
+  "scope": "current stage-three source and existing static outputs; no model or sample execution",
+  "project_version": "1.7.3",
+  "python": "3.14.0",
+  "harness2_reference": "bg668/harness2@1cfe254",
+  "harness2_python_requirement": ">=3.12,<3.14",
+  "task_fixture": {
+    "purpose": "example3 bounded-investigation agent test",
+    "jobs": 16,
+    "sample_level_tasks_demonstrated": 1
+  },
+  "recomputed_report": {
+    "status": "incomplete_provenance",
+    "knowledge_audit_passed": false,
+    "confirmed": 47,
+    "suspected": 9,
+    "iocs": 13,
+    "reference_scope": "full_material",
+    "total_segments": 238,
+    "valid_segments": 202,
+    "invalid_segments": 36,
+    "confirmed_without_valid_evidence": [
+      "G:C005",
+      "G:C016",
+      "G:C017",
+      "G:C018",
+      "G:C019",
+      "G:C020",
+      "G:C022",
+      "G:C023",
+      "G:C024",
+      "G:C025"
+    ],
+    "issues_match_saved_audit": true,
+    "input_bytes_unchanged": true
+  },
+  "same_saved_facts_without_packet_source_dir": {
+    "report_status": "complete",
+    "knowledge_audit_passed": true,
+    "reference_audit": {
+      "schema": "evidence_reference_validation_v1",
+      "scope": "full_material",
+      "status": "not_run",
+      "passed": true,
+      "reason": "packet source directory not supplied"
+    }
+  },
+  "offline_tests": {
+    "command": ".venv/Scripts/python.exe -m pytest tests -q",
+    "passed": 228,
+    "failed": 3,
+    "failures": [
+      "tests/test_final_assessment_config.py::test_new_stage_uses_separate_model_budget",
+      "tests/test_final_assessment_config.py::test_fails_when_final_enabled_but_no_stage",
+      "tests/test_v171_source_snippets.py::test_cli_version_exposes_loaded_module_and_schema"
+    ]
+  }
+}

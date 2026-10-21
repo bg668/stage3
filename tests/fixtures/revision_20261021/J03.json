@@ -1,0 +1,1949 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J03.json",
+        "sha256": "1aa1c0b1190d0c75bca63d642bfba8177e2e4cba91d1057378168674c9999056"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J03/analyzer/validated_result.json",
+        "sha256": "1e54e5ddec9dfb59d5cdd64263b2f64b54a48f1b064e2742e8aa1e97cbeafdcb"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J03/reviewer/validated_result.json",
+        "sha256": "55233b4ad737c932b38516e086aea819f43a3a680a72f35c1601544833c81a25"
+      },
+      "packet": {
+        "path": "testdata/packets/J03.md",
+        "sha256": "088717b0d165b99834209ba23e7bc64a032099a78ec70b9385b7c33e1998aba7"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J03/reviser/validated_result.json",
+        "sha256": "10c5e10bb6292fc9071f70cd2ed7fabc26379ed596b751c5155612ff5a3c62ce"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J03/reviser/revision_scope.json",
+        "sha256": "0a399eb9cb0ec2cd778f54edbb3c9f463d395be125c61589a230d5f2eded80f7"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J03",
+  "packet_text": "# J03 环境检查与输入分支\n任务来源：J00 中 F494 和两处 Hook 回调引用；保留所有退出分支。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0494 sub_40B118，原文件 L0001–L0070 / 共 70 行\n```text\nL0001: int __usercall sub_40B118@<eax>(signed int TickCount@<ebx>, int a2@<edi>, int a3@<esi>)\nL0002: {\nL0003:   __int64 n5000; // rax\nL0004: \nL0005:   if ( *off_40D1D4[0] == 1 && (unsigned __int8)sub_4052EC() == 1 )\nL0006:     ExitProcess_0(0);\nL0007:   if ( *off_40D1B0 == 1 && sub_405168() == 1 )\nL0008:     ExitProcess_0(0);\nL0009:   if ( *off_40D1FC[0] == 1 && (unsigned __int8)sub_405124() == 1 )\nL0010:     ExitProcess_0(0);\nL0011:   if ( *off_40D1AC == 1 && (unsigned __int8)sub_4051CC() == 1 )\nL0012:     ExitProcess_0(0);\nL0013:   if ( *off_40D1F4[0] == 1 && (unsigned __int8)sub_405310() == 1 )\nL0014:     ExitProcess_0(0);\nL0015:   if ( *off_40D1C8[0] == 1 && (unsigned __int8)sub_4054A4() == 1 )\nL0016:     ExitProcess_0(0);\nL0017:   if ( *off_40D1D0[0] == 1 && (unsigned __int8)sub_4053EC() == 1 )\nL0018:     ExitProcess_0(0);\nL0019:   if ( *off_40D1C0 == 1 && (unsigned __int8)sub_405334() == 1 )\nL0020:     ExitProcess_0(0);\nL0021:   if ( *off_40D1F8[0] == 1 && (unsigned __int8)sub_40555C(TickCount, a2, a3) == 1 )\nL0022:     ExitProcess_0(0);\nL0023:   if ( *off_40D1BC == 1 && (unsigned __int8)sub_40588C() == 1 )\nL0024:     ExitProcess_0(0);\nL0025:   if ( *off_40D1B4 == 1 && (unsigned __int8)sub_4056C0() == 1 )\nL0026:     ExitProcess_0(0);\nL0027:   if ( *off_40D200[0] == 1 )\nL0028:   {\nL0029:     TickCount = GetTickCount();\nL0030:     if ( (unsigned __int8)sub_405750() )\nL0031:       ExitProcess_0(0);\nL0032:     if ( (unsigned __int8)sub_405750() )\nL0033:       ExitProcess_0(0);\nL0034:     if ( (unsigned __int8)sub_405750() )\nL0035:       ExitProcess_0(0);\nL0036:     if ( (unsigned __int8)sub_405750() )\nL0037:       ExitProcess_0(0);\nL0038:     if ( (unsigned __int8)sub_405750() )\nL0039:       ExitProcess_0(0);\nL0040:     if ( (unsigned __int8)sub_405750() )\nL0041:       ExitProcess_0(0);\nL0042:     if ( (unsigned __int8)sub_405750() )\nL0043:       ExitProcess_0(0);\nL0044:     if ( (unsigned __int8)sub_405750() )\nL0045:       ExitProcess_0(0);\nL0046:     if ( (unsigned __int8)sub_405750() )\nL0047:       ExitProcess_0(0);\nL0048:     if ( (unsigned __int8)sub_405750() )\nL0049:       ExitProcess_0(0);\nL0050:     if ( (unsigned __int8)sub_405750() )\nL0051:       ExitProcess_0(0);\nL0052:     if ( (unsigned __int8)sub_405750() )\nL0053:       ExitProcess_0(0);\nL0054:     if ( (unsigned __int8)sub_405750() )\nL0055:       ExitProcess_0(0);\nL0056:     if ( (unsigned __int8)sub_405750() )\nL0057:       ExitProcess_0(0);\nL0058:     if ( sub_4056DC(TickCount) )\nL0059:       ExitProcess_0(0);\nL0060:   }\nL0061:   *(char **)&n5000 = off_40D200[0];\nL0062:   if ( *off_40D200[0] == 1 )\nL0063:   {\nL0064:     sub_405770();\nL0065:     n5000 = GetTickCount() - (__int64)TickCount;\nL0066:     if ( n5000 > 5000 )\nL0067:       ExitProcess_0(0);\nL0068:   }\nL0069:   return n5000;\nL0070: }\n```\n\n## F-0334 sub_405124，原文件 L0001–L0013 / 共 13 行\n```text\nL0001: int sub_405124()\nL0002: {\nL0003:   int result; // eax\nL0004:   unsigned int v1[2]; // [esp-8h] [ebp-8h] BYREF\nL0005: \nL0006:   v1[1] = (unsigned int)&loc_40514C;\nL0007:   v1[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0008:   __writefsdword(0, (unsigned int)v1);\nL0009:   __indword(0x5658u);\nL0010:   result = 1;\nL0011:   __writefsdword(0, v1[0]);\nL0012:   return result;\nL0013: }\n```\n\n## F-0335 sub_405168，原文件 L0001–L0005 / 共 5 行\n```text\nL0001: char sub_405168()\nL0002: {\nL0003:   __asm { vpcext  7, 0Bh }\nL0004:   return 1;\nL0005: }\n```\n\n## F-0337 sub_4051CC，原文件 L0001–L0048 / 共 48 行\n```text\nL0001: int sub_4051CC()\nL0002: {\nL0003:   int v0; // ebx\nL0004:   HANDLE hObject; // esi\nL0005:   char *n3; // eax\nL0006:   _BYTE *v4; // [esp-10h] [ebp-150h]\nL0007:   unsigned int v5[2]; // [esp-Ch] [ebp-14Ch] BYREF\nL0008:   int *v6; // [esp-4h] [ebp-144h]\nL0009:   char *v7; // [esp+8h] [ebp-138h] BYREF\nL0010:   char *v8; // [esp+Ch] [ebp-134h] BYREF\nL0011:   char *dst; // [esp+10h] [ebp-130h] BYREF\nL0012:   _BYTE *v10; // [esp+14h] [ebp-12Ch] BYREF\nL0013:   PROCESSENTRY32 lppe_; // [esp+18h] [ebp-128h] BYREF\nL0014:   int savedregs; // [esp+140h] [ebp+0h] BYREF\nL0015: \nL0016:   v10 = 0;\nL0017:   v8 = 0;\nL0018:   v7 = 0;\nL0019:   dst = 0;\nL0020:   v6 = &savedregs;\nL0021:   v5[1] = (unsigned int)&loc_4052C4;\nL0022:   v5[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0023:   __writefsdword(0, (unsigned int)v5);\nL0024:   v0 = 0;\nL0025:   hObject = sub_40508C(2u, 0);\nL0026:   lppe_.dwSize = 296;\nL0027:   while ( sub_4050CC(hObject, &lppe_) )\nL0028:   {\nL0029:     sub_401D24(&dst, (unsigned int)lppe_.szExeFile, 260);\nL0030:     sub_404740((int)dst, (volatile __int32 *)&v10);\nL0031:     v4 = v10;\nL0032:     sub_404740((int)\"VBoxService.exe\", (volatile __int32 *)&v7);\nL0033:     n3 = sub_401F48(v7);\nL0034:     sub_401CAC(&v8, n3);\nL0035:     if ( (int)sub_40202C(v8, v4) > 0 )\nL0036:     {\nL0037:       CloseHandle(hObject);\nL0038:       LOBYTE(v0) = 1;\nL0039:       goto LABEL_6;\nL0040:     }\nL0041:   }\nL0042:   CloseHandle(hObject);\nL0043: LABEL_6:\nL0044:   __writefsdword(0, v5[0]);\nL0045:   v6 = (int *)&loc_4052CB;\nL0046:   sub_401AE4((int *)&v7, 4);\nL0047:   return v0;\nL0048: }\n```\n\n## F-0338 sub_4052EC，原文件 L0001–L0009 / 共 9 行\n```text\nL0001: int sub_4052EC()\nL0002: {\nL0003:   int v0; // ebx\nL0004: \nL0005:   v0 = 0;\nL0006:   if ( GetModuleHandleA_0(\"SbieDll.dll\") )\nL0007:     LOBYTE(v0) = 1;\nL0008:   return v0;\nL0009: }\n```\n\n## F-0339 sub_405310，原文件 L0001–L0009 / 共 9 行\n```text\nL0001: int sub_405310()\nL0002: {\nL0003:   int v0; // ebx\nL0004: \nL0005:   v0 = 0;\nL0006:   if ( GetModuleHandleA_0(\"dbghelp.dll\") )\nL0007:     LOBYTE(v0) = 1;\nL0008:   return v0;\nL0009: }\n```\n\n## F-0340 sub_405334，原文件 L0001–L0018 / 共 18 行\n```text\nL0001: int sub_405334()\nL0002: {\nL0003:   int v0; // ebx\nL0004:   HKEY hKey; // [esp+0h] [ebp-110h] BYREF\nL0005:   DWORD cbData; // [esp+4h] [ebp-10Ch] BYREF\nL0006:   BYTE Data[264]; // [esp+8h] [ebp-108h] BYREF\nL0007: \nL0008:   v0 = 0;\nL0009:   if ( !RegOpenKeyExA(HKEY_LOCAL_MACHINE, \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\", 0, 1u, &hKey) )\nL0010:   {\nL0011:     cbData = 257;\nL0012:     RegQueryValueExA(hKey, \"ProductId\", 0, 0, Data, &cbData);\nL0013:     if ( Data == (BYTE *)\"55274-640-2673064-23950\" )\nL0014:       LOBYTE(v0) = 1;\nL0015:   }\nL0016:   RegCloseKey(hKey);\nL0017:   return v0;\nL0018: }\n```\n\n## F-0341 sub_4053EC，原文件 L0001–L0018 / 共 18 行\n```text\nL0001: int sub_4053EC()\nL0002: {\nL0003:   int v0; // ebx\nL0004:   HKEY hKey; // [esp+0h] [ebp-110h] BYREF\nL0005:   DWORD cbData; // [esp+4h] [ebp-10Ch] BYREF\nL0006:   BYTE Data[264]; // [esp+8h] [ebp-108h] BYREF\nL0007: \nL0008:   v0 = 0;\nL0009:   if ( !RegOpenKeyExA(HKEY_LOCAL_MACHINE, \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\", 0, 1u, &hKey) )\nL0010:   {\nL0011:     cbData = 257;\nL0012:     RegQueryValueExA(hKey, \"ProductId\", 0, 0, Data, &cbData);\nL0013:     if ( Data == (BYTE *)\"76487-644-3177037-23510\" )\nL0014:       LOBYTE(v0) = 1;\nL0015:   }\nL0016:   RegCloseKey(hKey);\nL0017:   return v0;\nL0018: }\n```\n\n## F-0342 sub_4054A4，原文件 L0001–L0018 / 共 18 行\n```text\nL0001: int sub_4054A4()\nL0002: {\nL0003:   int v0; // ebx\nL0004:   HKEY hKey; // [esp+0h] [ebp-110h] BYREF\nL0005:   DWORD cbData; // [esp+4h] [ebp-10Ch] BYREF\nL0006:   BYTE Data[264]; // [esp+8h] [ebp-108h] BYREF\nL0007: \nL0008:   v0 = 0;\nL0009:   if ( !RegOpenKeyExA(HKEY_LOCAL_MACHINE, \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\", 0, 1u, &hKey) )\nL0010:   {\nL0011:     cbData = 257;\nL0012:     RegQueryValueExA(hKey, \"ProductId\", 0, 0, Data, &cbData);\nL0013:     if ( Data == (BYTE *)sub_405544 )\nL0014:       LOBYTE(v0) = 1;\nL0015:   }\nL0016:   RegCloseKey(hKey);\nL0017:   return v0;\nL0018: }\n```\n\n## F-0344 sub_40555C，原文件 L0001–L0046 / 共 46 行\n```text\nL0001: int __usercall sub_40555C@<eax>(int a1@<ebx>, int a2@<edi>, int a3@<esi>)\nL0002: {\nL0003:   char *lpBuffer; // eax\nL0004:   char v4; // zf\nL0005:   unsigned int v6[2]; // [esp-24h] [ebp-34h] BYREF\nL0006:   int *v7; // [esp-1Ch] [ebp-2Ch]\nL0007:   unsigned int v8[2]; // [esp-18h] [ebp-28h] BYREF\nL0008:   int *v9; // [esp-10h] [ebp-20h]\nL0009:   int v10; // [esp-Ch] [ebp-1Ch]\nL0010:   int v11; // [esp-8h] [ebp-18h]\nL0011:   int v12; // [esp-4h] [ebp-14h]\nL0012:   int *v13; // [esp+0h] [ebp-10h] BYREF\nL0013:   int *v14; // [esp+4h] [ebp-Ch] BYREF\nL0014:   char *dst; // [esp+8h] [ebp-8h] BYREF\nL0015:   DWORD pcbBuffer; // [esp+Ch] [ebp-4h] BYREF\nL0016:   int savedregs; // [esp+10h] [ebp+0h] BYREF\nL0017: \nL0018:   dst = 0;\nL0019:   v14 = 0;\nL0020:   v13 = 0;\nL0021:   v12 = a1;\nL0022:   v11 = a3;\nL0023:   v10 = a2;\nL0024:   v9 = &savedregs;\nL0025:   v8[1] = (unsigned int)&loc_405607;\nL0026:   v8[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0027:   __writefsdword(0, (unsigned int)v8);\nL0028:   v7 = &savedregs;\nL0029:   v6[1] = (unsigned int)&loc_4055B2;\nL0030:   v6[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0031:   __writefsdword(0, (unsigned int)v6);\nL0032:   pcbBuffer = 256;\nL0033:   sub_402074((unsigned int *)&dst, 256);\nL0034:   lpBuffer = sub_401F48(dst);\nL0035:   GetUserNameA(lpBuffer, &pcbBuffer);\nL0036:   __writefsdword(0, v6[0]);\nL0037:   sub_404740((int)dst, (volatile __int32 *)&v14);\nL0038:   v7 = v14;\nL0039:   sub_404740((int)\"CurrentUser\", (volatile __int32 *)&v13);\nL0040:   sub_401E94((int)v7, v13);\nL0041:   LOBYTE(a1) = v4;\nL0042:   __writefsdword(0, v8[0]);\nL0043:   v9 = (int *)&loc_40560E;\nL0044:   sub_401AE4((int *)&v13, 3);\nL0045:   return a1;\nL0046: }\n```\n\n## F-0345 sub_40562C，原文件 L0001–L0016 / 共 16 行\n```text\nL0001: int sub_40562C()\nL0002: {\nL0003:   int v0; // ebx\nL0004:   HMODULE hModule; // eax\nL0005:   BOOL (__stdcall *IsDebuggerPresent)(); // eax\nL0006: \nL0007:   v0 = 0;\nL0008:   hModule = LoadLibraryA(\"kernel32.dll\");\nL0009:   if ( hModule )\nL0010:   {\nL0011:     IsDebuggerPresent = GetProcAddress(hModule, \"IsDebuggerPresent\");\nL0012:     if ( IsDebuggerPresent )\nL0013:       return IsDebuggerPresent();\nL0014:   }\nL0015:   return v0;\nL0016: }\n```\n\n## F-0346 sub_405684，原文件 L0001–L0011 / 共 11 行\n```text\nL0001: int __fastcall sub_405684(int a1, int a2)\nL0002: {\nL0003:   int v3; // [esp+4h] [ebp-4h]\nL0004: \nL0005:   if ( !NtCurrentPeb()->BeingDebugged )\nL0006:     v3 = 1;\nL0007:   LOBYTE(a2) = 1;\nL0008:   if ( v3 == 1 )\nL0009:     return 0;\nL0010:   return a2;\nL0011: }\n```\n\n## F-0347 sub_4056C0，原文件 L0001–L0011 / 共 11 行\n```text\nL0001: int sub_4056C0()\nL0002: {\nL0003:   int v0; // ebx\nL0004:   int v1; // edx\nL0005:   int v2; // ecx\nL0006: \nL0007:   v0 = 0;\nL0008:   if ( (unsigned __int8)sub_40562C() == 1 || (unsigned __int8)sub_405684(v2, v1) == 1 )\nL0009:     LOBYTE(v0) = 1;\nL0010:   return v0;\nL0011: }\n```\n\n## F-0348 sub_4056DC，原文件 L0001–L0015 / 共 15 行\n```text\nL0001: BOOL __usercall sub_4056DC@<eax>(int a1@<ebx>)\nL0002: {\nL0003:   _DWORD v2[4]; // [esp-10h] [ebp-14h] BYREF\nL0004:   __int32 v3; // [esp+0h] [ebp-4h] BYREF\nL0005:   int savedregs; // [esp+4h] [ebp+0h] BYREF\nL0006: \nL0007:   v3 = 0;\nL0008:   v2[3] = a1;\nL0009:   v2[2] = &savedregs;\nL0010:   v2[1] = &sub_405732;\nL0011:   v2[0] = NtCurrentTeb()->NtTib.ExceptionList;\nL0012:   __writefsdword(0, (unsigned int)v2);\nL0013:   sub_401B58(&v3, (__int32)\"DAEMON\");\nL0014:   return NtCurrentPeb()->BeingDebugged != 0;\nL0015: }\n```\n\n## F-0349 sub_405750，原文件 L0001–L0004 / 共 4 行\n```text\nL0001: int sub_405750()\nL0002: {\nL0003:   return 0;\nL0004: }\n```\n\n## F-0350 sub_405770，原文件 L0001–L0008 / 共 8 行\n```text\nL0001: struct _LIST_ENTRY *sub_405770()\nL0002: {\nL0003:   struct _LIST_ENTRY *Flink; // eax\nL0004: \nL0005:   Flink = NtCurrentPeb()->Ldr->InLoadOrderModuleList.Flink;\nL0006:   Flink[4].Flink += 1024;\nL0007:   return Flink;\nL0008: }\n```\n\n## F-0351 sub_405788，原文件 L0001–L0014 / 共 14 行\n```text\nL0001: int __usercall sub_405788@<eax>(const CHAR *lpFileName@<eax>)\nL0002: {\nL0003:   int v1; // ebx\nL0004:   HANDLE hObject; // eax\nL0005: \nL0006:   v1 = 0;\nL0007:   hObject = CreateFileA_0(lpFileName, 0xC0000000, 3u, 0, 3u, 0x80u, 0);\nL0008:   if ( hObject != (HANDLE)-1 )\nL0009:   {\nL0010:     CloseHandle(hObject);\nL0011:     LOBYTE(v1) = 1;\nL0012:   }\nL0013:   return v1;\nL0014: }\n```\n\n## F-0352 sub_4057B4，原文件 L0001–L0013 / 共 13 行\n```text\nL0001: int sub_4057B4()\nL0002: {\nL0003:   int v0; // ebx\nL0004: \nL0005:   v0 = 0;\nL0006:   if ( (unsigned __int8)sub_405788(\"\\\\\\\\.\\\\Syser\")\nL0007:     || (unsigned __int8)sub_405788(\"\\\\\\\\.\\\\SyserDbgMsg\")\nL0008:     || (unsigned __int8)sub_405788(\"\\\\\\\\.\\\\SyserBoot\") )\nL0009:   {\nL0010:     LOBYTE(v0) = 1;\nL0011:   }\nL0012:   return v0;\nL0013: }\n```\n\n## F-0353 sub_405814，原文件 L0001–L0014 / 共 14 行\n```text\nL0001: int sub_405814()\nL0002: {\nL0003:   int v0; // ebx\nL0004:   HANDLE hObject; // eax\nL0005: \nL0006:   v0 = 0;\nL0007:   hObject = CreateFileA_0(\"\\\\\\\\.\\\\SICE\", 0xC0000000, 3u, 0, 3u, 0x80u, 0);\nL0008:   if ( hObject != (HANDLE)-1 )\nL0009:   {\nL0010:     CloseHandle(hObject);\nL0011:     LOBYTE(v0) = 1;\nL0012:   }\nL0013:   return v0;\nL0014: }\n```\n\n## F-0354 sub_405850，原文件 L0001–L0014 / 共 14 行\n```text\nL0001: int sub_405850()\nL0002: {\nL0003:   int v0; // ebx\nL0004:   HANDLE hObject; // eax\nL0005: \nL0006:   v0 = 0;\nL0007:   hObject = CreateFileA_0(\"\\\\\\\\.\\\\NTICE\", 0xC0000000, 3u, 0, 3u, 0x80u, 0);\nL0008:   if ( hObject != (HANDLE)-1 )\nL0009:   {\nL0010:     CloseHandle(hObject);\nL0011:     LOBYTE(v0) = 1;\nL0012:   }\nL0013:   return v0;\nL0014: }\n```\n\n## F-0355 sub_40588C，原文件 L0001–L0009 / 共 9 行\n```text\nL0001: int sub_40588C()\nL0002: {\nL0003:   int v0; // ebx\nL0004: \nL0005:   v0 = 0;\nL0006:   if ( (unsigned __int8)sub_405814() == 1 || (unsigned __int8)sub_405850() == 1 )\nL0007:     LOBYTE(v0) = 1;\nL0008:   return v0;\nL0009: }\n```\n\n## F-0492 fn，原文件 L0001–L0014 / 共 14 行\n```text\nL0001: LRESULT __fastcall fn(UINT *a1, int n256)\nL0002: {\nL0003:   BYTE KeyState[256]; // [esp+Ah] [ebp-106h] BYREF\nL0004:   WORD Char; // [esp+10Ah] [ebp-6h] BYREF\nL0005:   UINT *v6; // [esp+10Ch] [ebp-4h]\nL0006: \nL0007:   v6 = a1;\nL0008:   if ( n256 == 256 )\nL0009:   {\nL0010:     GetKeyboardState(KeyState);\nL0011:     ToAscii(*a1, a1[1], KeyState, &Char, 0);\nL0012:   }\nL0013:   return 1;\nL0014: }\n```\n\n## F-0493 sub_40B108，原文件 L0001–L0004 / 共 4 行\n```text\nL0001: LRESULT __stdcall sub_40B108()\nL0002: {\nL0003:   return 1;\nL0004: }\n```\n\n## F-0498 sub_40BA84，原文件 L0001–L0016 / 共 16 行\n```text\nL0001: char sub_40BA84()\nL0002: {\nL0003:   HANDLE hObject; // ebx\nL0004: \nL0005:   hObject = CreateMutexA_w(0, 0, \"_x_X_BLOCKMOUSE_X_x_\");\nL0006:   if ( GetLastError() == 183 )\nL0007:   {\nL0008:     CloseHandle(hObject);\nL0009:     return 0;\nL0010:   }\nL0011:   else\nL0012:   {\nL0013:     CloseHandle(hObject);\nL0014:     return 1;\nL0015:   }\nL0016: }\n```\n\n## F-0358 sub_4058E0，原文件 L0001–L0017 / 共 17 行\n```text\nL0001: int __usercall sub_4058E0@<eax>(struct tagMSG *lpMsg@<eax>)\nL0002: {\nL0003:   int v2; // ebx\nL0004: \nL0005:   v2 = 0;\nL0006:   if ( PeekMessageA(lpMsg, 0, 0, 0, 1u) )\nL0007:   {\nL0008:     LOBYTE(v2) = 1;\nL0009:     if ( lpMsg->message != 18 )\nL0010:     {\nL0011:       TranslateMessage(lpMsg);\nL0012:       DispatchMessageA(lpMsg);\nL0013:     }\nL0014:   }\nL0015:   Sleep(1u);\nL0016:   return v2;\nL0017: }\n```\n\n## F-0359 sub_405918，原文件 L0001–L0010 / 共 10 行\n```text\nL0001: int sub_405918()\nL0002: {\nL0003:   int result; // eax\nL0004:   struct tagMSG lpMsg_; // [esp+0h] [ebp-1Ch] BYREF\nL0005: \nL0006:   do\nL0007:     result = sub_4058E0(&lpMsg_);\nL0008:   while ( (_BYTE)result );\nL0009:   return result;\nL0010: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包补实了 J00 中环境检查与键盘 Hook 回调的具体行为：多个可配置探针在命中时终止进程；其中包括沙箱/调试器模块、虚拟机进程、调试设备、调试状态及若干注册表读取检查。密码列表/阻断鼠标分支的 Hook 回调会读取键盘状态并调用 ToAscii，但当前证据未显示字符被保存、传输或写入；另一 Hook 回调恒返回 1。材料还显示阻断鼠标互斥体的终止判定，以及一个可能修改 PEB 加载器列表并进行超时退出的分支。",
+    "claims": [
+      {
+        "behavior": "在相应全局检查开关为 1 且环境探针返回命中时，程序终止当前进程。",
+        "condition": "F-0494 中对应的 off_40D1D4、off_40D1B0、off_40D1FC、off_40D1AC、off_40D1F4、off_40D1C8、off_40D1D0、off_40D1C0、off_40D1F8 或 off_40D1BC 指向值为 1，且其探针返回 1。",
+        "source": "当前进程及其环境：已加载模块、进程枚举结果、系统注册表 ProductId 和调试设备对象。",
+        "action": "依次调用 sub_4052EC、sub_405168、sub_405124、sub_4051CC、sub_405310、sub_4054A4、sub_4053EC、sub_405334、sub_40555C 或 sub_40588C，并将命中结果作为退出条件。",
+        "sink": "ExitProcess_0(0)；静态代码证明具备终止能力，不证明任一开关或探针在运行时必然命中。",
+        "evidence": [
+          {
+            "location": "F-0494 sub_40B118 原文件 L0005-L0026",
+            "observation": "多个全局开关分别保护环境探针；各探针返回 1 时直接调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0338 sub_4052EC 原文件 L0005-L0008",
+            "observation": "调用 GetModuleHandleA_0(\"SbieDll.dll\")，模块存在时返回 1。"
+          },
+          {
+            "location": "F-0337 sub_4051CC 原文件 L0025-L0040",
+            "observation": "枚举进程名，并将每个进程名与由 \"VBoxService.exe\" 生成的字符串比较；比较结果大于 0 时返回命中。"
+          },
+          {
+            "location": "F-0353 sub_405814 原文件 L0006-L0013；F-0354 sub_405850 原文件 L0006-L0013",
+            "observation": "分别尝试打开 \\\\.\\SICE 和 \\\\.\\NTICE，成功打开时返回 1。"
+          },
+          {
+            "location": "F-0340 sub_405334 原文件 L0008-L0017；F-0341 sub_4053EC 原文件 L0008-L0017；F-0342 sub_4054A4 原文件 L0008-L0017",
+            "observation": "打开 Windows CurrentVersion 注册表并查询 ProductId，然后与固定值或 sub_405544 结果进行比较。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "部分注册表比较在反编译代码中表现为 Data 指针比较，不能据此断言实际字符串匹配语义。",
+          "各全局开关的赋值和实际运行时状态不在本包内。"
+        ]
+      },
+      {
+        "behavior": "程序在启用对应检查开关且检测到调试状态时终止进程。",
+        "condition": "off_40D1B4 为 1 且 sub_4056C0 返回 1，或 off_40D200[0] 为 1 且 sub_4056DC 返回非零/其后检测到 PEB 调试标志。",
+        "source": "当前进程的 IsDebuggerPresent 结果、PEB BeingDebugged 字段以及 sub_4056DC 对 \"DAEMON\" 的处理路径。",
+        "action": "sub_4056C0 组合 IsDebuggerPresent 与 sub_405684 的结果；sub_4056DC 设置异常处理上下文、调用 sub_401B58(\"DAEMON\") 并读取 NtCurrentPeb()->BeingDebugged。",
+        "sink": "命中路径调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0347 sub_4056C0 原文件 L0007-L0010",
+            "observation": "函数在 sub_40562C 或 sub_405684 返回 1 时返回 1。"
+          },
+          {
+            "location": "F-0345 sub_40562C 原文件 L0008-L0015",
+            "observation": "动态取得 kernel32.dll 的 IsDebuggerPresent 并调用它。"
+          },
+          {
+            "location": "F-0346 sub_405684 原文件 L0005-L0010",
+            "observation": "读取 NtCurrentPeb()->BeingDebugged，并据此决定返回值。"
+          },
+          {
+            "location": "F-0348 sub_4056DC 原文件 L0007-L0014",
+            "observation": "调用 sub_401B58(&v3, \"DAEMON\")，随后返回 NtCurrentPeb()->BeingDebugged != 0。"
+          },
+          {
+            "location": "F-0494 sub_40B118 原文件 L0019-L0022、L0027-L0031、L0058-L0059",
+            "observation": "F-0494 在调试相关探针命中时调用 ExitProcess_0(0)。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_401B58 对 \"DAEMON\" 的具体副作用未提供，不能进一步解释该字符串的用途。"
+        ]
+      },
+      {
+        "behavior": "在 J00 所述阻断鼠标互斥体分支中，键盘 Hook 回调读取键盘状态并将按键消息转换为 ASCII；当前包未显示转换结果离开局部变量或进入外部输出。",
+        "condition": "上游已验证的条件是 _x_X_BLOCKMOUSE_X_x_ 已存在并导致 F-0500 安装 Hook；Hook 回调收到 n256 == 256 时执行转换。",
+        "source": "Hook 回调参数 a1（包含虚拟键码/扫描码字段）及当前键盘状态。",
+        "action": "调用 GetKeyboardState(KeyState)，再调用 ToAscii(*a1, a1[1], KeyState, &Char, 0)。",
+        "sink": "结果写入 fn 的局部变量 Char；函数随后恒返回 1，没有本包证据表明字符被记录、写文件、传输或阻断。",
+        "evidence": [
+          {
+            "location": "F-0492 fn 原文件 L0007-L0013",
+            "observation": "n256 等于 256 时读取 256 字节键盘状态，并将 a1 中的两个字段与该状态传给 ToAscii；返回值固定为 1。"
+          },
+          {
+            "location": "dependency J00 摘要中 F-0500 L128-L137 的已验证事实",
+            "observation": "阻断鼠标互斥体已存在时，F-0500 将 fn 和 sub_40B108 作为两个系统级 Hook 回调传给 SetWindowsHookExA。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包不包含 Hook 安装调用本身，只能依赖已验证的 J00 摘要解释触发关系。",
+          "没有证据证明 Char 被持久化、外传或用于鼠标阻断。"
+        ]
+      },
+      {
+        "behavior": "阻断鼠标分支的循环终止判定通过再次检查命名互斥体：互斥体仍已存在时继续，互斥体不再存在时返回终止信号。",
+        "condition": "sub_40BA84 被调用。",
+        "source": "名为 _x_X_BLOCKMOUSE_X_x_ 的系统命名互斥体状态及 CreateMutexA_w 的 GetLastError 结果。",
+        "action": "调用 CreateMutexA_w 创建/打开该互斥体；GetLastError()==183 时关闭句柄并返回 0，否则关闭句柄并返回 1。",
+        "sink": "返回值供上游循环作为退出条件；J00 已验证上游在该条件为非零后调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0498 sub_40BA84 原文件 L0005-L0015",
+            "observation": "代码以固定名称调用 CreateMutexA_w；错误码 183 时返回 0，其他情况返回 1。"
+          },
+          {
+            "location": "dependency J00 摘要中 F-0500 L128-L137 的已验证事实",
+            "observation": "Hook 分支循环执行 sub_405918，直到 sub_40BA84 返回非零，随后终止进程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包未重新提供 F-0500 的完整循环源码，因此循环与 ExitProcess 的连接使用已验证依赖摘要。"
+        ]
+      },
+      {
+        "behavior": "当 off_40D200[0] 为 1 时，程序执行重复的探测调用、调用调试相关处理，并可能修改 PEB 加载器列表；若处理耗时超过 5 秒则终止进程。",
+        "condition": "*off_40D200[0] == 1。",
+        "source": "GetTickCount、sub_4056DC 的调试检查以及当前进程 PEB 的 InLoadOrderModuleList。",
+        "action": "记录起始 TickCount；调用 sub_405750 14 次（该函数当前恒返回 0），调用 sub_4056DC；随后调用 sub_405770，后者将加载器列表项的 Flink 增加 1024，并比较经过时间。",
+        "sink": "超过 5000 毫秒时调用 ExitProcess_0(0)；否则返回。",
+        "evidence": [
+          {
+            "location": "F-0494 sub_40B118 原文件 L0027-L0068",
+            "observation": "开关为 1 时记录 GetTickCount，重复调用 sub_405750，调用 sub_4056DC，之后执行 sub_405770 并在耗时大于 5000 时退出。"
+          },
+          {
+            "location": "F-0349 sub_405750 原文件 L0001-L0004",
+            "observation": "sub_405750 恒返回 0，因此这些调用本身不会触发其直接退出条件。"
+          },
+          {
+            "location": "F-0350 sub_405770 原文件 L0005-L0007",
+            "observation": "函数访问 PEB 的 InLoadOrderModuleList，并将 Flink 增加 1024。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "该 PEB 列表修改的后续运行时影响未在本包中展开；不能断言其一定成功或具体改变了哪些模块枚举结果。"
+        ]
+      },
+      {
+        "behavior": "F-0494 还包含通过注册表、特殊指令和模块加载状态进行环境探测的独立退出路径，但其具体意图不能仅由当前包确定。",
+        "condition": "相应 off_40D1* 开关为 1，且对应探针返回 1。",
+        "source": "SbieDll.dll、dbghelp.dll、特殊指令执行结果，以及 CurrentVersion\\ProductId 注册表读取。",
+        "action": "执行 GetModuleHandleA、特殊指令、注册表查询或异常/进程枚举辅助逻辑。",
+        "sink": "命中时调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0494 sub_40B118 原文件 L0005-L0020",
+            "observation": "代码将这些辅助探针的返回值直接连接到 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0335 sub_405168 原文件 L0001-L0005",
+            "observation": "执行 vpcext 7, 0Bh 后返回 1。"
+          },
+          {
+            "location": "F-0339 sub_405310 原文件 L0005-L0008",
+            "observation": "检测 dbghelp.dll 是否已加载。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "这些探针的样本意图、兼容性及运行时结果未由静态代码完全确定；只能确认检测与退出能力。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "string",
+        "value": "SbieDll.dll",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "被用于 GetModuleHandleA 环境检查；其存在可作为沙箱相关上下文线索。",
+        "evidence": [
+          {
+            "location": "F-0338 sub_4052EC 原文件 L0005-L0008",
+            "observation": "代码查询名为 SbieDll.dll 的已加载模块。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "dbghelp.dll",
+        "role": "environment_probe",
+        "detection_specificity": "low",
+        "meaning": "被用于已加载模块检查；单独作为恶意样本指标的特异性有限。",
+        "evidence": [
+          {
+            "location": "F-0339 sub_405310 原文件 L0005-L0008",
+            "observation": "代码查询名为 dbghelp.dll 的已加载模块。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "VBoxService.exe",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "被用作进程枚举比较目标，可能用于识别虚拟化环境。",
+        "evidence": [
+          {
+            "location": "F-0337 sub_4051CC 原文件 L0030-L0035",
+            "observation": "代码构造 VBoxService.exe 字符串并与枚举到的进程名比较。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProductId",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "环境探针读取的系统注册表值。",
+        "evidence": [
+          {
+            "location": "F-0340 sub_405334 原文件 L0009-L0013",
+            "observation": "代码打开 CurrentVersion 键并查询 ProductId。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\Syser",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 sub_4057B4 原文件 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SyserDbgMsg",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 sub_4057B4 原文件 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SyserBoot",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 sub_4057B4 原文件 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SICE",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过打开设备对象检查 SoftICE 类调试环境。",
+        "evidence": [
+          {
+            "location": "F-0353 sub_405814 原文件 L0007-L0011",
+            "observation": "代码尝试以读写方式打开该设备路径，成功时返回命中。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\NTICE",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过打开设备对象检查调试环境。",
+        "evidence": [
+          {
+            "location": "F-0354 sub_405850 原文件 L0007-L0011",
+            "observation": "代码尝试以读写方式打开该设备路径，成功时返回命中。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "DAEMON",
+        "role": "config_marker",
+        "detection_specificity": "low",
+        "meaning": "传给 sub_401B58 的固定字符串；当前包不能确定其配置或控制语义。",
+        "evidence": [
+          {
+            "location": "F-0348 sub_4056DC 原文件 L0010-L0014",
+            "observation": "sub_4056DC 将固定字符串 DAEMON 传给 sub_401B58。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "字符转换结果 Char 是否被其他 Hook 处理、写入文件、发送网络或用于输入阻断？",
+        "reason": "fn 只展示了局部 ToAscii 调用；Hook 后续处理和全局状态不在当前包。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "F-0494 中各 off_40D1* 和 off_40D200[0] 开关由何处设置，哪些探针在真实执行中启用？",
+        "reason": "当前材料仅显示读取开关并据此分支，未提供初始化或配置来源。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_4051CC 的进程名比较及三个 ProductId 检查在原始实现中是否为内容比较，以及命中后具体环境分类是什么？",
+        "reason": "反编译代码显示了比较调用，但部分数据流和比较实现未提供，ProductId 处还存在指针比较表现。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_405770 对 PEB 加载器列表的修改是否成功，以及后续哪些代码依赖该修改？",
+        "reason": "当前包只有字段写入，没有后续枚举或行为证据。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "fn 的调用者及 Hook 相关共享状态",
+        "reason": "确认 ToAscii 产生的 Char 是否流向记录、输出或阻断逻辑。",
+        "expected_value": "闭合键盘输入 source→action→sink，并区分仅转换与实际键盘记录。",
+        "priority": "high"
+      },
+      {
+        "target": "off_40D1D4/off_40D1B0/off_40D1FC/off_40D1AC/off_40D1F4/off_40D1C8/off_40D1D0/off_40D1C0/off_40D1F8/off_40D1BC/off_40D200 的初始化代码",
+        "reason": "确定环境检查的启用条件和运行时覆盖范围。",
+        "expected_value": "各探针的真实触发条件及配置来源。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_401B58、sub_4012B8 或相关环境检查辅助函数",
+        "reason": "解析 DAEMON 标记及未展开的比较/异常处理语义。",
+        "expected_value": "补足环境检测结果的具体分类，避免将反编译表象过度解释。",
+        "priority": "low"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "fn",
+            "start_line": 1,
+            "end_line": 14
+          }
+        ],
+        "reason": "需要 fn 的调用者、共享缓冲区或后续处理代码，以判断 ToAscii 结果是否形成键盘记录或其他外部副作用。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0492 fn 原文件 L0008-L0013",
+            "observation": "当前函数只读取键盘状态、调用 ToAscii 并将结果写入局部 Char，未显示下游 sink。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的源码证据引用全部带有“原文件”及中文分隔符，验证器因此将当前包中的引用判为不可解析；当前包有效引用数为 0。部分单条 evidence 还把多个函数/多个行段合并在一个 location 中，无法准确支持对应 observation。",
+        "evidence": [
+          {
+            "location": "claim C001-C006、artifact A001-A002 的 evidence.location",
+            "observation": "引用形如“F-0494 sub_40B118 原文件 L0005-L0026”或在同一 location 中使用“；”连接多个函数；验证结果显示这些引用均为 invalid_format，valid_segments=0。"
+          },
+          {
+            "location": "F-0494 sub_40B118 L0005-L0026",
+            "observation": "材料实际提供了标准可引用的函数标识和原始行段，足以改写为单一的 F-0494 Lx-Ly 格式。"
+          }
+        ],
+        "required_fix": "将当前包内所有源码引用改为可解析的 F-XXXX Lx-Ly 格式，并把一条 location 中合并的多个函数/行段拆成独立 evidence，保持 observation 与实际引用一一对应；不要通过修改 observation 迁就错误位置。特别核对 claims 0、1 中合并的多函数引用。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "other",
+        "description": "material_needs/0 请求的 fn 函数代码已经完整包含在当前 material 中（F-0492）；该需求把“需要调用者/共享状态”错误地挂在 fn 本身，且把已满足的当前包材料列为 major 补料需求，导致 status/需求结论不一致。",
+        "evidence": [
+          {
+            "location": "F-0492 fn L0001-L0014",
+            "observation": "当前材料已经给出 fn 的完整函数体，包括 GetKeyboardState、ToAscii、局部 Char 及恒定返回值。"
+          },
+          {
+            "location": "/material_needs/0",
+            "observation": "需求 target=fn、targets[0]=fn，reason 却是需要 fn 的调用者、共享缓冲区或后续处理代码；请求对象与缺失信息不一致。"
+          }
+        ],
+        "required_fix": "删除该 material_need；对调用者或共享状态的未知，仅保留已有的 outside_packet gap/handoff，并将其 target 指向实际需要的调用者/后续处理材料（若无法指定具体函数则不要伪造 function_code target）。",
+        "revision_targets": [
+          {
+            "operation": "delete",
+            "path": "/material_needs/0"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "DAEMON 被标为 config_marker，但当前材料只证明它作为固定字符串传给 sub_401B58，未证明其是配置标记、持久化值或控制标志。该分类会把未解析的辅助参数误呈为配置 IOC。",
+        "evidence": [
+          {
+            "location": "F-0348 L0010-L0014",
+            "observation": "sub_4056DC 将字符串“DAEMON”传给 sub_401B58，随后读取 PEB BeingDebugged；本包没有 sub_401B58 的实现或配置读写证据。"
+          },
+          {
+            "location": "/artifacts/9",
+            "observation": "artifact role=config_marker、detection_specificity=low，但 meaning 同时承认当前包不能确定其配置或控制语义。"
+          }
+        ],
+        "required_fix": "将该 artifact 的 role 改为 other；detection_specificity 可保留 low 或下调为 none，并明确它只是未解析 helper 的参数，不作为配置/感染标记。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/9/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/9/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/9/meaning"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体抓住了环境探测退出、键盘 Hook 回调、互斥体终止判定和 PEB 列表修改；没有发现将键盘转换结果误报为已记录/外传的重大行为错误。但当前包源码引用全部不符合可解析格式，实质上使现有 claims/artifacts 在验收中没有有效证据，必须修订；同时应删除已被当前材料满足且 target 错置的 fn 补料需求，并纠正 DAEMON 的 artifact role。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的源码证据引用全部带有“原文件”及中文分隔符，验证器因此将当前包中的引用判为不可解析；当前包有效引用数为 0。部分单条 evidence 还把多个函数/多个行段合并在一个 location 中，无法准确支持对应 observation。",
+        "evidence": [
+          {
+            "location": "claim C001-C006、artifact A001-A002 的 evidence.location",
+            "observation": "引用形如“F-0494 sub_40B118 原文件 L0005-L0026”或在同一 location 中使用“；”连接多个函数；验证结果显示这些引用均为 invalid_format，valid_segments=0。"
+          },
+          {
+            "location": "F-0494 sub_40B118 L0005-L0026",
+            "observation": "材料实际提供了标准可引用的函数标识和原始行段，足以改写为单一的 F-0494 Lx-Ly 格式。"
+          }
+        ],
+        "required_fix": "将当前包内所有源码引用改为可解析的 F-XXXX Lx-Ly 格式，并把一条 location 中合并的多个函数/行段拆成独立 evidence，保持 observation 与实际引用一一对应；不要通过修改 observation 迁就错误位置。特别核对 claims 0、1 中合并的多函数引用。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "other",
+        "description": "material_needs/0 请求的 fn 函数代码已经完整包含在当前 material 中（F-0492）；该需求把“需要调用者/共享状态”错误地挂在 fn 本身，且把已满足的当前包材料列为 major 补料需求，导致 status/需求结论不一致。",
+        "evidence": [
+          {
+            "location": "F-0492 fn L0001-L0014",
+            "observation": "当前材料已经给出 fn 的完整函数体，包括 GetKeyboardState、ToAscii、局部 Char 及恒定返回值。"
+          },
+          {
+            "location": "/material_needs/0",
+            "observation": "需求 target=fn、targets[0]=fn，reason 却是需要 fn 的调用者、共享缓冲区或后续处理代码；请求对象与缺失信息不一致。"
+          }
+        ],
+        "required_fix": "删除该 material_need；对调用者或共享状态的未知，仅保留已有的 outside_packet gap/handoff，并将其 target 指向实际需要的调用者/后续处理材料（若无法指定具体函数则不要伪造 function_code target）。",
+        "revision_targets": [
+          {
+            "operation": "delete",
+            "path": "/material_needs/0"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "DAEMON 被标为 config_marker，但当前材料只证明它作为固定字符串传给 sub_401B58，未证明其是配置标记、持久化值或控制标志。该分类会把未解析的辅助参数误呈为配置 IOC。",
+        "evidence": [
+          {
+            "location": "F-0348 L0010-L0014",
+            "observation": "sub_4056DC 将字符串“DAEMON”传给 sub_401B58，随后读取 PEB BeingDebugged；本包没有 sub_401B58 的实现或配置读写证据。"
+          },
+          {
+            "location": "/artifacts/9",
+            "observation": "artifact role=config_marker、detection_specificity=low，但 meaning 同时承认当前包不能确定其配置或控制语义。"
+          }
+        ],
+        "required_fix": "将该 artifact 的 role 改为 other；detection_specificity 可保留 low 或下调为 none，并明确它只是未解析 helper 的参数，不作为配置/感染标记。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/9/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/9/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/9/meaning"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体抓住了环境探测退出、键盘 Hook 回调、互斥体终止判定和 PEB 列表修改；没有发现将键盘转换结果误报为已记录/外传的重大行为错误。但当前包源码引用全部不符合可解析格式，实质上使现有 claims/artifacts 在验收中没有有效证据，必须修订；同时应删除已被当前材料满足且 target 错置的 fn 补料需求，并纠正 DAEMON 的 artifact role。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包补实了 J00 中环境检查与键盘 Hook 回调的具体行为：多个可配置探针在命中时终止进程；其中包括沙箱/调试器模块、虚拟机进程、调试设备、调试状态及若干注册表读取检查。密码列表/阻断鼠标分支的 Hook 回调会读取键盘状态并调用 ToAscii，但当前证据未显示字符被保存、传输或写入；另一 Hook 回调恒返回 1。材料还显示阻断鼠标互斥体的终止判定，以及一个可能修改 PEB 加载器列表并进行超时退出的分支。",
+    "claims": [
+      {
+        "behavior": "在相应全局检查开关为 1 且环境探针返回命中时，程序终止当前进程。",
+        "condition": "F-0494 中对应的 off_40D1D4、off_40D1B0、off_40D1FC、off_40D1AC、off_40D1F4、off_40D1C8、off_40D1D0、off_40D1C0、off_40D1F8 或 off_40D1BC 指向值为 1，且其探针返回 1。",
+        "source": "当前进程及其环境：已加载模块、进程枚举结果、系统注册表 ProductId 和调试设备对象。",
+        "action": "依次调用 sub_4052EC、sub_405168、sub_405124、sub_4051CC、sub_405310、sub_4054A4、sub_4053EC、sub_405334、sub_40555C 或 sub_40588C，并将命中结果作为退出条件。",
+        "sink": "ExitProcess_0(0)；静态代码证明具备终止能力，不证明任一开关或探针在运行时必然命中。",
+        "evidence": [
+          {
+            "location": "F-0494 L0005-L0026",
+            "observation": "多个全局开关分别保护环境探针；各探针返回 1 时直接调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0338 L0005-L0008",
+            "observation": "调用 GetModuleHandleA_0(\"SbieDll.dll\")，模块存在时返回 1。"
+          },
+          {
+            "location": "F-0337 L0025-L0040",
+            "observation": "枚举进程名，并将每个进程名与由 \"VBoxService.exe\" 生成的字符串比较；比较结果大于 0 时返回命中。"
+          },
+          {
+            "location": "F-0353 L0006-L0013",
+            "observation": "尝试打开 \\\\.\\SICE，成功打开时返回 1。"
+          },
+          {
+            "location": "F-0354 L0006-L0013",
+            "observation": "尝试打开 \\\\.\\NTICE，成功打开时返回 1。"
+          },
+          {
+            "location": "F-0340 L0008-L0017",
+            "observation": "打开 Windows CurrentVersion 注册表并查询 ProductId，然后与固定值比较。"
+          },
+          {
+            "location": "F-0341 L0008-L0017",
+            "observation": "打开 Windows CurrentVersion 注册表并查询 ProductId，然后与固定值比较。"
+          },
+          {
+            "location": "F-0342 L0008-L0017",
+            "observation": "打开 Windows CurrentVersion 注册表并查询 ProductId，然后与 sub_405544 结果比较。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "部分注册表比较在反编译代码中表现为 Data 指针比较，不能据此断言实际字符串匹配语义。",
+          "各全局开关的赋值和实际运行时状态不在本包内。"
+        ]
+      },
+      {
+        "behavior": "程序在启用对应检查开关且检测到调试状态时终止进程。",
+        "condition": "off_40D1B4 为 1 且 sub_4056C0 返回 1，或 off_40D200[0] 为 1 且 sub_4056DC 返回非零/其后检测到 PEB 调试标志。",
+        "source": "当前进程的 IsDebuggerPresent 结果、PEB BeingDebugged 字段以及 sub_4056DC 对 \"DAEMON\" 的处理路径。",
+        "action": "sub_4056C0 组合 IsDebuggerPresent 与 sub_405684 的结果；sub_4056DC 设置异常处理上下文、调用 sub_401B58(\"DAEMON\") 并读取 NtCurrentPeb()->BeingDebugged。",
+        "sink": "命中路径调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0347 L0007-L0010",
+            "observation": "函数在 sub_40562C 或 sub_405684 返回 1 时返回 1。"
+          },
+          {
+            "location": "F-0345 L0008-L0015",
+            "observation": "动态取得 kernel32.dll 的 IsDebuggerPresent 并调用它。"
+          },
+          {
+            "location": "F-0346 L0005-L0010",
+            "observation": "读取 NtCurrentPeb()->BeingDebugged，并据此决定返回值。"
+          },
+          {
+            "location": "F-0348 L0007-L0014",
+            "observation": "调用 sub_401B58(&v3, \"DAEMON\")，随后返回 NtCurrentPeb()->BeingDebugged != 0。"
+          },
+          {
+            "location": "F-0494 L0019-L0022",
+            "observation": "F-0494 在调试相关探针命中时调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0494 L0027-L0031",
+            "observation": "F-0494 在调试相关探针命中时调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0494 L0058-L0059",
+            "observation": "F-0494 在调试相关探针命中时调用 ExitProcess_0(0)。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_401B58 对 \"DAEMON\" 的具体副作用未提供，不能进一步解释该字符串的用途。"
+        ]
+      },
+      {
+        "behavior": "在 J00 所述阻断鼠标互斥体分支中，键盘 Hook 回调读取键盘状态并将按键消息转换为 ASCII；当前包未显示转换结果离开局部变量或进入外部输出。",
+        "condition": "上游已验证的条件是 _x_X_BLOCKMOUSE_X_x_ 已存在并导致 F-0500 安装 Hook；Hook 回调收到 n256 == 256 时执行转换。",
+        "source": "Hook 回调参数 a1（包含虚拟键码/扫描码字段）及当前键盘状态。",
+        "action": "调用 GetKeyboardState(KeyState)，再调用 ToAscii(*a1, a1[1], KeyState, &Char, 0)。",
+        "sink": "结果写入 fn 的局部变量 Char；函数随后恒返回 1，没有本包证据表明字符被记录、写文件、传输或阻断。",
+        "evidence": [
+          {
+            "location": "F-0492 L0007-L0013",
+            "observation": "n256 等于 256 时读取 256 字节键盘状态，并将 a1 中的两个字段与该状态传给 ToAscii；返回值固定为 1。"
+          },
+          {
+            "location": "dependency J00 F-0500 L0128-L0137",
+            "observation": "阻断鼠标互斥体已存在时，F-0500 将 fn 和 sub_40B108 作为两个系统级 Hook 回调传给 SetWindowsHookExA。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包不包含 Hook 安装调用本身，只能依赖已验证的 J00 摘要解释触发关系。",
+          "没有证据证明 Char 被持久化、外传或用于鼠标阻断。"
+        ]
+      },
+      {
+        "behavior": "阻断鼠标分支的循环终止判定通过再次检查命名互斥体：互斥体仍已存在时继续，互斥体不再存在时返回终止信号。",
+        "condition": "sub_40BA84 被调用。",
+        "source": "名为 _x_X_BLOCKMOUSE_X_x_ 的系统命名互斥体状态及 CreateMutexA_w 的 GetLastError 结果。",
+        "action": "调用 CreateMutexA_w 创建/打开该互斥体；GetLastError()==183 时关闭句柄并返回 0，否则关闭句柄并返回 1。",
+        "sink": "返回值供上游循环作为退出条件；J00 已验证上游在该条件为非零后调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0498 L0005-L0015",
+            "observation": "代码以固定名称调用 CreateMutexA_w；错误码 183 时返回 0，其他情况返回 1。"
+          },
+          {
+            "location": "dependency J00 F-0500 L0128-L0137",
+            "observation": "Hook 分支循环执行 sub_405918，直到 sub_40BA84 返回非零，随后终止进程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包未重新提供 F-0500 的完整循环源码，因此循环与 ExitProcess 的连接使用已验证依赖摘要。"
+        ]
+      },
+      {
+        "behavior": "当 off_40D200[0] 为 1 时，程序执行重复的探测调用、调用调试相关处理，并可能修改 PEB 加载器列表；若处理耗时超过 5 秒则终止进程。",
+        "condition": "*off_40D200[0] == 1。",
+        "source": "GetTickCount、sub_4056DC 的调试检查以及当前进程 PEB 的 InLoadOrderModuleList。",
+        "action": "记录起始 TickCount；调用 sub_405750 14 次（该函数当前恒返回 0），调用 sub_4056DC；随后调用 sub_405770，后者将加载器列表项的 Flink 增加 1024，并比较经过时间。",
+        "sink": "超过 5000 毫秒时调用 ExitProcess_0(0)；否则返回。",
+        "evidence": [
+          {
+            "location": "F-0494 L0027-L0068",
+            "observation": "开关为 1 时记录 GetTickCount，重复调用 sub_405750，调用 sub_4056DC，之后执行 sub_405770 并在耗时大于 5000 时退出。"
+          },
+          {
+            "location": "F-0349 L0001-L0004",
+            "observation": "sub_405750 恒返回 0，因此这些调用本身不会触发其直接退出条件。"
+          },
+          {
+            "location": "F-0350 L0005-L0007",
+            "observation": "函数访问 PEB 的 InLoadOrderModuleList，并将 Flink 增加 1024。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "该 PEB 列表修改的后续运行时影响未在本包中展开；不能断言其一定成功或具体改变了哪些模块枚举结果。"
+        ]
+      },
+      {
+        "behavior": "F-0494 还包含通过注册表、特殊指令和模块加载状态进行环境探测的独立退出路径，但其具体意图不能仅由当前包确定。",
+        "condition": "相应 off_40D1* 开关为 1，且对应探针返回 1。",
+        "source": "SbieDll.dll、dbghelp.dll、特殊指令执行结果，以及 CurrentVersion\\ProductId 注册表读取。",
+        "action": "执行 GetModuleHandleA、特殊指令、注册表查询或异常/进程枚举辅助逻辑。",
+        "sink": "命中时调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0494 L0005-L0020",
+            "observation": "代码将这些辅助探针的返回值直接连接到 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0335 L0001-L0005",
+            "observation": "执行 vpcext 7, 0Bh 后返回 1。"
+          },
+          {
+            "location": "F-0339 L0005-L0008",
+            "observation": "检测 dbghelp.dll 是否已加载。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "这些探针的样本意图、兼容性及运行时结果未由静态代码完全确定；只能确认检测与退出能力。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "string",
+        "value": "SbieDll.dll",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "被用于 GetModuleHandleA 环境检查；其存在可作为沙箱相关上下文线索。",
+        "evidence": [
+          {
+            "location": "F-0338 L0005-L0008",
+            "observation": "代码查询名为 SbieDll.dll 的已加载模块。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "dbghelp.dll",
+        "role": "environment_probe",
+        "detection_specificity": "low",
+        "meaning": "被用于已加载模块检查；单独作为恶意样本指标的特异性有限。",
+        "evidence": [
+          {
+            "location": "F-0339 L0005-L0008",
+            "observation": "代码查询名为 dbghelp.dll 的已加载模块。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "VBoxService.exe",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "被用作进程枚举比较目标，可能用于识别虚拟化环境。",
+        "evidence": [
+          {
+            "location": "F-0337 L0030-L0035",
+            "observation": "代码构造 VBoxService.exe 字符串并与枚举到的进程名比较。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProductId",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "环境探针读取的系统注册表值。",
+        "evidence": [
+          {
+            "location": "F-0340 L0009-L0013",
+            "observation": "代码打开 CurrentVersion 键并查询 ProductId。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\Syser",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SyserDbgMsg",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SyserBoot",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SICE",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过打开设备对象检查 SoftICE 类调试环境。",
+        "evidence": [
+          {
+            "location": "F-0353 L0007-L0011",
+            "observation": "代码尝试以读写方式打开该设备路径，成功时返回命中。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\NTICE",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过打开设备对象检查调试环境。",
+        "evidence": [
+          {
+            "location": "F-0354 L0007-L0011",
+            "observation": "代码尝试以读写方式打开该设备路径，成功时返回命中。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "DAEMON",
+        "role": "other",
+        "detection_specificity": "low",
+        "meaning": "作为未解析 helper sub_401B58 的固定参数；当前包未证明其为配置、持久化值或控制标志，不应单独作为配置或感染标记。",
+        "evidence": [
+          {
+            "location": "F-0348 L0010-L0014",
+            "observation": "sub_4056DC 将固定字符串 DAEMON 传给 sub_401B58。"
+          }
+        ],
+        "confidence": "low"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "字符转换结果 Char 是否被其他 Hook 处理、写入文件、发送网络或用于输入阻断？",
+        "reason": "fn 只展示了局部 ToAscii 调用；Hook 后续处理和全局状态不在当前包。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "F-0494 中各 off_40D1* 和 off_40D200[0] 开关由何处设置，哪些探针在真实执行中启用？",
+        "reason": "当前材料仅显示读取开关并据此分支，未提供初始化或配置来源。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_4051CC 的进程名比较及三个 ProductId 检查在原始实现中是否为内容比较，以及命中后具体环境分类是什么？",
+        "reason": "反编译代码显示了比较调用，但部分数据流和比较实现未提供，ProductId 处还存在指针比较表现。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_405770 对 PEB 加载器列表的修改是否成功，以及后续哪些代码依赖该修改？",
+        "reason": "当前包只有字段写入，没有后续枚举或行为证据。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "fn 的调用者及 Hook 相关共享状态",
+        "reason": "确认 ToAscii 产生的 Char 是否流向记录、输出或阻断逻辑。",
+        "expected_value": "闭合键盘输入 source→action→sink，并区分仅转换与实际键盘记录。",
+        "priority": "high"
+      },
+      {
+        "target": "off_40D1D4/off_40D1B0/off_40D1FC/off_40D1AC/off_40D1F4/off_40D1C8/off_40D1D0/off_40D1C0/off_40D1F8/off_40D1BC/off_40D200 的初始化代码",
+        "reason": "确定环境检查的启用条件和运行时覆盖范围。",
+        "expected_value": "各探针的真实触发条件及配置来源。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_401B58、sub_4012B8 或相关环境检查辅助函数",
+        "reason": "解析 DAEMON 标记及未展开的比较/异常处理语义。",
+        "expected_value": "补足环境检测结果的具体分类，避免将反编译表象过度解释。",
+        "priority": "low"
+      }
+    ],
+    "material_needs": []
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包补实了 J00 中环境检查与键盘 Hook 回调的具体行为：多个可配置探针在命中时终止进程；其中包括沙箱/调试器模块、虚拟机进程、调试设备、调试状态及若干注册表读取检查。密码列表/阻断鼠标分支的 Hook 回调会读取键盘状态并调用 ToAscii，但当前证据未显示字符被保存、传输或写入；另一 Hook 回调恒返回 1。材料还显示阻断鼠标互斥体的终止判定，以及一个可能修改 PEB 加载器列表并进行超时退出的分支。",
+    "claims": [
+      {
+        "behavior": "在相应全局检查开关为 1 且环境探针返回命中时，程序终止当前进程。",
+        "condition": "F-0494 中对应的 off_40D1D4、off_40D1B0、off_40D1FC、off_40D1AC、off_40D1F4、off_40D1C8、off_40D1D0、off_40D1C0、off_40D1F8 或 off_40D1BC 指向值为 1，且其探针返回 1。",
+        "source": "当前进程及其环境：已加载模块、进程枚举结果、系统注册表 ProductId 和调试设备对象。",
+        "action": "依次调用 sub_4052EC、sub_405168、sub_405124、sub_4051CC、sub_405310、sub_4054A4、sub_4053EC、sub_405334、sub_40555C 或 sub_40588C，并将命中结果作为退出条件。",
+        "sink": "ExitProcess_0(0)；静态代码证明具备终止能力，不证明任一开关或探针在运行时必然命中。",
+        "evidence": [
+          {
+            "location": "F-0494 L0005-L0026",
+            "observation": "多个全局开关分别保护环境探针；各探针返回 1 时直接调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0338 L0005-L0008",
+            "observation": "调用 GetModuleHandleA_0(\"SbieDll.dll\")，模块存在时返回 1。"
+          },
+          {
+            "location": "F-0337 L0025-L0040",
+            "observation": "枚举进程名，并将每个进程名与由 \"VBoxService.exe\" 生成的字符串比较；比较结果大于 0 时返回命中。"
+          },
+          {
+            "location": "F-0353 L0006-L0013",
+            "observation": "尝试打开 \\\\.\\SICE，成功打开时返回 1。"
+          },
+          {
+            "location": "F-0354 L0006-L0013",
+            "observation": "尝试打开 \\\\.\\NTICE，成功打开时返回 1。"
+          },
+          {
+            "location": "F-0340 L0008-L0017",
+            "observation": "打开 Windows CurrentVersion 注册表并查询 ProductId，然后与固定值比较。"
+          },
+          {
+            "location": "F-0341 L0008-L0017",
+            "observation": "打开 Windows CurrentVersion 注册表并查询 ProductId，然后与固定值比较。"
+          },
+          {
+            "location": "F-0342 L0008-L0017",
+            "observation": "打开 Windows CurrentVersion 注册表并查询 ProductId，然后与 sub_405544 结果比较。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "部分注册表比较在反编译代码中表现为 Data 指针比较，不能据此断言实际字符串匹配语义。",
+          "各全局开关的赋值和实际运行时状态不在本包内。"
+        ]
+      },
+      {
+        "behavior": "程序在启用对应检查开关且检测到调试状态时终止进程。",
+        "condition": "off_40D1B4 为 1 且 sub_4056C0 返回 1，或 off_40D200[0] 为 1 且 sub_4056DC 返回非零/其后检测到 PEB 调试标志。",
+        "source": "当前进程的 IsDebuggerPresent 结果、PEB BeingDebugged 字段以及 sub_4056DC 对 \"DAEMON\" 的处理路径。",
+        "action": "sub_4056C0 组合 IsDebuggerPresent 与 sub_405684 的结果；sub_4056DC 设置异常处理上下文、调用 sub_401B58(\"DAEMON\") 并读取 NtCurrentPeb()->BeingDebugged。",
+        "sink": "命中路径调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0347 L0007-L0010",
+            "observation": "函数在 sub_40562C 或 sub_405684 返回 1 时返回 1。"
+          },
+          {
+            "location": "F-0345 L0008-L0015",
+            "observation": "动态取得 kernel32.dll 的 IsDebuggerPresent 并调用它。"
+          },
+          {
+            "location": "F-0346 L0005-L0010",
+            "observation": "读取 NtCurrentPeb()->BeingDebugged，并据此决定返回值。"
+          },
+          {
+            "location": "F-0348 L0007-L0014",
+            "observation": "调用 sub_401B58(&v3, \"DAEMON\")，随后返回 NtCurrentPeb()->BeingDebugged != 0。"
+          },
+          {
+            "location": "F-0494 L0019-L0022",
+            "observation": "F-0494 在调试相关探针命中时调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0494 L0027-L0031",
+            "observation": "F-0494 在调试相关探针命中时调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0494 L0058-L0059",
+            "observation": "F-0494 在调试相关探针命中时调用 ExitProcess_0(0)。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_401B58 对 \"DAEMON\" 的具体副作用未提供，不能进一步解释该字符串的用途。"
+        ]
+      },
+      {
+        "behavior": "在 J00 所述阻断鼠标互斥体分支中，键盘 Hook 回调读取键盘状态并将按键消息转换为 ASCII；当前包未显示转换结果离开局部变量或进入外部输出。",
+        "condition": "上游已验证的条件是 _x_X_BLOCKMOUSE_X_x_ 已存在并导致 F-0500 安装 Hook；Hook 回调收到 n256 == 256 时执行转换。",
+        "source": "Hook 回调参数 a1（包含虚拟键码/扫描码字段）及当前键盘状态。",
+        "action": "调用 GetKeyboardState(KeyState)，再调用 ToAscii(*a1, a1[1], KeyState, &Char, 0)。",
+        "sink": "结果写入 fn 的局部变量 Char；函数随后恒返回 1，没有本包证据表明字符被记录、写文件、传输或阻断。",
+        "evidence": [
+          {
+            "location": "F-0492 L0007-L0013",
+            "observation": "n256 等于 256 时读取 256 字节键盘状态，并将 a1 中的两个字段与该状态传给 ToAscii；返回值固定为 1。"
+          },
+          {
+            "location": "dependency J00 F-0500 L0128-L0137",
+            "observation": "阻断鼠标互斥体已存在时，F-0500 将 fn 和 sub_40B108 作为两个系统级 Hook 回调传给 SetWindowsHookExA。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包不包含 Hook 安装调用本身，只能依赖已验证的 J00 摘要解释触发关系。",
+          "没有证据证明 Char 被持久化、外传或用于鼠标阻断。"
+        ]
+      },
+      {
+        "behavior": "阻断鼠标分支的循环终止判定通过再次检查命名互斥体：互斥体仍已存在时继续，互斥体不再存在时返回终止信号。",
+        "condition": "sub_40BA84 被调用。",
+        "source": "名为 _x_X_BLOCKMOUSE_X_x_ 的系统命名互斥体状态及 CreateMutexA_w 的 GetLastError 结果。",
+        "action": "调用 CreateMutexA_w 创建/打开该互斥体；GetLastError()==183 时关闭句柄并返回 0，否则关闭句柄并返回 1。",
+        "sink": "返回值供上游循环作为退出条件；J00 已验证上游在该条件为非零后调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0498 L0005-L0015",
+            "observation": "代码以固定名称调用 CreateMutexA_w；错误码 183 时返回 0，其他情况返回 1。"
+          },
+          {
+            "location": "dependency J00 F-0500 L0128-L0137",
+            "observation": "Hook 分支循环执行 sub_405918，直到 sub_40BA84 返回非零，随后终止进程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包未重新提供 F-0500 的完整循环源码，因此循环与 ExitProcess 的连接使用已验证依赖摘要。"
+        ]
+      },
+      {
+        "behavior": "当 off_40D200[0] 为 1 时，程序执行重复的探测调用、调用调试相关处理，并可能修改 PEB 加载器列表；若处理耗时超过 5 秒则终止进程。",
+        "condition": "*off_40D200[0] == 1。",
+        "source": "GetTickCount、sub_4056DC 的调试检查以及当前进程 PEB 的 InLoadOrderModuleList。",
+        "action": "记录起始 TickCount；调用 sub_405750 14 次（该函数当前恒返回 0），调用 sub_4056DC；随后调用 sub_405770，后者将加载器列表项的 Flink 增加 1024，并比较经过时间。",
+        "sink": "超过 5000 毫秒时调用 ExitProcess_0(0)；否则返回。",
+        "evidence": [
+          {
+            "location": "F-0494 L0027-L0068",
+            "observation": "开关为 1 时记录 GetTickCount，重复调用 sub_405750，调用 sub_4056DC，之后执行 sub_405770 并在耗时大于 5000 时退出。"
+          },
+          {
+            "location": "F-0349 L0001-L0004",
+            "observation": "sub_405750 恒返回 0，因此这些调用本身不会触发其直接退出条件。"
+          },
+          {
+            "location": "F-0350 L0005-L0007",
+            "observation": "函数访问 PEB 的 InLoadOrderModuleList，并将 Flink 增加 1024。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "该 PEB 列表修改的后续运行时影响未在本包中展开；不能断言其一定成功或具体改变了哪些模块枚举结果。"
+        ]
+      },
+      {
+        "behavior": "F-0494 还包含通过注册表、特殊指令和模块加载状态进行环境探测的独立退出路径，但其具体意图不能仅由当前包确定。",
+        "condition": "相应 off_40D1* 开关为 1，且对应探针返回 1。",
+        "source": "SbieDll.dll、dbghelp.dll、特殊指令执行结果，以及 CurrentVersion\\ProductId 注册表读取。",
+        "action": "执行 GetModuleHandleA、特殊指令、注册表查询或异常/进程枚举辅助逻辑。",
+        "sink": "命中时调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0494 L0005-L0020",
+            "observation": "代码将这些辅助探针的返回值直接连接到 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0335 L0001-L0005",
+            "observation": "执行 vpcext 7, 0Bh 后返回 1。"
+          },
+          {
+            "location": "F-0339 L0005-L0008",
+            "observation": "检测 dbghelp.dll 是否已加载。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "这些探针的样本意图、兼容性及运行时结果未由静态代码完全确定；只能确认检测与退出能力。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "string",
+        "value": "SbieDll.dll",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "被用于 GetModuleHandleA 环境检查；其存在可作为沙箱相关上下文线索。",
+        "evidence": [
+          {
+            "location": "F-0338 L0005-L0008",
+            "observation": "代码查询名为 SbieDll.dll 的已加载模块。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "dbghelp.dll",
+        "role": "environment_probe",
+        "detection_specificity": "low",
+        "meaning": "被用于已加载模块检查；单独作为恶意样本指标的特异性有限。",
+        "evidence": [
+          {
+            "location": "F-0339 L0005-L0008",
+            "observation": "代码查询名为 dbghelp.dll 的已加载模块。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "VBoxService.exe",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "被用作进程枚举比较目标，可能用于识别虚拟化环境。",
+        "evidence": [
+          {
+            "location": "F-0337 L0030-L0035",
+            "observation": "代码构造 VBoxService.exe 字符串并与枚举到的进程名比较。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProductId",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "环境探针读取的系统注册表值。",
+        "evidence": [
+          {
+            "location": "F-0340 L0009-L0013",
+            "observation": "代码打开 CurrentVersion 键并查询 ProductId。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\Syser",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SyserDbgMsg",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SyserBoot",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SICE",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过打开设备对象检查 SoftICE 类调试环境。",
+        "evidence": [
+          {
+            "location": "F-0353 L0007-L0011",
+            "observation": "代码尝试以读写方式打开该设备路径，成功时返回命中。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\NTICE",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过打开设备对象检查调试环境。",
+        "evidence": [
+          {
+            "location": "F-0354 L0007-L0011",
+            "observation": "代码尝试以读写方式打开该设备路径，成功时返回命中。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "DAEMON",
+        "role": "other",
+        "detection_specificity": "low",
+        "meaning": "作为未解析 helper sub_401B58 的固定参数；当前包未证明其为配置、持久化值或控制标志，不应单独作为配置或感染标记。",
+        "evidence": [
+          {
+            "location": "F-0348 L0010-L0014",
+            "observation": "sub_4056DC 将固定字符串 DAEMON 传给 sub_401B58。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "字符转换结果 Char 是否被其他 Hook 处理、写入文件、发送网络或用于输入阻断？",
+        "reason": "fn 只展示了局部 ToAscii 调用；Hook 后续处理和全局状态不在当前包。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "F-0494 中各 off_40D1* 和 off_40D200[0] 开关由何处设置，哪些探针在真实执行中启用？",
+        "reason": "当前材料仅显示读取开关并据此分支，未提供初始化或配置来源。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_4051CC 的进程名比较及三个 ProductId 检查在原始实现中是否为内容比较，以及命中后具体环境分类是什么？",
+        "reason": "反编译代码显示了比较调用，但部分数据流和比较实现未提供，ProductId 处还存在指针比较表现。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_405770 对 PEB 加载器列表的修改是否成功，以及后续哪些代码依赖该修改？",
+        "reason": "当前包只有字段写入，没有后续枚举或行为证据。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "fn 的调用者及 Hook 相关共享状态",
+        "reason": "确认 ToAscii 产生的 Char 是否流向记录、输出或阻断逻辑。",
+        "expected_value": "闭合键盘输入 source→action→sink，并区分仅转换与实际键盘记录。",
+        "priority": "high"
+      },
+      {
+        "target": "off_40D1D4/off_40D1B0/off_40D1FC/off_40D1AC/off_40D1F4/off_40D1C8/off_40D1D0/off_40D1C0/off_40D1F8/off_40D1BC/off_40D200 的初始化代码",
+        "reason": "确定环境检查的启用条件和运行时覆盖范围。",
+        "expected_value": "各探针的真实触发条件及配置来源。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_401B58、sub_4012B8 或相关环境检查辅助函数",
+        "reason": "解析 DAEMON 标记及未展开的比较/异常处理语义。",
+        "expected_value": "补足环境检测结果的具体分类，避免将反编译表象过度解释。",
+        "priority": "low"
+      }
+    ],
+    "material_needs": []
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/3/evidence/0/location",
+      "/artifacts/4/evidence/0/location",
+      "/artifacts/5/evidence/0/location",
+      "/artifacts/6/evidence/0/location",
+      "/artifacts/7/evidence/0/location",
+      "/artifacts/8/evidence/0/location",
+      "/artifacts/9/detection_specificity",
+      "/artifacts/9/evidence/0/location",
+      "/artifacts/9/meaning",
+      "/artifacts/9/role",
+      "/claims/0",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/0/evidence/3/location",
+      "/claims/0/evidence/4/location",
+      "/claims/1",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/1/evidence/3/location",
+      "/claims/1/evidence/4/location",
+      "/claims/2/evidence/0/location",
+      "/claims/2/evidence/1/location",
+      "/claims/3/evidence/0/location",
+      "/claims/3/evidence/1/location",
+      "/claims/4/evidence/0/location",
+      "/claims/4/evidence/1/location",
+      "/claims/4/evidence/2/location",
+      "/claims/5/evidence/0/location",
+      "/claims/5/evidence/1/location",
+      "/claims/5/evidence/2/location"
+    ],
+    "deleted_paths": [
+      "/material_needs/0"
+    ],
+    "appended_paths": [],
+    "applied_paths": [
+      "/claims/0/evidence",
+      "/claims/1/evidence",
+      "/claims/2/evidence/0/location",
+      "/claims/2/evidence/1/location",
+      "/claims/3/evidence/0/location",
+      "/claims/3/evidence/1/location",
+      "/claims/4/evidence/0/location",
+      "/claims/4/evidence/1/location",
+      "/claims/4/evidence/2/location",
+      "/claims/5/evidence/0/location",
+      "/claims/5/evidence/1/location",
+      "/claims/5/evidence/2/location",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/3/evidence/0/location",
+      "/artifacts/4/evidence/0/location",
+      "/artifacts/5/evidence/0/location",
+      "/artifacts/6/evidence/0/location",
+      "/artifacts/7/evidence/0/location",
+      "/artifacts/8/evidence/0/location",
+      "/artifacts/9/role",
+      "/artifacts/9/meaning",
+      "/artifacts/9/evidence/0/location",
+      "/material_needs"
+    ],
+    "ignored_paths": [
+      "/artifacts/9/confidence"
+    ],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的源码证据引用全部带有“原文件”及中文分隔符，验证器因此将当前包中的引用判为不可解析；当前包有效引用数为 0。部分单条 evidence 还把多个函数/多个行段合并在一个 location 中，无法准确支持对应 observation。",
+        "evidence": [
+          {
+            "location": "claim C001-C006、artifact A001-A002 的 evidence.location",
+            "observation": "引用形如“F-0494 sub_40B118 原文件 L0005-L0026”或在同一 location 中使用“；”连接多个函数；验证结果显示这些引用均为 invalid_format，valid_segments=0。"
+          },
+          {
+            "location": "F-0494 sub_40B118 L0005-L0026",
+            "observation": "材料实际提供了标准可引用的函数标识和原始行段，足以改写为单一的 F-0494 Lx-Ly 格式。"
+          }
+        ],
+        "required_fix": "将当前包内所有源码引用改为可解析的 F-XXXX Lx-Ly 格式，并把一条 location 中合并的多个函数/行段拆成独立 evidence，保持 observation 与实际引用一一对应；不要通过修改 observation 迁就错误位置。特别核对 claims 0、1 中合并的多函数引用。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/*",
+              "/artifacts/*",
+              "/material_needs/*"
+            ]
+          },
+          {
+            "type": "evidence_revision",
+            "targets": [
+              "/claims/0",
+              "/claims/1"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "other",
+        "description": "material_needs/0 请求的 fn 函数代码已经完整包含在当前 material 中（F-0492）；该需求把“需要调用者/共享状态”错误地挂在 fn 本身，且把已满足的当前包材料列为 major 补料需求，导致 status/需求结论不一致。",
+        "evidence": [
+          {
+            "location": "F-0492 fn L0001-L0014",
+            "observation": "当前材料已经给出 fn 的完整函数体，包括 GetKeyboardState、ToAscii、局部 Char 及恒定返回值。"
+          },
+          {
+            "location": "/material_needs/0",
+            "observation": "需求 target=fn、targets[0]=fn，reason 却是需要 fn 的调用者、共享缓冲区或后续处理代码；请求对象与缺失信息不一致。"
+          }
+        ],
+        "required_fix": "删除该 material_need；对调用者或共享状态的未知，仅保留已有的 outside_packet gap/handoff，并将其 target 指向实际需要的调用者/后续处理材料（若无法指定具体函数则不要伪造 function_code target）。",
+        "fixes": [
+          {
+            "type": "delete_item",
+            "targets": [
+              "/material_needs/0"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "DAEMON 被标为 config_marker，但当前材料只证明它作为固定字符串传给 sub_401B58，未证明其是配置标记、持久化值或控制标志。该分类会把未解析的辅助参数误呈为配置 IOC。",
+        "evidence": [
+          {
+            "location": "F-0348 L0010-L0014",
+            "observation": "sub_4056DC 将字符串“DAEMON”传给 sub_401B58，随后读取 PEB BeingDebugged；本包没有 sub_401B58 的实现或配置读写证据。"
+          },
+          {
+            "location": "/artifacts/9",
+            "observation": "artifact role=config_marker、detection_specificity=low，但 meaning 同时承认当前包不能确定其配置或控制语义。"
+          }
+        ],
+        "required_fix": "将该 artifact 的 role 改为 other；detection_specificity 可保留 low 或下调为 none，并明确它只是未解析 helper 的参数，不作为配置/感染标记。",
+        "fixes": [
+          {
+            "type": "artifact_classification",
+            "targets": [
+              "/artifacts/9"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体抓住了环境探测退出、键盘 Hook 回调、互斥体终止判定和 PEB 列表修改；没有发现将键盘转换结果误报为已记录/外传的重大行为错误。但当前包源码引用全部不符合可解析格式，实质上使现有 claims/artifacts 在验收中没有有效证据，必须修订；同时应删除已被当前材料满足且 target 错置的 fn 补料需求，并纠正 DAEMON 的 artifact role。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包补实了 J00 中环境检查与键盘 Hook 回调的具体行为：多个可配置探针在命中时终止进程；其中包括沙箱/调试器模块、虚拟机进程、调试设备、调试状态及若干注册表读取检查。密码列表/阻断鼠标分支的 Hook 回调会读取键盘状态并调用 ToAscii，但当前证据未显示字符被保存、传输或写入；另一 Hook 回调恒返回 1。材料还显示阻断鼠标互斥体的终止判定，以及一个可能修改 PEB 加载器列表并进行超时退出的分支。",
+    "claims": [
+      {
+        "behavior": "在相应全局检查开关为 1 且环境探针返回命中时，程序终止当前进程。",
+        "condition": "F-0494 中对应的 off_40D1D4、off_40D1B0、off_40D1FC、off_40D1AC、off_40D1F4、off_40D1C8、off_40D1D0、off_40D1C0、off_40D1F8 或 off_40D1BC 指向值为 1，且其探针返回 1。",
+        "source": "当前进程及其环境：已加载模块、进程枚举结果、系统注册表 ProductId 和调试设备对象。",
+        "action": "依次调用 sub_4052EC、sub_405168、sub_405124、sub_4051CC、sub_405310、sub_4054A4、sub_4053EC、sub_405334、sub_40555C 或 sub_40588C，并将命中结果作为退出条件。",
+        "sink": "ExitProcess_0(0)；静态代码证明具备终止能力，不证明任一开关或探针在运行时必然命中。",
+        "evidence": [
+          {
+            "location": "F-0494 L0005-L0026",
+            "observation": "多个全局开关分别保护环境探针；各探针返回 1 时直接调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0338 L0005-L0008",
+            "observation": "调用 GetModuleHandleA_0(\"SbieDll.dll\")，模块存在时返回 1。"
+          },
+          {
+            "location": "F-0337 L0025-L0040",
+            "observation": "枚举进程名，并将每个进程名与由 \"VBoxService.exe\" 生成的字符串比较；比较结果大于 0 时返回命中。"
+          },
+          {
+            "location": "F-0353 L0006-L0013",
+            "observation": "尝试打开 \\\\.\\SICE，成功打开时返回 1。"
+          },
+          {
+            "location": "F-0354 L0006-L0013",
+            "observation": "尝试打开 \\\\.\\NTICE，成功打开时返回 1。"
+          },
+          {
+            "location": "F-0340 L0008-L0017",
+            "observation": "打开 Windows CurrentVersion 注册表并查询 ProductId，然后与固定值比较。"
+          },
+          {
+            "location": "F-0341 L0008-L0017",
+            "observation": "打开 Windows CurrentVersion 注册表并查询 ProductId，然后与固定值比较。"
+          },
+          {
+            "location": "F-0342 L0008-L0017",
+            "observation": "打开 Windows CurrentVersion 注册表并查询 ProductId，然后与 sub_405544 结果比较。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "部分注册表比较在反编译代码中表现为 Data 指针比较，不能据此断言实际字符串匹配语义。",
+          "各全局开关的赋值和实际运行时状态不在本包内。"
+        ]
+      },
+      {
+        "behavior": "程序在启用对应检查开关且检测到调试状态时终止进程。",
+        "condition": "off_40D1B4 为 1 且 sub_4056C0 返回 1，或 off_40D200[0] 为 1 且 sub_4056DC 返回非零/其后检测到 PEB 调试标志。",
+        "source": "当前进程的 IsDebuggerPresent 结果、PEB BeingDebugged 字段以及 sub_4056DC 对 \"DAEMON\" 的处理路径。",
+        "action": "sub_4056C0 组合 IsDebuggerPresent 与 sub_405684 的结果；sub_4056DC 设置异常处理上下文、调用 sub_401B58(\"DAEMON\") 并读取 NtCurrentPeb()->BeingDebugged。",
+        "sink": "命中路径调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0347 L0007-L0010",
+            "observation": "函数在 sub_40562C 或 sub_405684 返回 1 时返回 1。"
+          },
+          {
+            "location": "F-0345 L0008-L0015",
+            "observation": "动态取得 kernel32.dll 的 IsDebuggerPresent 并调用它。"
+          },
+          {
+            "location": "F-0346 L0005-L0010",
+            "observation": "读取 NtCurrentPeb()->BeingDebugged，并据此决定返回值。"
+          },
+          {
+            "location": "F-0348 L0007-L0014",
+            "observation": "调用 sub_401B58(&v3, \"DAEMON\")，随后返回 NtCurrentPeb()->BeingDebugged != 0。"
+          },
+          {
+            "location": "F-0494 L0019-L0022",
+            "observation": "F-0494 在调试相关探针命中时调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0494 L0027-L0031",
+            "observation": "F-0494 在调试相关探针命中时调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0494 L0058-L0059",
+            "observation": "F-0494 在调试相关探针命中时调用 ExitProcess_0(0)。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_401B58 对 \"DAEMON\" 的具体副作用未提供，不能进一步解释该字符串的用途。"
+        ]
+      },
+      {
+        "behavior": "在 J00 所述阻断鼠标互斥体分支中，键盘 Hook 回调读取键盘状态并将按键消息转换为 ASCII；当前包未显示转换结果离开局部变量或进入外部输出。",
+        "condition": "上游已验证的条件是 _x_X_BLOCKMOUSE_X_x_ 已存在并导致 F-0500 安装 Hook；Hook 回调收到 n256 == 256 时执行转换。",
+        "source": "Hook 回调参数 a1（包含虚拟键码/扫描码字段）及当前键盘状态。",
+        "action": "调用 GetKeyboardState(KeyState)，再调用 ToAscii(*a1, a1[1], KeyState, &Char, 0)。",
+        "sink": "结果写入 fn 的局部变量 Char；函数随后恒返回 1，没有本包证据表明字符被记录、写文件、传输或阻断。",
+        "evidence": [
+          {
+            "location": "F-0492 L0007-L0013",
+            "observation": "n256 等于 256 时读取 256 字节键盘状态，并将 a1 中的两个字段与该状态传给 ToAscii；返回值固定为 1。"
+          },
+          {
+            "location": "dependency J00 F-0500 L0128-L0137",
+            "observation": "阻断鼠标互斥体已存在时，F-0500 将 fn 和 sub_40B108 作为两个系统级 Hook 回调传给 SetWindowsHookExA。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包不包含 Hook 安装调用本身，只能依赖已验证的 J00 摘要解释触发关系。",
+          "没有证据证明 Char 被持久化、外传或用于鼠标阻断。"
+        ]
+      },
+      {
+        "behavior": "阻断鼠标分支的循环终止判定通过再次检查命名互斥体：互斥体仍已存在时继续，互斥体不再存在时返回终止信号。",
+        "condition": "sub_40BA84 被调用。",
+        "source": "名为 _x_X_BLOCKMOUSE_X_x_ 的系统命名互斥体状态及 CreateMutexA_w 的 GetLastError 结果。",
+        "action": "调用 CreateMutexA_w 创建/打开该互斥体；GetLastError()==183 时关闭句柄并返回 0，否则关闭句柄并返回 1。",
+        "sink": "返回值供上游循环作为退出条件；J00 已验证上游在该条件为非零后调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0498 L0005-L0015",
+            "observation": "代码以固定名称调用 CreateMutexA_w；错误码 183 时返回 0，其他情况返回 1。"
+          },
+          {
+            "location": "dependency J00 F-0500 L0128-L0137",
+            "observation": "Hook 分支循环执行 sub_405918，直到 sub_40BA84 返回非零，随后终止进程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包未重新提供 F-0500 的完整循环源码，因此循环与 ExitProcess 的连接使用已验证依赖摘要。"
+        ]
+      },
+      {
+        "behavior": "当 off_40D200[0] 为 1 时，程序执行重复的探测调用、调用调试相关处理，并可能修改 PEB 加载器列表；若处理耗时超过 5 秒则终止进程。",
+        "condition": "*off_40D200[0] == 1。",
+        "source": "GetTickCount、sub_4056DC 的调试检查以及当前进程 PEB 的 InLoadOrderModuleList。",
+        "action": "记录起始 TickCount；调用 sub_405750 14 次（该函数当前恒返回 0），调用 sub_4056DC；随后调用 sub_405770，后者将加载器列表项的 Flink 增加 1024，并比较经过时间。",
+        "sink": "超过 5000 毫秒时调用 ExitProcess_0(0)；否则返回。",
+        "evidence": [
+          {
+            "location": "F-0494 L0027-L0068",
+            "observation": "开关为 1 时记录 GetTickCount，重复调用 sub_405750，调用 sub_4056DC，之后执行 sub_405770 并在耗时大于 5000 时退出。"
+          },
+          {
+            "location": "F-0349 L0001-L0004",
+            "observation": "sub_405750 恒返回 0，因此这些调用本身不会触发其直接退出条件。"
+          },
+          {
+            "location": "F-0350 L0005-L0007",
+            "observation": "函数访问 PEB 的 InLoadOrderModuleList，并将 Flink 增加 1024。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "该 PEB 列表修改的后续运行时影响未在本包中展开；不能断言其一定成功或具体改变了哪些模块枚举结果。"
+        ]
+      },
+      {
+        "behavior": "F-0494 还包含通过注册表、特殊指令和模块加载状态进行环境探测的独立退出路径，但其具体意图不能仅由当前包确定。",
+        "condition": "相应 off_40D1* 开关为 1，且对应探针返回 1。",
+        "source": "SbieDll.dll、dbghelp.dll、特殊指令执行结果，以及 CurrentVersion\\ProductId 注册表读取。",
+        "action": "执行 GetModuleHandleA、特殊指令、注册表查询或异常/进程枚举辅助逻辑。",
+        "sink": "命中时调用 ExitProcess_0(0)。",
+        "evidence": [
+          {
+            "location": "F-0494 L0005-L0020",
+            "observation": "代码将这些辅助探针的返回值直接连接到 ExitProcess_0(0)。"
+          },
+          {
+            "location": "F-0335 L0001-L0005",
+            "observation": "执行 vpcext 7, 0Bh 后返回 1。"
+          },
+          {
+            "location": "F-0339 L0005-L0008",
+            "observation": "检测 dbghelp.dll 是否已加载。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "这些探针的样本意图、兼容性及运行时结果未由静态代码完全确定；只能确认检测与退出能力。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "string",
+        "value": "SbieDll.dll",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "被用于 GetModuleHandleA 环境检查；其存在可作为沙箱相关上下文线索。",
+        "evidence": [
+          {
+            "location": "F-0338 L0005-L0008",
+            "observation": "代码查询名为 SbieDll.dll 的已加载模块。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "dbghelp.dll",
+        "role": "environment_probe",
+        "detection_specificity": "low",
+        "meaning": "被用于已加载模块检查；单独作为恶意样本指标的特异性有限。",
+        "evidence": [
+          {
+            "location": "F-0339 L0005-L0008",
+            "observation": "代码查询名为 dbghelp.dll 的已加载模块。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "VBoxService.exe",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "被用作进程枚举比较目标，可能用于识别虚拟化环境。",
+        "evidence": [
+          {
+            "location": "F-0337 L0030-L0035",
+            "observation": "代码构造 VBoxService.exe 字符串并与枚举到的进程名比较。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProductId",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "环境探针读取的系统注册表值。",
+        "evidence": [
+          {
+            "location": "F-0340 L0009-L0013",
+            "observation": "代码打开 CurrentVersion 键并查询 ProductId。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\Syser",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SyserDbgMsg",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SyserBoot",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过尝试打开设备对象检测调试器相关设备。",
+        "evidence": [
+          {
+            "location": "F-0352 L0005-L0008",
+            "observation": "代码将该设备路径传给 sub_405788，后者尝试 CreateFileA。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\SICE",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过打开设备对象检查 SoftICE 类调试环境。",
+        "evidence": [
+          {
+            "location": "F-0353 L0007-L0011",
+            "observation": "代码尝试以读写方式打开该设备路径，成功时返回命中。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "\\\\.\\NTICE",
+        "role": "environment_probe",
+        "detection_specificity": "medium",
+        "meaning": "通过打开设备对象检查调试环境。",
+        "evidence": [
+          {
+            "location": "F-0354 L0007-L0011",
+            "observation": "代码尝试以读写方式打开该设备路径，成功时返回命中。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "DAEMON",
+        "role": "other",
+        "detection_specificity": "low",
+        "meaning": "作为未解析 helper sub_401B58 的固定参数；当前包未证明其为配置、持久化值或控制标志，不应单独作为配置或感染标记。",
+        "evidence": [
+          {
+            "location": "F-0348 L0010-L0014",
+            "observation": "sub_4056DC 将固定字符串 DAEMON 传给 sub_401B58。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "字符转换结果 Char 是否被其他 Hook 处理、写入文件、发送网络或用于输入阻断？",
+        "reason": "fn 只展示了局部 ToAscii 调用；Hook 后续处理和全局状态不在当前包。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "F-0494 中各 off_40D1* 和 off_40D200[0] 开关由何处设置，哪些探针在真实执行中启用？",
+        "reason": "当前材料仅显示读取开关并据此分支，未提供初始化或配置来源。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_4051CC 的进程名比较及三个 ProductId 检查在原始实现中是否为内容比较，以及命中后具体环境分类是什么？",
+        "reason": "反编译代码显示了比较调用，但部分数据流和比较实现未提供，ProductId 处还存在指针比较表现。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_405770 对 PEB 加载器列表的修改是否成功，以及后续哪些代码依赖该修改？",
+        "reason": "当前包只有字段写入，没有后续枚举或行为证据。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "fn 的调用者及 Hook 相关共享状态",
+        "reason": "确认 ToAscii 产生的 Char 是否流向记录、输出或阻断逻辑。",
+        "expected_value": "闭合键盘输入 source→action→sink，并区分仅转换与实际键盘记录。",
+        "priority": "high"
+      },
+      {
+        "target": "off_40D1D4/off_40D1B0/off_40D1FC/off_40D1AC/off_40D1F4/off_40D1C8/off_40D1D0/off_40D1C0/off_40D1F8/off_40D1BC/off_40D200 的初始化代码",
+        "reason": "确定环境检查的启用条件和运行时覆盖范围。",
+        "expected_value": "各探针的真实触发条件及配置来源。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_401B58、sub_4012B8 或相关环境检查辅助函数",
+        "reason": "解析 DAEMON 标记及未展开的比较/异常处理语义。",
+        "expected_value": "补足环境检测结果的具体分类，避免将反编译表象过度解释。",
+        "priority": "low"
+      }
+    ],
+    "material_needs": []
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": [
+    "/artifacts/9/confidence"
+  ]
+}

@@ -1,0 +1,738 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J05.json",
+        "sha256": "9e2bcf9dd5b07d0ab18d22e66cf99fc5f30a00159c23d2976fbce04d5f16c14c"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J05/analyzer/validated_result.json",
+        "sha256": "92790610bc8258491a0435bd5be94ba6f0135dc7a3d1f674a39400c4e9ca95c6"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J05/reviewer/validated_result.json",
+        "sha256": "1206d64dbf9dc570507eaa5a2b497e9319679f5d1455e0831e521f1f48e558ed"
+      },
+      "packet": {
+        "path": "testdata/packets/J05.md",
+        "sha256": "acbd7671e39951a22e4ba39e2176014f196860ae9b91f9ea24c8bf2a78073b20"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J05/reviser/revision_scope.json",
+        "sha256": "ad4b85462c9dead79a6c53466dd3ed1ab580773619f12049d1550452a9583a67"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "no Reviser call in this run; no candidate invented"
+  },
+  "packet_name": "J05",
+  "packet_text": "# J05 安装路径辅助\n任务来源：J04 对目录选择、路径读取辅助的契约请求；不恢复缺失资源值。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0368 sub_405E18，原文件 L0001–L0009 / 共 9 行\n```text\nL0001: UINT __usercall sub_405E18@<eax>(CHAR *lpBuffer@<eax>, UINT uSize@<edx>)\nL0002: {\nL0003:   HMODULE hModule; // eax\nL0004:   UINT (__stdcall *GetSystemDirectoryA)(LPSTR, UINT); // eax\nL0005: \nL0006:   hModule = LoadLibraryA(\"kernel32.dll\");\nL0007:   GetSystemDirectoryA = (UINT (__stdcall *)(LPSTR, UINT))GetProcAddress(hModule, \"GetSystemDirectoryA\");\nL0008:   return GetSystemDirectoryA(lpBuffer, uSize);\nL0009: }\n```\n\n## F-0369 sub_405E60，原文件 L0001–L0009 / 共 9 行\n```text\nL0001: UINT __usercall sub_405E60@<eax>(CHAR *lpBuffer@<eax>, UINT uSize@<edx>)\nL0002: {\nL0003:   HMODULE hModule; // eax\nL0004:   UINT (__stdcall *GetWindowsDirectoryA)(LPSTR, UINT); // eax\nL0005: \nL0006:   hModule = LoadLibraryA(\"kernel32.dll\");\nL0007:   GetWindowsDirectoryA = (UINT (__stdcall *)(LPSTR, UINT))GetProcAddress(hModule, \"GetWindowsDirectoryA\");\nL0008:   return GetWindowsDirectoryA(lpBuffer, uSize);\nL0009: }\n```\n\n## F-0371 sub_405EF0，原文件 L0001–L0020 / 共 20 行\n```text\nL0001: _DWORD *__usercall sub_405EF0@<eax>(volatile __int32 *a1@<eax>)\nL0002: {\nL0003:   unsigned int v3[2]; // [esp-Ch] [ebp-11Ch] BYREF\nL0004:   int *v4; // [esp-4h] [ebp-114h]\nL0005:   char *dst; // [esp+4h] [ebp-10Ch] BYREF\nL0006:   CHAR lpBuffer_[261]; // [esp+Bh] [ebp-105h] BYREF\nL0007:   int savedregs; // [esp+110h] [ebp+0h] BYREF\nL0008: \nL0009:   dst = 0;\nL0010:   v4 = &savedregs;\nL0011:   v3[1] = (unsigned int)&loc_405F63;\nL0012:   v3[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0013:   __writefsdword(0, (unsigned int)v3);\nL0014:   sub_405E18(lpBuffer_, 0x105u);\nL0015:   sub_401D24(&dst, (unsigned int)lpBuffer_, 261);\nL0016:   sub_401D9C(a1, (unsigned __int32)dst, (unsigned __int32)&dst__0);\nL0017:   __writefsdword(0, v3[0]);\nL0018:   v4 = (int *)&loc_405F6A;\nL0019:   return sub_401AC0(&dst);\nL0020: }\n```\n\n## F-0372 sub_405F7C，原文件 L0001–L0020 / 共 20 行\n```text\nL0001: _DWORD *__usercall sub_405F7C@<eax>(volatile __int32 *a1@<eax>)\nL0002: {\nL0003:   unsigned int v3[2]; // [esp-Ch] [ebp-11Ch] BYREF\nL0004:   int *v4; // [esp-4h] [ebp-114h]\nL0005:   char *dst; // [esp+4h] [ebp-10Ch] BYREF\nL0006:   CHAR lpBuffer_[261]; // [esp+Bh] [ebp-105h] BYREF\nL0007:   int savedregs; // [esp+110h] [ebp+0h] BYREF\nL0008: \nL0009:   dst = 0;\nL0010:   v4 = &savedregs;\nL0011:   v3[1] = (unsigned int)&loc_405FEF;\nL0012:   v3[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0013:   __writefsdword(0, (unsigned int)v3);\nL0014:   sub_405E60(lpBuffer_, 0x105u);\nL0015:   sub_401D24(&dst, (unsigned int)lpBuffer_, 261);\nL0016:   sub_401D9C(a1, (unsigned __int32)dst, (unsigned __int32)&dst__1);\nL0017:   __writefsdword(0, v3[0]);\nL0018:   v4 = (int *)&loc_405FF6;\nL0019:   return sub_401AC0(&dst);\nL0020: }\n```\n\n## F-0374 sub_406034，原文件 L0001–L0018 / 共 18 行\n```text\nL0001: _DWORD *__usercall sub_406034@<eax>(char **a1@<eax>)\nL0002: {\nL0003:   unsigned int v3[2]; // [esp-10h] [ebp-14h] BYREF\nL0004:   int *v4; // [esp-8h] [ebp-Ch]\nL0005:   __int32 v5; // [esp+0h] [ebp-4h] BYREF\nL0006:   int savedregs; // [esp+4h] [ebp+0h] BYREF\nL0007: \nL0008:   v5 = 0;\nL0009:   v4 = &savedregs;\nL0010:   v3[1] = (unsigned int)&loc_40607B;\nL0011:   v3[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0012:   __writefsdword(0, (unsigned int)v3);\nL0013:   sub_405F7C(&v5);\nL0014:   sub_401FA4(v5, 1, 3, a1);\nL0015:   __writefsdword(0, v3[0]);\nL0016:   v4 = (int *)&loc_406082;\nL0017:   return sub_401AC0(&v5);\nL0018: }\n```\n\n## F-0377 sub_4061DC，原文件 L0001–L0021 / 共 21 行\n```text\nL0001: int *__usercall sub_4061DC@<eax>(volatile __int32 *a1@<eax>)\nL0002: {\nL0003:   unsigned int v3[2]; // [esp-10h] [ebp-18h] BYREF\nL0004:   int *v4; // [esp-8h] [ebp-10h]\nL0005:   char *v5; // [esp+0h] [ebp-8h] BYREF\nL0006:   char *v6; // [esp+4h] [ebp-4h] BYREF\nL0007:   int savedregs; // [esp+8h] [ebp+0h] BYREF\nL0008: \nL0009:   v6 = 0;\nL0010:   v5 = 0;\nL0011:   v4 = &savedregs;\nL0012:   v3[1] = (unsigned int)&loc_40623C;\nL0013:   v3[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0014:   __writefsdword(0, (unsigned int)v3);\nL0015:   sub_401B58((volatile __int32 *)&v6, (__int32)\"SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\");\nL0016:   sub_401B58((volatile __int32 *)&v5, (__int32)\"ProgramFilesDir\");\nL0017:   sub_406088(HKEY_LOCAL_MACHINE, v6, v5, a1, 0);\nL0018:   __writefsdword(0, v3[0]);\nL0019:   v4 = (int *)&loc_406243;\nL0020:   return sub_401AE4((int *)&v5, 2);\nL0021: }\n```\n\n## F-0383 sub_406684，原文件 L0001–L0064 / 共 64 行\n```text\nL0001: int __usercall sub_406684@<eax>(char *a1@<eax>, int a2@<ebx>)\nL0002: {\nL0003:   int v2; // ebx\nL0004:   int v3; // eax\nL0005:   _BYTE *n4; // eax\nL0006:   _BYTE *v5; // eax\nL0007:   char *lpPathName; // eax\nL0008:   int v7; // eax\nL0009:   unsigned int v9[2]; // [esp-10h] [ebp-20h] BYREF\nL0010:   int *v10; // [esp-8h] [ebp-18h]\nL0011:   int v11; // [esp-4h] [ebp-14h]\nL0012:   char *dst; // [esp+0h] [ebp-10h] BYREF\nL0013:   char *v13; // [esp+4h] [ebp-Ch] BYREF\nL0014:   _BYTE *v14; // [esp+8h] [ebp-8h] BYREF\nL0015:   char *v15; // [esp+Ch] [ebp-4h]\nL0016:   int savedregs; // [esp+10h] [ebp+0h] BYREF\nL0017: \nL0018:   v14 = 0;\nL0019:   v13 = 0;\nL0020:   dst = 0;\nL0021:   v11 = a2;\nL0022:   v15 = a1;\nL0023:   sub_401F38((int)a1);\nL0024:   v10 = &savedregs;\nL0025:   v9[1] = (unsigned int)&loc_406794;\nL0026:   v9[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0027:   __writefsdword(0, (unsigned int)v9);\nL0028:   v2 = 0;\nL0029:   if ( v15 )\nL0030:   {\nL0031:     if ( sub_406660(v15) )\nL0032:     {\nL0033:       LOBYTE(v2) = 1;\nL0034:     }\nL0035:     else\nL0036:     {\nL0037:       sub_401B58((volatile __int32 *)&v14, (__int32)v15);\nL0038:       v3 = sub_401D50((int)v14);\nL0039:       if ( v14[v3 - 1] != 92 )\nL0040:         sub_401D58((volatile __int32 *)&v14, (__int32)&dst__2);\nL0041:       while ( (int)sub_40202C(&dst__2, v14) >= 1 )\nL0042:       {\nL0043:         n4 = sub_40202C(&dst__2, v14);\nL0044:         sub_401FA4((int)v14, 1, (int)n4, &dst);\nL0045:         sub_401D58((volatile __int32 *)&v13, (__int32)dst);\nL0046:         v5 = sub_40202C(&dst__2, v14);\nL0047:         sub_401FE4((unsigned int *)&v14, 1, (int)v5);\nL0048:         if ( !sub_406660(v13) )\nL0049:         {\nL0050:           lpPathName = sub_401F48(v13);\nL0051:           if ( !CreateDirectoryA(lpPathName, 0) )\nL0052:             goto LABEL_10;\nL0053:         }\nL0054:       }\nL0055:       LOBYTE(v7) = sub_406660(v15);\nL0056:       v2 = v7;\nL0057:     }\nL0058:   }\nL0059: LABEL_10:\nL0060:   __writefsdword(0, v9[0]);\nL0061:   v10 = (int *)&loc_40679B;\nL0062:   sub_401AE4((int *)&dst, 4);\nL0063:   return v2;\nL0064: }\n```\n\n## F-0375 sub_406088，原文件 L0001–L0047 / 共 47 行\n```text\nL0001: _DWORD *__userpurge sub_406088@<eax>(\nL0002:         HKEY hKey@<eax>,\nL0003:         char *a2@<edx>,\nL0004:         char *a3@<ecx>,\nL0005:         volatile __int32 *a4,\nL0006:         __int32 dst)\nL0007: {\nL0008:   char *lpSubKey; // eax\nL0009:   char *lpValueName; // esi\nL0010:   char *lpData; // eax\nL0011:   unsigned int v10[2]; // [esp-Ch] [ebp-28h] BYREF\nL0012:   int *v11; // [esp-4h] [ebp-20h]\nL0013:   DWORD cbData; // [esp+8h] [ebp-14h] BYREF\nL0014:   DWORD Type; // [esp+Ch] [ebp-10h] BYREF\nL0015:   HKEY phkResult; // [esp+10h] [ebp-Ch] BYREF\nL0016:   char *v15; // [esp+14h] [ebp-8h] BYREF\nL0017:   char *v16; // [esp+18h] [ebp-4h]\nL0018:   int savedregs; // [esp+1Ch] [ebp+0h] BYREF\nL0019: \nL0020:   v15 = a3;\nL0021:   v16 = a2;\nL0022:   sub_401F38((int)a2);\nL0023:   sub_401F38((int)v15);\nL0024:   sub_401F38(dst);\nL0025:   v11 = &savedregs;\nL0026:   v10[1] = (unsigned int)&loc_406167;\nL0027:   v10[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0028:   __writefsdword(0, (unsigned int)v10);\nL0029:   sub_401B14(a4, dst);\nL0030:   lpSubKey = sub_401F48(v16);\nL0031:   if ( !RegOpenKeyExA(hKey, lpSubKey, 0, 1u, &phkResult) )\nL0032:   {\nL0033:     lpValueName = sub_401F48(v15);\nL0034:     if ( !RegQueryValueExA(phkResult, lpValueName, 0, &Type, 0, &cbData) )\nL0035:     {\nL0036:       sub_402074((unsigned int *)a4, cbData);\nL0037:       lpData = sub_401F48(*(char **)a4);\nL0038:       RegQueryValueExA(phkResult, lpValueName, 0, &Type, (LPBYTE)lpData, &cbData);\nL0039:       sub_402074((unsigned int *)a4, cbData - 1);\nL0040:     }\nL0041:     RegCloseKey(phkResult);\nL0042:   }\nL0043:   __writefsdword(0, v10[0]);\nL0044:   v11 = (int *)&loc_40616E;\nL0045:   sub_401AE4((int *)&v15, 2);\nL0046:   return sub_401AC0(&dst);\nL0047: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包补充证明了安装路径辅助能力：程序可读取系统目录、Windows 目录及 HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProgramFilesDir，并可按输入路径逐级创建缺失目录。当前材料未给出这些辅助函数的调用者，因此无法确定最终使用的具体路径或其是否形成完整安装链。",
+    "claims": [
+      {
+        "behavior": "按输入路径逐级创建不存在的目录",
+        "condition": "sub_406684 的 a1 非空，且该路径不被 sub_406660 判定为已存在；遍历过程中相应子路径仍不存在且 CreateDirectoryA 成功或继续处理",
+        "source": "sub_406684 的 a1 输入路径",
+        "action": "规范化并拆分输入路径，逐段检查目录存在性；对不存在的中间路径调用 CreateDirectoryA(lpPathName, 0)",
+        "sink": "输入路径对应的文件系统目录层级",
+        "evidence": [
+          {
+            "location": "F-0383 sub_406684 原文件 L0028-L0057",
+            "observation": "函数在 a1 非空且路径未被判定存在时拆分路径，逐段调用 sub_406660 检查；对缺失路径调用 CreateDirectoryA，随后返回检查结果。"
+          },
+          {
+            "location": "F-0383 sub_406684 原文件 L0048-L0053",
+            "observation": "对不存在的子路径调用 sub_401F48 后的 lpPathName 执行 CreateDirectoryA(lpPathName, 0)，失败时跳转到结束路径。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "材料未显示 sub_406684 的调用者，因此无法确定具体创建的目录字符串、是否用于安装文件，或创建失败后的上层处理。"
+        ]
+      },
+      {
+        "behavior": "读取本机 Windows 系统目录并交给内部字符串/路径处理逻辑",
+        "condition": "调用 sub_405EF0",
+        "source": "GetSystemDirectoryA(lpBuffer_, 0x105u) 返回的当前系统目录",
+        "action": "动态解析 kernel32.dll 的 GetSystemDirectoryA，将结果复制到内部缓冲区，再通过 sub_401D9C 传入调用者提供的输出对象",
+        "sink": "sub_405EF0 的 a1 指向的内部输出对象",
+        "evidence": [
+          {
+            "location": "F-0368 sub_405E18 原文件 L0006-L0008",
+            "observation": "加载 kernel32.dll，解析 GetSystemDirectoryA，并以调用者缓冲区和大小调用该 API。"
+          },
+          {
+            "location": "F-0371 sub_405EF0 原文件 L0009-L0019",
+            "observation": "调用 sub_405E18 获取系统目录，将结果复制到 dst，并调用 sub_401D9C(a1, dst, &dst__0) 写入输出对象。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包未提供 sub_401D9C 的实现或 sub_405EF0 调用者，无法确认该目录后续是否被拼接为文件目标或用于实际复制。"
+        ]
+      },
+      {
+        "behavior": "读取 Windows 根目录并交给内部字符串/路径处理逻辑",
+        "condition": "调用 sub_405F7C",
+        "source": "GetWindowsDirectoryA(lpBuffer_, 0x105u) 返回的当前 Windows 目录",
+        "action": "动态解析 kernel32.dll 的 GetWindowsDirectoryA，将结果复制到内部缓冲区，再通过 sub_401D9C 传入调用者提供的输出对象",
+        "sink": "sub_405F7C 的 a1 指向的内部输出对象",
+        "evidence": [
+          {
+            "location": "F-0369 sub_405E60 原文件 L0006-L0008",
+            "observation": "加载 kernel32.dll，解析 GetWindowsDirectoryA，并以调用者缓冲区和大小调用该 API。"
+          },
+          {
+            "location": "F-0372 sub_405F7C 原文件 L0009-L0019",
+            "observation": "调用 sub_405E60 获取 Windows 目录，将结果复制到 dst，并调用 sub_401D9C(a1, dst, &dst__1) 写入输出对象。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包未提供 sub_401D9C 的实现或 sub_405F7C 调用者，无法确认该目录后续用途。"
+        ]
+      },
+      {
+        "behavior": "从 HKLM 的 Windows CurrentVersion 注册表键读取 ProgramFilesDir 值",
+        "condition": "调用 sub_4061DC 且 RegOpenKeyExA 能打开 HKLM\\Software\\Microsoft\\Windows\\CurrentVersion，且该键存在 ProgramFilesDir 值",
+        "source": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProgramFilesDir",
+        "action": "构造注册表子键和值名，调用 sub_406088；该函数通过 RegOpenKeyExA、RegQueryValueExA 查询值大小并再次读取值数据到 a1 指向的内部缓冲区",
+        "sink": "sub_4061DC 的 a1 指向的内部输出对象",
+        "evidence": [
+          {
+            "location": "F-0377 sub_4061DC 原文件 L0015-L0020",
+            "observation": "构造字符串 Software\\\\Microsoft\\\\Windows\\\\CurrentVersion 和 ProgramFilesDir，并以 HKEY_LOCAL_MACHINE 及 a1 调用 sub_406088。"
+          },
+          {
+            "location": "F-0375 sub_406088 原文件 L0029-L0041",
+            "observation": "调用 RegOpenKeyExA 打开指定键，先用 RegQueryValueExA 查询数据长度，再分配/调整 a4 缓冲区并再次调用 RegQueryValueExA 读取值数据。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "材料未显示 a1 输出对象的下游使用，不能据此确认 ProgramFilesDir 最终用于复制、目录创建或注册表持久化。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "other",
+        "value": "GetSystemDirectoryA",
+        "role": "environment_probe",
+        "detection_specificity": "none",
+        "meaning": "用于获取当前系统目录的通用系统环境查询 API。",
+        "evidence": [
+          {
+            "location": "F-0368 sub_405E18 原文件 L0006-L0008",
+            "observation": "动态解析并调用 GetSystemDirectoryA，将结果写入调用者缓冲区。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "GetWindowsDirectoryA",
+        "role": "environment_probe",
+        "detection_specificity": "none",
+        "meaning": "用于获取当前 Windows 目录的通用系统环境查询 API。",
+        "evidence": [
+          {
+            "location": "F-0369 sub_405E60 原文件 L0006-L0008",
+            "observation": "动态解析并调用 GetWindowsDirectoryA，将结果写入调用者缓冲区。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProgramFilesDir",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "被读取的标准 Windows 安装目录配置值。",
+        "evidence": [
+          {
+            "location": "F-0377 sub_4061DC 原文件 L0015-L0017",
+            "observation": "明确构造 CurrentVersion 子键及 ProgramFilesDir 值名，并从 HKEY_LOCAL_MACHINE 读取。"
+          },
+          {
+            "location": "F-0375 sub_406088 原文件 L0030-L0039",
+            "observation": "打开指定注册表键并两次查询指定值，第二次将值数据读入输出缓冲区。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "CreateDirectoryA",
+        "role": "created_output",
+        "detection_specificity": "low",
+        "meaning": "用于创建由输入路径拆分出的缺失目录；具体目录名称由调用者输入决定。",
+        "evidence": [
+          {
+            "location": "F-0383 sub_406684 原文件 L0041-L0053",
+            "observation": "对拆分出的不存在路径调用 CreateDirectoryA(lpPathName, 0)。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_405EF0、sub_405F7C、sub_4061DC 和 sub_406684 的调用者分别如何使用输出路径，最终是否连接到 J04 已证明的文件复制或持久化行为？",
+        "reason": "当前源码证明了路径读取和目录创建，但未包含调用者或输出对象的后续使用。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "由 a1 传入 sub_406684 的实际目录字符串是什么，以及创建失败时上层是否采取备用路径？",
+        "reason": "函数仅显示动态输入路径和 CreateDirectoryA 返回结果，未显示具体调用参数或调用者分支。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_406684 callers",
+        "reason": "确定输入路径来源、实际安装目录及目录创建结果的上层处理。",
+        "expected_value": "将路径创建能力连接到具体文件复制/安装行为，并识别备用路径分支。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405EF0, sub_405F7C, sub_4061DC callers",
+        "reason": "确定系统目录、Windows 目录和 ProgramFilesDir 输出的最终用途。",
+        "expected_value": "判断这些环境路径是否参与 J04 的复制目标构造或其他外部副作用。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_406684 callers",
+        "targets": [
+          {
+            "identifier": "sub_406684",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要调用者源码以确定 a1 的实际路径来源、创建目录的触发场景及其与安装复制行为的连接。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0383 sub_406684 原文件 L0021-L0023",
+            "observation": "a1 被保存为输入路径并传入路径处理逻辑，但本函数未显示其调用者提供的具体值。"
+          },
+          {
+            "location": "F-0383 sub_406684 原文件 L0048-L0057",
+            "observation": "函数创建缺失目录并返回结果，具体上层用途不在当前材料中。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_405EF0/sub_405F7C/sub_4061DC callers",
+        "targets": [
+          {
+            "identifier": "sub_405EF0",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_405F7C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_4061DC",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要调用者源码以确定读取到的系统目录、Windows 目录和 ProgramFilesDir 是否被用于实际安装路径、复制目标或其他副作用。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0371 sub_405EF0 原文件 L0014-L0019",
+            "observation": "系统目录被写入 a1 指向的输出对象，但本函数未显示输出对象的后续用途。"
+          },
+          {
+            "location": "F-0372 sub_405F7C 原文件 L0014-L0019",
+            "observation": "Windows 目录被写入 a1 指向的输出对象，但本函数未显示输出对象的后续用途。"
+          },
+          {
+            "location": "F-0377 sub_4061DC 原文件 L0015-L0020",
+            "observation": "ProgramFilesDir 被读取并交给 a1 指向的输出对象，但本函数未显示其后续用途。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前结果中的全部源码证据 location 均使用了“F-XXXX sub_x 原文件 L... ”格式，未被当前证据校验器解析；因此 4 条核心 claim、4 个 artifact 和 2 条 material_need 实际上都没有可定位的有效证据引用。材料本身确实支持这些内容，但报告当前不可验收。",
+        "evidence": [
+          {
+            "location": "claims 0-3、artifacts 0-3、material_needs 0-1 的全部 evidence.location",
+            "observation": "evidence_reference_validation 报告 valid_segments=0，并将 18 个引用全部标为 invalid_format；例如 F-0383 sub_406684 原文件 L0028-L0057 无法解析。"
+          }
+        ],
+        "required_fix": "将所有当前材料源码引用改为可解析的原始格式，例如“F-0383 L0028-L0057”，去除函数名及“原文件”文字；保持对应 F 编号和源码行段不变，并重新核对每个 observation 与该行段一致。该修订必须覆盖 claims、artifacts、material_needs 中所有现有 evidence.location。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "将 API 名称 GetSystemDirectoryA、GetWindowsDirectoryA 和 CreateDirectoryA 作为 artifact 保存，分别标为 environment_probe 或 created_output；这些是执行的 API/动作，不是具体环境探针目标或具体创建对象。当前 detection_specificity=none/low 已降低 IOC 混淆风险，但 artifact role 与制品粒度仍不准确。",
+        "evidence": [
+          {
+            "location": "F-0368 L0006-L0008",
+            "observation": "代码动态解析并调用 GetSystemDirectoryA。"
+          },
+          {
+            "location": "F-0369 L0006-L0008",
+            "observation": "代码动态解析并调用 GetWindowsDirectoryA。"
+          },
+          {
+            "location": "F-0383 L0048-L0053",
+            "observation": "代码对缺失路径调用 CreateDirectoryA；具体目录由输入路径决定。"
+          }
+        ],
+        "required_fix": "删除这三个 API/动作型 artifact；保留相应 claim 作为行为证据即可。若需记录制品，只能在有具体路径对象时记录具体系统路径或创建出的目录，但当前材料未给出固定值，不应凭空新增 artifact。",
+        "revision_targets": [
+          {
+            "operation": "delete",
+            "path": "/artifacts/0"
+          },
+          {
+            "operation": "delete",
+            "path": "/artifacts/1"
+          },
+          {
+            "operation": "delete",
+            "path": "/artifacts/3"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖总体充分：目录逐级创建、系统/Windows 目录读取及 ProgramFilesDir 注册表读取均被报告，且未把辅助能力错误连接为 J04 的安装或持久化结果；status 与 gaps 也基本一致。必须先修复所有不可解析的证据引用，否则核心结论无法验收。另需清理 API/动作型 artifact，避免将函数名当作制品。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前结果中的全部源码证据 location 均使用了“F-XXXX sub_x 原文件 L... ”格式，未被当前证据校验器解析；因此 4 条核心 claim、4 个 artifact 和 2 条 material_need 实际上都没有可定位的有效证据引用。材料本身确实支持这些内容，但报告当前不可验收。",
+        "evidence": [
+          {
+            "location": "claims 0-3、artifacts 0-3、material_needs 0-1 的全部 evidence.location",
+            "observation": "evidence_reference_validation 报告 valid_segments=0，并将 18 个引用全部标为 invalid_format；例如 F-0383 sub_406684 原文件 L0028-L0057 无法解析。"
+          }
+        ],
+        "required_fix": "将所有当前材料源码引用改为可解析的原始格式，例如“F-0383 L0028-L0057”，去除函数名及“原文件”文字；保持对应 F 编号和源码行段不变，并重新核对每个 observation 与该行段一致。该修订必须覆盖 claims、artifacts、material_needs 中所有现有 evidence.location。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "将 API 名称 GetSystemDirectoryA、GetWindowsDirectoryA 和 CreateDirectoryA 作为 artifact 保存，分别标为 environment_probe 或 created_output；这些是执行的 API/动作，不是具体环境探针目标或具体创建对象。当前 detection_specificity=none/low 已降低 IOC 混淆风险，但 artifact role 与制品粒度仍不准确。",
+        "evidence": [
+          {
+            "location": "F-0368 L0006-L0008",
+            "observation": "代码动态解析并调用 GetSystemDirectoryA。"
+          },
+          {
+            "location": "F-0369 L0006-L0008",
+            "observation": "代码动态解析并调用 GetWindowsDirectoryA。"
+          },
+          {
+            "location": "F-0383 L0048-L0053",
+            "observation": "代码对缺失路径调用 CreateDirectoryA；具体目录由输入路径决定。"
+          }
+        ],
+        "required_fix": "删除这三个 API/动作型 artifact；保留相应 claim 作为行为证据即可。若需记录制品，只能在有具体路径对象时记录具体系统路径或创建出的目录，但当前材料未给出固定值，不应凭空新增 artifact。",
+        "revision_targets": [
+          {
+            "operation": "delete",
+            "path": "/artifacts/0"
+          },
+          {
+            "operation": "delete",
+            "path": "/artifacts/1"
+          },
+          {
+            "operation": "delete",
+            "path": "/artifacts/3"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖总体充分：目录逐级创建、系统/Windows 目录读取及 ProgramFilesDir 注册表读取均被报告，且未把辅助能力错误连接为 J04 的安装或持久化结果；status 与 gaps 也基本一致。必须先修复所有不可解析的证据引用，否则核心结论无法验收。另需清理 API/动作型 artifact，避免将函数名当作制品。"
+  },
+  "candidate_result": null,
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包补充证明了安装路径辅助能力：程序可读取系统目录、Windows 目录及 HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProgramFilesDir，并可按输入路径逐级创建缺失目录。当前材料未给出这些辅助函数的调用者，因此无法确定最终使用的具体路径或其是否形成完整安装链。",
+    "claims": [
+      {
+        "behavior": "按输入路径逐级创建不存在的目录",
+        "condition": "sub_406684 的 a1 非空，且该路径不被 sub_406660 判定为已存在；遍历过程中相应子路径仍不存在且 CreateDirectoryA 成功或继续处理",
+        "source": "sub_406684 的 a1 输入路径",
+        "action": "规范化并拆分输入路径，逐段检查目录存在性；对不存在的中间路径调用 CreateDirectoryA(lpPathName, 0)",
+        "sink": "输入路径对应的文件系统目录层级",
+        "evidence": [
+          {
+            "location": "F-0383 sub_406684 原文件 L0028-L0057",
+            "observation": "函数在 a1 非空且路径未被判定存在时拆分路径，逐段调用 sub_406660 检查；对缺失路径调用 CreateDirectoryA，随后返回检查结果。"
+          },
+          {
+            "location": "F-0383 sub_406684 原文件 L0048-L0053",
+            "observation": "对不存在的子路径调用 sub_401F48 后的 lpPathName 执行 CreateDirectoryA(lpPathName, 0)，失败时跳转到结束路径。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "材料未显示 sub_406684 的调用者，因此无法确定具体创建的目录字符串、是否用于安装文件，或创建失败后的上层处理。"
+        ]
+      },
+      {
+        "behavior": "读取本机 Windows 系统目录并交给内部字符串/路径处理逻辑",
+        "condition": "调用 sub_405EF0",
+        "source": "GetSystemDirectoryA(lpBuffer_, 0x105u) 返回的当前系统目录",
+        "action": "动态解析 kernel32.dll 的 GetSystemDirectoryA，将结果复制到内部缓冲区，再通过 sub_401D9C 传入调用者提供的输出对象",
+        "sink": "sub_405EF0 的 a1 指向的内部输出对象",
+        "evidence": [
+          {
+            "location": "F-0368 sub_405E18 原文件 L0006-L0008",
+            "observation": "加载 kernel32.dll，解析 GetSystemDirectoryA，并以调用者缓冲区和大小调用该 API。"
+          },
+          {
+            "location": "F-0371 sub_405EF0 原文件 L0009-L0019",
+            "observation": "调用 sub_405E18 获取系统目录，将结果复制到 dst，并调用 sub_401D9C(a1, dst, &dst__0) 写入输出对象。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包未提供 sub_401D9C 的实现或 sub_405EF0 调用者，无法确认该目录后续是否被拼接为文件目标或用于实际复制。"
+        ]
+      },
+      {
+        "behavior": "读取 Windows 根目录并交给内部字符串/路径处理逻辑",
+        "condition": "调用 sub_405F7C",
+        "source": "GetWindowsDirectoryA(lpBuffer_, 0x105u) 返回的当前 Windows 目录",
+        "action": "动态解析 kernel32.dll 的 GetWindowsDirectoryA，将结果复制到内部缓冲区，再通过 sub_401D9C 传入调用者提供的输出对象",
+        "sink": "sub_405F7C 的 a1 指向的内部输出对象",
+        "evidence": [
+          {
+            "location": "F-0369 sub_405E60 原文件 L0006-L0008",
+            "observation": "加载 kernel32.dll，解析 GetWindowsDirectoryA，并以调用者缓冲区和大小调用该 API。"
+          },
+          {
+            "location": "F-0372 sub_405F7C 原文件 L0009-L0019",
+            "observation": "调用 sub_405E60 获取 Windows 目录，将结果复制到 dst，并调用 sub_401D9C(a1, dst, &dst__1) 写入输出对象。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包未提供 sub_401D9C 的实现或 sub_405F7C 调用者，无法确认该目录后续用途。"
+        ]
+      },
+      {
+        "behavior": "从 HKLM 的 Windows CurrentVersion 注册表键读取 ProgramFilesDir 值",
+        "condition": "调用 sub_4061DC 且 RegOpenKeyExA 能打开 HKLM\\Software\\Microsoft\\Windows\\CurrentVersion，且该键存在 ProgramFilesDir 值",
+        "source": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProgramFilesDir",
+        "action": "构造注册表子键和值名，调用 sub_406088；该函数通过 RegOpenKeyExA、RegQueryValueExA 查询值大小并再次读取值数据到 a1 指向的内部缓冲区",
+        "sink": "sub_4061DC 的 a1 指向的内部输出对象",
+        "evidence": [
+          {
+            "location": "F-0377 sub_4061DC 原文件 L0015-L0020",
+            "observation": "构造字符串 Software\\\\Microsoft\\\\Windows\\\\CurrentVersion 和 ProgramFilesDir，并以 HKEY_LOCAL_MACHINE 及 a1 调用 sub_406088。"
+          },
+          {
+            "location": "F-0375 sub_406088 原文件 L0029-L0041",
+            "observation": "调用 RegOpenKeyExA 打开指定键，先用 RegQueryValueExA 查询数据长度，再分配/调整 a4 缓冲区并再次调用 RegQueryValueExA 读取值数据。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "材料未显示 a1 输出对象的下游使用，不能据此确认 ProgramFilesDir 最终用于复制、目录创建或注册表持久化。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "other",
+        "value": "GetSystemDirectoryA",
+        "role": "environment_probe",
+        "detection_specificity": "none",
+        "meaning": "用于获取当前系统目录的通用系统环境查询 API。",
+        "evidence": [
+          {
+            "location": "F-0368 sub_405E18 原文件 L0006-L0008",
+            "observation": "动态解析并调用 GetSystemDirectoryA，将结果写入调用者缓冲区。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "GetWindowsDirectoryA",
+        "role": "environment_probe",
+        "detection_specificity": "none",
+        "meaning": "用于获取当前 Windows 目录的通用系统环境查询 API。",
+        "evidence": [
+          {
+            "location": "F-0369 sub_405E60 原文件 L0006-L0008",
+            "observation": "动态解析并调用 GetWindowsDirectoryA，将结果写入调用者缓冲区。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProgramFilesDir",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "被读取的标准 Windows 安装目录配置值。",
+        "evidence": [
+          {
+            "location": "F-0377 sub_4061DC 原文件 L0015-L0017",
+            "observation": "明确构造 CurrentVersion 子键及 ProgramFilesDir 值名，并从 HKEY_LOCAL_MACHINE 读取。"
+          },
+          {
+            "location": "F-0375 sub_406088 原文件 L0030-L0039",
+            "observation": "打开指定注册表键并两次查询指定值，第二次将值数据读入输出缓冲区。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "CreateDirectoryA",
+        "role": "created_output",
+        "detection_specificity": "low",
+        "meaning": "用于创建由输入路径拆分出的缺失目录；具体目录名称由调用者输入决定。",
+        "evidence": [
+          {
+            "location": "F-0383 sub_406684 原文件 L0041-L0053",
+            "observation": "对拆分出的不存在路径调用 CreateDirectoryA(lpPathName, 0)。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_405EF0、sub_405F7C、sub_4061DC 和 sub_406684 的调用者分别如何使用输出路径，最终是否连接到 J04 已证明的文件复制或持久化行为？",
+        "reason": "当前源码证明了路径读取和目录创建，但未包含调用者或输出对象的后续使用。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "由 a1 传入 sub_406684 的实际目录字符串是什么，以及创建失败时上层是否采取备用路径？",
+        "reason": "函数仅显示动态输入路径和 CreateDirectoryA 返回结果，未显示具体调用参数或调用者分支。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_406684 callers",
+        "reason": "确定输入路径来源、实际安装目录及目录创建结果的上层处理。",
+        "expected_value": "将路径创建能力连接到具体文件复制/安装行为，并识别备用路径分支。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405EF0, sub_405F7C, sub_4061DC callers",
+        "reason": "确定系统目录、Windows 目录和 ProgramFilesDir 输出的最终用途。",
+        "expected_value": "判断这些环境路径是否参与 J04 的复制目标构造或其他外部副作用。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_406684 callers",
+        "targets": [
+          {
+            "identifier": "sub_406684",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要调用者源码以确定 a1 的实际路径来源、创建目录的触发场景及其与安装复制行为的连接。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0383 sub_406684 原文件 L0021-L0023",
+            "observation": "a1 被保存为输入路径并传入路径处理逻辑，但本函数未显示其调用者提供的具体值。"
+          },
+          {
+            "location": "F-0383 sub_406684 原文件 L0048-L0057",
+            "observation": "函数创建缺失目录并返回结果，具体上层用途不在当前材料中。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_405EF0/sub_405F7C/sub_4061DC callers",
+        "targets": [
+          {
+            "identifier": "sub_405EF0",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_405F7C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_4061DC",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要调用者源码以确定读取到的系统目录、Windows 目录和 ProgramFilesDir 是否被用于实际安装路径、复制目标或其他副作用。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0371 sub_405EF0 原文件 L0014-L0019",
+            "observation": "系统目录被写入 a1 指向的输出对象，但本函数未显示输出对象的后续用途。"
+          },
+          {
+            "location": "F-0372 sub_405F7C 原文件 L0014-L0019",
+            "observation": "Windows 目录被写入 a1 指向的输出对象，但本函数未显示输出对象的后续用途。"
+          },
+          {
+            "location": "F-0377 sub_4061DC 原文件 L0015-L0020",
+            "observation": "ProgramFilesDir 被读取并交给 a1 指向的输出对象，但本函数未显示其后续用途。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": false,
+    "error": "cannot replace and delete the same original item: artifacts"
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前结果中的全部源码证据 location 均使用了“F-XXXX sub_x 原文件 L... ”格式，未被当前证据校验器解析；因此 4 条核心 claim、4 个 artifact 和 2 条 material_need 实际上都没有可定位的有效证据引用。材料本身确实支持这些内容，但报告当前不可验收。",
+        "evidence": [
+          {
+            "location": "claims 0-3、artifacts 0-3、material_needs 0-1 的全部 evidence.location",
+            "observation": "evidence_reference_validation 报告 valid_segments=0，并将 18 个引用全部标为 invalid_format；例如 F-0383 sub_406684 原文件 L0028-L0057 无法解析。"
+          }
+        ],
+        "required_fix": "将所有当前材料源码引用改为可解析的原始格式，例如“F-0383 L0028-L0057”，去除函数名及“原文件”文字；保持对应 F 编号和源码行段不变，并重新核对每个 observation 与该行段一致。该修订必须覆盖 claims、artifacts、material_needs 中所有现有 evidence.location。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/*",
+              "/artifacts/*",
+              "/material_needs/*"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "将 API 名称 GetSystemDirectoryA、GetWindowsDirectoryA 和 CreateDirectoryA 作为 artifact 保存，分别标为 environment_probe 或 created_output；这些是执行的 API/动作，不是具体环境探针目标或具体创建对象。当前 detection_specificity=none/low 已降低 IOC 混淆风险，但 artifact role 与制品粒度仍不准确。",
+        "evidence": [
+          {
+            "location": "F-0368 L0006-L0008",
+            "observation": "代码动态解析并调用 GetSystemDirectoryA。"
+          },
+          {
+            "location": "F-0369 L0006-L0008",
+            "observation": "代码动态解析并调用 GetWindowsDirectoryA。"
+          },
+          {
+            "location": "F-0383 L0048-L0053",
+            "observation": "代码对缺失路径调用 CreateDirectoryA；具体目录由输入路径决定。"
+          }
+        ],
+        "required_fix": "删除这三个 API/动作型 artifact；保留相应 claim 作为行为证据即可。若需记录制品，只能在有具体路径对象时记录具体系统路径或创建出的目录，但当前材料未给出固定值，不应凭空新增 artifact。",
+        "fixes": [
+          {
+            "type": "delete_item",
+            "targets": [
+              "/artifacts/0",
+              "/artifacts/1",
+              "/artifacts/3"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖总体充分：目录逐级创建、系统/Windows 目录读取及 ProgramFilesDir 注册表读取均被报告，且未把辅助能力错误连接为 J04 的安装或持久化结果；status 与 gaps 也基本一致。必须先修复所有不可解析的证据引用，否则核心结论无法验收。另需清理 API/动作型 artifact，避免将函数名当作制品。"
+  },
+  "expected_result": null,
+  "recovered_paths": [],
+  "expected_ignored_paths": null
+}

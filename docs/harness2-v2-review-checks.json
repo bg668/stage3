@@ -1,0 +1,34 @@
+{
+  "checked_on": "2026-10-21",
+  "reference": "bg668/harness2@1cfe254",
+  "method": "isolated execution of cached fixed-source prompt/tree helpers; not a harness2 install or integration run",
+  "python": "3.14.0",
+  "checks": {
+    "native_registry_resolves_adapt_inv_dom_aggregate_and_sequential_prompts": true,
+    "native_prompts_omit_opencode_skill_tool_and_plugin_instructions": true,
+    "base_role_skills_have_valid_frontmatter_and_no_autotrigger_changes": true,
+    "new_domain_skill_autotrigger_targets_supported_systemprompt": true,
+    "native_tts_still_contains_hardcoded_script_guidance": true,
+    "benchprompts_rejects_forbidden_english_terms": true,
+    "derived_subset_manifest_passes_current_dag_validation": true
+  },
+  "example_subset": {
+    "target_jobs": [
+      "J04"
+    ],
+    "closure_jobs": [
+      "J00",
+      "J01",
+      "J04"
+    ],
+    "job_count": 3,
+    "full_sample_jobs": 16
+  },
+  "not_run": [
+    "three model-backed baseline repetitions",
+    "candidate repeat comparison",
+    "cross-task merge",
+    "Linux/Python 3.12 installation and CLI preflight",
+    "full harness2 recursion"
+  ]
+}

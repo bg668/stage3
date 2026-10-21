@@ -1,0 +1,1153 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J11.json",
+        "sha256": "d6c1b25d59dabac983bc67ec6543dc4f590f7c107224e595235063bfd72f4243"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J11/analyzer/validated_result.json",
+        "sha256": "249b3fae4d7e37fb6e871a8a3b7175d6745702b18d5d410dfbd4773d2eafea15"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J11/reviewer/validated_result.json",
+        "sha256": "60fc681e70475eb689969afe29303235889b4576526b95e60ed11ba6d1d07f7d"
+      },
+      "packet": {
+        "path": "testdata/packets/J11.md",
+        "sha256": "5a99b0ecefc759c35b8f100c21b7a868536b438b829a518d8e611b231ba36eee"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J11/reviser/validated_result.json",
+        "sha256": "524b66e93f90eac5db63ec8578e5a583e0cb89d4de72b459210de39bf4190d33"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J11/reviser/revision_scope.json",
+        "sha256": "7d384ea645e134b1dc89748d398ff0744b6a83288717c8f61461026f7de6f32b"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J11",
+  "packet_text": "# J11 Firefox 前半：定位及初始化\n任务来源：J00 的 F483；初始二跳该函数被截断，必须登记未读范围。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0483 sub_409EF8，原文件 L0001–L0274 / 共 522 行\n```text\nL0001: _DWORD *__usercall sub_409EF8@<eax>(volatile __int32 *a1@<eax>)\nL0002: {\nL0003:   char *v2; // eax\nL0004:   char *v3; // eax\nL0005:   char *v4; // eax\nL0006:   char *v5; // eax\nL0007:   char *v6; // eax\nL0008:   char *v7; // eax\nL0009:   char *v8; // eax\nL0010:   char *v9; // eax\nL0011:   FARPROC NSSBase64_DecodeBuffer; // esi\nL0012:   FARPROC PK11SDR_Decrypt; // edi\nL0013:   HANDLE ProcessHandle; // eax\nL0014:   char *lpFileName; // eax\nL0015:   char *n3; // eax\nL0016:   char *lpFileName_1; // eax\nL0017:   char *n3_1; // eax\nL0018:   char *n3_2; // eax\nL0019:   char *n3_3; // eax\nL0020:   _BYTE *v19; // eax\nL0021:   char *v20; // eax\nL0022:   _BYTE *v21; // eax\nL0023:   int v22; // eax\nL0024:   _BYTE *v23; // eax\nL0025:   int v24; // eax\nL0026:   _BYTE *v25; // eax\nL0027:   int v26; // eax\nL0028:   _BYTE *v27; // eax\nL0029:   int v28; // eax\nL0030:   char *v29; // eax\nL0031:   const char *p_nss3.dll; // [esp-14h] [ebp-26Ch] BYREF\nL0032:   const char *__Mozilla__Firefox__1; // [esp-10h] [ebp-268h]\nL0033:   struct _EXCEPTION_REGISTRATION_RECORD *ExceptionList; // [esp-Ch] [ebp-264h] BYREF\nL0034:   const char *__Mozilla__Firefox_; // [esp-8h] [ebp-260h]\nL0035:   int *v35; // [esp-4h] [ebp-25Ch]\nL0036:   void *v36; // [esp+0h] [ebp-258h]\nL0037:   int v37; // [esp+Ch] [ebp-24Ch] BYREF\nL0038:   __int32 v38; // [esp+10h] [ebp-248h] BYREF\nL0039:   __int32 v39; // [esp+14h] [ebp-244h] BYREF\nL0040:   char **ExceptionList_10; // [esp+18h] [ebp-240h] BYREF\nL0041:   int *v41; // [esp+1Ch] [ebp-23Ch] BYREF\nL0042:   char *dst__17; // [esp+20h] [ebp-238h] BYREF\nL0043:   char *p_nss3.dll_1; // [esp+24h] [ebp-234h] BYREF\nL0044:   char **ExceptionList_9; // [esp+28h] [ebp-230h] BYREF\nL0045:   char *dst__16; // [esp+2Ch] [ebp-22Ch] BYREF\nL0046:   char **ExceptionList_8; // [esp+30h] [ebp-228h] BYREF\nL0047:   int *v47; // [esp+34h] [ebp-224h] BYREF\nL0048:   char *dst__15; // [esp+38h] [ebp-220h] BYREF\nL0049:   char *v49; // [esp+3Ch] [ebp-21Ch] BYREF\nL0050:   char **ExceptionList_7; // [esp+40h] [ebp-218h] BYREF\nL0051:   int *v51; // [esp+44h] [ebp-214h] BYREF\nL0052:   char *dst__14; // [esp+48h] [ebp-210h] BYREF\nL0053:   char **ExceptionList_6; // [esp+4Ch] [ebp-20Ch] BYREF\nL0054:   int *v54; // [esp+50h] [ebp-208h] BYREF\nL0055:   char *dst__13; // [esp+54h] [ebp-204h] BYREF\nL0056:   char *v56; // [esp+58h] [ebp-200h] BYREF\nL0057:   char **ExceptionList_5; // [esp+5Ch] [ebp-1FCh] BYREF\nL0058:   int *v58; // [esp+60h] [ebp-1F8h] BYREF\nL0059:   char *dst__12; // [esp+64h] [ebp-1F4h] BYREF\nL0060:   char **ExceptionList_4; // [esp+68h] [ebp-1F0h] BYREF\nL0061:   int *v61; // [esp+6Ch] [ebp-1ECh] BYREF\nL0062:   char *dst__11; // [esp+70h] [ebp-1E8h] BYREF\nL0063:   char *v63; // [esp+74h] [ebp-1E4h] BYREF\nL0064:   char **ExceptionList_3; // [esp+78h] [ebp-1E0h] BYREF\nL0065:   int *v65; // [esp+7Ch] [ebp-1DCh] BYREF\nL0066:   char *dst__10; // [esp+80h] [ebp-1D8h] BYREF\nL0067:   char **ExceptionList_2; // [esp+84h] [ebp-1D4h] BYREF\nL0068:   int *v68; // [esp+88h] [ebp-1D0h] BYREF\nL0069:   char *dst__9; // [esp+8Ch] [ebp-1CCh] BYREF\nL0070:   char *v70; // [esp+90h] [ebp-1C8h] BYREF\nL0071:   char **ExceptionList_1; // [esp+94h] [ebp-1C4h] BYREF\nL0072:   char *dst__8; // [esp+98h] [ebp-1C0h] BYREF\nL0073:   char *dst__7; // [esp+9Ch] [ebp-1BCh] BYREF\nL0074:   char *dst__6; // [esp+A0h] [ebp-1B8h] BYREF\nL0075:   char *dst__5; // [esp+A4h] [ebp-1B4h] BYREF\nL0076:   char *dst__4; // [esp+A8h] [ebp-1B0h] BYREF\nL0077:   char *dst__3; // [esp+ACh] [ebp-1ACh] BYREF\nL0078:   char *dst__2; // [esp+B0h] [ebp-1A8h] BYREF\nL0079:   char *dst__1; // [esp+B4h] [ebp-1A4h] BYREF\nL0080:   char *dst_; // [esp+B8h] [ebp-1A0h] BYREF\nL0081:   __int32 dst; // [esp+BCh] [ebp-19Ch] BYREF\nL0082:   _DWORD v82[7]; // [esp+C0h] [ebp-198h] BYREF\nL0083:   _BYTE v83[4]; // [esp+DFh] [ebp-179h] BYREF\nL0084:   _BYTE *n3_4; // [esp+E3h] [ebp-175h]\nL0085:   int n4; // [esp+E7h] [ebp-171h]\nL0086:   CHAR v86[12]; // [esp+EBh] [ebp-16Dh] BYREF\nL0087:   CHAR ReturnedString[261]; // [esp+F7h] [ebp-161h] BYREF\nL0088:   HMODULE *v88; // [esp+1FCh] [ebp-5Ch]\nL0089:   __int32 v89; // [esp+200h] [ebp-58h] BYREF\nL0090:   int n7; // [esp+204h] [ebp-54h]\nL0091:   char **ExceptionList_11; // [esp+208h] [ebp-50h] BYREF\nL0092:   int v92; // [esp+20Ch] [ebp-4Ch]\nL0093:   char *v93; // [esp+210h] [ebp-48h] BYREF\nL0094:   __int32 v94; // [esp+214h] [ebp-44h] BYREF\nL0095:   const char *p_nss3.dll_2; // [esp+218h] [ebp-40h] BYREF\nL0096:   _BYTE *v96[2]; // [esp+21Ch] [ebp-3Ch] BYREF\nL0097:   char *v97; // [esp+224h] [ebp-34h] BYREF\nL0098:   LPVOID lpBuffer; // [esp+228h] [ebp-30h]\nL0099:   DWORD nNumberOfBytesToRead; // [esp+22Ch] [ebp-2Ch]\nL0100:   HANDLE hFile; // [esp+230h] [ebp-28h]\nL0101:   HANDLE TokenHandle[2]; // [esp+234h] [ebp-24h] BYREF\nL0102:   HMODULE hModule_1; // [esp+23Ch] [ebp-1Ch]\nL0103:   FARPROC PK11_FreeSlot; // [esp+240h] [ebp-18h]\nL0104:   void (*NSS_Shutdown)(void); // [esp+244h] [ebp-14h]\nL0105:   FARPROC PK11_Authenticate; // [esp+248h] [ebp-10h]\nL0106:   int (*PK11_GetInternalKeySlot)(void); // [esp+24Ch] [ebp-Ch]\nL0107:   FARPROC NSS_Init; // [esp+250h] [ebp-8h]\nL0108:   HMODULE hModule; // [esp+254h] [ebp-4h]\nL0109:   int savedregs; // [esp+258h] [ebp+0h] BYREF\nL0110: \nL0111:   v35 = &savedregs;\nL0112:   __Mozilla__Firefox_ = (const char *)&loc_40ABA5;\nL0113:   ExceptionList = NtCurrentTeb()->NtTib.ExceptionList;\nL0114:   __writefsdword(0, (unsigned int)&ExceptionList);\nL0115:   if ( !::ExceptionList )\nL0116:   {\nL0117:     sub_4061DC(&dst);\nL0118:     sub_401B14(&::ExceptionList, dst);\nL0119:   }\nL0120:   sub_401B14(a1, (__int32)::dst__10);\nL0121:   sub_401AC0(&ExceptionList_11);\nL0122:   sub_401E10((volatile __int32 *)&dst_, 3);\nL0123:   v2 = sub_401F48(dst_);\nL0124:   v82[0] = LoadLibraryA(v2);\nL0125:   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)::ExceptionList;\nL0126:   sub_401E10((volatile __int32 *)&dst__1, 3);\nL0127:   v3 = sub_401F48(dst__1);\nL0128:   v82[1] = LoadLibraryA(v3);\nL0129:   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)::ExceptionList;\nL0130:   sub_401E10((volatile __int32 *)&dst__2, 3);\nL0131:   v4 = sub_401F48(dst__2);\nL0132:   v82[2] = LoadLibraryA(v4);\nL0133:   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)::ExceptionList;\nL0134:   sub_401E10((volatile __int32 *)&dst__3, 3);\nL0135:   v5 = sub_401F48(dst__3);\nL0136:   v82[3] = LoadLibraryA(v5);\nL0137:   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)::ExceptionList;\nL0138:   sub_401E10((volatile __int32 *)&dst__4, 3);\nL0139:   v6 = sub_401F48(dst__4);\nL0140:   v82[4] = LoadLibraryA(v6);\nL0141:   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)::ExceptionList;\nL0142:   sub_401E10((volatile __int32 *)&dst__5, 3);\nL0143:   v7 = sub_401F48(dst__5);\nL0144:   v82[5] = LoadLibraryA(v7);\nL0145:   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)::ExceptionList;\nL0146:   sub_401E10((volatile __int32 *)&dst__6, 3);\nL0147:   v8 = sub_401F48(dst__6);\nL0148:   v82[6] = LoadLibraryA(v8);\nL0149:   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)::ExceptionList;\nL0150:   p_nss3.dll = \"nss3.dll\";\nL0151:   sub_401E10((volatile __int32 *)&dst__7, 3);\nL0152:   v9 = sub_401F48(dst__7);\nL0153:   hModule = LoadLibraryA(v9);\nL0154:   NSS_Init = GetProcAddress(hModule, \"NSS_Init\");\nL0155:   if ( NSS_Init )\nL0156:   {\nL0157:     NSSBase64_DecodeBuffer = GetProcAddress(hModule, \"NSSBase64_DecodeBuffer\");\nL0158:     if ( NSSBase64_DecodeBuffer )\nL0159:     {\nL0160:       PK11_GetInternalKeySlot = GetProcAddress(hModule, \"PK11_GetInternalKeySlot\");\nL0161:       if ( PK11_GetInternalKeySlot )\nL0162:       {\nL0163:         PK11_Authenticate = GetProcAddress(hModule, \"PK11_Authenticate\");\nL0164:         if ( PK11_Authenticate )\nL0165:         {\nL0166:           PK11SDR_Decrypt = GetProcAddress(hModule, \"PK11SDR_Decrypt\");\nL0167:           if ( PK11SDR_Decrypt )\nL0168:           {\nL0169:             NSS_Shutdown = (void (*)(void))GetProcAddress(hModule, \"NSS_Shutdown\");\nL0170:             if ( NSS_Shutdown )\nL0171:             {\nL0172:               PK11_FreeSlot = GetProcAddress(hModule, \"PK11_FreeSlot\");\nL0173:               if ( PK11_FreeSlot )\nL0174:               {\nL0175:                 hModule_1 = LoadLibraryA(\"userenv.dll\");\nL0176:                 TokenHandle[1] = GetProcAddress(hModule_1, \"GetUserProfileDirectoryA\");\nL0177:                 ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)TokenHandle;\nL0178:                 ProcessHandle = GetCurrentProcess();\nL0179:                 OpenProcessToken(ProcessHandle, 8u, (PHANDLE)&ExceptionList->Next);\nL0180:                 sub_405BEC((int)&ExceptionList_1);\nL0181:                 ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_1;\nL0182:                 sub_401E10((volatile __int32 *)&dst__8, 3);\nL0183:                 lpFileName = sub_401F48(dst__8);\nL0184:                 GetPrivateProfileStringA(\"Profile0\", \"Path\", Default, ReturnedString, 0x104u, lpFileName);\nL0185:                 sub_405BEC((int)&v68);\nL0186:                 v35 = v68;\nL0187:                 __Mozilla__Firefox_ = \"\\\\Mozilla\\\\Firefox\\\\\";\nL0188:                 sub_401D24((char **)&ExceptionList_2, (unsigned int)ReturnedString, 261);\nL0189:                 ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_2;\nL0190:                 __Mozilla__Firefox__1 = \"\\\\signons3.txt\";\nL0191:                 sub_401E10((volatile __int32 *)&dst__9, 4);\nL0192:                 n3 = sub_401F48(dst__9);\nL0193:                 sub_401CAC(&v70, n3);\nL0194:                 if ( (unsigned __int8)sub_405D04(v70) == 1 )\nL0195:                 {\nL0196:                   sub_405BEC((int)&v65);\nL0197:                   v35 = v65;\nL0198:                   __Mozilla__Firefox_ = \"\\\\Mozilla\\\\Firefox\\\\\";\nL0199:                   sub_401D24((char **)&ExceptionList_3, (unsigned int)ReturnedString, 261);\nL0200:                   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_3;\nL0201:                   __Mozilla__Firefox__1 = \"\\\\signons3.txt\";\nL0202:                   sub_401E10((volatile __int32 *)&dst__10, 4);\nL0203:                   lpFileName_1 = sub_401F48(dst__10);\nL0204:                 }\nL0205:                 else\nL0206:                 {\nL0207:                   sub_405BEC((int)&v61);\nL0208:                   v35 = v61;\nL0209:                   __Mozilla__Firefox_ = \"\\\\Mozilla\\\\Firefox\\\\\";\nL0210:                   sub_401D24((char **)&ExceptionList_4, (unsigned int)ReturnedString, 261);\nL0211:                   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_4;\nL0212:                   __Mozilla__Firefox__1 = \"\\\\signons2.txt\";\nL0213:                   sub_401E10((volatile __int32 *)&dst__11, 4);\nL0214:                   n3_1 = sub_401F48(dst__11);\nL0215:                   sub_401CAC(&v63, n3_1);\nL0216:                   if ( (unsigned __int8)sub_405D04(v63) == 1 )\nL0217:                   {\nL0218:                     sub_405BEC((int)&v58);\nL0219:                     v35 = v58;\nL0220:                     __Mozilla__Firefox_ = \"\\\\Mozilla\\\\Firefox\\\\\";\nL0221:                     sub_401D24((char **)&ExceptionList_5, (unsigned int)ReturnedString, 261);\nL0222:                     ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_5;\nL0223:                     __Mozilla__Firefox__1 = \"\\\\signons2.txt\";\nL0224:                     sub_401E10((volatile __int32 *)&dst__12, 4);\nL0225:                     lpFileName_1 = sub_401F48(dst__12);\nL0226:                   }\nL0227:                   else\nL0228:                   {\nL0229:                     sub_405BEC((int)&v54);\nL0230:                     v35 = v54;\nL0231:                     __Mozilla__Firefox_ = \"\\\\Mozilla\\\\Firefox\\\\\";\nL0232:                     sub_401D24((char **)&ExceptionList_6, (unsigned int)ReturnedString, 261);\nL0233:                     ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_6;\nL0234:                     __Mozilla__Firefox__1 = \"\\\\signons1.txt\";\nL0235:                     sub_401E10((volatile __int32 *)&dst__13, 4);\nL0236:                     n3_2 = sub_401F48(dst__13);\nL0237:                     sub_401CAC(&v56, n3_2);\nL0238:                     if ( (unsigned __int8)sub_405D04(v56) == 1 )\nL0239:                     {\nL0240:                       sub_405BEC((int)&v51);\nL0241:                       v35 = v51;\nL0242:                       __Mozilla__Firefox_ = \"\\\\Mozilla\\\\Firefox\\\\\";\nL0243:                       sub_401D24((char **)&ExceptionList_7, (unsigned int)ReturnedString, 261);\nL0244:                       ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_7;\nL0245:                       __Mozilla__Firefox__1 = \"\\\\signons1.txt\";\nL0246:                       sub_401E10((volatile __int32 *)&dst__14, 4);\nL0247:                       lpFileName_1 = sub_401F48(dst__14);\nL0248:                     }\nL0249:                     else\nL0250:                     {\nL0251:                       sub_405BEC((int)&v47);\nL0252:                       v35 = v47;\nL0253:                       __Mozilla__Firefox_ = \"\\\\Mozilla\\\\Firefox\\\\\";\nL0254:                       sub_401D24((char **)&ExceptionList_8, (unsigned int)ReturnedString, 261);\nL0255:                       ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_8;\nL0256:                       __Mozilla__Firefox__1 = \"\\\\signons.txt\";\nL0257:                       sub_401E10((volatile __int32 *)&dst__15, 4);\nL0258:                       n3_3 = sub_401F48(dst__15);\nL0259:                       sub_401CAC(&v49, n3_3);\nL0260:                       if ( (unsigned __int8)sub_405D04(v49) != 1 )\nL0261:                       {\nL0262:                         sub_401AC0(a1);\nL0263:                         goto LABEL_59;\nL0264:                       }\nL0265:                       sub_405BEC((int)&ExceptionList_9);\nL0266:                       ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_9;\nL0267:                       __Mozilla__Firefox__1 = \"\\\\Mozilla\\\\Firefox\\\\\";\nL0268:                       sub_401D24(&p_nss3.dll_1, (unsigned int)ReturnedString, 261);\nL0269:                       p_nss3.dll = p_nss3.dll_1;\nL0270:                       sub_401E10((volatile __int32 *)&dst__16, 4);\nL0271:                       lpFileName_1 = sub_401F48(dst__16);\nL0272:                     }\nL0273:                   }\nL0274:                 }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包提供了 Firefox 数据处理例程的前半段：程序加载并动态解析 NSS/PK11 相关组件，读取 Firefox 配置中的 Profile0\\Path，并按候选版本构造 signons3.txt、signons2.txt、signons1.txt 或 signons.txt 路径，依据辅助函数结果选择后续处理路径。源码在候选路径选择后截断，因此尚不能确认是否读取、解密或输出凭据数据；该例程最终返回值及与 J00 的 FIREFOX.abc 写入之间的完整关系仍待补料。",
+    "claims": [
+      {
+        "behavior": "在成功加载所需组件并解析 NSS/PK11 导出函数后，例程从 Firefox 配置读取配置文件中的 Profile0\\Path，并构造多个 Firefox signons 数据库候选路径，按辅助检查结果选择可用候选路径供后续处理。",
+        "condition": "LoadLibraryA/GetProcAddress 对 NSS 相关函数以及 userenv.dll 的 GetUserProfileDirectoryA 成功；随后取得配置文件路径并进入候选路径检查流程。",
+        "source": "userenv.dll 的 GetUserProfileDirectoryA 地址、当前用户配置相关路径，以及 GetPrivateProfileStringA(\"Profile0\", \"Path\", ...) 读取的 Firefox Profile0\\Path 值。",
+        "action": "动态加载并解析 NSS_Init、NSSBase64_DecodeBuffer、PK11_GetInternalKeySlot、PK11_Authenticate、PK11SDR_Decrypt、NSS_Shutdown、PK11_FreeSlot；读取 Profile0\\Path 后依次拼接 Firefox 目录与 signons3.txt、signons2.txt、signons1.txt、signons.txt，并调用 sub_405D04 对候选路径结果进行分支选择。",
+        "sink": "选中的 signons 文件路径被保存到后续处理使用的 lpFileName_1；当前可见范围未显示该路径之后的读取、解密或输出。",
+        "evidence": [
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0150-L0175",
+            "observation": "代码对 nss3.dll 及 NSS/PK11 相关导出函数逐项调用 GetProcAddress，并在全部成功后加载 userenv.dll。"
+          },
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0176-L0188",
+            "observation": "代码获取 GetUserProfileDirectoryA 地址，并通过 GetPrivateProfileStringA(\"Profile0\", \"Path\", Default, ReturnedString, 0x104u, lpFileName) 读取配置中的 Profile0 Path，随后准备追加 Firefox 路径。"
+          },
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0187-L0216",
+            "observation": "代码构造 \\Mozilla\\Firefox\\ 与 \\signons3.txt、\\signons2.txt 的路径，并调用 sub_405D04 根据结果选择分支。"
+          },
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0229-L0271",
+            "observation": "代码继续构造 \\signons1.txt 与 \\signons.txt 候选路径；若检查成功，将候选路径转换后赋给 lpFileName_1。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_405D04 的实现不在本包内，因此这里仅确认候选路径构造及基于其返回值的分支，不能单独确认该函数是否执行文件存在性检查或读取。",
+          "F-0483 在原文件 L0274 处截断，尚未看到 lpFileName_1 的后续使用、NSS 解密调用、返回数据形成或失败处理。",
+          "虽然已解析 PK11SDR_Decrypt 等函数地址，但当前范围没有直接证据证明解密已执行或成功。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons3.txt",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0187-L0194",
+            "observation": "代码将 ReturnedString 与 \\Mozilla\\Firefox\\、\\signons3.txt 拼接，并把结果传给 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons2.txt",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0196-L0216",
+            "observation": "在 signons3.txt 分支未满足时，代码构造 \\signons2.txt 并调用 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons1.txt",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0218-L0238",
+            "observation": "在前一候选未满足时，代码构造 \\signons1.txt 并调用 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons.txt",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "Firefox 更早版本凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0240-L0260",
+            "observation": "代码构造 \\signons.txt，并在 sub_405D04 返回不满足时跳转失败路径，否则继续保存该候选路径。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "nss3.dll",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "被动态加载的 NSS 组件名称；支持 Firefox 凭据处理能力的环境依赖线索，但不是单独的感染 IOC。",
+        "evidence": [
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0150-L0154",
+            "observation": "代码将 nss3.dll 作为模块名称并调用 LoadLibraryA，随后解析 NSS_Init。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Profile0 / Path",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "Firefox 配置解析键，用于取得 Profile0 的路径。",
+        "evidence": [
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0182-L0185",
+            "observation": "GetPrivateProfileStringA 使用节名 Profile0 和键名 Path 读取 ReturnedString。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "F-0483 截断后的 L0275-L0522 是否调用文件读取、NSS 解密并生成返回数据？",
+        "reason": "当前包只覆盖例程前半段；候选路径选择之后的 source→action→sink 关系不可见。",
+        "scope": "packet_internal",
+        "impact": "critical"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_405D04 对候选 signons 路径执行的是存在性检查、文件读取还是其他操作？",
+        "reason": "该辅助函数的实现未包含在当前材料中，无法把候选路径构造升级为已确认的文件访问。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_409EF8 的返回值如何与 J00 已验证的 FIREFOX.abc 输出绑定？",
+        "reason": "J00 仅验证调用及写出绑定；本包尚未显示 Firefox 例程的最终返回数据。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "F-0483 sub_409EF8 L0275-L0522",
+        "reason": "补齐候选 signons 路径后的读取、解密、数据整理和返回逻辑。",
+        "expected_value": "确认 Firefox 凭据数据的 source→action→sink，并闭合到 FIREFOX.abc 的返回值。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405D04",
+        "reason": "确定候选 signons 路径检查的实际语义。",
+        "expected_value": "区分路径存在性探测、文件读取或其他副作用。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "F-0483 sub_409EF8",
+        "targets": [
+          {
+            "identifier": "sub_409EF8",
+            "start_line": 275,
+            "end_line": 522
+          }
+        ],
+        "reason": "需要读取该例程截断后的原始代码，以确认选定 signons 文件的后续读取、NSS 解密、返回值形成及最终副作用。",
+        "impact": "critical",
+        "evidence": [
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0260-L0274",
+            "observation": "代码在选择 signons.txt 候选并赋值 lpFileName_1 后，材料于 L0274 截断；后续行为不可见。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_405D04",
+        "targets": [
+          {
+            "identifier": "sub_405D04",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认对 signons 候选路径的检查是否实际访问文件，以及其返回值含义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0192-L0194",
+            "observation": "signons3.txt 候选路径被传给 sub_405D04，随后依据其返回值选择分支。"
+          },
+          {
+            "location": "F-0483 sub_409EF8 原文件 L0214-L0216",
+            "observation": "signons2.txt 候选路径同样被传给 sub_405D04。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的全部 claim、artifact 和 material_need 证据 location 都写成了“F-0483 sub_409EF8 原文件 L...”，不符合本包要求的可解析源码引用格式；验证结果显示 13 个引用全部 invalid_format。因此现有核心结论虽大体受材料支持，但证据无法被定位验收。",
+        "evidence": [
+          {
+            "location": "F-0483 L0001-L0274",
+            "observation": "当前材料明确标识源码材料为 F-0483，函数为 sub_409EF8，且提供原始行号 L0001-L0274。"
+          },
+          {
+            "location": "evidence_reference_validation",
+            "observation": "valid_segments=0，invalid_segments=13；claim、artifact 和 material_need 的所有引用均被标记为 invalid_format。"
+          }
+        ],
+        "required_fix": "仅将现有 evidence.location 规范化为可解析的“F-0483 Lx-Ly”格式，并保持每个 location 对应的原始行段和 observation 不变；不得借此扩大证据范围或改变结论。所有 claim、artifact、material_need 的证据引用都必须完成修正。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_specificity_error",
+        "description": "若保留这些 artifact，detection_specificity 有轻微偏高或 role 不准确之处：四个 signons 文件名只是 Firefox 候选数据路径，当前包甚至未确认实际读取，作为检测制品更适合 low 而非 medium；“Profile0 / Path”是配置解析内部键，按规则应为 none；nss3.dll 是动态加载的组件名，不是 read_source，role 更适合 other。",
+        "evidence": [
+          {
+            "location": "F-0483 L0187-L0271",
+            "observation": "代码构造 signons3.txt、signons2.txt、signons1.txt、signons.txt 候选路径并交给 sub_405D04，但当前范围未证明实际读取。"
+          },
+          {
+            "location": "F-0483 L0150-L0175",
+            "observation": "代码加载 nss3.dll 并解析 NSS/PK11 导出函数。"
+          },
+          {
+            "location": "F-0483 L0182-L0185",
+            "observation": "GetPrivateProfileStringA 使用 Profile0 和 Path 读取配置键。"
+          }
+        ],
+        "required_fix": "将 artifacts/0-3 的 detection_specificity 调整为 low；将 artifact/5 的 detection_specificity 调整为 none；将 artifact/4 的 role 从 read_source 调整为 other（或删除该低价值制品）。保持其 meaning 与现有限制，不得把候选路径升级为已确认文件读取。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/3/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/4/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/5/detection_specificity"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖基本正确：Analyzer 已报告当前包可见的 NSS/PK11 动态解析、Firefox Profile0\\Path 读取、signons 候选路径选择，并保留了截断、sub_405D04 语义及 FIREFOX.abc 闭合关系的缺口，没有把未见的读取/解密/输出写成 confirmed。主要必须修复的是全部证据引用格式失效；另有少量 artifact role/detection_specificity 需要校准。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的全部 claim、artifact 和 material_need 证据 location 都写成了“F-0483 sub_409EF8 原文件 L...”，不符合本包要求的可解析源码引用格式；验证结果显示 13 个引用全部 invalid_format。因此现有核心结论虽大体受材料支持，但证据无法被定位验收。",
+        "evidence": [
+          {
+            "location": "F-0483 L0001-L0274",
+            "observation": "当前材料明确标识源码材料为 F-0483，函数为 sub_409EF8，且提供原始行号 L0001-L0274。"
+          },
+          {
+            "location": "evidence_reference_validation",
+            "observation": "valid_segments=0，invalid_segments=13；claim、artifact 和 material_need 的所有引用均被标记为 invalid_format。"
+          }
+        ],
+        "required_fix": "仅将现有 evidence.location 规范化为可解析的“F-0483 Lx-Ly”格式，并保持每个 location 对应的原始行段和 observation 不变；不得借此扩大证据范围或改变结论。所有 claim、artifact、material_need 的证据引用都必须完成修正。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_specificity_error",
+        "description": "若保留这些 artifact，detection_specificity 有轻微偏高或 role 不准确之处：四个 signons 文件名只是 Firefox 候选数据路径，当前包甚至未确认实际读取，作为检测制品更适合 low 而非 medium；“Profile0 / Path”是配置解析内部键，按规则应为 none；nss3.dll 是动态加载的组件名，不是 read_source，role 更适合 other。",
+        "evidence": [
+          {
+            "location": "F-0483 L0187-L0271",
+            "observation": "代码构造 signons3.txt、signons2.txt、signons1.txt、signons.txt 候选路径并交给 sub_405D04，但当前范围未证明实际读取。"
+          },
+          {
+            "location": "F-0483 L0150-L0175",
+            "observation": "代码加载 nss3.dll 并解析 NSS/PK11 导出函数。"
+          },
+          {
+            "location": "F-0483 L0182-L0185",
+            "observation": "GetPrivateProfileStringA 使用 Profile0 和 Path 读取配置键。"
+          }
+        ],
+        "required_fix": "将 artifacts/0-3 的 detection_specificity 调整为 low；将 artifact/5 的 detection_specificity 调整为 none；将 artifact/4 的 role 从 read_source 调整为 other（或删除该低价值制品）。保持其 meaning 与现有限制，不得把候选路径升级为已确认文件读取。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/3/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/4/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/5/detection_specificity"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖基本正确：Analyzer 已报告当前包可见的 NSS/PK11 动态解析、Firefox Profile0\\Path 读取、signons 候选路径选择，并保留了截断、sub_405D04 语义及 FIREFOX.abc 闭合关系的缺口，没有把未见的读取/解密/输出写成 confirmed。主要必须修复的是全部证据引用格式失效；另有少量 artifact role/detection_specificity 需要校准。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包提供了 Firefox 数据处理例程的前半段：程序加载并动态解析 NSS/PK11 相关组件，读取 Firefox 配置中的 Profile0\\Path，并按候选版本构造 signons3.txt、signons2.txt、signons1.txt 或 signons.txt 路径，依据辅助函数结果选择后续处理路径。源码在候选路径选择后截断，因此尚不能确认是否读取、解密或输出凭据数据；该例程最终返回值及与 J00 的 FIREFOX.abc 写入之间的完整关系仍待补料。",
+    "claims": [
+      {
+        "behavior": "在成功加载所需组件并解析 NSS/PK11 导出函数后，例程从 Firefox 配置读取配置文件中的 Profile0\\Path，并构造多个 Firefox signons 数据库候选路径，按辅助检查结果选择可用候选路径供后续处理。",
+        "condition": "LoadLibraryA/GetProcAddress 对 NSS 相关函数以及 userenv.dll 的 GetUserProfileDirectoryA 成功；随后取得配置文件路径并进入候选路径检查流程。",
+        "source": "userenv.dll 的 GetUserProfileDirectoryA 地址、当前用户配置相关路径，以及 GetPrivateProfileStringA(\"Profile0\", \"Path\", ...) 读取的 Firefox Profile0\\Path 值。",
+        "action": "动态加载并解析 NSS_Init、NSSBase64_DecodeBuffer、PK11_GetInternalKeySlot、PK11_Authenticate、PK11SDR_Decrypt、NSS_Shutdown、PK11_FreeSlot；读取 Profile0\\Path 后依次拼接 Firefox 目录与 signons3.txt、signons2.txt、signons1.txt、signons.txt，并调用 sub_405D04 对候选路径结果进行分支选择。",
+        "sink": "选中的 signons 文件路径被保存到后续处理使用的 lpFileName_1；当前可见范围未显示该路径之后的读取、解密或输出。",
+        "evidence": [
+          {
+            "location": "F-0483 L0150-L0175",
+            "observation": "代码对 nss3.dll 及 NSS/PK11 相关导出函数逐项调用 GetProcAddress，并在全部成功后加载 userenv.dll。"
+          },
+          {
+            "location": "F-0483 L0176-L0188",
+            "observation": "代码获取 GetUserProfileDirectoryA 地址，并通过 GetPrivateProfileStringA(\"Profile0\", \"Path\", Default, ReturnedString, 0x104u, lpFileName) 读取配置中的 Profile0 Path，随后准备追加 Firefox 路径。"
+          },
+          {
+            "location": "F-0483 L0187-L0216",
+            "observation": "代码构造 \\Mozilla\\Firefox\\ 与 \\signons3.txt、\\signons2.txt 的路径，并调用 sub_405D04 根据结果选择分支。"
+          },
+          {
+            "location": "F-0483 L0229-L0271",
+            "observation": "代码继续构造 \\signons1.txt 与 \\signons.txt 候选路径；若检查成功，将候选路径转换后赋给 lpFileName_1。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_405D04 的实现不在本包内，因此这里仅确认候选路径构造及基于其返回值的分支，不能单独确认该函数是否执行文件存在性检查或读取。",
+          "F-0483 在原文件 L0274 处截断，尚未看到 lpFileName_1 的后续使用、NSS 解密调用、返回数据形成或失败处理。",
+          "虽然已解析 PK11SDR_Decrypt 等函数地址，但当前范围没有直接证据证明解密已执行或成功。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons3.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0187-L0194",
+            "observation": "代码将 ReturnedString 与 \\Mozilla\\Firefox\\、\\signons3.txt 拼接，并把结果传给 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons2.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0196-L0216",
+            "observation": "在 signons3.txt 分支未满足时，代码构造 \\signons2.txt 并调用 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons1.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0218-L0238",
+            "observation": "在前一候选未满足时，代码构造 \\signons1.txt 并调用 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 更早版本凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0240-L0260",
+            "observation": "代码构造 \\signons.txt，并在 sub_405D04 返回不满足时跳转失败路径，否则继续保存该候选路径。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "nss3.dll",
+        "role": "other",
+        "detection_specificity": "low",
+        "meaning": "被动态加载的 NSS 组件名称；支持 Firefox 凭据处理能力的环境依赖线索，但不是单独的感染 IOC。",
+        "evidence": [
+          {
+            "location": "F-0483 L0150-L0154",
+            "observation": "代码将 nss3.dll 作为模块名称并调用 LoadLibraryA，随后解析 NSS_Init。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Profile0 / Path",
+        "role": "parser_marker",
+        "detection_specificity": "none",
+        "meaning": "Firefox 配置解析键，用于取得 Profile0 的路径。",
+        "evidence": [
+          {
+            "location": "F-0483 L0182-L0185",
+            "observation": "GetPrivateProfileStringA 使用节名 Profile0 和键名 Path 读取 ReturnedString。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "F-0483 截断后的 L0275-L0522 是否调用文件读取、NSS 解密并生成返回数据？",
+        "reason": "当前包只覆盖例程前半段；候选路径选择之后的 source→action→sink 关系不可见。",
+        "scope": "packet_internal",
+        "impact": "critical"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_405D04 对候选 signons 路径执行的是存在性检查、文件读取还是其他操作？",
+        "reason": "该辅助函数的实现未包含在当前材料中，无法把候选路径构造升级为已确认的文件访问。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_409EF8 的返回值如何与 J00 已验证的 FIREFOX.abc 输出绑定？",
+        "reason": "J00 仅验证调用及写出绑定；本包尚未显示 Firefox 例程的最终返回数据。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "F-0483 sub_409EF8 L0275-L0522",
+        "reason": "补齐候选 signons 路径后的读取、解密、数据整理和返回逻辑。",
+        "expected_value": "确认 Firefox 凭据数据的 source→action→sink，并闭合到 FIREFOX.abc 的返回值。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405D04",
+        "reason": "确定候选 signons 路径检查的实际语义。",
+        "expected_value": "区分路径存在性探测、文件读取或其他副作用。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "F-0483 sub_409EF8",
+        "targets": [
+          {
+            "identifier": "sub_409EF8",
+            "start_line": 275,
+            "end_line": 522
+          }
+        ],
+        "reason": "需要读取该例程截断后的原始代码，以确认选定 signons 文件的后续读取、NSS 解密、返回值形成及最终副作用。",
+        "impact": "critical",
+        "evidence": [
+          {
+            "location": "F-0483 L0260-L0274",
+            "observation": "代码在选择 signons.txt 候选并赋值 lpFileName_1 后，材料于 L0274 截断；后续行为不可见。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_405D04",
+        "targets": [
+          {
+            "identifier": "sub_405D04",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认对 signons 候选路径的检查是否实际访问文件，以及其返回值含义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0192-L0194",
+            "observation": "signons3.txt 候选路径被传给 sub_405D04，随后依据其返回值选择分支。"
+          },
+          {
+            "location": "F-0483 L0214-L0216",
+            "observation": "signons2.txt 候选路径同样被传给 sub_405D04。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包提供了 Firefox 数据处理例程的前半段：程序加载并动态解析 NSS/PK11 相关组件，读取 Firefox 配置中的 Profile0\\Path，并按候选版本构造 signons3.txt、signons2.txt、signons1.txt 或 signons.txt 路径，依据辅助函数结果选择后续处理路径。源码在候选路径选择后截断，因此尚不能确认是否读取、解密或输出凭据数据；该例程最终返回值及与 J00 的 FIREFOX.abc 写入之间的完整关系仍待补料。",
+    "claims": [
+      {
+        "behavior": "在成功加载所需组件并解析 NSS/PK11 导出函数后，例程从 Firefox 配置读取配置文件中的 Profile0\\Path，并构造多个 Firefox signons 数据库候选路径，按辅助检查结果选择可用候选路径供后续处理。",
+        "condition": "LoadLibraryA/GetProcAddress 对 NSS 相关函数以及 userenv.dll 的 GetUserProfileDirectoryA 成功；随后取得配置文件路径并进入候选路径检查流程。",
+        "source": "userenv.dll 的 GetUserProfileDirectoryA 地址、当前用户配置相关路径，以及 GetPrivateProfileStringA(\"Profile0\", \"Path\", ...) 读取的 Firefox Profile0\\Path 值。",
+        "action": "动态加载并解析 NSS_Init、NSSBase64_DecodeBuffer、PK11_GetInternalKeySlot、PK11_Authenticate、PK11SDR_Decrypt、NSS_Shutdown、PK11_FreeSlot；读取 Profile0\\Path 后依次拼接 Firefox 目录与 signons3.txt、signons2.txt、signons1.txt、signons.txt，并调用 sub_405D04 对候选路径结果进行分支选择。",
+        "sink": "选中的 signons 文件路径被保存到后续处理使用的 lpFileName_1；当前可见范围未显示该路径之后的读取、解密或输出。",
+        "evidence": [
+          {
+            "location": "F-0483 L0150-L0175",
+            "observation": "代码对 nss3.dll 及 NSS/PK11 相关导出函数逐项调用 GetProcAddress，并在全部成功后加载 userenv.dll。"
+          },
+          {
+            "location": "F-0483 L0176-L0188",
+            "observation": "代码获取 GetUserProfileDirectoryA 地址，并通过 GetPrivateProfileStringA(\"Profile0\", \"Path\", Default, ReturnedString, 0x104u, lpFileName) 读取配置中的 Profile0 Path，随后准备追加 Firefox 路径。"
+          },
+          {
+            "location": "F-0483 L0187-L0216",
+            "observation": "代码构造 \\Mozilla\\Firefox\\ 与 \\signons3.txt、\\signons2.txt 的路径，并调用 sub_405D04 根据结果选择分支。"
+          },
+          {
+            "location": "F-0483 L0229-L0271",
+            "observation": "代码继续构造 \\signons1.txt 与 \\signons.txt 候选路径；若检查成功，将候选路径转换后赋给 lpFileName_1。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_405D04 的实现不在本包内，因此这里仅确认候选路径构造及基于其返回值的分支，不能单独确认该函数是否执行文件存在性检查或读取。",
+          "F-0483 在原文件 L0274 处截断，尚未看到 lpFileName_1 的后续使用、NSS 解密调用、返回数据形成或失败处理。",
+          "虽然已解析 PK11SDR_Decrypt 等函数地址，但当前范围没有直接证据证明解密已执行或成功。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons3.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0187-L0194",
+            "observation": "代码将 ReturnedString 与 \\Mozilla\\Firefox\\、\\signons3.txt 拼接，并把结果传给 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons2.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0196-L0216",
+            "observation": "在 signons3.txt 分支未满足时，代码构造 \\signons2.txt 并调用 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons1.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0218-L0238",
+            "observation": "在前一候选未满足时，代码构造 \\signons1.txt 并调用 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 更早版本凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0240-L0260",
+            "observation": "代码构造 \\signons.txt，并在 sub_405D04 返回不满足时跳转失败路径，否则继续保存该候选路径。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "nss3.dll",
+        "role": "other",
+        "detection_specificity": "low",
+        "meaning": "被动态加载的 NSS 组件名称；支持 Firefox 凭据处理能力的环境依赖线索，但不是单独的感染 IOC。",
+        "evidence": [
+          {
+            "location": "F-0483 L0150-L0154",
+            "observation": "代码将 nss3.dll 作为模块名称并调用 LoadLibraryA，随后解析 NSS_Init。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Profile0 / Path",
+        "role": "parser_marker",
+        "detection_specificity": "none",
+        "meaning": "Firefox 配置解析键，用于取得 Profile0 的路径。",
+        "evidence": [
+          {
+            "location": "F-0483 L0182-L0185",
+            "observation": "GetPrivateProfileStringA 使用节名 Profile0 和键名 Path 读取 ReturnedString。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "F-0483 截断后的 L0275-L0522 是否调用文件读取、NSS 解密并生成返回数据？",
+        "reason": "当前包只覆盖例程前半段；候选路径选择之后的 source→action→sink 关系不可见。",
+        "scope": "packet_internal",
+        "impact": "critical"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_405D04 对候选 signons 路径执行的是存在性检查、文件读取还是其他操作？",
+        "reason": "该辅助函数的实现未包含在当前材料中，无法把候选路径构造升级为已确认的文件访问。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_409EF8 的返回值如何与 J00 已验证的 FIREFOX.abc 输出绑定？",
+        "reason": "J00 仅验证调用及写出绑定；本包尚未显示 Firefox 例程的最终返回数据。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "F-0483 sub_409EF8 L0275-L0522",
+        "reason": "补齐候选 signons 路径后的读取、解密、数据整理和返回逻辑。",
+        "expected_value": "确认 Firefox 凭据数据的 source→action→sink，并闭合到 FIREFOX.abc 的返回值。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405D04",
+        "reason": "确定候选 signons 路径检查的实际语义。",
+        "expected_value": "区分路径存在性探测、文件读取或其他副作用。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "F-0483 sub_409EF8",
+        "targets": [
+          {
+            "identifier": "sub_409EF8",
+            "start_line": 275,
+            "end_line": 522
+          }
+        ],
+        "reason": "需要读取该例程截断后的原始代码，以确认选定 signons 文件的后续读取、NSS 解密、返回值形成及最终副作用。",
+        "impact": "critical",
+        "evidence": [
+          {
+            "location": "F-0483 L0260-L0274",
+            "observation": "代码在选择 signons.txt 候选并赋值 lpFileName_1 后，材料于 L0274 截断；后续行为不可见。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_405D04",
+        "targets": [
+          {
+            "identifier": "sub_405D04",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认对 signons 候选路径的检查是否实际访问文件，以及其返回值含义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0192-L0194",
+            "observation": "signons3.txt 候选路径被传给 sub_405D04，随后依据其返回值选择分支。"
+          },
+          {
+            "location": "F-0483 L0214-L0216",
+            "observation": "signons2.txt 候选路径同样被传给 sub_405D04。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/detection_specificity",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/detection_specificity",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/detection_specificity",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/3/detection_specificity",
+      "/artifacts/3/evidence/0/location",
+      "/artifacts/4/evidence/0/location",
+      "/artifacts/4/role",
+      "/artifacts/5/detection_specificity",
+      "/artifacts/5/evidence/0/location",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/0/evidence/3/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/1/evidence/1/location"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [],
+    "applied_paths": [
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/0/evidence/3/location",
+      "/artifacts/0/detection_specificity",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/detection_specificity",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/detection_specificity",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/3/detection_specificity",
+      "/artifacts/3/evidence/0/location",
+      "/artifacts/4/role",
+      "/artifacts/4/evidence/0/location",
+      "/artifacts/5/detection_specificity",
+      "/artifacts/5/evidence/0/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/1/evidence/1/location"
+    ],
+    "ignored_paths": [],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的全部 claim、artifact 和 material_need 证据 location 都写成了“F-0483 sub_409EF8 原文件 L...”，不符合本包要求的可解析源码引用格式；验证结果显示 13 个引用全部 invalid_format。因此现有核心结论虽大体受材料支持，但证据无法被定位验收。",
+        "evidence": [
+          {
+            "location": "F-0483 L0001-L0274",
+            "observation": "当前材料明确标识源码材料为 F-0483，函数为 sub_409EF8，且提供原始行号 L0001-L0274。"
+          },
+          {
+            "location": "evidence_reference_validation",
+            "observation": "valid_segments=0，invalid_segments=13；claim、artifact 和 material_need 的所有引用均被标记为 invalid_format。"
+          }
+        ],
+        "required_fix": "仅将现有 evidence.location 规范化为可解析的“F-0483 Lx-Ly”格式，并保持每个 location 对应的原始行段和 observation 不变；不得借此扩大证据范围或改变结论。所有 claim、artifact、material_need 的证据引用都必须完成修正。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/*",
+              "/artifacts/*",
+              "/material_needs/*"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_specificity_error",
+        "description": "若保留这些 artifact，detection_specificity 有轻微偏高或 role 不准确之处：四个 signons 文件名只是 Firefox 候选数据路径，当前包甚至未确认实际读取，作为检测制品更适合 low 而非 medium；“Profile0 / Path”是配置解析内部键，按规则应为 none；nss3.dll 是动态加载的组件名，不是 read_source，role 更适合 other。",
+        "evidence": [
+          {
+            "location": "F-0483 L0187-L0271",
+            "observation": "代码构造 signons3.txt、signons2.txt、signons1.txt、signons.txt 候选路径并交给 sub_405D04，但当前范围未证明实际读取。"
+          },
+          {
+            "location": "F-0483 L0150-L0175",
+            "observation": "代码加载 nss3.dll 并解析 NSS/PK11 导出函数。"
+          },
+          {
+            "location": "F-0483 L0182-L0185",
+            "observation": "GetPrivateProfileStringA 使用 Profile0 和 Path 读取配置键。"
+          }
+        ],
+        "required_fix": "将 artifacts/0-3 的 detection_specificity 调整为 low；将 artifact/5 的 detection_specificity 调整为 none；将 artifact/4 的 role 从 read_source 调整为 other（或删除该低价值制品）。保持其 meaning 与现有限制，不得把候选路径升级为已确认文件读取。",
+        "fixes": [
+          {
+            "type": "artifact_classification",
+            "targets": [
+              "/artifacts/0",
+              "/artifacts/1",
+              "/artifacts/2",
+              "/artifacts/3",
+              "/artifacts/4",
+              "/artifacts/5"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖基本正确：Analyzer 已报告当前包可见的 NSS/PK11 动态解析、Firefox Profile0\\Path 读取、signons 候选路径选择，并保留了截断、sub_405D04 语义及 FIREFOX.abc 闭合关系的缺口，没有把未见的读取/解密/输出写成 confirmed。主要必须修复的是全部证据引用格式失效；另有少量 artifact role/detection_specificity 需要校准。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包提供了 Firefox 数据处理例程的前半段：程序加载并动态解析 NSS/PK11 相关组件，读取 Firefox 配置中的 Profile0\\Path，并按候选版本构造 signons3.txt、signons2.txt、signons1.txt 或 signons.txt 路径，依据辅助函数结果选择后续处理路径。源码在候选路径选择后截断，因此尚不能确认是否读取、解密或输出凭据数据；该例程最终返回值及与 J00 的 FIREFOX.abc 写入之间的完整关系仍待补料。",
+    "claims": [
+      {
+        "behavior": "在成功加载所需组件并解析 NSS/PK11 导出函数后，例程从 Firefox 配置读取配置文件中的 Profile0\\Path，并构造多个 Firefox signons 数据库候选路径，按辅助检查结果选择可用候选路径供后续处理。",
+        "condition": "LoadLibraryA/GetProcAddress 对 NSS 相关函数以及 userenv.dll 的 GetUserProfileDirectoryA 成功；随后取得配置文件路径并进入候选路径检查流程。",
+        "source": "userenv.dll 的 GetUserProfileDirectoryA 地址、当前用户配置相关路径，以及 GetPrivateProfileStringA(\"Profile0\", \"Path\", ...) 读取的 Firefox Profile0\\Path 值。",
+        "action": "动态加载并解析 NSS_Init、NSSBase64_DecodeBuffer、PK11_GetInternalKeySlot、PK11_Authenticate、PK11SDR_Decrypt、NSS_Shutdown、PK11_FreeSlot；读取 Profile0\\Path 后依次拼接 Firefox 目录与 signons3.txt、signons2.txt、signons1.txt、signons.txt，并调用 sub_405D04 对候选路径结果进行分支选择。",
+        "sink": "选中的 signons 文件路径被保存到后续处理使用的 lpFileName_1；当前可见范围未显示该路径之后的读取、解密或输出。",
+        "evidence": [
+          {
+            "location": "F-0483 L0150-L0175",
+            "observation": "代码对 nss3.dll 及 NSS/PK11 相关导出函数逐项调用 GetProcAddress，并在全部成功后加载 userenv.dll。"
+          },
+          {
+            "location": "F-0483 L0176-L0188",
+            "observation": "代码获取 GetUserProfileDirectoryA 地址，并通过 GetPrivateProfileStringA(\"Profile0\", \"Path\", Default, ReturnedString, 0x104u, lpFileName) 读取配置中的 Profile0 Path，随后准备追加 Firefox 路径。"
+          },
+          {
+            "location": "F-0483 L0187-L0216",
+            "observation": "代码构造 \\Mozilla\\Firefox\\ 与 \\signons3.txt、\\signons2.txt 的路径，并调用 sub_405D04 根据结果选择分支。"
+          },
+          {
+            "location": "F-0483 L0229-L0271",
+            "observation": "代码继续构造 \\signons1.txt 与 \\signons.txt 候选路径；若检查成功，将候选路径转换后赋给 lpFileName_1。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_405D04 的实现不在本包内，因此这里仅确认候选路径构造及基于其返回值的分支，不能单独确认该函数是否执行文件存在性检查或读取。",
+          "F-0483 在原文件 L0274 处截断，尚未看到 lpFileName_1 的后续使用、NSS 解密调用、返回数据形成或失败处理。",
+          "虽然已解析 PK11SDR_Decrypt 等函数地址，但当前范围没有直接证据证明解密已执行或成功。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons3.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0187-L0194",
+            "observation": "代码将 ReturnedString 与 \\Mozilla\\Firefox\\、\\signons3.txt 拼接，并把结果传给 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons2.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0196-L0216",
+            "observation": "在 signons3.txt 分支未满足时，代码构造 \\signons2.txt 并调用 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons1.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 旧版凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0218-L0238",
+            "observation": "在前一候选未满足时，代码构造 \\signons1.txt 并调用 sub_405D04。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "Firefox 更早版本凭据数据库候选路径；本包显示其被拼接并交给辅助检查，但未证明实际读取。",
+        "evidence": [
+          {
+            "location": "F-0483 L0240-L0260",
+            "observation": "代码构造 \\signons.txt，并在 sub_405D04 返回不满足时跳转失败路径，否则继续保存该候选路径。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "nss3.dll",
+        "role": "other",
+        "detection_specificity": "low",
+        "meaning": "被动态加载的 NSS 组件名称；支持 Firefox 凭据处理能力的环境依赖线索，但不是单独的感染 IOC。",
+        "evidence": [
+          {
+            "location": "F-0483 L0150-L0154",
+            "observation": "代码将 nss3.dll 作为模块名称并调用 LoadLibraryA，随后解析 NSS_Init。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Profile0 / Path",
+        "role": "parser_marker",
+        "detection_specificity": "none",
+        "meaning": "Firefox 配置解析键，用于取得 Profile0 的路径。",
+        "evidence": [
+          {
+            "location": "F-0483 L0182-L0185",
+            "observation": "GetPrivateProfileStringA 使用节名 Profile0 和键名 Path 读取 ReturnedString。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "F-0483 截断后的 L0275-L0522 是否调用文件读取、NSS 解密并生成返回数据？",
+        "reason": "当前包只覆盖例程前半段；候选路径选择之后的 source→action→sink 关系不可见。",
+        "scope": "packet_internal",
+        "impact": "critical"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_405D04 对候选 signons 路径执行的是存在性检查、文件读取还是其他操作？",
+        "reason": "该辅助函数的实现未包含在当前材料中，无法把候选路径构造升级为已确认的文件访问。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_409EF8 的返回值如何与 J00 已验证的 FIREFOX.abc 输出绑定？",
+        "reason": "J00 仅验证调用及写出绑定；本包尚未显示 Firefox 例程的最终返回数据。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "F-0483 sub_409EF8 L0275-L0522",
+        "reason": "补齐候选 signons 路径后的读取、解密、数据整理和返回逻辑。",
+        "expected_value": "确认 Firefox 凭据数据的 source→action→sink，并闭合到 FIREFOX.abc 的返回值。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405D04",
+        "reason": "确定候选 signons 路径检查的实际语义。",
+        "expected_value": "区分路径存在性探测、文件读取或其他副作用。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "F-0483 sub_409EF8",
+        "targets": [
+          {
+            "identifier": "sub_409EF8",
+            "start_line": 275,
+            "end_line": 522
+          }
+        ],
+        "reason": "需要读取该例程截断后的原始代码，以确认选定 signons 文件的后续读取、NSS 解密、返回值形成及最终副作用。",
+        "impact": "critical",
+        "evidence": [
+          {
+            "location": "F-0483 L0260-L0274",
+            "observation": "代码在选择 signons.txt 候选并赋值 lpFileName_1 后，材料于 L0274 截断；后续行为不可见。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_405D04",
+        "targets": [
+          {
+            "identifier": "sub_405D04",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认对 signons 候选路径的检查是否实际访问文件，以及其返回值含义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0192-L0194",
+            "observation": "signons3.txt 候选路径被传给 sub_405D04，随后依据其返回值选择分支。"
+          },
+          {
+            "location": "F-0483 L0214-L0216",
+            "observation": "signons2.txt 候选路径同样被传给 sub_405D04。"
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": []
+}

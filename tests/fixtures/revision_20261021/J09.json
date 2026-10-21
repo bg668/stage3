@@ -1,0 +1,1627 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J09.json",
+        "sha256": "0c13467c0f1fdd1472938fcf95e58e8d1ae50fddeba1cae41fb7924509620ae1"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J09/analyzer/validated_result.json",
+        "sha256": "bb73c4105b6a7376dcbcdd71f733b270521ce244080086e751ac38f090cf598c"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J09/reviewer/validated_result.json",
+        "sha256": "11778644b5ef9ea690be57bebbd188e5eaac7e8dbb5c225746ae7a39710019c1"
+      },
+      "packet": {
+        "path": "testdata/packets/J09.md",
+        "sha256": "d5e202599d82d654cb3bb92dfe4ee582b1cd356ed71be1edd63dd886ecccee90"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J09/reviser/validated_result.json",
+        "sha256": "f219eebee23ba212ee6bb1d859fbdb871afe0fa642b57ee33e2409e8bfb2b02f"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J09/reviser/revision_scope.json",
+        "sha256": "4dc54ba4dc68a1c84280caf08dfa793d239db4e00bce38062aa358e5420403b8"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J09",
+  "packet_text": "# J09 Storage2 及 URL 派生\n任务来源：J00 F478 转调 F466；F466 给出 Storage2 路径，F464 调用 F461。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0466 sub_4096EC，原文件 L0001–L0019 / 共 19 行\n```text\nL0001: int **__usercall sub_4096EC@<eax>(_DWORD *a1@<eax>)\nL0002: {\nL0003:   unsigned int v3[2]; // [esp-10h] [ebp-14h] BYREF\nL0004:   int *v4; // [esp-8h] [ebp-Ch]\nL0005:   __int32 *v5; // [esp+0h] [ebp-4h] BYREF\nL0006:   int savedregs; // [esp+4h] [ebp+0h] BYREF\nL0007: \nL0008:   v5 = 0;\nL0009:   v4 = &savedregs;\nL0010:   v3[1] = (unsigned int)&loc_40973C;\nL0011:   v3[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0012:   __writefsdword(0, (unsigned int)v3);\nL0013:   sub_401AC0(a1);\nL0014:   sub_40879C(&v5);\nL0015:   sub_408E58(v5, \"Software\\\\Microsoft\\\\Internet Explorer\\\\IntelliForms\\\\Storage2\", (__int32)a1);\nL0016:   __writefsdword(0, v3[0]);\nL0017:   v4 = (int *)&loc_409743;\nL0018:   return sub_402FC8(&v5, (int)dword_408734);\nL0019: }\n```\n\n## F-0464 sub_408E58，原文件 L0001–L0148 / 共 148 行\n```text\nL0001: int **__usercall sub_408E58@<eax>(int *a1@<eax>, const CHAR *lpSubKey@<edx>, __int32 a3@<ecx>)\nL0002: {\nL0003:   CHAR *lpValueName; // esi\nL0004:   int v5; // eax\nL0005:   int v6; // edi\nL0006:   int v7; // ebx\nL0007:   _BYTE *v8; // eax\nL0008:   _BYTE *v9; // eax\nL0009:   _BYTE *v10; // eax\nL0010:   char v11; // zf\nL0011:   _BYTE *v12; // eax\nL0012:   _BYTE *v13; // eax\nL0013:   _BYTE *v14; // eax\nL0014:   _BYTE *v15; // eax\nL0015:   _BYTE *v16; // eax\nL0016:   _BYTE *v17; // eax\nL0017:   _BYTE *v18; // eax\nL0018:   _BYTE *v19; // eax\nL0019:   _BYTE *v20; // eax\nL0020:   unsigned int v22[2]; // [esp-Ch] [ebp-84h] BYREF\nL0021:   int *v23; // [esp-4h] [ebp-7Ch]\nL0022:   char *v24; // [esp+Ch] [ebp-6Ch] BYREF\nL0023:   char *v25; // [esp+10h] [ebp-68h] BYREF\nL0024:   char *v26; // [esp+14h] [ebp-64h] BYREF\nL0025:   _BYTE *v27; // [esp+18h] [ebp-60h] BYREF\nL0026:   __int32 v28; // [esp+1Ch] [ebp-5Ch] BYREF\nL0027:   __int32 dst__1; // [esp+20h] [ebp-58h] BYREF\nL0028:   char *v30; // [esp+24h] [ebp-54h] BYREF\nL0029:   OLECHAR *v31; // [esp+28h] [ebp-50h] BYREF\nL0030:   _BYTE *dst_; // [esp+2Ch] [ebp-4Ch] BYREF\nL0031:   __int32 dst__2; // [esp+30h] [ebp-48h] BYREF\nL0032:   char *dst; // [esp+34h] [ebp-44h] BYREF\nL0033:   char *v35; // [esp+38h] [ebp-40h] BYREF\nL0034:   DATA_BLOB pOptionalEntropy; // [esp+3Ch] [ebp-3Ch] BYREF\nL0035:   DATA_BLOB pDataOut; // [esp+44h] [ebp-34h] BYREF\nL0036:   DATA_BLOB pDataIn; // [esp+4Ch] [ebp-2Ch] BYREF\nL0037:   LPBYTE lpData; // [esp+54h] [ebp-24h] BYREF\nL0038:   DWORD cbData; // [esp+58h] [ebp-20h] BYREF\nL0039:   DWORD Type; // [esp+5Ch] [ebp-1Ch] BYREF\nL0040:   DWORD cchValueName; // [esp+60h] [ebp-18h] BYREF\nL0041:   HKEY phkResult; // [esp+64h] [ebp-14h] BYREF\nL0042:   __int32 v44; // [esp+68h] [ebp-10h] BYREF\nL0043:   DWORD dwIndex; // [esp+6Ch] [ebp-Ch]\nL0044:   volatile __int32 *v46; // [esp+70h] [ebp-8h]\nL0045:   int *v47; // [esp+74h] [ebp-4h] BYREF\nL0046:   int savedregs; // [esp+78h] [ebp+0h] BYREF\nL0047: \nL0048:   v46 = (volatile __int32 *)_InterlockedExchange((volatile __int32 *)&v47, a3);\nL0049:   v47 = a1;\nL0050:   sub_40302C((int)a1);\nL0051:   v23 = &savedregs;\nL0052:   v22[1] = (unsigned int)&loc_4092A7;\nL0053:   v22[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0054:   __writefsdword(0, (unsigned int)v22);\nL0055:   sub_401AC0(&dst_);\nL0056:   dwIndex = 0;\nL0057:   if ( !RegOpenKeyExA(HKEY_CURRENT_USER, lpSubKey, 0, 1u, &phkResult) )\nL0058:   {\nL0059:     cchValueName = 1024;\nL0060:     lpValueName = (CHAR *)sub_401174((LPVOID)0x400);\nL0061:     while ( RegEnumValueA(phkResult, dwIndex, lpValueName, &cchValueName, 0, 0, 0, 0) != 259 )\nL0062:     {\nL0063:       cchValueName = 1024;\nL0064:       v5 = sub_402E08((int)v47);\nL0065:       if ( v5 >= 0 )\nL0066:       {\nL0067:         v6 = v5 + 1;\nL0068:         v7 = 0;\nL0069:         do\nL0070:         {\nL0071:           sub_408AF8((OLECHAR *)v47[v7], &v44);\nL0072:           RegQueryValueExA(phkResult, lpValueName, 0, &Type, 0, &cbData);\nL0073:           sub_402FBC((__int32 **)&lpData, (int)dword_408E38, 1, cbData);\nL0074:           if ( !RegQueryValueExA(phkResult, lpValueName, 0, &Type, lpData, &cbData) )\nL0075:           {\nL0076:             pDataIn.pbData = lpData;\nL0077:             pDataIn.cbData = cbData;\nL0078:             pOptionalEntropy.pbData = (BYTE *)v47[v7];\nL0079:             sub_402218(&v31, (OLECHAR *)v47[v7]);\nL0080:             pOptionalEntropy.cbData = 2 * (sub_402274((int)v31) + 1);\nL0081:             if ( CryptUnprotectData(&pDataIn, 0, &pOptionalEntropy, 0, 0, 1u, &pDataOut) )\nL0082:             {\nL0083:               sub_401CDC(&v30, v47[v7]);\nL0084:               sub_401E10((volatile __int32 *)&dst_, 4);\nL0085:               sub_408CCC((int)pDataOut.pbData, &dst__1);\nL0086:               sub_401E10((volatile __int32 *)&dst_, 3);\nL0087:             }\nL0088:           }\nL0089:           ++v7;\nL0090:           --v6;\nL0091:         }\nL0092:         while ( v6 );\nL0093:       }\nL0094:       sub_403738(lpValueName, cchValueName);\nL0095:       ++dwIndex;\nL0096:     }\nL0097:   }\nL0098:   RegCloseKey(phkResult);\nL0099:   while ( (int)sub_40202C(dst__9, dst_) > 0 )\nL0100:   {\nL0101:     v8 = sub_40202C(dst__9, dst_);\nL0102:     sub_401FA4((int)dst_, 1, (int)(v8 - 1), &dst);\nL0103:     v9 = sub_40202C(dst__9, dst_);\nL0104:     sub_401FE4((unsigned int *)&dst_, 1, (int)(v9 + 1));\nL0105:     sub_401D9C((volatile __int32 *)&v27, (unsigned __int32)dst, (unsigned __int32)dst__9);\nL0106:     sub_40592C(v27, 0, (__int32)dst_, &v28);\nL0107:     sub_401B58((volatile __int32 *)&dst_, v28);\nL0108:     v10 = sub_40202C(dword_4092EC, dst);\nL0109:     sub_401FA4((int)dst, 1, (int)(v10 - 1), &v26);\nL0110:     sub_401E94((int)v26, (int *)\"Address\");\nL0111:     if ( v11 )\nL0112:     {\nL0113:       v12 = sub_40202C(&dword_409308, dst);\nL0114:       sub_401FE4((unsigned int *)&dst, 1, (int)v12);\nL0115:       v13 = sub_40202C(dword_4092D4, dst);\nL0116:       sub_401FA4((int)dst, 1, (int)(v13 - 1), &v35);\nL0117:       v14 = sub_40202C(dword_4092D4, dst);\nL0118:       sub_401FE4((unsigned int *)&dst, 1, (int)v14);\nL0119:       while ( (int)sub_40202C(dword_4092D4, dst) > 0 )\nL0120:       {\nL0121:         v15 = sub_40202C(&dword_409308, dst);\nL0122:         sub_401FE4((unsigned int *)&dst, 1, (int)v15);\nL0123:         v16 = sub_40202C(dword_4092D4, dst);\nL0124:         sub_401FA4((int)dst, 1, (int)(v16 - 1), &v25);\nL0125:         sub_401E10(&dst__2, 5);\nL0126:         v17 = sub_40202C(dword_4092D4, dst);\nL0127:         sub_401FE4((unsigned int *)&dst, 1, (int)v17);\nL0128:         v18 = sub_40202C(&dword_409308, dst);\nL0129:         sub_401FE4((unsigned int *)&dst, 1, (int)v18);\nL0130:         v19 = sub_40202C(dword_4092D4, dst);\nL0131:         sub_401FA4((int)dst, 1, (int)(v19 - 1), &v24);\nL0132:         sub_401E10(&dst__2, 3);\nL0133:         v20 = sub_40202C(dword_4092D4, dst);\nL0134:         sub_401FE4((unsigned int *)&dst, 1, (int)v20);\nL0135:         sub_401D58(&dst__2, (__int32)dst__9);\nL0136:       }\nL0137:     }\nL0138:   }\nL0139:   sub_401B14(v46, dst__2);\nL0140:   __writefsdword(0, v22[0]);\nL0141:   v23 = (int *)&loc_4092AE;\nL0142:   sub_401AE4((int *)&v24, 7);\nL0143:   sub_402108(&v31);\nL0144:   sub_401AE4((int *)&dst_, 4);\nL0145:   sub_402FC8((int **)&lpData, (int)dword_408E38);\nL0146:   sub_401AC0(&v44);\nL0147:   return sub_402FC8(&v47, (int)dword_408734);\nL0148: }\n```\n\n## F-0461 sub_408AF8，原文件 L0001–L0072 / 共 72 行\n```text\nL0001: int **__usercall sub_408AF8@<eax>(OLECHAR *strIn@<eax>, volatile __int32 *a2@<edx>)\nL0002: {\nL0003:   unsigned __int8 v4; // bl\nL0004:   int v5; // eax\nL0005:   int v6; // edi\nL0006:   unsigned int v8[2]; // [esp-Ch] [ebp-40h] BYREF\nL0007:   int *v9; // [esp-4h] [ebp-38h]\nL0008:   char *dst_1; // [esp+Ch] [ebp-28h] BYREF\nL0009:   int v11; // [esp+10h] [ebp-24h] BYREF\nL0010:   char v12; // [esp+14h] [ebp-20h]\nL0011:   char *dst; // [esp+18h] [ebp-1Ch] BYREF\nL0012:   OLECHAR *v14; // [esp+1Ch] [ebp-18h] BYREF\nL0013:   DWORD pdwDataLen_1; // [esp+20h] [ebp-14h]\nL0014:   DWORD pdwDataLen; // [esp+24h] [ebp-10h] BYREF\nL0015:   BYTE *pbData; // [esp+28h] [ebp-Ch] BYREF\nL0016:   HCRYPTHASH phHash; // [esp+2Ch] [ebp-8h] BYREF\nL0017:   HCRYPTPROV phProv; // [esp+30h] [ebp-4h] BYREF\nL0018:   int savedregs; // [esp+34h] [ebp+0h] BYREF\nL0019: \nL0020:   dst_1 = 0;\nL0021:   dst = 0;\nL0022:   v14 = 0;\nL0023:   pbData = 0;\nL0024:   v9 = &savedregs;\nL0025:   v8[1] = (unsigned int)&loc_408C74;\nL0026:   v8[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0027:   __writefsdword(0, (unsigned int)v8);\nL0028:   v4 = 0;\nL0029:   sub_401AC0(a2);\nL0030:   CryptAcquireContextA(&phProv, 0, 0, 1u, 0);\nL0031:   if ( CryptCreateHash(phProv, 0x8004u, 0, 0, &phHash) )\nL0032:   {\nL0033:     sub_402218(&v14, strIn);\nL0034:     v5 = sub_402274((int)v14);\nL0035:     if ( CryptHashData(phHash, (const BYTE *)strIn, 2 * (v5 + 1), 0) )\nL0036:     {\nL0037:       pdwDataLen = 20;\nL0038:       sub_402FBC((__int32 **)&pbData, (int)dword_408AD8, 1, 20);\nL0039:       if ( CryptGetHashParam(phHash, 2u, pbData, &pdwDataLen, 0) )\nL0040:       {\nL0041:         CryptDestroyHash(phHash);\nL0042:         CryptReleaseContext(phProv, 0);\nL0043:         if ( (int)(pdwDataLen - 1) >= 0 )\nL0044:         {\nL0045:           pdwDataLen_1 = pdwDataLen;\nL0046:           v6 = 0;\nL0047:           do\nL0048:           {\nL0049:             v4 += pbData[v6];\nL0050:             v11 = pbData[v6];\nL0051:             v12 = 0;\nL0052:             sub_4089C8(\"%2.2X\", (int)&v11, 0, &dst);\nL0053:             sub_401D58(a2, (__int32)dst);\nL0054:             ++v6;\nL0055:             --pdwDataLen_1;\nL0056:           }\nL0057:           while ( pdwDataLen_1 );\nL0058:         }\nL0059:         v11 = v4;\nL0060:         v12 = 0;\nL0061:         sub_4089C8(\"%2.2X\", (int)&v11, 0, &dst_1);\nL0062:         sub_401D58(a2, (__int32)dst_1);\nL0063:       }\nL0064:     }\nL0065:   }\nL0066:   __writefsdword(0, v8[0]);\nL0067:   v9 = (int *)&loc_408C7B;\nL0068:   sub_401AC0(&dst_1);\nL0069:   sub_401AC0(&dst);\nL0070:   sub_402108(&v14);\nL0071:   return sub_402FC8((int **)&pbData, (int)dword_408AD8);\nL0072: }\n```\n\n## F-0463 sub_408CCC，原文件 L0001–L0060 / 共 60 行\n```text\nL0001: int *__usercall sub_408CCC@<eax>(int a1@<eax>, volatile __int32 *dst_1@<ecx>)\nL0002: {\nL0003:   int v2; // ebx\nL0004:   unsigned int n3; // ebx\nL0005:   int dst__3; // edi\nL0006:   int lpWideCharStr; // esi\nL0007:   unsigned int v7[2]; // [esp-Ch] [ebp-40h] BYREF\nL0008:   int *v8; // [esp-4h] [ebp-38h]\nL0009:   char *v9; // [esp+Ch] [ebp-28h] BYREF\nL0010:   __int32 v10; // [esp+10h] [ebp-24h] BYREF\nL0011:   int v11; // [esp+14h] [ebp-20h]\nL0012:   LPVOID dst__5; // [esp+18h] [ebp-1Ch] BYREF\nL0013:   int dst__4; // [esp+1Ch] [ebp-18h] BYREF\nL0014:   int dst__2; // [esp+20h] [ebp-14h] BYREF\nL0015:   int dst__1; // [esp+24h] [ebp-10h] BYREF\nL0016:   int dst_; // [esp+28h] [ebp-Ch] BYREF\nL0017:   volatile __int32 *dst; // [esp+2Ch] [ebp-8h]\nL0018:   int v18; // [esp+30h] [ebp-4h]\nL0019:   int savedregs; // [esp+34h] [ebp+0h] BYREF\nL0020: \nL0021:   v9 = 0;\nL0022:   v10 = 0;\nL0023:   dst = dst_1;\nL0024:   v18 = a1;\nL0025:   v8 = &savedregs;\nL0026:   v7[1] = (unsigned int)&loc_408DF5;\nL0027:   v7[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0028:   __writefsdword(0, (unsigned int)v7);\nL0029:   sub_401AC0(dst_1);\nL0030:   v2 = v18;\nL0031:   sub_403730(&dst_, v18 + 4, 4);\nL0032:   sub_403730(&dst__1, v2 + 8, 4);\nL0033:   sub_403730(&dst__2, v2 + 20, 4);\nL0034:   n3 = v2 + 36;\nL0035:   if ( dst__2 - 1 >= 0 )\nL0036:   {\nL0037:     dst__3 = dst__2;\nL0038:     v11 = 0;\nL0039:     do\nL0040:     {\nL0041:       sub_403730(&dst__4, n3, 4);\nL0042:       sub_403730(&dst__5, n3 + 12, 4);\nL0043:       sub_401174(dst__5);\nL0044:       lpWideCharStr = dst__4 + dst_ + v18 + 12;\nL0045:       if ( (unsigned __int8)sub_408C94(v11) == 1 )\nL0046:         sub_401B58(&v10, (__int32)\"User: \");\nL0047:       else\nL0048:         sub_401B58(&v10, (__int32)\"Password: \");\nL0049:       sub_401CDC(&v9, lpWideCharStr);\nL0050:       sub_401E10(dst, 4);\nL0051:       n3 += 16;\nL0052:       ++v11;\nL0053:       --dst__3;\nL0054:     }\nL0055:     while ( dst__3 );\nL0056:   }\nL0057:   __writefsdword(0, v7[0]);\nL0058:   v8 = (int *)&loc_408DFC;\nL0059:   return sub_401AE4((int *)&v9, 2);\nL0060: }\n```\n\n## F-0449 sub_40879C，原文件 L0001–L0058 / 共 58 行\n```text\nL0001: int __usercall sub_40879C@<eax>(__int32 **a1@<eax>)\nL0002: {\nL0003:   int v2; // ebx\nL0004:   _DWORD *v3; // eax\nL0005:   _BYTE *v4; // eax\nL0006:   int v5; // eax\nL0007:   WCHAR *lpWideCharStr_1; // edi\nL0008:   int v7; // eax\nL0009:   char **ExceptionList; // [esp-Ch] [ebp-50h] BYREF\nL0010:   void *v10; // [esp-8h] [ebp-4Ch]\nL0011:   int *v11; // [esp-4h] [ebp-48h]\nL0012:   void *v12; // [esp+0h] [ebp-44h]\nL0013:   int (__stdcall ***v13)(_DWORD, int, _DWORD *); // [esp+Ch] [ebp-38h] BYREF\nL0014:   _BYTE v14[4]; // [esp+10h] [ebp-34h] BYREF\nL0015:   int lpWideCharStr; // [esp+14h] [ebp-30h]\nL0016:   char *v16; // [esp+38h] [ebp-Ch] BYREF\nL0017:   _BYTE v17[4]; // [esp+3Ch] [ebp-8h] BYREF\nL0018:   int v18; // [esp+40h] [ebp-4h] BYREF\nL0019:   int savedregs; // [esp+44h] [ebp+0h] BYREF\nL0020: \nL0021:   v13 = 0;\nL0022:   v18 = 0;\nL0023:   v16 = 0;\nL0024:   v11 = &savedregs;\nL0025:   v10 = &loc_4088E9;\nL0026:   ExceptionList = (char **)NtCurrentTeb()->NtTib.ExceptionList;\nL0027:   __writefsdword(0, (unsigned int)&ExceptionList);\nL0028:   OleInitialize(0);\nL0029:   v2 = 0;\nL0030:   sub_402FBC(a1, (int)dword_408734, 1, 1);\nL0031:   sub_408764(&CLSID_CLSID_CUrlHistory, &v13);\nL0032:   sub_4030A8(&dword_40F1C0, v13, (int)dword_4088FC);\nL0033:   v3 = sub_403064(&v18);\nL0034:   (*(void (__stdcall **)(int, _DWORD *, char **))(*(_DWORD *)dword_40F1C0 + 28))(dword_40F1C0, v3, ExceptionList);\nL0035:   (*(void (__stdcall **)(int, int *, _DWORD))(*(_DWORD *)v18 + 28))(v18, &dword_40890C, 0);\nL0036:   while ( !(*(int (__stdcall **)(int, int, _BYTE *, _BYTE *))(*(_DWORD *)v18 + 12))(v18, 1, v14, v17) )\nL0037:   {\nL0038:     sub_402FBC(a1, (int)dword_408734, 1, ++v2);\nL0039:     sub_401CDC(&v16, lpWideCharStr);\nL0040:     if ( sub_40202C(&dword_408918, v16) )\nL0041:     {\nL0042:       ExceptionList = &v16;\nL0043:       v4 = sub_40202C(&dword_408918, v16);\nL0044:       sub_401FA4((int)v16, 0, (int)(v4 - 1), ExceptionList);\nL0045:     }\nL0046:     v5 = sub_401D50((int)v16);\nL0047:     lpWideCharStr_1 = (WCHAR *)sub_401174((LPVOID)(2 * (v5 + 1)));\nL0048:     (*a1)[v2 - 1] = (__int32)lpWideCharStr_1;\nL0049:     v7 = sub_401D50((int)v16);\nL0050:     sub_402928(v16, lpWideCharStr_1, 2 * (v7 + 1));\nL0051:   }\nL0052:   __writefsdword(0, (unsigned int)v10);\nL0053:   v12 = &loc_4088F0;\nL0054:   sub_403064(&v13);\nL0055:   sub_401AC0(&v16);\nL0056:   sub_403064(&v18);\nL0057:   return v2;\nL0058: }\n```\n\n## F-0475 sub_409980，原文件 L0001–L0031 / 共 31 行\n```text\nL0001: int __usercall sub_409980@<eax>(int a1@<ebx>)\nL0002: {\nL0003:   int v1; // ebx\nL0004:   char v2; // zf\nL0005:   unsigned int v4[2]; // [esp-10h] [ebp-1Ch] BYREF\nL0006:   int *v5; // [esp-8h] [ebp-14h]\nL0007:   int v6; // [esp-4h] [ebp-10h]\nL0008:   char *v7; // [esp+0h] [ebp-Ch] BYREF\nL0009:   char *v8; // [esp+4h] [ebp-8h] BYREF\nL0010:   __int32 v9; // [esp+8h] [ebp-4h] BYREF\nL0011:   int savedregs; // [esp+Ch] [ebp+0h] BYREF\nL0012: \nL0013:   v9 = 0;\nL0014:   v8 = 0;\nL0015:   v7 = 0;\nL0016:   v6 = a1;\nL0017:   v5 = &savedregs;\nL0018:   v4[1] = (unsigned int)&loc_409A1B;\nL0019:   v4[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0020:   __writefsdword(0, (unsigned int)v4);\nL0021:   v1 = 0;\nL0022:   sub_406088(HKEY_LOCAL_MACHINE, \"Software\\\\Microsoft\\\\Internet Explorer\", \"Version\", &v9, 0);\nL0023:   sub_401FA4(v9, 1, 1, &v8);\nL0024:   sub_401E94((int)v8, dword_409A74);\nL0025:   if ( v2 || (sub_401FA4(v9, 1, 1, &v7), sub_401E94((int)v7, &dword_409A80), v2) )\nL0026:     LOBYTE(v1) = 1;\nL0027:   __writefsdword(0, v4[0]);\nL0028:   v5 = (int *)&loc_409A22;\nL0029:   sub_401AE4((int *)&v7, 3);\nL0030:   return v1;\nL0031: }\n```\n\n## F-0478 sub_409A9C，原文件 L0001–L0010 / 共 10 行\n```text\nL0001: int **__usercall sub_409A9C@<eax>(_DWORD *a1@<eax>)\nL0002: {\nL0003:   int **result; // eax\nL0004: \nL0005:   sub_401AC0(a1);\nL0006:   result = (int **)sub_409980((int)a1);\nL0007:   if ( (_BYTE)result == 1 )\nL0008:     return sub_4096EC(a1);\nL0009:   return result;\nL0010: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了两类与 IE 数据收集相关的能力：程序可枚举当前用户 IE IntelliForms\\Storage2 注册表值，使用由候选字符串派生的哈希摘要作为 DPAPI 可选熵解密，并将解密结果整理为 User/Password 标记的内存数据；程序还可通过 URL History COM 接口枚举浏览历史并复制到返回数组。sub_409A9C 仅在 IE 版本检查通过时进入 Storage2 路径。当前包未提供七个 .abc 生产者的直接调用关系，因此不能把这些数据源分别归属到具体输出文件，也不能证明运行时成功或最终外传。",
+    "claims": [
+      {
+        "behavior": "在 IE 版本检查通过的条件下，程序读取当前用户的 IE IntelliForms Storage2 注册表项，枚举其值并尝试解密其中的数据。",
+        "condition": "sub_409980 返回 1；该返回值来自读取 HKLM\\Software\\Microsoft\\Internet Explorer 的 Version 值并与两个未解析常量比较。",
+        "source": "当前用户注册表键 Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2 中枚举到的值名和值数据。",
+        "action": "打开注册表键，逐项调用 RegEnumValueA/RegQueryValueExA；对每个成功读取的数据构造 DATA_BLOB，并调用 CryptUnprotectData，使用由候选字符串派生的哈希材料作为可选熵。",
+        "sink": "解密成功的数据被追加到 sub_408E58 管理的内存缓冲区，随后由该函数返回给调用者；当前包未显示该缓冲区的最终文件或网络去向。",
+        "evidence": [
+          {
+            "location": "F-0478 sub_409A9C 原文件 L0005-L0009",
+            "observation": "函数调用 sub_409980；仅当其返回值为 1 时才调用 sub_4096EC。"
+          },
+          {
+            "location": "F-0475 sub_409980 原文件 L0022-L0026",
+            "observation": "读取 HKLM\\Software\\Microsoft\\Internet Explorer 的 Version 值并进行两次比较，比较结果为真时返回 1。"
+          },
+          {
+            "location": "F-0466 sub_4096EC 原文件 L0013-L0018",
+            "observation": "调用 sub_408E58，并传入固定子键 Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2。"
+          },
+          {
+            "location": "F-0464 sub_408E58 原文件 L0057-L0087",
+            "observation": "打开 HKEY_CURRENT_USER 下的目标子键，枚举并查询每个值；成功读取后设置 pDataIn 和 pOptionalEntropy，并调用 CryptUnprotectData，成功时将 pDataOut 追加到内存缓冲区。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码证明的是读取和解密尝试，不证明注册表键存在、解密一定成功或后续数据被写出/传输。",
+          "pOptionalEntropy 的候选字符串集合由 a3/a1 及缺失的上游构造逻辑决定，当前包未闭合其具体来源。"
+        ]
+      },
+      {
+        "behavior": "程序使用候选字符串的宽字符内容计算固定长度的密码学摘要，并将摘要字节格式化为十六进制文本，再追加一个由摘要字节累加得到的十六进制值；该结果可作为 Storage2 解密路径的候选熵或关联字符串。",
+        "condition": "sub_408AF8 被 sub_408E58 的每个枚举值处理循环调用。",
+        "source": "传入 sub_408AF8 的 OLECHAR 字符串 strIn；在调用点该字符串来自 v47[v7]。",
+        "action": "创建哈希对象，对 strIn 的宽字符数据执行 CryptHashData，取得哈希参数，逐字节格式化为两位十六进制并追加字节和。",
+        "sink": "生成的文本被追加到调用者提供的 a2 缓冲区；sub_408E58 随后将对应候选字符串的宽字符内容作为 pOptionalEntropy 使用。",
+        "evidence": [
+          {
+            "location": "F-0461 sub_408AF8 原文件 L0029-L0039",
+            "observation": "创建哈希对象，对 strIn 的 2*(长度+1) 字节数据计算摘要并取回摘要参数。"
+          },
+          {
+            "location": "F-0461 sub_408AF8 原文件 L0043-L0063",
+            "observation": "逐摘要字节使用 %2.2X 格式追加到 a2，随后追加字节累加值的十六进制表示。"
+          },
+          {
+            "location": "F-0464 sub_408E58 原文件 L0071-L0081",
+            "observation": "对 v47[v7] 调用 sub_408AF8，并将同一 v47[v7] 转为 pOptionalEntropy，之后调用 CryptUnprotectData。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未给出 sub_408E58 的上游调用者如何构造 v47，因此不能确定候选字符串的完整集合及其与具体用户数据的对应关系。"
+        ]
+      },
+      {
+        "behavior": "成功解密的 Storage2 数据被解析为带有 User: 或 Password: 标签的记录并加入内存结果缓冲区。",
+        "condition": "RegQueryValueExA 成功且 CryptUnprotectData 返回非零；每个记录的标签选择由 sub_408C94(v11) 的结果决定。",
+        "source": "CryptUnprotectData 输出的 pDataOut.pbData，以及 Storage2 每个值记录中的偏移和长度字段。",
+        "action": "sub_408CCC 根据记录结构读取字段，按类型追加 User: 或 Password:，再追加相应宽字符数据并将该记录加入 dst_ 缓冲区。",
+        "sink": "sub_408E58 的 dst_ 内存缓冲区，最终作为函数返回所管理的数据的一部分；没有当前包证据证明其已落盘或外传。",
+        "evidence": [
+          {
+            "location": "F-0464 sub_408E58 原文件 L0081-L0087",
+            "observation": "解密成功后调用 sub_408CCC，并将其结果加入 dst_ 缓冲区。"
+          },
+          {
+            "location": "F-0463 sub_408CCC 原文件 L0031-L0055",
+            "observation": "读取记录字段；依据 sub_408C94 追加 User: 或 Password:，再追加记录数据并循环处理全部记录。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "记录结构和 sub_408C94 的具体分类规则未在本包中展开；可确认标签化处理，但不能进一步确定每条记录的精确字段语义。",
+          "该结果与 J00 所述固定 .abc 输出之间的映射需要对应的七个生产者函数证据。"
+        ]
+      },
+      {
+        "behavior": "程序可通过 URL History COM 接口枚举浏览历史条目，并将每个枚举到的条目复制为宽字符字符串存入调用者提供的数组。",
+        "condition": "sub_40879C 被调用且 URL History COM 对象及枚举接口初始化成功；循环持续到枚举接口返回非零。",
+        "source": "系统 URL History COM 对象 CLSID_CUrlHistory 返回的枚举结果。",
+        "action": "初始化 URL History COM 接口，反复调用枚举方法；对每个结果按字符串长度分配内存并复制内容。",
+        "sink": "调用者 a1 指向的数组槽位 (*a1)[v2 - 1]，并由 sub_40879C 返回枚举数量。",
+        "evidence": [
+          {
+            "location": "F-0449 sub_40879C 原文件 L0028-L0036",
+            "observation": "初始化 COM，解析 CLSID_CUrlHistory，并取得对象和枚举接口后开始循环。"
+          },
+          {
+            "location": "F-0449 sub_40879C 原文件 L0036-L0051",
+            "observation": "循环调用枚举接口；对每个结果计算长度、分配宽字符缓冲区并复制到调用者数组。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包未显示 sub_40879C 的调用者如何使用 URL 数组，也未证明这些条目最终进入 J00 的某个固定输出文件。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "registry",
+        "value": "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "IE IntelliForms Storage2 数据的读取位置；与凭据解密路径直接相关，但不是单独足够的感染 IOC。",
+        "evidence": [
+          {
+            "location": "F-0466 sub_4096EC 原文件 L0013-L0018",
+            "observation": "将该固定子键传入 sub_408E58。"
+          },
+          {
+            "location": "F-0464 sub_408E58 原文件 L0057-L0075",
+            "observation": "在 HKEY_CURRENT_USER 下打开并枚举该子键的值。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Software\\Microsoft\\Internet Explorer",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "用于读取 IE Version 以门控 Storage2 收集路径的注册表子键。",
+        "evidence": [
+          {
+            "location": "F-0475 sub_409980 原文件 L0022-L0026",
+            "observation": "从 HKLM 下该子键读取 Version 并进行条件比较。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "guid",
+        "value": "CLSID_CUrlHistory",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "系统 URL History COM 类标识，用于访问浏览历史；属于常规系统资源，不是特异性恶意 IOC。",
+        "evidence": [
+          {
+            "location": "F-0449 sub_40879C 原文件 L0030-L0036",
+            "observation": "通过 sub_408764 解析 CLSID_CUrlHistory 并取得后续枚举接口。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "User: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密数据整理时使用的用户字段标签。",
+        "evidence": [
+          {
+            "location": "F-0463 sub_408CCC 原文件 L0045-L0049",
+            "observation": "根据 sub_408C94 结果追加 User: 或 Password: 标签。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Password: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密数据整理时使用的密码字段标签。",
+        "evidence": [
+          {
+            "location": "F-0463 sub_408CCC 原文件 L0045-L0049",
+            "observation": "在另一分支追加 Password: 标签。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "七个 .abc 生产者是否分别调用 sub_409A9C、sub_4096EC 或 sub_40879C，以及每个文件承载哪类数据？",
+        "reason": "当前包展示了收集函数及其内部行为，但没有七个生产者函数的实现或直接调用关系；J00 仅确认其返回值被绑定到固定文件。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_408E58 返回的解密/标签化缓冲区是否最终写入文件、传输或仅在内存中使用？",
+        "reason": "当前包只显示其在内存中构造并返回，最终 sink 位于未提供的下游调用者或生产者中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_409980 中两个 IE Version 比较常量及 sub_401BAC/sub_4012B8 等上游字符串构造逻辑的具体语义是什么？",
+        "reason": "常量和部分上游数据构造未在当前包提供，限制了精确触发条件和候选熵来源判断。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "建立当前收集函数与 J00 固定 .abc 输出之间的直接映射。",
+        "expected_value": "确认具体文件的数据源、触发条件及最终 sink。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_408E58 callers and sub_40B93C",
+        "reason": "解析 Storage2 结果及备用路径结果的最终消费方式。",
+        "expected_value": "确认解密凭据/浏览数据是否写入固定文件、传输或执行其他外部副作用。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_409AD4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409D28",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认当前包中的 IE Storage2/URL History 收集结果分别流向哪些固定 .abc 输出及其完整 source-to-sink 关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0466 sub_4096EC 原文件 L0013-L0018",
+            "observation": "当前包确认 Storage2 收集函数被调用并返回数据。"
+          },
+          {
+            "location": "F-0449 sub_40879C 原文件 L0036-L0051",
+            "observation": "当前包确认 URL History 条目被收集到内存数组。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_408E58",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40B93C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 Storage2 解密结果及备用路径数据的最终外部副作用，尤其是是否进入 XX--XX--XX.txt 或其他传输 sink。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0464 sub_408E58 原文件 L0081-L0099",
+            "observation": "解密结果被写入内存缓冲区，随后函数继续处理并返回；当前包未展示下游 sink。"
+          },
+          {
+            "location": "dependency J00 F-0500 L0172-L0190 摘要",
+            "observation": "J00 已验证备用路径将值与 XX--XX--XX.txt 传给 sub_40B93C，但未验证该 callee 的最终副作用。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "wrong_claim",
+        "description": "Analyzer 将 Storage2 的 DPAPI 可选熵错误表述为“由候选字符串派生的哈希材料”。当前代码中 sub_408AF8 生成的摘要写入调用者提供的 a2/v44 缓冲区，但 sub_408E58 随后把 v47[v7] 本身（及其长度）赋给 pOptionalEntropy；材料没有显示摘要输出被作为 CryptUnprotectData 的熵使用。该错误改变了关键 source→action 关系。",
+        "evidence": [
+          {
+            "location": "F-0464 L71-L81",
+            "observation": "对 v47[v7] 调用 sub_408AF8 后，pOptionalEntropy.pbData 直接设置为 v47[v7]，pOptionalEntropy.cbData 根据同一字符串长度计算，随后传入 CryptUnprotectData；没有把 sub_408AF8 的 a2 输出作为 pOptionalEntropy。"
+          },
+          {
+            "location": "F-0461 L29-L63",
+            "observation": "sub_408AF8 将摘要十六进制文本和字节累加值追加到调用者提供的 a2 缓冲区。"
+          }
+        ],
+        "required_fix": "将 claim 0 的 action/limitations、claim 1 的整体表述及 summary 改为：解密尝试使用候选字符串本身作为可选熵；sub_408AF8 另行把摘要文本写入 a2 缓冲区，但当前材料未证明该摘要被用于解密或后续外部副作用。不得继续把摘要称为 DPAPI 可选熵。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/summary"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/limitations"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/limitations"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前包内所有源码证据 location 都写成了“F-xxxx 函数名 原文件 L...”，而验收格式要求可解析的“F-xxxx Lx-Ly”。验证结果显示 current_packet 的 valid_segments 为 0，claims、artifacts 和 material_needs 的当前包证据全部不可解析，导致核心结论无法被定位验收。",
+        "evidence": [
+          {
+            "location": "claims 0-3、artifacts 0-4、material_needs 0-1 的全部当前包 evidence.location",
+            "observation": "例如现值“F-0478 sub_409A9C 原文件 L0005-L0009”包含函数名和“原文件”前缀，验证器报告为 invalid_format；同类格式覆盖本包全部 20 个当前包引用。"
+          }
+        ],
+        "required_fix": "只修正当前包来源的 location 格式为对应的 F-xxxx Lx-Ly，例如“F-0478 L0005-L0009”；保留原有 observation 与证据指向，不要用报告排版行号替代源码行号。dependency J00 引用可继续按依赖摘要标注，不要据此改写为当前包源码证据。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "unsupported_claim",
+        "description": "claim 4 将 URL History 枚举结果的 source→sink 作为 confirmed，但当前重建代码没有明确把枚举调用的输出参数 v14/v17 赋给随后复制的 lpWideCharStr；L39-L50 使用 lpWideCharStr 进行长度、分配和复制，但其来源在可见材料中未闭合。因此“每个枚举到的条目被复制并存入数组”超出当前直接证据，至少应降为 suspected 并明确该变量关联缺口。",
+        "evidence": [
+          {
+            "location": "F-0449 L36-L50",
+            "observation": "循环调用对象方法并以 v14、v17 作为参数，随后却对未在可见代码中赋值的 lpWideCharStr 做复制和长度处理，再写入调用者数组；枚举输出与复制源之间的连接没有直接显示。"
+          }
+        ],
+        "required_fix": "将该 claim 的 evidence_level 降为 suspected，或仅保留材料直接支持的“通过 URL History COM 反复枚举并尝试处理结果”表述；在 source/action/sink 或 limitations 中明确枚举输出到 lpWideCharStr 的关联未由当前包闭合。若保留数组写入结论，必须提供当前包内直接建立该关联的证据。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/3"
+          }
+        ]
+      }
+    ],
+    "review_summary": "当前 Analyzer 覆盖了 Storage2、DPAPI 调用、URL History 及 IE 版本门控等主要新行为，也正确保留了 .abc 映射和最终 sink 缺口；但存在一个会改变核心数据关系的 DPAPI 熵错误、全部当前包证据引用不可解析的问题，以及对 URL History 输出关联过度确认的问题。需修订后才能通过覆盖验收。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "wrong_claim",
+        "description": "Analyzer 将 Storage2 的 DPAPI 可选熵错误表述为“由候选字符串派生的哈希材料”。当前代码中 sub_408AF8 生成的摘要写入调用者提供的 a2/v44 缓冲区，但 sub_408E58 随后把 v47[v7] 本身（及其长度）赋给 pOptionalEntropy；材料没有显示摘要输出被作为 CryptUnprotectData 的熵使用。该错误改变了关键 source→action 关系。",
+        "evidence": [
+          {
+            "location": "F-0464 L71-L81",
+            "observation": "对 v47[v7] 调用 sub_408AF8 后，pOptionalEntropy.pbData 直接设置为 v47[v7]，pOptionalEntropy.cbData 根据同一字符串长度计算，随后传入 CryptUnprotectData；没有把 sub_408AF8 的 a2 输出作为 pOptionalEntropy。"
+          },
+          {
+            "location": "F-0461 L29-L63",
+            "observation": "sub_408AF8 将摘要十六进制文本和字节累加值追加到调用者提供的 a2 缓冲区。"
+          }
+        ],
+        "required_fix": "将 claim 0 的 action/limitations、claim 1 的整体表述及 summary 改为：解密尝试使用候选字符串本身作为可选熵；sub_408AF8 另行把摘要文本写入 a2 缓冲区，但当前材料未证明该摘要被用于解密或后续外部副作用。不得继续把摘要称为 DPAPI 可选熵。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/summary"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/limitations"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/limitations"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前包内所有源码证据 location 都写成了“F-xxxx 函数名 原文件 L...”，而验收格式要求可解析的“F-xxxx Lx-Ly”。验证结果显示 current_packet 的 valid_segments 为 0，claims、artifacts 和 material_needs 的当前包证据全部不可解析，导致核心结论无法被定位验收。",
+        "evidence": [
+          {
+            "location": "claims 0-3、artifacts 0-4、material_needs 0-1 的全部当前包 evidence.location",
+            "observation": "例如现值“F-0478 sub_409A9C 原文件 L0005-L0009”包含函数名和“原文件”前缀，验证器报告为 invalid_format；同类格式覆盖本包全部 20 个当前包引用。"
+          }
+        ],
+        "required_fix": "只修正当前包来源的 location 格式为对应的 F-xxxx Lx-Ly，例如“F-0478 L0005-L0009”；保留原有 observation 与证据指向，不要用报告排版行号替代源码行号。dependency J00 引用可继续按依赖摘要标注，不要据此改写为当前包源码证据。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "unsupported_claim",
+        "description": "claim 4 将 URL History 枚举结果的 source→sink 作为 confirmed，但当前重建代码没有明确把枚举调用的输出参数 v14/v17 赋给随后复制的 lpWideCharStr；L39-L50 使用 lpWideCharStr 进行长度、分配和复制，但其来源在可见材料中未闭合。因此“每个枚举到的条目被复制并存入数组”超出当前直接证据，至少应降为 suspected 并明确该变量关联缺口。",
+        "evidence": [
+          {
+            "location": "F-0449 L36-L50",
+            "observation": "循环调用对象方法并以 v14、v17 作为参数，随后却对未在可见代码中赋值的 lpWideCharStr 做复制和长度处理，再写入调用者数组；枚举输出与复制源之间的连接没有直接显示。"
+          }
+        ],
+        "required_fix": "将该 claim 的 evidence_level 降为 suspected，或仅保留材料直接支持的“通过 URL History COM 反复枚举并尝试处理结果”表述；在 source/action/sink 或 limitations 中明确枚举输出到 lpWideCharStr 的关联未由当前包闭合。若保留数组写入结论，必须提供当前包内直接建立该关联的证据。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/3"
+          }
+        ]
+      }
+    ],
+    "review_summary": "当前 Analyzer 覆盖了 Storage2、DPAPI 调用、URL History 及 IE 版本门控等主要新行为，也正确保留了 .abc 映射和最终 sink 缺口；但存在一个会改变核心数据关系的 DPAPI 熵错误、全部当前包证据引用不可解析的问题，以及对 URL History 输出关联过度确认的问题。需修订后才能通过覆盖验收。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了两类与 IE 数据收集相关的能力：程序可枚举当前用户 IE IntelliForms\\Storage2 注册表值，使用候选字符串本身作为 DPAPI 可选熵尝试解密，并将解密结果整理为 User/Password 标记的内存数据；程序还可通过 URL History COM 接口反复枚举并尝试处理浏览历史结果。sub_409A9C 仅在 IE 版本检查通过时进入 Storage2 路径。sub_408AF8 另行将摘要文本写入调用者提供的缓冲区，但当前材料未证明该摘要被用于解密或后续外部副作用。当前包未提供七个 .abc 生产者的直接调用关系，因此不能把这些数据源分别归属到具体输出文件，也不能证明运行时成功或最终外传。",
+    "claims": [
+      {
+        "behavior": "在 IE 版本检查通过的条件下，程序读取当前用户的 IE IntelliForms Storage2 注册表项，枚举其值并尝试解密其中的数据。",
+        "condition": "sub_409980 返回 1；该返回值来自读取 HKLM\\Software\\Microsoft\\Internet Explorer 的 Version 值并与两个未解析常量比较。",
+        "source": "当前用户注册表键 Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2 中枚举到的值名和值数据。",
+        "action": "打开注册表键，逐项调用 RegEnumValueA/RegQueryValueExA；对每个成功读取的数据构造 DATA_BLOB，并调用 CryptUnprotectData，直接使用对应候选字符串及其长度作为 pOptionalEntropy。",
+        "sink": "解密成功的数据被追加到 sub_408E58 管理的内存缓冲区，随后由该函数返回给调用者；当前包未显示该缓冲区的最终文件或网络去向。",
+        "evidence": [
+          {
+            "location": "F-0478 L0005-L0009",
+            "observation": "函数调用 sub_409980；仅当其返回值为 1 时才调用 sub_4096EC。"
+          },
+          {
+            "location": "F-0475 L0022-L0026",
+            "observation": "读取 HKLM\\Software\\Microsoft\\Internet Explorer 的 Version 值并进行两次比较，比较结果为真时返回 1。"
+          },
+          {
+            "location": "F-0466 L0013-L0018",
+            "observation": "调用 sub_408E58，并传入固定子键 Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2。"
+          },
+          {
+            "location": "F-0464 L0057-L0087",
+            "observation": "打开 HKEY_CURRENT_USER 下的目标子键，枚举并查询每个值；成功读取后设置 pDataIn，直接以 v47[v7] 及其长度设置 pOptionalEntropy，并调用 CryptUnprotectData，成功时将 pDataOut 追加到内存缓冲区。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码证明的是读取和解密尝试，不证明注册表键存在、解密一定成功或后续数据被写出/传输。",
+          "pOptionalEntropy 的候选字符串集合由 a3/a1 及缺失的上游构造逻辑决定，当前包未闭合其具体来源。"
+        ]
+      },
+      {
+        "behavior": "程序使用候选字符串的宽字符内容计算固定长度的密码学摘要，并将摘要字节格式化为十六进制文本，再追加一个由摘要字节累加得到的十六进制值；该结果被写入调用者提供的缓冲区，但当前材料未证明它被用于 Storage2 解密或外部副作用。",
+        "condition": "sub_408AF8 被 sub_408E58 的每个枚举值处理循环调用。",
+        "source": "传入 sub_408AF8 的 OLECHAR 字符串 strIn；在调用点该字符串来自 v47[v7]。",
+        "action": "创建哈希对象，对 strIn 的 2*(长度+1) 字节数据执行 CryptHashData，取得哈希参数，逐字节格式化为两位十六进制并追加字节和。",
+        "sink": "生成的文本被追加到调用者提供的 a2 缓冲区；在同一调用流程中，sub_408E58 另行将对应候选字符串的宽字符内容作为 pOptionalEntropy 使用。",
+        "evidence": [
+          {
+            "location": "F-0461 L0029-L0039",
+            "observation": "创建哈希对象，对 strIn 的 2*(长度+1) 字节数据计算摘要并取回摘要参数。"
+          },
+          {
+            "location": "F-0461 L0043-L0063",
+            "observation": "逐摘要字节使用 %2.2X 格式追加到 a2，随后追加字节累加值的十六进制表示。"
+          },
+          {
+            "location": "F-0464 L0071-L0081",
+            "observation": "对 v47[v7] 调用 sub_408AF8，并将同一 v47[v7] 转为 pOptionalEntropy，之后调用 CryptUnprotectData；未显示使用 a2 摘要作为熵。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未给出 sub_408E58 的上游调用者如何构造 v47，因此不能确定候选字符串的完整集合及其与具体用户数据的对应关系。",
+          "当前材料未证明 sub_408AF8 生成的摘要文本被用于解密或任何后续外部副作用。"
+        ]
+      },
+      {
+        "behavior": "成功解密的 Storage2 数据被解析为带有 User: 或 Password: 标签的记录并加入内存结果缓冲区。",
+        "condition": "RegQueryValueExA 成功且 CryptUnprotectData 返回非零；每个记录的标签选择由 sub_408C94(v11) 的结果决定。",
+        "source": "CryptUnprotectData 输出的 pDataOut.pbData，以及 Storage2 每个值记录中的偏移和长度字段。",
+        "action": "sub_408CCC 根据记录结构读取字段，按类型追加 User: 或 Password:，再追加相应宽字符数据并将该记录加入 dst_ 缓冲区。",
+        "sink": "sub_408E58 的 dst_ 内存缓冲区，最终作为函数返回所管理的数据的一部分；没有当前包证据证明其已落盘或外传。",
+        "evidence": [
+          {
+            "location": "F-0464 L0081-L0087",
+            "observation": "解密成功后调用 sub_408CCC，并将其结果加入 dst_ 缓冲区。"
+          },
+          {
+            "location": "F-0463 L0031-L0055",
+            "observation": "读取记录字段；依据 sub_408C94 追加 User: 或 Password:，再追加记录数据并循环处理全部记录。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "记录结构和 sub_408C94 的具体分类规则未在本包中展开；可确认标签化处理，但不能进一步确定每条记录的精确字段语义。",
+          "该结果与 J00 所述固定 .abc 输出之间的映射需要对应的七个生产者函数证据。"
+        ]
+      },
+      {
+        "behavior": "程序通过 URL History COM 接口反复枚举并尝试处理浏览历史结果；可见代码随后对 lpWideCharStr 做长度、分配和复制，并写入调用者提供的数组，但枚举输出参数与 lpWideCharStr 之间的关联未在当前包闭合。",
+        "condition": "sub_40879C 被调用且 URL History COM 对象及枚举接口初始化成功；循环持续到枚举接口返回非零。",
+        "source": "系统 URL History COM 对象 CLSID_CUrlHistory 的枚举调用结果；具体结果到 lpWideCharStr 的赋值关系在当前材料中未显示。",
+        "action": "初始化 URL History COM 接口，反复调用枚举方法；随后尝试计算 lpWideCharStr 长度、分配宽字符缓冲区并复制内容。",
+        "sink": "若 lpWideCharStr 确由枚举输出赋值，则代码将其复制到调用者 a1 指向的数组槽位 (*a1)[v2 - 1]；该 source-to-sink 关联当前仅属未闭合的尝试性判断。",
+        "evidence": [
+          {
+            "location": "F-0449 L0028-L0036",
+            "observation": "初始化 COM，解析 CLSID_CUrlHistory，并取得对象和枚举接口后开始循环。"
+          },
+          {
+            "location": "F-0449 L0036-L0051",
+            "observation": "循环调用枚举接口并以 v14、v17 作为参数；随后对材料中未显示赋值来源的 lpWideCharStr 计算长度、分配缓冲区并复制到调用者数组。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "当前包未明确枚举调用的输出参数是否赋给 lpWideCharStr，因此不能确认每个枚举到的条目都被复制并存入数组。",
+          "当前包未显示 sub_40879C 的调用者如何使用 URL 数组，也未证明这些条目最终进入 J00 的某个固定输出文件。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "registry",
+        "value": "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "IE IntelliForms Storage2 数据的读取位置；与凭据解密路径直接相关，但不是单独足够的感染 IOC。",
+        "evidence": [
+          {
+            "location": "F-0466 L0013-L0018",
+            "observation": "将该固定子键传入 sub_408E58。"
+          },
+          {
+            "location": "F-0464 L0057-L0075",
+            "observation": "在 HKEY_CURRENT_USER 下打开并枚举该子键的值。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "Software\\Microsoft\\Internet Explorer",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "用于读取 IE Version 以门控 Storage2 收集路径的注册表子键。",
+        "evidence": [
+          {
+            "location": "F-0475 L0022-L0026",
+            "observation": "从 HKLM 下该子键读取 Version 并进行条件比较。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "guid",
+        "value": "CLSID_CUrlHistory",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "系统 URL History COM 类标识，用于访问浏览历史；属于常规系统资源，不是特异性恶意 IOC。",
+        "evidence": [
+          {
+            "location": "F-0449 L0030-L0036",
+            "observation": "通过 sub_408764 解析 CLSID_CUrlHistory 并取得后续枚举接口。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "User: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密数据整理时使用的用户字段标签。",
+        "evidence": [
+          {
+            "location": "F-0463 L0045-L0049",
+            "observation": "根据 sub_408C94 结果追加 User: 或 Password: 标签。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Password: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密数据整理时使用的密码字段标签。",
+        "evidence": [
+          {
+            "location": "F-0463 L0045-L0049",
+            "observation": "在另一分支追加 Password: 标签。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "七个 .abc 生产者是否分别调用 sub_409A9C、sub_4096EC 或 sub_40879C，以及每个文件承载哪类数据？",
+        "reason": "当前包展示了收集函数及其内部行为，但没有七个生产者函数的实现或直接调用关系；J00 仅确认其返回值被绑定到固定文件。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_408E58 返回的解密/标签化缓冲区是否最终写入文件、传输或仅在内存中使用？",
+        "reason": "当前包只显示其在内存中构造并返回，最终 sink 位于未提供的下游调用者或生产者中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_409980 中两个 IE Version 比较常量及 sub_401BAC/sub_4012B8 等上游字符串构造逻辑的具体语义是什么？",
+        "reason": "常量和部分上游数据构造未在当前包提供，限制了精确触发条件和候选熵来源判断。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "建立当前收集函数与 J00 固定 .abc 输出之间的直接映射。",
+        "expected_value": "确认具体文件的数据源、触发条件及最终 sink。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_408E58 callers and sub_40B93C",
+        "reason": "解析 Storage2 结果及备用路径结果的最终消费方式。",
+        "expected_value": "确认解密凭据/浏览数据是否写入固定文件、传输或执行其他外部副作用。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_409AD4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409D28",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认当前包中的 IE Storage2/URL History 收集结果分别流向哪些固定 .abc 输出及其完整 source-to-sink 关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0466 L0013-L0018",
+            "observation": "当前包确认 Storage2 收集函数被调用并返回数据。"
+          },
+          {
+            "location": "F-0449 L0036-L0051",
+            "observation": "当前包确认 URL History 条目被尝试收集到内存数组。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_408E58",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40B93C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 Storage2 解密结果及备用路径数据的最终外部副作用，尤其是是否进入 XX--XX--XX.txt 或其他传输 sink。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0464 L0081-L0099",
+            "observation": "解密结果被写入内存缓冲区，随后函数继续处理并返回；当前包未展示下游 sink。"
+          },
+          {
+            "location": "dependency J00 F-0500 L0172-L0190",
+            "observation": "J00 已验证备用路径将值与 XX--XX--XX.txt 传给 sub_40B93C，但未验证该 callee 的最终副作用。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了两类与 IE 数据收集相关的能力：程序可枚举当前用户 IE IntelliForms\\Storage2 注册表值，使用候选字符串本身作为 DPAPI 可选熵尝试解密，并将解密结果整理为 User/Password 标记的内存数据；程序还可通过 URL History COM 接口反复枚举并尝试处理浏览历史结果。sub_409A9C 仅在 IE 版本检查通过时进入 Storage2 路径。sub_408AF8 另行将摘要文本写入调用者提供的缓冲区，但当前材料未证明该摘要被用于解密或后续外部副作用。当前包未提供七个 .abc 生产者的直接调用关系，因此不能把这些数据源分别归属到具体输出文件，也不能证明运行时成功或最终外传。",
+    "claims": [
+      {
+        "behavior": "在 IE 版本检查通过的条件下，程序读取当前用户的 IE IntelliForms Storage2 注册表项，枚举其值并尝试解密其中的数据。",
+        "condition": "sub_409980 返回 1；该返回值来自读取 HKLM\\Software\\Microsoft\\Internet Explorer 的 Version 值并与两个未解析常量比较。",
+        "source": "当前用户注册表键 Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2 中枚举到的值名和值数据。",
+        "action": "打开注册表键，逐项调用 RegEnumValueA/RegQueryValueExA；对每个成功读取的数据构造 DATA_BLOB，并调用 CryptUnprotectData，直接使用对应候选字符串及其长度作为 pOptionalEntropy。",
+        "sink": "解密成功的数据被追加到 sub_408E58 管理的内存缓冲区，随后由该函数返回给调用者；当前包未显示该缓冲区的最终文件或网络去向。",
+        "evidence": [
+          {
+            "location": "F-0478 L0005-L0009",
+            "observation": "函数调用 sub_409980；仅当其返回值为 1 时才调用 sub_4096EC。"
+          },
+          {
+            "location": "F-0475 L0022-L0026",
+            "observation": "读取 HKLM\\Software\\Microsoft\\Internet Explorer 的 Version 值并进行两次比较，比较结果为真时返回 1。"
+          },
+          {
+            "location": "F-0466 L0013-L0018",
+            "observation": "调用 sub_408E58，并传入固定子键 Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2。"
+          },
+          {
+            "location": "F-0464 L0057-L0087",
+            "observation": "打开 HKEY_CURRENT_USER 下的目标子键，枚举并查询每个值；成功读取后设置 pDataIn 和 pOptionalEntropy，并调用 CryptUnprotectData，成功时将 pDataOut 追加到内存缓冲区。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码证明的是读取和解密尝试，不证明注册表键存在、解密一定成功或后续数据被写出/传输。",
+          "pOptionalEntropy 的候选字符串集合由 a3/a1 及缺失的上游构造逻辑决定，当前包未闭合其具体来源。"
+        ]
+      },
+      {
+        "behavior": "程序使用候选字符串的宽字符内容计算固定长度的密码学摘要，并将摘要字节格式化为十六进制文本，再追加一个由摘要字节累加得到的十六进制值；该结果被写入调用者提供的缓冲区，但当前材料未证明它被用于 Storage2 解密或外部副作用。",
+        "condition": "sub_408AF8 被 sub_408E58 的每个枚举值处理循环调用。",
+        "source": "传入 sub_408AF8 的 OLECHAR 字符串 strIn；在调用点该字符串来自 v47[v7]。",
+        "action": "创建哈希对象，对 strIn 的 2*(长度+1) 字节数据执行 CryptHashData，取得哈希参数，逐字节格式化为两位十六进制并追加字节和。",
+        "sink": "生成的文本被追加到调用者提供的 a2 缓冲区；在同一调用流程中，sub_408E58 另行将对应候选字符串的宽字符内容作为 pOptionalEntropy 使用。",
+        "evidence": [
+          {
+            "location": "F-0461 L0029-L0039",
+            "observation": "创建哈希对象，对 strIn 的 2*(长度+1) 字节数据计算摘要并取回摘要参数。"
+          },
+          {
+            "location": "F-0461 L0043-L0063",
+            "observation": "逐摘要字节使用 %2.2X 格式追加到 a2，随后追加字节累加值的十六进制表示。"
+          },
+          {
+            "location": "F-0464 L0071-L0081",
+            "observation": "对 v47[v7] 调用 sub_408AF8，并将同一 v47[v7] 转为 pOptionalEntropy，之后调用 CryptUnprotectData；未显示使用 a2 摘要作为熵。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未给出 sub_408E58 的上游调用者如何构造 v47，因此不能确定候选字符串的完整集合及其与具体用户数据的对应关系。",
+          "当前材料未证明 sub_408AF8 生成的摘要文本被用于解密或任何后续外部副作用。"
+        ]
+      },
+      {
+        "behavior": "成功解密的 Storage2 数据被解析为带有 User: 或 Password: 标签的记录并加入内存结果缓冲区。",
+        "condition": "RegQueryValueExA 成功且 CryptUnprotectData 返回非零；每个记录的标签选择由 sub_408C94(v11) 的结果决定。",
+        "source": "CryptUnprotectData 输出的 pDataOut.pbData，以及 Storage2 每个值记录中的偏移和长度字段。",
+        "action": "sub_408CCC 根据记录结构读取字段，按类型追加 User: 或 Password:，再追加相应宽字符数据并将该记录加入 dst_ 缓冲区。",
+        "sink": "sub_408E58 的 dst_ 内存缓冲区，最终作为函数返回所管理的数据的一部分；没有当前包证据证明其已落盘或外传。",
+        "evidence": [
+          {
+            "location": "F-0464 L0081-L0087",
+            "observation": "解密成功后调用 sub_408CCC，并将其结果加入 dst_ 缓冲区。"
+          },
+          {
+            "location": "F-0463 L0031-L0055",
+            "observation": "读取记录字段；依据 sub_408C94 追加 User: 或 Password:，再追加记录数据并循环处理全部记录。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "记录结构和 sub_408C94 的具体分类规则未在本包中展开；可确认标签化处理，但不能进一步确定每条记录的精确字段语义。",
+          "该结果与 J00 所述固定 .abc 输出之间的映射需要对应的七个生产者函数证据。"
+        ]
+      },
+      {
+        "behavior": "程序通过 URL History COM 接口反复枚举并尝试处理浏览历史结果；可见代码随后对 lpWideCharStr 做长度、分配和复制，并写入调用者提供的数组，但枚举输出参数与 lpWideCharStr 之间的关联未在当前包闭合。",
+        "condition": "sub_40879C 被调用且 URL History COM 对象及枚举接口初始化成功；循环持续到枚举接口返回非零。",
+        "source": "系统 URL History COM 对象 CLSID_CUrlHistory 的枚举调用结果；具体结果到 lpWideCharStr 的赋值关系在当前材料中未显示。",
+        "action": "初始化 URL History COM 接口，反复调用枚举方法；随后尝试计算 lpWideCharStr 长度、分配宽字符缓冲区并复制内容。",
+        "sink": "若 lpWideCharStr 确由枚举输出赋值，则代码将其复制到调用者 a1 指向的数组槽位 (*a1)[v2 - 1]；该 source-to-sink 关联当前仅属未闭合的尝试性判断。",
+        "evidence": [
+          {
+            "location": "F-0449 L0028-L0036",
+            "observation": "初始化 COM，解析 CLSID_CUrlHistory，并取得对象和枚举接口后开始循环。"
+          },
+          {
+            "location": "F-0449 L0036-L0051",
+            "observation": "循环调用枚举接口并以 v14、v17 作为参数；随后对材料中未显示赋值来源的 lpWideCharStr 计算长度、分配缓冲区并复制到调用者数组。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "当前包未明确枚举调用的输出参数是否赋给 lpWideCharStr，因此不能确认每个枚举到的条目都被复制并存入数组。",
+          "当前包未显示 sub_40879C 的调用者如何使用 URL 数组，也未证明这些条目最终进入 J00 的某个固定输出文件。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "registry",
+        "value": "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "IE IntelliForms Storage2 数据的读取位置；与凭据解密路径直接相关，但不是单独足够的感染 IOC。",
+        "evidence": [
+          {
+            "location": "F-0466 L0013-L0018",
+            "observation": "将该固定子键传入 sub_408E58。"
+          },
+          {
+            "location": "F-0464 L0057-L0075",
+            "observation": "在 HKEY_CURRENT_USER 下打开并枚举该子键的值。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Software\\Microsoft\\Internet Explorer",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "用于读取 IE Version 以门控 Storage2 收集路径的注册表子键。",
+        "evidence": [
+          {
+            "location": "F-0475 L0022-L0026",
+            "observation": "从 HKLM 下该子键读取 Version 并进行条件比较。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "guid",
+        "value": "CLSID_CUrlHistory",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "系统 URL History COM 类标识，用于访问浏览历史；属于常规系统资源，不是特异性恶意 IOC。",
+        "evidence": [
+          {
+            "location": "F-0449 L0030-L0036",
+            "observation": "通过 sub_408764 解析 CLSID_CUrlHistory 并取得后续枚举接口。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "User: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密数据整理时使用的用户字段标签。",
+        "evidence": [
+          {
+            "location": "F-0463 L0045-L0049",
+            "observation": "根据 sub_408C94 结果追加 User: 或 Password: 标签。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Password: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密数据整理时使用的密码字段标签。",
+        "evidence": [
+          {
+            "location": "F-0463 L0045-L0049",
+            "observation": "在另一分支追加 Password: 标签。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "七个 .abc 生产者是否分别调用 sub_409A9C、sub_4096EC 或 sub_40879C，以及每个文件承载哪类数据？",
+        "reason": "当前包展示了收集函数及其内部行为，但没有七个生产者函数的实现或直接调用关系；J00 仅确认其返回值被绑定到固定文件。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_408E58 返回的解密/标签化缓冲区是否最终写入文件、传输或仅在内存中使用？",
+        "reason": "当前包只显示其在内存中构造并返回，最终 sink 位于未提供的下游调用者或生产者中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_409980 中两个 IE Version 比较常量及 sub_401BAC/sub_4012B8 等上游字符串构造逻辑的具体语义是什么？",
+        "reason": "常量和部分上游数据构造未在当前包提供，限制了精确触发条件和候选熵来源判断。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "建立当前收集函数与 J00 固定 .abc 输出之间的直接映射。",
+        "expected_value": "确认具体文件的数据源、触发条件及最终 sink。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_408E58 callers and sub_40B93C",
+        "reason": "解析 Storage2 结果及备用路径结果的最终消费方式。",
+        "expected_value": "确认解密凭据/浏览数据是否写入固定文件、传输或执行其他外部副作用。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_409AD4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409D28",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认当前包中的 IE Storage2/URL History 收集结果分别流向哪些固定 .abc 输出及其完整 source-to-sink 关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0466 L0013-L0018",
+            "observation": "当前包确认 Storage2 收集函数被调用并返回数据。"
+          },
+          {
+            "location": "F-0449 L0036-L0051",
+            "observation": "当前包确认 URL History 条目被收集到内存数组。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_408E58",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40B93C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 Storage2 解密结果及备用路径数据的最终外部副作用，尤其是是否进入 XX--XX--XX.txt 或其他传输 sink。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0464 L0081-L0099",
+            "observation": "解密结果被写入内存缓冲区，随后函数继续处理并返回；当前包未展示下游 sink。"
+          },
+          {
+            "location": "dependency J00 F-0500 L0172-L0190",
+            "observation": "J00 已验证备用路径将值与 XX--XX--XX.txt 传给 sub_40B93C，但未验证该 callee 的最终副作用。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/0/evidence/1/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/3/evidence/0/location",
+      "/artifacts/4/evidence/0/location",
+      "/claims/0/action",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/0/evidence/3/location",
+      "/claims/0/limitations",
+      "/claims/1",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/2/evidence/0/location",
+      "/claims/2/evidence/1/location",
+      "/claims/2/limitations",
+      "/claims/3",
+      "/claims/3/evidence/0/location",
+      "/claims/3/evidence/1/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/0/evidence/1/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/1/evidence/1/location",
+      "/summary"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [],
+    "applied_paths": [
+      "/summary",
+      "/claims/0/action",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/0/evidence/3/location",
+      "/claims/1/behavior",
+      "/claims/1/action",
+      "/claims/1/sink",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/1/evidence/2/observation",
+      "/claims/1/limitations",
+      "/claims/2/evidence/0/location",
+      "/claims/2/evidence/1/location",
+      "/claims/3/behavior",
+      "/claims/3/source",
+      "/claims/3/action",
+      "/claims/3/sink",
+      "/claims/3/evidence/0/location",
+      "/claims/3/evidence/1/location",
+      "/claims/3/evidence/1/observation",
+      "/claims/3/confidence",
+      "/claims/3/evidence_level",
+      "/claims/3/limitations",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/0/evidence/1/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/3/evidence/0/location",
+      "/artifacts/4/evidence/0/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/0/evidence/1/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/1/evidence/1/location"
+    ],
+    "ignored_paths": [
+      "/claims/0/evidence/3/observation",
+      "/artifacts/1/kind",
+      "/material_needs/0/evidence/1/observation"
+    ],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "wrong_claim",
+        "description": "Analyzer 将 Storage2 的 DPAPI 可选熵错误表述为“由候选字符串派生的哈希材料”。当前代码中 sub_408AF8 生成的摘要写入调用者提供的 a2/v44 缓冲区，但 sub_408E58 随后把 v47[v7] 本身（及其长度）赋给 pOptionalEntropy；材料没有显示摘要输出被作为 CryptUnprotectData 的熵使用。该错误改变了关键 source→action 关系。",
+        "evidence": [
+          {
+            "location": "F-0464 L71-L81",
+            "observation": "对 v47[v7] 调用 sub_408AF8 后，pOptionalEntropy.pbData 直接设置为 v47[v7]，pOptionalEntropy.cbData 根据同一字符串长度计算，随后传入 CryptUnprotectData；没有把 sub_408AF8 的 a2 输出作为 pOptionalEntropy。"
+          },
+          {
+            "location": "F-0461 L29-L63",
+            "observation": "sub_408AF8 将摘要十六进制文本和字节累加值追加到调用者提供的 a2 缓冲区。"
+          }
+        ],
+        "required_fix": "将 claim 0 的 action/limitations、claim 1 的整体表述及 summary 改为：解密尝试使用候选字符串本身作为可选熵；sub_408AF8 另行把摘要文本写入 a2 缓冲区，但当前材料未证明该摘要被用于解密或后续外部副作用。不得继续把摘要称为 DPAPI 可选熵。",
+        "fixes": [
+          {
+            "type": "claim_revision",
+            "targets": [
+              "/claims/0",
+              "/claims/1",
+              "/claims/2"
+            ]
+          },
+          {
+            "type": "evidence_revision",
+            "targets": [
+              "/claims/1/evidence/2"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前包内所有源码证据 location 都写成了“F-xxxx 函数名 原文件 L...”，而验收格式要求可解析的“F-xxxx Lx-Ly”。验证结果显示 current_packet 的 valid_segments 为 0，claims、artifacts 和 material_needs 的当前包证据全部不可解析，导致核心结论无法被定位验收。",
+        "evidence": [
+          {
+            "location": "claims 0-3、artifacts 0-4、material_needs 0-1 的全部当前包 evidence.location",
+            "observation": "例如现值“F-0478 sub_409A9C 原文件 L0005-L0009”包含函数名和“原文件”前缀，验证器报告为 invalid_format；同类格式覆盖本包全部 20 个当前包引用。"
+          }
+        ],
+        "required_fix": "只修正当前包来源的 location 格式为对应的 F-xxxx Lx-Ly，例如“F-0478 L0005-L0009”；保留原有 observation 与证据指向，不要用报告排版行号替代源码行号。dependency J00 引用可继续按依赖摘要标注，不要据此改写为当前包源码证据。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/*",
+              "/artifacts/*",
+              "/material_needs/*"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "unsupported_claim",
+        "description": "claim 4 将 URL History 枚举结果的 source→sink 作为 confirmed，但当前重建代码没有明确把枚举调用的输出参数 v14/v17 赋给随后复制的 lpWideCharStr；L39-L50 使用 lpWideCharStr 进行长度、分配和复制，但其来源在可见材料中未闭合。因此“每个枚举到的条目被复制并存入数组”超出当前直接证据，至少应降为 suspected 并明确该变量关联缺口。",
+        "evidence": [
+          {
+            "location": "F-0449 L36-L50",
+            "observation": "循环调用对象方法并以 v14、v17 作为参数，随后却对未在可见代码中赋值的 lpWideCharStr 做复制和长度处理，再写入调用者数组；枚举输出与复制源之间的连接没有直接显示。"
+          }
+        ],
+        "required_fix": "将该 claim 的 evidence_level 降为 suspected，或仅保留材料直接支持的“通过 URL History COM 反复枚举并尝试处理结果”表述；在 source/action/sink 或 limitations 中明确枚举输出到 lpWideCharStr 的关联未由当前包闭合。若保留数组写入结论，必须提供当前包内直接建立该关联的证据。",
+        "fixes": [
+          {
+            "type": "claim_revision",
+            "targets": [
+              "/claims/3"
+            ]
+          },
+          {
+            "type": "evidence_revision",
+            "targets": [
+              "/claims/3/evidence/1"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "当前 Analyzer 覆盖了 Storage2、DPAPI 调用、URL History 及 IE 版本门控等主要新行为，也正确保留了 .abc 映射和最终 sink 缺口；但存在一个会改变核心数据关系的 DPAPI 熵错误、全部当前包证据引用不可解析的问题，以及对 URL History 输出关联过度确认的问题。需修订后才能通过覆盖验收。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了两类与 IE 数据收集相关的能力：程序可枚举当前用户 IE IntelliForms\\Storage2 注册表值，使用候选字符串本身作为 DPAPI 可选熵尝试解密，并将解密结果整理为 User/Password 标记的内存数据；程序还可通过 URL History COM 接口反复枚举并尝试处理浏览历史结果。sub_409A9C 仅在 IE 版本检查通过时进入 Storage2 路径。sub_408AF8 另行将摘要文本写入调用者提供的缓冲区，但当前材料未证明该摘要被用于解密或后续外部副作用。当前包未提供七个 .abc 生产者的直接调用关系，因此不能把这些数据源分别归属到具体输出文件，也不能证明运行时成功或最终外传。",
+    "claims": [
+      {
+        "behavior": "在 IE 版本检查通过的条件下，程序读取当前用户的 IE IntelliForms Storage2 注册表项，枚举其值并尝试解密其中的数据。",
+        "condition": "sub_409980 返回 1；该返回值来自读取 HKLM\\Software\\Microsoft\\Internet Explorer 的 Version 值并与两个未解析常量比较。",
+        "source": "当前用户注册表键 Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2 中枚举到的值名和值数据。",
+        "action": "打开注册表键，逐项调用 RegEnumValueA/RegQueryValueExA；对每个成功读取的数据构造 DATA_BLOB，并调用 CryptUnprotectData，直接使用对应候选字符串及其长度作为 pOptionalEntropy。",
+        "sink": "解密成功的数据被追加到 sub_408E58 管理的内存缓冲区，随后由该函数返回给调用者；当前包未显示该缓冲区的最终文件或网络去向。",
+        "evidence": [
+          {
+            "location": "F-0478 L0005-L0009",
+            "observation": "函数调用 sub_409980；仅当其返回值为 1 时才调用 sub_4096EC。"
+          },
+          {
+            "location": "F-0475 L0022-L0026",
+            "observation": "读取 HKLM\\Software\\Microsoft\\Internet Explorer 的 Version 值并进行两次比较，比较结果为真时返回 1。"
+          },
+          {
+            "location": "F-0466 L0013-L0018",
+            "observation": "调用 sub_408E58，并传入固定子键 Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2。"
+          },
+          {
+            "location": "F-0464 L0057-L0087",
+            "observation": "打开 HKEY_CURRENT_USER 下的目标子键，枚举并查询每个值；成功读取后设置 pDataIn 和 pOptionalEntropy，并调用 CryptUnprotectData，成功时将 pDataOut 追加到内存缓冲区。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码证明的是读取和解密尝试，不证明注册表键存在、解密一定成功或后续数据被写出/传输。",
+          "pOptionalEntropy 的候选字符串集合由 a3/a1 及缺失的上游构造逻辑决定，当前包未闭合其具体来源。"
+        ]
+      },
+      {
+        "behavior": "程序使用候选字符串的宽字符内容计算固定长度的密码学摘要，并将摘要字节格式化为十六进制文本，再追加一个由摘要字节累加得到的十六进制值；该结果被写入调用者提供的缓冲区，但当前材料未证明它被用于 Storage2 解密或外部副作用。",
+        "condition": "sub_408AF8 被 sub_408E58 的每个枚举值处理循环调用。",
+        "source": "传入 sub_408AF8 的 OLECHAR 字符串 strIn；在调用点该字符串来自 v47[v7]。",
+        "action": "创建哈希对象，对 strIn 的 2*(长度+1) 字节数据执行 CryptHashData，取得哈希参数，逐字节格式化为两位十六进制并追加字节和。",
+        "sink": "生成的文本被追加到调用者提供的 a2 缓冲区；在同一调用流程中，sub_408E58 另行将对应候选字符串的宽字符内容作为 pOptionalEntropy 使用。",
+        "evidence": [
+          {
+            "location": "F-0461 L0029-L0039",
+            "observation": "创建哈希对象，对 strIn 的 2*(长度+1) 字节数据计算摘要并取回摘要参数。"
+          },
+          {
+            "location": "F-0461 L0043-L0063",
+            "observation": "逐摘要字节使用 %2.2X 格式追加到 a2，随后追加字节累加值的十六进制表示。"
+          },
+          {
+            "location": "F-0464 L0071-L0081",
+            "observation": "对 v47[v7] 调用 sub_408AF8，并将同一 v47[v7] 转为 pOptionalEntropy，之后调用 CryptUnprotectData；未显示使用 a2 摘要作为熵。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未给出 sub_408E58 的上游调用者如何构造 v47，因此不能确定候选字符串的完整集合及其与具体用户数据的对应关系。",
+          "当前材料未证明 sub_408AF8 生成的摘要文本被用于解密或任何后续外部副作用。"
+        ]
+      },
+      {
+        "behavior": "成功解密的 Storage2 数据被解析为带有 User: 或 Password: 标签的记录并加入内存结果缓冲区。",
+        "condition": "RegQueryValueExA 成功且 CryptUnprotectData 返回非零；每个记录的标签选择由 sub_408C94(v11) 的结果决定。",
+        "source": "CryptUnprotectData 输出的 pDataOut.pbData，以及 Storage2 每个值记录中的偏移和长度字段。",
+        "action": "sub_408CCC 根据记录结构读取字段，按类型追加 User: 或 Password:，再追加相应宽字符数据并将该记录加入 dst_ 缓冲区。",
+        "sink": "sub_408E58 的 dst_ 内存缓冲区，最终作为函数返回所管理的数据的一部分；没有当前包证据证明其已落盘或外传。",
+        "evidence": [
+          {
+            "location": "F-0464 L0081-L0087",
+            "observation": "解密成功后调用 sub_408CCC，并将其结果加入 dst_ 缓冲区。"
+          },
+          {
+            "location": "F-0463 L0031-L0055",
+            "observation": "读取记录字段；依据 sub_408C94 追加 User: 或 Password:，再追加记录数据并循环处理全部记录。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "记录结构和 sub_408C94 的具体分类规则未在本包中展开；可确认标签化处理，但不能进一步确定每条记录的精确字段语义。",
+          "该结果与 J00 所述固定 .abc 输出之间的映射需要对应的七个生产者函数证据。"
+        ]
+      },
+      {
+        "behavior": "程序通过 URL History COM 接口反复枚举并尝试处理浏览历史结果；可见代码随后对 lpWideCharStr 做长度、分配和复制，并写入调用者提供的数组，但枚举输出参数与 lpWideCharStr 之间的关联未在当前包闭合。",
+        "condition": "sub_40879C 被调用且 URL History COM 对象及枚举接口初始化成功；循环持续到枚举接口返回非零。",
+        "source": "系统 URL History COM 对象 CLSID_CUrlHistory 的枚举调用结果；具体结果到 lpWideCharStr 的赋值关系在当前材料中未显示。",
+        "action": "初始化 URL History COM 接口，反复调用枚举方法；随后尝试计算 lpWideCharStr 长度、分配宽字符缓冲区并复制内容。",
+        "sink": "若 lpWideCharStr 确由枚举输出赋值，则代码将其复制到调用者 a1 指向的数组槽位 (*a1)[v2 - 1]；该 source-to-sink 关联当前仅属未闭合的尝试性判断。",
+        "evidence": [
+          {
+            "location": "F-0449 L0028-L0036",
+            "observation": "初始化 COM，解析 CLSID_CUrlHistory，并取得对象和枚举接口后开始循环。"
+          },
+          {
+            "location": "F-0449 L0036-L0051",
+            "observation": "循环调用枚举接口并以 v14、v17 作为参数；随后对材料中未显示赋值来源的 lpWideCharStr 计算长度、分配缓冲区并复制到调用者数组。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "当前包未明确枚举调用的输出参数是否赋给 lpWideCharStr，因此不能确认每个枚举到的条目都被复制并存入数组。",
+          "当前包未显示 sub_40879C 的调用者如何使用 URL 数组，也未证明这些条目最终进入 J00 的某个固定输出文件。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "registry",
+        "value": "HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "IE IntelliForms Storage2 数据的读取位置；与凭据解密路径直接相关，但不是单独足够的感染 IOC。",
+        "evidence": [
+          {
+            "location": "F-0466 L0013-L0018",
+            "observation": "将该固定子键传入 sub_408E58。"
+          },
+          {
+            "location": "F-0464 L0057-L0075",
+            "observation": "在 HKEY_CURRENT_USER 下打开并枚举该子键的值。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Software\\Microsoft\\Internet Explorer",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "用于读取 IE Version 以门控 Storage2 收集路径的注册表子键。",
+        "evidence": [
+          {
+            "location": "F-0475 L0022-L0026",
+            "observation": "从 HKLM 下该子键读取 Version 并进行条件比较。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "guid",
+        "value": "CLSID_CUrlHistory",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "系统 URL History COM 类标识，用于访问浏览历史；属于常规系统资源，不是特异性恶意 IOC。",
+        "evidence": [
+          {
+            "location": "F-0449 L0030-L0036",
+            "observation": "通过 sub_408764 解析 CLSID_CUrlHistory 并取得后续枚举接口。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "User: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密数据整理时使用的用户字段标签。",
+        "evidence": [
+          {
+            "location": "F-0463 L0045-L0049",
+            "observation": "根据 sub_408C94 结果追加 User: 或 Password: 标签。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Password: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密数据整理时使用的密码字段标签。",
+        "evidence": [
+          {
+            "location": "F-0463 L0045-L0049",
+            "observation": "在另一分支追加 Password: 标签。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "七个 .abc 生产者是否分别调用 sub_409A9C、sub_4096EC 或 sub_40879C，以及每个文件承载哪类数据？",
+        "reason": "当前包展示了收集函数及其内部行为，但没有七个生产者函数的实现或直接调用关系；J00 仅确认其返回值被绑定到固定文件。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_408E58 返回的解密/标签化缓冲区是否最终写入文件、传输或仅在内存中使用？",
+        "reason": "当前包只显示其在内存中构造并返回，最终 sink 位于未提供的下游调用者或生产者中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_409980 中两个 IE Version 比较常量及 sub_401BAC/sub_4012B8 等上游字符串构造逻辑的具体语义是什么？",
+        "reason": "常量和部分上游数据构造未在当前包提供，限制了精确触发条件和候选熵来源判断。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_409AD4, sub_409D28, sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "建立当前收集函数与 J00 固定 .abc 输出之间的直接映射。",
+        "expected_value": "确认具体文件的数据源、触发条件及最终 sink。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_408E58 callers and sub_40B93C",
+        "reason": "解析 Storage2 结果及备用路径结果的最终消费方式。",
+        "expected_value": "确认解密凭据/浏览数据是否写入固定文件、传输或执行其他外部副作用。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_409AD4",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409D28",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认当前包中的 IE Storage2/URL History 收集结果分别流向哪些固定 .abc 输出及其完整 source-to-sink 关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0466 L0013-L0018",
+            "observation": "当前包确认 Storage2 收集函数被调用并返回数据。"
+          },
+          {
+            "location": "F-0449 L0036-L0051",
+            "observation": "当前包确认 URL History 条目被收集到内存数组。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_408E58",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40B93C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 Storage2 解密结果及备用路径数据的最终外部副作用，尤其是是否进入 XX--XX--XX.txt 或其他传输 sink。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0464 L0081-L0099",
+            "observation": "解密结果被写入内存缓冲区，随后函数继续处理并返回；当前包未展示下游 sink。"
+          },
+          {
+            "location": "dependency J00 F-0500 L0172-L0190",
+            "observation": "J00 已验证备用路径将值与 XX--XX--XX.txt 传给 sub_40B93C，但未验证该 callee 的最终副作用。"
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": [
+    "/claims/0/evidence/3/observation",
+    "/artifacts/1/kind",
+    "/material_needs/0/evidence/1/observation"
+  ]
+}

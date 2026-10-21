@@ -1,0 +1,1359 @@
+{
+  "provenance": {
+    "original_records": {
+      "analyzer": {
+        "path": "results_v17/_artifacts/J13/analyzer/validated_result.json",
+        "sha256": "1633d04b0f1c02e09188f4cf2d41f95a36667b1531fdc1a6c5e4eda6c6164403"
+      },
+      "reviewer": {
+        "path": "results_prompt_check_J13_2762f6a2/_artifacts/J13/reviewer/validated_result.json",
+        "sha256": "0471d884612ae6eade860db9f6282780f2e7cab7df543eb13c9ffe4d3168f72c"
+      },
+      "reviser": {
+        "path": "results_prompt_check_J13_2762f6a2/_artifacts/J13/reviser/validated_result.json",
+        "sha256": "437c006500f7a69f60112cef8557255f0e6eb3d5f205e3937e0d077a683e907a"
+      },
+      "previous_final": {
+        "path": "results_prompt_check_J13_2762f6a2/_artifacts/J13/reviser/scope_applied_result.json",
+        "sha256": "18aac6277f640bdbeaf87b6e2437e531183dbd631a771e13cb4f9d9a646762cf"
+      },
+      "previous_audit": {
+        "path": "results_prompt_check_J13_2762f6a2/_artifacts/J13/reviser/revision_scope.json",
+        "sha256": "5fcd0c3cca64ed796be6646e308ac9a3753b51644ad287bfad863894d62d3cb8"
+      },
+      "packet": {
+        "path": "testdata/packets/J13.md",
+        "sha256": "0447b3e66b533b2361f20e7df94f35968ece317045e4c982db6a6acc3dd1521a"
+      }
+    },
+    "review_origin": "actual saved Reviewer output with typed fixes, unchanged",
+    "candidate_origin": "actual saved Reviser output, unchanged",
+    "expected_result_origin": "previous actual merged result, changing only /artifacts/0/kind to string"
+  },
+  "packet_name": "J13",
+  "packet_text": "# J13 宿主选择与 PE 映射主路径\n任务来源：J00 F495/F496；远程映射器调用 F304→F302。必须同时列出其他效果分支。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0495 sub_40B3C0，原文件 L0001–L0121 / 共 121 行\n```text\nL0001: int *__usercall sub_40B3C0@<eax>(int a1@<ebx>)\nL0002: {\nL0003:   unsigned int n3; // esi\nL0004:   char v2; // zf\nL0005:   int n3_1; // ecx\nL0006:   char v4; // al\nL0007:   HWND hWnd; // eax\nL0008:   HANDLE hProcess; // eax\nL0009:   int n3_2; // ecx\nL0010:   char *lpApplicationName; // eax\nL0011:   int n3_3; // ecx\nL0012:   char *lpApplicationName_1; // eax\nL0013:   int n3_5; // ecx\nL0014:   char *lpFile; // eax\nL0015:   char *lpApplicationName_2; // eax\nL0016:   int n3_4; // ecx\nL0017:   unsigned int v16[2]; // [esp-Ch] [ebp-84h] BYREF\nL0018:   int *v17; // [esp-4h] [ebp-7Ch]\nL0019:   int *v18; // [esp+8h] [ebp-70h] BYREF\nL0020:   __int32 dst_2; // [esp+Ch] [ebp-6Ch] BYREF\nL0021:   __int32 dst_1; // [esp+10h] [ebp-68h] BYREF\nL0022:   __int32 dst; // [esp+14h] [ebp-64h] BYREF\nL0023:   __int32 v22; // [esp+18h] [ebp-60h] BYREF\nL0024:   struct _STARTUPINFOA StartupInfo; // [esp+1Ch] [ebp-5Ch] BYREF\nL0025:   struct _PROCESS_INFORMATION ProcessInformation; // [esp+60h] [ebp-18h] BYREF\nL0026:   DWORD dwProcessId_1; // [esp+70h] [ebp-8h] BYREF\nL0027:   DWORD dwProcessId; // [esp+74h] [ebp-4h] BYREF\nL0028:   int savedregs; // [esp+78h] [ebp+0h] BYREF\nL0029: \nL0030:   v18 = 0;\nL0031:   dst_2 = 0;\nL0032:   dst_1 = 0;\nL0033:   dst = 0;\nL0034:   v22 = 0;\nL0035:   v17 = &savedregs;\nL0036:   v16[1] = (unsigned int)&loc_40B7A8;\nL0037:   v16[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0038:   __writefsdword(0, (unsigned int)v16);\nL0039:   n3 = sub_401F9C((unsigned int *)off_40D1CC);\nL0040:   if ( *off_40D210 == 2 )\nL0041:   {\nL0042:     sub_4047C4(*off_40D21C, &v22);\nL0043:     sub_401E94(v22, (int *)\"explorer.exe\");\nL0044:     if ( v2 )\nL0045:     {\nL0046:       if ( *off_40D214[0] == 1\nL0047:         || (hWnd = FindWindowA(\"shell_traywnd\", 0),\nL0048:             GetWindowThreadProcessId(hWnd, &dwProcessId),\nL0049:             hProcess = OpenProcess(0x1F0FFFu, 0, dwProcessId),\nL0050:             !sub_4040F4(hProcess, n3, n3_2)) )\nL0051:       {\nL0052:         sub_403738((char *)&StartupInfo, 68);\nL0053:         sub_403738((char *)&ProcessInformation, 16);\nL0054:         CreateProcessA(0, (LPSTR)\"explorer.exe\", 0, 0, 0, 4u, 0, 0, &StartupInfo, &ProcessInformation);\nL0055:         v4 = sub_4040F4(ProcessInformation.hProcess, n3, n3_1);\nL0056:       }\nL0057:       else\nL0058:       {\nL0059:         v4 = 1;\nL0060:       }\nL0061:     }\nL0062:     else\nL0063:     {\nL0064:       if ( (unsigned __int8)sub_4064DC(*off_40D21C, &dwProcessId_1) == 1 )\nL0065:       {\nL0066:         sub_4063FC(dwProcessId_1, (unsigned int *)&dst);\nL0067:         sub_401B14(off_40D21C, dst);\nL0068:       }\nL0069:       else\nL0070:       {\nL0071:         sub_406294(&dst_1, a1);\nL0072:         sub_401B14(off_40D21C, dst_1);\nL0073:       }\nL0074:       sub_403738((char *)&StartupInfo, 68);\nL0075:       sub_403738((char *)&ProcessInformation, 16);\nL0076:       lpApplicationName = sub_401F48((char *)*off_40D21C);\nL0077:       CreateProcessA(lpApplicationName, (LPSTR)lpCommandLine_, 0, 0, 0, 4u, 0, 0, &StartupInfo, &ProcessInformation);\nL0078:       v4 = sub_4040F4(ProcessInformation.hProcess, n3, n3_3);\nL0079:     }\nL0080:     if ( !v4 )\nL0081:       goto LABEL_19;\nL0082:   }\nL0083:   else\nL0084:   {\nL0085:     if ( *off_40D210 != 1 )\nL0086:     {\nL0087:       if ( *off_40D1B8 == 1 )\nL0088:       {\nL0089:         sub_4013A4(0, (int *)&v18);\nL0090:         sub_401E94(dword_40F1E8, v18);\nL0091:         if ( !v2 )\nL0092:         {\nL0093:           lpFile = sub_401F48((char *)dword_40F1E8);\nL0094:           sub_405AD8(0, \"open\", lpFile, 0, lpCommandLine_, lpCommandLine_);\nL0095:           sub_40AFB0();\nL0096:           ExitProcess_0(0);\nL0097:         }\nL0098:       }\nL0099:       goto LABEL_19;\nL0100:     }\nL0101:     sub_406294(&dst_2, a1);\nL0102:     sub_401B14(off_40D21C, dst_2);\nL0103:     sub_403738((char *)&StartupInfo, 68);\nL0104:     sub_403738((char *)&ProcessInformation, 16);\nL0105:     lpApplicationName_1 = sub_401F48((char *)*off_40D21C);\nL0106:     CreateProcessA(lpApplicationName_1, (LPSTR)lpCommandLine_, 0, 0, 0, 4u, 0, 0, &StartupInfo, &ProcessInformation);\nL0107:     if ( !sub_4040F4(ProcessInformation.hProcess, n3, n3_5) )\nL0108:     {\nL0109: LABEL_19:\nL0110:       sub_4013A4(0, off_40D21C);\nL0111:       sub_403738((char *)&StartupInfo, 68);\nL0112:       sub_403738((char *)&ProcessInformation, 16);\nL0113:       lpApplicationName_2 = sub_401F48((char *)*off_40D21C);\nL0114:       CreateProcessA(lpApplicationName_2, (LPSTR)lpCommandLine_, 0, 0, 0, 4u, 0, 0, &StartupInfo, &ProcessInformation);\nL0115:       sub_4040F4(ProcessInformation.hProcess, n3, n3_4);\nL0116:     }\nL0117:   }\nL0118:   __writefsdword(0, v16[0]);\nL0119:   v17 = (int *)&loc_40B7AF;\nL0120:   return sub_401AE4((int *)&v18, 5);\nL0121: }\n```\n\n## F-0496 sub_40B7FC，原文件 L0001–L0048 / 共 48 行\n```text\nL0001: _DWORD *sub_40B7FC()\nL0002: {\nL0003:   char *lpName; // eax\nL0004:   HANDLE hObject; // ebx\nL0005:   unsigned int n3; // esi\nL0006:   HWND hWnd; // eax\nL0007:   HANDLE hProcess; // eax\nL0008:   int n3_2; // ecx\nL0009:   int n3_1; // ecx\nL0010:   unsigned int v8[2]; // [esp-Ch] [ebp-70h] BYREF\nL0011:   int *v9; // [esp-4h] [ebp-68h]\nL0012:   char *v10; // [esp+8h] [ebp-5Ch] BYREF\nL0013:   struct _STARTUPINFOA StartupInfo; // [esp+Ch] [ebp-58h] BYREF\nL0014:   struct _PROCESS_INFORMATION ProcessInformation; // [esp+50h] [ebp-14h] BYREF\nL0015:   DWORD dwProcessId; // [esp+60h] [ebp-4h] BYREF\nL0016:   int savedregs; // [esp+64h] [ebp+0h] BYREF\nL0017: \nL0018:   v10 = 0;\nL0019:   v9 = &savedregs;\nL0020:   v8[1] = (unsigned int)&loc_40B8FA;\nL0021:   v8[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0022:   __writefsdword(0, (unsigned int)v8);\nL0023:   sub_401D9C((volatile __int32 *)&v10, *off_40D204[0], (unsigned __int32)\"_PERSIST\");\nL0024:   lpName = sub_401F48(v10);\nL0025:   hObject = CreateMutexA_w(0, 0, lpName);\nL0026:   if ( GetLastError() == 183 )\nL0027:   {\nL0028:     CloseHandle(hObject);\nL0029:   }\nL0030:   else\nL0031:   {\nL0032:     CloseHandle(hObject);\nL0033:     n3 = sub_401F9C((unsigned int *)off_40D1CC);\nL0034:     hWnd = FindWindowA(\"Shell_TrayWnd\", 0);\nL0035:     GetWindowThreadProcessId(hWnd, &dwProcessId);\nL0036:     hProcess = OpenProcess(0x1F0FFFu, 0, dwProcessId);\nL0037:     if ( !sub_4040F4(hProcess, n3, n3_2) )\nL0038:     {\nL0039:       sub_403738((char *)&StartupInfo, 68);\nL0040:       sub_403738((char *)&ProcessInformation, 16);\nL0041:       CreateProcessA(0, (LPSTR)\"explorer.exe\", 0, 0, 0, 4u, 0, 0, &StartupInfo, &ProcessInformation);\nL0042:       sub_4040F4(ProcessInformation.hProcess, n3, n3_1);\nL0043:     }\nL0044:   }\nL0045:   __writefsdword(0, v8[0]);\nL0046:   v9 = (int *)&loc_40B901;\nL0047:   return sub_401AC0(&v10);\nL0048: }\n```\n\n## F-0304 sub_4040F4，原文件 L0001–L0057 / 共 57 行\n```text\nL0001: char __usercall sub_4040F4@<al>(void *hProcess_1@<eax>, int n3_2@<edx>, int n3@<ecx>)\nL0002: {\nL0003:   unsigned int dwSize; // edi\nL0004:   unsigned int n0x10000000; // esi\nL0005:   void *lpAddress; // eax\nL0006:   void *lpAddress_1; // ebx\nL0007:   unsigned int v8[2]; // [esp+8h] [ebp-44h] BYREF\nL0008:   int *v9; // [esp+10h] [ebp-3Ch]\nL0009:   LPCVOID lpBuffer[5]; // [esp+20h] [ebp-2Ch] BYREF\nL0010:   SIZE_T NumberOfBytesWritten; // [esp+34h] [ebp-18h] BYREF\nL0011:   _DWORD lpBuffer_[2]; // [esp+38h] [ebp-14h] BYREF\nL0012:   char v13; // [esp+43h] [ebp-9h]\nL0013:   int n3_1; // [esp+44h] [ebp-8h]\nL0014:   HANDLE hProcess; // [esp+48h] [ebp-4h]\nL0015:   int savedregs; // [esp+4Ch] [ebp+0h] BYREF\nL0016: \nL0017:   n3_1 = n3_2;\nL0018:   hProcess = hProcess_1;\nL0019:   sub_40242C(n3, (int)n4_);\nL0020:   v9 = &savedregs;\nL0021:   v8[1] = (unsigned int)&loc_404205;\nL0022:   v8[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0023:   __writefsdword(0, (unsigned int)v8);\nL0024:   v13 = 0;\nL0025:   dwSize = n3_1 + *(_DWORD *)(n3_1 + 60);\nL0026:   n0x10000000 = 0x10000000;\nL0027:   do\nL0028:   {\nL0029:     n0x10000000 += 0x10000;\nL0030:     lpAddress = VirtualAlloc((LPVOID)(n0x10000000 + *(_DWORD *)(dwSize + 52)), *(_DWORD *)(dwSize + 80), 0x3000u, 0x40u);\nL0031:     lpAddress_1 = lpAddress;\nL0032:     if ( lpAddress )\nL0033:     {\nL0034:       VirtualFree(lpAddress, 0, 0x8000u);\nL0035:       lpAddress_1 = VirtualAllocEx(\nL0036:                       hProcess,\nL0037:                       (LPVOID)(n0x10000000 + *(_DWORD *)(dwSize + 52)),\nL0038:                       *(_DWORD *)(dwSize + 80),\nL0039:                       0x3000u,\nL0040:                       0x40u);\nL0041:     }\nL0042:   }\nL0043:   while ( !lpAddress_1 && n0x10000000 <= 0x30000000 );\nL0044:   sub_403EC0((int)hProcess, lpAddress_1, n3_1, dwSize, (int)lpBuffer);\nL0045:   if ( lpBuffer[0] )\nL0046:   {\nL0047:     lpBuffer_[0] = lpBuffer[0];\nL0048:     lpBuffer_[1] = lpBuffer[3];\nL0049:     WriteProcessMemory(hProcess, lpAddress_1, lpBuffer[0], (SIZE_T)lpBuffer[1], &NumberOfBytesWritten);\nL0050:     if ( sub_4038AC(hProcess, sub_4040CC, lpBuffer_, 0, 8u) )\nL0051:       v13 = 1;\nL0052:   }\nL0053:   __writefsdword(0, v8[0]);\nL0054:   v9 = (int *)&loc_40420C;\nL0055:   sub_4024F0((int)lpBuffer, (int)n4_);\nL0056:   return v13;\nL0057: }\n```\n\n## F-0302 sub_403EC0，原文件 L0001–L0099 / 共 99 行\n```text\nL0001: int __userpurge sub_403EC0@<eax>(\nL0002:         int a1@<eax>,\nL0003:         void *lpAddress_1@<edx>,\nL0004:         int n3_1@<ecx>,\nL0005:         unsigned int dwSize@<edi>,\nL0006:         int a5)\nL0007: {\nL0008:   int v6; // esi\nL0009:   int v7; // ebx\nL0010:   int v8; // edi\nL0011:   int v9; // eax\nL0012:   int v10; // eax\nL0013:   int v11; // ebx\nL0014:   DWORD flNewProtect; // eax\nL0015:   unsigned int v14[2]; // [esp+8h] [ebp-50h] BYREF\nL0016:   int *v15; // [esp+10h] [ebp-48h]\nL0017:   int v16; // [esp+20h] [ebp-38h]\nL0018:   DWORD flOldProtect; // [esp+24h] [ebp-34h] BYREF\nL0019:   unsigned int n4; // [esp+28h] [ebp-30h]\nL0020:   LPVOID dst; // [esp+2Ch] [ebp-2Ch]\nL0021:   unsigned int n3; // [esp+30h] [ebp-28h]\nL0022:   int v21; // [esp+34h] [ebp-24h]\nL0023:   _DWORD v22[2]; // [esp+38h] [ebp-20h] BYREF\nL0024:   char *v23; // [esp+40h] [ebp-18h]\nL0025:   char *v24; // [esp+44h] [ebp-14h]\nL0026:   __int32 *v25; // [esp+48h] [ebp-10h] BYREF\nL0027:   LPVOID lpAddress; // [esp+4Ch] [ebp-Ch]\nL0028:   char *v27; // [esp+50h] [ebp-8h]\nL0029:   int v28; // [esp+54h] [ebp-4h]\nL0030:   int savedregs; // [esp+58h] [ebp+0h] BYREF\nL0031: \nL0032:   n3 = n3_1;\nL0033:   v21 = a1;\nL0034:   sub_40242C(n3_1, (int)n4_);\nL0035:   v15 = &savedregs;\nL0036:   v14[1] = (unsigned int)&loc_4040BA;\nL0037:   v14[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0038:   __writefsdword(0, (unsigned int)v14);\nL0039:   v28 = n3 + *(_DWORD *)(n3 + 60);\nL0040:   lpAddress = VirtualAlloc(lpAddress_1, *(_DWORD *)(v28 + 80), 0x2000u, 1u);\nL0041:   v27 = (char *)lpAddress - *(_DWORD *)(v28 + 52);\nL0042:   dst = VirtualAlloc(lpAddress, *(_DWORD *)(v28 + 84), 0x1000u, 4u);\nL0043:   sub_401258(n3, dst, *(_DWORD *)(v28 + 84));\nL0044:   VirtualProtect(dst, *(_DWORD *)(v28 + 84), 2u, &flOldProtect);\nL0045:   v6 = *(unsigned __int16 *)(v28 + 20) + v28 + 24;\nL0046:   if ( *(unsigned __int16 *)(v28 + 6) - 1 >= 0 )\nL0047:   {\nL0048:     v16 = *(unsigned __int16 *)(v28 + 6);\nL0049:     v7 = 0;\nL0050:     do\nL0051:     {\nL0052:       dwSize = *(_DWORD *)(v6 + 40 * v7 + 8);\nL0053:       n4 = *(_DWORD *)(v6 + 40 * v7 + 16);\nL0054:       if ( dwSize < n4 )\nL0055:       {\nL0056:         v8 = n4 ^ dwSize;\nL0057:         n4 ^= v8;\nL0058:         dwSize = n4 ^ v8;\nL0059:       }\nL0060:       dst = VirtualAlloc((char *)lpAddress + *(_DWORD *)(v6 + 40 * v7 + 12), dwSize, 0x1000u, 4u);\nL0061:       sub_401414((char *)dst, dwSize, 0);\nL0062:       sub_401258(n3 + *(_DWORD *)(v6 + 40 * v7++ + 20), dst, n4);\nL0063:       --v16;\nL0064:     }\nL0065:     while ( v16 );\nL0066:   }\nL0067:   v23 = (char *)lpAddress + *(_DWORD *)(v28 + 40);\nL0068:   v24 = v23;\nL0069:   v22[0] = lpAddress;\nL0070:   v22[1] = *(_DWORD *)(v28 + 80);\nL0071:   sub_402FBC(&v25, (int)dword_40378C, 1, 0);\nL0072:   v9 = *(_DWORD *)(v28 + 160);\nL0073:   if ( v9 )\nL0074:     sub_403D08((char *)lpAddress + v9, (int)&savedregs);\nL0075:   v10 = *(_DWORD *)(v28 + 128);\nL0076:   if ( v10 )\nL0077:     sub_403D84((char *)lpAddress + v10, dwSize, (int)&savedregs);\nL0078:   if ( *(unsigned __int16 *)(v28 + 6) - 1 >= 0 )\nL0079:   {\nL0080:     v16 = *(unsigned __int16 *)(v28 + 6);\nL0081:     v11 = 0;\nL0082:     do\nL0083:     {\nL0084:       flNewProtect = sub_403C98(*(_DWORD *)(v6 + 40 * v11 + 36));\nL0085:       VirtualProtect(\nL0086:         (char *)lpAddress + *(_DWORD *)(v6 + 40 * v11 + 12),\nL0087:         *(_DWORD *)(v6 + 40 * v11 + 8),\nL0088:         flNewProtect,\nL0089:         &flOldProtect);\nL0090:       ++v11;\nL0091:       --v16;\nL0092:     }\nL0093:     while ( v16 );\nL0094:   }\nL0095:   sub_402704(a5, (int)v22, (int)n4_);\nL0096:   __writefsdword(0, v14[0]);\nL0097:   v15 = (int *)&loc_4040C1;\nL0098:   return sub_4024F0((int)v22, (int)n4_);\nL0099: }\n```\n\n## F-0303 sub_4040CC，原文件 L0001–L0004 / 共 4 行\n```text\nL0001: int __stdcall sub_4040CC(int a1)\nL0002: {\nL0003:   return (*(int (__stdcall **)(_DWORD, int, _DWORD))(a1 + 4))(*(_DWORD *)a1, 1, 0);\nL0004: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包显示一个按全局模式和宿主进程状态选择的进程注入/映射路径：代码可启动或复用 explorer.exe，并将由上游获取的 PE 映像映射到目标进程、写入远程内存并调用远程入口。另有基于模块路径的“open”分支和 _PERSIST 互斥体分支。PE 来源、远程回调的完整语义及若干模式变量的触发来源仍需包外函数补充。",
+    "claims": [
+      {
+        "behavior": "在 explorer.exe 已存在且满足相应模式条件时，或在无法复用现有宿主时，代码打开或创建 explorer.exe，并尝试将 PE 映像映射到该进程。",
+        "condition": "sub_40B3C0 中 *off_40D210==2；若 shell tray 对应的 explorer.exe 不满足 sub_4040F4，则创建 explorer.exe；在其他允许的模式分支中也直接创建 explorer.exe。",
+        "source": "由 sub_401F9C(off_40D1CC) 得到的映像/模块数据，以及通过 FindWindowA(\"shell_traywnd\",0)、GetWindowThreadProcessId 和 OpenProcess 获得的 explorer.exe 进程句柄。",
+        "action": "调用 sub_4040F4；该函数依据 PE 头和节表分配目标地址，调用 sub_403EC0 建立映像布局，并设置各节保护属性。",
+        "sink": "explorer.exe 进程的远程地址空间；若没有可用宿主，则先由 CreateProcessA 创建 explorer.exe。",
+        "evidence": [
+          {
+            "location": "F-0495 sub_40B3C0 原文件 L0004-L0078",
+            "observation": "代码查找 Shell_TrayWnd 对应进程，打开其进程句柄；不满足 sub_4040F4 时以命令行 explorer.exe 创建进程，随后再次调用 sub_4040F4。"
+          },
+          {
+            "location": "F-0495 sub_40B3C0 原文件 L0083-L0115",
+            "observation": "其他模式分支也通过 CreateProcessA 启动 explorer.exe，并在失败回退路径再次调用 sub_4040F4。"
+          },
+          {
+            "location": "F-0304 sub_4040F4 原文件 L0025-L0044",
+            "observation": "函数读取 PE 头字段，尝试 VirtualAllocEx 目标地址，并调用 sub_403EC0 继续映射。"
+          },
+          {
+            "location": "F-0302 sub_403EC0 原文件 L0039-L0065,L0078-L0095",
+            "observation": "函数分配映像和各节区域、复制节数据、处理可选重定位/初始化偏移，并按节属性调用 VirtualProtect。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未包含 sub_401F9C、off_40D1CC 或其上游数据构造，不能确定被映射 PE 的具体来源、内容或是否为当前样本主体。",
+          "CreateProcessA、VirtualAllocEx 或后续写入/回调的运行时成功不能仅凭静态代码保证。"
+        ]
+      },
+      {
+        "behavior": "映射完成后，代码把准备好的缓冲区写入目标进程，并在写入成功后通过目标地址处的间接回调尝试启动远程映像。",
+        "condition": "sub_4040F4 已取得非空远程分配地址，sub_403EC0 返回用于写入的缓冲区信息，且 lpBuffer[0] 非零；随后 sub_4038AC 返回非零。",
+        "source": "sub_403EC0 准备的映像缓冲区及其地址/长度对；目标进程句柄来自 sub_40B3C0 或其创建的 PROCESS_INFORMATION。",
+        "action": "调用 WriteProcessMemory 写入目标地址，然后调用 sub_4038AC(hProcess, sub_4040CC, lpBuffer_, 0, 8)，其中 sub_4040CC 间接调用地址结构中的函数指针。",
+        "sink": "目标进程的远程内存及其执行控制流。",
+        "evidence": [
+          {
+            "location": "F-0304 sub_4040F4 原文件 L0044-L0051",
+            "observation": "当 lpBuffer[0] 非零时，代码以目标进程句柄和 lpAddress_1 调用 WriteProcessMemory，随后调用 sub_4038AC 并据返回值设置成功标志。"
+          },
+          {
+            "location": "F-0303 sub_4040CC 原文件 L0001-L0003",
+            "observation": "回调函数从传入结构读取函数指针及第一个参数，并以参数 1、0 调用该函数。"
+          },
+          {
+            "location": "F-0302 sub_403EC0 原文件 L0067-L0077,L0095-L0098",
+            "observation": "映像基址/大小被组装到 v22，随后执行初始化相关辅助调用并将映像信息传给 sub_402704。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_4038AC、sub_402704 及 sub_403D08/sub_403D84 的实现不在包内，不能确定线程创建方式、回调目标的完整语义或远程代码最终执行结果。",
+          "当前证据证明的是写入和调用能力，不证明目标进程中一定成功执行。"
+        ]
+      },
+      {
+        "behavior": "在特定模式下，程序可对由当前模块路径派生的值执行一次名为 open 的辅助操作，随后终止自身。",
+        "condition": "*off_40D210!=2、*off_40D210!=1 且 *off_40D1B8==1；sub_4013A4(0,...) 返回值与 dword_40F1E8 的比较结果使 v2 为假。",
+        "source": "sub_4013A4(0,...) 返回的当前模块路径处理结果；依赖摘要确认零参数分支读取 GetModuleFileNameA 的当前模块路径并经 sub_401BAC 处理。",
+        "action": "将该值交给 sub_401F48 后调用 sub_405AD8(0,\"open\",lpFile,0,lpCommandLine_,lpCommandLine_)，随后调用 sub_40AFB0 并 ExitProcess(0)。",
+        "sink": "sub_405AD8 的 open 操作及当前进程终止。",
+        "evidence": [
+          {
+            "location": "F-0495 sub_40B3C0 原文件 L0083-L0097",
+            "observation": "代码在该条件分支调用 sub_4013A4(0,...), 将结果经 sub_401F48 传给带有 \"open\" 字符串的 sub_405AD8，随后调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "dependency J01: F-0038 sub_4013A4 原文件 L0009-L0027",
+            "observation": "已验证依赖摘要说明 sub_4013A4 的零参数分支调用 GetModuleFileNameA 获取当前模块路径并交给 sub_401BAC 处理。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_405AD8 和 sub_40AFB0 未提供，无法确认 open 的具体外部副作用；当前只能确认参数传递和进程终止调用。",
+          "off_40D210、off_40D1B8 与 dword_40F1E8 的来源和运行时取值未知。"
+        ]
+      },
+      {
+        "behavior": "程序使用派生的 _PERSIST 名称创建互斥体；若互斥体不存在，则执行 explorer.exe 宿主检查/启动和映射尝试。",
+        "condition": "sub_401D9C 生成名称后 CreateMutexA_w 返回的 GetLastError()!=183。",
+        "source": "*off_40D204[0] 经常量字符串 \"_PERSIST\" 派生出的互斥体名，以及 Shell_TrayWnd 对应的 explorer.exe 进程。",
+        "action": "创建并关闭互斥体；在非碰撞分支获取 explorer.exe 进程句柄，若 sub_4040F4 失败则创建 explorer.exe 并再次调用映射函数。",
+        "sink": "命名互斥体状态、explorer.exe 进程创建/打开和后续远程映像映射。",
+        "evidence": [
+          {
+            "location": "F-0496 sub_40B7FC 原文件 L0023-L0043",
+            "observation": "代码把 _PERSIST 追加到派生字符串后调用 CreateMutexA_w；非 ERROR_ALREADY_EXISTS 分支关闭互斥体，查找 Shell_TrayWnd 对应进程，并在映射失败时创建 explorer.exe 和再次调用 sub_4040F4。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "互斥体完整名称依赖 sub_401D9C 和 *off_40D204[0]，材料只直接显示固定后缀 _PERSIST。",
+          "该分支是否由主入口调用及调用频率不在本包中。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "mutex",
+        "value": "_PERSIST",
+        "role": "created_mutex",
+        "detection_specificity": "medium",
+        "meaning": "用于派生持久化/单实例互斥体名称的固定后缀；完整对象名由运行时字符串派生。",
+        "evidence": [
+          {
+            "location": "F-0496 sub_40B7FC 原文件 L0023-L0027",
+            "observation": "sub_401D9C 将字符串 _PERSIST 追加到派生数据，随后结果传给 CreateMutexA_w。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "explorer.exe",
+        "role": "other",
+        "detection_specificity": "low",
+        "meaning": "被选择或创建为 PE 映射的宿主进程；其本身是常见系统进程，需结合注入行为使用。",
+        "evidence": [
+          {
+            "location": "F-0495 sub_40B3C0 原文件 L0042-L0055",
+            "observation": "代码查找 explorer.exe 相关窗口/进程，并在需要时以 explorer.exe 命令行创建进程。"
+          },
+          {
+            "location": "F-0496 sub_40B7FC 原文件 L0034-L0042",
+            "observation": "代码查找 Shell_TrayWnd 对应进程，映射失败时创建 explorer.exe。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_401F9C 和 off_40D1CC 提供的 PE 映像具体是什么，是否为嵌入或解密载荷？",
+        "reason": "当前包只显示该数据被传入 PE 映射器，未提供其构造或来源。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_4038AC、sub_402704、sub_403D08 和 sub_403D84 的具体远程执行/初始化语义是什么？",
+        "reason": "当前代码证明远程分配、写入和间接回调路径，但这些辅助函数决定最终启动方式及初始化效果。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_405AD8 的 open 操作和 sub_40AFB0 的副作用是什么？",
+        "reason": "当前包只显示固定字符串、模块派生参数和 ExitProcess，未显示 open 辅助函数实现。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "off_40D210、off_40D1B8、off_40D21C 及相关全局状态由何处设置？",
+        "reason": "这些状态控制宿主选择、创建进程和备用分支，但其来源未在材料中给出。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401F9C, off_40D1CC",
+        "reason": "确定传入 PE 映射器的映像来源和内容。",
+        "expected_value": "载荷来源、解密/解压步骤及与宿主选择条件的关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_4038AC, sub_402704, sub_403D08, sub_403D84",
+        "reason": "闭合远程映射后的初始化和执行效果。",
+        "expected_value": "远程线程/回调创建、入口调用及最终目标进程行为。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405AD8, sub_40AFB0",
+        "reason": "解析备用 open 分支的真实副作用。",
+        "expected_value": "确认是否启动程序、打开文件、执行命令或仅进行内部处理。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401F9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_4038AC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402704",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403D08",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403D84",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 PE 映像来源及其写入后的远程初始化/执行语义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0495 sub_40B3C0 原文件 L0039-L0055",
+            "observation": "sub_401F9C 的返回值被用于 sub_4040F4，后者对目标 explorer.exe 执行映射。"
+          },
+          {
+            "location": "F-0304 sub_4040F4 原文件 L0044-L0051",
+            "observation": "sub_4038AC 在 WriteProcessMemory 后被调用并决定成功标志。"
+          },
+          {
+            "location": "F-0302 sub_403EC0 原文件 L0071-L0077,L0095-L0098",
+            "observation": "sub_402704、sub_403D08 和 sub_403D84 位于映像初始化和后续处理路径。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_405AD8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40AFB0",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认备用 open 分支在传入模块派生路径后产生的实际外部副作用。",
+        "impact": "minor",
+        "evidence": [
+          {
+            "location": "F-0495 sub_40B3C0 原文件 L0089-L0097",
+            "observation": "代码将模块路径相关值传给 sub_405AD8，随后调用 sub_40AFB0 并退出进程。"
+          }
+        ]
+      }
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "Analyzer 的全部核心 claim、artifact 和 material_need 引用均使用了不可解析的“原文件”格式，验证器将 17 条引用全部判为 invalid_format；因此当前结果无法按公共规则核验其证据。",
+        "evidence": [
+          {
+            "location": "F-0495 L0039-L0078",
+            "observation": "当前材料明确提供 sub_40B3C0 的原始源码行段，可作为宿主查找、创建和映射调用的证据。"
+          },
+          {
+            "location": "F-0304 L0044-L0051",
+            "observation": "当前材料明确提供 WriteProcessMemory 与 sub_4038AC 调用的原始源码行段。"
+          },
+          {
+            "location": "F-0496 L0023-L0043",
+            "observation": "当前材料明确提供 _PERSIST 派生名称、CreateMutexA_w 及 explorer.exe 分支的原始源码行段。"
+          }
+        ],
+        "required_fix": "将所有 evidence.location 从“F-xxxx 函数 原文件 L...”等不可解析形式改为可解析的 F-xxxx Lx-Ly 格式；依赖证据应明确标记为 dependency J01 后接有效的 F-0038 L9-L27 格式，不得改变 observation 以迁就错误位置。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/0",
+              "/claims/1",
+              "/claims/2",
+              "/claims/3",
+              "/artifacts/0",
+              "/artifacts/1",
+              "/material_needs/0",
+              "/material_needs/1"
+            ]
+          }
+        ],
+        "revision_targets": []
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "wrong_claim",
+        "description": "claim 2 将 WriteProcessMemory 之后的流程表述为“写入成功后”启动远程映像，但代码没有检查 WriteProcessMemory 的返回值或 NumberOfBytesWritten；它只在 lpBuffer[0] 非零时调用写入 API，随后无条件调用 sub_4038AC，并且 sub_4038AC 的具体执行方式未提供。该表述同时把未闭合的间接回调效果升级为 confirmed。",
+        "evidence": [
+          {
+            "location": "F-0304 L0044-L0051",
+            "observation": "当 lpBuffer[0] 非零时调用 WriteProcessMemory，源码未检查其返回值，随后调用 sub_4038AC 并根据后者返回值设置 v13。"
+          },
+          {
+            "location": "F-0303 L0001-L0003",
+            "observation": "sub_4040CC 通过传入结构中的函数指针进行间接调用，但当前材料没有证明该指针对应远程映像入口或已经成功执行。"
+          }
+        ],
+        "required_fix": "将 claim 2 改为：在 lpBuffer[0] 非零时尝试向目标进程写入映像，随后尝试通过 sub_4038AC 触发一个由结构中函数指针决定的间接回调；不能写成 WriteProcessMemory 成功后的远程启动，也应将证据等级/限制调整为反映 sub_4038AC 的未解析语义。",
+        "fixes": [
+          {
+            "type": "claim_revision",
+            "targets": [
+              "/claims/1"
+            ]
+          }
+        ],
+        "revision_targets": []
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "omitted_artifact",
+        "description": "当前材料直接显示向 explorer.exe 目标进程分配远程地址、写入映像并尝试回调，但 artifacts 只登记了互斥体和 explorer.exe，遗漏了本包最有价值的进程注入/远程映射行为制品，导致 IOC 与行为检索信息不完整。",
+        "evidence": [
+          {
+            "location": "F-0304 L0035-L0049",
+            "observation": "代码通过 VirtualAllocEx 在目标进程中分配地址，并调用 WriteProcessMemory 写入准备好的缓冲区。"
+          },
+          {
+            "location": "F-0302 L0039-L0095",
+            "observation": "代码建立 PE 映像布局、复制节数据、设置节保护，并将映像信息交给后续初始化处理。"
+          },
+          {
+            "location": "F-0495 L0042-L0055",
+            "observation": "目标为 Shell_TrayWnd 关联的 explorer.exe 进程，映射失败时还会创建 explorer.exe 后再次尝试。"
+          }
+        ],
+        "required_fix": "新增一个独立 ArtifactFinding，表示 explorer.exe 中的远程 PE 映像/进程注入或远程映射行为；role 应使用 other，detection_specificity 至少为 medium，并保留“静态代码仅证明尝试能力、不证明运行时成功”的限定。",
+        "fixes": [
+          {
+            "type": "append_item",
+            "targets": [
+              "/artifacts/2"
+            ]
+          }
+        ],
+        "revision_targets": []
+      },
+      {
+        "issue_id": "R4",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "artifact 0 将固定后缀“_PERSIST”直接分类为 created_mutex，但 CreateMutexA_w 接收的是由基础字符串加该后缀派生出的完整名称；当前证据只证明该字符串是命名组成部分，不证明存在名为“_PERSIST”的独立互斥体。其 detection_specificity=medium 也偏高，因为该后缀本身是通用字符串。",
+        "evidence": [
+          {
+            "location": "F-0496 L0023-L0027",
+            "observation": "sub_401D9C 将“_PERSIST”追加到 *off_40D204[0] 形成 lpName，CreateMutexA_w 使用的是该派生结果。"
+          }
+        ],
+        "required_fix": "将该 artifact 改为 config_marker 或其他表示命名后缀的角色，并将 detection_specificity 调整为 low；不要把后缀值表述为完整互斥体名称。",
+        "fixes": [
+          {
+            "type": "artifact_classification",
+            "targets": [
+              "/artifacts/0"
+            ]
+          }
+        ],
+        "revision_targets": []
+      }
+    ],
+    "review_summary": "核心的 explorer.exe 宿主选择、PE 映射、远程写入尝试及备用 open 分支基本覆盖，且主要缺口已记录。但证据引用全部不可解析，claim 2 对写入成功和远程执行作了超出材料的确认性表述，并遗漏了远程映射/进程注入这一高价值行为制品；另有 _PERSIST artifact 的角色与特异性偏差。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包显示一个按全局模式和宿主进程状态选择的进程注入/映射路径：代码可启动或复用 explorer.exe，并将由上游获取的 PE 映像映射到该进程、写入远程内存并尝试间接回调。另有基于模块路径的“open”分支和由派生名称加 _PERSIST 后缀形成的互斥体分支。PE 来源、远程回调的完整语义及若干模式变量的触发来源仍需包外函数补充；静态代码不证明运行时成功。",
+    "claims": [
+      {
+        "behavior": "在 explorer.exe 已存在且满足相应模式条件时，或在无法复用现有宿主时，代码打开或创建 explorer.exe，并尝试将 PE 映像映射到该进程。",
+        "condition": "sub_40B3C0 中 *off_40D210==2；若 shell tray 对应的 explorer.exe 不满足 sub_4040F4，则创建 explorer.exe；在其他允许的模式分支中也直接创建 explorer.exe。",
+        "source": "由 sub_401F9C(off_40D1CC) 得到的映像/模块数据，以及通过 FindWindowA(\"shell_traywnd\",0)、GetWindowThreadProcessId 和 OpenProcess 获得的 explorer.exe 进程句柄。",
+        "action": "调用 sub_4040F4；该函数依据 PE 头和节表分配目标地址，调用 sub_403EC0 建立映像布局，并设置各节保护属性。",
+        "sink": "explorer.exe 进程的远程地址空间；若没有可用宿主，则先由 CreateProcessA 创建 explorer.exe。",
+        "evidence": [
+          {
+            "location": "F-0495 L0004-L0078",
+            "observation": "代码查找 Shell_TrayWnd 对应进程，打开其进程句柄；不满足 sub_4040F4 时以命令行 explorer.exe 创建进程，随后再次调用 sub_4040F4。"
+          },
+          {
+            "location": "F-0495 L0083-L0115",
+            "observation": "其他模式分支也通过 CreateProcessA 启动 explorer.exe，并在失败回退路径再次调用 sub_4040F4。"
+          },
+          {
+            "location": "F-0304 L0025-L0044",
+            "observation": "函数读取 PE 头字段，尝试 VirtualAllocEx 目标地址，并调用 sub_403EC0 继续映射。"
+          },
+          {
+            "location": "F-0302 L0039-L0065,L0078-L0095",
+            "observation": "函数分配映像和各节区域、复制节数据、处理可选重定位/初始化偏移，并按节属性调用 VirtualProtect。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未包含 sub_401F9C、off_40D1CC 或其上游数据构造，不能确定被映射 PE 的具体来源、内容或是否为当前样本主体。",
+          "CreateProcessA、VirtualAllocEx 或后续写入/回调的运行时成功不能仅凭静态代码保证。"
+        ]
+      },
+      {
+        "behavior": "在 lpBuffer[0] 非零时，代码尝试向目标进程写入准备好的映像，随后尝试通过 sub_4038AC 触发一个由结构中函数指针决定的间接回调。",
+        "condition": "sub_4040F4 已取得非空远程分配地址，sub_403EC0 返回用于写入的缓冲区信息，且 lpBuffer[0] 非零；随后代码调用 WriteProcessMemory 和 sub_4038AC，但未检查 WriteProcessMemory 的返回值。",
+        "source": "sub_403EC0 准备的映像缓冲区及其地址/长度对；目标进程句柄来自 sub_40B3C0 或其创建的 PROCESS_INFORMATION。",
+        "action": "调用 WriteProcessMemory 写入目标地址，然后调用 sub_4038AC(hProcess, sub_4040CC, lpBuffer_, 0, 8)；sub_4040CC 从传入结构读取函数指针并进行间接调用。",
+        "sink": "目标进程的远程内存及随后可能的间接回调控制流；材料不证明写入成功或回调已执行。",
+        "evidence": [
+          {
+            "location": "F-0304 L0044-L0051",
+            "observation": "当 lpBuffer[0] 非零时调用 WriteProcessMemory，源码未检查其返回值，随后调用 sub_4038AC 并根据后者返回值设置成功标志。"
+          },
+          {
+            "location": "F-0303 L0001-L0003",
+            "observation": "回调函数从传入结构读取函数指针及第一个参数，并以参数 1、0 调用该函数；材料没有证明该指针对应远程映像入口或已经成功执行。"
+          },
+          {
+            "location": "F-0302 L0067-L0077,L0095-L0098",
+            "observation": "映像基址/大小被组装到 v22，随后执行初始化相关辅助调用并将映像信息传给 sub_402704。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_4038AC、sub_402704 及 sub_403D08/sub_403D84 的实现不在包内，不能确定线程创建方式、回调目标的完整语义或远程代码最终执行结果。",
+          "代码未检查 WriteProcessMemory 的返回值；当前证据只证明写入和间接回调尝试能力，不证明目标进程中一定成功写入或执行。"
+        ]
+      },
+      {
+        "behavior": "在特定模式下，程序可对由当前模块路径派生的值执行一次名为 open 的辅助操作，随后终止自身。",
+        "condition": "*off_40D210!=2、*off_40D210!=1 且 *off_40D1B8==1；sub_4013A4(0,...) 返回值与 dword_40F1E8 的比较结果使 v2 为假。",
+        "source": "sub_4013A4(0,...) 返回的当前模块路径处理结果；依赖摘要确认零参数分支读取 GetModuleFileNameA 的当前模块路径并经 sub_401BAC 处理。",
+        "action": "将该值交给 sub_401F48 后调用 sub_405AD8(0,\"open\",lpFile,0,lpCommandLine_,lpCommandLine_)，随后调用 sub_40AFB0 并 ExitProcess(0)。",
+        "sink": "sub_405AD8 的 open 操作及当前进程终止。",
+        "evidence": [
+          {
+            "location": "F-0495 L0083-L0097",
+            "observation": "代码在该条件分支调用 sub_4013A4(0,...), 将结果经 sub_401F48 传给带有 \"open\" 字符串的 sub_405AD8，随后调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "dependency J01: F-0038 L9-L27",
+            "observation": "已验证依赖摘要说明 sub_4013A4 的零参数分支调用 GetModuleFileNameA 获取当前模块路径并交给 sub_401BAC 处理。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_405AD8 和 sub_40AFB0 未提供，无法确认 open 的具体外部副作用；当前只能确认参数传递和进程终止调用。",
+          "off_40D210、off_40D1B8 与 dword_40F1E8 的来源和运行时取值未知。"
+        ]
+      },
+      {
+        "behavior": "程序使用派生的 _PERSIST 名称创建互斥体；若互斥体不存在，则执行 explorer.exe 宿主检查/启动和映射尝试。",
+        "condition": "sub_401D9C 生成名称后 CreateMutexA_w 返回的 GetLastError()!=183。",
+        "source": "*off_40D204[0] 经常量字符串 \"_PERSIST\" 派生出的互斥体名，以及 Shell_TrayWnd 对应的 explorer.exe 进程。",
+        "action": "创建并关闭互斥体；在非碰撞分支获取 explorer.exe 进程句柄，若 sub_4040F4 失败则创建 explorer.exe 并再次调用映射函数。",
+        "sink": "命名互斥体状态、explorer.exe 进程创建/打开和后续远程映像映射。",
+        "evidence": [
+          {
+            "location": "F-0496 L0023-L0043",
+            "observation": "代码把 _PERSIST 追加到派生字符串后调用 CreateMutexA_w；非碰撞分支关闭互斥体，查找 Shell_TrayWnd 对应进程，并在映射失败时创建 explorer.exe 和再次调用 sub_4040F4。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "互斥体完整名称依赖 sub_401D9C 和 *off_40D204[0]，材料只直接显示固定后缀 _PERSIST。",
+          "该分支是否由主入口调用及调用频率不在本包中。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "string",
+        "value": "_PERSIST",
+        "role": "config_marker",
+        "detection_specificity": "low",
+        "meaning": "用于派生互斥体名称的固定后缀；完整对象名由基础字符串与该后缀运行时组合，不能据此断言存在名为 _PERSIST 的独立互斥体。",
+        "evidence": [
+          {
+            "location": "F-0496 L0023-L0027",
+            "observation": "sub_401D9C 将字符串 _PERSIST 追加到派生数据，随后结果传给 CreateMutexA_w。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "explorer.exe",
+        "role": "other",
+        "detection_specificity": "low",
+        "meaning": "被选择或创建为 PE 映射的宿主进程；其本身是常见系统进程，需结合注入行为使用。",
+        "evidence": [
+          {
+            "location": "F-0495 L0042-L0055",
+            "observation": "代码查找 explorer.exe 相关窗口/进程，并在需要时以 explorer.exe 命令行创建进程。"
+          },
+          {
+            "location": "F-0496 L0034-L0042",
+            "observation": "代码查找 Shell_TrayWnd 对应进程，映射失败时创建 explorer.exe。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "explorer.exe 中的远程 PE 映像/进程注入尝试",
+        "role": "other",
+        "detection_specificity": "medium",
+        "meaning": "代码在 explorer.exe 目标进程中分配远程地址、建立 PE 映像布局、写入映像并尝试后续间接回调；静态材料证明的是行为能力，不证明运行时成功。",
+        "evidence": [
+          {
+            "location": "F-0304 L0035-L0049",
+            "observation": "代码通过 VirtualAllocEx 在目标进程中分配地址，并调用 WriteProcessMemory 写入准备好的缓冲区。"
+          },
+          {
+            "location": "F-0302 L0039-L0095",
+            "observation": "代码建立 PE 映像布局、复制节数据、设置节保护，并将映像信息交给后续初始化处理。"
+          },
+          {
+            "location": "F-0495 L0042-L0055",
+            "observation": "目标为 Shell_TrayWnd 关联的 explorer.exe 进程，映射失败时还会创建 explorer.exe 后再次尝试。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_401F9C 和 off_40D1CC 提供的 PE 映像具体是什么，是否为嵌入或解密载荷？",
+        "reason": "当前包只显示该数据被传入 PE 映射器，未提供其构造或来源。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_4038AC、sub_402704、sub_403D08 和 sub_403D84 的具体远程执行/初始化语义是什么？",
+        "reason": "当前代码证明远程分配、写入和间接回调路径，但这些辅助函数决定最终启动方式及初始化效果。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_405AD8 的 open 操作和 sub_40AFB0 的副作用是什么？",
+        "reason": "当前包只显示固定字符串、模块派生参数和 ExitProcess，未显示 open 辅助函数实现。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "off_40D210、off_40D1B8、off_40D21C 及相关全局状态由何处设置？",
+        "reason": "这些状态控制宿主选择、创建进程和备用分支，但其来源未在材料中给出。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401F9C, off_40D1CC",
+        "reason": "确定传入 PE 映射器的映像来源和内容。",
+        "expected_value": "载荷来源、解密/解压步骤及与宿主选择条件的关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_4038AC, sub_402704, sub_403D08, sub_403D84",
+        "reason": "闭合远程映射后的初始化和执行效果。",
+        "expected_value": "远程线程/回调创建、入口调用及最终目标进程行为。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405AD8, sub_40AFB0",
+        "reason": "解析备用 open 分支的真实副作用。",
+        "expected_value": "确认是否启动程序、打开文件、执行命令或仅进行内部处理。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401F9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_4038AC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402704",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403D08",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403D84",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 PE 映像来源及其写入后的远程初始化/执行语义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0495 L0039-L0055",
+            "observation": "sub_401F9C 的返回值被用于 sub_4040F4，后者对目标 explorer.exe 执行映射。"
+          },
+          {
+            "location": "F-0304 L0044-L0051",
+            "observation": "sub_4038AC 在 WriteProcessMemory 后被调用并决定成功标志。"
+          },
+          {
+            "location": "F-0302 L0071-L0077,L0095-L0098",
+            "observation": "sub_402704、sub_403D08 和 sub_403D84 位于映像初始化和后续处理路径。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_405AD8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40AFB0",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认备用 open 分支在传入模块派生路径后产生的实际外部副作用。",
+        "impact": "minor",
+        "evidence": [
+          {
+            "location": "F-0495 L0089-L0097",
+            "observation": "代码将模块路径相关值传给 sub_405AD8，随后调用 sub_40AFB0 并退出进程。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包显示一个按全局模式和宿主进程状态选择的进程注入/映射路径：代码可启动或复用 explorer.exe，并将由上游获取的 PE 映像映射到该进程、写入远程内存并尝试间接回调。另有基于模块路径的“open”分支和由派生名称加 _PERSIST 后缀形成的互斥体分支。PE 来源、远程回调的完整语义及若干模式变量的触发来源仍需包外函数补充；静态代码不证明运行时成功。",
+    "claims": [
+      {
+        "behavior": "在 explorer.exe 已存在且满足相应模式条件时，或在无法复用现有宿主时，代码打开或创建 explorer.exe，并尝试将 PE 映像映射到该进程。",
+        "condition": "sub_40B3C0 中 *off_40D210==2；若 shell tray 对应的 explorer.exe 不满足 sub_4040F4，则创建 explorer.exe；在其他允许的模式分支中也直接创建 explorer.exe。",
+        "source": "由 sub_401F9C(off_40D1CC) 得到的映像/模块数据，以及通过 FindWindowA(\"shell_traywnd\",0)、GetWindowThreadProcessId 和 OpenProcess 获得的 explorer.exe 进程句柄。",
+        "action": "调用 sub_4040F4；该函数依据 PE 头和节表分配目标地址，调用 sub_403EC0 建立映像布局，并设置各节保护属性。",
+        "sink": "explorer.exe 进程的远程地址空间；若没有可用宿主，则先由 CreateProcessA 创建 explorer.exe。",
+        "evidence": [
+          {
+            "location": "F-0495 L0004-L0078",
+            "observation": "代码查找 Shell_TrayWnd 对应进程，打开其进程句柄；不满足 sub_4040F4 时以命令行 explorer.exe 创建进程，随后再次调用 sub_4040F4。"
+          },
+          {
+            "location": "F-0495 L0083-L0115",
+            "observation": "其他模式分支也通过 CreateProcessA 启动 explorer.exe，并在失败回退路径再次调用 sub_4040F4。"
+          },
+          {
+            "location": "F-0304 L0025-L0044",
+            "observation": "函数读取 PE 头字段，尝试 VirtualAllocEx 目标地址，并调用 sub_403EC0 继续映射。"
+          },
+          {
+            "location": "F-0302 L0039-L0065,L0078-L0095",
+            "observation": "函数分配映像和各节区域、复制节数据、处理可选重定位/初始化偏移，并按节属性调用 VirtualProtect。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未包含 sub_401F9C、off_40D1CC 或其上游数据构造，不能确定被映射 PE 的具体来源、内容或是否为当前样本主体。",
+          "CreateProcessA、VirtualAllocEx 或后续写入/回调的运行时成功不能仅凭静态代码保证。"
+        ]
+      },
+      {
+        "behavior": "在 lpBuffer[0] 非零时，代码尝试向目标进程写入准备好的映像，随后尝试通过 sub_4038AC 触发一个由结构中函数指针决定的间接回调。",
+        "condition": "sub_4040F4 已取得非空远程分配地址，sub_403EC0 返回用于写入的缓冲区信息，且 lpBuffer[0] 非零；随后代码调用 WriteProcessMemory 和 sub_4038AC，但未检查 WriteProcessMemory 的返回值。",
+        "source": "sub_403EC0 准备的映像缓冲区及其地址/长度对；目标进程句柄来自 sub_40B3C0 或其创建的 PROCESS_INFORMATION。",
+        "action": "调用 WriteProcessMemory 写入目标地址，然后调用 sub_4038AC(hProcess, sub_4040CC, lpBuffer_, 0, 8)；sub_4040CC 从传入结构读取函数指针并进行间接调用。",
+        "sink": "目标进程的远程内存及随后可能的间接回调控制流；材料不证明写入成功或回调已执行。",
+        "evidence": [
+          {
+            "location": "F-0304 L0044-L0051",
+            "observation": "当 lpBuffer[0] 非零时，代码以目标进程句柄和 lpAddress_1 调用 WriteProcessMemory，随后调用 sub_4038AC 并据返回值设置成功标志。"
+          },
+          {
+            "location": "F-0303 L0001-L0003",
+            "observation": "回调函数从传入结构读取函数指针及第一个参数，并以参数 1、0 调用该函数。"
+          },
+          {
+            "location": "F-0302 L0067-L0077,L0095-L0098",
+            "observation": "映像基址/大小被组装到 v22，随后执行初始化相关辅助调用并将映像信息传给 sub_402704。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_4038AC、sub_402704 及 sub_403D08/sub_403D84 的实现不在包内，不能确定线程创建方式、回调目标的完整语义或远程代码最终执行结果。",
+          "代码未检查 WriteProcessMemory 的返回值；当前证据只证明写入和间接回调尝试能力，不证明目标进程中一定成功写入或执行。"
+        ]
+      },
+      {
+        "behavior": "在特定模式下，程序可对由当前模块路径派生的值执行一次名为 open 的辅助操作，随后终止自身。",
+        "condition": "*off_40D210!=2、*off_40D210!=1 且 *off_40D1B8==1；sub_4013A4(0,...) 返回值与 dword_40F1E8 的比较结果使 v2 为假。",
+        "source": "sub_4013A4(0,...) 返回的当前模块路径处理结果；依赖摘要确认零参数分支读取 GetModuleFileNameA 的当前模块路径并经 sub_401BAC 处理。",
+        "action": "将该值交给 sub_401F48 后调用 sub_405AD8(0,\"open\",lpFile,0,lpCommandLine_,lpCommandLine_)，随后调用 sub_40AFB0 并 ExitProcess(0)。",
+        "sink": "sub_405AD8 的 open 操作及当前进程终止。",
+        "evidence": [
+          {
+            "location": "F-0495 L0083-L0097",
+            "observation": "代码在该条件分支调用 sub_4013A4(0,...), 将结果经 sub_401F48 传给带有 \"open\" 字符串的 sub_405AD8，随后调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "dependency J01: F-0038 L9-L27",
+            "observation": "已验证依赖摘要说明 sub_4013A4 的零参数分支调用 GetModuleFileNameA 获取当前模块路径并交给 sub_401BAC 处理。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_405AD8 和 sub_40AFB0 未提供，无法确认 open 的具体外部副作用；当前只能确认参数传递和进程终止调用。",
+          "off_40D210、off_40D1B8 与 dword_40F1E8 的来源和运行时取值未知。"
+        ]
+      },
+      {
+        "behavior": "程序使用派生的 _PERSIST 名称创建互斥体；若互斥体不存在，则执行 explorer.exe 宿主检查/启动和映射尝试。",
+        "condition": "sub_401D9C 生成名称后 CreateMutexA_w 返回的 GetLastError()!=183。",
+        "source": "*off_40D204[0] 经常量字符串 \"_PERSIST\" 派生出的互斥体名，以及 Shell_TrayWnd 对应的 explorer.exe 进程。",
+        "action": "创建并关闭互斥体；在非碰撞分支获取 explorer.exe 进程句柄，若 sub_4040F4 失败则创建 explorer.exe 并再次调用映射函数。",
+        "sink": "命名互斥体状态、explorer.exe 进程创建/打开和后续远程映像映射。",
+        "evidence": [
+          {
+            "location": "F-0496 L0023-L0043",
+            "observation": "代码把 _PERSIST 追加到派生字符串后调用 CreateMutexA_w；非 ERROR_ALREADY_EXISTS 分支关闭互斥体，查找 Shell_TrayWnd 对应进程，并在映射失败时创建 explorer.exe 和再次调用 sub_4040F4。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "互斥体完整名称依赖 sub_401D9C 和 *off_40D204[0]，材料只直接显示固定后缀 _PERSIST。",
+          "该分支是否由主入口调用及调用频率不在本包中。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "mutex",
+        "value": "_PERSIST",
+        "role": "config_marker",
+        "detection_specificity": "low",
+        "meaning": "用于派生互斥体名称的固定后缀；完整对象名由基础字符串与该后缀运行时组合，不能据此断言存在名为 _PERSIST 的独立互斥体。",
+        "evidence": [
+          {
+            "location": "F-0496 L0023-L0027",
+            "observation": "sub_401D9C 将字符串 _PERSIST 追加到派生数据，随后结果传给 CreateMutexA_w。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "explorer.exe",
+        "role": "other",
+        "detection_specificity": "low",
+        "meaning": "被选择或创建为 PE 映射的宿主进程；其本身是常见系统进程，需结合注入行为使用。",
+        "evidence": [
+          {
+            "location": "F-0495 L0042-L0055",
+            "observation": "代码查找 explorer.exe 相关窗口/进程，并在需要时以 explorer.exe 命令行创建进程。"
+          },
+          {
+            "location": "F-0496 L0034-L0042",
+            "observation": "代码查找 Shell_TrayWnd 对应进程，映射失败时创建 explorer.exe。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "explorer.exe 中的远程 PE 映像/进程注入尝试",
+        "role": "other",
+        "detection_specificity": "medium",
+        "meaning": "代码在 explorer.exe 目标进程中分配远程地址、建立 PE 映像布局、写入映像并尝试后续间接回调；静态材料证明的是行为能力，不证明运行时成功。",
+        "evidence": [
+          {
+            "location": "F-0304 L0035-L0049",
+            "observation": "代码通过 VirtualAllocEx 在目标进程中分配地址，并调用 WriteProcessMemory 写入准备好的缓冲区。"
+          },
+          {
+            "location": "F-0302 L0039-L0095",
+            "observation": "代码建立 PE 映像布局、复制节数据、设置节保护，并将映像信息交给后续初始化处理。"
+          },
+          {
+            "location": "F-0495 L0042-L0055",
+            "observation": "目标为 Shell_TrayWnd 关联的 explorer.exe 进程，映射失败时还会创建 explorer.exe 后再次尝试。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_401F9C 和 off_40D1CC 提供的 PE 映像具体是什么，是否为嵌入或解密载荷？",
+        "reason": "当前包只显示该数据被传入 PE 映射器，未提供其构造或来源。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_4038AC、sub_402704、sub_403D08 和 sub_403D84 的具体远程执行/初始化语义是什么？",
+        "reason": "当前代码证明远程分配、写入和间接回调路径，但这些辅助函数决定最终启动方式及初始化效果。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_405AD8 的 open 操作和 sub_40AFB0 的副作用是什么？",
+        "reason": "当前包只显示固定字符串、模块派生参数和 ExitProcess，未显示 open 辅助函数实现。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "off_40D210、off_40D1B8、off_40D21C 及相关全局状态由何处设置？",
+        "reason": "这些状态控制宿主选择、创建进程和备用分支，但其来源未在材料中给出。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401F9C, off_40D1CC",
+        "reason": "确定传入 PE 映射器的映像来源和内容。",
+        "expected_value": "载荷来源、解密/解压步骤及与宿主选择条件的关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_4038AC, sub_402704, sub_403D08, sub_403D84",
+        "reason": "闭合远程映射后的初始化和执行效果。",
+        "expected_value": "远程线程/回调创建、入口调用及最终目标进程行为。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405AD8, sub_40AFB0",
+        "reason": "解析备用 open 分支的真实副作用。",
+        "expected_value": "确认是否启动程序、打开文件、执行命令或仅进行内部处理。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401F9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_4038AC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402704",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403D08",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403D84",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 PE 映像来源及其写入后的远程初始化/执行语义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0495 L0039-L0055",
+            "observation": "sub_401F9C 的返回值被用于 sub_4040F4，后者对目标 explorer.exe 执行映射。"
+          },
+          {
+            "location": "F-0304 L0044-L0051",
+            "observation": "sub_4038AC 在 WriteProcessMemory 后被调用并决定成功标志。"
+          },
+          {
+            "location": "F-0302 L0071-L0077,L0095-L0098",
+            "observation": "sub_402704、sub_403D08 和 sub_403D84 位于映像初始化和后续处理路径。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_405AD8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40AFB0",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认备用 open 分支在传入模块派生路径后产生的实际外部副作用。",
+        "impact": "minor",
+        "evidence": [
+          {
+            "location": "F-0495 L0089-L0097",
+            "observation": "代码将模块路径相关值传给 sub_405AD8，随后调用 sub_40AFB0 并退出进程。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/detection_specificity",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/0/meaning",
+      "/artifacts/0/role",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/1/evidence/1/location",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/0/evidence/3/location",
+      "/claims/1/action",
+      "/claims/1/behavior",
+      "/claims/1/condition",
+      "/claims/1/confidence",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/1/evidence_level",
+      "/claims/1/limitations",
+      "/claims/1/sink",
+      "/claims/1/source",
+      "/claims/2/evidence/0/location",
+      "/claims/2/evidence/1/location",
+      "/claims/3/evidence/0/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/0/evidence/1/location",
+      "/material_needs/0/evidence/2/location",
+      "/material_needs/1/evidence/0/location",
+      "/status",
+      "/summary"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [
+      "/artifacts/2"
+    ],
+    "applied_paths": [
+      "/summary",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/0/evidence/3/location",
+      "/claims/1/behavior",
+      "/claims/1/condition",
+      "/claims/1/action",
+      "/claims/1/sink",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/1/confidence",
+      "/claims/1/evidence_level",
+      "/claims/1/limitations/1",
+      "/claims/2/evidence/0/location",
+      "/claims/2/evidence/1/location",
+      "/claims/3/evidence/0/location",
+      "/artifacts",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/0/evidence/1/location",
+      "/material_needs/0/evidence/2/location",
+      "/material_needs/1/evidence/0/location"
+    ],
+    "ignored_paths": [
+      "/claims/1/evidence/0/observation",
+      "/claims/1/evidence/1/observation",
+      "/claims/3/evidence/0/observation",
+      "/artifacts/0/kind"
+    ],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包显示一个按全局模式和宿主进程状态选择的进程注入/映射路径：代码可启动或复用 explorer.exe，并将由上游获取的 PE 映像映射到该进程、写入远程内存并尝试间接回调。另有基于模块路径的“open”分支和由派生名称加 _PERSIST 后缀形成的互斥体分支。PE 来源、远程回调的完整语义及若干模式变量的触发来源仍需包外函数补充；静态代码不证明运行时成功。",
+    "claims": [
+      {
+        "behavior": "在 explorer.exe 已存在且满足相应模式条件时，或在无法复用现有宿主时，代码打开或创建 explorer.exe，并尝试将 PE 映像映射到该进程。",
+        "condition": "sub_40B3C0 中 *off_40D210==2；若 shell tray 对应的 explorer.exe 不满足 sub_4040F4，则创建 explorer.exe；在其他允许的模式分支中也直接创建 explorer.exe。",
+        "source": "由 sub_401F9C(off_40D1CC) 得到的映像/模块数据，以及通过 FindWindowA(\"shell_traywnd\",0)、GetWindowThreadProcessId 和 OpenProcess 获得的 explorer.exe 进程句柄。",
+        "action": "调用 sub_4040F4；该函数依据 PE 头和节表分配目标地址，调用 sub_403EC0 建立映像布局，并设置各节保护属性。",
+        "sink": "explorer.exe 进程的远程地址空间；若没有可用宿主，则先由 CreateProcessA 创建 explorer.exe。",
+        "evidence": [
+          {
+            "location": "F-0495 L0004-L0078",
+            "observation": "代码查找 Shell_TrayWnd 对应进程，打开其进程句柄；不满足 sub_4040F4 时以命令行 explorer.exe 创建进程，随后再次调用 sub_4040F4。"
+          },
+          {
+            "location": "F-0495 L0083-L0115",
+            "observation": "其他模式分支也通过 CreateProcessA 启动 explorer.exe，并在失败回退路径再次调用 sub_4040F4。"
+          },
+          {
+            "location": "F-0304 L0025-L0044",
+            "observation": "函数读取 PE 头字段，尝试 VirtualAllocEx 目标地址，并调用 sub_403EC0 继续映射。"
+          },
+          {
+            "location": "F-0302 L0039-L0065,L0078-L0095",
+            "observation": "函数分配映像和各节区域、复制节数据、处理可选重定位/初始化偏移，并按节属性调用 VirtualProtect。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未包含 sub_401F9C、off_40D1CC 或其上游数据构造，不能确定被映射 PE 的具体来源、内容或是否为当前样本主体。",
+          "CreateProcessA、VirtualAllocEx 或后续写入/回调的运行时成功不能仅凭静态代码保证。"
+        ]
+      },
+      {
+        "behavior": "在 lpBuffer[0] 非零时，代码尝试向目标进程写入准备好的映像，随后尝试通过 sub_4038AC 触发一个由结构中函数指针决定的间接回调。",
+        "condition": "sub_4040F4 已取得非空远程分配地址，sub_403EC0 返回用于写入的缓冲区信息，且 lpBuffer[0] 非零；随后代码调用 WriteProcessMemory 和 sub_4038AC，但未检查 WriteProcessMemory 的返回值。",
+        "source": "sub_403EC0 准备的映像缓冲区及其地址/长度对；目标进程句柄来自 sub_40B3C0 或其创建的 PROCESS_INFORMATION。",
+        "action": "调用 WriteProcessMemory 写入目标地址，然后调用 sub_4038AC(hProcess, sub_4040CC, lpBuffer_, 0, 8)；sub_4040CC 从传入结构读取函数指针并进行间接调用。",
+        "sink": "目标进程的远程内存及随后可能的间接回调控制流；材料不证明写入成功或回调已执行。",
+        "evidence": [
+          {
+            "location": "F-0304 L0044-L0051",
+            "observation": "当 lpBuffer[0] 非零时，代码以目标进程句柄和 lpAddress_1 调用 WriteProcessMemory，随后调用 sub_4038AC 并据返回值设置成功标志。"
+          },
+          {
+            "location": "F-0303 L0001-L0003",
+            "observation": "回调函数从传入结构读取函数指针及第一个参数，并以参数 1、0 调用该函数。"
+          },
+          {
+            "location": "F-0302 L0067-L0077,L0095-L0098",
+            "observation": "映像基址/大小被组装到 v22，随后执行初始化相关辅助调用并将映像信息传给 sub_402704。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_4038AC、sub_402704 及 sub_403D08/sub_403D84 的实现不在包内，不能确定线程创建方式、回调目标的完整语义或远程代码最终执行结果。",
+          "代码未检查 WriteProcessMemory 的返回值；当前证据只证明写入和间接回调尝试能力，不证明目标进程中一定成功写入或执行。"
+        ]
+      },
+      {
+        "behavior": "在特定模式下，程序可对由当前模块路径派生的值执行一次名为 open 的辅助操作，随后终止自身。",
+        "condition": "*off_40D210!=2、*off_40D210!=1 且 *off_40D1B8==1；sub_4013A4(0,...) 返回值与 dword_40F1E8 的比较结果使 v2 为假。",
+        "source": "sub_4013A4(0,...) 返回的当前模块路径处理结果；依赖摘要确认零参数分支读取 GetModuleFileNameA 的当前模块路径并经 sub_401BAC 处理。",
+        "action": "将该值交给 sub_401F48 后调用 sub_405AD8(0,\"open\",lpFile,0,lpCommandLine_,lpCommandLine_)，随后调用 sub_40AFB0 并 ExitProcess(0)。",
+        "sink": "sub_405AD8 的 open 操作及当前进程终止。",
+        "evidence": [
+          {
+            "location": "F-0495 L0083-L0097",
+            "observation": "代码在该条件分支调用 sub_4013A4(0,...), 将结果经 sub_401F48 传给带有 \"open\" 字符串的 sub_405AD8，随后调用 ExitProcess_0(0)。"
+          },
+          {
+            "location": "dependency J01: F-0038 L9-L27",
+            "observation": "已验证依赖摘要说明 sub_4013A4 的零参数分支调用 GetModuleFileNameA 获取当前模块路径并交给 sub_401BAC 处理。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_405AD8 和 sub_40AFB0 未提供，无法确认 open 的具体外部副作用；当前只能确认参数传递和进程终止调用。",
+          "off_40D210、off_40D1B8 与 dword_40F1E8 的来源和运行时取值未知。"
+        ]
+      },
+      {
+        "behavior": "程序使用派生的 _PERSIST 名称创建互斥体；若互斥体不存在，则执行 explorer.exe 宿主检查/启动和映射尝试。",
+        "condition": "sub_401D9C 生成名称后 CreateMutexA_w 返回的 GetLastError()!=183。",
+        "source": "*off_40D204[0] 经常量字符串 \"_PERSIST\" 派生出的互斥体名，以及 Shell_TrayWnd 对应的 explorer.exe 进程。",
+        "action": "创建并关闭互斥体；在非碰撞分支获取 explorer.exe 进程句柄，若 sub_4040F4 失败则创建 explorer.exe 并再次调用映射函数。",
+        "sink": "命名互斥体状态、explorer.exe 进程创建/打开和后续远程映像映射。",
+        "evidence": [
+          {
+            "location": "F-0496 L0023-L0043",
+            "observation": "代码把 _PERSIST 追加到派生字符串后调用 CreateMutexA_w；非 ERROR_ALREADY_EXISTS 分支关闭互斥体，查找 Shell_TrayWnd 对应进程，并在映射失败时创建 explorer.exe 和再次调用 sub_4040F4。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "互斥体完整名称依赖 sub_401D9C 和 *off_40D204[0]，材料只直接显示固定后缀 _PERSIST。",
+          "该分支是否由主入口调用及调用频率不在本包中。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "string",
+        "value": "_PERSIST",
+        "role": "config_marker",
+        "detection_specificity": "low",
+        "meaning": "用于派生互斥体名称的固定后缀；完整对象名由基础字符串与该后缀运行时组合，不能据此断言存在名为 _PERSIST 的独立互斥体。",
+        "evidence": [
+          {
+            "location": "F-0496 L0023-L0027",
+            "observation": "sub_401D9C 将字符串 _PERSIST 追加到派生数据，随后结果传给 CreateMutexA_w。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "explorer.exe",
+        "role": "other",
+        "detection_specificity": "low",
+        "meaning": "被选择或创建为 PE 映射的宿主进程；其本身是常见系统进程，需结合注入行为使用。",
+        "evidence": [
+          {
+            "location": "F-0495 L0042-L0055",
+            "observation": "代码查找 explorer.exe 相关窗口/进程，并在需要时以 explorer.exe 命令行创建进程。"
+          },
+          {
+            "location": "F-0496 L0034-L0042",
+            "observation": "代码查找 Shell_TrayWnd 对应进程，映射失败时创建 explorer.exe。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "explorer.exe 中的远程 PE 映像/进程注入尝试",
+        "role": "other",
+        "detection_specificity": "medium",
+        "meaning": "代码在 explorer.exe 目标进程中分配远程地址、建立 PE 映像布局、写入映像并尝试后续间接回调；静态材料证明的是行为能力，不证明运行时成功。",
+        "evidence": [
+          {
+            "location": "F-0304 L0035-L0049",
+            "observation": "代码通过 VirtualAllocEx 在目标进程中分配地址，并调用 WriteProcessMemory 写入准备好的缓冲区。"
+          },
+          {
+            "location": "F-0302 L0039-L0095",
+            "observation": "代码建立 PE 映像布局、复制节数据、设置节保护，并将映像信息交给后续初始化处理。"
+          },
+          {
+            "location": "F-0495 L0042-L0055",
+            "observation": "目标为 Shell_TrayWnd 关联的 explorer.exe 进程，映射失败时还会创建 explorer.exe 后再次尝试。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_401F9C 和 off_40D1CC 提供的 PE 映像具体是什么，是否为嵌入或解密载荷？",
+        "reason": "当前包只显示该数据被传入 PE 映射器，未提供其构造或来源。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_4038AC、sub_402704、sub_403D08 和 sub_403D84 的具体远程执行/初始化语义是什么？",
+        "reason": "当前代码证明远程分配、写入和间接回调路径，但这些辅助函数决定最终启动方式及初始化效果。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_405AD8 的 open 操作和 sub_40AFB0 的副作用是什么？",
+        "reason": "当前包只显示固定字符串、模块派生参数和 ExitProcess，未显示 open 辅助函数实现。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "off_40D210、off_40D1B8、off_40D21C 及相关全局状态由何处设置？",
+        "reason": "这些状态控制宿主选择、创建进程和备用分支，但其来源未在材料中给出。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401F9C, off_40D1CC",
+        "reason": "确定传入 PE 映射器的映像来源和内容。",
+        "expected_value": "载荷来源、解密/解压步骤及与宿主选择条件的关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_4038AC, sub_402704, sub_403D08, sub_403D84",
+        "reason": "闭合远程映射后的初始化和执行效果。",
+        "expected_value": "远程线程/回调创建、入口调用及最终目标进程行为。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405AD8, sub_40AFB0",
+        "reason": "解析备用 open 分支的真实副作用。",
+        "expected_value": "确认是否启动程序、打开文件、执行命令或仅进行内部处理。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401F9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_4038AC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402704",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403D08",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403D84",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 PE 映像来源及其写入后的远程初始化/执行语义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0495 L0039-L0055",
+            "observation": "sub_401F9C 的返回值被用于 sub_4040F4，后者对目标 explorer.exe 执行映射。"
+          },
+          {
+            "location": "F-0304 L0044-L0051",
+            "observation": "sub_4038AC 在 WriteProcessMemory 后被调用并决定成功标志。"
+          },
+          {
+            "location": "F-0302 L0071-L0077,L0095-L0098",
+            "observation": "sub_402704、sub_403D08 和 sub_403D84 位于映像初始化和后续处理路径。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_405AD8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40AFB0",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认备用 open 分支在传入模块派生路径后产生的实际外部副作用。",
+        "impact": "minor",
+        "evidence": [
+          {
+            "location": "F-0495 L0089-L0097",
+            "observation": "代码将模块路径相关值传给 sub_405AD8，随后调用 sub_40AFB0 并退出进程。"
+          }
+        ]
+      }
+    ]
+  },
+  "expected_ignored_paths": [
+    "/claims/1/evidence/0/observation",
+    "/claims/1/evidence/1/observation",
+    "/claims/3/evidence/0/observation"
+  ]
+}

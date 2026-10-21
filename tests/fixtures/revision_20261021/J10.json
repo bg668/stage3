@@ -1,0 +1,1100 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J10.json",
+        "sha256": "93f98b7307ce0b062b0a202bda644df5e9b0be83af18317ca4ba605b2d07a801"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J10/analyzer/validated_result.json",
+        "sha256": "30f567058a1dd94ad57a37e9561067019b13136db935bee875b61fcfbeaf19b1"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J10/reviewer/validated_result.json",
+        "sha256": "cec725f2303142eeefad1e20b64c63bd02061fd69a36d9f1f95596c52d17d83e"
+      },
+      "packet": {
+        "path": "testdata/packets/J10.md",
+        "sha256": "55735e516cb530eb8690ca54c0ae7cc277cf0469881060c1fa271afcec151173"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J10/reviser/validated_result.json",
+        "sha256": "3858530300ab6fc15ae58fea46db836b99984fbafeaacb2a60027a3d8eb3dda2"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J10/reviser/revision_scope.json",
+        "sha256": "7d3817dbc3ccb45270bc6352145312c60a08d82d74f5a4ab995a239139683c02"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J10",
+  "packet_text": "# J10 Credential Manager 与可选熵\n任务来源：J00 F479 转调 F465；版本条件共享 J09 的 F475 结果。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0465 sub_40930C，原文件 L0001–L0114 / 共 114 行\n```text\nL0001: int **__usercall sub_40930C@<eax>(volatile __int32 *dst@<eax>)\nL0002: {\nL0003:   int n37; // edi\nL0004:   char *abe2869f_9b47_4cd9_a358_c22904dba7f7; // eax\nL0005:   char *v4; // edx\nL0006:   int v5; // edi\nL0007:   OLECHAR *pbData; // ebx\nL0008:   char *v8; // [esp-1Ch] [ebp-104h]\nL0009:   char *ui; // [esp-18h] [ebp-100h]\nL0010:   _WORD *v10; // [esp-18h] [ebp-100h]\nL0011:   int ui_1; // [esp-18h] [ebp-100h]\nL0012:   unsigned int v12[2]; // [esp-Ch] [ebp-F4h] BYREF\nL0013:   int *v13; // [esp-4h] [ebp-ECh]\nL0014:   int dst_3; // [esp+Ch] [ebp-DCh] BYREF\nL0015:   __int32 dst_2; // [esp+10h] [ebp-D8h] BYREF\nL0016:   __int32 dst_1; // [esp+14h] [ebp-D4h] BYREF\nL0017:   OLECHAR *v17; // [esp+18h] [ebp-D0h] BYREF\nL0018:   OLECHAR *v18; // [esp+1Ch] [ebp-CCh] BYREF\nL0019:   OLECHAR *v19; // [esp+20h] [ebp-C8h] BYREF\nL0020:   OLECHAR *v20; // [esp+24h] [ebp-C4h] BYREF\nL0021:   OLECHAR *v21; // [esp+28h] [ebp-C0h] BYREF\nL0022:   const CHAR *lpMultiByteStr_1; // [esp+2Ch] [ebp-BCh] BYREF\nL0023:   OLECHAR *v23; // [esp+30h] [ebp-B8h] BYREF\nL0024:   const WCHAR *lpWideCharStr_1; // [esp+34h] [ebp-B4h] BYREF\nL0025:   OLECHAR *v25; // [esp+38h] [ebp-B0h] BYREF\nL0026:   OLECHAR *v26; // [esp+3Ch] [ebp-ACh] BYREF\nL0027:   OLECHAR *v27; // [esp+40h] [ebp-A8h] BYREF\nL0028:   const CHAR *lpMultiByteStr; // [esp+44h] [ebp-A4h] BYREF\nL0029:   OLECHAR *v29; // [esp+48h] [ebp-A0h] BYREF\nL0030:   const WCHAR *lpWideCharStr; // [esp+4Ch] [ebp-9Ch] BYREF\nL0031:   char *v31; // [esp+50h] [ebp-98h] BYREF\nL0032:   char abe2869f_9b47_4cd9_a358_c22904dba7f7_[111]; // [esp+55h] [ebp-93h] BYREF\nL0033:   DWORD Count_1; // [esp+C4h] [ebp-24h]\nL0034:   DATA_BLOB pOptionalEntropy; // [esp+C8h] [ebp-20h] BYREF\nL0035:   DATA_BLOB pDataOut; // [esp+D0h] [ebp-18h] BYREF\nL0036:   DATA_BLOB pDataIn; // [esp+D8h] [ebp-10h] BYREF\nL0037:   DWORD Count; // [esp+E0h] [ebp-8h] BYREF\nL0038:   PCREDENTIALA *Credential; // [esp+E4h] [ebp-4h] BYREF\nL0039:   int savedregs; // [esp+E8h] [ebp+0h] BYREF\nL0040: \nL0041:   v13 = &savedregs;\nL0042:   v12[1] = (unsigned int)&loc_409651;\nL0043:   v12[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0044:   __writefsdword(0, (unsigned int)v12);\nL0045:   sub_401AC0(dst);\nL0046:   strcpy(abe2869f_9b47_4cd9_a358_c22904dba7f7_, \"abe2869f-9b47-4cd9-a358-c22904dba7f7\");\nL0047:   n37 = 37;\nL0048:   abe2869f_9b47_4cd9_a358_c22904dba7f7 = abe2869f_9b47_4cd9_a358_c22904dba7f7_;\nL0049:   v4 = &abe2869f_9b47_4cd9_a358_c22904dba7f7_[37];\nL0050:   do\nL0051:   {\nL0052:     *(_WORD *)v4 = 4 * (unsigned __int8)*abe2869f_9b47_4cd9_a358_c22904dba7f7;\nL0053:     v4 += 2;\nL0054:     ++abe2869f_9b47_4cd9_a358_c22904dba7f7;\nL0055:     --n37;\nL0056:   }\nL0057:   while ( n37 );\nL0058:   pOptionalEntropy.pbData = (BYTE *)&abe2869f_9b47_4cd9_a358_c22904dba7f7_[37];\nL0059:   pOptionalEntropy.cbData = 74;\nL0060:   CredEnumerateA(0, 0, &Count, &Credential);\nL0061:   if ( (int)(Count - 1) >= 0 )\nL0062:   {\nL0063:     Count_1 = Count;\nL0064:     v5 = 0;\nL0065:     do\nL0066:     {\nL0067:       pDataIn = *(DATA_BLOB *)&Credential[v5]->CredentialBlobSize;\nL0068:       CryptUnprotectData(&pDataIn, 0, &pOptionalEntropy, 0, 0, 0, &pDataOut);\nL0069:       sub_401CAC(&v31, Credential[v5]->TargetName);\nL0070:       sub_401E10(dst, 4);\nL0071:       sub_401174((LPVOID)pDataOut.cbData);\nL0072:       pbData = (OLECHAR *)pDataOut.pbData;\nL0073:       sub_401D9C((volatile __int32 *)&lpMultiByteStr, *dst, (unsigned __int32)\"User: \");\nL0074:       sub_402254(&v29, lpMultiByteStr);\nL0075:       sub_402218(&v26, pbData);\nL0076:       ui = (char *)sub_402398(dword_4096BC, v26) - 1;\nL0077:       sub_402218(&v25, pbData);\nL0078:       sub_40234C((int)v25, 0, (int)ui, &v27);\nL0079:       sub_402280((volatile __int32 *)&lpWideCharStr, 3);\nL0080:       sub_401D3C((char **)dst, lpWideCharStr);\nL0081:       sub_401D9C((volatile __int32 *)&lpMultiByteStr_1, *dst, (unsigned __int32)\"Password: \");\nL0082:       sub_402254(&v23, lpMultiByteStr_1);\nL0083:       sub_402218(&v20, pbData);\nL0084:       v10 = sub_402398(dword_4096BC, v20);\nL0085:       sub_402218(&v19, pbData);\nL0086:       ui_1 = sub_402274((int)v19) - (_DWORD)v10;\nL0087:       sub_402218(&v18, pbData);\nL0088:       v8 = (char *)sub_402398(dword_4096BC, v18) + 1;\nL0089:       sub_402218(&v17, pbData);\nL0090:       sub_40234C((int)v17, (int)v8, ui_1, &v21);\nL0091:       sub_402280((volatile __int32 *)&lpWideCharStr_1, 4);\nL0092:       sub_401D3C((char **)dst, lpWideCharStr_1);\nL0093:       ++v5;\nL0094:       --Count_1;\nL0095:     }\nL0096:     while ( Count_1 );\nL0097:   }\nL0098:   sub_40592C(\"Address: \", 0, *dst, &dst_1);\nL0099:   sub_401B14(dst, dst_1);\nL0100:   sub_40592C(\"User: \", 0, *dst, &dst_2);\nL0101:   sub_401B14(dst, dst_2);\nL0102:   sub_40592C(\"Password: \", 0, *dst, &dst_3);\nL0103:   sub_401B14(dst, dst_3);\nL0104:   __writefsdword(0, v12[0]);\nL0105:   v13 = (int *)&loc_409658;\nL0106:   sub_401AE4(&dst_3, 3);\nL0107:   sub_402120(&v17, 5);\nL0108:   sub_401AC0(&lpMultiByteStr_1);\nL0109:   sub_402120(&v23, 5);\nL0110:   sub_401AC0(&lpMultiByteStr);\nL0111:   sub_402120(&v29, 2);\nL0112:   sub_401AC0(&v31);\nL0113:   return sub_402FC8((int **)&Credential, (int)dword_4086C0);\nL0114: }\n```\n\n## F-0479 sub_409AB8，原文件 L0001–L0010 / 共 10 行\n```text\nL0001: int **__usercall sub_409AB8@<eax>(volatile __int32 *dst@<eax>)\nL0002: {\nL0003:   int **result; // eax\nL0004: \nL0005:   sub_401AC0(dst);\nL0006:   result = (int **)sub_409980((int)dst);\nL0007:   if ( (_BYTE)result == 1 )\nL0008:     return sub_40930C(dst);\nL0009:   return result;\nL0010: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了 Credential Manager 凭据枚举、固定可选熵解密及 User/Password 格式化能力，并确认该逻辑由 sub_409AB8 的版本门控分支调用。结合已验证的上游调度事实，sub_409AB8 的返回缓冲区在密码列表分支中被绑定到 IEWEB.abc 的临时目录输出；但当前包不能证明枚举、解密或文件写入在运行时一定成功，也不能精确确定解密凭据字段的内部格式。",
+    "claims": [
+      {
+        "behavior": "程序在版本门控通过时枚举当前用户凭据，并尝试使用固定派生可选熵调用 DPAPI 解密每条凭据数据。",
+        "condition": "sub_409980 返回 1；sub_409AB8 随后调用 sub_40930C。版本检查与其读取 IE 版本的语义由已验证依赖 J09 提供。",
+        "source": "CredEnumerateA(0, 0, &Count, &Credential) 返回的凭据数组及每个 Credential 的 CredentialBlobSize/CredentialBlob；固定字符串 abe2869f-9b47-4cd9-a358-c22904dba7f7 经逐字节乘 4 转换后作为 74 字节 pOptionalEntropy。",
+        "action": "遍历凭据数组，将每项凭据数据构造为 DATA_BLOB，并调用 CryptUnprotectData；随后将目标名称和解密结果整理到 dst 管理的缓冲区。",
+        "sink": "sub_40930C 的 dst 内存结果缓冲区，随后作为 sub_409AB8 的返回结果。",
+        "evidence": [
+          {
+            "location": "F-0479 sub_409AB8 原文件 L0005-L0009",
+            "observation": "sub_409AB8 调用 sub_409980，并仅在返回值为 1 时调用 sub_40930C。"
+          },
+          {
+            "location": "F-0465 sub_40930C 原文件 L0045-L0069",
+            "observation": "代码构造固定字符串及 74 字节可选熵，调用 CredEnumerateA 枚举凭据，并将每项 CredentialBlob 传给 CryptUnprotectData。"
+          },
+          {
+            "location": "F-0465 sub_40930C 原文件 L0069-L0096",
+            "observation": "代码遍历枚举结果并使用解密输出 pbData 继续构造 dst 缓冲区内容。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码未检查 CredEnumerateA 或 CryptUnprotectData 的返回值，因此只能确认具备枚举和解密尝试能力，不能证明运行时成功。",
+          "解密 blob 的精确字段布局依赖 sub_402398、sub_40234C 等未在本包提供的辅助函数。"
+        ]
+      },
+      {
+        "behavior": "成功进入凭据处理循环后，程序把凭据目标名称和解密数据整理为 Address、User、Password 标记的内存记录。",
+        "condition": "CredEnumerateA 返回至少一条记录，并且后续数据处理路径继续执行；CryptUnprotectData 的成功与否未在代码中显式检查。",
+        "source": "每条凭据的 TargetName，以及 CryptUnprotectData 输出的 pDataOut.pbData。",
+        "action": "先追加 TargetName；随后追加 User: 和 Password: 标签，并从解密输出中按计算出的偏移、长度复制宽字符片段。函数末尾还对 Address:、User:、Password: 进行摘要/长度相关处理。",
+        "sink": "调用者提供的 dst 结果缓冲区，并由 sub_40930C 返回给 sub_409AB8 的调用者。",
+        "evidence": [
+          {
+            "location": "F-0465 sub_40930C 原文件 L0067-L0080",
+            "observation": "代码读取 Credential[v5]->TargetName，追加 User:，并从 pDataOut.pbData 复制一段数据到 dst。"
+          },
+          {
+            "location": "F-0465 sub_40930C 原文件 L0081-L0092",
+            "observation": "代码追加 Password:，依据解密数据计算位置和长度后复制另一段数据到 dst。"
+          },
+          {
+            "location": "F-0465 sub_40930C 原文件 L0098-L0103",
+            "observation": "代码针对 Address:、User:、Password: 在 dst 缓冲区中执行后续长度/定位处理。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "辅助字符串处理函数未提供，因而无法从本包独立确认每个复制片段对应的真实凭据字段；只能确认代码使用这些标签和解密数据构造记录。"
+        ]
+      },
+      {
+        "behavior": "在已验证的密码列表调度分支中，sub_409AB8 返回的凭据结果被尝试写入临时目录中的 IEWEB.abc。",
+        "condition": "密码列表命名互斥体已存在，且该输出生产者的 dword_40F1EC 门控非零；这些调度条件和写入绑定来自已验证依赖 J00。",
+        "source": "sub_409AB8 返回的、由 sub_40930C 构造的凭据结果缓冲区。",
+        "action": "上游调度器为 sub_409AB8 结果构造临时目录路径并追加 IEWEB.abc，然后调用其通用写入例程。",
+        "sink": "对临时目录\\IEWEB.abc 的文件写入尝试。",
+        "evidence": [
+          {
+            "location": "F-0479 sub_409AB8 原文件 L0005-L0009",
+            "observation": "sub_409AB8 在版本门控通过时返回 sub_40930C 的结果。"
+          },
+          {
+            "location": "F-0500 L57-L123（已验证依赖 J00）",
+            "observation": "调度器将 sub_409AB8 的生产者结果绑定到 IEWEB.abc，并调用写入例程；该依赖明确限定为写入尝试而非运行时成功。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包未包含 F-0500 调度源码；IEWEB.abc 的绑定及写入调用依赖已验证上游事实。",
+          "静态证据不能证明文件实际创建、写入成功或数据随后被外传。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "guid",
+        "value": "abe2869f-9b47-4cd9-a358-c22904dba7f7",
+        "role": "config_marker",
+        "detection_specificity": "high",
+        "meaning": "硬编码字符串被转换为固定 74 字节可选熵，用于 Credential Manager 数据的 DPAPI 解密尝试；可作为样本/家族关联标记，但不能单独证明感染。",
+        "evidence": [
+          {
+            "location": "F-0465 sub_40930C 原文件 L0045-L0059",
+            "observation": "代码复制该固定字符串，并把每个字符乘 4 写入 pOptionalEntropy，长度设为 74。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "User: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密凭据结果中的用户字段标签。",
+        "evidence": [
+          {
+            "location": "F-0465 sub_40930C 原文件 L0073-L0080",
+            "observation": "代码将 User: 追加到 dst，并随后复制解密数据片段。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Password: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密凭据结果中的密码字段标签。",
+        "evidence": [
+          {
+            "location": "F-0465 sub_40930C 原文件 L0081-L0092",
+            "observation": "代码将 Password: 追加到 dst，并随后复制另一解密数据片段。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEWEB.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "上游密码列表调度器为 sub_409AB8 返回结果绑定的固定临时目录输出文件。",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123（已验证依赖 J00）",
+            "observation": "已验证调度事实显示 sub_409AB8 结果对应 IEWEB.abc，并调用文件写入例程。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_40930C 的 DPAPI 解密结果是否在实际运行中成功，以及 CredentialBlob 的确切字段边界是什么？",
+        "reason": "本包未提供辅助字符串/字段解析函数，且代码未检查 CredEnumerateA 或 CryptUnprotectData 的返回值。",
+        "scope": "packet_internal",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "IEWEB.abc 是否实际创建并成功写入，以及是否存在后续传输或其他消费？",
+        "reason": "当前包只提供 sub_409AB8 的结果构造；文件绑定和写入调用来自 J00 的已验证上游摘要，静态材料不能证明运行时成功或后续外传。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_402398, sub_40234C, sub_402274, sub_402280",
+        "reason": "确定 DPAPI 输出中 User/Password 片段的精确解析和边界。",
+        "expected_value": "凭据字段的准确 source-to-buffer 语义。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_405D70及其IEWEB.abc写入后的调用者",
+        "reason": "确认 IEWEB.abc 写入是否成功及是否存在后续外传或处理。",
+        "expected_value": "凭据结果的最终外部副作用。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_402398",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40234C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402274",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402280",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_40930C 从 DPAPI 输出中提取 User/Password 字段的确切偏移和长度；当前代码只显示调用关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0465 sub_40930C 原文件 L0075-L0092",
+            "observation": "这些辅助函数参与解密输出的长度、位置计算及宽字符片段复制。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的核心 claims、artifact 及 material_need 证据位置都写成了“F-xxxx 函数名 原文件 Lx-Ly”格式，而验证器要求可解析的 F-xxxx Lx-Ly；因此这些当前包证据无法被识别和核验。问题覆盖 Credential Manager 枚举/DPAPI 解密、User/Password 整理、固定可选熵 artifact 以及字段解析补料需求，导致核心结论在结果格式中缺乏有效证据引用。",
+        "evidence": [
+          {
+            "location": "F-0465 sub_40930C L0045-L0059",
+            "observation": "当前材料确实显示固定字符串被复制、逐字符乘 4，并以 74 字节作为 pOptionalEntropy；但 Analyzer 将其写成带“原文件”及函数名的不可解析 location。"
+          },
+          {
+            "location": "F-0465 sub_40930C L0060-L0069",
+            "observation": "当前材料确实显示 CredEnumerateA、CredentialBlob 和 CryptUnprotectData；但 Analyzer 的对应 location 格式不可解析。"
+          },
+          {
+            "location": "F-0479 sub_409AB8 L0005-L0009",
+            "observation": "当前材料确实显示 sub_409AB8 按 sub_409980 返回值调用 sub_40930C；但 Analyzer 的对应 location 格式不可解析。"
+          }
+        ],
+        "required_fix": "仅将下列 location 字段改为可解析的原始源码引用，保留其 observation、claim 内容和证据等级；不要用改写 observation 代替修正引用。应分别使用：F-0479 L0005-L0009；F-0465 L0045-L0069；F-0465 L0069-L0096；F-0465 L0067-L0080；F-0465 L0081-L0092；F-0465 L0098-L0103；F-0465 L0045-L0059；F-0465 L0073-L0080；F-0465 L0081-L0092；F-0465 L0075-L0092。依赖摘要中的 F-0500 L57-L123 已是可接受格式，不应因本问题擅自改写。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/2/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/2/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/0/evidence/0/location"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖基本完整：Credential Manager 枚举、固定可选熵 DPAPI 解密尝试、凭据字段整理及 IEWEB.abc 的上游写入绑定均有相应内容，artifact role 与 detection_specificity 未见足以改变结论的错误。当前必须修复的是当前包证据 location 的统一格式；否则核心结论无法通过证据验证。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的核心 claims、artifact 及 material_need 证据位置都写成了“F-xxxx 函数名 原文件 Lx-Ly”格式，而验证器要求可解析的 F-xxxx Lx-Ly；因此这些当前包证据无法被识别和核验。问题覆盖 Credential Manager 枚举/DPAPI 解密、User/Password 整理、固定可选熵 artifact 以及字段解析补料需求，导致核心结论在结果格式中缺乏有效证据引用。",
+        "evidence": [
+          {
+            "location": "F-0465 sub_40930C L0045-L0059",
+            "observation": "当前材料确实显示固定字符串被复制、逐字符乘 4，并以 74 字节作为 pOptionalEntropy；但 Analyzer 将其写成带“原文件”及函数名的不可解析 location。"
+          },
+          {
+            "location": "F-0465 sub_40930C L0060-L0069",
+            "observation": "当前材料确实显示 CredEnumerateA、CredentialBlob 和 CryptUnprotectData；但 Analyzer 的对应 location 格式不可解析。"
+          },
+          {
+            "location": "F-0479 sub_409AB8 L0005-L0009",
+            "observation": "当前材料确实显示 sub_409AB8 按 sub_409980 返回值调用 sub_40930C；但 Analyzer 的对应 location 格式不可解析。"
+          }
+        ],
+        "required_fix": "仅将下列 location 字段改为可解析的原始源码引用，保留其 observation、claim 内容和证据等级；不要用改写 observation 代替修正引用。应分别使用：F-0479 L0005-L0009；F-0465 L0045-L0069；F-0465 L0069-L0096；F-0465 L0067-L0080；F-0465 L0081-L0092；F-0465 L0098-L0103；F-0465 L0045-L0059；F-0465 L0073-L0080；F-0465 L0081-L0092；F-0465 L0075-L0092。依赖摘要中的 F-0500 L57-L123 已是可接受格式，不应因本问题擅自改写。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/2/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/2/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/0/evidence/0/location"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖基本完整：Credential Manager 枚举、固定可选熵 DPAPI 解密尝试、凭据字段整理及 IEWEB.abc 的上游写入绑定均有相应内容，artifact role 与 detection_specificity 未见足以改变结论的错误。当前必须修复的是当前包证据 location 的统一格式；否则核心结论无法通过证据验证。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了 Credential Manager 凭据枚举、固定可选熵解密及 User/Password 格式化能力，并确认该逻辑由 sub_409AB8 的版本门控分支调用。结合已验证的上游调度事实，sub_409AB8 的返回缓冲区在密码列表分支中被绑定到 IEWEB.abc 的临时目录输出；但当前包不能证明枚举、解密或文件写入在运行时一定成功，也不能精确确定解密凭据字段的内部格式。",
+    "claims": [
+      {
+        "behavior": "程序在版本门控通过时枚举当前用户凭据，并尝试使用固定派生可选熵调用 DPAPI 解密每条凭据数据。",
+        "condition": "sub_409980 返回 1；sub_409AB8 随后调用 sub_40930C。版本检查与其读取 IE 版本的语义由已验证依赖 J09 提供。",
+        "source": "CredEnumerateA(0, 0, &Count, &Credential) 返回的凭据数组及每个 Credential 的 CredentialBlobSize/CredentialBlob；固定字符串 abe2869f-9b47-4cd9-a358-c22904dba7f7 经逐字节乘 4 转换后作为 74 字节 pOptionalEntropy。",
+        "action": "遍历凭据数组，将每项凭据数据构造为 DATA_BLOB，并调用 CryptUnprotectData；随后将目标名称和解密结果整理到 dst 管理的缓冲区。",
+        "sink": "sub_40930C 的 dst 内存结果缓冲区，随后作为 sub_409AB8 的返回结果。",
+        "evidence": [
+          {
+            "location": "F-0479 L0005-L0009",
+            "observation": "sub_409AB8 调用 sub_409980，并仅在返回值为 1 时调用 sub_40930C。"
+          },
+          {
+            "location": "F-0465 L0045-L0069",
+            "observation": "代码构造固定字符串及 74 字节可选熵，调用 CredEnumerateA 枚举凭据，并将每项 CredentialBlob 传给 CryptUnprotectData。"
+          },
+          {
+            "location": "F-0465 L0069-L0096",
+            "observation": "代码遍历枚举结果并使用解密输出 pbData 继续构造 dst 缓冲区内容。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码未检查 CredEnumerateA 或 CryptUnprotectData 的返回值，因此只能确认具备枚举和解密尝试能力，不能证明运行时成功。",
+          "解密 blob 的精确字段布局依赖 sub_402398、sub_40234C 等未在本包提供的辅助函数。"
+        ]
+      },
+      {
+        "behavior": "成功进入凭据处理循环后，程序把凭据目标名称和解密数据整理为 Address、User、Password 标记的内存记录。",
+        "condition": "CredEnumerateA 返回至少一条记录，并且后续数据处理路径继续执行；CryptUnprotectData 的成功与否未在代码中显式检查。",
+        "source": "每条凭据的 TargetName，以及 CryptUnprotectData 输出的 pDataOut.pbData。",
+        "action": "先追加 TargetName；随后追加 User: 和 Password: 标签，并从解密输出中按计算出的偏移、长度复制宽字符片段。函数末尾还对 Address:、User:、Password: 进行摘要/长度相关处理。",
+        "sink": "调用者提供的 dst 结果缓冲区，并由 sub_40930C 返回给 sub_409AB8 的调用者。",
+        "evidence": [
+          {
+            "location": "F-0465 L0067-L0080",
+            "observation": "代码读取 Credential[v5]->TargetName，追加 User:，并从 pDataOut.pbData 复制一段数据到 dst。"
+          },
+          {
+            "location": "F-0465 L0081-L0092",
+            "observation": "代码追加 Password:，依据解密数据计算位置和长度后复制另一段数据到 dst。"
+          },
+          {
+            "location": "F-0465 L0098-L0103",
+            "observation": "代码针对 Address:、User:、Password: 在 dst 缓冲区中执行后续长度/定位处理。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "辅助字符串处理函数未提供，因而无法从本包独立确认每个复制片段对应的真实凭据字段；只能确认代码使用这些标签和解密数据构造记录。"
+        ]
+      },
+      {
+        "behavior": "在已验证的密码列表调度分支中，sub_409AB8 返回的凭据结果被尝试写入临时目录中的 IEWEB.abc。",
+        "condition": "密码列表命名互斥体已存在，且该输出生产者的 dword_40F1EC 门控非零；这些调度条件和写入绑定来自已验证依赖 J00。",
+        "source": "sub_409AB8 返回的、由 sub_40930C 构造的凭据结果缓冲区。",
+        "action": "上游调度器为 sub_409AB8 结果构造临时目录路径并追加 IEWEB.abc，然后调用其通用写入例程。",
+        "sink": "对临时目录\\IEWEB.abc 的文件写入尝试。",
+        "evidence": [
+          {
+            "location": "F-0479 L0005-L0009",
+            "observation": "sub_409AB8 在版本门控通过时返回 sub_40930C 的结果。"
+          },
+          {
+            "location": "F-0500 L57-L123",
+            "observation": "调度器将 sub_409AB8 的生产者结果绑定到 IEWEB.abc，并调用写入例程；该依赖明确限定为写入尝试而非运行时成功。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包未包含 F-0500 调度源码；IEWEB.abc 的绑定及写入调用依赖已验证上游事实。",
+          "静态证据不能证明文件实际创建、写入成功或数据随后被外传。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "guid",
+        "value": "abe2869f-9b47-4cd9-a358-c22904dba7f7",
+        "role": "config_marker",
+        "detection_specificity": "high",
+        "meaning": "硬编码字符串被转换为固定 74 字节可选熵，用于 Credential Manager 数据的 DPAPI 解密尝试；可作为样本/家族关联标记，但不能单独证明感染。",
+        "evidence": [
+          {
+            "location": "F-0465 L0045-L0059",
+            "observation": "代码复制该固定字符串，并把每个字符乘 4 写入 pOptionalEntropy，长度设为 74。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "User: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密凭据结果中的用户字段标签。",
+        "evidence": [
+          {
+            "location": "F-0465 L0073-L0080",
+            "observation": "代码将 User: 追加到 dst，并随后复制解密数据片段。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Password: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密凭据结果中的密码字段标签。",
+        "evidence": [
+          {
+            "location": "F-0465 L0081-L0092",
+            "observation": "代码将 Password: 追加到 dst，并随后复制另一解密数据片段。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEWEB.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "上游密码列表调度器为 sub_409AB8 返回结果绑定的固定临时目录输出文件。",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123",
+            "observation": "已验证调度事实显示 sub_409AB8 结果对应 IEWEB.abc，并调用文件写入例程。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_40930C 的 DPAPI 解密结果是否在实际运行中成功，以及 CredentialBlob 的确切字段边界是什么？",
+        "reason": "本包未提供辅助字符串/字段解析函数，且代码未检查 CredEnumerateA 或 CryptUnprotectData 的返回值。",
+        "scope": "packet_internal",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "IEWEB.abc 是否实际创建并成功写入，以及是否存在后续传输或其他消费？",
+        "reason": "当前包只提供 sub_409AB8 的结果构造；文件绑定和写入调用来自 J00 的已验证上游摘要，静态材料不能证明运行时成功或后续外传。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_402398, sub_40234C, sub_402274, sub_402280",
+        "reason": "确定 DPAPI 输出中 User/Password 片段的精确解析和边界。",
+        "expected_value": "凭据字段的准确 source-to-buffer 语义。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_405D70及其IEWEB.abc写入后的调用者",
+        "reason": "确认 IEWEB.abc 写入是否成功及是否存在后续外传或处理。",
+        "expected_value": "凭据结果的最终外部副作用。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_402398",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40234C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402274",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402280",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_40930C 从 DPAPI 输出中提取 User/Password 字段的确切偏移和长度；当前代码只显示调用关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0465 L0075-L0092",
+            "observation": "这些辅助函数参与解密输出的长度、位置计算及宽字符片段复制。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了 Credential Manager 凭据枚举、固定可选熵解密及 User/Password 格式化能力，并确认该逻辑由 sub_409AB8 的版本门控分支调用。结合已验证的上游调度事实，sub_409AB8 的返回缓冲区在密码列表分支中被绑定到 IEWEB.abc 的临时目录输出；但当前包不能证明枚举、解密或文件写入在运行时一定成功，也不能精确确定解密凭据字段的内部格式。",
+    "claims": [
+      {
+        "behavior": "程序在版本门控通过时枚举当前用户凭据，并尝试使用固定派生可选熵调用 DPAPI 解密每条凭据数据。",
+        "condition": "sub_409980 返回 1；sub_409AB8 随后调用 sub_40930C。版本检查与其读取 IE 版本的语义由已验证依赖 J09 提供。",
+        "source": "CredEnumerateA(0, 0, &Count, &Credential) 返回的凭据数组及每个 Credential 的 CredentialBlobSize/CredentialBlob；固定字符串 abe2869f-9b47-4cd9-a358-c22904dba7f7 经逐字节乘 4 转换后作为 74 字节 pOptionalEntropy。",
+        "action": "遍历凭据数组，将每项凭据数据构造为 DATA_BLOB，并调用 CryptUnprotectData；随后将目标名称和解密结果整理到 dst 管理的缓冲区。",
+        "sink": "sub_40930C 的 dst 内存结果缓冲区，随后作为 sub_409AB8 的返回结果。",
+        "evidence": [
+          {
+            "location": "F-0479 L0005-L0009",
+            "observation": "sub_409AB8 调用 sub_409980，并仅在返回值为 1 时调用 sub_40930C。"
+          },
+          {
+            "location": "F-0465 L0045-L0069",
+            "observation": "代码构造固定字符串及 74 字节可选熵，调用 CredEnumerateA 枚举凭据，并将每项 CredentialBlob 传给 CryptUnprotectData。"
+          },
+          {
+            "location": "F-0465 L0069-L0096",
+            "observation": "代码遍历枚举结果并使用解密输出 pbData 继续构造 dst 缓冲区内容。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码未检查 CredEnumerateA 或 CryptUnprotectData 的返回值，因此只能确认具备枚举和解密尝试能力，不能证明运行时成功。",
+          "解密 blob 的精确字段布局依赖 sub_402398、sub_40234C 等未在本包提供的辅助函数。"
+        ]
+      },
+      {
+        "behavior": "成功进入凭据处理循环后，程序把凭据目标名称和解密数据整理为 Address、User、Password 标记的内存记录。",
+        "condition": "CredEnumerateA 返回至少一条记录，并且后续数据处理路径继续执行；CryptUnprotectData 的成功与否未在代码中显式检查。",
+        "source": "每条凭据的 TargetName，以及 CryptUnprotectData 输出的 pDataOut.pbData。",
+        "action": "先追加 TargetName；随后追加 User: 和 Password: 标签，并从解密输出中按计算出的偏移、长度复制宽字符片段。函数末尾还对 Address:、User:、Password: 进行摘要/长度相关处理。",
+        "sink": "调用者提供的 dst 结果缓冲区，并由 sub_40930C 返回给 sub_409AB8 的调用者。",
+        "evidence": [
+          {
+            "location": "F-0465 L0067-L0080",
+            "observation": "代码读取 Credential[v5]->TargetName，追加 User:，并从 pDataOut.pbData 复制一段数据到 dst。"
+          },
+          {
+            "location": "F-0465 L0081-L0092",
+            "observation": "代码追加 Password:，依据解密数据计算位置和长度后复制另一段数据到 dst。"
+          },
+          {
+            "location": "F-0465 L0098-L0103",
+            "observation": "代码针对 Address:、User:、Password: 在 dst 缓冲区中执行后续长度/定位处理。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "辅助字符串处理函数未提供，因而无法从本包独立确认每个复制片段对应的真实凭据字段；只能确认代码使用这些标签和解密数据构造记录。"
+        ]
+      },
+      {
+        "behavior": "在已验证的密码列表调度分支中，sub_409AB8 返回的凭据结果被尝试写入临时目录中的 IEWEB.abc。",
+        "condition": "密码列表命名互斥体已存在，且该输出生产者的 dword_40F1EC 门控非零；这些调度条件和写入绑定来自已验证依赖 J00。",
+        "source": "sub_409AB8 返回的、由 sub_40930C 构造的凭据结果缓冲区。",
+        "action": "上游调度器为 sub_409AB8 结果构造临时目录路径并追加 IEWEB.abc，然后调用其通用写入例程。",
+        "sink": "对临时目录\\IEWEB.abc 的文件写入尝试。",
+        "evidence": [
+          {
+            "location": "F-0479 L0005-L0009",
+            "observation": "sub_409AB8 在版本门控通过时返回 sub_40930C 的结果。"
+          },
+          {
+            "location": "F-0500 L57-L123（已验证依赖 J00）",
+            "observation": "调度器将 sub_409AB8 的生产者结果绑定到 IEWEB.abc，并调用写入例程；该依赖明确限定为写入尝试而非运行时成功。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包未包含 F-0500 调度源码；IEWEB.abc 的绑定及写入调用依赖已验证上游事实。",
+          "静态证据不能证明文件实际创建、写入成功或数据随后被外传。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "guid",
+        "value": "abe2869f-9b47-4cd9-a358-c22904dba7f7",
+        "role": "config_marker",
+        "detection_specificity": "high",
+        "meaning": "硬编码字符串被转换为固定 74 字节可选熵，用于 Credential Manager 数据的 DPAPI 解密尝试；可作为样本/家族关联标记，但不能单独证明感染。",
+        "evidence": [
+          {
+            "location": "F-0465 L0045-L0059",
+            "observation": "代码复制该固定字符串，并把每个字符乘 4 写入 pOptionalEntropy，长度设为 74。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "User: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密凭据结果中的用户字段标签。",
+        "evidence": [
+          {
+            "location": "F-0465 L0073-L0080",
+            "observation": "代码将 User: 追加到 dst，并随后复制解密数据片段。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Password: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密凭据结果中的密码字段标签。",
+        "evidence": [
+          {
+            "location": "F-0465 L0081-L0092",
+            "observation": "代码将 Password: 追加到 dst，并随后复制另一解密数据片段。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEWEB.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "上游密码列表调度器为 sub_409AB8 返回结果绑定的固定临时目录输出文件。",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123（已验证依赖 J00）",
+            "observation": "已验证调度事实显示 sub_409AB8 结果对应 IEWEB.abc，并调用文件写入例程。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_40930C 的 DPAPI 解密结果是否在实际运行中成功，以及 CredentialBlob 的确切字段边界是什么？",
+        "reason": "本包未提供辅助字符串/字段解析函数，且代码未检查 CredEnumerateA 或 CryptUnprotectData 的返回值。",
+        "scope": "packet_internal",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "IEWEB.abc 是否实际创建并成功写入，以及是否存在后续传输或其他消费？",
+        "reason": "当前包只提供 sub_409AB8 的结果构造；文件绑定和写入调用来自 J00 的已验证上游摘要，静态材料不能证明运行时成功或后续外传。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_402398, sub_40234C, sub_402274, sub_402280",
+        "reason": "确定 DPAPI 输出中 User/Password 片段的精确解析和边界。",
+        "expected_value": "凭据字段的准确 source-to-buffer 语义。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_405D70及其IEWEB.abc写入后的调用者",
+        "reason": "确认 IEWEB.abc 写入是否成功及是否存在后续外传或处理。",
+        "expected_value": "凭据结果的最终外部副作用。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_402398",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40234C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402274",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402280",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_40930C 从 DPAPI 输出中提取 User/Password 字段的确切偏移和长度；当前代码只显示调用关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0465 L0075-L0092",
+            "observation": "这些辅助函数参与解密输出的长度、位置计算及宽字符片段复制。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/2/evidence/0/location",
+      "/material_needs/0/evidence/0/location"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [],
+    "applied_paths": [
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/2/evidence/0/location",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/material_needs/0/evidence/0/location"
+    ],
+    "ignored_paths": [
+      "/claims/2/evidence/1/location",
+      "/artifacts/3/evidence/0/location"
+    ],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的核心 claims、artifact 及 material_need 证据位置都写成了“F-xxxx 函数名 原文件 Lx-Ly”格式，而验证器要求可解析的 F-xxxx Lx-Ly；因此这些当前包证据无法被识别和核验。问题覆盖 Credential Manager 枚举/DPAPI 解密、User/Password 整理、固定可选熵 artifact 以及字段解析补料需求，导致核心结论在结果格式中缺乏有效证据引用。",
+        "evidence": [
+          {
+            "location": "F-0465 sub_40930C L0045-L0059",
+            "observation": "当前材料确实显示固定字符串被复制、逐字符乘 4，并以 74 字节作为 pOptionalEntropy；但 Analyzer 将其写成带“原文件”及函数名的不可解析 location。"
+          },
+          {
+            "location": "F-0465 sub_40930C L0060-L0069",
+            "observation": "当前材料确实显示 CredEnumerateA、CredentialBlob 和 CryptUnprotectData；但 Analyzer 的对应 location 格式不可解析。"
+          },
+          {
+            "location": "F-0479 sub_409AB8 L0005-L0009",
+            "observation": "当前材料确实显示 sub_409AB8 按 sub_409980 返回值调用 sub_40930C；但 Analyzer 的对应 location 格式不可解析。"
+          }
+        ],
+        "required_fix": "仅将下列 location 字段改为可解析的原始源码引用，保留其 observation、claim 内容和证据等级；不要用改写 observation 代替修正引用。应分别使用：F-0479 L0005-L0009；F-0465 L0045-L0069；F-0465 L0069-L0096；F-0465 L0067-L0080；F-0465 L0081-L0092；F-0465 L0098-L0103；F-0465 L0045-L0059；F-0465 L0073-L0080；F-0465 L0081-L0092；F-0465 L0075-L0092。依赖摘要中的 F-0500 L57-L123 已是可接受格式，不应因本问题擅自改写。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/0/evidence/0",
+              "/claims/0/evidence/1",
+              "/claims/0/evidence/2",
+              "/claims/1/evidence/0",
+              "/claims/1/evidence/1",
+              "/claims/1/evidence/2",
+              "/claims/2/evidence/0",
+              "/artifacts/0/evidence/0",
+              "/artifacts/1/evidence/0",
+              "/artifacts/2/evidence/0",
+              "/material_needs/0/evidence/0"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖基本完整：Credential Manager 枚举、固定可选熵 DPAPI 解密尝试、凭据字段整理及 IEWEB.abc 的上游写入绑定均有相应内容，artifact role 与 detection_specificity 未见足以改变结论的错误。当前必须修复的是当前包证据 location 的统一格式；否则核心结论无法通过证据验证。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了 Credential Manager 凭据枚举、固定可选熵解密及 User/Password 格式化能力，并确认该逻辑由 sub_409AB8 的版本门控分支调用。结合已验证的上游调度事实，sub_409AB8 的返回缓冲区在密码列表分支中被绑定到 IEWEB.abc 的临时目录输出；但当前包不能证明枚举、解密或文件写入在运行时一定成功，也不能精确确定解密凭据字段的内部格式。",
+    "claims": [
+      {
+        "behavior": "程序在版本门控通过时枚举当前用户凭据，并尝试使用固定派生可选熵调用 DPAPI 解密每条凭据数据。",
+        "condition": "sub_409980 返回 1；sub_409AB8 随后调用 sub_40930C。版本检查与其读取 IE 版本的语义由已验证依赖 J09 提供。",
+        "source": "CredEnumerateA(0, 0, &Count, &Credential) 返回的凭据数组及每个 Credential 的 CredentialBlobSize/CredentialBlob；固定字符串 abe2869f-9b47-4cd9-a358-c22904dba7f7 经逐字节乘 4 转换后作为 74 字节 pOptionalEntropy。",
+        "action": "遍历凭据数组，将每项凭据数据构造为 DATA_BLOB，并调用 CryptUnprotectData；随后将目标名称和解密结果整理到 dst 管理的缓冲区。",
+        "sink": "sub_40930C 的 dst 内存结果缓冲区，随后作为 sub_409AB8 的返回结果。",
+        "evidence": [
+          {
+            "location": "F-0479 L0005-L0009",
+            "observation": "sub_409AB8 调用 sub_409980，并仅在返回值为 1 时调用 sub_40930C。"
+          },
+          {
+            "location": "F-0465 L0045-L0069",
+            "observation": "代码构造固定字符串及 74 字节可选熵，调用 CredEnumerateA 枚举凭据，并将每项 CredentialBlob 传给 CryptUnprotectData。"
+          },
+          {
+            "location": "F-0465 L0069-L0096",
+            "observation": "代码遍历枚举结果并使用解密输出 pbData 继续构造 dst 缓冲区内容。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码未检查 CredEnumerateA 或 CryptUnprotectData 的返回值，因此只能确认具备枚举和解密尝试能力，不能证明运行时成功。",
+          "解密 blob 的精确字段布局依赖 sub_402398、sub_40234C 等未在本包提供的辅助函数。"
+        ]
+      },
+      {
+        "behavior": "成功进入凭据处理循环后，程序把凭据目标名称和解密数据整理为 Address、User、Password 标记的内存记录。",
+        "condition": "CredEnumerateA 返回至少一条记录，并且后续数据处理路径继续执行；CryptUnprotectData 的成功与否未在代码中显式检查。",
+        "source": "每条凭据的 TargetName，以及 CryptUnprotectData 输出的 pDataOut.pbData。",
+        "action": "先追加 TargetName；随后追加 User: 和 Password: 标签，并从解密输出中按计算出的偏移、长度复制宽字符片段。函数末尾还对 Address:、User:、Password: 进行摘要/长度相关处理。",
+        "sink": "调用者提供的 dst 结果缓冲区，并由 sub_40930C 返回给 sub_409AB8 的调用者。",
+        "evidence": [
+          {
+            "location": "F-0465 L0067-L0080",
+            "observation": "代码读取 Credential[v5]->TargetName，追加 User:，并从 pDataOut.pbData 复制一段数据到 dst。"
+          },
+          {
+            "location": "F-0465 L0081-L0092",
+            "observation": "代码追加 Password:，依据解密数据计算位置和长度后复制另一段数据到 dst。"
+          },
+          {
+            "location": "F-0465 L0098-L0103",
+            "observation": "代码针对 Address:、User:、Password: 在 dst 缓冲区中执行后续长度/定位处理。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "辅助字符串处理函数未提供，因而无法从本包独立确认每个复制片段对应的真实凭据字段；只能确认代码使用这些标签和解密数据构造记录。"
+        ]
+      },
+      {
+        "behavior": "在已验证的密码列表调度分支中，sub_409AB8 返回的凭据结果被尝试写入临时目录中的 IEWEB.abc。",
+        "condition": "密码列表命名互斥体已存在，且该输出生产者的 dword_40F1EC 门控非零；这些调度条件和写入绑定来自已验证依赖 J00。",
+        "source": "sub_409AB8 返回的、由 sub_40930C 构造的凭据结果缓冲区。",
+        "action": "上游调度器为 sub_409AB8 结果构造临时目录路径并追加 IEWEB.abc，然后调用其通用写入例程。",
+        "sink": "对临时目录\\IEWEB.abc 的文件写入尝试。",
+        "evidence": [
+          {
+            "location": "F-0479 L0005-L0009",
+            "observation": "sub_409AB8 在版本门控通过时返回 sub_40930C 的结果。"
+          },
+          {
+            "location": "F-0500 L57-L123（已验证依赖 J00）",
+            "observation": "调度器将 sub_409AB8 的生产者结果绑定到 IEWEB.abc，并调用写入例程；该依赖明确限定为写入尝试而非运行时成功。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包未包含 F-0500 调度源码；IEWEB.abc 的绑定及写入调用依赖已验证上游事实。",
+          "静态证据不能证明文件实际创建、写入成功或数据随后被外传。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "guid",
+        "value": "abe2869f-9b47-4cd9-a358-c22904dba7f7",
+        "role": "config_marker",
+        "detection_specificity": "high",
+        "meaning": "硬编码字符串被转换为固定 74 字节可选熵，用于 Credential Manager 数据的 DPAPI 解密尝试；可作为样本/家族关联标记，但不能单独证明感染。",
+        "evidence": [
+          {
+            "location": "F-0465 L0045-L0059",
+            "observation": "代码复制该固定字符串，并把每个字符乘 4 写入 pOptionalEntropy，长度设为 74。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "User: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密凭据结果中的用户字段标签。",
+        "evidence": [
+          {
+            "location": "F-0465 L0073-L0080",
+            "observation": "代码将 User: 追加到 dst，并随后复制解密数据片段。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "Password: ",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "解密凭据结果中的密码字段标签。",
+        "evidence": [
+          {
+            "location": "F-0465 L0081-L0092",
+            "observation": "代码将 Password: 追加到 dst，并随后复制另一解密数据片段。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "IEWEB.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "上游密码列表调度器为 sub_409AB8 返回结果绑定的固定临时目录输出文件。",
+        "evidence": [
+          {
+            "location": "F-0500 L57-L123（已验证依赖 J00）",
+            "observation": "已验证调度事实显示 sub_409AB8 结果对应 IEWEB.abc，并调用文件写入例程。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_40930C 的 DPAPI 解密结果是否在实际运行中成功，以及 CredentialBlob 的确切字段边界是什么？",
+        "reason": "本包未提供辅助字符串/字段解析函数，且代码未检查 CredEnumerateA 或 CryptUnprotectData 的返回值。",
+        "scope": "packet_internal",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "IEWEB.abc 是否实际创建并成功写入，以及是否存在后续传输或其他消费？",
+        "reason": "当前包只提供 sub_409AB8 的结果构造；文件绑定和写入调用来自 J00 的已验证上游摘要，静态材料不能证明运行时成功或后续外传。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_402398, sub_40234C, sub_402274, sub_402280",
+        "reason": "确定 DPAPI 输出中 User/Password 片段的精确解析和边界。",
+        "expected_value": "凭据字段的准确 source-to-buffer 语义。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_405D70及其IEWEB.abc写入后的调用者",
+        "reason": "确认 IEWEB.abc 写入是否成功及是否存在后续外传或处理。",
+        "expected_value": "凭据结果的最终外部副作用。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_402398",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40234C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402274",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402280",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_40930C 从 DPAPI 输出中提取 User/Password 字段的确切偏移和长度；当前代码只显示调用关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0465 L0075-L0092",
+            "observation": "这些辅助函数参与解密输出的长度、位置计算及宽字符片段复制。"
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": [
+    "/claims/2/evidence/1/location",
+    "/artifacts/3/evidence/0/location"
+  ]
+}

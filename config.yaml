@@ -1,0 +1,107 @@
+providers:
+  deepseek:
+    type: deepseek
+    base_url: "https://api.deepseek.com"
+    api_key_env: "DEEPSEEK_API_KEY"
+    request_timeout_seconds: 300
+    sdk_max_retries: 0
+
+  # 示例：内部 OpenAI-compatible 网关。未使用时可保留或删除。
+  internal:
+    type: openai_compatible
+    base_url: "http://127.0.0.1:2455/v1"
+    api_key_env: "INTERNAL_API_KEY"
+    request_timeout_seconds: 300
+    sdk_max_retries: 0
+
+models:
+  investigator:
+    provider: internal
+    model_name: "gpt-5.6-luna"
+    api_mode: chat
+    output_mode: tool
+    # omit = 完全不发送 reasoning/thinking 字段；disabled = 显式 thinking=false。
+    reasoning: omit
+    temperature: null
+    stream_output: true
+
+  reviewer_fast:
+    provider: internal
+    model_name: "gpt-5.6-luna"
+    api_mode: chat
+    output_mode: tool
+    reasoning: omit
+    temperature: null
+    stream_output: true
+
+  # Format repair is a clean-context, plain-text JSON repair model.
+  # It can be replaced with a cheaper model that is reliable at JSON formatting.
+  repair_fast:
+    provider: internal
+    model_name: "gpt-5.6-luna"
+    api_mode: chat
+    output_mode: prompted
+    reasoning: omit
+    temperature: null
+    stream_output: true
+
+  global_reconciler:
+    provider: internal
+    model_name: "gpt-5.6-luna"
+    api_mode: chat
+    output_mode: prompted
+    reasoning: omit
+    temperature: null
+    stream_output: true
+
+stages:
+  analyzer:
+    model: investigator
+    max_output_tokens: 40960
+  reviewer:
+    model: reviewer_fast
+    max_output_tokens: 15360
+  reviser:
+    model: investigator
+    max_output_tokens: 20480
+  format_repair:
+    model: repair_fast
+    max_output_tokens: 40960
+  # v0.7: relationship decisions only; canonical facts are assembled by Python.
+  global_reconciliation:
+    model: global_reconciler
+    max_output_tokens: 40960
+
+
+workflow:
+  max_model_requests: 3
+  total_tokens_limit: 130000
+  wall_clock_seconds: 600
+  output_retries: 0
+  enable_revision: true
+
+format_repair:
+  enabled: true
+  max_attempts: 3
+  total_tokens_limit: 240000
+  deterministic_cleanup: true
+
+global_reconciliation:
+  enabled: true
+  max_model_requests: 1
+  total_tokens_limit: 160000
+  wall_clock_seconds: 300
+
+final_evidence_assessment:
+  enabled: false
+  max_model_requests: 1
+  total_tokens_limit: 60000
+  wall_clock_seconds: 180
+
+batch:
+  concurrency: 1
+
+logging:
+  level: "INFO"
+  console: true
+  file: "logs/bounded_investigator.log"

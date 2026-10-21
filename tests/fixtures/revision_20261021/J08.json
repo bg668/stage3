@@ -1,0 +1,1169 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J08.json",
+        "sha256": "e13e7191a0565038f4ca79c9fb1a71851c766f294bfab0f5cb47f9493c5efcba"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J08/analyzer/validated_result.json",
+        "sha256": "383f18183edb8492d11ee51aaaad37074fc1177f38140039e1cf92d890f84f4d"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J08/reviewer/validated_result.json",
+        "sha256": "a728298ecdc87654b0ac33c953f35cfd90b18b1c8aaa06e5db48b7fcac391702"
+      },
+      "packet": {
+        "path": "testdata/packets/J08.md",
+        "sha256": "fe000958b67a424075c369821f6ee56f9f6ff19c2f64c952a1ab76b06f9f39ce"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J08/reviser/validated_result.json",
+        "sha256": "e3f74a9c96d267f83c669c78203eca0f3c558b2238c131622f71d70af978a85f"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J08/reviser/revision_scope.json",
+        "sha256": "46a05996115289c5c5e4888eaaf4041497f867b4232e5e2dc893209a2f756491"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J08",
+  "packet_text": "# J08 Protected Storage 收集\n任务来源：J00 的 F477 是转调 F419；其集合提取调用向下展开。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0419 sub_407834，原文件 L0001–L0080 / 共 80 行\n```text\nL0001: int *__usercall sub_407834@<eax>(volatile __int32 *dst_3@<eax>)\nL0002: {\nL0003:   _BYTE *v2; // eax\nL0004:   _BYTE *v3; // eax\nL0005:   _BYTE *v4; // eax\nL0006:   _BYTE *v5; // eax\nL0007:   _BYTE *v6; // eax\nL0008:   _BYTE *v7; // eax\nL0009:   _BYTE *v8; // eax\nL0010:   _BYTE *v9; // eax\nL0011:   _BYTE *v10; // eax\nL0012:   _BYTE *v11; // eax\nL0013:   unsigned int v13[2]; // [esp-Ch] [ebp-34h] BYREF\nL0014:   int *v14; // [esp-4h] [ebp-2Ch]\nL0015:   char *dst_2; // [esp+4h] [ebp-24h] BYREF\nL0016:   char *dst_1; // [esp+8h] [ebp-20h] BYREF\nL0017:   char *dst; // [esp+Ch] [ebp-1Ch] BYREF\nL0018:   char *v18; // [esp+10h] [ebp-18h] BYREF\nL0019:   __int32 v19; // [esp+14h] [ebp-14h] BYREF\nL0020:   __int32 v20; // [esp+18h] [ebp-10h] BYREF\nL0021:   __int32 v21; // [esp+1Ch] [ebp-Ch] BYREF\nL0022:   char *v22; // [esp+20h] [ebp-8h] BYREF\nL0023:   struct _EXCEPTION_REGISTRATION_RECORD *dst_; // [esp+24h] [ebp-4h] BYREF\nL0024:   int savedregs; // [esp+28h] [ebp+0h] BYREF\nL0025: \nL0026:   v14 = &savedregs;\nL0027:   v13[1] = (unsigned int)&loc_407AA5;\nL0028:   v13[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0029:   __writefsdword(0, (unsigned int)v13);\nL0030:   sub_401AC0(dst_3);\nL0031:   PStoreCreateInstance((int)&dword_40E9AC, dword_40E9B0, 0, 0);\nL0032:   sub_4077D4(dword_40E9AC, &v18);\nL0033:   sub_4076C0(dword_40E9AC, &dst_);\nL0034:   if ( dst_ )\nL0035:   {\nL0036:     while ( (int)sub_40202C(dword_407ABC, dst_) > 0 )\nL0037:     {\nL0038:       v2 = sub_40202C(dword_407ABC, dst_);\nL0039:       sub_401FA4((int)dst_, 1, (int)(v2 - 1), &v22);\nL0040:       if ( (int)sub_40202C(\":StringData\", v22) <= 0 )\nL0041:       {\nL0042:         v11 = sub_40202C(dword_407ABC, dst_);\nL0043:         sub_401FE4((unsigned int *)&dst_, 1, (int)(v11 + 1));\nL0044:       }\nL0045:       else\nL0046:       {\nL0047:         v3 = sub_40202C(\":StringData\", v22);\nL0048:         sub_401FA4((int)dst_, 1, (int)(v3 - 1), &dst);\nL0049:         sub_401D9C(&v21, (unsigned __int32)dst, (unsigned __int32)dst__5);\nL0050:         v4 = sub_40202C(dword_407ABC, dst_);\nL0051:         sub_401FE4((unsigned int *)&dst_, 1, (int)(v4 + 1));\nL0052:         v5 = sub_40202C(dword_407ABC, dst_);\nL0053:         sub_401FA4((int)dst_, 1, (int)(v5 - 1), &v22);\nL0054:         v6 = sub_40202C(dword_407ABC, dst_);\nL0055:         sub_401FE4((unsigned int *)&dst_, 1, (int)(v6 + 1));\nL0056:         if ( (int)sub_40202C(&dword_407AE8, v22) > 0 )\nL0057:         {\nL0058:           while ( (int)sub_40202C(&dword_407AE8, v22) > 0 )\nL0059:           {\nL0060:             v7 = sub_40202C(&dword_407AE8, v22);\nL0061:             sub_401FA4((int)v22, 1, (int)(v7 - 1), &dst_1);\nL0062:             sub_401D9C(&v20, (unsigned __int32)dst_1, (unsigned __int32)dst__5);\nL0063:             v8 = sub_40202C(&dword_407AE8, v22);\nL0064:             sub_401FE4((unsigned int *)&v22, 1, (int)v8);\nL0065:             v9 = sub_40202C(&dword_407AE8, v22);\nL0066:             sub_401FA4((int)v22, 1, (int)(v9 - 1), &dst_2);\nL0067:             sub_401D9C(&v19, (unsigned __int32)dst_2, (unsigned __int32)dst__5);\nL0068:             v10 = sub_40202C(&dword_407AE8, v22);\nL0069:             sub_401FE4((unsigned int *)&v22, 1, (int)v10);\nL0070:             if ( v20 && v19 )\nL0071:               sub_401E10(dst_3, 7);\nL0072:           }\nL0073:         }\nL0074:       }\nL0075:     }\nL0076:   }\nL0077:   __writefsdword(0, v13[0]);\nL0078:   v14 = (int *)&loc_407AAC;\nL0079:   return sub_401AE4((int *)&dst_2, 9);\nL0080: }\n```\n\n## F-0417 sub_4076C0，原文件 L0001–L0055 / 共 55 行\n```text\nL0001: _DWORD *__usercall sub_4076C0@<eax>(int a1@<eax>, struct _EXCEPTION_REGISTRATION_RECORD **dst@<edx>)\nL0002: {\nL0003:   void *pv; // ecx\nL0004:   struct _EXCEPTION_REGISTRATION_RECORD *ExceptionList; // [esp-Ch] [ebp-3Ch] BYREF\nL0005:   void *v6; // [esp-8h] [ebp-38h]\nL0006:   int *v7; // [esp-4h] [ebp-34h]\nL0007:   void *v8; // [esp+0h] [ebp-30h]\nL0008:   struct _EXCEPTION_REGISTRATION_RECORD *dst_; // [esp+8h] [ebp-28h] BYREF\nL0009:   char *v10; // [esp+Ch] [ebp-24h] BYREF\nL0010:   char *v11; // [esp+10h] [ebp-20h] BYREF\nL0011:   IID rclsid_; // [esp+14h] [ebp-1Ch] BYREF\nL0012:   int v13; // [esp+24h] [ebp-Ch] BYREF\nL0013:   int v14; // [esp+28h] [ebp-8h] BYREF\nL0014:   int v15; // [esp+2Ch] [ebp-4h] BYREF\nL0015:   int savedregs; // [esp+30h] [ebp+0h] BYREF\nL0016: \nL0017:   dst_ = 0;\nL0018:   v11 = 0;\nL0019:   v10 = 0;\nL0020:   v14 = 0;\nL0021:   v15 = a1;\nL0022:   sub_4030D4(a1);\nL0023:   v7 = &savedregs;\nL0024:   v6 = &loc_4077AD;\nL0025:   ExceptionList = NtCurrentTeb()->NtTib.ExceptionList;\nL0026:   __writefsdword(0, (unsigned int)&ExceptionList);\nL0027:   sub_401AC0(dst);\nL0028:   (*(void (__stdcall **)(int, _DWORD, _DWORD, int *, struct _EXCEPTION_REGISTRATION_RECORD *))(*(_DWORD *)v15 + 56))(\nL0029:     v15,\nL0030:     0,\nL0031:     0,\nL0032:     &v14,\nL0033:     ExceptionList);\nL0034:   v13 = 0;\nL0035:   do\nL0036:   {\nL0037:     (*(void (__stdcall **)(int, int, IID *, int *))(*(_DWORD *)v14 + 12))(v14, 1, &rclsid_, &v13);\nL0038:     if ( v13 )\nL0039:     {\nL0040:       ExceptionList = *dst;\nL0041:       sub_40756C(&rclsid_, &v11, pv);\nL0042:       sub_4073FC(&rclsid_, &v10);\nL0043:       sub_401E10((volatile __int32 *)dst, 5);\nL0044:       ExceptionList = *dst;\nL0045:       sub_407598(v15, &rclsid_, &dst_);\nL0046:       sub_401E10((volatile __int32 *)dst, 3);\nL0047:     }\nL0048:   }\nL0049:   while ( v13 );\nL0050:   __writefsdword(0, (unsigned int)v6);\nL0051:   v8 = &loc_4077B4;\nL0052:   sub_401AE4((int *)&dst_, 3);\nL0053:   sub_403064(&v14);\nL0054:   return sub_403064(&v15);\nL0055: }\n```\n\n## F-0416 sub_407598，原文件 L0001–L0061 / 共 61 行\n```text\nL0001: _DWORD *__usercall sub_407598@<eax>(int a1@<eax>, _DWORD *a2@<edx>, struct _EXCEPTION_REGISTRATION_RECORD **dst@<ecx>)\nL0002: {\nL0003:   void *pv; // ecx\nL0004:   struct _EXCEPTION_REGISTRATION_RECORD *ExceptionList; // [esp-Ch] [ebp-50h] BYREF\nL0005:   void *v7; // [esp-8h] [ebp-4Ch]\nL0006:   int *v8; // [esp-4h] [ebp-48h]\nL0007:   void *v9; // [esp+0h] [ebp-44h]\nL0008:   struct _EXCEPTION_REGISTRATION_RECORD *dst_; // [esp+Ch] [ebp-38h] BYREF\nL0009:   char *v11; // [esp+10h] [ebp-34h] BYREF\nL0010:   char *v12; // [esp+14h] [ebp-30h] BYREF\nL0011:   IID rclsid_; // [esp+18h] [ebp-2Ch] BYREF\nL0012:   _DWORD v14[4]; // [esp+28h] [ebp-1Ch] BYREF\nL0013:   int v15; // [esp+38h] [ebp-Ch] BYREF\nL0014:   int v16; // [esp+3Ch] [ebp-8h] BYREF\nL0015:   int v17; // [esp+40h] [ebp-4h] BYREF\nL0016:   int savedregs; // [esp+44h] [ebp+0h] BYREF\nL0017: \nL0018:   dst_ = 0;\nL0019:   v12 = 0;\nL0020:   v11 = 0;\nL0021:   v16 = 0;\nL0022:   v14[0] = *a2;\nL0023:   v14[1] = a2[1];\nL0024:   v14[2] = a2[2];\nL0025:   v14[3] = a2[3];\nL0026:   v17 = a1;\nL0027:   sub_4030D4(a1);\nL0028:   v8 = &savedregs;\nL0029:   v7 = &loc_40769A;\nL0030:   ExceptionList = NtCurrentTeb()->NtTib.ExceptionList;\nL0031:   __writefsdword(0, (unsigned int)&ExceptionList);\nL0032:   sub_401AC0(dst);\nL0033:   (*(void (__stdcall **)(int, _DWORD, _DWORD *, _DWORD, int *, struct _EXCEPTION_REGISTRATION_RECORD *))(*(_DWORD *)v17 + 60))(\nL0034:     v17,\nL0035:     0,\nL0036:     v14,\nL0037:     0,\nL0038:     &v16,\nL0039:     ExceptionList);\nL0040:   v15 = 0;\nL0041:   do\nL0042:   {\nL0043:     (*(void (__stdcall **)(int, int, IID *, int *))(*(_DWORD *)v16 + 12))(v16, 1, &rclsid_, &v15);\nL0044:     if ( v15 )\nL0045:     {\nL0046:       ExceptionList = *dst;\nL0047:       sub_40756C(&rclsid_, &v12, pv);\nL0048:       sub_4073A0(v14, &rclsid_, &v11);\nL0049:       sub_401E10((volatile __int32 *)dst, 5);\nL0050:       ExceptionList = *dst;\nL0051:       sub_40744C(v17, v14, &rclsid_, &dst_);\nL0052:       sub_401E10((volatile __int32 *)dst, 3);\nL0053:     }\nL0054:   }\nL0055:   while ( v15 );\nL0056:   __writefsdword(0, (unsigned int)v7);\nL0057:   v9 = &loc_4076A1;\nL0058:   sub_401AE4((int *)&dst_, 3);\nL0059:   sub_403064(&v16);\nL0060:   return sub_403064(&v17);\nL0061: }\n```\n\n## F-0418 sub_4077D4，原文件 L0001–L0025 / 共 25 行\n```text\nL0001: _DWORD *__usercall sub_4077D4@<eax>(int a1@<eax>, char **a2@<edx>)\nL0002: {\nL0003:   struct _EXCEPTION_REGISTRATION_RECORD *ExceptionList; // [esp-Ch] [ebp-18h] BYREF\nL0004:   void *v5; // [esp-8h] [ebp-14h]\nL0005:   int *v6; // [esp-4h] [ebp-10h]\nL0006:   void *v7; // [esp+0h] [ebp-Ch]\nL0007:   int v8; // [esp+4h] [ebp-8h] BYREF\nL0008:   int v9; // [esp+8h] [ebp-4h] BYREF\nL0009:   int savedregs; // [esp+Ch] [ebp+0h] BYREF\nL0010: \nL0011:   v9 = a1;\nL0012:   sub_4030D4(a1);\nL0013:   v6 = &savedregs;\nL0014:   v5 = &loc_407826;\nL0015:   ExceptionList = NtCurrentTeb()->NtTib.ExceptionList;\nL0016:   __writefsdword(0, (unsigned int)&ExceptionList);\nL0017:   (*(void (__stdcall **)(int, int *, struct _EXCEPTION_REGISTRATION_RECORD *))(*(_DWORD *)v9 + 12))(\nL0018:     v9,\nL0019:     &v8,\nL0020:     ExceptionList);\nL0021:   sub_401CDC(a2, *(_DWORD *)(v8 + 24));\nL0022:   __writefsdword(0, (unsigned int)v5);\nL0023:   v7 = &loc_40782D;\nL0024:   return sub_403064(&v9);\nL0025: }\n```\n\n## F-0410 sub_407244，原文件 L0001–L0088 / 共 88 行\n```text\nL0001: _DWORD *__userpurge sub_407244@<eax>(\nL0002:         int a1@<eax>,\nL0003:         _DWORD *a2@<edx>,\nL0004:         _DWORD *a3@<ecx>,\nL0005:         volatile __int32 *a4,\nL0006:         int lpWideCharStr)\nL0007: {\nL0008:   unsigned int v5; // ebx\nL0009:   OLECHAR *v6; // eax\nL0010:   __int64 pv_1; // [esp+28h] [ebp-64h] BYREF\nL0011:   void *v9; // [esp+30h] [ebp-5Ch]\nL0012:   int *v10; // [esp+34h] [ebp-58h]\nL0013:   void *v11; // [esp+38h] [ebp-54h]\nL0014:   char *dst; // [esp+44h] [ebp-48h] BYREF\nL0015:   char *lpMultiByteStr; // [esp+48h] [ebp-44h] BYREF\nL0016:   _DWORD v14[4]; // [esp+4Ch] [ebp-40h] BYREF\nL0017:   _DWORD v15[4]; // [esp+5Ch] [ebp-30h] BYREF\nL0018:   _DWORD v16[4]; // [esp+6Ch] [ebp-20h] BYREF\nL0019:   __int32 dst_1; // [esp+7Ch] [ebp-10h] BYREF\nL0020:   LPVOID pv; // [esp+80h] [ebp-Ch] BYREF\nL0021:   unsigned int v19; // [esp+84h] [ebp-8h] BYREF\nL0022:   int v20; // [esp+88h] [ebp-4h] BYREF\nL0023:   int savedregs; // [esp+8Ch] [ebp+0h] BYREF\nL0024: \nL0025:   v5 = 0;\nL0026:   dst = 0;\nL0027:   lpMultiByteStr = 0;\nL0028:   dst_1 = 0;\nL0029:   v15[0] = *a3;\nL0030:   v15[1] = a3[1];\nL0031:   v15[2] = a3[2];\nL0032:   v15[3] = a3[3];\nL0033:   v16[0] = *a2;\nL0034:   v16[1] = a2[1];\nL0035:   v16[2] = a2[2];\nL0036:   v16[3] = a2[3];\nL0037:   v20 = a1;\nL0038:   sub_4030D4(a1);\nL0039:   v10 = &savedregs;\nL0040:   v9 = &loc_40737D;\nL0041:   HIDWORD(pv_1) = NtCurrentTeb()->NtTib.ExceptionList;\nL0042:   __writefsdword(0, (unsigned int)&pv_1 + 4);\nL0043:   v19 = 0;\nL0044:   pv = 0;\nL0045:   v14[0] = 16;\nL0046:   v14[1] = 4;\nL0047:   v14[2] = 0;\nL0048:   v14[3] = &dword_407390;\nL0049:   sub_401CDC(&lpMultiByteStr, lpWideCharStr);\nL0050:   v6 = sub_402958(lpMultiByteStr);\nL0051:   (*(void (__stdcall **)(int, _DWORD, _DWORD *, _DWORD *, OLECHAR *, unsigned int *, LPVOID *, _DWORD *, _DWORD, _DWORD))(*(_DWORD *)v20 + 68))(\nL0052:     v20,\nL0053:     0,\nL0054:     v16,\nL0055:     v15,\nL0056:     v6,\nL0057:     &v19,\nL0058:     &pv,\nL0059:     v14,\nL0060:     0,\nL0061:     HIDWORD(pv_1));\nL0062:   if ( v19 )\nL0063:   {\nL0064:     do\nL0065:     {\nL0066:       pv_1 = (int)pv;\nL0067:       if ( *(char *)(pv_1 + v5) >= 32 )\nL0068:       {\nL0069:         pv_1 = (int)pv;\nL0070:         sub_401C9C(&dst);\nL0071:         sub_401D58(&dst_1, (__int32)dst);\nL0072:       }\nL0073:       else\nL0074:       {\nL0075:         sub_401D58(&dst_1, (__int32)&dst__4);\nL0076:       }\nL0077:       v5 += 2;\nL0078:     }\nL0079:     while ( v5 < v19 );\nL0080:   }\nL0081:   CoTaskMemFree(pv);\nL0082:   sub_401B14(a4, dst_1);\nL0083:   __writefsdword(0, (unsigned int)v9);\nL0084:   v11 = &loc_407384;\nL0085:   sub_401AE4((int *)&dst, 2);\nL0086:   sub_401AC0(&dst_1);\nL0087:   return sub_403064(&v20);\nL0088: }\n```\n\n## F-0411 sub_4073A0，原文件 L0001–L0025 / 共 25 行\n```text\nL0001: void __usercall sub_4073A0(_DWORD *a1@<eax>, _DWORD *a2@<edx>, char **a3@<ecx>)\nL0002: {\nL0003:   LPVOID pv; // [esp+18h] [ebp-30h] BYREF\nL0004:   _DWORD v5[4]; // [esp+1Ch] [ebp-2Ch] BYREF\nL0005:   _DWORD v6[7]; // [esp+2Ch] [ebp-1Ch] BYREF\nL0006: \nL0007:   v6[0] = *a2;\nL0008:   v6[1] = a2[1];\nL0009:   v6[2] = a2[2];\nL0010:   v6[3] = a2[3];\nL0011:   v5[0] = *a1;\nL0012:   v5[1] = a1[1];\nL0013:   v5[2] = a1[2];\nL0014:   v5[3] = a1[3];\nL0015:   pv = 0;\nL0016:   (*(void (__stdcall **)(int, _DWORD, _DWORD *, _DWORD *, LPVOID *, _DWORD))(*(_DWORD *)dword_40E9AC + 40))(\nL0017:     dword_40E9AC,\nL0018:     0,\nL0019:     v5,\nL0020:     v6,\nL0021:     &pv,\nL0022:     0);\nL0023:   sub_401CDC(a3, *((_DWORD *)pv + 1));\nL0024:   CoTaskMemFree(pv);\nL0025: }\n```\n\n## F-0412 sub_4073FC，原文件 L0001–L0019 / 共 19 行\n```text\nL0001: void __usercall sub_4073FC(_DWORD *a1@<eax>, char **a2@<edx>)\nL0002: {\nL0003:   LPVOID pv; // [esp+14h] [ebp-20h] BYREF\nL0004:   _DWORD v4[7]; // [esp+18h] [ebp-1Ch] BYREF\nL0005: \nL0006:   v4[0] = *a1;\nL0007:   v4[1] = a1[1];\nL0008:   v4[2] = a1[2];\nL0009:   v4[3] = a1[3];\nL0010:   pv = 0;\nL0011:   (*(void (__stdcall **)(int, _DWORD, _DWORD *, LPVOID *, _DWORD))(*(_DWORD *)dword_40E9AC + 28))(\nL0012:     dword_40E9AC,\nL0013:     0,\nL0014:     v4,\nL0015:     &pv,\nL0016:     0);\nL0017:   sub_401CDC(a2, *((_DWORD *)pv + 1));\nL0018:   CoTaskMemFree(pv);\nL0019: }\n```\n\n## F-0413 sub_40744C，原文件 L0001–L0067 / 共 67 行\n```text\nL0001: _DWORD *__userpurge sub_40744C@<eax>(\nL0002:         int a1@<eax>,\nL0003:         _DWORD *a2@<edx>,\nL0004:         _DWORD *a3@<ecx>,\nL0005:         struct _EXCEPTION_REGISTRATION_RECORD **dst)\nL0006: {\nL0007:   struct _EXCEPTION_REGISTRATION_RECORD *ExceptionList; // [esp-Ch] [ebp-50h] BYREF\nL0008:   void *v6; // [esp-8h] [ebp-4Ch]\nL0009:   int *v7; // [esp-4h] [ebp-48h]\nL0010:   void *v8; // [esp+0h] [ebp-44h]\nL0011:   int v9; // [esp+Ch] [ebp-38h] BYREF\nL0012:   char *v10; // [esp+10h] [ebp-34h] BYREF\nL0013:   _DWORD v11[4]; // [esp+14h] [ebp-30h] BYREF\nL0014:   _DWORD v12[4]; // [esp+24h] [ebp-20h] BYREF\nL0015:   int lpWideCharStr; // [esp+34h] [ebp-10h] BYREF\nL0016:   int v14; // [esp+38h] [ebp-Ch] BYREF\nL0017:   int v15; // [esp+3Ch] [ebp-8h] BYREF\nL0018:   int v16; // [esp+40h] [ebp-4h] BYREF\nL0019:   int savedregs; // [esp+44h] [ebp+0h] BYREF\nL0020: \nL0021:   v9 = 0;\nL0022:   v10 = 0;\nL0023:   v15 = 0;\nL0024:   v11[0] = *a3;\nL0025:   v11[1] = a3[1];\nL0026:   v11[2] = a3[2];\nL0027:   v11[3] = a3[3];\nL0028:   v12[0] = *a2;\nL0029:   v12[1] = a2[1];\nL0030:   v12[2] = a2[2];\nL0031:   v12[3] = a2[3];\nL0032:   v16 = a1;\nL0033:   sub_4030D4(a1);\nL0034:   v7 = &savedregs;\nL0035:   v6 = &loc_407547;\nL0036:   ExceptionList = NtCurrentTeb()->NtTib.ExceptionList;\nL0037:   __writefsdword(0, (unsigned int)&ExceptionList);\nL0038:   sub_401AC0(dst);\nL0039:   (*(void (__stdcall **)(int, _DWORD, _DWORD *, _DWORD *, _DWORD, int *, struct _EXCEPTION_REGISTRATION_RECORD *))(*(_DWORD *)v16 + 84))(\nL0040:     v16,\nL0041:     0,\nL0042:     v12,\nL0043:     v11,\nL0044:     0,\nL0045:     &v15,\nL0046:     ExceptionList);\nL0047:   v14 = 0;\nL0048:   do\nL0049:   {\nL0050:     (*(void (__stdcall **)(int, int, int *, int *))(*(_DWORD *)v15 + 12))(v15, 1, &lpWideCharStr, &v14);\nL0051:     if ( v14 )\nL0052:     {\nL0053:       ExceptionList = *dst;\nL0054:       sub_401CDC(&v10, lpWideCharStr);\nL0055:       sub_401E10((volatile __int32 *)dst, 3);\nL0056:       ExceptionList = *dst;\nL0057:       sub_407244(v16, v12, v11, &v9, lpWideCharStr);\nL0058:       sub_401E10((volatile __int32 *)dst, 3);\nL0059:     }\nL0060:   }\nL0061:   while ( v14 );\nL0062:   __writefsdword(0, (unsigned int)v6);\nL0063:   v8 = &loc_40754E;\nL0064:   sub_401AE4(&v9, 2);\nL0065:   sub_403064(&v15);\nL0066:   return sub_403064(&v16);\nL0067: }\n```\n\n## F-0415 sub_40756C，原文件 L0001–L0013 / 共 13 行\n```text\nL0001: int __usercall sub_40756C@<eax>(const IID *rclsid@<eax>, char **a2@<edx>, void *pv_1@<ecx>)\nL0002: {\nL0003:   HRESULT v4; // eax\nL0004:   int result; // eax\nL0005:   LPVOID pv; // [esp+0h] [ebp-Ch] BYREF\nL0006: \nL0007:   pv = pv_1;\nL0008:   v4 = StringFromCLSID(rclsid, (LPOLESTR *)&pv);\nL0009:   sub_403740(v4);\nL0010:   sub_401CDC(a2, (int)pv);\nL0011:   CoTaskMemFree(pv);\nL0012:   return result;\nL0013: }\n```\n\n## F-0477 sub_409A90，原文件 L0001–L0004 / 共 4 行\n```text\nL0001: int *__usercall sub_409A90@<eax>(volatile __int32 *dst@<eax>)\nL0002: {\nL0003:   return sub_407834(dst);\nL0004: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "当前材料显示 sub_409A90 转调 sub_407834，后者初始化 Protected Storage 实例并枚举其中的对象/属性；枚举到的 GUID、名称及宽字符数据会被提取、转换并写入调用者提供的内部输出缓冲区。材料未闭合该缓冲区最终对应的具体数据含义，也未显示其后是否写入 J00 的固定 .abc 文件或发生网络传输。",
+    "claims": [
+      {
+        "behavior": "在调用 sub_409A90（即 sub_407834）时，程序创建 Protected Storage 实例并枚举其可用对象；对每个枚举到的记录提取 GUID、名称及属性相关数据，并继续处理记录内容。",
+        "condition": "调用 sub_407834 且 Protected Storage 接口返回可枚举对象/记录；各循环继续条件分别由 v13、v15 或 v14 非零决定。",
+        "source": "PStoreCreateInstance 创建并保存到 dword_40E9AC 的 Protected Storage 接口；sub_4077D4 获取的集合对象；sub_4076C0 和 sub_407598 枚举返回的 IID、名称及属性数据。",
+        "action": "通过 COM/接口虚函数调用枚举记录，使用 StringFromCLSID 获取记录 GUID 字符串，并对名称、属性及宽字符值执行提取、转换和缓冲区拼接。",
+        "sink": "调用者提供的内部输出状态/缓冲区 dst_3，以及 sub_407244 中由 a4 指向并经 sub_401B14 更新的内部结果；当前材料未证明外部文件、注册表或网络写入。",
+        "evidence": [
+          {
+            "location": "F-0419 sub_407834 原文件 L0030-L0036",
+            "observation": "调用 sub_401AC0、PStoreCreateInstance，并通过 sub_4077D4 和 sub_4076C0 获取并枚举 Protected Storage 相关对象。"
+          },
+          {
+            "location": "F-0417 sub_4076C0 原文件 L0027-L0048",
+            "observation": "通过接口方法获取枚举器，循环取得 IID，并调用 sub_40756C、sub_4073FC 和 sub_407598 处理每个记录。"
+          },
+          {
+            "location": "F-0415 sub_40756C 原文件 L0007-L0011",
+            "observation": "对枚举得到的 IID 调用 StringFromCLSID，将生成的字符串复制到调用者缓冲区。"
+          },
+          {
+            "location": "F-0416 sub_407598 原文件 L0041-L0052",
+            "observation": "每个枚举记录被进一步送入 sub_4073A0 和 sub_40744C，说明记录属性和数据会继续被读取。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料没有给出 Protected Storage 接口参数所代表的具体存储类型、账户、凭据或其他数据语义。",
+          "sub_401CDC、sub_401D9C、sub_401B14 等缓冲区辅助函数的完整语义不在材料中，因此只能确认数据被提取/转换并写入内部状态，不能确认最终输出格式。",
+          "当前材料未显示 sub_407834 的结果如何返回到 J00 的 .abc 文件写入路径，也未证明网络传输或运行时成功。"
+        ]
+      },
+      {
+        "behavior": "对 Protected Storage 枚举出的每个属性值，程序将宽字符值转换为多字节字符串，过滤控制字符并拼接到结果缓冲区，然后将结果写入 a4 指向的内部输出对象。",
+        "condition": "sub_40744C 的属性枚举器返回 v14 非零，并且每个 lpWideCharStr 对应的转换/读取操作返回数据；可打印字符与非打印字符分别走不同的追加分支。",
+        "source": "sub_40744C 从 COM 接口方法读取的 lpWideCharStr；其内容通过 sub_401CDC 转换为多字节字符串。",
+        "action": "调用 sub_402958 准备宽字符输入，按两个字节步进检查返回数据；可打印字符通过 sub_401C9C/sub_401D58 追加，其他字符追加固定替代内容，最后调用 sub_401B14 写入 a4。",
+        "sink": "a4 指向的内部结果缓冲区/状态对象；该位置不是已确认的文件或网络 sink。",
+        "evidence": [
+          {
+            "location": "F-0413 sub_40744C 原文件 L0039-L0061",
+            "observation": "通过 COM 虚函数取得属性枚举器，并循环获得 lpWideCharStr。"
+          },
+          {
+            "location": "F-0410 sub_407244 原文件 L0049-L0082",
+            "observation": "将宽字符输入转换后逐项检查字符，分别追加转换结果或固定替代内容，并调用 sub_401B14(a4, dst_1)。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "a4 的所有权、具体结构及其后续用途未在当前材料中给出。",
+          "材料未证明这些结果代表密码、登录凭据或其他特定类别的数据；只能确认其来自 Protected Storage 属性读取流程。"
+        ]
+      },
+      {
+        "behavior": "枚举逻辑识别包含 \":StringData\" 的记录，并对其中的分隔字段执行进一步解析；满足后续两个解析结果均非零时更新调用者输出状态。",
+        "condition": "sub_407834 的记录枚举中，当前记录包含字符串标记 \":StringData\"，并且后续两个 sub_401D9C 解析结果 v20、v19 均非零。",
+        "source": "Protected Storage 枚举得到的记录字符串，以及通过 sub_401FA4/sub_401FE4 分割出的字段。",
+        "action": "查找 \":StringData\"，提取其前后字段；随后在 dword_407AE8 相关字符串中循环拆分并解析字段，成功时调用 sub_401E10(dst_3, 7)。",
+        "sink": "dst_3 指向的内部聚合状态，具体含义由 sub_401E10 决定。",
+        "evidence": [
+          {
+            "location": "F-0419 sub_407834 原文件 L0036-L0072",
+            "observation": "代码检查记录是否包含 \":StringData\"，分割相关字段，并在 v20 与 v19 同时非零时调用 sub_401E10(dst_3, 7)。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_401D9C 和 sub_401E10 未提供，无法确认字段解析的语义及值 7 对输出状态的具体影响。",
+          "不能仅凭字符串标记推断其对应的凭据、浏览器数据或其他特定数据类别。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "resource",
+        "value": "Protected Storage",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "程序通过 PStoreCreateInstance 及关联 COM 接口访问并枚举 Protected Storage 数据；这是行为上下文，不是单独的样本特异 IOC。",
+        "evidence": [
+          {
+            "location": "F-0419 sub_407834 原文件 L0030-L0034",
+            "observation": "调用 PStoreCreateInstance 并通过 sub_4077D4/sub_4076C0 获取存储对象和枚举对象。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": ":StringData",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "用于在枚举得到的字符串记录中定位待处理字段的解析标记。",
+        "evidence": [
+          {
+            "location": "F-0419 sub_407834 原文件 L0040-L0048",
+            "observation": "代码通过 sub_40202C 检查记录是否包含 \":StringData\"，命中后进入字段提取分支。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "Protected Storage 中被读取的具体对象、字段及其数据类型是什么？",
+        "reason": "当前包只显示 COM 枚举、字符串字段解析和宽字符值读取，缺少接口参数语义及相关结构定义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_407834 生成的内部结果是否被 sub_409A90 调用者绑定到 J00 的 IEPASS.abc 或其他输出？",
+        "reason": "当前包仅包含 sub_409A90 的四行转调和 Protected Storage 子流程，没有下游调用者或最终 sink。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_401B14、sub_401E10、sub_401D9C 的具体状态更新和数据格式是什么？",
+        "reason": "这些函数决定提取结果如何保存及如何影响聚合输出，但实现不在本材料中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401B14, sub_401E10, sub_401D9C",
+        "reason": "确认 Protected Storage 提取结果的内部格式、聚合状态及后续可观察输出。",
+        "expected_value": "闭合宽字符属性值和解析字段到结果对象的 source→action→sink 关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409A90 的调用者及其下游输出代码",
+        "reason": "确认 sub_407834 返回/更新的结果是否进入 J00 的 IEPASS.abc 或其他固定输出。",
+        "expected_value": "确定 Protected Storage 数据最终是否写入文件、传输或仅保留在内存。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_4073A0、sub_4073FC、sub_40744C 相关 COM 接口定义或参数来源",
+        "reason": "确定枚举字段及属性值在 Protected Storage 中的实际数据语义。",
+        "expected_value": "识别被读取的数据类别，但不预设其为凭据。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401B14",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 Protected Storage 读取结果如何写入/更新内部输出状态，以及 \":StringData\" 分支的解析结果是否形成可导出的数据。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0410 sub_407244 原文件 L0062-L0082",
+            "observation": "转换后的字符串最终通过 sub_401B14 写入 a4。"
+          },
+          {
+            "location": "F-0419 sub_407834 原文件 L0047-L0071",
+            "observation": "解析字段后通过 sub_401D9C 产生 v20/v19，并在成功条件下调用 sub_401E10(dst_3, 7)。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_409A90 的调用者",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_407834 产生的 Protected Storage 数据如何被上层消费，以及是否进入 J00 已知的 IEPASS.abc 输出。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0477 sub_409A90 原文件 L0001-L0004",
+            "observation": "sub_409A90 仅直接转调 sub_407834，当前材料没有显示其调用者如何处理 dst。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "Analyzer 的所有 claim、artifact 与 material_need 证据 location 都写成了“F-0419 sub_407834 原文件 L0030-L0036”这类扩展格式；当前验证器无法解析这些位置，导致 12 个证据引用全部无效。核心结论虽基本与当前材料一致，但按无效位置不能验收为有证据支持。",
+        "evidence": [
+          {
+            "location": "/claims/0/evidence/*/location",
+            "observation": "当前值包含函数名和“原文件”文本，例如“F-0419 sub_407834 原文件 L0030-L0036”，不符合可解析的 F-xxxx Lx[-Ly] 格式。"
+          },
+          {
+            "location": "/claims/1/evidence/*/location",
+            "observation": "claim 2 的两个源码引用同样包含额外函数名和“原文件”文本，验证结果均为 invalid_format。"
+          },
+          {
+            "location": "/claims/2/evidence/*/location",
+            "observation": "claim 3 的源码引用同样不可解析，验证结果为 invalid_format。"
+          },
+          {
+            "location": "/artifacts/0/evidence/*/location",
+            "observation": "Protected Storage artifact 的唯一证据 location 不可解析。"
+          },
+          {
+            "location": "/artifacts/1/evidence/*/location",
+            "observation": ":StringData artifact 的唯一证据 location 不可解析。"
+          },
+          {
+            "location": "/material_needs/*/evidence/*/location",
+            "observation": "两个 material_need 的全部源码证据 location 也不可解析。"
+          }
+        ],
+        "required_fix": "仅将各 evidence.location 规范化为实际材料中的文件编号和原始源码行段，例如“F-0419 L30-L36”“F-0417 L27-L48”“F-0415 L7-L11”“F-0416 L41-L52”“F-0413 L39-L61”“F-0410 L49-L82”“F-0419 L36-L72”“F-0419 L30-L34”“F-0419 L40-L48”“F-0410 L62-L82”“F-0419 L47-L71”“F-0477 L1-L4”；不得借此改变 observation、claim 或证据等级。修订后每个 claim、artifact 和 material_need 都应能由对应源码行直接核验。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "第二个 material_need 的 function_code target 写成“sub_409A90 的调用者”，不是单一函数标识符，不能直接作为结构化代码补料目标；但该缺口本身判断合理，且不改变当前核心分析。",
+        "evidence": [
+          {
+            "location": "/material_needs/1/targets/0/identifier",
+            "observation": "当前 identifier 为“sub_409A90 的调用者”，混合了函数标识符与自然语言关系，未满足单一 identifier 的要求。"
+          },
+          {
+            "location": "/material_needs/1/evidence/0/location",
+            "observation": "F-0477 的代码仅显示 sub_409A90 转调 sub_407834，确实不能从该函数本身指定未知调用者。"
+          }
+        ],
+        "required_fix": "将补料需求改写为可执行的材料描述：若继续请求调用关系，使用适合的非 function_code 材料需求类型；若保留 function_code，则将 target 改为已知的 sub_409A90，并在 reason 中说明需要其调用者/下游调用点，而不要把关系描述放入 identifier。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/kind"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/target"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/targets/0/identifier"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/reason"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖总体充分：正确覆盖了 sub_409A90 对 Protected Storage 的访问、对象枚举、GUID/字段提取、宽字符转换以及 :StringData 分支，并且没有把数据类别或最终 IEPASS.abc 写入无证据地升级为 confirmed。主要验收阻塞是所有证据位置格式无效；修正引用后，除 material_need target 的轻微结构问题外，未发现会改变最终核心分析的重大遗漏或方向错误。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "Analyzer 的所有 claim、artifact 与 material_need 证据 location 都写成了“F-0419 sub_407834 原文件 L0030-L0036”这类扩展格式；当前验证器无法解析这些位置，导致 12 个证据引用全部无效。核心结论虽基本与当前材料一致，但按无效位置不能验收为有证据支持。",
+        "evidence": [
+          {
+            "location": "/claims/0/evidence/*/location",
+            "observation": "当前值包含函数名和“原文件”文本，例如“F-0419 sub_407834 原文件 L0030-L0036”，不符合可解析的 F-xxxx Lx[-Ly] 格式。"
+          },
+          {
+            "location": "/claims/1/evidence/*/location",
+            "observation": "claim 2 的两个源码引用同样包含额外函数名和“原文件”文本，验证结果均为 invalid_format。"
+          },
+          {
+            "location": "/claims/2/evidence/*/location",
+            "observation": "claim 3 的源码引用同样不可解析，验证结果为 invalid_format。"
+          },
+          {
+            "location": "/artifacts/0/evidence/*/location",
+            "observation": "Protected Storage artifact 的唯一证据 location 不可解析。"
+          },
+          {
+            "location": "/artifacts/1/evidence/*/location",
+            "observation": ":StringData artifact 的唯一证据 location 不可解析。"
+          },
+          {
+            "location": "/material_needs/*/evidence/*/location",
+            "observation": "两个 material_need 的全部源码证据 location 也不可解析。"
+          }
+        ],
+        "required_fix": "仅将各 evidence.location 规范化为实际材料中的文件编号和原始源码行段，例如“F-0419 L30-L36”“F-0417 L27-L48”“F-0415 L7-L11”“F-0416 L41-L52”“F-0413 L39-L61”“F-0410 L49-L82”“F-0419 L36-L72”“F-0419 L30-L34”“F-0419 L40-L48”“F-0410 L62-L82”“F-0419 L47-L71”“F-0477 L1-L4”；不得借此改变 observation、claim 或证据等级。修订后每个 claim、artifact 和 material_need 都应能由对应源码行直接核验。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "第二个 material_need 的 function_code target 写成“sub_409A90 的调用者”，不是单一函数标识符，不能直接作为结构化代码补料目标；但该缺口本身判断合理，且不改变当前核心分析。",
+        "evidence": [
+          {
+            "location": "/material_needs/1/targets/0/identifier",
+            "observation": "当前 identifier 为“sub_409A90 的调用者”，混合了函数标识符与自然语言关系，未满足单一 identifier 的要求。"
+          },
+          {
+            "location": "/material_needs/1/evidence/0/location",
+            "observation": "F-0477 的代码仅显示 sub_409A90 转调 sub_407834，确实不能从该函数本身指定未知调用者。"
+          }
+        ],
+        "required_fix": "将补料需求改写为可执行的材料描述：若继续请求调用关系，使用适合的非 function_code 材料需求类型；若保留 function_code，则将 target 改为已知的 sub_409A90，并在 reason 中说明需要其调用者/下游调用点，而不要把关系描述放入 identifier。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/kind"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/target"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/targets/0/identifier"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/reason"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖总体充分：正确覆盖了 sub_409A90 对 Protected Storage 的访问、对象枚举、GUID/字段提取、宽字符转换以及 :StringData 分支，并且没有把数据类别或最终 IEPASS.abc 写入无证据地升级为 confirmed。主要验收阻塞是所有证据位置格式无效；修正引用后，除 material_need target 的轻微结构问题外，未发现会改变最终核心分析的重大遗漏或方向错误。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "当前材料显示 sub_409A90 转调 sub_407834，后者初始化 Protected Storage 实例并枚举其中的对象/属性；枚举到的 GUID、名称及宽字符数据会被提取、转换并写入调用者提供的内部输出缓冲区。材料未闭合该缓冲区最终对应的具体数据含义，也未显示其后是否写入 J00 的固定 .abc 文件或发生网络传输。",
+    "claims": [
+      {
+        "behavior": "在调用 sub_409A90（即 sub_407834）时，程序创建 Protected Storage 实例并枚举其可用对象；对每个枚举到的记录提取 GUID、名称及属性相关数据，并继续处理记录内容。",
+        "condition": "调用 sub_407834 且 Protected Storage 接口返回可枚举对象/记录；各循环继续条件分别由 v13、v15 或 v14 非零决定。",
+        "source": "PStoreCreateInstance 创建并保存到 dword_40E9AC 的 Protected Storage 接口；sub_4077D4 获取的集合对象；sub_4076C0 和 sub_407598 枚举返回的 IID、名称及属性数据。",
+        "action": "通过 COM/接口虚函数调用枚举记录，使用 StringFromCLSID 获取记录 GUID 字符串，并对名称、属性及宽字符值执行提取、转换和缓冲区拼接。",
+        "sink": "调用者提供的内部输出状态/缓冲区 dst_3，以及 sub_407244 中由 a4 指向并经 sub_401B14 更新的内部结果；当前材料未证明外部文件、注册表或网络写入。",
+        "evidence": [
+          {
+            "location": "F-0419 L30-L36",
+            "observation": "调用 sub_401AC0、PStoreCreateInstance，并通过 sub_4077D4 和 sub_4076C0 获取并枚举 Protected Storage 相关对象。"
+          },
+          {
+            "location": "F-0417 L27-L48",
+            "observation": "通过接口方法获取枚举器，循环取得 IID，并调用 sub_40756C、sub_4073FC 和 sub_407598 处理每个记录。"
+          },
+          {
+            "location": "F-0415 L7-L11",
+            "observation": "对枚举得到的 IID 调用 StringFromCLSID，将生成的字符串复制到调用者缓冲区。"
+          },
+          {
+            "location": "F-0416 L41-L52",
+            "observation": "每个枚举记录被进一步送入 sub_4073A0 和 sub_40744C，说明记录属性和数据会继续被读取。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料没有给出 Protected Storage 接口参数所代表的具体存储类型、账户、凭据或其他数据语义。",
+          "sub_401CDC、sub_401D9C、sub_401B14 等缓冲区辅助函数的完整语义不在材料中，因此只能确认数据被提取/转换并写入内部状态，不能确认最终输出格式。",
+          "当前材料未显示 sub_407834 的结果如何返回到 J00 的 .abc 文件写入路径，也未证明网络传输或运行时成功。"
+        ]
+      },
+      {
+        "behavior": "对 Protected Storage 枚举出的每个属性值，程序将宽字符值转换为多字节字符串，过滤控制字符并拼接到结果缓冲区，然后将结果写入 a4 指向的内部输出对象。",
+        "condition": "sub_40744C 的属性枚举器返回 v14 非零，并且每个 lpWideCharStr 对应的转换/读取操作返回数据；可打印字符与非打印字符分别走不同的追加分支。",
+        "source": "sub_40744C 从 COM 接口方法读取的 lpWideCharStr；其内容通过 sub_401CDC 转换为多字节字符串。",
+        "action": "调用 sub_402958 准备宽字符输入，按两个字节步进检查返回数据；可打印字符通过 sub_401C9C/sub_401D58 追加，其他字符追加固定替代内容，最后调用 sub_401B14 写入 a4。",
+        "sink": "a4 指向的内部结果缓冲区/状态对象；该位置不是已确认的文件或网络 sink。",
+        "evidence": [
+          {
+            "location": "F-0413 L39-L61",
+            "observation": "通过 COM 虚函数取得属性枚举器，并循环获得 lpWideCharStr。"
+          },
+          {
+            "location": "F-0410 L49-L82",
+            "observation": "将宽字符输入转换后逐项检查字符，分别追加转换结果或固定替代内容，并调用 sub_401B14(a4, dst_1)。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "a4 的所有权、具体结构及其后续用途未在当前材料中给出。",
+          "材料未证明这些结果代表密码、登录凭据或其他特定类别的数据；只能确认其来自 Protected Storage 属性读取流程。"
+        ]
+      },
+      {
+        "behavior": "枚举逻辑识别包含 \":StringData\" 的记录，并对其中的分隔字段执行进一步解析；满足后续两个解析结果均非零时更新调用者输出状态。",
+        "condition": "sub_407834 的记录枚举中，当前记录包含字符串标记 \":StringData\"，并且后续两个 sub_401D9C 解析结果 v20、v19 均非零。",
+        "source": "Protected Storage 枚举得到的记录字符串，以及通过 sub_401FA4/sub_401FE4 分割出的字段。",
+        "action": "查找 \":StringData\"，提取其前后字段；随后在 dword_407AE8 相关字符串中循环拆分并解析字段，成功时调用 sub_401E10(dst_3, 7)。",
+        "sink": "dst_3 指向的内部聚合状态，具体含义由 sub_401E10 决定。",
+        "evidence": [
+          {
+            "location": "F-0419 L36-L72",
+            "observation": "代码检查记录是否包含 \":StringData\"，分割相关字段，并在 v20 与 v19 同时非零时调用 sub_401E10(dst_3, 7)。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_401D9C 和 sub_401E10 未提供，无法确认字段解析的语义及值 7 对输出状态的具体影响。",
+          "不能仅凭字符串标记推断其对应的凭据、浏览器数据或其他特定数据类别。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "resource",
+        "value": "Protected Storage",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "程序通过 PStoreCreateInstance 及关联 COM 接口访问并枚举 Protected Storage 数据；这是行为上下文，不是单独的样本特异 IOC。",
+        "evidence": [
+          {
+            "location": "F-0419 L30-L34",
+            "observation": "调用 PStoreCreateInstance 并通过 sub_4077D4/sub_4076C0 获取存储对象和枚举对象。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": ":StringData",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "用于在枚举得到的字符串记录中定位待处理字段的解析标记。",
+        "evidence": [
+          {
+            "location": "F-0419 L40-L48",
+            "observation": "代码通过 sub_40202C 检查记录是否包含 \":StringData\"，命中后进入字段提取分支。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "Protected Storage 中被读取的具体对象、字段及其数据类型是什么？",
+        "reason": "当前包只显示 COM 枚举、字符串字段解析和宽字符值读取，缺少接口参数语义及相关结构定义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_407834 生成的内部结果是否被 sub_409A90 调用者绑定到 J00 的 IEPASS.abc 或其他输出？",
+        "reason": "当前包仅包含 sub_409A90 的四行转调和 Protected Storage 子流程，没有下游调用者或最终 sink。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_401B14、sub_401E10、sub_401D9C 的具体状态更新和数据格式是什么？",
+        "reason": "这些函数决定提取结果如何保存及如何影响聚合输出，但实现不在本材料中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401B14, sub_401E10, sub_401D9C",
+        "reason": "确认 Protected Storage 提取结果的内部格式、聚合状态及后续可观察输出。",
+        "expected_value": "闭合宽字符属性值和解析字段到结果对象的 source→action→sink 关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409A90 的调用者及其下游输出代码",
+        "reason": "确认 sub_407834 返回/更新的结果是否进入 J00 的 IEPASS.abc 或其他固定输出。",
+        "expected_value": "确定 Protected Storage 数据最终是否写入文件、传输或仅保留在内存。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_4073A0、sub_4073FC、sub_40744C 相关 COM 接口定义或参数来源",
+        "reason": "确定枚举字段及属性值在 Protected Storage 中的实际数据语义。",
+        "expected_value": "识别被读取的数据类别，但不预设其为凭据。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401B14",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 Protected Storage 读取结果如何写入/更新内部输出状态，以及 \":StringData\" 分支的解析结果是否形成可导出的数据。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0410 L62-L82",
+            "observation": "转换后的字符串最终通过 sub_401B14 写入 a4。"
+          },
+          {
+            "location": "F-0419 L47-L71",
+            "observation": "解析字段后通过 sub_401D9C 产生 v20/v19，并在成功条件下调用 sub_401E10(dst_3, 7)。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_409A90",
+        "targets": [
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要补充 sub_409A90 的调用者或下游调用点，以确认 sub_407834 产生的 Protected Storage 数据如何被上层消费，以及是否进入 J00 已知的 IEPASS.abc 输出。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0477 L1-L4",
+            "observation": "sub_409A90 仅直接转调 sub_407834，当前材料没有显示其调用者如何处理 dst。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "当前材料显示 sub_409A90 转调 sub_407834，后者初始化 Protected Storage 实例并枚举其中的对象/属性；枚举到的 GUID、名称及宽字符数据会被提取、转换并写入调用者提供的内部输出缓冲区。材料未闭合该缓冲区最终对应的具体数据含义，也未显示其后是否写入 J00 的固定 .abc 文件或发生网络传输。",
+    "claims": [
+      {
+        "behavior": "在调用 sub_409A90（即 sub_407834）时，程序创建 Protected Storage 实例并枚举其可用对象；对每个枚举到的记录提取 GUID、名称及属性相关数据，并继续处理记录内容。",
+        "condition": "调用 sub_407834 且 Protected Storage 接口返回可枚举对象/记录；各循环继续条件分别由 v13、v15 或 v14 非零决定。",
+        "source": "PStoreCreateInstance 创建并保存到 dword_40E9AC 的 Protected Storage 接口；sub_4077D4 获取的集合对象；sub_4076C0 和 sub_407598 枚举返回的 IID、名称及属性数据。",
+        "action": "通过 COM/接口虚函数调用枚举记录，使用 StringFromCLSID 获取记录 GUID 字符串，并对名称、属性及宽字符值执行提取、转换和缓冲区拼接。",
+        "sink": "调用者提供的内部输出状态/缓冲区 dst_3，以及 sub_407244 中由 a4 指向并经 sub_401B14 更新的内部结果；当前材料未证明外部文件、注册表或网络写入。",
+        "evidence": [
+          {
+            "location": "F-0419 L30-L36",
+            "observation": "调用 sub_401AC0、PStoreCreateInstance，并通过 sub_4077D4 和 sub_4076C0 获取并枚举 Protected Storage 相关对象。"
+          },
+          {
+            "location": "F-0417 L27-L48",
+            "observation": "通过接口方法获取枚举器，循环取得 IID，并调用 sub_40756C、sub_4073FC 和 sub_407598 处理每个记录。"
+          },
+          {
+            "location": "F-0415 L7-L11",
+            "observation": "对枚举得到的 IID 调用 StringFromCLSID，将生成的字符串复制到调用者缓冲区。"
+          },
+          {
+            "location": "F-0416 L41-L52",
+            "observation": "每个枚举记录被进一步送入 sub_4073A0 和 sub_40744C，说明记录属性和数据会继续被读取。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料没有给出 Protected Storage 接口参数所代表的具体存储类型、账户、凭据或其他数据语义。",
+          "sub_401CDC、sub_401D9C、sub_401B14 等缓冲区辅助函数的完整语义不在材料中，因此只能确认数据被提取/转换并写入内部状态，不能确认最终输出格式。",
+          "当前材料未显示 sub_407834 的结果如何返回到 J00 的 .abc 文件写入路径，也未证明网络传输或运行时成功。"
+        ]
+      },
+      {
+        "behavior": "对 Protected Storage 枚举出的每个属性值，程序将宽字符值转换为多字节字符串，过滤控制字符并拼接到结果缓冲区，然后将结果写入 a4 指向的内部输出对象。",
+        "condition": "sub_40744C 的属性枚举器返回 v14 非零，并且每个 lpWideCharStr 对应的转换/读取操作返回数据；可打印字符与非打印字符分别走不同的追加分支。",
+        "source": "sub_40744C 从 COM 接口方法读取的 lpWideCharStr；其内容通过 sub_401CDC 转换为多字节字符串。",
+        "action": "调用 sub_402958 准备宽字符输入，按两个字节步进检查返回数据；可打印字符通过 sub_401C9C/sub_401D58 追加，其他字符追加固定替代内容，最后调用 sub_401B14 写入 a4。",
+        "sink": "a4 指向的内部结果缓冲区/状态对象；该位置不是已确认的文件或网络 sink。",
+        "evidence": [
+          {
+            "location": "F-0413 L39-L61",
+            "observation": "通过 COM 虚函数取得属性枚举器，并循环获得 lpWideCharStr。"
+          },
+          {
+            "location": "F-0410 L49-L82",
+            "observation": "将宽字符输入转换后逐项检查字符，分别追加转换结果或固定替代内容，并调用 sub_401B14(a4, dst_1)。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "a4 的所有权、具体结构及其后续用途未在当前材料中给出。",
+          "材料未证明这些结果代表密码、登录凭据或其他特定类别的数据；只能确认其来自 Protected Storage 属性读取流程。"
+        ]
+      },
+      {
+        "behavior": "枚举逻辑识别包含 \":StringData\" 的记录，并对其中的分隔字段执行进一步解析；满足后续两个解析结果均非零时更新调用者输出状态。",
+        "condition": "sub_407834 的记录枚举中，当前记录包含字符串标记 \":StringData\"，并且后续两个 sub_401D9C 解析结果 v20、v19 均非零。",
+        "source": "Protected Storage 枚举得到的记录字符串，以及通过 sub_401FA4/sub_401FE4 分割出的字段。",
+        "action": "查找 \":StringData\"，提取其前后字段；随后在 dword_407AE8 相关字符串中循环拆分并解析字段，成功时调用 sub_401E10(dst_3, 7)。",
+        "sink": "dst_3 指向的内部聚合状态，具体含义由 sub_401E10 决定。",
+        "evidence": [
+          {
+            "location": "F-0419 L36-L72",
+            "observation": "代码检查记录是否包含 \":StringData\"，分割相关字段，并在 v20 与 v19 同时非零时调用 sub_401E10(dst_3, 7)。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_401D9C 和 sub_401E10 未提供，无法确认字段解析的语义及值 7 对输出状态的具体影响。",
+          "不能仅凭字符串标记推断其对应的凭据、浏览器数据或其他特定数据类别。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "resource",
+        "value": "Protected Storage",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "程序通过 PStoreCreateInstance 及关联 COM 接口访问并枚举 Protected Storage 数据；这是行为上下文，不是单独的样本特异 IOC。",
+        "evidence": [
+          {
+            "location": "F-0419 L30-L34",
+            "observation": "调用 PStoreCreateInstance 并通过 sub_4077D4/sub_4076C0 获取存储对象和枚举对象。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": ":StringData",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "用于在枚举得到的字符串记录中定位待处理字段的解析标记。",
+        "evidence": [
+          {
+            "location": "F-0419 L40-L48",
+            "observation": "代码通过 sub_40202C 检查记录是否包含 \":StringData\"，命中后进入字段提取分支。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "Protected Storage 中被读取的具体对象、字段及其数据类型是什么？",
+        "reason": "当前包只显示 COM 枚举、字符串字段解析和宽字符值读取，缺少接口参数语义及相关结构定义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_407834 生成的内部结果是否被 sub_409A90 调用者绑定到 J00 的 IEPASS.abc 或其他输出？",
+        "reason": "当前包仅包含 sub_409A90 的四行转调和 Protected Storage 子流程，没有下游调用者或最终 sink。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_401B14、sub_401E10、sub_401D9C 的具体状态更新和数据格式是什么？",
+        "reason": "这些函数决定提取结果如何保存及如何影响聚合输出，但实现不在本材料中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401B14, sub_401E10, sub_401D9C",
+        "reason": "确认 Protected Storage 提取结果的内部格式、聚合状态及后续可观察输出。",
+        "expected_value": "闭合宽字符属性值和解析字段到结果对象的 source→action→sink 关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409A90 的调用者及其下游输出代码",
+        "reason": "确认 sub_407834 返回/更新的结果是否进入 J00 的 IEPASS.abc 或其他固定输出。",
+        "expected_value": "确定 Protected Storage 数据最终是否写入文件、传输或仅保留在内存。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_4073A0、sub_4073FC、sub_40744C 相关 COM 接口定义或参数来源",
+        "reason": "确定枚举字段及属性值在 Protected Storage 中的实际数据语义。",
+        "expected_value": "识别被读取的数据类别，但不预设其为凭据。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401B14",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 Protected Storage 读取结果如何写入/更新内部输出状态，以及 \":StringData\" 分支的解析结果是否形成可导出的数据。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0410 L62-L82",
+            "observation": "转换后的字符串最终通过 sub_401B14 写入 a4。"
+          },
+          {
+            "location": "F-0419 L47-L71",
+            "observation": "解析字段后通过 sub_401D9C 产生 v20/v19，并在成功条件下调用 sub_401E10(dst_3, 7)。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_409A90",
+        "targets": [
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要补充 sub_409A90 的调用者或下游调用点，以确认 sub_407834 产生的 Protected Storage 数据如何被上层消费，以及是否进入 J00 已知的 IEPASS.abc 输出。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0477 L1-L4",
+            "observation": "sub_409A90 仅直接转调 sub_407834，当前材料没有显示其调用者如何处理 dst。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/0/evidence/3/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/2/evidence/0/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/0/evidence/1/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/1/kind",
+      "/material_needs/1/reason",
+      "/material_needs/1/target",
+      "/material_needs/1/targets/0/identifier"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [],
+    "applied_paths": [
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/0/evidence/3/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/2/evidence/0/location",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/0/evidence/1/location",
+      "/material_needs/1/target",
+      "/material_needs/1/targets/0/identifier",
+      "/material_needs/1/reason",
+      "/material_needs/1/evidence/0/location"
+    ],
+    "ignored_paths": [],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "Analyzer 的所有 claim、artifact 与 material_need 证据 location 都写成了“F-0419 sub_407834 原文件 L0030-L0036”这类扩展格式；当前验证器无法解析这些位置，导致 12 个证据引用全部无效。核心结论虽基本与当前材料一致，但按无效位置不能验收为有证据支持。",
+        "evidence": [
+          {
+            "location": "/claims/0/evidence/*/location",
+            "observation": "当前值包含函数名和“原文件”文本，例如“F-0419 sub_407834 原文件 L0030-L0036”，不符合可解析的 F-xxxx Lx[-Ly] 格式。"
+          },
+          {
+            "location": "/claims/1/evidence/*/location",
+            "observation": "claim 2 的两个源码引用同样包含额外函数名和“原文件”文本，验证结果均为 invalid_format。"
+          },
+          {
+            "location": "/claims/2/evidence/*/location",
+            "observation": "claim 3 的源码引用同样不可解析，验证结果为 invalid_format。"
+          },
+          {
+            "location": "/artifacts/0/evidence/*/location",
+            "observation": "Protected Storage artifact 的唯一证据 location 不可解析。"
+          },
+          {
+            "location": "/artifacts/1/evidence/*/location",
+            "observation": ":StringData artifact 的唯一证据 location 不可解析。"
+          },
+          {
+            "location": "/material_needs/*/evidence/*/location",
+            "observation": "两个 material_need 的全部源码证据 location 也不可解析。"
+          }
+        ],
+        "required_fix": "仅将各 evidence.location 规范化为实际材料中的文件编号和原始源码行段，例如“F-0419 L30-L36”“F-0417 L27-L48”“F-0415 L7-L11”“F-0416 L41-L52”“F-0413 L39-L61”“F-0410 L49-L82”“F-0419 L36-L72”“F-0419 L30-L34”“F-0419 L40-L48”“F-0410 L62-L82”“F-0419 L47-L71”“F-0477 L1-L4”；不得借此改变 observation、claim 或证据等级。修订后每个 claim、artifact 和 material_need 都应能由对应源码行直接核验。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/*",
+              "/artifacts/*",
+              "/material_needs/*"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "第二个 material_need 的 function_code target 写成“sub_409A90 的调用者”，不是单一函数标识符，不能直接作为结构化代码补料目标；但该缺口本身判断合理，且不改变当前核心分析。",
+        "evidence": [
+          {
+            "location": "/material_needs/1/targets/0/identifier",
+            "observation": "当前 identifier 为“sub_409A90 的调用者”，混合了函数标识符与自然语言关系，未满足单一 identifier 的要求。"
+          },
+          {
+            "location": "/material_needs/1/evidence/0/location",
+            "observation": "F-0477 的代码仅显示 sub_409A90 转调 sub_407834，确实不能从该函数本身指定未知调用者。"
+          }
+        ],
+        "required_fix": "将补料需求改写为可执行的材料描述：若继续请求调用关系，使用适合的非 function_code 材料需求类型；若保留 function_code，则将 target 改为已知的 sub_409A90，并在 reason 中说明需要其调用者/下游调用点，而不要把关系描述放入 identifier。",
+        "fixes": [
+          {
+            "type": "gap_revision",
+            "targets": [
+              "/material_needs/1"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖总体充分：正确覆盖了 sub_409A90 对 Protected Storage 的访问、对象枚举、GUID/字段提取、宽字符转换以及 :StringData 分支，并且没有把数据类别或最终 IEPASS.abc 写入无证据地升级为 confirmed。主要验收阻塞是所有证据位置格式无效；修正引用后，除 material_need target 的轻微结构问题外，未发现会改变最终核心分析的重大遗漏或方向错误。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "当前材料显示 sub_409A90 转调 sub_407834，后者初始化 Protected Storage 实例并枚举其中的对象/属性；枚举到的 GUID、名称及宽字符数据会被提取、转换并写入调用者提供的内部输出缓冲区。材料未闭合该缓冲区最终对应的具体数据含义，也未显示其后是否写入 J00 的固定 .abc 文件或发生网络传输。",
+    "claims": [
+      {
+        "behavior": "在调用 sub_409A90（即 sub_407834）时，程序创建 Protected Storage 实例并枚举其可用对象；对每个枚举到的记录提取 GUID、名称及属性相关数据，并继续处理记录内容。",
+        "condition": "调用 sub_407834 且 Protected Storage 接口返回可枚举对象/记录；各循环继续条件分别由 v13、v15 或 v14 非零决定。",
+        "source": "PStoreCreateInstance 创建并保存到 dword_40E9AC 的 Protected Storage 接口；sub_4077D4 获取的集合对象；sub_4076C0 和 sub_407598 枚举返回的 IID、名称及属性数据。",
+        "action": "通过 COM/接口虚函数调用枚举记录，使用 StringFromCLSID 获取记录 GUID 字符串，并对名称、属性及宽字符值执行提取、转换和缓冲区拼接。",
+        "sink": "调用者提供的内部输出状态/缓冲区 dst_3，以及 sub_407244 中由 a4 指向并经 sub_401B14 更新的内部结果；当前材料未证明外部文件、注册表或网络写入。",
+        "evidence": [
+          {
+            "location": "F-0419 L30-L36",
+            "observation": "调用 sub_401AC0、PStoreCreateInstance，并通过 sub_4077D4 和 sub_4076C0 获取并枚举 Protected Storage 相关对象。"
+          },
+          {
+            "location": "F-0417 L27-L48",
+            "observation": "通过接口方法获取枚举器，循环取得 IID，并调用 sub_40756C、sub_4073FC 和 sub_407598 处理每个记录。"
+          },
+          {
+            "location": "F-0415 L7-L11",
+            "observation": "对枚举得到的 IID 调用 StringFromCLSID，将生成的字符串复制到调用者缓冲区。"
+          },
+          {
+            "location": "F-0416 L41-L52",
+            "observation": "每个枚举记录被进一步送入 sub_4073A0 和 sub_40744C，说明记录属性和数据会继续被读取。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料没有给出 Protected Storage 接口参数所代表的具体存储类型、账户、凭据或其他数据语义。",
+          "sub_401CDC、sub_401D9C、sub_401B14 等缓冲区辅助函数的完整语义不在材料中，因此只能确认数据被提取/转换并写入内部状态，不能确认最终输出格式。",
+          "当前材料未显示 sub_407834 的结果如何返回到 J00 的 .abc 文件写入路径，也未证明网络传输或运行时成功。"
+        ]
+      },
+      {
+        "behavior": "对 Protected Storage 枚举出的每个属性值，程序将宽字符值转换为多字节字符串，过滤控制字符并拼接到结果缓冲区，然后将结果写入 a4 指向的内部输出对象。",
+        "condition": "sub_40744C 的属性枚举器返回 v14 非零，并且每个 lpWideCharStr 对应的转换/读取操作返回数据；可打印字符与非打印字符分别走不同的追加分支。",
+        "source": "sub_40744C 从 COM 接口方法读取的 lpWideCharStr；其内容通过 sub_401CDC 转换为多字节字符串。",
+        "action": "调用 sub_402958 准备宽字符输入，按两个字节步进检查返回数据；可打印字符通过 sub_401C9C/sub_401D58 追加，其他字符追加固定替代内容，最后调用 sub_401B14 写入 a4。",
+        "sink": "a4 指向的内部结果缓冲区/状态对象；该位置不是已确认的文件或网络 sink。",
+        "evidence": [
+          {
+            "location": "F-0413 L39-L61",
+            "observation": "通过 COM 虚函数取得属性枚举器，并循环获得 lpWideCharStr。"
+          },
+          {
+            "location": "F-0410 L49-L82",
+            "observation": "将宽字符输入转换后逐项检查字符，分别追加转换结果或固定替代内容，并调用 sub_401B14(a4, dst_1)。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "a4 的所有权、具体结构及其后续用途未在当前材料中给出。",
+          "材料未证明这些结果代表密码、登录凭据或其他特定类别的数据；只能确认其来自 Protected Storage 属性读取流程。"
+        ]
+      },
+      {
+        "behavior": "枚举逻辑识别包含 \":StringData\" 的记录，并对其中的分隔字段执行进一步解析；满足后续两个解析结果均非零时更新调用者输出状态。",
+        "condition": "sub_407834 的记录枚举中，当前记录包含字符串标记 \":StringData\"，并且后续两个 sub_401D9C 解析结果 v20、v19 均非零。",
+        "source": "Protected Storage 枚举得到的记录字符串，以及通过 sub_401FA4/sub_401FE4 分割出的字段。",
+        "action": "查找 \":StringData\"，提取其前后字段；随后在 dword_407AE8 相关字符串中循环拆分并解析字段，成功时调用 sub_401E10(dst_3, 7)。",
+        "sink": "dst_3 指向的内部聚合状态，具体含义由 sub_401E10 决定。",
+        "evidence": [
+          {
+            "location": "F-0419 L36-L72",
+            "observation": "代码检查记录是否包含 \":StringData\"，分割相关字段，并在 v20 与 v19 同时非零时调用 sub_401E10(dst_3, 7)。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_401D9C 和 sub_401E10 未提供，无法确认字段解析的语义及值 7 对输出状态的具体影响。",
+          "不能仅凭字符串标记推断其对应的凭据、浏览器数据或其他特定数据类别。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "resource",
+        "value": "Protected Storage",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "程序通过 PStoreCreateInstance 及关联 COM 接口访问并枚举 Protected Storage 数据；这是行为上下文，不是单独的样本特异 IOC。",
+        "evidence": [
+          {
+            "location": "F-0419 L30-L34",
+            "observation": "调用 PStoreCreateInstance 并通过 sub_4077D4/sub_4076C0 获取存储对象和枚举对象。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": ":StringData",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "用于在枚举得到的字符串记录中定位待处理字段的解析标记。",
+        "evidence": [
+          {
+            "location": "F-0419 L40-L48",
+            "observation": "代码通过 sub_40202C 检查记录是否包含 \":StringData\"，命中后进入字段提取分支。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "Protected Storage 中被读取的具体对象、字段及其数据类型是什么？",
+        "reason": "当前包只显示 COM 枚举、字符串字段解析和宽字符值读取，缺少接口参数语义及相关结构定义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_407834 生成的内部结果是否被 sub_409A90 调用者绑定到 J00 的 IEPASS.abc 或其他输出？",
+        "reason": "当前包仅包含 sub_409A90 的四行转调和 Protected Storage 子流程，没有下游调用者或最终 sink。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_401B14、sub_401E10、sub_401D9C 的具体状态更新和数据格式是什么？",
+        "reason": "这些函数决定提取结果如何保存及如何影响聚合输出，但实现不在本材料中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401B14, sub_401E10, sub_401D9C",
+        "reason": "确认 Protected Storage 提取结果的内部格式、聚合状态及后续可观察输出。",
+        "expected_value": "闭合宽字符属性值和解析字段到结果对象的 source→action→sink 关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409A90 的调用者及其下游输出代码",
+        "reason": "确认 sub_407834 返回/更新的结果是否进入 J00 的 IEPASS.abc 或其他固定输出。",
+        "expected_value": "确定 Protected Storage 数据最终是否写入文件、传输或仅保留在内存。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_4073A0、sub_4073FC、sub_40744C 相关 COM 接口定义或参数来源",
+        "reason": "确定枚举字段及属性值在 Protected Storage 中的实际数据语义。",
+        "expected_value": "识别被读取的数据类别，但不预设其为凭据。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401B14",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 Protected Storage 读取结果如何写入/更新内部输出状态，以及 \":StringData\" 分支的解析结果是否形成可导出的数据。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0410 L62-L82",
+            "observation": "转换后的字符串最终通过 sub_401B14 写入 a4。"
+          },
+          {
+            "location": "F-0419 L47-L71",
+            "observation": "解析字段后通过 sub_401D9C 产生 v20/v19，并在成功条件下调用 sub_401E10(dst_3, 7)。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_409A90",
+        "targets": [
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要补充 sub_409A90 的调用者或下游调用点，以确认 sub_407834 产生的 Protected Storage 数据如何被上层消费，以及是否进入 J00 已知的 IEPASS.abc 输出。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0477 L1-L4",
+            "observation": "sub_409A90 仅直接转调 sub_407834，当前材料没有显示其调用者如何处理 dst。"
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": []
+}

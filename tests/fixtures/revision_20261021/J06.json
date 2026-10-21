@@ -1,0 +1,1474 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J06.json",
+        "sha256": "847addc8ef65400e637fcc36a45d7eff425e7b8e768c8a0f36160272a2b9cb7c"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J06/analyzer/validated_result.json",
+        "sha256": "3f9913962a79c739d0d595e2a45acedcb99db16a55d94cc8aed093d146b90794"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J06/reviewer/validated_result.json",
+        "sha256": "f0b8b02a47b54708ae72c238d3c66572de08b87eaf1f01e968b98a856a6ea40d"
+      },
+      "packet": {
+        "path": "testdata/packets/J06.md",
+        "sha256": "102a24d67e15b33f7ad056157f405266e71824be5ad168a24a9d6a3431bd3768"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J06/reviser/validated_result.json",
+        "sha256": "297806b5a1c028f4967dd4aa2e6637865024ab1f2138087181c1d26b70dc1be1"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J06/reviser/revision_scope.json",
+        "sha256": "c1591dea9ca46bdcd78c2455a7cbf3aeec811b38d3f47e25625caedd63f51176"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J06",
+  "packet_text": "# J06 No-IP 与 Windows Live 数据提取\n任务来源：J00 的两条不同收集调用；F482 额外存在独立文件写入。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0480 sub_409AD4，原文件 L0001–L0033 / 共 33 行\n```text\nL0001: int *__usercall sub_409AD4@<eax>(volatile __int32 *dst@<eax>, int a2@<ebx>)\nL0002: {\nL0003:   unsigned int v4[2]; // [esp-10h] [ebp-1Ch] BYREF\nL0004:   int *v5; // [esp-8h] [ebp-14h]\nL0005:   int v6; // [esp-4h] [ebp-10h]\nL0006:   int v7; // [esp+0h] [ebp-Ch] BYREF\nL0007:   __int32 v8; // [esp+4h] [ebp-8h] BYREF\nL0008:   __int32 v9; // [esp+8h] [ebp-4h] BYREF\nL0009:   int savedregs; // [esp+Ch] [ebp+0h] BYREF\nL0010: \nL0011:   v9 = 0;\nL0012:   v8 = 0;\nL0013:   v7 = 0;\nL0014:   v6 = a2;\nL0015:   v5 = &savedregs;\nL0016:   v4[1] = (unsigned int)&loc_409B78;\nL0017:   v4[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0018:   __writefsdword(0, (unsigned int)v4);\nL0019:   sub_406088(HKEY_LOCAL_MACHINE, \"SOFTWARE\\\\Vitalwerks\\\\DUC\", \"UserName\", &v9, 0);\nL0020:   sub_406088(HKEY_LOCAL_MACHINE, \"SOFTWARE\\\\Vitalwerks\\\\DUC\", \"Password\", &v8, 0);\nL0021:   if ( v9 )\nL0022:   {\nL0023:     sub_4097BC();\nL0024:     sub_401E10(dst, 5);\nL0025:   }\nL0026:   else\nL0027:   {\nL0028:     sub_401AC0(dst);\nL0029:   }\nL0030:   __writefsdword(0, v4[0]);\nL0031:   v5 = (int *)&loc_409B7F;\nL0032:   return sub_401AE4(&v7, 3);\nL0033: }\n```\n\n## F-0469 sub_4097BC，原文件 L0001–L0005 / 共 5 行\n```text\nL0001: // attributes: thunk\nL0002: int sub_4097BC()\nL0003: {\nL0004:   return sub_4098DC();\nL0005: }\n```\n\n## F-0470 sub_4097C4，原文件 L0001–L0019 / 共 19 行\n```text\nL0001: int __usercall sub_4097C4@<eax>(_DWORD *a1@<eax>, unsigned int a2@<edx>)\nL0002: {\nL0003:   int v2; // ecx\nL0004: \nL0005:   v2 = 0;\nL0006:   if ( a2 && (a2 & 3) == 0 )\nL0007:   {\nL0008:     v2 = 3 * (a2 >> 2);\nL0009:     if ( *(_BYTE *)(*a1 + a2 - 2) == 61 )\nL0010:     {\nL0011:       v2 -= 2;\nL0012:     }\nL0013:     else if ( *(_BYTE *)(*a1 + a2 - 1) == 61 )\nL0014:     {\nL0015:       --v2;\nL0016:     }\nL0017:   }\nL0018:   return v2;\nL0019: }\n```\n\n## F-0471 sub_4097F8，原文件 L0001–L0105 / 共 105 行\n```text\nL0001: char __usercall sub_4097F8@<al>(unsigned int **a1@<eax>, unsigned int a2@<edx>, _BYTE **a3@<ecx>)\nL0002: {\nL0003:   unsigned int *v3; // esi\nL0004:   _BYTE *v4; // edi\nL0005:   int v5; // ebx\nL0006:   int v6; // ebp\nL0007:   unsigned int v7; // edx\nL0008:   unsigned int v8; // eax\nL0009:   unsigned __int16 v9; // ax\nL0010:   _WORD *v10; // edi\nL0011:   unsigned int v11; // edx\nL0012:   unsigned int v12; // edx\nL0013:   __int16 v13; // ax\nL0014:   unsigned __int16 v14; // ax\nL0015:   _BYTE *v15; // edi\nL0016:   unsigned int n61; // edx\nL0017:   __int16 v17; // ax\nL0018:   __int16 v18; // ax\nL0019:   _BYTE *v19; // edi\nL0020:   char v21; // [esp+7h] [ebp-1h]\nL0021: \nL0022:   v3 = *a1;\nL0023:   v4 = *a3;\nL0024:   if ( (a2 & 3) != 0 )\nL0025:     return 0;\nL0026:   if ( a2 >> 2 )\nL0027:   {\nL0028:     v5 = 0;\nL0029:     if ( a2 >> 2 != 1 )\nL0030:     {\nL0031:       v6 = (a2 >> 2) - 1;\nL0032:       do\nL0033:       {\nL0034:         v8 = *v3++;\nL0035:         v7 = v8;\nL0036:         LOBYTE(v5) = v8;\nL0037:         BYTE1(v8) = byte_40D0AC[v5];\nL0038:         if ( BYTE1(v8) == 0xFF )\nL0039:           return 0;\nL0040:         LOBYTE(v5) = BYTE1(v7);\nL0041:         LOBYTE(v8) = byte_40D0AC[v5];\nL0042:         if ( (_BYTE)v8 == 0xFF )\nL0043:           return 0;\nL0044:         LOBYTE(v8) = 4 * v8;\nL0045:         v9 = __ROR2__(v8, 6);\nL0046:         *v4 = v9;\nL0047:         v10 = v4 + 1;\nL0048:         LOWORD(v8) = v9 >> 12;\nL0049:         v11 = HIWORD(v7);\nL0050:         LOBYTE(v5) = v11;\nL0051:         BYTE1(v8) = byte_40D0AC[v5];\nL0052:         if ( BYTE1(v8) == 0xFF )\nL0053:           return 0;\nL0054:         BYTE1(v8) *= 4;\nL0055:         LOWORD(v8) = __ROL2__(v8, 4);\nL0056:         LOBYTE(v5) = BYTE1(v11);\nL0057:         LOBYTE(v5) = byte_40D0AC[v5];\nL0058:         if ( (_BYTE)v5 == 0xFF )\nL0059:           return 0;\nL0060:         BYTE1(v8) |= v5;\nL0061:         *v10 = v8;\nL0062:         v4 = v10 + 1;\nL0063:       }\nL0064:       while ( --v6 );\nL0065:     }\nL0066:     v12 = *v3;\nL0067:     LOBYTE(v5) = *v3;\nL0068:     HIBYTE(v13) = byte_40D0AC[v5];\nL0069:     if ( HIBYTE(v13) != 0xFF )\nL0070:     {\nL0071:       LOBYTE(v5) = BYTE1(*v3);\nL0072:       LOBYTE(v13) = byte_40D0AC[v5];\nL0073:       if ( (_BYTE)v13 != 0xFF )\nL0074:       {\nL0075:         LOBYTE(v13) = 4 * v13;\nL0076:         v14 = __ROR2__(v13, 6);\nL0077:         *v4 = v14;\nL0078:         v15 = v4 + 1;\nL0079:         n61 = HIWORD(v12);\nL0080:         if ( (_BYTE)n61 == 61 )\nL0081:           return 1;\nL0082:         v17 = v14 >> 12;\nL0083:         LOBYTE(v5) = n61;\nL0084:         HIBYTE(v17) = byte_40D0AC[v5];\nL0085:         if ( HIBYTE(v17) == 0xFF )\nL0086:           return 0;\nL0087:         HIBYTE(v17) *= 4;\nL0088:         v18 = __ROL2__(v17, 4);\nL0089:         *v15 = v18;\nL0090:         v19 = v15 + 1;\nL0091:         if ( BYTE1(n61) == 61 )\nL0092:           return 1;\nL0093:         LOBYTE(v5) = BYTE1(n61);\nL0094:         LOBYTE(v5) = byte_40D0AC[v5];\nL0095:         if ( (_BYTE)v5 != 0xFF )\nL0096:         {\nL0097:           *v19 = v5 | HIBYTE(v18);\nL0098:           return 1;\nL0099:         }\nL0100:       }\nL0101:     }\nL0102:     return 0;\nL0103:   }\nL0104:   return v21;\nL0105: }\n```\n\n## F-0472 sub_4098DC，原文件 L0001–L0023 / 共 23 行\n```text\nL0001: _DWORD *__usercall sub_4098DC@<eax>(char *a1@<eax>, unsigned int *a2@<edx>)\nL0002: {\nL0003:   unsigned int v4; // esi\nL0004:   int n4; // edi\nL0005:   char *buf; // eax\nL0006:   int v7; // ecx\nL0007:   _DWORD *result; // eax\nL0008:   char *v9; // [esp+0h] [ebp-14h] BYREF\nL0009:   _BYTE *v10; // [esp+4h] [ebp-10h] BYREF\nL0010: \nL0011:   v4 = sub_401D50((int)a1);\nL0012:   v9 = sub_401F48(a1);\nL0013:   n4 = sub_4097C4(&v9, v4);\nL0014:   sub_402074(a2, n4);\nL0015:   buf = (char *)sub_401F9C(a2);\nL0016:   LOBYTE(v7) = 46;\nL0017:   sub_401414(buf, n4, v7);\nL0018:   v10 = (_BYTE *)sub_401F9C(a2);\nL0019:   LOBYTE(result) = sub_4097F8((unsigned int **)&v9, v4, &v10);\nL0020:   if ( !(_BYTE)result )\nL0021:     return sub_402074(a2, 0);\nL0022:   return result;\nL0023: }\n```\n\n## F-0482 sub_409D28，原文件 L0001–L0094 / 共 94 行\n```text\nL0001: // bad sp value at call has been detected, the output may be wrong!\nL0002: int **__usercall sub_409D28@<eax>(HMODULE *dst@<eax>, int a2@<ebx>, int a3@<edi>, int a4@<esi>)\nL0003: {\nL0004:   int v5; // esi\nL0005:   int v6; // edi\nL0006:   char *n3; // eax\nL0007:   struct _EXCEPTION_REGISTRATION_RECORD *ExceptionList; // [esp-18h] [ebp-38h] BYREF\nL0008:   void *v10; // [esp-14h] [ebp-34h]\nL0009:   void **v11; // [esp-10h] [ebp-30h]\nL0010:   int v12; // [esp-Ch] [ebp-2Ch]\nL0011:   int v13; // [esp-8h] [ebp-28h]\nL0012:   int v14; // [esp-4h] [ebp-24h]\nL0013:   char *v15; // [esp+0h] [ebp-20h] BYREF\nL0014:   const char *Messenger_1; // [esp+4h] [ebp-1Ch] BYREF\nL0015:   char *dst_; // [esp+8h] [ebp-18h] BYREF\nL0016:   char *v18; // [esp+Ch] [ebp-14h] BYREF\nL0017:   const char *Messenger; // [esp+10h] [ebp-10h]\nL0018:   HMODULE hModule; // [esp+14h] [ebp-Ch]\nL0019:   const char *Messenger_2; // [esp+18h] [ebp-8h] BYREF\nL0020:   int *v22; // [esp+1Ch] [ebp-4h] BYREF\nL0021:   void *savedregs; // [esp+20h] [ebp+0h] BYREF\nL0022: \nL0023:   v22 = 0;\nL0024:   Messenger_2 = 0;\nL0025:   hModule = 0;\nL0026:   Messenger = 0;\nL0027:   v18 = 0;\nL0028:   dst_ = 0;\nL0029:   Messenger_1 = 0;\nL0030:   v15 = 0;\nL0031:   v14 = a2;\nL0032:   v13 = a4;\nL0033:   v12 = a3;\nL0034:   v11 = &savedregs;\nL0035:   v10 = &loc_409E71;\nL0036:   ExceptionList = NtCurrentTeb()->NtTib.ExceptionList;\nL0037:   __writefsdword(0, (unsigned int)&ExceptionList);\nL0038:   sub_401AC0(dst);\nL0039:   hModule = LoadLibraryA(\"advapi32.dll\");\nL0040:   CredEnumerateA_0 = (BOOL (__stdcall *)(LPCSTR, DWORD, DWORD *, PCREDENTIALA **))GetProcAddress(\nL0041:                                                                                     hModule,\nL0042:                                                                                     \"CredEnumerateA\");\nL0043:   CredFree = (void (__stdcall *)(PVOID))GetProcAddress(hModule, \"CredFree\");\nL0044:   ((void (__stdcall *)(const char *, _DWORD, const char **, int **, struct _EXCEPTION_REGISTRATION_RECORD *, void *, void **, int, int, int, char *, const char *, char *, char *, const char *, HMODULE))CredEnumerateA_0)(\nL0045:     \"WindowsLive:name=*\",\nL0046:     0,\nL0047:     &Messenger_2,\nL0048:     &v22,\nL0049:     ExceptionList,\nL0050:     v10,\nL0051:     v11,\nL0052:     v12,\nL0053:     v13,\nL0054:     v14,\nL0055:     v15,\nL0056:     Messenger_1,\nL0057:     dst_,\nL0058:     v18,\nL0059:     Messenger,\nL0060:     hModule);\nL0061:   if ( Messenger_2 )\nL0062:   {\nL0063:     Messenger = Messenger_2;\nL0064:     v5 = 0;\nL0065:     do\nL0066:     {\nL0067:       hModule = *dst;\nL0068:       Messenger = \"Messenger|\";\nL0069:       v6 = v22[v5];\nL0070:       sub_401CAC(&v18, *(_BYTE **)(v6 + 48));\nL0071:       dst_ = (char *)dword_409EDC;\nL0072:       sub_401E10((volatile __int32 *)dst, 4);\nL0073:       hModule = *dst;\nL0074:       sub_409C1C(*(_DWORD *)(v6 + 28), *(_DWORD *)(v6 + 24), (volatile __int32 *)&Messenger_1);\nL0075:       Messenger = Messenger_1;\nL0076:       v18 = (char *)dword_409EDC;\nL0077:       sub_401E10((volatile __int32 *)&dst_, 3);\nL0078:       n3 = sub_401F48(dst_);\nL0079:       sub_401CAC((char **)dst, n3);\nL0080:       ++v5;\nL0081:       --Messenger;\nL0082:     }\nL0083:     while ( Messenger );\nL0084:     FreeLibrary_0(hModule);\nL0085:     hModule = (HMODULE)sub_401D50((int)*dst);\nL0086:     sub_406008(&v15);\nL0087:     sub_401D58((volatile __int32 *)&v15, (__int32)\"xxxyyyzzz.dat\");\nL0088:     sub_405D70((DWORD)hModule, v15, (int)*dst);\nL0089:   }\nL0090:   __writefsdword(0, (unsigned int)Messenger_2);\nL0091:   savedregs = &loc_409E78;\nL0092:   sub_401AE4((int *)&v15, 4);\nL0093:   return sub_402FC8(&v22, (int)dword_409BF0);\nL0094: }\n```\n\n## F-0481 sub_409C1C，原文件 L0001–L0081 / 共 81 行\n```text\nL0001: int *__usercall sub_409C1C@<eax>(int a1@<eax>, unsigned int a2@<edx>, volatile __int32 *a3@<ecx>)\nL0002: {\nL0003:   int v4; // ebx\nL0004:   int n16; // edi\nL0005:   unsigned __int8 n0x20; // al\nL0006:   int v7; // ebx\nL0007:   unsigned __int8 n0x20_1; // al\nL0008:   unsigned int v10[2]; // [esp-Ch] [ebp-30h] BYREF\nL0009:   int *v11; // [esp-4h] [ebp-28h]\nL0010:   char *dst_1; // [esp+Ch] [ebp-18h] BYREF\nL0011:   char *dst; // [esp+10h] [ebp-14h] BYREF\nL0012:   unsigned int v14; // [esp+14h] [ebp-10h]\nL0013:   int v15; // [esp+18h] [ebp-Ch]\nL0014:   volatile __int32 *v16; // [esp+1Ch] [ebp-8h]\nL0015:   unsigned int v17; // [esp+20h] [ebp-4h]\nL0016:   int savedregs; // [esp+24h] [ebp+0h] BYREF\nL0017: \nL0018:   dst_1 = 0;\nL0019:   dst = 0;\nL0020:   v16 = a3;\nL0021:   v17 = a2;\nL0022:   v11 = &savedregs;\nL0023:   v10[1] = (unsigned int)&loc_409D1A;\nL0024:   v10[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0025:   __writefsdword(0, (unsigned int)v10);\nL0026:   v15 = 0;\nL0027:   sub_401AC0(a3);\nL0028:   if ( v17 >> 4 )\nL0029:   {\nL0030:     v14 = v17 >> 4;\nL0031:     do\nL0032:     {\nL0033:       v4 = v15;\nL0034:       if ( v15 + 15 > v15 )\nL0035:       {\nL0036:         n16 = 16;\nL0037:         do\nL0038:         {\nL0039:           n0x20 = *(_BYTE *)(v4 + a1);\nL0040:           if ( n0x20 >= 0x20u && n0x20 <= 0xFAu )\nL0041:           {\nL0042:             sub_401C9C(&dst);\nL0043:             sub_401D58(v16, (__int32)dst);\nL0044:           }\nL0045:           else\nL0046:           {\nL0047:             sub_401B14(v16, *v16);\nL0048:           }\nL0049:           ++v4;\nL0050:           --n16;\nL0051:         }\nL0052:         while ( n16 );\nL0053:       }\nL0054:       v15 += 16;\nL0055:       --v14;\nL0056:     }\nL0057:     while ( v14 );\nL0058:   }\nL0059:   if ( (v17 & 0xF) != 0 )\nL0060:   {\nL0061:     v7 = v17 & 0xF;\nL0062:     do\nL0063:     {\nL0064:       n0x20_1 = *(_BYTE *)(v17 + a1 - v7);\nL0065:       if ( n0x20_1 >= 0x20u && n0x20_1 <= 0xFAu )\nL0066:       {\nL0067:         sub_401C9C(&dst_1);\nL0068:         sub_401D58(v16, (__int32)dst_1);\nL0069:       }\nL0070:       else\nL0071:       {\nL0072:         sub_401B14(v16, *v16);\nL0073:       }\nL0074:       --v7;\nL0075:     }\nL0076:     while ( v7 );\nL0077:   }\nL0078:   __writefsdword(0, v10[0]);\nL0079:   v11 = (int *)&loc_409D21;\nL0080:   return sub_401AE4((int *)&dst_1, 2);\nL0081: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了 J00 两条收集调用中的具体数据来源：NOIP 路径读取 Vitalwerks DUC 注册表的 UserName/Password，并在 UserName 存在时对相关字符串执行表驱动的解码/转换；Windows Live 路径动态解析 CredEnumerateA，枚举匹配 WindowsLive:name=* 的凭据，组合凭据字段后尝试写入临时目录下的 xxxyyyzzz.dat。静态证据证明了能力与写入尝试，不证明运行时成功、输出内容完整语义或其他 .abc 产物的数据来源。",
+    "claims": [
+      {
+        "behavior": "在 J00 的密码列表分支中，sub_409AD4 读取 Vitalwerks DUC 注册表的 UserName 和 Password；当 UserName 返回非零时，对相关输入执行辅助处理并将结果返回给上游写出流程。",
+        "condition": "调用 sub_409AD4 时，注册表 UserName 查询结果 v9 非零；若 v9 为零则改走 sub_401AC0(dst)。",
+        "source": "HKLM\\SOFTWARE\\Vitalwerks\\DUC 下的 UserName 与 Password 值；当前源码明确显示两次读取，但可见代码未证明 Password 最终被写入结果。",
+        "action": "通过 sub_406088 读取两个注册表值；UserName 存在时调用 sub_4097BC→sub_4098DC，并由 sub_4098DC 根据输入长度、查表结果和 sub_4097F8 生成转换后的缓冲区。",
+        "sink": "返回给 J00 已验证的 NOIP.abc 临时文件写入调用；J06 直接证明的是返回数据的构造和上游绑定，不能单独证明文件写入成功。",
+        "evidence": [
+          {
+            "location": "F-0480 sub_409AD4 原文件 L0019-L0032",
+            "observation": "读取 HKLM\\SOFTWARE\\Vitalwerks\\DUC 的 UserName 和 Password；v9 非零时调用 sub_4097BC 和 sub_401E10，否则调用 sub_401AC0，最后返回 sub_401AE4 处理后的结果。"
+          },
+          {
+            "location": "F-0472 sub_4098DC 原文件 L0011-L0022",
+            "observation": "计算输入长度，复制/准备输入缓冲区，计算转换后长度，调用 sub_4097F8 处理数据；处理失败时将输出长度置零。"
+          },
+          {
+            "location": "F-0471 sub_4097F8 原文件 L0022-L0045、L0066-L0098",
+            "observation": "使用 byte_40D0AC 查表并将输入字节转换后写入输出缓冲区，遇到无效查表值返回失败。"
+          },
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证 sub_409AD4 的返回结果在密码列表分支中绑定到临时目录的 NOIP.abc 并交给文件写入例程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "可见代码没有证明 Password 值参与了最终输出，不能将 NOIP.abc 直接标记为明文密码文件。",
+          "sub_401AC0、sub_401E10、sub_401AE4 的完整语义以及底层写入成功状态不在本包内。"
+        ]
+      },
+      {
+        "behavior": "在 J00 的密码列表分支中，sub_409D28 枚举 Windows Live 凭据，组合每条凭据的可见字段，并尝试将聚合结果写入临时目录下的固定文件 xxxyyyzzz.dat。",
+        "condition": "CredEnumerateA(\"WindowsLive:name=*\") 返回的 Messenger_2 非空；若为空则跳过枚举循环和文件写入段。",
+        "source": "Windows Credential Manager 中由 CredEnumerateA 按 WindowsLive:name=* 返回的凭据集合；每条凭据使用 v6+48、v6+28 和 v6+24 处的字段。",
+        "action": "动态加载 advapi32.dll 并解析 CredEnumerateA/CredFree；对每条凭据追加字段和分隔文本，调用 sub_409C1C 按字节处理另两个字段，再聚合到 dst；随后计算长度、获取临时路径并调用 sub_405D70。",
+        "sink": "临时目录下的 xxxyyyzzz.dat 文件写入尝试，写入数据为聚合缓冲区 dst；静态代码不能证明实际创建成功。",
+        "evidence": [
+          {
+            "location": "F-0482 sub_409D28 原文件 L0038-L0045",
+            "observation": "加载 advapi32.dll，解析 CredEnumerateA 和 CredFree，并以 WindowsLive:name=* 作为枚举过滤字符串调用 CredEnumerateA。"
+          },
+          {
+            "location": "F-0482 sub_409D28 原文件 L0061-L0083",
+            "observation": "当 Messenger_2 非空时遍历 v22 中的凭据，追加 *(_BYTE **)(v6+48) 字段，调用 sub_409C1C 处理 v6+28/v6+24 指定的数据，并将结果继续拼接到 dst。"
+          },
+          {
+            "location": "F-0481 sub_409C1C 原文件 L0027-L0076",
+            "observation": "按传入长度逐字节读取源缓冲区；对 0x20 至 0xFA 范围内的字节调用 sub_401C9C 后追加转换结果，其他字节走长度/缓冲区更新分支。"
+          },
+          {
+            "location": "F-0482 sub_409D28 原文件 L0085-L0089",
+            "observation": "计算聚合数据长度，获取临时路径，追加固定文件名 xxxyyyzzz.dat，并调用 sub_405D70 传入长度、路径和聚合数据。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "v6+48、v6+28、v6+24 的具体凭据字段含义，以及 sub_401CAC/sub_401C9C 的精确编码格式未在本包中给出。",
+          "CredEnumerateA 的返回状态和 sub_405D70 的实际写入结果未被检查或证明。",
+          "代码调用 CredFree 的地址已解析，但可见片段未展示其实际释放调用。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "registry",
+        "value": "HKLM\\SOFTWARE\\Vitalwerks\\DUC\\UserName",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "sub_409AD4 读取的 DUC 注册表用户名值，并作为进入数据转换分支的条件。",
+        "evidence": [
+          {
+            "location": "F-0480 sub_409AD4 原文件 L0019-L0028",
+            "observation": "调用 sub_406088(HKEY_LOCAL_MACHINE, \"SOFTWARE\\\\Vitalwerks\\\\DUC\", \"UserName\", &v9, 0)，随后以 v9 是否非零选择分支。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\SOFTWARE\\Vitalwerks\\DUC\\Password",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "sub_409AD4 读取的 DUC 注册表密码值；当前可见代码未证明其被纳入返回输出。",
+        "evidence": [
+          {
+            "location": "F-0480 sub_409AD4 原文件 L0019-L0020",
+            "observation": "调用 sub_406088(HKEY_LOCAL_MACHINE, \"SOFTWARE\\\\Vitalwerks\\\\DUC\", \"Password\", &v8, 0)。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "WindowsLive:name=*",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "传给 CredEnumerateA 的 Windows Live 凭据枚举过滤字符串。",
+        "evidence": [
+          {
+            "location": "F-0482 sub_409D28 原文件 L0039-L0045",
+            "observation": "通过 GetProcAddress 获取 CredEnumerateA，并以 WindowsLive:name=* 作为首个参数调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "NOIP.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "J00 已验证的密码列表分支固定输出名；本包补充了其对应 sub_409AD4 的注册表读取和转换来源。",
+        "evidence": [
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证 sub_409AD4 返回结果绑定到临时目录下的 NOIP.abc 并交给写入例程。"
+          },
+          {
+            "location": "F-0480 sub_409AD4 原文件 L0019-L0032",
+            "observation": "直接显示 NOIP 生产函数读取 DUC 注册表并构造返回结果。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "xxxyyyzzz.dat",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Windows Live 凭据聚合路径追加的固定临时输出文件名。",
+        "evidence": [
+          {
+            "location": "F-0482 sub_409D28 原文件 L0085-L0089",
+            "observation": "获取临时路径后追加 xxxyyyzzz.dat，并将聚合数据传给 sub_405D70。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "Password 值是否实际参与 NOIP.abc 的输出，以及 sub_401AC0/sub_401E10/sub_401AE4 的精确数据语义是什么？",
+        "reason": "当前函数读取 Password，但可见控制流没有直接使用 v8；多个缓冲区辅助函数实现缺失。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "Windows Live 凭据字段 v6+48、v6+28、v6+24 分别代表什么，以及 sub_401CAC/sub_401C9C 的精确编码格式是什么？",
+        "reason": "当前材料证明了凭据枚举和聚合动作，但未提供字段结构或编码辅助函数实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "J00 其余 .abc 输出（MSN、FIREFOX、IELOGIN、IEPASS、IEAUTO、IEWEB）的具体数据来源和语义是什么？",
+        "reason": "本包仅提供 sub_409AD4 与 sub_409D28；其余 producer 实现未包含在材料中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_405D70 和 J00 其他写出辅助函数在运行时是否成功创建/写入目标文件？",
+        "reason": "静态调用只能证明写入能力和调用尝试，不能证明运行时成功。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401AC0, sub_401E10, sub_401AE4",
+        "reason": "确认 NOIP 生产函数中缓冲区初始化、追加和最终返回值的精确语义，并判断 Password 是否进入输出。",
+        "expected_value": "NOIP.abc 的准确数据组成及 UserName/Password 的关系。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_401CAC, sub_401C9C",
+        "reason": "确认 Windows Live 凭据字段拼接和字节转换的格式。",
+        "expected_value": "xxxyyyzzz.dat 的准确记录结构和字段含义。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405D70",
+        "reason": "确认 xxxyyyzzz.dat 参数是否执行文件创建、写入、传输或其他副作用。",
+        "expected_value": "Windows Live 路径的最终 sink 和成功条件。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "解析 J00 其他固定 .abc 文件对应的 producer 数据来源。",
+        "expected_value": "其余密码/浏览器输出的 source→action→sink 语义。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_405D70",
+        "targets": [
+          {
+            "identifier": "sub_405D70",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_409D28 中传入 xxxyyyzzz.dat 的参数最终执行何种外部副作用，以及是否实际写入文件。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0482 sub_409D28 原文件 L0085-L0089",
+            "observation": "代码获取临时路径、追加 xxxyyyzzz.dat，并调用 sub_405D70 传入聚合数据。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401CAC, sub_401C9C",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401C9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 Windows Live 凭据字段的拼接格式和 sub_409C1C 对凭据字节的具体编码。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0482 sub_409D28 原文件 L0067-L0079",
+            "observation": "枚举循环调用 sub_401CAC 拼接字段，并调用 sub_409C1C；sub_409C1C 内部再次调用 sub_401C9C。"
+          },
+          {
+            "location": "F-0481 sub_409C1C 原文件 L0039-L0048、L0064-L0073",
+            "observation": "可见代码仅显示按字节分支并调用 sub_401C9C，未显示转换结果格式。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "targets": [
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要闭合 J00 已验证固定 .abc 输出与各自真实数据源之间的关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证这些 producer 的返回值分别绑定到 MSN.abc、FIREFOX.abc、IELOGIN.abc、IEPASS.abc、IEAUTO.abc 和 IEWEB.abc，但 producer 实现未提供。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前包的核心 claims、artifacts 和 material_needs 使用了带“原文件”、函数名或中文逗号/顿号的 location 字符串，导致当前材料证据引用全部无法按 F-xxxx Lx[-Ly] 解析。证据本身对应的函数和行段在 material 中存在，但当前引用格式不能作为可验证的材料定位，影响 NOIP、Windows Live 及 xxxyyyzzz.dat 核心结论的验收。",
+        "evidence": [
+          {
+            "location": "F-0480 L0001-L0033",
+            "observation": "当前材料明确提供 sub_409AD4 的源码，相关注册表读取位于 L0019-L0020，分支和返回位于 L0021-L0032；Analyzer 的引用写成“F-0480 sub_409AD4 原文件 L0019-L0032”，验证器判定为 invalid_format。"
+          },
+          {
+            "location": "F-0482 L0001-L0094",
+            "observation": "当前材料明确提供 sub_409D28 的源码，CredEnumerateA 调用、凭据聚合和 xxxyyyzzz.dat 写出调用分别位于 L0038-L0045、L0061-L0083、L0085-L0089；Analyzer 的对应引用均无法解析。"
+          },
+          {
+            "location": "F-0481 L0001-L0081",
+            "observation": "当前材料明确提供 sub_409C1C 的逐字节处理源码；Analyzer 的引用包含“原文件”和中文顿号，验证器判定为 invalid_format。"
+          }
+        ],
+        "required_fix": "只修正 evidence.location 为可解析且准确的 F-xxxx Lx-Ly 格式，不改变已由材料支持的 claim 内容。当前包引用应分别使用 F-0480 L19-L32、F-0472 L11-L22、F-0471 L22-L45 和 F-0471 L66-L98、F-0482 L38-L45、F-0482 L61-L83、F-0481 L27-L76、F-0482 L85-L89；dependency J00 引用按其已验证摘要的原格式保留或单独按依赖引用规则处理。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/2/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/2/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/3/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/3/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/4/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/evidence/1/location"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖总体充分：NOIP 的 DUC 注册表来源、Windows Live 凭据枚举/聚合及固定输出名均已覆盖，证据等级和主要边界也基本一致。需要修订的主要问题是当前包证据 location 格式全部不可解析，必须恢复为准确的 F-xxxx Lx-Ly 引用后才能验收这些核心结论。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前包的核心 claims、artifacts 和 material_needs 使用了带“原文件”、函数名或中文逗号/顿号的 location 字符串，导致当前材料证据引用全部无法按 F-xxxx Lx[-Ly] 解析。证据本身对应的函数和行段在 material 中存在，但当前引用格式不能作为可验证的材料定位，影响 NOIP、Windows Live 及 xxxyyyzzz.dat 核心结论的验收。",
+        "evidence": [
+          {
+            "location": "F-0480 L0001-L0033",
+            "observation": "当前材料明确提供 sub_409AD4 的源码，相关注册表读取位于 L0019-L0020，分支和返回位于 L0021-L0032；Analyzer 的引用写成“F-0480 sub_409AD4 原文件 L0019-L0032”，验证器判定为 invalid_format。"
+          },
+          {
+            "location": "F-0482 L0001-L0094",
+            "observation": "当前材料明确提供 sub_409D28 的源码，CredEnumerateA 调用、凭据聚合和 xxxyyyzzz.dat 写出调用分别位于 L0038-L0045、L0061-L0083、L0085-L0089；Analyzer 的对应引用均无法解析。"
+          },
+          {
+            "location": "F-0481 L0001-L0081",
+            "observation": "当前材料明确提供 sub_409C1C 的逐字节处理源码；Analyzer 的引用包含“原文件”和中文顿号，验证器判定为 invalid_format。"
+          }
+        ],
+        "required_fix": "只修正 evidence.location 为可解析且准确的 F-xxxx Lx-Ly 格式，不改变已由材料支持的 claim 内容。当前包引用应分别使用 F-0480 L19-L32、F-0472 L11-L22、F-0471 L22-L45 和 F-0471 L66-L98、F-0482 L38-L45、F-0482 L61-L83、F-0481 L27-L76、F-0482 L85-L89；dependency J00 引用按其已验证摘要的原格式保留或单独按依赖引用规则处理。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/2/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/2/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence/3/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/3/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/4/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/1/evidence/1/location"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖总体充分：NOIP 的 DUC 注册表来源、Windows Live 凭据枚举/聚合及固定输出名均已覆盖，证据等级和主要边界也基本一致。需要修订的主要问题是当前包证据 location 格式全部不可解析，必须恢复为准确的 F-xxxx Lx-Ly 引用后才能验收这些核心结论。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了 J00 两条收集调用中的具体数据来源：NOIP 路径读取 Vitalwerks DUC 注册表的 UserName/Password，并在 UserName 存在时对相关字符串执行表驱动的解码/转换；Windows Live 路径动态解析 CredEnumerateA，枚举匹配 WindowsLive:name=* 的凭据，组合凭据字段后尝试写入临时目录下的 xxxyyyzzz.dat。静态证据证明了能力与写入尝试，不证明运行时成功、输出内容完整语义或其他 .abc 产物的数据来源。",
+    "claims": [
+      {
+        "behavior": "在 J00 的密码列表分支中，sub_409AD4 读取 Vitalwerks DUC 注册表的 UserName 和 Password；当 UserName 返回非零时，对相关输入执行辅助处理并将结果返回给上游写出流程。",
+        "condition": "调用 sub_409AD4 时，注册表 UserName 查询结果 v9 非零；若 v9 为零则改走 sub_401AC0(dst)。",
+        "source": "HKLM\\SOFTWARE\\Vitalwerks\\DUC 下的 UserName 与 Password 值；当前源码明确显示两次读取，但可见代码未证明 Password 最终被写入结果。",
+        "action": "通过 sub_406088 读取两个注册表值；UserName 存在时调用 sub_4097BC→sub_4098DC，并由 sub_4098DC 根据输入长度、查表结果和 sub_4097F8 生成转换后的缓冲区。",
+        "sink": "返回给 J00 已验证的 NOIP.abc 临时文件写入调用；J06 直接证明的是返回数据的构造和上游绑定，不能单独证明文件写入成功。",
+        "evidence": [
+          {
+            "location": "F-0480 L19-L32",
+            "observation": "读取 HKLM\\SOFTWARE\\Vitalwerks\\DUC 的 UserName 和 Password；v9 非零时调用 sub_4097BC 和 sub_401E10，否则调用 sub_401AC0，最后返回 sub_401AE4 处理后的结果。"
+          },
+          {
+            "location": "F-0472 L11-L22",
+            "observation": "计算输入长度，复制/准备输入缓冲区，计算转换后长度，调用 sub_4097F8 处理数据；处理失败时将输出长度置零。"
+          },
+          {
+            "location": "F-0471 L22-L45、L66-L98",
+            "observation": "使用 byte_40D0AC 查表并将输入字节转换后写入输出缓冲区，遇到无效查表值返回失败。"
+          },
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证 sub_409AD4 的返回结果在密码列表分支中绑定到临时目录的 NOIP.abc 并交给文件写入例程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "可见代码没有证明 Password 值参与了最终输出，不能将 NOIP.abc 直接标记为明文密码文件。",
+          "sub_401AC0、sub_401E10、sub_401AE4 的完整语义以及底层写入成功状态不在本包内。"
+        ]
+      },
+      {
+        "behavior": "在 J00 的密码列表分支中，sub_409D28 枚举 Windows Live 凭据，组合每条凭据的可见字段，并尝试将聚合结果写入临时目录下的固定文件 xxxyyyzzz.dat。",
+        "condition": "CredEnumerateA(\"WindowsLive:name=*\") 返回的 Messenger_2 非空；若为空则跳过枚举循环和文件写入段。",
+        "source": "Windows Credential Manager 中由 CredEnumerateA 按 WindowsLive:name=* 返回的凭据集合；每条凭据使用 v6+48、v6+28 和 v6+24 处的字段。",
+        "action": "动态加载 advapi32.dll 并解析 CredEnumerateA/CredFree；对每条凭据追加字段和分隔文本，调用 sub_409C1C 按字节处理另两个字段，再聚合到 dst；随后计算长度、获取临时路径并调用 sub_405D70。",
+        "sink": "临时目录下的 xxxyyyzzz.dat 文件写入尝试，写入数据为聚合缓冲区 dst；静态代码不能证明实际创建成功。",
+        "evidence": [
+          {
+            "location": "F-0482 L38-L45",
+            "observation": "加载 advapi32.dll，解析 CredEnumerateA 和 CredFree，并以 WindowsLive:name=* 作为首个参数调用 CredEnumerateA。"
+          },
+          {
+            "location": "F-0482 L61-L83",
+            "observation": "当 Messenger_2 非空时遍历 v22 中的凭据，追加 *(_BYTE **)(v6+48) 字段，调用 sub_409C1C 处理 v6+28/v6+24 指定的数据，并将结果继续拼接到 dst。"
+          },
+          {
+            "location": "F-0481 L27-L76",
+            "observation": "按传入长度逐字节读取源缓冲区；对 0x20 至 0xFA 范围内的字节调用 sub_401C9C 后追加转换结果，其他字节走长度/缓冲区更新分支。"
+          },
+          {
+            "location": "F-0482 L85-L89",
+            "observation": "计算聚合数据长度，获取临时路径，追加固定文件名 xxxyyyzzz.dat，并调用 sub_405D70 传入长度、路径和聚合数据。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "v6+48、v6+28、v6+24 的具体凭据字段含义，以及 sub_401CAC/sub_401C9C 的精确编码格式未在本包中给出。",
+          "CredEnumerateA 的返回状态和 sub_405D70 的实际写入结果未被检查或证明。",
+          "代码调用 CredFree 的地址已解析，但可见片段未展示其实际释放调用。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "registry",
+        "value": "HKLM\\SOFTWARE\\Vitalwerks\\DUC\\UserName",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "sub_409AD4 读取的 DUC 注册表用户名值，并作为进入数据转换分支的条件。",
+        "evidence": [
+          {
+            "location": "F-0480 L19-L28",
+            "observation": "调用 sub_406088(HKEY_LOCAL_MACHINE, \"SOFTWARE\\\\Vitalwerks\\\\DUC\", \"UserName\", &v9, 0)，随后以 v9 是否非零选择分支。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\SOFTWARE\\Vitalwerks\\DUC\\Password",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "sub_409AD4 读取的 DUC 注册表密码值；当前可见代码未证明其被纳入返回输出。",
+        "evidence": [
+          {
+            "location": "F-0480 L19-L20",
+            "observation": "调用 sub_406088(HKEY_LOCAL_MACHINE, \"SOFTWARE\\\\Vitalwerks\\\\DUC\", \"Password\", &v8, 0)。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "WindowsLive:name=*",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "传给 CredEnumerateA 的 Windows Live 凭据枚举过滤字符串。",
+        "evidence": [
+          {
+            "location": "F-0482 L39-L45",
+            "observation": "通过 GetProcAddress 获取 CredEnumerateA，并以 WindowsLive:name=* 作为首个参数调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "NOIP.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "J00 已验证的密码列表分支固定输出名；本包补充了其对应 sub_409AD4 的注册表读取和转换来源。",
+        "evidence": [
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证 sub_409AD4 返回结果绑定到临时目录下的 NOIP.abc 并交给写入例程。"
+          },
+          {
+            "location": "F-0480 L19-L32",
+            "observation": "直接显示 NOIP 生产函数读取 DUC 注册表并构造返回结果。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "xxxyyyzzz.dat",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Windows Live 凭据聚合路径追加的固定临时输出文件名。",
+        "evidence": [
+          {
+            "location": "F-0482 L85-L89",
+            "observation": "获取临时路径后追加 xxxyyyzzz.dat，并将聚合数据传给 sub_405D70。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "Password 值是否实际参与 NOIP.abc 的输出，以及 sub_401AC0/sub_401E10/sub_401AE4 的精确数据语义是什么？",
+        "reason": "当前函数读取 Password，但可见控制流没有直接使用 v8；多个缓冲区辅助函数实现缺失。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "Windows Live 凭据字段 v6+48、v6+28、v6+24 分别代表什么，以及 sub_401CAC/sub_401C9C 的精确编码格式是什么？",
+        "reason": "当前材料证明了凭据枚举和聚合动作，但未提供字段结构或编码辅助函数实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "J00 其余 .abc 输出（MSN、FIREFOX、IELOGIN、IEPASS、IEAUTO、IEWEB）的具体数据来源和语义是什么？",
+        "reason": "本包仅提供 sub_409AD4 与 sub_409D28；其余 producer 实现未包含在材料中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_405D70 和 J00 其他写出辅助函数在运行时是否成功创建/写入目标文件？",
+        "reason": "静态调用只能证明写入能力和调用尝试，不能证明运行时成功。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401AC0, sub_401E10, sub_401AE4",
+        "reason": "确认 NOIP 生产函数中缓冲区初始化、追加和最终返回值的精确语义，并判断 Password 是否进入输出。",
+        "expected_value": "NOIP.abc 的准确数据组成及 UserName/Password 的关系。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_401CAC, sub_401C9C",
+        "reason": "确认 Windows Live 凭据字段拼接和字节转换的格式。",
+        "expected_value": "xxxyyyzzz.dat 的准确记录结构和字段含义。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405D70",
+        "reason": "确认 xxxyyyzzz.dat 参数是否执行文件创建、写入、传输或其他副作用。",
+        "expected_value": "Windows Live 路径的最终 sink 和成功条件。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "解析 J00 其他固定 .abc 文件对应的 producer 数据来源。",
+        "expected_value": "其余密码/浏览器输出的 source→action→sink 语义。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_405D70",
+        "targets": [
+          {
+            "identifier": "sub_405D70",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_409D28 中传入 xxxyyyzzz.dat 的参数最终执行何种外部副作用，以及是否实际写入文件。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0482 L85-L89",
+            "observation": "代码获取临时路径、追加 xxxyyyzzz.dat，并调用 sub_405D70 传入聚合数据。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401CAC, sub_401C9C",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401C9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 Windows Live 凭据字段的拼接格式和 sub_409C1C 对凭据字节的具体编码。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0482 L67-L79",
+            "observation": "枚举循环调用 sub_401CAC 拼接字段，并调用 sub_409C1C；sub_409C1C 内部再次调用 sub_401C9C。"
+          },
+          {
+            "location": "F-0481 L39-L48、L64-L73",
+            "observation": "可见代码仅显示按字节分支并调用 sub_401C9C，未显示转换结果格式。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "targets": [
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要闭合 J00 已验证固定 .abc 输出与各自真实数据源之间的关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证这些 producer 的返回值分别绑定到 MSN.abc、FIREFOX.abc、IELOGIN.abc、IEPASS.abc、IEAUTO.abc 和 IEWEB.abc，但 producer 实现未提供。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了 J00 两条收集调用中的具体数据来源：NOIP 路径读取 Vitalwerks DUC 注册表的 UserName/Password，并在 UserName 存在时对相关字符串执行表驱动的解码/转换；Windows Live 路径动态解析 CredEnumerateA，枚举匹配 WindowsLive:name=* 的凭据，组合凭据字段后尝试写入临时目录下的 xxxyyyzzz.dat。静态证据证明了能力与写入尝试，不证明运行时成功、输出内容完整语义或其他 .abc 产物的数据来源。",
+    "claims": [
+      {
+        "behavior": "在 J00 的密码列表分支中，sub_409AD4 读取 Vitalwerks DUC 注册表的 UserName 和 Password；当 UserName 返回非零时，对相关输入执行辅助处理并将结果返回给上游写出流程。",
+        "condition": "调用 sub_409AD4 时，注册表 UserName 查询结果 v9 非零；若 v9 为零则改走 sub_401AC0(dst)。",
+        "source": "HKLM\\SOFTWARE\\Vitalwerks\\DUC 下的 UserName 与 Password 值；当前源码明确显示两次读取，但可见代码未证明 Password 最终被写入结果。",
+        "action": "通过 sub_406088 读取两个注册表值；UserName 存在时调用 sub_4097BC→sub_4098DC，并由 sub_4098DC 根据输入长度、查表结果和 sub_4097F8 生成转换后的缓冲区。",
+        "sink": "返回给 J00 已验证的 NOIP.abc 临时文件写入调用；J06 直接证明的是返回数据的构造和上游绑定，不能单独证明文件写入成功。",
+        "evidence": [
+          {
+            "location": "F-0480 L19-L32",
+            "observation": "读取 HKLM\\SOFTWARE\\Vitalwerks\\DUC 的 UserName 和 Password；v9 非零时调用 sub_4097BC 和 sub_401E10，否则调用 sub_401AC0，最后返回 sub_401AE4 处理后的结果。"
+          },
+          {
+            "location": "F-0472 L11-L22",
+            "observation": "计算输入长度，复制/准备输入缓冲区，计算转换后长度，调用 sub_4097F8 处理数据；处理失败时将输出长度置零。"
+          },
+          {
+            "location": "F-0471 L22-L45、L66-L98",
+            "observation": "使用 byte_40D0AC 查表并将输入字节转换后写入输出缓冲区，遇到无效查表值返回失败。"
+          },
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证 sub_409AD4 的返回结果在密码列表分支中绑定到临时目录的 NOIP.abc 并交给文件写入例程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "可见代码没有证明 Password 值参与了最终输出，不能将 NOIP.abc 直接标记为明文密码文件。",
+          "sub_401AC0、sub_401E10、sub_401AE4 的完整语义以及底层写入成功状态不在本包内。"
+        ]
+      },
+      {
+        "behavior": "在 J00 的密码列表分支中，sub_409D28 枚举 Windows Live 凭据，组合每条凭据的可见字段，并尝试将聚合结果写入临时目录下的固定文件 xxxyyyzzz.dat。",
+        "condition": "CredEnumerateA(\"WindowsLive:name=*\") 返回的 Messenger_2 非空；若为空则跳过枚举循环和文件写入段。",
+        "source": "Windows Credential Manager 中由 CredEnumerateA 按 WindowsLive:name=* 返回的凭据集合；每条凭据使用 v6+48、v6+28 和 v6+24 处的字段。",
+        "action": "动态加载 advapi32.dll 并解析 CredEnumerateA/CredFree；对每条凭据追加字段和分隔文本，调用 sub_409C1C 按字节处理另两个字段，再聚合到 dst；随后计算长度、获取临时路径并调用 sub_405D70。",
+        "sink": "临时目录下的 xxxyyyzzz.dat 文件写入尝试，写入数据为聚合缓冲区 dst；静态代码不能证明实际创建成功。",
+        "evidence": [
+          {
+            "location": "F-0482 L38-L45",
+            "observation": "加载 advapi32.dll，解析 CredEnumerateA 和 CredFree，并以 WindowsLive:name=* 作为枚举过滤字符串调用 CredEnumerateA。"
+          },
+          {
+            "location": "F-0482 L61-L83",
+            "observation": "当 Messenger_2 非空时遍历 v22 中的凭据，追加 *(_BYTE **)(v6+48) 字段，调用 sub_409C1C 处理 v6+28/v6+24 指定的数据，并将结果继续拼接到 dst。"
+          },
+          {
+            "location": "F-0481 L27-L76",
+            "observation": "按传入长度逐字节读取源缓冲区；对 0x20 至 0xFA 范围内的字节调用 sub_401C9C 后追加转换结果，其他字节走长度/缓冲区更新分支。"
+          },
+          {
+            "location": "F-0482 L85-L89",
+            "observation": "计算聚合数据长度，获取临时路径，追加固定文件名 xxxyyyzzz.dat，并调用 sub_405D70 传入长度、路径和聚合数据。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "v6+48、v6+28、v6+24 的具体凭据字段含义，以及 sub_401CAC/sub_401C9C 的精确编码格式未在本包中给出。",
+          "CredEnumerateA 的返回状态和 sub_405D70 的实际写入结果未被检查或证明。",
+          "代码调用 CredFree 的地址已解析，但可见片段未展示其实际释放调用。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "registry",
+        "value": "HKLM\\SOFTWARE\\Vitalwerks\\DUC\\UserName",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "sub_409AD4 读取的 DUC 注册表用户名值，并作为进入数据转换分支的条件。",
+        "evidence": [
+          {
+            "location": "F-0480 L19-L28",
+            "observation": "调用 sub_406088(HKEY_LOCAL_MACHINE, \"SOFTWARE\\\\Vitalwerks\\\\DUC\", \"UserName\", &v9, 0)，随后以 v9 是否非零选择分支。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\SOFTWARE\\Vitalwerks\\DUC\\Password",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "sub_409AD4 读取的 DUC 注册表密码值；当前可见代码未证明其被纳入返回输出。",
+        "evidence": [
+          {
+            "location": "F-0480 L19-L20",
+            "observation": "调用 sub_406088(HKEY_LOCAL_MACHINE, \"SOFTWARE\\\\Vitalwerks\\\\DUC\", \"Password\", &v8, 0)。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "WindowsLive:name=*",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "传给 CredEnumerateA 的 Windows Live 凭据枚举过滤字符串。",
+        "evidence": [
+          {
+            "location": "F-0482 L39-L45",
+            "observation": "通过 GetProcAddress 获取 CredEnumerateA，并以 WindowsLive:name=* 作为首个参数调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "NOIP.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "J00 已验证的密码列表分支固定输出名；本包补充了其对应 sub_409AD4 的注册表读取和转换来源。",
+        "evidence": [
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证 sub_409AD4 返回结果绑定到临时目录下的 NOIP.abc 并交给写入例程。"
+          },
+          {
+            "location": "F-0480 L19-L32",
+            "observation": "直接显示 NOIP 生产函数读取 DUC 注册表并构造返回结果。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "xxxyyyzzz.dat",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Windows Live 凭据聚合路径追加的固定临时输出文件名。",
+        "evidence": [
+          {
+            "location": "F-0482 L85-L89",
+            "observation": "获取临时路径后追加 xxxyyyzzz.dat，并将聚合数据传给 sub_405D70。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "Password 值是否实际参与 NOIP.abc 的输出，以及 sub_401AC0/sub_401E10/sub_401AE4 的精确数据语义是什么？",
+        "reason": "当前函数读取 Password，但可见控制流没有直接使用 v8；多个缓冲区辅助函数实现缺失。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "Windows Live 凭据字段 v6+48、v6+28、v6+24 分别代表什么，以及 sub_401CAC/sub_401C9C 的精确编码格式是什么？",
+        "reason": "当前材料证明了凭据枚举和聚合动作，但未提供字段结构或编码辅助函数实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "J00 其余 .abc 输出（MSN、FIREFOX、IELOGIN、IEPASS、IEAUTO、IEWEB）的具体数据来源和语义是什么？",
+        "reason": "本包仅提供 sub_409AD4 与 sub_409D28；其余 producer 实现未包含在材料中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_405D70 和 J00 其他写出辅助函数在运行时是否成功创建/写入目标文件？",
+        "reason": "静态调用只能证明写入能力和调用尝试，不能证明运行时成功。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401AC0, sub_401E10, sub_401AE4",
+        "reason": "确认 NOIP 生产函数中缓冲区初始化、追加和最终返回值的精确语义，并判断 Password 是否进入输出。",
+        "expected_value": "NOIP.abc 的准确数据组成及 UserName/Password 的关系。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_401CAC, sub_401C9C",
+        "reason": "确认 Windows Live 凭据字段拼接和字节转换的格式。",
+        "expected_value": "xxxyyyzzz.dat 的准确记录结构和字段含义。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405D70",
+        "reason": "确认 xxxyyyzzz.dat 参数是否执行文件创建、写入、传输或其他副作用。",
+        "expected_value": "Windows Live 路径的最终 sink 和成功条件。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "解析 J00 其他固定 .abc 文件对应的 producer 数据来源。",
+        "expected_value": "其余密码/浏览器输出的 source→action→sink 语义。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_405D70",
+        "targets": [
+          {
+            "identifier": "sub_405D70",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_409D28 中传入 xxxyyyzzz.dat 的参数最终执行何种外部副作用，以及是否实际写入文件。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0482 L85-L89",
+            "observation": "代码获取临时路径、追加 xxxyyyzzz.dat，并调用 sub_405D70 传入聚合数据。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401CAC, sub_401C9C",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401C9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 Windows Live 凭据字段的拼接格式和 sub_409C1C 对凭据字节的具体编码。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0482 L67-L79",
+            "observation": "枚举循环调用 sub_401CAC 拼接字段，并调用 sub_409C1C；sub_409C1C 内部再次调用 sub_401C9C。"
+          },
+          {
+            "location": "F-0481 L39-L48、L64-L73",
+            "observation": "可见代码仅显示按字节分支并调用 sub_401C9C，未显示转换结果格式。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "targets": [
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要闭合 J00 已验证固定 .abc 输出与各自真实数据源之间的关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证这些 producer 的返回值分别绑定到 MSN.abc、FIREFOX.abc、IELOGIN.abc、IEPASS.abc、IEAUTO.abc 和 IEWEB.abc，但 producer 实现未提供。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/3/evidence/1/location",
+      "/artifacts/4/evidence/0/location",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/1/evidence/3/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/1/evidence/1/location"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [],
+    "applied_paths": [
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/1/evidence/3/location",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/3/evidence/1/location",
+      "/artifacts/4/evidence/0/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/1/evidence/1/location"
+    ],
+    "ignored_paths": [
+      "/claims/1/evidence/0/observation"
+    ],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前包的核心 claims、artifacts 和 material_needs 使用了带“原文件”、函数名或中文逗号/顿号的 location 字符串，导致当前材料证据引用全部无法按 F-xxxx Lx[-Ly] 解析。证据本身对应的函数和行段在 material 中存在，但当前引用格式不能作为可验证的材料定位，影响 NOIP、Windows Live 及 xxxyyyzzz.dat 核心结论的验收。",
+        "evidence": [
+          {
+            "location": "F-0480 L0001-L0033",
+            "observation": "当前材料明确提供 sub_409AD4 的源码，相关注册表读取位于 L0019-L0020，分支和返回位于 L0021-L0032；Analyzer 的引用写成“F-0480 sub_409AD4 原文件 L0019-L0032”，验证器判定为 invalid_format。"
+          },
+          {
+            "location": "F-0482 L0001-L0094",
+            "observation": "当前材料明确提供 sub_409D28 的源码，CredEnumerateA 调用、凭据聚合和 xxxyyyzzz.dat 写出调用分别位于 L0038-L0045、L0061-L0083、L0085-L0089；Analyzer 的对应引用均无法解析。"
+          },
+          {
+            "location": "F-0481 L0001-L0081",
+            "observation": "当前材料明确提供 sub_409C1C 的逐字节处理源码；Analyzer 的引用包含“原文件”和中文顿号，验证器判定为 invalid_format。"
+          }
+        ],
+        "required_fix": "只修正 evidence.location 为可解析且准确的 F-xxxx Lx-Ly 格式，不改变已由材料支持的 claim 内容。当前包引用应分别使用 F-0480 L19-L32、F-0472 L11-L22、F-0471 L22-L45 和 F-0471 L66-L98、F-0482 L38-L45、F-0482 L61-L83、F-0481 L27-L76、F-0482 L85-L89；dependency J00 引用按其已验证摘要的原格式保留或单独按依赖引用规则处理。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/0/evidence/0",
+              "/claims/0/evidence/1",
+              "/claims/0/evidence/2",
+              "/claims/1/evidence/0",
+              "/claims/1/evidence/1",
+              "/claims/1/evidence/2",
+              "/claims/1/evidence/3",
+              "/artifacts/0/evidence/0",
+              "/artifacts/1/evidence/0",
+              "/artifacts/2/evidence/0",
+              "/artifacts/3/evidence/1",
+              "/artifacts/4/evidence/0",
+              "/material_needs/0/evidence/0",
+              "/material_needs/1/evidence/0",
+              "/material_needs/1/evidence/1"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心行为覆盖总体充分：NOIP 的 DUC 注册表来源、Windows Live 凭据枚举/聚合及固定输出名均已覆盖，证据等级和主要边界也基本一致。需要修订的主要问题是当前包证据 location 格式全部不可解析，必须恢复为准确的 F-xxxx Lx-Ly 引用后才能验收这些核心结论。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了 J00 两条收集调用中的具体数据来源：NOIP 路径读取 Vitalwerks DUC 注册表的 UserName/Password，并在 UserName 存在时对相关字符串执行表驱动的解码/转换；Windows Live 路径动态解析 CredEnumerateA，枚举匹配 WindowsLive:name=* 的凭据，组合凭据字段后尝试写入临时目录下的 xxxyyyzzz.dat。静态证据证明了能力与写入尝试，不证明运行时成功、输出内容完整语义或其他 .abc 产物的数据来源。",
+    "claims": [
+      {
+        "behavior": "在 J00 的密码列表分支中，sub_409AD4 读取 Vitalwerks DUC 注册表的 UserName 和 Password；当 UserName 返回非零时，对相关输入执行辅助处理并将结果返回给上游写出流程。",
+        "condition": "调用 sub_409AD4 时，注册表 UserName 查询结果 v9 非零；若 v9 为零则改走 sub_401AC0(dst)。",
+        "source": "HKLM\\SOFTWARE\\Vitalwerks\\DUC 下的 UserName 与 Password 值；当前源码明确显示两次读取，但可见代码未证明 Password 最终被写入结果。",
+        "action": "通过 sub_406088 读取两个注册表值；UserName 存在时调用 sub_4097BC→sub_4098DC，并由 sub_4098DC 根据输入长度、查表结果和 sub_4097F8 生成转换后的缓冲区。",
+        "sink": "返回给 J00 已验证的 NOIP.abc 临时文件写入调用；J06 直接证明的是返回数据的构造和上游绑定，不能单独证明文件写入成功。",
+        "evidence": [
+          {
+            "location": "F-0480 L19-L32",
+            "observation": "读取 HKLM\\SOFTWARE\\Vitalwerks\\DUC 的 UserName 和 Password；v9 非零时调用 sub_4097BC 和 sub_401E10，否则调用 sub_401AC0，最后返回 sub_401AE4 处理后的结果。"
+          },
+          {
+            "location": "F-0472 L11-L22",
+            "observation": "计算输入长度，复制/准备输入缓冲区，计算转换后长度，调用 sub_4097F8 处理数据；处理失败时将输出长度置零。"
+          },
+          {
+            "location": "F-0471 L22-L45、L66-L98",
+            "observation": "使用 byte_40D0AC 查表并将输入字节转换后写入输出缓冲区，遇到无效查表值返回失败。"
+          },
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证 sub_409AD4 的返回结果在密码列表分支中绑定到临时目录的 NOIP.abc 并交给文件写入例程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "可见代码没有证明 Password 值参与了最终输出，不能将 NOIP.abc 直接标记为明文密码文件。",
+          "sub_401AC0、sub_401E10、sub_401AE4 的完整语义以及底层写入成功状态不在本包内。"
+        ]
+      },
+      {
+        "behavior": "在 J00 的密码列表分支中，sub_409D28 枚举 Windows Live 凭据，组合每条凭据的可见字段，并尝试将聚合结果写入临时目录下的固定文件 xxxyyyzzz.dat。",
+        "condition": "CredEnumerateA(\"WindowsLive:name=*\") 返回的 Messenger_2 非空；若为空则跳过枚举循环和文件写入段。",
+        "source": "Windows Credential Manager 中由 CredEnumerateA 按 WindowsLive:name=* 返回的凭据集合；每条凭据使用 v6+48、v6+28 和 v6+24 处的字段。",
+        "action": "动态加载 advapi32.dll 并解析 CredEnumerateA/CredFree；对每条凭据追加字段和分隔文本，调用 sub_409C1C 按字节处理另两个字段，再聚合到 dst；随后计算长度、获取临时路径并调用 sub_405D70。",
+        "sink": "临时目录下的 xxxyyyzzz.dat 文件写入尝试，写入数据为聚合缓冲区 dst；静态代码不能证明实际创建成功。",
+        "evidence": [
+          {
+            "location": "F-0482 L38-L45",
+            "observation": "加载 advapi32.dll，解析 CredEnumerateA 和 CredFree，并以 WindowsLive:name=* 作为枚举过滤字符串调用 CredEnumerateA。"
+          },
+          {
+            "location": "F-0482 L61-L83",
+            "observation": "当 Messenger_2 非空时遍历 v22 中的凭据，追加 *(_BYTE **)(v6+48) 字段，调用 sub_409C1C 处理 v6+28/v6+24 指定的数据，并将结果继续拼接到 dst。"
+          },
+          {
+            "location": "F-0481 L27-L76",
+            "observation": "按传入长度逐字节读取源缓冲区；对 0x20 至 0xFA 范围内的字节调用 sub_401C9C 后追加转换结果，其他字节走长度/缓冲区更新分支。"
+          },
+          {
+            "location": "F-0482 L85-L89",
+            "observation": "计算聚合数据长度，获取临时路径，追加固定文件名 xxxyyyzzz.dat，并调用 sub_405D70 传入长度、路径和聚合数据。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "v6+48、v6+28、v6+24 的具体凭据字段含义，以及 sub_401CAC/sub_401C9C 的精确编码格式未在本包中给出。",
+          "CredEnumerateA 的返回状态和 sub_405D70 的实际写入结果未被检查或证明。",
+          "代码调用 CredFree 的地址已解析，但可见片段未展示其实际释放调用。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "registry",
+        "value": "HKLM\\SOFTWARE\\Vitalwerks\\DUC\\UserName",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "sub_409AD4 读取的 DUC 注册表用户名值，并作为进入数据转换分支的条件。",
+        "evidence": [
+          {
+            "location": "F-0480 L19-L28",
+            "observation": "调用 sub_406088(HKEY_LOCAL_MACHINE, \"SOFTWARE\\\\Vitalwerks\\\\DUC\", \"UserName\", &v9, 0)，随后以 v9 是否非零选择分支。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\SOFTWARE\\Vitalwerks\\DUC\\Password",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "sub_409AD4 读取的 DUC 注册表密码值；当前可见代码未证明其被纳入返回输出。",
+        "evidence": [
+          {
+            "location": "F-0480 L19-L20",
+            "observation": "调用 sub_406088(HKEY_LOCAL_MACHINE, \"SOFTWARE\\\\Vitalwerks\\\\DUC\", \"Password\", &v8, 0)。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "WindowsLive:name=*",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "传给 CredEnumerateA 的 Windows Live 凭据枚举过滤字符串。",
+        "evidence": [
+          {
+            "location": "F-0482 L39-L45",
+            "observation": "通过 GetProcAddress 获取 CredEnumerateA，并以 WindowsLive:name=* 作为首个参数调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "NOIP.abc",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "J00 已验证的密码列表分支固定输出名；本包补充了其对应 sub_409AD4 的注册表读取和转换来源。",
+        "evidence": [
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证 sub_409AD4 返回结果绑定到临时目录下的 NOIP.abc 并交给写入例程。"
+          },
+          {
+            "location": "F-0480 L19-L32",
+            "observation": "直接显示 NOIP 生产函数读取 DUC 注册表并构造返回结果。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "xxxyyyzzz.dat",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "Windows Live 凭据聚合路径追加的固定临时输出文件名。",
+        "evidence": [
+          {
+            "location": "F-0482 L85-L89",
+            "observation": "获取临时路径后追加 xxxyyyzzz.dat，并将聚合数据传给 sub_405D70。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "Password 值是否实际参与 NOIP.abc 的输出，以及 sub_401AC0/sub_401E10/sub_401AE4 的精确数据语义是什么？",
+        "reason": "当前函数读取 Password，但可见控制流没有直接使用 v8；多个缓冲区辅助函数实现缺失。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "Windows Live 凭据字段 v6+48、v6+28、v6+24 分别代表什么，以及 sub_401CAC/sub_401C9C 的精确编码格式是什么？",
+        "reason": "当前材料证明了凭据枚举和聚合动作，但未提供字段结构或编码辅助函数实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "J00 其余 .abc 输出（MSN、FIREFOX、IELOGIN、IEPASS、IEAUTO、IEWEB）的具体数据来源和语义是什么？",
+        "reason": "本包仅提供 sub_409AD4 与 sub_409D28；其余 producer 实现未包含在材料中。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_405D70 和 J00 其他写出辅助函数在运行时是否成功创建/写入目标文件？",
+        "reason": "静态调用只能证明写入能力和调用尝试，不能证明运行时成功。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401AC0, sub_401E10, sub_401AE4",
+        "reason": "确认 NOIP 生产函数中缓冲区初始化、追加和最终返回值的精确语义，并判断 Password 是否进入输出。",
+        "expected_value": "NOIP.abc 的准确数据组成及 UserName/Password 的关系。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_401CAC, sub_401C9C",
+        "reason": "确认 Windows Live 凭据字段拼接和字节转换的格式。",
+        "expected_value": "xxxyyyzzz.dat 的准确记录结构和字段含义。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_405D70",
+        "reason": "确认 xxxyyyzzz.dat 参数是否执行文件创建、写入、传输或其他副作用。",
+        "expected_value": "Windows Live 路径的最终 sink 和成功条件。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "reason": "解析 J00 其他固定 .abc 文件对应的 producer 数据来源。",
+        "expected_value": "其余密码/浏览器输出的 source→action→sink 语义。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_405D70",
+        "targets": [
+          {
+            "identifier": "sub_405D70",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_409D28 中传入 xxxyyyzzz.dat 的参数最终执行何种外部副作用，以及是否实际写入文件。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0482 L85-L89",
+            "observation": "代码获取临时路径、追加 xxxyyyzzz.dat，并调用 sub_405D70 传入聚合数据。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401CAC, sub_401C9C",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401C9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 Windows Live 凭据字段的拼接格式和 sub_409C1C 对凭据字节的具体编码。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0482 L67-L79",
+            "observation": "枚举循环调用 sub_401CAC 拼接字段，并调用 sub_409C1C；sub_409C1C 内部再次调用 sub_401C9C。"
+          },
+          {
+            "location": "F-0481 L39-L48、L64-L73",
+            "observation": "可见代码仅显示按字节分支并调用 sub_401C9C，未显示转换结果格式。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_409EF8, sub_409A84, sub_409A90, sub_409A9C, sub_409AB8",
+        "targets": [
+          {
+            "identifier": "sub_409EF8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A84",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A90",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409A9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_409AB8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要闭合 J00 已验证固定 .abc 输出与各自真实数据源之间的关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "dependency J00 summary, F-0500 L57-L123",
+            "observation": "已验证这些 producer 的返回值分别绑定到 MSN.abc、FIREFOX.abc、IELOGIN.abc、IEPASS.abc、IEAUTO.abc 和 IEWEB.abc，但 producer 实现未提供。"
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": [
+    "/claims/1/evidence/0/observation"
+  ]
+}

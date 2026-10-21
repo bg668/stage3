@@ -1,0 +1,1446 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J02.json",
+        "sha256": "49a07f40cd0fea1f46aae0e222bc7045c86f3a821f0348f7b163985c1fe63ac0"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J02/analyzer/validated_result.json",
+        "sha256": "9f34bfbcbb2a95029848b70ac335896fab73ab510ce3fb39621aaa44bb0eee3d"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J02/reviewer/validated_result.json",
+        "sha256": "f426e54cb8dabdb0489bae2fdae6807848531aa5f679c7950a9164e846a1ab28"
+      },
+      "packet": {
+        "path": "testdata/packets/J02.md",
+        "sha256": "a5a6f82ed3574e2149453cbb6dd054fa840a7eef6dcc999d1bf880c99fc09070"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J02/reviser/validated_result.json",
+        "sha256": "6ff781816b159f3a1ab2df93def59fa5c4327dfcf9097852b007ce7e664db0f2"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J02/reviser/revision_scope.json",
+        "sha256": "3f5b1b0e17493da6a578b9404f5fc2e4284016105ca173190da2403eeb62362e"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J02",
+  "packet_text": "# J02 配置读取、转换与写回\n任务来源：J00 中的 F313、F325、F497 调用及其依赖。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0309 sub_404460，原文件 L0001–L0023 / 共 23 行\n```text\nL0001: LPVOID __usercall sub_404460@<eax>(unsigned int *a1@<eax>)\nL0002: {\nL0003:   HRSRC hResInfo; // ebx\nL0004:   DWORD n4; // edi\nL0005:   HGLOBAL hResData; // ebx\nL0006:   LPVOID n3_1; // eax\nL0007:   unsigned int n3; // esi\nL0008:   _DWORD *dst; // eax\nL0009: \nL0010:   hResInfo = FindResourceA(hmod, \"XX-XX-XX-XX\", (LPCSTR)0xA);\nL0011:   n4 = SizeofResource(hmod, hResInfo);\nL0012:   hResData = LoadResource(hmod, hResInfo);\nL0013:   n3_1 = LockResource(hResData);\nL0014:   n3 = (unsigned int)n3_1;\nL0015:   if ( n3_1 )\nL0016:   {\nL0017:     sub_402074(a1, n4 - 1);\nL0018:     dst = (_DWORD *)sub_401F9C(a1);\nL0019:     sub_403730(dst, n3, n4);\nL0020:     return (LPVOID)FreeResource(hResData);\nL0021:   }\nL0022:   return n3_1;\nL0023: }\n```\n\n## F-0310 sub_4044D4，原文件 L0001–L0056 / 共 56 行\n```text\nL0001: int **__usercall sub_4044D4@<eax>(int a1@<eax>, int a2@<ebx>, int a3@<edi>, int a4@<esi>)\nL0002: {\nL0003:   int v5; // eax\nL0004:   int v6; // edi\nL0005:   int v7; // ebx\nL0006:   char v8; // zf\nL0007:   unsigned int v10[2]; // [esp-18h] [ebp-24h] BYREF\nL0008:   int *v11; // [esp-10h] [ebp-1Ch]\nL0009:   int v12; // [esp-Ch] [ebp-18h]\nL0010:   int v13; // [esp-8h] [ebp-14h]\nL0011:   int v14; // [esp-4h] [ebp-10h]\nL0012:   int dst; // [esp+0h] [ebp-Ch] BYREF\nL0013:   __int32 v16; // [esp+4h] [ebp-8h] BYREF\nL0014:   int *v17; // [esp+8h] [ebp-4h] BYREF\nL0015:   int savedregs; // [esp+Ch] [ebp+0h] BYREF\nL0016: \nL0017:   v17 = 0;\nL0018:   v16 = 0;\nL0019:   dst = 0;\nL0020:   v14 = a2;\nL0021:   v13 = a4;\nL0022:   v12 = a3;\nL0023:   v11 = &savedregs;\nL0024:   v10[1] = (unsigned int)&loc_40459B;\nL0025:   v10[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0026:   __writefsdword(0, (unsigned int)v10);\nL0027:   sub_404460((unsigned int *)&v16);\nL0028:   sub_404358(v16, \"####@####\", &v17);\nL0029:   sub_403004((int)n4__0, v17, (int **)(a1 + 4));\nL0030:   v5 = sub_402E08(*(_DWORD *)(a1 + 4));\nL0031:   if ( v5 >= 0 )\nL0032:   {\nL0033:     v6 = v5 + 1;\nL0034:     v7 = 0;\nL0035:     do\nL0036:     {\nL0037:       if ( !*(_DWORD *)(*(_DWORD *)(a1 + 4) + 4 * v7)\nL0038:         || (sub_401E94(*(_DWORD *)(*(_DWORD *)(a1 + 4) + 4 * v7), &dword_4045C8), v8) )\nL0039:       {\nL0040:         sub_401AC0((_DWORD *)(*(_DWORD *)(a1 + 4) + 4 * v7));\nL0041:       }\nL0042:       else\nL0043:       {\nL0044:         sub_4042DC(*(_DWORD *)(*(_DWORD *)(a1 + 4) + 4 * v7), &dst);\nL0045:         sub_401B14((volatile __int32 *)(*(_DWORD *)(a1 + 4) + 4 * v7), dst);\nL0046:       }\nL0047:       ++v7;\nL0048:       --v6;\nL0049:     }\nL0050:     while ( v6 );\nL0051:   }\nL0052:   __writefsdword(0, v10[0]);\nL0053:   v11 = (int *)&loc_4045A2;\nL0054:   sub_401AE4(&dst, 2);\nL0055:   return sub_402FC8(&v17, (int)n4__0);\nL0056: }\n```\n\n## F-0307 sub_4042DC，原文件 L0001–L0034 / 共 34 行\n```text\nL0001: _DWORD *__usercall sub_4042DC@<eax>(int dst_1@<eax>, volatile __int32 *a2@<edx>)\nL0002: {\nL0003:   int v3; // esi\nL0004:   int v4; // ebx\nL0005:   unsigned int v5; // eax\nL0006:   unsigned int v7[2]; // [esp-Ch] [ebp-1Ch] BYREF\nL0007:   int *v8; // [esp-4h] [ebp-14h]\nL0008:   int dst; // [esp+Ch] [ebp-4h] BYREF\nL0009:   int savedregs; // [esp+10h] [ebp+0h] BYREF\nL0010: \nL0011:   dst = dst_1;\nL0012:   sub_401F38(dst_1);\nL0013:   v8 = &savedregs;\nL0014:   v7[1] = (unsigned int)&loc_40434B;\nL0015:   v7[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0016:   __writefsdword(0, (unsigned int)v7);\nL0017:   v3 = sub_401D50(dst);\nL0018:   if ( v3 > 0 )\nL0019:   {\nL0020:     v4 = 1;\nL0021:     do\nL0022:     {\nL0023:       v5 = sub_401F9C((unsigned int *)&dst);\nL0024:       *(_BYTE *)(v5 + v4 - 1) = *(_BYTE *)(dst + v4 - 1) ^ 0xBC;\nL0025:       ++v4;\nL0026:       --v3;\nL0027:     }\nL0028:     while ( v3 );\nL0029:   }\nL0030:   sub_401B14(a2, dst);\nL0031:   __writefsdword(0, v7[0]);\nL0032:   v8 = (int *)&loc_404352;\nL0033:   return sub_401AC0(&dst);\nL0034: }\n```\n\n## F-0308 sub_404358，原文件 L0001–L0042 / 共 42 行\n```text\nL0001: _DWORD *__usercall sub_404358@<eax>(__int32 a1@<eax>, _BYTE *a2@<edx>, int **a3@<ecx>)\nL0002: {\nL0003:   int v4; // esi\nL0004:   _BYTE *v5; // ebx\nL0005:   int v6; // esi\nL0006:   unsigned int v8[2]; // [esp-Ch] [ebp-28h] BYREF\nL0007:   int *v9; // [esp-4h] [ebp-20h]\nL0008:   __int32 *v10; // [esp+Ch] [ebp-10h] BYREF\nL0009:   _BYTE *dst; // [esp+10h] [ebp-Ch] BYREF\nL0010:   int i; // [esp+14h] [ebp-8h]\nL0011:   int **v13; // [esp+18h] [ebp-4h]\nL0012:   int savedregs; // [esp+1Ch] [ebp+0h] BYREF\nL0013: \nL0014:   dst = 0;\nL0015:   v10 = 0;\nL0016:   v13 = a3;\nL0017:   v9 = &savedregs;\nL0018:   v8[1] = (unsigned int)&loc_404451;\nL0019:   v8[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0020:   __writefsdword(0, (unsigned int)v8);\nL0021:   sub_401B58((volatile __int32 *)&dst, a1);\nL0022:   v4 = 0;\nL0023:   for ( i = sub_401D50((int)a2) - 1; ; sub_401FE4((unsigned int *)&dst, 1, (int)&v5[i]) )\nL0024:   {\nL0025:     v5 = sub_40202C(a2, dst);\nL0026:     if ( !v5 )\nL0027:       break;\nL0028:     sub_402FBC(&v10, (int)n4__0, 1, ++v4);\nL0029:     sub_401FA4((int)dst, 1, (int)(v5 - 1), (char **)&v10[v4 - 1]);\nL0030:   }\nL0031:   if ( sub_401D50((int)dst) > 0 )\nL0032:   {\nL0033:     v6 = v4 + 1;\nL0034:     sub_402FBC(&v10, (int)n4__0, 1, v6);\nL0035:     sub_401B14(&v10[v6 - 1], (__int32)dst);\nL0036:   }\nL0037:   sub_403004((int)n4__0, v10, v13);\nL0038:   __writefsdword(0, v8[0]);\nL0039:   v9 = (int *)&loc_404458;\nL0040:   sub_402FC8(&v10, (int)n4__0);\nL0041:   return sub_401AC0(&dst);\nL0042: }\n```\n\n## F-0313 sub_404604，原文件 L0001–L0015 / 共 15 行\n```text\nL0001: _DWORD *__usercall sub_404604@<eax>(int a1@<ecx>, int a2@<ebx>, int a3@<esi>)\nL0002: {\nL0003:   _DWORD *v3; // edi\nL0004:   int n101; // esi\nL0005:   volatile __int32 *v5; // ebx\nL0006: \nL0007:   v3 = (_DWORD *)sub_401478(a1, 1);\nL0008:   sub_4044D4((int)v3, a2, (int)v3, a3);\nL0009:   n101 = 0;\nL0010:   v5 = (volatile __int32 *)&unk_40E68C;\nL0011:   do\nL0012:     sub_401B14(v5++, *(_DWORD *)(v3[1] + 4 * n101++));\nL0013:   while ( n101 != 101 );\nL0014:   return sub_4014A8(v3);\nL0015: }\n```\n\n## F-0325 sub_40491C，原文件 L0001–L0072 / 共 72 行\n```text\nL0001: volatile __int32 *sub_40491C()\nL0002: {\nL0003:   int *v0; // ebx\nL0004:   int n20; // ebp\nL0005:   __int32 *v2; // esi\nL0006:   volatile __int32 *v3; // edi\nL0007: \nL0008:   v0 = (int *)off_40D1C4;\nL0009:   n20 = 20;\nL0010:   v2 = (__int32 *)off_40D1C4;\nL0011:   v3 = (volatile __int32 *)&unk_40E834;\nL0012:   do\nL0013:   {\nL0014:     sub_401B14(v3++, *v2++);\nL0015:     --n20;\nL0016:   }\nL0017:   while ( n20 );\nL0018:   sub_401B14(&dword_40E884, v0[20]);\nL0019:   sub_401B14(&dword_40E888, v0[21]);\nL0020:   byte_40E88C = sub_404880(v0[22]);\nL0021:   dword_40E890 = sub_4046E8(v0[23]);\nL0022:   sub_401B14(&dword_40E894, v0[24]);\nL0023:   sub_401B14(&dword_40E898, v0[25]);\nL0024:   sub_401B14(&dword_40E89C, v0[26]);\nL0025:   sub_401B14(&dword_40E8A0, v0[27]);\nL0026:   sub_401B14(&dword_40E8A4, v0[28]);\nL0027:   sub_401B14(&dword_40E8A8, v0[29]);\nL0028:   byte_40E8B0 = sub_404880(v0[30]);\nL0029:   dword_40E8B4 = sub_4046E8(v0[31]);\nL0030:   dword_40E8B8 = sub_4046E8(v0[32]);\nL0031:   sub_401B14(&dword_40E8BC, v0[33]);\nL0032:   sub_401B14(&dword_40E8C0, v0[34]);\nL0033:   byte_40E8C4 = sub_404880(v0[35]);\nL0034:   byte_40E8C5 = sub_404880(v0[36]);\nL0035:   byte_40E8C6 = sub_404880(v0[37]);\nL0036:   sub_401B14(&dword_40E8C8, v0[38]);\nL0037:   sub_401B14(&dword_40E8CC, v0[39]);\nL0038:   sub_401B14(&dword_40E8D0, v0[41]);\nL0039:   sub_401B14(&dword_40E8D4, v0[42]);\nL0040:   dword_40E8D8 = sub_4046E8(v0[43]);\nL0041:   dword_40E8DC = sub_4046E8(v0[44]);\nL0042:   byte_40E8E0 = sub_404880(v0[45]);\nL0043:   byte_40E8E1 = sub_404880(v0[46]);\nL0044:   byte_40E8E2 = sub_404880(v0[47]);\nL0045:   byte_40E8E3 = sub_404880(v0[48]);\nL0046:   byte_40E8E4 = sub_404880(v0[49]);\nL0047:   byte_40E8E5 = sub_404880(v0[50]);\nL0048:   byte_40E8E6 = sub_404880(v0[51]);\nL0049:   byte_40E8E7 = sub_404880(v0[52]);\nL0050:   byte_40E8E8 = sub_404880(v0[53]);\nL0051:   byte_40E8E9 = sub_404880(v0[54]);\nL0052:   byte_40E8EA = sub_404880(v0[55]);\nL0053:   byte_40E8EB = sub_404880(v0[56]);\nL0054:   dword_40E8EC = sub_4046E8(v0[57]);\nL0055:   sub_401B14(&dword_40E8F0, v0[58]);\nL0056:   byte_40E8F4 = sub_404880(v0[59]);\nL0057:   byte_40E8F5 = sub_404880(v0[60]);\nL0058:   byte_40E8F6 = sub_404880(v0[61]);\nL0059:   sub_401B14(&dword_40E8F8, v0[62]);\nL0060:   byte_40E8FC = sub_404880(v0[63]);\nL0061:   sub_401B14(&dword_40E900, v0[64]);\nL0062:   sub_401B14(&dword_40E904, v0[65]);\nL0063:   sub_401B14(&dword_40E908, v0[68]);\nL0064:   sub_401B14(&dword_40E8AC, v0[69]);\nL0065:   byte_40E910 = sub_404880(v0[70]);\nL0066:   sub_401B14(&dword_40E90C, v0[71]);\nL0067:   sub_401B14(&dword_40E914, v0[72]);\nL0068:   sub_401B14(&dword_40E918, v0[73]);\nL0069:   *(_BYTE *)off_40D1E8 = sub_404880(v0[74]);\nL0070:   sub_401B14(&dword_40E920, v0[99]);\nL0071:   return sub_401B14(&dword_40E924, v0[100]);\nL0072: }\n```\n\n## F-0317 sub_4046E8，原文件 L0001–L0021 / 共 21 行\n```text\nL0001: __int64 __usercall sub_4046E8@<edx:eax>(int a1@<eax>)\nL0002: {\nL0003:   unsigned int v2[2]; // [esp-Ch] [ebp-20h] BYREF\nL0004:   int *v3; // [esp-4h] [ebp-18h]\nL0005:   int v4; // [esp+0h] [ebp-14h] BYREF\nL0006:   __int64 v5; // [esp+4h] [ebp-10h]\nL0007:   int v6; // [esp+10h] [ebp-4h] BYREF\nL0008:   int savedregs; // [esp+14h] [ebp+0h] BYREF\nL0009: \nL0010:   v6 = a1;\nL0011:   sub_401F38(a1);\nL0012:   v3 = &savedregs;\nL0013:   v2[1] = (unsigned int)&loc_40472E;\nL0014:   v2[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0015:   __writefsdword(0, (unsigned int)v2);\nL0016:   v5 = sub_402BDC(v6, &v4);\nL0017:   __writefsdword(0, v2[0]);\nL0018:   v3 = (int *)&loc_404735;\nL0019:   sub_401AC0(&v6);\nL0020:   return v5;\nL0021: }\n```\n\n## F-0322 sub_404880，原文件 L0001–L0024 / 共 24 行\n```text\nL0001: int __usercall sub_404880@<eax>(int a1@<eax>)\nL0002: {\nL0003:   int v1; // ebx\nL0004:   char v2; // zf\nL0005:   unsigned int v4[2]; // [esp-Ch] [ebp-14h] BYREF\nL0006:   int *v5; // [esp-4h] [ebp-Ch]\nL0007:   int v6; // [esp+4h] [ebp-4h] BYREF\nL0008:   int savedregs; // [esp+8h] [ebp+0h] BYREF\nL0009: \nL0010:   v6 = a1;\nL0011:   sub_401F38(a1);\nL0012:   v5 = &savedregs;\nL0013:   v4[1] = (unsigned int)&loc_4048C7;\nL0014:   v4[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0015:   __writefsdword(0, (unsigned int)v4);\nL0016:   v1 = 0;\nL0017:   sub_401E94(v6, (int *)\"TRUE\");\nL0018:   if ( v2 )\nL0019:     LOBYTE(v1) = 1;\nL0020:   __writefsdword(0, v4[0]);\nL0021:   v5 = (int *)&loc_4048CE;\nL0022:   sub_401AC0(&v6);\nL0023:   return v1;\nL0024: }\n```\n\n## F-0497 sub_40B93C，原文件 L0001–L0064 / 共 64 行\n```text\nL0001: // bad sp value at call has been detected, the output may be wrong!\nL0002: int *__usercall sub_40B93C@<eax>(int dst__2@<eax>, char *dst_3@<edx>, int a3@<ebx>, int a4@<esi>)\nL0003: {\nL0004:   int n101; // esi\nL0005:   int *v5; // ebx\nL0006:   char v6; // zf\nL0007:   DWORD nNumberOfBytesToWrite; // eax\nL0008:   _DWORD v9[5]; // [esp-14h] [ebp-28h] BYREF\nL0009:   char *dst_1; // [esp+0h] [ebp-14h] BYREF\nL0010:   unsigned __int32 dst; // [esp+4h] [ebp-10h] BYREF\nL0011:   const char *dst_; // [esp+8h] [ebp-Ch] BYREF\nL0012:   char *dst_2; // [esp+Ch] [ebp-8h]\nL0013:   const char *dst__1; // [esp+10h] [ebp-4h]\nL0014:   void *savedregs; // [esp+14h] [ebp+0h] BYREF\nL0015: \nL0016:   dst_ = 0;\nL0017:   dst = 0;\nL0018:   dst_1 = 0;\nL0019:   v9[4] = a3;\nL0020:   v9[3] = a4;\nL0021:   dst_2 = dst_3;\nL0022:   dst__1 = (const char *)dst__2;\nL0023:   sub_401F38(dst__2);\nL0024:   sub_401F38((int)dst_2);\nL0025:   v9[2] = &savedregs;\nL0026:   v9[1] = &loc_40BA4A;\nL0027:   v9[0] = NtCurrentTeb()->NtTib.ExceptionList;\nL0028:   __writefsdword(0, (unsigned int)v9);\nL0029:   sub_4013A4(0, (int *)&dst);\nL0030:   sub_401D9C((volatile __int32 *)&dst_, dst, (unsigned __int32)dst__11);\nL0031:   sub_401E10((volatile __int32 *)&dst_, 3);\nL0032:   n101 = 101;\nL0033:   v5 = (int *)off_40D1C4;\nL0034:   do\nL0035:   {\nL0036:     if ( !*v5 || (sub_401E94(*v5, dword_40BA6C), v6) )\nL0037:     {\nL0038:       dst__1 = dst_;\nL0039:       dst_2 = (char *)dword_40BA6C;\nL0040:       dst_ = \"####@####\";\nL0041:       sub_401E10((volatile __int32 *)&dst_, 3);\nL0042:     }\nL0043:     else\nL0044:     {\nL0045:       dst__1 = dst_;\nL0046:       sub_4042DC(*v5, (volatile __int32 *)&dst_1);\nL0047:       dst_2 = dst_1;\nL0048:       dst_ = \"####@####\";\nL0049:       sub_401E10((volatile __int32 *)&dst_, 3);\nL0050:     }\nL0051:     ++v5;\nL0052:     --n101;\nL0053:   }\nL0054:   while ( n101 );\nL0055:   dst__1 = dst_;\nL0056:   dst_2 = (char *)dword_40BA6C;\nL0057:   dst_ = \"####@####\";\nL0058:   sub_401E10((volatile __int32 *)&dst_, 3);\nL0059:   nNumberOfBytesToWrite = sub_401D50((int)dst_);\nL0060:   sub_405D70(nNumberOfBytesToWrite, dst_2, (int)dst_);\nL0061:   __writefsdword(0, (unsigned int)dst_2);\nL0062:   savedregs = &loc_40BA51;\nL0063:   return sub_401AE4((int *)&dst_1, 5);\nL0064: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包显示样本从固定资源“XX-XX-XX-XX”读取配置样数据，按“####@####”分隔并对部分条目执行逐字节 XOR 0xBC 转换；这些条目随后被汇总到备用路径的输出缓冲区。sub_40B93C 还从当前模块路径取得数据，并将汇总缓冲区连同长度、目标参数传给 sub_405D70，但 sub_405D70 及若干字符串辅助函数未提供，因此无法在本包内确认最终文件写入的确切目标、内容语义或运行时成功。",
+    "claims": [
+      {
+        "behavior": "程序读取嵌入资源“XX-XX-XX-XX”，将资源内容（长度减一）复制到内部缓冲区，随后把该内容作为配置/条目数据继续处理。",
+        "condition": "调用 sub_404460 时资源句柄可被 FindResourceA、LoadResource 和 LockResource 成功取得；若 LockResource 返回非空则执行复制。",
+        "source": "当前模块中的资源“XX-XX-XX-XX”。",
+        "action": "调用 FindResourceA、SizeofResource、LoadResource、LockResource，并将 n4-1 字节复制到 a1 指向的内部缓冲区。",
+        "sink": "内部缓冲区 a1，后续由 sub_4044D4 解析。",
+        "evidence": [
+          {
+            "location": "F-0309 sub_404460 原文件 L0001-L0022",
+            "observation": "L0010-L0013 查找并加载固定资源名“XX-XX-XX-XX”并锁定资源；L0015-L0020 在资源指针非空时按 n4-1 长度复制到 a1 缓冲区。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "材料未给出该资源的实际字节内容，因此不能确定配置字段的具体含义。",
+          "静态代码只能证明读取和复制能力，不能证明资源加载在运行时一定成功。"
+        ]
+      },
+      {
+        "behavior": "读取的资源内容被按固定分隔符“####@####”拆分为多个条目；非空且未匹配特定字符串的条目会经过逐字节 XOR 0xBC 转换后重新保存。",
+        "condition": "sub_4044D4 成功取得资源缓冲区并解析出条目；对单个条目而言，该条目非空且 sub_401E94 未报告其匹配 dword_4045C8 所代表的比较值。",
+        "source": "sub_404460 填充的资源缓冲区，以及其中被 sub_404358 拆出的条目。",
+        "action": "sub_404358 使用“####@####”组织/拆分条目；sub_4042DC 对条目长度范围内的每个字节执行与 0xBC 的 XOR，并将结果写入输出缓冲区。",
+        "sink": "sub_4044D4 管理的条目数组及其后续全局配置存储；sub_404604 随后将 101 个条目复制到 unk_40E68C 起始区域。",
+        "evidence": [
+          {
+            "location": "F-0310 sub_4044D4 原文件 L0027-L0045",
+            "observation": "L0027-L0029 读取资源并调用 sub_404358，传入“####@####”；L0037-L0045 对条目进行空值/比较判断，符合条件时调用 sub_4042DC。"
+          },
+          {
+            "location": "F-0307 sub_4042DC 原文件 L0011-L0033",
+            "observation": "L0017-L0028 获取条目长度并逐字节执行 XOR 0xBC；L0030 将处理后的结果保存到调用者提供的位置。"
+          },
+          {
+            "location": "F-0313 sub_404604 原文件 L0007-L0014",
+            "observation": "L0008 调用 sub_4044D4，L0011-L0013 随后循环 101 次，将条目复制到 unk_40E68C 起始的全局区域。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "dword_4045C8 的实际字符串/语义未在材料中给出，不能确定哪些条目被排除或保留。",
+          "sub_401D50、sub_401B14 等缓冲区辅助函数未展开，条目边界和内存表示只能按调用关系描述。",
+          "不能据此把条目确定为账号、密码或其他具体配置类型。"
+        ]
+      },
+      {
+        "behavior": "配置条目被转换到多个全局配置字段，其中部分字段按字符串“TRUE”转换为布尔值，部分字段通过 sub_402BDC 转换为 64 位数值或其他标量。",
+        "condition": "调用 sub_40491C；函数无显式外部条件，逐项处理 off_40D1C4 中的配置指针。",
+        "source": "off_40D1C4 指向的配置值。",
+        "action": "复制前 20 项及后续多项配置；对选定项调用 sub_404880 比较“TRUE”，或调用 sub_4046E8 进行数值/标量转换。",
+        "sink": "unk_40E834、dword_40E884 起始及相关 byte_/dword_ 全局配置字段。",
+        "evidence": [
+          {
+            "location": "F-0325 sub_40491C 原文件 L0008-L0030",
+            "observation": "L0012-L0030 将 off_40D1C4 中的值复制到全局字段，并对若干项调用 sub_404880 或 sub_4046E8。"
+          },
+          {
+            "location": "F-0317 sub_4046E8 原文件 L0010-L0020",
+            "observation": "L0010-L0016 保存输入并调用 sub_402BDC，返回其产生的 64 位结果。"
+          },
+          {
+            "location": "F-0322 sub_404880 原文件 L0010-L0023",
+            "observation": "L0010-L0017 保存输入并将其与字符串“TRUE”比较；L0018-L0023 返回布尔结果。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "配置字段的名称、用途和触发逻辑不可见。",
+          "sub_402BDC 的具体解析规则不在本包内，不能断言其结果代表时间、数量、地址或其他具体数据类型。"
+        ]
+      },
+      {
+        "behavior": "备用输出路径汇总当前模块路径相关数据和约 101 项配置条目，并将组装后的缓冲区、长度及目标参数传给 sub_405D70，形成潜在的输出/写入动作。",
+        "condition": "sub_40B93C 被调用；J00 已验证该函数位于备用路径并接收 XX--XX--XX.txt 相关输出参数，但当前源码未显示其调用者的完整参数绑定。",
+        "source": "sub_4013A4(0) 返回的当前模块路径相关数据，以及 off_40D1C4 中逐项处理的配置值。",
+        "action": "调用 sub_4013A4(0) 获取源数据；通过 sub_401D9C、sub_401E10 和循环中的 sub_4042DC 组装缓冲区，计算长度后调用 sub_405D70。",
+        "sink": "传给 sub_405D70 的目标参数 dst_2/相关目标状态，以及组装缓冲区 dst_；具体外部对象由 sub_405D70 决定。",
+        "evidence": [
+          {
+            "location": "F-0497 sub_40B93C 原文件 L0021-L0031",
+            "observation": "L0021-L0030 保存输入参数并调用 sub_4013A4(0)，随后把返回值交给 sub_401D9C；L0031 调用 sub_401E10 初始化/更新组装状态。"
+          },
+          {
+            "location": "F-0497 sub_40B93C 原文件 L0032-L0058",
+            "observation": "L0032-L0058 循环处理 101 个 off_40D1C4 条目，并持续将条目或 dword_40BA6C 加入组装状态。"
+          },
+          {
+            "location": "F-0497 sub_40B93C 原文件 L0059-L0063",
+            "observation": "L0059 计算组装数据长度，L0060 以长度、dst_2 和 dst_ 为参数调用 sub_405D70。"
+          },
+          {
+            "location": "F-0038 sub_4013A4 原文件 L0009-L0027（依赖 J01 已验证摘要）",
+            "observation": "sub_4013A4 的零参数分支获取当前模块文件名并经 sub_401BAC 处理后返回，支持当前模块路径相关数据作为该调用的来源。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_405D70 的实现不在本包内，因此不能确认该调用实际创建/写入 XX--XX--XX.txt、传输数据或执行其他副作用。",
+          "sub_401D9C、sub_401E10 的具体拼接语义未提供，不能精确描述最终缓冲区格式。",
+          "当前包未显示 sub_40B93C 的调用者参数，目标参数与 J00 所述固定文件名之间的绑定依赖上游摘要，不能在本包源码中重新确认。",
+          "静态调用只能证明具备执行该动作的能力，不能证明运行时写入成功。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "resource",
+        "value": "XX-XX-XX-XX",
+        "role": "read_source",
+        "detection_specificity": "high",
+        "meaning": "FindResourceA 使用的固定嵌入资源名，资源内容被读取并作为后续条目解析输入。",
+        "evidence": [
+          {
+            "location": "F-0309 sub_404460 原文件 L0010-L0013",
+            "observation": "代码以固定字符串“XX-XX-XX-XX”调用 FindResourceA，并继续 SizeofResource、LoadResource、LockResource。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "####@####",
+        "role": "parser_marker",
+        "detection_specificity": "high",
+        "meaning": "资源条目拆分/拼接过程中使用的固定分隔符或解析标记。",
+        "evidence": [
+          {
+            "location": "F-0310 sub_4044D4 原文件 L0027-L0029",
+            "observation": "sub_404358 被传入固定字符串“####@####”。"
+          },
+          {
+            "location": "F-0497 sub_40B93C 原文件 L0036-L0058",
+            "observation": "备用汇总循环中多次将 dst_ 指向固定字符串“####@####”并调用 sub_401E10。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "TRUE",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "配置布尔字段识别所用的固定字符串。",
+        "evidence": [
+          {
+            "location": "F-0322 sub_404880 原文件 L0016-L0019",
+            "observation": "代码调用 sub_401E94(v6, (int *)\"TRUE\")，并在比较成功时返回 1。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "XX--XX--XX.txt",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "J00 已验证的备用路径固定输出文件名；本包补充显示该路径的下游函数会把组装缓冲区传给 sub_405D70，但未直接证明该文件已被创建或写入。",
+        "evidence": [
+          {
+            "location": "dependency J00 summary, claim on F-0500 L172-L190",
+            "observation": "已验证上游摘要记录备用路径将 XX--XX--XX.txt 绑定到临时路径并调用 sub_40B93C；该摘要同时明确当时尚未证明其写入效果。"
+          },
+          {
+            "location": "F-0497 sub_40B93C 原文件 L0059-L0060",
+            "observation": "sub_40B93C 计算组装缓冲区长度并调用 sub_405D70，提供了该输出路径下游动作的直接调用证据。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_405D70 接收长度、目标参数和组装缓冲区后是否创建/写入 XX--XX--XX.txt，还是执行其他输出或传输动作？",
+        "reason": "当前材料只显示 sub_40B93C 调用 sub_405D70，未提供该 helper 的实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_401D9C、sub_401E10 和 sub_401BAC 如何构造或处理最终输出数据？",
+        "reason": "这些函数决定当前模块路径及配置条目的具体拼接格式，但实现不在本包内。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "off_40D1C4 及其 101 项配置字段分别代表什么数据？",
+        "reason": "本包证明了复制、布尔/数值转换和汇总，但没有字段名称或业务语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_405D70",
+        "reason": "闭合 sub_40B93C 的组装缓冲区和目标参数到实际外部副作用。",
+        "expected_value": "确认 XX--XX--XX.txt 是否被创建/写入，或确定实际输出/传输目的地及数据格式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401D9C, sub_401E10, sub_401BAC",
+        "reason": "解析备用路径的字符串构造和模块路径处理。",
+        "expected_value": "确定当前模块路径如何进入最终缓冲区，以及配置条目的拼接/编码规则。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_402BDC, sub_401E94, sub_401D50",
+        "reason": "确定配置值转换、比较和长度计算的具体语义。",
+        "expected_value": "识别配置字段类型及其在最终输出中的编码含义。",
+        "priority": "low"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_405D70",
+        "targets": [
+          {
+            "identifier": "sub_405D70",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_40B93C 最终调用的输出 helper 是否写入文件、传输数据或产生其他外部副作用。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 sub_40B93C 原文件 L0059-L0060",
+            "observation": "代码计算组装缓冲区长度后调用 sub_405D70(nNumberOfBytesToWrite, dst_2, dst_)。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401D9C",
+        "targets": [
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_4013A4 返回的模块路径数据如何被并入备用输出缓冲区。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 sub_40B93C 原文件 L0029-L0031",
+            "observation": "sub_4013A4(0) 的返回值 dst 被传入 sub_401D9C，随后由 sub_401E10 继续处理。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401E10",
+        "targets": [
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认固定分隔符和条目在备用输出缓冲区中的实际拼接/编码行为。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 sub_40B93C 原文件 L0036-L0058",
+            "observation": "循环中反复以 dword_40BA6C 或条目设置 dst_2，并以“####@####”调用 sub_401E10。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的绝大多数本包证据 location 都不是可解析的标准引用格式：例如写成“F-0309 sub_404460 原文件 L0001-L0022”，而不是可直接定位的 F-xxxx Lx-Ly。验证结果显示本包可解析的 current-packet 证据为 0 条，导致 claims、artifacts 和 material_needs 的实际源码支持无法按结果结构被可靠验收。这里不是缺少源码，而是引用字段表达错误。",
+        "evidence": [
+          {
+            "location": "analyzer_result /claims/0/evidence/0/location",
+            "observation": "值为“F-0309 sub_404460 原文件 L0001-L0022”，验证器报告 invalid_format。"
+          },
+          {
+            "location": "analyzer_result /claims/3/evidence/0/location",
+            "observation": "值为“F-0497 sub_40B93C 原文件 L0021-L0031”，验证器报告 invalid_format。"
+          },
+          {
+            "location": "analyzer_result /artifacts/0/evidence/0/location",
+            "observation": "值为“F-0309 sub_404460 原文件 L0010-L0013”，验证器报告 invalid_format。"
+          },
+          {
+            "location": "analyzer_result /material_needs/0/evidence/0/location",
+            "observation": "值为“F-0497 sub_40B93C 原文件 L0059-L0060”，验证器报告 invalid_format。"
+          }
+        ],
+        "required_fix": "将所有指向当前材料包的 location 改为可解析且准确的 F-xxxx Lx-Ly 格式，例如 F-0309 L0010-L0020、F-0497 L0059-L0060；保留函数名和解释可放在 observation 中。不得通过扩大行段来迁就格式。依赖摘要引用可继续作为 dependency 证据，但也应采用结果允许的依赖定位格式。修订后每条 claim、artifact、material_need 都应至少保留一条可定位到实际源码的证据。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "artifact_role_error",
+        "description": "XX--XX--XX.txt 被标为 role=created_output，但当前包和已验证依赖只证明该固定文件名被绑定到临时路径并作为参数传入 sub_40B93C，随后传给 sub_405D70；尚未证明文件创建或写入。该 role 会把尚未确认的输出路径误报为已创建输出 artifact。其 detection_specificity=high 可以保留，问题在 role 与说明不一致。",
+        "evidence": [
+          {
+            "location": "F-0497 L0059-L0060",
+            "observation": "sub_40B93C 计算缓冲区长度后调用 sub_405D70；该位置没有显示文件创建 API 或写入对象。"
+          },
+          {
+            "location": "dependency J00 / F-0500 L0172-L0190",
+            "observation": "已验证摘要仅证明构造 XX--XX--XX.txt 并调用 sub_40B93C，同时明确未证明该路径的写入效果。"
+          }
+        ],
+        "required_fix": "将该 artifact 的 role 从 created_output 改为 other（或删除该 artifact 并仅保留为未确认的输出路径，若结果模型允许）；保留固定文件名及 high detection_specificity，但 meaning 必须明确其是传递给下游 helper 的固定目标名，而不是已创建文件。不得把 sub_405D70 的未知效果升级为 confirmed output。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/3/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/3/meaning"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体充分：资源读取、分隔解析、XOR 转换、配置字段转换以及备用路径汇总到 sub_405D70 均已报告，且没有发现会反转核心行为的遗漏。需要修订的主要问题是当前结果的本包证据引用整体不可解析，以及将尚未证实创建的 XX--XX--XX.txt 错分为 created_output。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的绝大多数本包证据 location 都不是可解析的标准引用格式：例如写成“F-0309 sub_404460 原文件 L0001-L0022”，而不是可直接定位的 F-xxxx Lx-Ly。验证结果显示本包可解析的 current-packet 证据为 0 条，导致 claims、artifacts 和 material_needs 的实际源码支持无法按结果结构被可靠验收。这里不是缺少源码，而是引用字段表达错误。",
+        "evidence": [
+          {
+            "location": "analyzer_result /claims/0/evidence/0/location",
+            "observation": "值为“F-0309 sub_404460 原文件 L0001-L0022”，验证器报告 invalid_format。"
+          },
+          {
+            "location": "analyzer_result /claims/3/evidence/0/location",
+            "observation": "值为“F-0497 sub_40B93C 原文件 L0021-L0031”，验证器报告 invalid_format。"
+          },
+          {
+            "location": "analyzer_result /artifacts/0/evidence/0/location",
+            "observation": "值为“F-0309 sub_404460 原文件 L0010-L0013”，验证器报告 invalid_format。"
+          },
+          {
+            "location": "analyzer_result /material_needs/0/evidence/0/location",
+            "observation": "值为“F-0497 sub_40B93C 原文件 L0059-L0060”，验证器报告 invalid_format。"
+          }
+        ],
+        "required_fix": "将所有指向当前材料包的 location 改为可解析且准确的 F-xxxx Lx-Ly 格式，例如 F-0309 L0010-L0020、F-0497 L0059-L0060；保留函数名和解释可放在 observation 中。不得通过扩大行段来迁就格式。依赖摘要引用可继续作为 dependency 证据，但也应采用结果允许的依赖定位格式。修订后每条 claim、artifact、material_need 都应至少保留一条可定位到实际源码的证据。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "artifact_role_error",
+        "description": "XX--XX--XX.txt 被标为 role=created_output，但当前包和已验证依赖只证明该固定文件名被绑定到临时路径并作为参数传入 sub_40B93C，随后传给 sub_405D70；尚未证明文件创建或写入。该 role 会把尚未确认的输出路径误报为已创建输出 artifact。其 detection_specificity=high 可以保留，问题在 role 与说明不一致。",
+        "evidence": [
+          {
+            "location": "F-0497 L0059-L0060",
+            "observation": "sub_40B93C 计算缓冲区长度后调用 sub_405D70；该位置没有显示文件创建 API 或写入对象。"
+          },
+          {
+            "location": "dependency J00 / F-0500 L0172-L0190",
+            "observation": "已验证摘要仅证明构造 XX--XX--XX.txt 并调用 sub_40B93C，同时明确未证明该路径的写入效果。"
+          }
+        ],
+        "required_fix": "将该 artifact 的 role 从 created_output 改为 other（或删除该 artifact 并仅保留为未确认的输出路径，若结果模型允许）；保留固定文件名及 high detection_specificity，但 meaning 必须明确其是传递给下游 helper 的固定目标名，而不是已创建文件。不得把 sub_405D70 的未知效果升级为 confirmed output。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/3/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/3/meaning"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体充分：资源读取、分隔解析、XOR 转换、配置字段转换以及备用路径汇总到 sub_405D70 均已报告，且没有发现会反转核心行为的遗漏。需要修订的主要问题是当前结果的本包证据引用整体不可解析，以及将尚未证实创建的 XX--XX--XX.txt 错分为 created_output。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包显示样本从固定资源“XX-XX-XX-XX”读取配置样数据，按“####@####”分隔并对部分条目执行逐字节 XOR 0xBC 转换；这些条目随后被汇总到备用路径的输出缓冲区。sub_40B93C 还从当前模块路径取得数据，并将汇总缓冲区连同长度、目标参数传给 sub_405D70，但 sub_405D70 及若干字符串辅助函数未提供，因此无法在本包内确认最终文件写入的确切目标、内容语义或运行时成功。",
+    "claims": [
+      {
+        "behavior": "程序读取嵌入资源“XX-XX-XX-XX”，将资源内容（长度减一）复制到内部缓冲区，随后把该内容作为配置/条目数据继续处理。",
+        "condition": "调用 sub_404460 时资源句柄可被 FindResourceA、LoadResource 和 LockResource 成功取得；若 LockResource 返回非空则执行复制。",
+        "source": "当前模块中的资源“XX-XX-XX-XX”。",
+        "action": "调用 FindResourceA、SizeofResource、LoadResource、LockResource，并将 n4-1 字节复制到 a1 指向的内部缓冲区。",
+        "sink": "内部缓冲区 a1，后续由 sub_4044D4 解析。",
+        "evidence": [
+          {
+            "location": "F-0309 L0001-L0022",
+            "observation": "L0010-L0013 查找并加载固定资源名“XX-XX-XX-XX”并锁定资源；L0015-L0020 在资源指针非空时按 n4-1 长度复制到 a1 缓冲区。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "材料未给出该资源的实际字节内容，因此不能确定配置字段的具体含义。",
+          "静态代码只能证明读取和复制能力，不能证明资源加载在运行时一定成功。"
+        ]
+      },
+      {
+        "behavior": "读取的资源内容被按固定分隔符“####@####”拆分为多个条目；非空且未匹配特定字符串的条目会经过逐字节 XOR 0xBC 转换后重新保存。",
+        "condition": "sub_4044D4 成功取得资源缓冲区并解析出条目；对单个条目而言，该条目非空且 sub_401E94 未报告其匹配 dword_4045C8 所代表的比较值。",
+        "source": "sub_404460 填充的资源缓冲区，以及其中被 sub_404358 拆出的条目。",
+        "action": "sub_404358 使用“####@####”组织/拆分条目；sub_4042DC 对条目长度范围内的每个字节执行与 0xBC 的 XOR，并将结果写入输出缓冲区。",
+        "sink": "sub_4044D4 管理的条目数组及其后续全局配置存储；sub_404604 随后将 101 个条目复制到 unk_40E68C 起始区域。",
+        "evidence": [
+          {
+            "location": "F-0310 L0027-L0045",
+            "observation": "L0027-L0029 读取资源并调用 sub_404358，传入“####@####”；L0037-L0045 对条目进行空值/比较判断，符合条件时调用 sub_4042DC。"
+          },
+          {
+            "location": "F-0307 L0011-L0033",
+            "observation": "L0017-L0028 获取条目长度并逐字节执行 XOR 0xBC；L0030 将处理后的结果保存到调用者提供的位置。"
+          },
+          {
+            "location": "F-0313 L0007-L0014",
+            "observation": "L0008 调用 sub_4044D4，L0011-L0013 随后循环 101 次，将条目复制到 unk_40E68C 起始的全局区域。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "dword_4045C8 的实际字符串/语义未在材料中给出，不能确定哪些条目被排除或保留。",
+          "sub_401D50、sub_401B14 等缓冲区辅助函数未展开，条目边界和内存表示只能按调用关系描述。",
+          "不能据此把条目确定为账号、密码或其他具体配置类型。"
+        ]
+      },
+      {
+        "behavior": "配置条目被转换到多个全局配置字段，其中部分字段按字符串“TRUE”转换为布尔值，部分字段通过 sub_402BDC 转换为 64 位数值或其他标量。",
+        "condition": "调用 sub_40491C；函数无显式外部条件，逐项处理 off_40D1C4 中的配置指针。",
+        "source": "off_40D1C4 指向的配置值。",
+        "action": "复制前 20 项及后续多项配置；对选定项调用 sub_404880 比较“TRUE”，或调用 sub_4046E8 进行数值/标量转换。",
+        "sink": "unk_40E834、dword_40E884 起始及相关 byte_/dword_ 全局配置字段。",
+        "evidence": [
+          {
+            "location": "F-0325 L0008-L0030",
+            "observation": "L0012-L0030 将 off_40D1C4 中的值复制到全局字段，并对若干项调用 sub_404880 或 sub_4046E8。"
+          },
+          {
+            "location": "F-0317 L0010-L0020",
+            "observation": "L0010-L0016 保存输入并调用 sub_402BDC，返回其产生的 64 位结果。"
+          },
+          {
+            "location": "F-0322 L0010-L0023",
+            "observation": "L0010-L0017 保存输入并将其与字符串“TRUE”比较；L0018-L0023 返回布尔结果。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "配置字段的名称、用途和触发逻辑不可见。",
+          "sub_402BDC 的具体解析规则不在本包内，不能断言其结果代表时间、数量、地址或其他具体数据类型。"
+        ]
+      },
+      {
+        "behavior": "备用输出路径汇总当前模块路径相关数据和约 101 项配置条目，并将组装后的缓冲区、长度及目标参数传给 sub_405D70，形成潜在的输出/写入动作。",
+        "condition": "sub_40B93C 被调用；J00 已验证该函数位于备用路径并接收 XX--XX--XX.txt 相关输出参数，但当前源码未显示其调用者的完整参数绑定。",
+        "source": "sub_4013A4(0) 返回的当前模块路径相关数据，以及 off_40D1C4 中逐项处理的配置值。",
+        "action": "调用 sub_4013A4(0) 获取源数据；通过 sub_401D9C、sub_401E10 和循环中的 sub_4042DC 组装缓冲区，计算长度后调用 sub_405D70。",
+        "sink": "传给 sub_405D70 的目标参数 dst_2/相关目标状态，以及组装缓冲区 dst_；具体外部对象由 sub_405D70 决定。",
+        "evidence": [
+          {
+            "location": "F-0497 L0021-L0031",
+            "observation": "L0021-L0030 保存输入参数并调用 sub_4013A4(0)，随后把返回值交给 sub_401D9C；L0031 调用 sub_401E10 初始化/更新组装状态。"
+          },
+          {
+            "location": "F-0497 L0032-L0058",
+            "observation": "L0032-L0058 循环处理 101 个 off_40D1C4 条目，并持续将条目或 dword_40BA6C 加入组装状态。"
+          },
+          {
+            "location": "F-0497 L0059-L0063",
+            "observation": "L0059 计算组装数据长度，L0060 以长度、dst_2 和 dst_ 为参数调用 sub_405D70。"
+          },
+          {
+            "location": "F-0038 L0009-L0027",
+            "observation": "依赖 J01 已验证摘要：sub_4013A4 的零参数分支获取当前模块文件名并经 sub_401BAC 处理后返回，支持当前模块路径相关数据作为该调用的来源。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_405D70 的实现不在本包内，因此不能确认该调用实际创建/写入 XX--XX--XX.txt、传输数据或执行其他副作用。",
+          "sub_401D9C、sub_401E10 的具体拼接语义未提供，不能精确描述最终缓冲区格式。",
+          "当前包未显示 sub_40B93C 的调用者参数，目标参数与 J00 所述固定文件名之间的绑定依赖上游摘要，不能在本包源码中重新确认。",
+          "静态调用只能证明具备执行该动作的能力，不能证明运行时写入成功。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "resource",
+        "value": "XX-XX-XX-XX",
+        "role": "read_source",
+        "detection_specificity": "high",
+        "meaning": "FindResourceA 使用的固定嵌入资源名，资源内容被读取并作为后续条目解析输入。",
+        "evidence": [
+          {
+            "location": "F-0309 L0010-L0013",
+            "observation": "代码以固定字符串“XX-XX-XX-XX”调用 FindResourceA，并继续 SizeofResource、LoadResource、LockResource。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "####@####",
+        "role": "parser_marker",
+        "detection_specificity": "high",
+        "meaning": "资源条目拆分/拼接过程中使用的固定分隔符或解析标记。",
+        "evidence": [
+          {
+            "location": "F-0310 L0027-L0029",
+            "observation": "sub_404358 被传入固定字符串“####@####”。"
+          },
+          {
+            "location": "F-0497 L0036-L0058",
+            "observation": "备用汇总循环中多次将 dst_ 指向固定字符串“####@####”并调用 sub_401E10。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "TRUE",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "配置布尔字段识别所用的固定字符串。",
+        "evidence": [
+          {
+            "location": "F-0322 L0016-L0019",
+            "observation": "代码调用 sub_401E94(v6, (int *)\"TRUE\")，并在比较成功时返回 1。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "XX--XX--XX.txt",
+        "role": "other",
+        "detection_specificity": "high",
+        "meaning": "J00 已验证的备用路径固定目标名；本包补充显示该路径的下游函数会把组装缓冲区传给 sub_405D70，但未直接证明该文件已被创建或写入。",
+        "evidence": [
+          {
+            "location": "F-0500 L0172-L0190",
+            "observation": "依赖 J00 已验证上游摘要记录备用路径将 XX--XX--XX.txt 绑定到临时路径并调用 sub_40B93C；该摘要同时明确当时尚未证明其写入效果。"
+          },
+          {
+            "location": "F-0497 L0059-L0060",
+            "observation": "sub_40B93C 计算组装缓冲区长度并调用 sub_405D70，提供了该目标名对应下游动作的直接调用证据。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_405D70 接收长度、目标参数和组装缓冲区后是否创建/写入 XX--XX--XX.txt，还是执行其他输出或传输动作？",
+        "reason": "当前材料只显示 sub_40B93C 调用 sub_405D70，未提供该 helper 的实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_401D9C、sub_401E10 和 sub_401BAC 如何构造或处理最终输出数据？",
+        "reason": "这些函数决定当前模块路径及配置条目的具体拼接格式，但实现不在本包内。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "off_40D1C4 及其 101 项配置字段分别代表什么数据？",
+        "reason": "本包证明了复制、布尔/数值转换和汇总，但没有字段名称或业务语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_405D70",
+        "reason": "闭合 sub_40B93C 的组装缓冲区和目标参数到实际外部副作用。",
+        "expected_value": "确认 XX--XX--XX.txt 是否被创建/写入，或确定实际输出/传输目的地及数据格式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401D9C, sub_401E10, sub_401BAC",
+        "reason": "解析备用路径的字符串构造和模块路径处理。",
+        "expected_value": "确定当前模块路径如何进入最终缓冲区，以及配置条目的拼接/编码规则。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_402BDC, sub_401E94, sub_401D50",
+        "reason": "确定配置值转换、比较和长度计算的具体语义。",
+        "expected_value": "识别配置字段类型及其在最终输出中的编码含义。",
+        "priority": "low"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_405D70",
+        "targets": [
+          {
+            "identifier": "sub_405D70",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_40B93C 最终调用的输出 helper 是否写入文件、传输数据或产生其他外部副作用。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 L0059-L0060",
+            "observation": "代码计算组装缓冲区长度后调用 sub_405D70(nNumberOfBytesToWrite, dst_2, dst_)。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401D9C",
+        "targets": [
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_4013A4 返回的模块路径数据如何被并入备用输出缓冲区。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 L0029-L0031",
+            "observation": "sub_4013A4(0) 的返回值 dst 被传入 sub_401D9C，随后由 sub_401E10 继续处理。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401E10",
+        "targets": [
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认固定分隔符和条目在备用输出缓冲区中的实际拼接/编码行为。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 L0036-L0058",
+            "observation": "循环中反复以 dword_40BA6C 或条目设置 dst_2，并以“####@####”调用 sub_401E10。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包显示样本从固定资源“XX-XX-XX-XX”读取配置样数据，按“####@####”分隔并对部分条目执行逐字节 XOR 0xBC 转换；这些条目随后被汇总到备用路径的输出缓冲区。sub_40B93C 还从当前模块路径取得数据，并将汇总缓冲区连同长度、目标参数传给 sub_405D70，但 sub_405D70 及若干字符串辅助函数未提供，因此无法在本包内确认最终文件写入的确切目标、内容语义或运行时成功。",
+    "claims": [
+      {
+        "behavior": "程序读取嵌入资源“XX-XX-XX-XX”，将资源内容（长度减一）复制到内部缓冲区，随后把该内容作为配置/条目数据继续处理。",
+        "condition": "调用 sub_404460 时资源句柄可被 FindResourceA、LoadResource 和 LockResource 成功取得；若 LockResource 返回非空则执行复制。",
+        "source": "当前模块中的资源“XX-XX-XX-XX”。",
+        "action": "调用 FindResourceA、SizeofResource、LoadResource、LockResource，并将 n4-1 字节复制到 a1 指向的内部缓冲区。",
+        "sink": "内部缓冲区 a1，后续由 sub_4044D4 解析。",
+        "evidence": [
+          {
+            "location": "F-0309 L0001-L0022",
+            "observation": "L0010-L0013 查找并加载固定资源名“XX-XX-XX-XX”并锁定资源；L0015-L0020 在资源指针非空时按 n4-1 长度复制到 a1 缓冲区。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "材料未给出该资源的实际字节内容，因此不能确定配置字段的具体含义。",
+          "静态代码只能证明读取和复制能力，不能证明资源加载在运行时一定成功。"
+        ]
+      },
+      {
+        "behavior": "读取的资源内容被按固定分隔符“####@####”拆分为多个条目；非空且未匹配特定字符串的条目会经过逐字节 XOR 0xBC 转换后重新保存。",
+        "condition": "sub_4044D4 成功取得资源缓冲区并解析出条目；对单个条目而言，该条目非空且 sub_401E94 未报告其匹配 dword_4045C8 所代表的比较值。",
+        "source": "sub_404460 填充的资源缓冲区，以及其中被 sub_404358 拆出的条目。",
+        "action": "sub_404358 使用“####@####”组织/拆分条目；sub_4042DC 对条目长度范围内的每个字节执行与 0xBC 的 XOR，并将结果写入输出缓冲区。",
+        "sink": "sub_4044D4 管理的条目数组及其后续全局配置存储；sub_404604 随后将 101 个条目复制到 unk_40E68C 起始区域。",
+        "evidence": [
+          {
+            "location": "F-0310 L0027-L0045",
+            "observation": "L0027-L0029 读取资源并调用 sub_404358，传入“####@####”；L0037-L0045 对条目进行空值/比较判断，符合条件时调用 sub_4042DC。"
+          },
+          {
+            "location": "F-0307 L0011-L0033",
+            "observation": "L0017-L0028 获取条目长度并逐字节执行 XOR 0xBC；L0030 将处理后的结果保存到调用者提供的位置。"
+          },
+          {
+            "location": "F-0313 L0007-L0014",
+            "observation": "L0008 调用 sub_4044D4，L0011-L0013 随后循环 101 次，将条目复制到 unk_40E68C 起始的全局区域。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "dword_4045C8 的实际字符串/语义未在材料中给出，不能确定哪些条目被排除或保留。",
+          "sub_401D50、sub_401B14 等缓冲区辅助函数未展开，条目边界和内存表示只能按调用关系描述。",
+          "不能据此把条目确定为账号、密码或其他具体配置类型。"
+        ]
+      },
+      {
+        "behavior": "配置条目被转换到多个全局配置字段，其中部分字段按字符串“TRUE”转换为布尔值，部分字段通过 sub_402BDC 转换为 64 位数值或其他标量。",
+        "condition": "调用 sub_40491C；函数无显式外部条件，逐项处理 off_40D1C4 中的配置指针。",
+        "source": "off_40D1C4 指向的配置值。",
+        "action": "复制前 20 项及后续多项配置；对选定项调用 sub_404880 比较“TRUE”，或调用 sub_4046E8 进行数值/标量转换。",
+        "sink": "unk_40E834、dword_40E884 起始及相关 byte_/dword_ 全局配置字段。",
+        "evidence": [
+          {
+            "location": "F-0325 L0008-L0030",
+            "observation": "L0012-L0030 将 off_40D1C4 中的值复制到全局字段，并对若干项调用 sub_404880 或 sub_4046E8。"
+          },
+          {
+            "location": "F-0317 L0010-L0020",
+            "observation": "L0010-L0016 保存输入并调用 sub_402BDC，返回其产生的 64 位结果。"
+          },
+          {
+            "location": "F-0322 L0010-L0023",
+            "observation": "L0010-L0017 保存输入并将其与字符串“TRUE”比较；L0018-L0023 返回布尔结果。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "配置字段的名称、用途和触发逻辑不可见。",
+          "sub_402BDC 的具体解析规则不在本包内，不能断言其结果代表时间、数量、地址或其他具体数据类型。"
+        ]
+      },
+      {
+        "behavior": "备用输出路径汇总当前模块路径相关数据和约 101 项配置条目，并将组装后的缓冲区、长度及目标参数传给 sub_405D70，形成潜在的输出/写入动作。",
+        "condition": "sub_40B93C 被调用；J00 已验证该函数位于备用路径并接收 XX--XX--XX.txt 相关输出参数，但当前源码未显示其调用者的完整参数绑定。",
+        "source": "sub_4013A4(0) 返回的当前模块路径相关数据，以及 off_40D1C4 中逐项处理的配置值。",
+        "action": "调用 sub_4013A4(0) 获取源数据；通过 sub_401D9C、sub_401E10 和循环中的 sub_4042DC 组装缓冲区，计算长度后调用 sub_405D70。",
+        "sink": "传给 sub_405D70 的目标参数 dst_2/相关目标状态，以及组装缓冲区 dst_；具体外部对象由 sub_405D70 决定。",
+        "evidence": [
+          {
+            "location": "F-0497 L0021-L0031",
+            "observation": "L0021-L0030 保存输入参数并调用 sub_4013A4(0)，随后把返回值交给 sub_401D9C；L0031 调用 sub_401E10 初始化/更新组装状态。"
+          },
+          {
+            "location": "F-0497 L0032-L0058",
+            "observation": "L0032-L0058 循环处理 101 个 off_40D1C4 条目，并持续将条目或 dword_40BA6C 加入组装状态。"
+          },
+          {
+            "location": "F-0497 L0059-L0063",
+            "observation": "L0059 计算组装数据长度，L0060 以长度、dst_2 和 dst_ 为参数调用 sub_405D70。"
+          },
+          {
+            "location": "F-0038 L0009-L0027",
+            "observation": "sub_4013A4 的零参数分支获取当前模块文件名并经 sub_401BAC 处理后返回，支持当前模块路径相关数据作为该调用的来源。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_405D70 的实现不在本包内，因此不能确认该调用实际创建/写入 XX--XX--XX.txt、传输数据或执行其他副作用。",
+          "sub_401D9C、sub_401E10 的具体拼接语义未提供，不能精确描述最终缓冲区格式。",
+          "当前包未显示 sub_40B93C 的调用者参数，目标参数与 J00 所述固定文件名之间的绑定依赖上游摘要，不能在本包源码中重新确认。",
+          "静态调用只能证明具备执行该动作的能力，不能证明运行时写入成功。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "resource",
+        "value": "XX-XX-XX-XX",
+        "role": "read_source",
+        "detection_specificity": "high",
+        "meaning": "FindResourceA 使用的固定嵌入资源名，资源内容被读取并作为后续条目解析输入。",
+        "evidence": [
+          {
+            "location": "F-0309 L0010-L0013",
+            "observation": "代码以固定字符串“XX-XX-XX-XX”调用 FindResourceA，并继续 SizeofResource、LoadResource、LockResource。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "####@####",
+        "role": "parser_marker",
+        "detection_specificity": "high",
+        "meaning": "资源条目拆分/拼接过程中使用的固定分隔符或解析标记。",
+        "evidence": [
+          {
+            "location": "F-0310 L0027-L0029",
+            "observation": "sub_404358 被传入固定字符串“####@####”。"
+          },
+          {
+            "location": "F-0497 L0036-L0058",
+            "observation": "备用汇总循环中多次将 dst_ 指向固定字符串“####@####”并调用 sub_401E10。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "TRUE",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "配置布尔字段识别所用的固定字符串。",
+        "evidence": [
+          {
+            "location": "F-0322 L0016-L0019",
+            "observation": "代码调用 sub_401E94(v6, (int *)\"TRUE\")，并在比较成功时返回 1。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "XX--XX--XX.txt",
+        "role": "other",
+        "detection_specificity": "high",
+        "meaning": "J00 已验证的备用路径固定目标名；本包补充显示该路径的下游函数会把组装缓冲区传给 sub_405D70，但未直接证明该文件已被创建或写入。",
+        "evidence": [
+          {
+            "location": "F-0500 L0172-L0190",
+            "observation": "已验证上游摘要记录备用路径将 XX--XX--XX.txt 绑定到临时路径并调用 sub_40B93C；该摘要同时明确当时尚未证明其写入效果。"
+          },
+          {
+            "location": "F-0497 L0059-L0060",
+            "observation": "sub_40B93C 计算组装缓冲区长度并调用 sub_405D70，提供了该输出路径下游动作的直接调用证据。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_405D70 接收长度、目标参数和组装缓冲区后是否创建/写入 XX--XX--XX.txt，还是执行其他输出或传输动作？",
+        "reason": "当前材料只显示 sub_40B93C 调用 sub_405D70，未提供该 helper 的实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_401D9C、sub_401E10 和 sub_401BAC 如何构造或处理最终输出数据？",
+        "reason": "这些函数决定当前模块路径及配置条目的具体拼接格式，但实现不在本包内。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "off_40D1C4 及其 101 项配置字段分别代表什么数据？",
+        "reason": "本包证明了复制、布尔/数值转换和汇总，但没有字段名称或业务语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_405D70",
+        "reason": "闭合 sub_40B93C 的组装缓冲区和目标参数到实际外部副作用。",
+        "expected_value": "确认 XX--XX--XX.txt 是否被创建/写入，或确定实际输出/传输目的地及数据格式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401D9C, sub_401E10, sub_401BAC",
+        "reason": "解析备用路径的字符串构造和模块路径处理。",
+        "expected_value": "确定当前模块路径如何进入最终缓冲区，以及配置条目的拼接/编码规则。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_402BDC, sub_401E94, sub_401D50",
+        "reason": "确定配置值转换、比较和长度计算的具体语义。",
+        "expected_value": "识别配置字段类型及其在最终输出中的编码含义。",
+        "priority": "low"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_405D70",
+        "targets": [
+          {
+            "identifier": "sub_405D70",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_40B93C 最终调用的输出 helper 是否写入文件、传输数据或产生其他外部副作用。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 L0059-L0060",
+            "observation": "代码计算组装缓冲区长度后调用 sub_405D70(nNumberOfBytesToWrite, dst_2, dst_)。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401D9C",
+        "targets": [
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_4013A4 返回的模块路径数据如何被并入备用输出缓冲区。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 L0029-L0031",
+            "observation": "sub_4013A4(0) 的返回值 dst 被传入 sub_401D9C，随后由 sub_401E10 继续处理。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401E10",
+        "targets": [
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认固定分隔符和条目在备用输出缓冲区中的实际拼接/编码行为。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 L0036-L0058",
+            "observation": "循环中反复以 dword_40BA6C 或条目设置 dst_2，并以“####@####”调用 sub_401E10。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/1/evidence/1/location",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/3/evidence/0/location",
+      "/artifacts/3/evidence/1/location",
+      "/artifacts/3/meaning",
+      "/artifacts/3/role",
+      "/claims/0/evidence/0/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/2/evidence/0/location",
+      "/claims/2/evidence/1/location",
+      "/claims/2/evidence/2/location",
+      "/claims/3/evidence/0/location",
+      "/claims/3/evidence/1/location",
+      "/claims/3/evidence/2/location",
+      "/claims/3/evidence/3/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/2/evidence/0/location"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [],
+    "applied_paths": [
+      "/claims/0/evidence/0/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/2/evidence/0/location",
+      "/claims/2/evidence/1/location",
+      "/claims/2/evidence/2/location",
+      "/claims/3/evidence/0/location",
+      "/claims/3/evidence/1/location",
+      "/claims/3/evidence/2/location",
+      "/claims/3/evidence/3/location",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/1/evidence/1/location",
+      "/artifacts/2/evidence/0/location",
+      "/artifacts/3/role",
+      "/artifacts/3/meaning",
+      "/artifacts/3/evidence/0/location",
+      "/artifacts/3/evidence/1/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/2/evidence/0/location"
+    ],
+    "ignored_paths": [
+      "/claims/3/evidence/3/observation",
+      "/artifacts/3/evidence/0/observation",
+      "/artifacts/3/evidence/1/observation"
+    ],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的绝大多数本包证据 location 都不是可解析的标准引用格式：例如写成“F-0309 sub_404460 原文件 L0001-L0022”，而不是可直接定位的 F-xxxx Lx-Ly。验证结果显示本包可解析的 current-packet 证据为 0 条，导致 claims、artifacts 和 material_needs 的实际源码支持无法按结果结构被可靠验收。这里不是缺少源码，而是引用字段表达错误。",
+        "evidence": [
+          {
+            "location": "analyzer_result /claims/0/evidence/0/location",
+            "observation": "值为“F-0309 sub_404460 原文件 L0001-L0022”，验证器报告 invalid_format。"
+          },
+          {
+            "location": "analyzer_result /claims/3/evidence/0/location",
+            "observation": "值为“F-0497 sub_40B93C 原文件 L0021-L0031”，验证器报告 invalid_format。"
+          },
+          {
+            "location": "analyzer_result /artifacts/0/evidence/0/location",
+            "observation": "值为“F-0309 sub_404460 原文件 L0010-L0013”，验证器报告 invalid_format。"
+          },
+          {
+            "location": "analyzer_result /material_needs/0/evidence/0/location",
+            "observation": "值为“F-0497 sub_40B93C 原文件 L0059-L0060”，验证器报告 invalid_format。"
+          }
+        ],
+        "required_fix": "将所有指向当前材料包的 location 改为可解析且准确的 F-xxxx Lx-Ly 格式，例如 F-0309 L0010-L0020、F-0497 L0059-L0060；保留函数名和解释可放在 observation 中。不得通过扩大行段来迁就格式。依赖摘要引用可继续作为 dependency 证据，但也应采用结果允许的依赖定位格式。修订后每条 claim、artifact、material_need 都应至少保留一条可定位到实际源码的证据。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/*",
+              "/artifacts/*",
+              "/material_needs/*"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "artifact_role_error",
+        "description": "XX--XX--XX.txt 被标为 role=created_output，但当前包和已验证依赖只证明该固定文件名被绑定到临时路径并作为参数传入 sub_40B93C，随后传给 sub_405D70；尚未证明文件创建或写入。该 role 会把尚未确认的输出路径误报为已创建输出 artifact。其 detection_specificity=high 可以保留，问题在 role 与说明不一致。",
+        "evidence": [
+          {
+            "location": "F-0497 L0059-L0060",
+            "observation": "sub_40B93C 计算缓冲区长度后调用 sub_405D70；该位置没有显示文件创建 API 或写入对象。"
+          },
+          {
+            "location": "dependency J00 / F-0500 L0172-L0190",
+            "observation": "已验证摘要仅证明构造 XX--XX--XX.txt 并调用 sub_40B93C，同时明确未证明该路径的写入效果。"
+          }
+        ],
+        "required_fix": "将该 artifact 的 role 从 created_output 改为 other（或删除该 artifact 并仅保留为未确认的输出路径，若结果模型允许）；保留固定文件名及 high detection_specificity，但 meaning 必须明确其是传递给下游 helper 的固定目标名，而不是已创建文件。不得把 sub_405D70 的未知效果升级为 confirmed output。",
+        "fixes": [
+          {
+            "type": "artifact_classification",
+            "targets": [
+              "/artifacts/3"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体充分：资源读取、分隔解析、XOR 转换、配置字段转换以及备用路径汇总到 sub_405D70 均已报告，且没有发现会反转核心行为的遗漏。需要修订的主要问题是当前结果的本包证据引用整体不可解析，以及将尚未证实创建的 XX--XX--XX.txt 错分为 created_output。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包显示样本从固定资源“XX-XX-XX-XX”读取配置样数据，按“####@####”分隔并对部分条目执行逐字节 XOR 0xBC 转换；这些条目随后被汇总到备用路径的输出缓冲区。sub_40B93C 还从当前模块路径取得数据，并将汇总缓冲区连同长度、目标参数传给 sub_405D70，但 sub_405D70 及若干字符串辅助函数未提供，因此无法在本包内确认最终文件写入的确切目标、内容语义或运行时成功。",
+    "claims": [
+      {
+        "behavior": "程序读取嵌入资源“XX-XX-XX-XX”，将资源内容（长度减一）复制到内部缓冲区，随后把该内容作为配置/条目数据继续处理。",
+        "condition": "调用 sub_404460 时资源句柄可被 FindResourceA、LoadResource 和 LockResource 成功取得；若 LockResource 返回非空则执行复制。",
+        "source": "当前模块中的资源“XX-XX-XX-XX”。",
+        "action": "调用 FindResourceA、SizeofResource、LoadResource、LockResource，并将 n4-1 字节复制到 a1 指向的内部缓冲区。",
+        "sink": "内部缓冲区 a1，后续由 sub_4044D4 解析。",
+        "evidence": [
+          {
+            "location": "F-0309 L0001-L0022",
+            "observation": "L0010-L0013 查找并加载固定资源名“XX-XX-XX-XX”并锁定资源；L0015-L0020 在资源指针非空时按 n4-1 长度复制到 a1 缓冲区。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "材料未给出该资源的实际字节内容，因此不能确定配置字段的具体含义。",
+          "静态代码只能证明读取和复制能力，不能证明资源加载在运行时一定成功。"
+        ]
+      },
+      {
+        "behavior": "读取的资源内容被按固定分隔符“####@####”拆分为多个条目；非空且未匹配特定字符串的条目会经过逐字节 XOR 0xBC 转换后重新保存。",
+        "condition": "sub_4044D4 成功取得资源缓冲区并解析出条目；对单个条目而言，该条目非空且 sub_401E94 未报告其匹配 dword_4045C8 所代表的比较值。",
+        "source": "sub_404460 填充的资源缓冲区，以及其中被 sub_404358 拆出的条目。",
+        "action": "sub_404358 使用“####@####”组织/拆分条目；sub_4042DC 对条目长度范围内的每个字节执行与 0xBC 的 XOR，并将结果写入输出缓冲区。",
+        "sink": "sub_4044D4 管理的条目数组及其后续全局配置存储；sub_404604 随后将 101 个条目复制到 unk_40E68C 起始区域。",
+        "evidence": [
+          {
+            "location": "F-0310 L0027-L0045",
+            "observation": "L0027-L0029 读取资源并调用 sub_404358，传入“####@####”；L0037-L0045 对条目进行空值/比较判断，符合条件时调用 sub_4042DC。"
+          },
+          {
+            "location": "F-0307 L0011-L0033",
+            "observation": "L0017-L0028 获取条目长度并逐字节执行 XOR 0xBC；L0030 将处理后的结果保存到调用者提供的位置。"
+          },
+          {
+            "location": "F-0313 L0007-L0014",
+            "observation": "L0008 调用 sub_4044D4，L0011-L0013 随后循环 101 次，将条目复制到 unk_40E68C 起始的全局区域。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "dword_4045C8 的实际字符串/语义未在材料中给出，不能确定哪些条目被排除或保留。",
+          "sub_401D50、sub_401B14 等缓冲区辅助函数未展开，条目边界和内存表示只能按调用关系描述。",
+          "不能据此把条目确定为账号、密码或其他具体配置类型。"
+        ]
+      },
+      {
+        "behavior": "配置条目被转换到多个全局配置字段，其中部分字段按字符串“TRUE”转换为布尔值，部分字段通过 sub_402BDC 转换为 64 位数值或其他标量。",
+        "condition": "调用 sub_40491C；函数无显式外部条件，逐项处理 off_40D1C4 中的配置指针。",
+        "source": "off_40D1C4 指向的配置值。",
+        "action": "复制前 20 项及后续多项配置；对选定项调用 sub_404880 比较“TRUE”，或调用 sub_4046E8 进行数值/标量转换。",
+        "sink": "unk_40E834、dword_40E884 起始及相关 byte_/dword_ 全局配置字段。",
+        "evidence": [
+          {
+            "location": "F-0325 L0008-L0030",
+            "observation": "L0012-L0030 将 off_40D1C4 中的值复制到全局字段，并对若干项调用 sub_404880 或 sub_4046E8。"
+          },
+          {
+            "location": "F-0317 L0010-L0020",
+            "observation": "L0010-L0016 保存输入并调用 sub_402BDC，返回其产生的 64 位结果。"
+          },
+          {
+            "location": "F-0322 L0010-L0023",
+            "observation": "L0010-L0017 保存输入并将其与字符串“TRUE”比较；L0018-L0023 返回布尔结果。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "配置字段的名称、用途和触发逻辑不可见。",
+          "sub_402BDC 的具体解析规则不在本包内，不能断言其结果代表时间、数量、地址或其他具体数据类型。"
+        ]
+      },
+      {
+        "behavior": "备用输出路径汇总当前模块路径相关数据和约 101 项配置条目，并将组装后的缓冲区、长度及目标参数传给 sub_405D70，形成潜在的输出/写入动作。",
+        "condition": "sub_40B93C 被调用；J00 已验证该函数位于备用路径并接收 XX--XX--XX.txt 相关输出参数，但当前源码未显示其调用者的完整参数绑定。",
+        "source": "sub_4013A4(0) 返回的当前模块路径相关数据，以及 off_40D1C4 中逐项处理的配置值。",
+        "action": "调用 sub_4013A4(0) 获取源数据；通过 sub_401D9C、sub_401E10 和循环中的 sub_4042DC 组装缓冲区，计算长度后调用 sub_405D70。",
+        "sink": "传给 sub_405D70 的目标参数 dst_2/相关目标状态，以及组装缓冲区 dst_；具体外部对象由 sub_405D70 决定。",
+        "evidence": [
+          {
+            "location": "F-0497 L0021-L0031",
+            "observation": "L0021-L0030 保存输入参数并调用 sub_4013A4(0)，随后把返回值交给 sub_401D9C；L0031 调用 sub_401E10 初始化/更新组装状态。"
+          },
+          {
+            "location": "F-0497 L0032-L0058",
+            "observation": "L0032-L0058 循环处理 101 个 off_40D1C4 条目，并持续将条目或 dword_40BA6C 加入组装状态。"
+          },
+          {
+            "location": "F-0497 L0059-L0063",
+            "observation": "L0059 计算组装数据长度，L0060 以长度、dst_2 和 dst_ 为参数调用 sub_405D70。"
+          },
+          {
+            "location": "F-0038 L0009-L0027",
+            "observation": "sub_4013A4 的零参数分支获取当前模块文件名并经 sub_401BAC 处理后返回，支持当前模块路径相关数据作为该调用的来源。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_405D70 的实现不在本包内，因此不能确认该调用实际创建/写入 XX--XX--XX.txt、传输数据或执行其他副作用。",
+          "sub_401D9C、sub_401E10 的具体拼接语义未提供，不能精确描述最终缓冲区格式。",
+          "当前包未显示 sub_40B93C 的调用者参数，目标参数与 J00 所述固定文件名之间的绑定依赖上游摘要，不能在本包源码中重新确认。",
+          "静态调用只能证明具备执行该动作的能力，不能证明运行时写入成功。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "resource",
+        "value": "XX-XX-XX-XX",
+        "role": "read_source",
+        "detection_specificity": "high",
+        "meaning": "FindResourceA 使用的固定嵌入资源名，资源内容被读取并作为后续条目解析输入。",
+        "evidence": [
+          {
+            "location": "F-0309 L0010-L0013",
+            "observation": "代码以固定字符串“XX-XX-XX-XX”调用 FindResourceA，并继续 SizeofResource、LoadResource、LockResource。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "####@####",
+        "role": "parser_marker",
+        "detection_specificity": "high",
+        "meaning": "资源条目拆分/拼接过程中使用的固定分隔符或解析标记。",
+        "evidence": [
+          {
+            "location": "F-0310 L0027-L0029",
+            "observation": "sub_404358 被传入固定字符串“####@####”。"
+          },
+          {
+            "location": "F-0497 L0036-L0058",
+            "observation": "备用汇总循环中多次将 dst_ 指向固定字符串“####@####”并调用 sub_401E10。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "TRUE",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "配置布尔字段识别所用的固定字符串。",
+        "evidence": [
+          {
+            "location": "F-0322 L0016-L0019",
+            "observation": "代码调用 sub_401E94(v6, (int *)\"TRUE\")，并在比较成功时返回 1。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "XX--XX--XX.txt",
+        "role": "other",
+        "detection_specificity": "high",
+        "meaning": "J00 已验证的备用路径固定目标名；本包补充显示该路径的下游函数会把组装缓冲区传给 sub_405D70，但未直接证明该文件已被创建或写入。",
+        "evidence": [
+          {
+            "location": "F-0500 L0172-L0190",
+            "observation": "已验证上游摘要记录备用路径将 XX--XX--XX.txt 绑定到临时路径并调用 sub_40B93C；该摘要同时明确当时尚未证明其写入效果。"
+          },
+          {
+            "location": "F-0497 L0059-L0060",
+            "observation": "sub_40B93C 计算组装缓冲区长度并调用 sub_405D70，提供了该输出路径下游动作的直接调用证据。"
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_405D70 接收长度、目标参数和组装缓冲区后是否创建/写入 XX--XX--XX.txt，还是执行其他输出或传输动作？",
+        "reason": "当前材料只显示 sub_40B93C 调用 sub_405D70，未提供该 helper 的实现。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_401D9C、sub_401E10 和 sub_401BAC 如何构造或处理最终输出数据？",
+        "reason": "这些函数决定当前模块路径及配置条目的具体拼接格式，但实现不在本包内。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "off_40D1C4 及其 101 项配置字段分别代表什么数据？",
+        "reason": "本包证明了复制、布尔/数值转换和汇总，但没有字段名称或业务语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_405D70",
+        "reason": "闭合 sub_40B93C 的组装缓冲区和目标参数到实际外部副作用。",
+        "expected_value": "确认 XX--XX--XX.txt 是否被创建/写入，或确定实际输出/传输目的地及数据格式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401D9C, sub_401E10, sub_401BAC",
+        "reason": "解析备用路径的字符串构造和模块路径处理。",
+        "expected_value": "确定当前模块路径如何进入最终缓冲区，以及配置条目的拼接/编码规则。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_402BDC, sub_401E94, sub_401D50",
+        "reason": "确定配置值转换、比较和长度计算的具体语义。",
+        "expected_value": "识别配置字段类型及其在最终输出中的编码含义。",
+        "priority": "low"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_405D70",
+        "targets": [
+          {
+            "identifier": "sub_405D70",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_40B93C 最终调用的输出 helper 是否写入文件、传输数据或产生其他外部副作用。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 L0059-L0060",
+            "observation": "代码计算组装缓冲区长度后调用 sub_405D70(nNumberOfBytesToWrite, dst_2, dst_)。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401D9C",
+        "targets": [
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认 sub_4013A4 返回的模块路径数据如何被并入备用输出缓冲区。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 L0029-L0031",
+            "observation": "sub_4013A4(0) 的返回值 dst 被传入 sub_401D9C，随后由 sub_401E10 继续处理。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401E10",
+        "targets": [
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认固定分隔符和条目在备用输出缓冲区中的实际拼接/编码行为。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0497 L0036-L0058",
+            "observation": "循环中反复以 dword_40BA6C 或条目设置 dst_2，并以“####@####”调用 sub_401E10。"
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": [
+    "/claims/3/evidence/3/observation",
+    "/artifacts/3/evidence/0/observation",
+    "/artifacts/3/evidence/1/observation"
+  ]
+}

@@ -1,0 +1,1438 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J07.json",
+        "sha256": "6cc0b67687a355dd9e5be4796dae2fb31f9d943ff146579202007ffc99c13d7e"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J07/analyzer/validated_result.json",
+        "sha256": "47e0d37a7466c1eca50f4f0a611ea47e680085d5493671dba69ac3311a110c53"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J07/reviewer/validated_result.json",
+        "sha256": "ebe47a6dbdb8826482a1781907109cc5182ce49269d950847068e946dc491672"
+      },
+      "packet": {
+        "path": "testdata/packets/J07.md",
+        "sha256": "94f5a24a786eb52ba75ca067f671ff6f014b7e6f4e6d76d3c10d6b9b0b9d6b83"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J07/reviser/validated_result.json",
+        "sha256": "4c9e30c56c252dc7b019906fc987e704e4fe0e7144585302ed6860ccffba33c3"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J07/reviser/revision_scope.json",
+        "sha256": "84110dead7a10f3e03e9d3e4a8c76bf807da671c7600133a8672c11068cff87b"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J07",
+  "packet_text": "# J07 RAS 收集与私有数据\n任务来源：J00 的 F476 是转调 F440；沿私有数据依赖补读。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0440 sub_408238，原文件 L0001–L0166 / 共 166 行\n```text\nL0001: int **__usercall sub_408238@<eax>(volatile __int32 *dst_3@<eax>, int a2@<ebx>, int a3@<edi>, int a4@<esi>)\nL0002: {\nL0003:   CHAR *pszPath; // eax\nL0004:   CHAR *pszPath_1; // eax\nL0005:   int v6; // esi\nL0006:   char *lpAppName; // edi\nL0007:   UINT _RAX; // ebx\nL0008:   const CHAR *lpFileName_1; // eax\nL0009:   char *lpAppName_1; // eax\nL0010:   char *lpAppName_2; // eax\nL0011:   int n256; // edi\nL0012:   int *v13; // ebx\nL0013:   char v14; // zf\nL0014:   char *src; // eax\nL0015:   const CHAR *lpFileName; // [esp-10h] [ebp-CF4h]\nL0016:   const CHAR *lpFileName_2; // [esp-10h] [ebp-CF4h]\nL0017:   const CHAR *lpFileName_3; // [esp-10h] [ebp-CF4h]\nL0018:   int v20; // [esp-10h] [ebp-CF4h]\nL0019:   unsigned int v21[2]; // [esp-Ch] [ebp-CF0h] BYREF\nL0020:   int *v22; // [esp-4h] [ebp-CE8h]\nL0021:   char *v23; // [esp+Ch] [ebp-CD8h] BYREF\nL0022:   char *v24; // [esp+10h] [ebp-CD4h] BYREF\nL0023:   unsigned __int8 v25[256]; // [esp+14h] [ebp-CD0h] BYREF\nL0024:   int v26; // [esp+114h] [ebp-BD0h] BYREF\nL0025:   __int32 v27; // [esp+118h] [ebp-BCCh] BYREF\nL0026:   char buf_[1768]; // [esp+11Ch] [ebp-BC8h] BYREF\nL0027:   tagRASDIALPARAMSA v29; // [esp+804h] [ebp-4E0h] BYREF\nL0028:   int n2; // [esp+C30h] [ebp-B4h]\nL0029:   DWORD v31; // [esp+CB4h] [ebp-30h]\nL0030:   char *v32; // [esp+CB8h] [ebp-2Ch] BYREF\nL0031:   char *v33; // [esp+CBCh] [ebp-28h] BYREF\nL0032:   char *lpMultiByteStr; // [esp+CC0h] [ebp-24h] BYREF\nL0033:   BOOL v35; // [esp+CC4h] [ebp-20h] BYREF\nL0034:   _BYTE *dst_1; // [esp+CC8h] [ebp-1Ch] BYREF\nL0035:   _BYTE *dst; // [esp+CCCh] [ebp-18h] BYREF\nL0036:   struct tagRASENTRYNAMEA *p_n264; // [esp+CD0h] [ebp-14h] BYREF\nL0037:   DWORD v39; // [esp+CD4h] [ebp-10h] BYREF\nL0038:   _BYTE v40[4]; // [esp+CD8h] [ebp-Ch] BYREF\nL0039:   DWORD n1768; // [esp+CDCh] [ebp-8h] BYREF\nL0040:   volatile __int32 *dst_2; // [esp+CE0h] [ebp-4h]\nL0041:   int savedregs; // [esp+CE4h] [ebp+0h] BYREF\nL0042: \nL0043:   v24 = 0;\nL0044:   v23 = 0;\nL0045:   v26 = 0;\nL0046:   v27 = 0;\nL0047:   p_n264 = 0;\nL0048:   dst = 0;\nL0049:   dst_1 = 0;\nL0050:   lpMultiByteStr = 0;\nL0051:   v33 = 0;\nL0052:   v32 = 0;\nL0053:   dst_2 = dst_3;\nL0054:   v22 = &savedregs;\nL0055:   v21[1] = (unsigned int)&loc_40861B;\nL0056:   v21[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0057:   __writefsdword(0, (unsigned int)v21);\nL0058:   sub_401AC0(dst_3);\nL0059:   v39 = sub_407FF0();\nL0060:   if ( v39 )\nL0061:   {\nL0062:     sub_402FBC((__int32 **)&p_n264, (int)dword_408218, 1, v39);\nL0063:     p_n264->dwSize = 264;\nL0064:     n1768 = 264 * v39;\nL0065:     if ( !RasEnumEntriesA(0, 0, p_n264, &n1768, &v39) )\nL0066:     {\nL0067:       v29.dwSubEntry = 148;\nL0068:       GetVersionExA((LPOSVERSIONINFOA)&v29.dwSubEntry);\nL0069:       sub_402074((unsigned int *)&dst, 261);\nL0070:       sub_402074((unsigned int *)&dst_1, 261);\nL0071:       if ( n2 == 2 && v29.dwCallbackId >= 5 )\nL0072:       {\nL0073:         pszPath = (CHAR *)sub_401F9C((unsigned int *)&dst);\nL0074:         if ( SHGetSpecialFolderPathA(0, pszPath, 26, 0) )\nL0075:         {\nL0076:           sub_407F4C((unsigned __int32)dst, &v27);\nL0077:           sub_401B58((volatile __int32 *)&dst, v27);\nL0078:         }\nL0079:         pszPath_1 = (CHAR *)sub_401F9C((unsigned int *)&dst_1);\nL0080:         if ( SHGetSpecialFolderPathA(0, pszPath_1, 35, 0) )\nL0081:         {\nL0082:           sub_407F4C((unsigned __int32)dst_1, &v26);\nL0083:           sub_401B58((volatile __int32 *)&dst_1, v26);\nL0084:         }\nL0085:         sub_407E40(a2, a3, a4);\nL0086:       }\nL0087:       v35 = -1;\nL0088:       if ( (int)(v39 - 1) >= 0 )\nL0089:       {\nL0090:         v31 = v39;\nL0091:         v6 = 0;\nL0092:         do\nL0093:         {\nL0094:           v29.dwSize = 1052;\nL0095:           sub_401258((unsigned int)&p_n264->szEntryName[264 * v6], v29.szEntryName, 256);\nL0096:           RasGetEntryDialParamsA(0, &v29, &v35);\nL0097:           n1768 = 1768;\nL0098:           sub_401414(buf_, 1768, 0);\nL0099:           *(_DWORD *)buf_ = n1768;\nL0100:           sub_4081BC(0, (int)&p_n264->szEntryName[264 * v6], (int)buf_, (int)v40, 0, (int)&n1768);\nL0101:           if ( n2 == 2 && v29.dwCallbackId >= 5 && (*dst || *dst_1) )\nL0102:           {\nL0103:             sub_401CAC(&lpMultiByteStr, v29.szEntryName);\nL0104:             sub_403268(lpMultiByteStr, (volatile __int32 *)&v33);\nL0105:             lpFileName = (const CHAR *)sub_401F9C((unsigned int *)&dst);\nL0106:             lpAppName = sub_401F48(lpMultiByteStr);\nL0107:             _RAX = GetPrivateProfileIntA(lpAppName, \"DialParamsUID\", 0, lpFileName);\nL0108:             if ( !_RAX )\nL0109:             {\nL0110:               lpFileName_1 = (const CHAR *)sub_401F9C((unsigned int *)&dst_1);\nL0111:               _RAX = GetPrivateProfileIntA(lpAppName, \"DialParamsUID\", 0, lpFileName_1);\nL0112:             }\nL0113:             if ( !_RAX )\nL0114:             {\nL0115:               lpFileName_2 = (const CHAR *)sub_401F9C((unsigned int *)&dst);\nL0116:               lpAppName_1 = sub_401F48(v33);\nL0117:               _RAX = GetPrivateProfileIntA(lpAppName_1, \"DialParamsUID\", 0, lpFileName_2);\nL0118:             }\nL0119:             if ( !_RAX )\nL0120:             {\nL0121:               lpFileName_3 = (const CHAR *)sub_401F9C((unsigned int *)&dst_1);\nL0122:               lpAppName_2 = sub_401F48(v33);\nL0123:               _RAX = GetPrivateProfileIntA(lpAppName_2, \"DialParamsUID\", 0, lpFileName_3);\nL0124:             }\nL0125:             if ( _RAX )\nL0126:             {\nL0127:               sub_402BC0(v25, _RAX);\nL0128:               sub_401D18(&v32, v25);\nL0129:               n256 = 256;\nL0130:               v13 = (int *)&unk_40E9BC;\nL0131:               do\nL0132:               {\nL0133:                 sub_401E94(*v13, (int *)v32);\nL0134:                 if ( v14 && v13[1] )\nL0135:                 {\nL0136:                   v20 = sub_401D50(v13[1]);\nL0137:                   src = sub_401F48((char *)v13[1]);\nL0138:                   sub_408038(v29.szPassword, src, v20);\nL0139:                 }\nL0140:                 v13 += 2;\nL0141:                 --n256;\nL0142:               }\nL0143:               while ( n256 );\nL0144:             }\nL0145:           }\nL0146:           if ( &v29 != (tagRASDIALPARAMSA *)-519 && &v29 != (tagRASDIALPARAMSA *)-776 )\nL0147:           {\nL0148:             sub_401CAC(&v24, v29.szUserName);\nL0149:             sub_401CAC(&v23, v29.szPassword);\nL0150:             sub_401E10(dst_2, 7);\nL0151:           }\nL0152:           ++v6;\nL0153:           --v31;\nL0154:         }\nL0155:         while ( v31 );\nL0156:       }\nL0157:     }\nL0158:   }\nL0159:   __writefsdword(0, v21[0]);\nL0160:   v22 = (int *)&loc_408622;\nL0161:   sub_401AE4((int *)&v23, 2);\nL0162:   sub_401AE4(&v26, 2);\nL0163:   sub_401AE4((int *)&v32, 3);\nL0164:   sub_401AE4((int *)&dst_1, 2);\nL0165:   return sub_402FC8((int **)&p_n264, (int)dword_408218);\nL0166: }\n```\n\n## F-0433 sub_407DD0，原文件 L0001–L0021 / 共 21 行\n```text\nL0001: int __usercall sub_407DD0@<eax>(\nL0002:         PLSA_UNICODE_STRING *PrivateData@<ecx>,\nL0003:         ACCESS_MASK DesiredAccess@<eax>,\nL0004:         char *a3@<edx>)\nL0005: {\nL0006:   int v6; // ebx\nL0007:   LSA_HANDLE PolicyHandle; // [esp+0h] [ebp-34h] BYREF\nL0008:   struct _LSA_UNICODE_STRING KeyName; // [esp+4h] [ebp-30h] BYREF\nL0009:   struct _LSA_OBJECT_ATTRIBUTES ObjectAttributes; // [esp+Ch] [ebp-28h] BYREF\nL0010: \nL0011:   v6 = 0;\nL0012:   sub_401414((char *)&ObjectAttributes, 24, 0);\nL0013:   if ( !LsaOpenPolicy(0, &ObjectAttributes, DesiredAccess, &PolicyHandle) )\nL0014:   {\nL0015:     sub_407D90(a3, (int)&KeyName);\nL0016:     LOBYTE(v6) = LsaRetrievePrivateData(PolicyHandle, &KeyName, PrivateData) == 0;\nL0017:     sub_40118C(KeyName.Buffer);\nL0018:     LsaClose(PolicyHandle);\nL0019:   }\nL0020:   return v6;\nL0021: }\n```\n\n## F-0434 sub_407E40，原文件 L0001–L0032 / 共 32 行\n```text\nL0001: // bad sp value at call has been detected, the output may be wrong!\nL0002: int *__usercall sub_407E40@<eax>(int a1@<ebx>, int a2@<edi>, int a3@<esi>)\nL0003: {\nL0004:   _DWORD v4[3]; // [esp-Ch] [ebp-18h] BYREF\nL0005:   char *v5; // [esp+0h] [ebp-Ch] BYREF\nL0006:   char *dst_; // [esp+4h] [ebp-8h] BYREF\nL0007:   PLSA_UNICODE_STRING PrivateData; // [esp+8h] [ebp-4h] BYREF\nL0008:   void *savedregs; // [esp+Ch] [ebp+0h] BYREF\nL0009: \nL0010:   PrivateData = 0;\nL0011:   dst_ = 0;\nL0012:   v5 = 0;\nL0013:   v4[2] = &savedregs;\nL0014:   v4[1] = &loc_407EF8;\nL0015:   v4[0] = NtCurrentTeb()->NtTib.ExceptionList;\nL0016:   __writefsdword(0, (unsigned int)v4);\nL0017:   sub_407CAC(&v5);\nL0018:   sub_401E10((volatile __int32 *)&dst_, 3);\nL0019:   if ( (unsigned __int8)sub_407DD0(&PrivateData, 4u, dst_) )\nL0020:   {\nL0021:     sub_407B94((int)PrivateData->Buffer, PrivateData->Length, a1, a2, a3);\nL0022:     LsaFreeMemory(PrivateData->Buffer);\nL0023:   }\nL0024:   if ( (unsigned __int8)sub_407DD0(&PrivateData, 4u, \"L$_RasDefaultCredentials#0\") )\nL0025:   {\nL0026:     sub_407B94((int)PrivateData->Buffer, PrivateData->Length, a1, a2, a3);\nL0027:     LsaFreeMemory(PrivateData->Buffer);\nL0028:   }\nL0029:   __writefsdword(0, (unsigned int)dst_);\nL0030:   savedregs = &loc_407EFF;\nL0031:   return sub_401AE4((int *)&v5, 2);\nL0032: }\n```\n\n## F-0435 sub_407F4C，原文件 L0001–L0013 / 共 13 行\n```text\nL0001: volatile __int32 *__usercall sub_407F4C@<eax>(unsigned __int32 dst@<eax>, volatile __int32 *a2@<edx>)\nL0002: {\nL0003:   const CHAR *v3; // eax\nL0004:   int n4; // eax\nL0005: \nL0006:   sub_401D9C(a2, dst, (unsigned __int32)&dst__6);\nL0007:   v3 = (const CHAR *)sub_401F9C((unsigned int *)a2);\nL0008:   n4 = lstrlenA(v3);\nL0009:   sub_402074((unsigned int *)a2, n4);\nL0010:   if ( *(_BYTE *)(*a2 + sub_401D50(*a2)) != 92 )\nL0011:     sub_401D58(a2, (__int32)dst__7);\nL0012:   return sub_401D58(a2, (__int32)\"Microsoft\\\\Network\\\\Connections\\\\pbk\\\\rasphone.pbk\");\nL0013: }\n```\n\n## F-0436 sub_407FF0，原文件 L0001–L0015 / 共 15 行\n```text\nL0001: DWORD sub_407FF0()\nL0002: {\nL0003:   DWORD n603; // eax\nL0004:   DWORD n264; // [esp+0h] [ebp-110h] BYREF\nL0005:   DWORD v3; // [esp+4h] [ebp-10Ch] BYREF\nL0006:   int n264_1; // [esp+8h] [ebp-108h] BYREF\nL0007: \nL0008:   n264 = 264;\nL0009:   n264_1 = 264;\nL0010:   n603 = RasEnumEntriesA(0, 0, (struct tagRASENTRYNAMEA *)&n264_1, &n264, &v3);\nL0011:   if ( n603 != 603 && n603 )\nL0012:     return 0;\nL0013:   else\nL0014:     return v3;\nL0015: }\n```\n\n## F-0430 sub_407B94，原文件 L0001–L0076 / 共 76 行\n```text\nL0001: int *__usercall sub_407B94@<eax>(int a1@<eax>, unsigned int a2@<edx>, int a3@<ebx>, int a4@<edi>, int a5@<esi>)\nL0002: {\nL0003:   int n7; // esi\nL0004:   int v7; // edi\nL0005:   unsigned int v9[2]; // [esp-18h] [ebp-34h] BYREF\nL0006:   int *v10; // [esp-10h] [ebp-2Ch]\nL0007:   int v11; // [esp-Ch] [ebp-28h]\nL0008:   int v12; // [esp-8h] [ebp-24h]\nL0009:   int v13; // [esp-4h] [ebp-20h]\nL0010:   char *dst; // [esp+0h] [ebp-1Ch] BYREF\nL0011:   _BYTE *v15; // [esp+4h] [ebp-18h]\nL0012:   __int32 dst_1; // [esp+8h] [ebp-14h] BYREF\nL0013:   __int32 dst_2; // [esp+Ch] [ebp-10h] BYREF\nL0014:   int v18; // [esp+10h] [ebp-Ch]\nL0015:   int v19; // [esp+14h] [ebp-8h]\nL0016:   int v20; // [esp+18h] [ebp-4h]\nL0017:   int savedregs; // [esp+1Ch] [ebp+0h] BYREF\nL0018: \nL0019:   v19 = 0;\nL0020:   v18 = 0;\nL0021:   dst_2 = 0;\nL0022:   dst_1 = 0;\nL0023:   v15 = 0;\nL0024:   dst = 0;\nL0025:   v13 = a3;\nL0026:   v12 = a5;\nL0027:   v11 = a4;\nL0028:   v20 = a1;\nL0029:   v10 = &savedregs;\nL0030:   v9[1] = (unsigned int)&loc_407C9D;\nL0031:   v9[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0032:   __writefsdword(0, (unsigned int)v9);\nL0033:   sub_401AC0(&dst_2);\nL0034:   n7 = 0;\nL0035:   sub_401AC0(&dst_1);\nL0036:   v19 = 0;\nL0037:   if ( (int)((a2 >> 1) - 2) >= 0 )\nL0038:   {\nL0039:     v7 = (a2 >> 1) - 1;\nL0040:     v18 = 0;\nL0041:     do\nL0042:     {\nL0043:       sub_402914();\nL0044:       if ( *v15 )\nL0045:       {\nL0046:         sub_401C9C(&dst);\nL0047:         sub_401D58(&dst_2, (__int32)dst);\nL0048:       }\nL0049:       else\nL0050:       {\nL0051:         if ( ++n7 == 1 )\nL0052:         {\nL0053:           sub_401B58(&dst_1, dst_2);\nL0054:         }\nL0055:         else if ( n7 == 7 && dst_2 )\nL0056:         {\nL0057:           sub_401B14((volatile __int32 *)&unk_40E9BC + 2 * v19, dst_1);\nL0058:           sub_401B14(&dword_40E9C0[2 * v19], dst_2);\nL0059:         }\nL0060:         sub_401AC0(&dst_2);\nL0061:       }\nL0062:       if ( n7 == 9 )\nL0063:       {\nL0064:         ++v19;\nL0065:         sub_401AC0(&dst_1);\nL0066:         n7 = 0;\nL0067:       }\nL0068:       ++v18;\nL0069:       --v7;\nL0070:     }\nL0071:     while ( v7 );\nL0072:   }\nL0073:   __writefsdword(0, v9[0]);\nL0074:   v10 = (int *)&loc_407CA4;\nL0075:   return sub_401AE4((int *)&dst, 4);\nL0076: }\n```\n\n## F-0431 sub_407CAC，原文件 L0001–L0044 / 共 44 行\n```text\nL0001: _DWORD *__usercall sub_407CAC@<eax>(char **a1@<eax>)\nL0002: {\nL0003:   CHAR *lpBuffer; // eax\nL0004:   const CHAR *lpAccountName; // eax\nL0005:   unsigned int v5[2]; // [esp-Ch] [ebp-228h] BYREF\nL0006:   int *v6; // [esp-4h] [ebp-220h]\nL0007:   CHAR ReferencedDomainName[256]; // [esp+4h] [ebp-218h] BYREF\nL0008:   _BYTE Sid[256]; // [esp+104h] [ebp-118h] BYREF\nL0009:   LPSTR StringSid; // [esp+204h] [ebp-18h] BYREF\nL0010:   enum _SID_NAME_USE peUse; // [esp+208h] [ebp-14h] BYREF\nL0011:   DWORD cchReferencedDomainName; // [esp+20Ch] [ebp-10h] BYREF\nL0012:   DWORD cbSid; // [esp+210h] [ebp-Ch] BYREF\nL0013:   DWORD pcbBuffer; // [esp+214h] [ebp-8h] BYREF\nL0014:   unsigned int v14; // [esp+218h] [ebp-4h] BYREF\nL0015:   int savedregs; // [esp+21Ch] [ebp+0h] BYREF\nL0016: \nL0017:   v14 = 0;\nL0018:   v6 = &savedregs;\nL0019:   v5[1] = (unsigned int)&loc_407D81;\nL0020:   v5[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0021:   __writefsdword(0, (unsigned int)v5);\nL0022:   sub_401AC0(a1);\nL0023:   sub_402074(&v14, 256);\nL0024:   pcbBuffer = 255;\nL0025:   lpBuffer = (CHAR *)sub_401F9C(&v14);\nL0026:   if ( GetUserNameA(lpBuffer, &pcbBuffer) )\nL0027:   {\nL0028:     cbSid = 255;\nL0029:     cchReferencedDomainName = 255;\nL0030:     lpAccountName = (const CHAR *)sub_401F9C(&v14);\nL0031:     if ( LookupAccountNameA(0, lpAccountName, Sid, &cbSid, ReferencedDomainName, &cchReferencedDomainName, &peUse) )\nL0032:     {\nL0033:       if ( IsValidSid(Sid) )\nL0034:       {\nL0035:         ConvertSidToStringSidA(Sid, &StringSid);\nL0036:         sub_401CAC(a1, StringSid);\nL0037:         GlobalFree(StringSid);\nL0038:       }\nL0039:     }\nL0040:   }\nL0041:   __writefsdword(0, v5[0]);\nL0042:   v6 = (int *)&loc_407D88;\nL0043:   return sub_401AC0(&v14);\nL0044: }\n```\n\n## F-0432 sub_407D90，原文件 L0001–L0014 / 共 14 行\n```text\nL0001: WCHAR *__usercall sub_407D90@<eax>(char *a1@<eax>, int a2@<edx>)\nL0002: {\nL0003:   __int16 v4; // ax\nL0004:   unsigned __int16 v5; // bp\nL0005:   WCHAR *lpWideCharStr; // eax\nL0006: \nL0007:   v4 = sub_401D50((int)a1);\nL0008:   *(_WORD *)a2 = 2 * v4;\nL0009:   v5 = 2 * v4 + 2;\nL0010:   *(_WORD *)(a2 + 2) = v5;\nL0011:   lpWideCharStr = (WCHAR *)sub_401174((LPVOID)v5);\nL0012:   *(_DWORD *)(a2 + 4) = lpWideCharStr;\nL0013:   return sub_402928(a1, lpWideCharStr, *(unsigned __int16 *)(a2 + 2));\nL0014: }\n```\n\n## F-0437 sub_408038，原文件 L0001–L0033 / 共 33 行\n```text\nL0001: char *__usercall sub_408038@<eax>(char *dst@<eax>, _BYTE *src@<edx>, int a3@<ecx>)\nL0002: {\nL0003:   _BYTE *src_1; // edi\nL0004:   int v4; // ebx\nL0005:   bool v5; // zf\nL0006:   unsigned int v6; // ebx\nL0007:   char *dst_1; // edi\nL0008:   unsigned int count; // ecx\nL0009: \nL0010:   src_1 = src;\nL0011:   v4 = a3;\nL0012:   v5 = a3 == 0;\nL0013:   if ( a3 )\nL0014:   {\nL0015:     do\nL0016:     {\nL0017:       if ( !a3 )\nL0018:         break;\nL0019:       v5 = *src_1++ == 0;\nL0020:       --a3;\nL0021:     }\nL0022:     while ( !v5 );\nL0023:     if ( v5 )\nL0024:       ++a3;\nL0025:   }\nL0026:   v6 = v4 - a3;\nL0027:   qmemcpy(dst, src, 4 * (v6 >> 2));\nL0028:   dst_1 = &dst[4 * (v6 >> 2)];\nL0029:   count = v6 & 3;\nL0030:   qmemcpy(dst_1, &src[4 * (v6 >> 2)], count);\nL0031:   dst_1[count] = 0;\nL0032:   return dst;\nL0033: }\n```\n\n## F-0439 sub_4081BC，原文件 L0001–L0007 / 共 7 行\n```text\nL0001: int __userpurge sub_4081BC@<eax>(int a1@<eax>, int a2@<edx>, int a3@<ecx>, int a4, int a5, int a6)\nL0002: {\nL0003:   FARPROC v8; // eax\nL0004: \nL0005:   v8 = sub_40806C(\"RasGetEntryProperties\");\nL0006:   return ((int (__stdcall *)(int, int, int, int, int, int))v8)(a1, a2, a3, a6, a5, a4);\nL0007: }\n```\n\n## F-0476 sub_409A84，原文件 L0001–L0004 / 共 4 行\n```text\nL0001: int **__usercall sub_409A84@<eax>(volatile __int32 *dst@<eax>, int a2@<edi>, int a3@<esi>)\nL0002: {\nL0003:   return sub_408238(dst, (int)dst, a2, a3);\nL0004: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "当前材料闭合了一个 RAS/拨号凭据收集路径：函数枚举 RAS 条目，读取拨号参数，并在满足系统版本、配置目录及条目条件时从 RAS 配置文件和 LSA 私有数据中补取或处理凭据相关数据；其结果被写入调用者提供的缓冲区/内部数据结构。由于序列化函数、调用者消费方式及最终 .abc 文件写入链不在本包内，无法确认最终输出内容或运行时成功。",
+    "claims": [
+      {
+        "behavior": "在 RAS 条目存在且 `n2 == 2`、系统版本回调值至少为 5 时，枚举 RAS 条目并读取每个条目的拨号参数；随后将用户名和密码字段追加到调用者提供的输出对象。",
+        "condition": "`sub_407FF0` 返回非零且 `RasEnumEntriesA` 成功；每个条目循环执行，且排除两个特定无效地址条件。",
+        "source": "RAS 条目名称及 `RasGetEntryDialParamsA` 返回的 `tagRASDIALPARAMSA` 字段，尤其是 `szUserName` 和 `szPassword`。",
+        "action": "对每个 RAS 条目调用 `RasGetEntryDialParamsA`，然后分别把 `v29.szUserName` 和 `v29.szPassword` 交给 `sub_401CAC`，并以类型/标记 7 调用 `sub_401E10`。",
+        "sink": "调用者传入的 `dst_3` 所关联的内部输出对象；本包未显示其最终序列化格式或外部写入。",
+        "evidence": [
+          {
+            "location": "F-0440 sub_408238 原文件 L0059-L0071",
+            "observation": "代码获取 RAS 条目数量并调用 `RasEnumEntriesA`；随后检查 `n2 == 2 && v29.dwCallbackId >= 5`。"
+          },
+          {
+            "location": "F-0440 sub_408238 原文件 L0094-L0100",
+            "observation": "循环中设置条目名称，调用 `RasGetEntryDialParamsA`，并调用 `sub_4081BC` 获取条目属性。"
+          },
+          {
+            "location": "F-0440 sub_408238 原文件 L0146-L0151",
+            "observation": "对每个条目的 `szUserName` 和 `szPassword` 调用 `sub_401CAC`，再调用 `sub_401E10(dst_2, 7)`。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "`sub_401CAC`、`sub_401E10` 及调用者对 `dst_3` 的消费方式未提供，因此不能确认字段编码、是否成功返回完整数据或是否直接形成文件内容。"
+        ]
+      },
+      {
+        "behavior": "在满足 RAS 条目、系统版本及用户目录条件时，代码从 RAS 配置文件中查询 `DialParamsUID`，并在得到非零 UID 后读取和处理对应数据以补充当前条目的密码字段。",
+        "condition": "`n2 == 2`、`v29.dwCallbackId >= 5`，且至少一个由 `SHGetSpecialFolderPathA` 获得并追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk` 的路径存在；随后至少一次 `GetPrivateProfileIntA(..., \"DialParamsUID\", ...)` 返回非零。",
+        "source": "当前 RAS 条目的 `szEntryName` 及用户目录下的 `rasphone.pbk` 配置文件。",
+        "action": "通过 `GetPrivateProfileIntA` 在多个候选配置文件/节名组合中查询 `DialParamsUID`；若获得 UID，则转换并处理该值，再遍历内部表，将匹配数据复制到 `v29.szPassword`。",
+        "sink": "`v29.szPassword`，之后由外层逻辑追加到 `dst_2` 关联的输出对象。",
+        "evidence": [
+          {
+            "location": "F-0440 sub_408238 原文件 L0073-L0085",
+            "observation": "代码获取特殊目录路径，并由 `sub_407F4C` 追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 sub_408238 原文件 L0101-L0125",
+            "observation": "在条目和版本条件下，代码对候选配置路径调用多次 `GetPrivateProfileIntA` 查询 `DialParamsUID`，并仅在 `_RAX` 非零时继续。"
+          },
+          {
+            "location": "F-0440 sub_408238 原文件 L0127-L0138",
+            "observation": "非零 UID 被转换后用于内部表查找；匹配项通过 `sub_408038` 写入 `v29.szPassword`。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未给出 `sub_401E94`、`sub_401D50`、内部表内容或 `sub_408038` 之外的密码数据语义，因此只能确认配置查询和写入密码缓冲区，不能确认实际恢复出的明文内容。"
+        ]
+      },
+      {
+        "behavior": "代码可从 LSA 私有数据读取并处理与当前用户相关的凭据材料，同时尝试读取固定名称的 `L$_RasDefaultCredentials#0` 私有数据项。",
+        "condition": "`sub_407E40` 被调用；在该函数内，`sub_407DD0` 成功打开 LSA Policy 并成功执行 `LsaRetrievePrivateData`。",
+        "source": "由当前用户名转换得到的 SID 字符串，以及固定 LSA 私有数据名称 `L$_RasDefaultCredentials#0`。",
+        "action": "调用 `GetUserNameA`、`LookupAccountNameA` 和 `ConvertSidToStringSidA` 得到 SID；将其转换为 LSA Unicode 名称后，以访问权限 4 调用 `LsaRetrievePrivateData`。成功取得的数据交给 `sub_407B94` 逐字节分段处理；固定名称项也执行同样处理。",
+        "sink": "`sub_407B94` 的内部输出/全局数据表，并由 `sub_407E40` 的调用参数继续传递；本包未显示最终文件、网络或其他外部 sink。",
+        "evidence": [
+          {
+            "location": "F-0431 sub_407CAC 原文件 L0022-L0037",
+            "observation": "代码读取当前用户名，解析账户 SID，转换为字符串并写入 `a1`。"
+          },
+          {
+            "location": "F-0432 sub_407D90 原文件 L0007-L0013",
+            "observation": "代码将输入字符串转换为 LSA Unicode 字符串结构。"
+          },
+          {
+            "location": "F-0433 sub_407DD0 原文件 L0012-L0018",
+            "observation": "代码打开 LSA Policy，构造键名并调用 `LsaRetrievePrivateData`，成功后关闭句柄。"
+          },
+          {
+            "location": "F-0434 sub_407E40 原文件 L0017-L0027",
+            "observation": "代码先读取由 `sub_407CAC` 生成的名称，再读取固定名称 `L$_RasDefaultCredentials#0`；每次成功检索后调用 `sub_407B94` 并释放 LSA 缓冲区。"
+          },
+          {
+            "location": "F-0430 sub_407B94 原文件 L0037-L0071",
+            "observation": "代码遍历私有数据字节，按分隔/记录条件复制到临时缓冲区和 `unk_40E9BC` 相关表。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "`sub_407B94` 的输出表字段含义和调用参数语义未提供，不能把该数据明确命名为用户名、密码或其他特定凭据字段；也不能确认 LSA 检索一定成功。"
+        ]
+      },
+      {
+        "behavior": "在 RAS 条目处理前，代码读取并使用当前用户的 RAS 配置路径以及两个特殊文件夹路径。",
+        "condition": "`SHGetSpecialFolderPathA` 对相应特殊目录调用成功。",
+        "source": "系统特殊文件夹路径。",
+        "action": "对路径缓冲区追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`，并将该路径作为 `GetPrivateProfileIntA` 的配置文件参数。",
+        "sink": "对 `rasphone.pbk` 的配置读取。",
+        "evidence": [
+          {
+            "location": "F-0435 sub_407F4C 原文件 L0006-L0012",
+            "observation": "代码规范化输入路径，并追加固定子路径 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 sub_408238 原文件 L0073-L0083",
+            "observation": "代码通过 `SHGetSpecialFolderPathA` 获取两个目录并保存处理后的路径。"
+          },
+          {
+            "location": "F-0440 sub_408238 原文件 L0105-L0123",
+            "observation": "处理后的路径作为 `GetPrivateProfileIntA` 的文件参数使用。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包没有显示配置文件内容，也没有证明路径存在或查询一定返回有效值。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "Microsoft\\Network\\Connections\\pbk\\rasphone.pbk",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "固定的 RAS 电话簿配置相对路径；代码将其追加到特殊文件夹路径并用于读取 `DialParamsUID`。",
+        "evidence": [
+          {
+            "location": "F-0435 sub_407F4C 原文件 L0010-L0012",
+            "observation": "明确追加固定字符串 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 sub_408238 原文件 L0105-L0123",
+            "observation": "由该路径构成的文件名传给 `GetPrivateProfileIntA`。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "L$_RasDefaultCredentials#0",
+        "role": "config_marker",
+        "detection_specificity": "high",
+        "meaning": "代码尝试读取的固定 LSA 私有数据名称，具有较高行为识别价值。",
+        "evidence": [
+          {
+            "location": "F-0434 sub_407E40 原文件 L0024-L0027",
+            "observation": "代码将固定字符串传给 `sub_407DD0`，成功后处理返回的 LSA 私有数据。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "DialParamsUID",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "RAS 配置查询使用的固定键名，用于定位拨号参数数据。",
+        "evidence": [
+          {
+            "location": "F-0440 sub_408238 原文件 L0107-L0123",
+            "observation": "代码在多个配置节/路径组合中查询固定键 `DialParamsUID`。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "RAS 收集结果如何编码、由哪个调用者传入 J00 的七个 `.abc` 输出之一，以及最终写入的具体内容是什么？",
+        "reason": "当前包包含 `sub_409A84` 到 `sub_408238` 的转调和收集逻辑，但未包含 `sub_401CAC`、`sub_401E10`、`sub_402914` 等关键缓冲区/序列化实现，也未包含最终写出调用者。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "LSA 私有数据经 `sub_407B94` 处理后，各输出表字段是否确实为 RAS 用户名、密码或其他凭据？",
+        "reason": "当前代码直接证明 LSA 私有数据被读取和分段处理，但未提供内部表定义或消费逻辑。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "`sub_407E40` 的调用条件和三个参数在 `sub_408238` 的上游/调用者中如何确定？",
+        "reason": "本函数内部只显示 `sub_407E40(a2, a3, a4)`，无法从当前包确认哪些调用模式启用 LSA 数据路径。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC, sub_401E10, sub_402914, sub_401E94",
+        "reason": "解析 RAS 用户名/密码及私有数据处理后的缓冲区格式和记录语义。",
+        "expected_value": "确认 source 到输出记录的字段含义及序列化方式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409A84 的调用者及最终写出链",
+        "reason": "确认该 RAS 收集函数返回数据如何绑定到 J00 的固定 `.abc` 文件。",
+        "expected_value": "闭合 RAS/LSA 数据到具体文件 sink 的关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_407B94 的调用者与 `unk_40E9BC` 消费代码",
+        "reason": "解析 LSA 私有数据分段后的目标字段。",
+        "expected_value": "判断处理结果是否为凭据字段及其最终用途。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402914",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E94",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定用户名、密码及 LSA 私有数据如何编码进内部输出缓冲区；当前证据只显示调用关系和部分字段来源。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0440 sub_408238 原文件 L0146-L0151",
+            "observation": "用户名和密码被追加后交给 `sub_401E10`。"
+          },
+          {
+            "location": "F-0430 sub_407B94 原文件 L0043-L0059",
+            "observation": "LSA 私有数据经分段后写入内部表，具体字段语义依赖未提供函数和表消费逻辑。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_409A84",
+            "start_line": 1,
+            "end_line": 4
+          }
+        ],
+        "reason": "需要其调用者和后续消费链，确认本 RAS 收集结果与 J00 固定 `.abc` 输出的绑定关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0476 sub_409A84 原文件 L0001-L0004",
+            "observation": "该函数仅转调 `sub_408238`，未显示返回数据如何进入最终输出。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前结果中的全部 claim、artifact 和 material_need 证据位置都使用了“F-xxxx 函数名 原文件 L...”格式，验证器将 21 个引用全部判为 invalid_format；因此即使 observation 与源码大体对应，结果当前不满足可核验的证据边界。",
+        "evidence": [
+          {
+            "location": "evidence_reference_validation: invalid_references",
+            "observation": "验证结果显示 valid_segments=0、invalid_segments=21，覆盖 C001-C004、A001-A003 和 M001 的所有证据引用。"
+          },
+          {
+            "location": "F-0440 L0059-L0071",
+            "observation": "当前材料实际提供了 sub_408238 的这些源码行，可作为 claim 1 的有效来源，但 Analyzer 写成了带函数名和“原文件”的不可解析格式。"
+          },
+          {
+            "location": "F-0434 L0024-L0027",
+            "observation": "当前材料实际提供了固定 LSA 名称调用的源码行，可作为 artifact 2 的有效来源，但现有引用同样不可解析。"
+          }
+        ],
+        "required_fix": "将所有当前无效的 location 改为验证器接受的当前材料格式，例如“F-0440 L59-L71”“F-0434 L24-L27”，并保持 observation 与对应源码一致；不要通过扩大行段或改写 observation 来规避引用错误。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "unsupported_claim",
+        "description": "claim 3 将 LSA 私有数据称为“与当前用户相关的凭据材料”，并在 summary 中概括为“凭据相关数据”。当前材料只直接证明：通过当前用户 SID 派生的名称及固定名称读取 LSA private data，并将返回字节交给 sub_407B94 分段/入表；没有证明这些私有数据的字段语义确为凭据。现有 limitations 虽然承认不能明确命名为用户名或密码，但没有消除 claim 主体的过度定性。",
+        "evidence": [
+          {
+            "location": "F-0434 L17-L27",
+            "observation": "sub_407E40 对派生名称和 L$_RasDefaultCredentials#0 调用 LsaRetrievePrivateData，成功后把返回缓冲区交给 sub_407B94。"
+          },
+          {
+            "location": "F-0430 L37-L71",
+            "observation": "sub_407B94 仅展示对私有数据字节的分段和写入 unk_40E9BC 相关表，未展示字段定义或凭据语义。"
+          }
+        ],
+        "required_fix": "把 claim 3 及 summary 中的“凭据材料/凭据相关数据”改为证据直接支持的“LSA 私有数据”或“LSA 私有数据字节”；保留已确认的读取、处理和固定名称事实，并在 limitations 中明确字段语义未闭合。不要把该路径升级为已确认的凭据窃取。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/2"
+          },
+          {
+            "operation": "replace",
+            "path": "/summary"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "material_need 1 的目标填写为 sub_409A84，但该函数的 4 行转调实现已在当前包提供，且 dependency_handoffs 已确认其作为 J00 的 producer；该需求真正需要的是调用者之后的消费/写出链或对应调用点，而不是再次索要 sub_409A84 本体。",
+        "evidence": [
+          {
+            "location": "F-0476 L1-L4",
+            "observation": "当前包明确显示 sub_409A84 仅调用 sub_408238 并返回。"
+          },
+          {
+            "location": "dependency_handoffs J00 claims / needed material",
+            "observation": "上游摘要已确认 sub_409A84 属于七个 producer/output pair，并指出未闭合的是 producer 结果的具体语义及后续输出消费。"
+          }
+        ],
+        "required_fix": "将 material_need 1 的 target/reason 改为未提供的调用者消费链、序列化函数或最终写出调用点；不要把已读的 sub_409A84 重新列为待补材料。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/material_needs/1"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体捕获了当前包新增的 RAS 枚举、拨号参数、rasphone.pbk 查询及 LSA private-data 路径，也正确保留了最终 .abc sink 未闭合的限制。但当前所有证据引用均不可解析，必须修正；另需删除对 LSA 数据“凭据材料”的未证实定性，并校正一项重复/错误的补料目标。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前结果中的全部 claim、artifact 和 material_need 证据位置都使用了“F-xxxx 函数名 原文件 L...”格式，验证器将 21 个引用全部判为 invalid_format；因此即使 observation 与源码大体对应，结果当前不满足可核验的证据边界。",
+        "evidence": [
+          {
+            "location": "evidence_reference_validation: invalid_references",
+            "observation": "验证结果显示 valid_segments=0、invalid_segments=21，覆盖 C001-C004、A001-A003 和 M001 的所有证据引用。"
+          },
+          {
+            "location": "F-0440 L0059-L0071",
+            "observation": "当前材料实际提供了 sub_408238 的这些源码行，可作为 claim 1 的有效来源，但 Analyzer 写成了带函数名和“原文件”的不可解析格式。"
+          },
+          {
+            "location": "F-0434 L0024-L0027",
+            "observation": "当前材料实际提供了固定 LSA 名称调用的源码行，可作为 artifact 2 的有效来源，但现有引用同样不可解析。"
+          }
+        ],
+        "required_fix": "将所有当前无效的 location 改为验证器接受的当前材料格式，例如“F-0440 L59-L71”“F-0434 L24-L27”，并保持 observation 与对应源码一致；不要通过扩大行段或改写 observation 来规避引用错误。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "unsupported_claim",
+        "description": "claim 3 将 LSA 私有数据称为“与当前用户相关的凭据材料”，并在 summary 中概括为“凭据相关数据”。当前材料只直接证明：通过当前用户 SID 派生的名称及固定名称读取 LSA private data，并将返回字节交给 sub_407B94 分段/入表；没有证明这些私有数据的字段语义确为凭据。现有 limitations 虽然承认不能明确命名为用户名或密码，但没有消除 claim 主体的过度定性。",
+        "evidence": [
+          {
+            "location": "F-0434 L17-L27",
+            "observation": "sub_407E40 对派生名称和 L$_RasDefaultCredentials#0 调用 LsaRetrievePrivateData，成功后把返回缓冲区交给 sub_407B94。"
+          },
+          {
+            "location": "F-0430 L37-L71",
+            "observation": "sub_407B94 仅展示对私有数据字节的分段和写入 unk_40E9BC 相关表，未展示字段定义或凭据语义。"
+          }
+        ],
+        "required_fix": "把 claim 3 及 summary 中的“凭据材料/凭据相关数据”改为证据直接支持的“LSA 私有数据”或“LSA 私有数据字节”；保留已确认的读取、处理和固定名称事实，并在 limitations 中明确字段语义未闭合。不要把该路径升级为已确认的凭据窃取。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/2"
+          },
+          {
+            "operation": "replace",
+            "path": "/summary"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "material_need 1 的目标填写为 sub_409A84，但该函数的 4 行转调实现已在当前包提供，且 dependency_handoffs 已确认其作为 J00 的 producer；该需求真正需要的是调用者之后的消费/写出链或对应调用点，而不是再次索要 sub_409A84 本体。",
+        "evidence": [
+          {
+            "location": "F-0476 L1-L4",
+            "observation": "当前包明确显示 sub_409A84 仅调用 sub_408238 并返回。"
+          },
+          {
+            "location": "dependency_handoffs J00 claims / needed material",
+            "observation": "上游摘要已确认 sub_409A84 属于七个 producer/output pair，并指出未闭合的是 producer 结果的具体语义及后续输出消费。"
+          }
+        ],
+        "required_fix": "将 material_need 1 的 target/reason 改为未提供的调用者消费链、序列化函数或最终写出调用点；不要把已读的 sub_409A84 重新列为待补材料。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/material_needs/1"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体捕获了当前包新增的 RAS 枚举、拨号参数、rasphone.pbk 查询及 LSA private-data 路径，也正确保留了最终 .abc sink 未闭合的限制。但当前所有证据引用均不可解析，必须修正；另需删除对 LSA 数据“凭据材料”的未证实定性，并校正一项重复/错误的补料目标。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "当前材料闭合了一个 RAS/拨号参数与 LSA 私有数据处理路径：函数枚举 RAS 条目，读取拨号参数，并在满足系统版本、配置目录及条目条件时从 RAS 配置文件查询 DialParamsUID、处理相关数据；同时通过当前用户 SID 派生名称及固定名称读取 LSA 私有数据字节并分段处理。其结果被写入调用者提供的缓冲区/内部数据结构。由于序列化函数、调用者消费方式及最终 .abc 文件写入链不在本包内，无法确认最终输出内容或运行时成功。",
+    "claims": [
+      {
+        "behavior": "在 RAS 条目存在且 `n2 == 2`、系统版本回调值至少为 5 时，枚举 RAS 条目并读取每个条目的拨号参数；随后将用户名和密码字段追加到调用者提供的输出对象。",
+        "condition": "`sub_407FF0` 返回非零且 `RasEnumEntriesA` 成功；每个条目循环执行，且排除两个特定无效地址条件。",
+        "source": "RAS 条目名称及 `RasGetEntryDialParamsA` 返回的 `tagRASDIALPARAMSA` 字段，尤其是 `szUserName` 和 `szPassword`。",
+        "action": "对每个 RAS 条目调用 `RasGetEntryDialParamsA`，然后分别把 `v29.szUserName` 和 `v29.szPassword` 交给 `sub_401CAC`，并以类型/标记 7 调用 `sub_401E10`。",
+        "sink": "调用者传入的 `dst_3` 所关联的内部输出对象；本包未显示其最终序列化格式或外部写入。",
+        "evidence": [
+          {
+            "location": "F-0440 L59-L71",
+            "observation": "代码获取 RAS 条目数量并调用 `RasEnumEntriesA`；随后检查 `n2 == 2 && v29.dwCallbackId >= 5`。"
+          },
+          {
+            "location": "F-0440 L94-L100",
+            "observation": "循环中设置条目名称，调用 `RasGetEntryDialParamsA`，并调用 `sub_4081BC` 获取条目属性。"
+          },
+          {
+            "location": "F-0440 L146-L151",
+            "observation": "对每个条目的 `szUserName` 和 `szPassword` 调用 `sub_401CAC`，再调用 `sub_401E10(dst_2, 7)`。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "`sub_401CAC`、`sub_401E10` 及调用者对 `dst_3` 的消费方式未提供，因此不能确认字段编码、是否成功返回完整数据或是否直接形成文件内容。"
+        ]
+      },
+      {
+        "behavior": "在满足 RAS 条目、系统版本及用户目录条件时，代码从 RAS 配置文件中查询 `DialParamsUID`，并在得到非零 UID 后读取和处理对应数据以补充当前条目的密码字段。",
+        "condition": "`n2 == 2`、`v29.dwCallbackId >= 5`，且至少一个由 `SHGetSpecialFolderPathA` 获得并追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk` 的路径存在；随后至少一次 `GetPrivateProfileIntA(..., \"DialParamsUID\", ...)` 返回非零。",
+        "source": "当前 RAS 条目的 `szEntryName` 及用户目录下的 `rasphone.pbk` 配置文件。",
+        "action": "通过 `GetPrivateProfileIntA` 在多个候选配置文件/节名组合中查询 `DialParamsUID`；若获得 UID，则转换并处理该值，再遍历内部表，将匹配数据复制到 `v29.szPassword`。",
+        "sink": "`v29.szPassword`，之后由外层逻辑追加到 `dst_2` 关联的输出对象。",
+        "evidence": [
+          {
+            "location": "F-0440 L73-L85",
+            "observation": "代码获取特殊目录路径，并由 `sub_407F4C` 追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 L101-L125",
+            "observation": "在条目和版本条件下，代码对候选配置路径调用多次 `GetPrivateProfileIntA` 查询 `DialParamsUID`，并仅在 `_RAX` 非零时继续。"
+          },
+          {
+            "location": "F-0440 L127-L138",
+            "observation": "非零 UID 被转换后用于内部表查找；匹配项通过 `sub_408038` 写入 `v29.szPassword`。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未给出 `sub_401E94`、`sub_401D50`、内部表内容或 `sub_408038` 之外的密码数据语义，因此只能确认配置查询和写入密码缓冲区，不能确认实际恢复出的明文内容。"
+        ]
+      },
+      {
+        "behavior": "代码可从 LSA 私有数据读取并处理由当前用户 SID 派生名称及固定名称对应的 LSA 私有数据字节。",
+        "condition": "`sub_407E40` 被调用；在该函数内，`sub_407DD0` 成功打开 LSA Policy 并成功执行 `LsaRetrievePrivateData`。",
+        "source": "由当前用户名转换得到的 SID 字符串，以及固定 LSA 私有数据名称 `L$_RasDefaultCredentials#0`。",
+        "action": "调用 `GetUserNameA`、`LookupAccountNameA` 和 `ConvertSidToStringSidA` 得到 SID；将其转换为 LSA Unicode 名称后，以访问权限 4 调用 `LsaRetrievePrivateData`。成功取得的数据交给 `sub_407B94` 逐字节分段处理；固定名称项也执行同样处理。",
+        "sink": "`sub_407B94` 的内部输出/全局数据表，并由 `sub_407E40` 的调用参数继续传递；本包未显示最终文件、网络或其他外部 sink。",
+        "evidence": [
+          {
+            "location": "F-0431 L22-L37",
+            "observation": "代码读取当前用户名，解析账户 SID，转换为字符串并写入 `a1`。"
+          },
+          {
+            "location": "F-0432 L7-L13",
+            "observation": "代码将输入字符串转换为 LSA Unicode 字符串结构。"
+          },
+          {
+            "location": "F-0433 L12-L18",
+            "observation": "代码打开 LSA Policy，构造键名并调用 `LsaRetrievePrivateData`，成功后关闭句柄。"
+          },
+          {
+            "location": "F-0434 L17-L27",
+            "observation": "代码先读取由 `sub_407CAC` 生成的名称，再读取固定名称 `L$_RasDefaultCredentials#0`；每次成功检索后调用 `sub_407B94` 并释放 LSA 缓冲区。"
+          },
+          {
+            "location": "F-0430 L37-L71",
+            "observation": "代码遍历私有数据字节，按分隔/记录条件复制到临时缓冲区和 `unk_40E9BC` 相关表。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "`sub_407B94` 的输出表字段含义和调用参数语义未提供，不能把该数据明确命名为用户名、密码或其他特定凭据字段；也不能确认 LSA 检索一定成功。"
+        ]
+      },
+      {
+        "behavior": "在 RAS 条目处理前，代码读取并使用当前用户的 RAS 配置路径以及两个特殊文件夹路径。",
+        "condition": "`SHGetSpecialFolderPathA` 对相应特殊目录调用成功。",
+        "source": "系统特殊文件夹路径。",
+        "action": "对路径缓冲区追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`，并将该路径作为 `GetPrivateProfileIntA` 的配置文件参数。",
+        "sink": "对 `rasphone.pbk` 的配置读取。",
+        "evidence": [
+          {
+            "location": "F-0435 L6-L12",
+            "observation": "代码规范化输入路径，并追加固定子路径 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 L73-L83",
+            "observation": "代码通过 `SHGetSpecialFolderPathA` 获取两个目录并保存处理后的路径。"
+          },
+          {
+            "location": "F-0440 L105-L123",
+            "observation": "处理后的路径作为 `GetPrivateProfileIntA` 的文件参数使用。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包没有显示配置文件内容，也没有证明路径存在或查询一定返回有效值。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "Microsoft\\Network\\Connections\\pbk\\rasphone.pbk",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "固定的 RAS 电话簿配置相对路径；代码将其追加到特殊文件夹路径并用于读取 `DialParamsUID`。",
+        "evidence": [
+          {
+            "location": "F-0435 L10-L12",
+            "observation": "明确追加固定字符串 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 L105-L123",
+            "observation": "由该路径构成的文件名传给 `GetPrivateProfileIntA`。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "L$_RasDefaultCredentials#0",
+        "role": "config_marker",
+        "detection_specificity": "high",
+        "meaning": "代码尝试读取的固定 LSA 私有数据名称，具有较高行为识别价值。",
+        "evidence": [
+          {
+            "location": "F-0434 L24-L27",
+            "observation": "代码将固定字符串传给 `sub_407DD0`，成功后处理返回的 LSA 私有数据。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "DialParamsUID",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "RAS 配置查询使用的固定键名，用于定位拨号参数数据。",
+        "evidence": [
+          {
+            "location": "F-0440 L107-L123",
+            "observation": "代码在多个配置节/路径组合中查询固定键 `DialParamsUID`。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "RAS 收集结果如何编码、由哪个调用者传入 J00 的七个 `.abc` 输出之一，以及最终写入的具体内容是什么？",
+        "reason": "当前包包含 `sub_409A84` 到 `sub_408238` 的转调和收集逻辑，但未包含 `sub_401CAC`、`sub_401E10`、`sub_402914` 等关键缓冲区/序列化实现，也未包含最终写出调用者。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "LSA 私有数据经 `sub_407B94` 处理后，各输出表字段是否确实为 RAS 用户名、密码或其他凭据？",
+        "reason": "当前代码直接证明 LSA 私有数据被读取和分段处理，但未提供内部表定义或消费逻辑。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "`sub_407E40` 的调用条件和三个参数在 `sub_408238` 的上游/调用者中如何确定？",
+        "reason": "本函数内部只显示 `sub_407E40(a2, a3, a4)`，无法从当前包确认哪些调用模式启用 LSA 数据路径。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC, sub_401E10, sub_402914, sub_401E94",
+        "reason": "解析 RAS 用户名/密码及私有数据处理后的缓冲区格式和记录语义。",
+        "expected_value": "确认 source 到输出记录的字段含义及序列化方式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409A84 的调用者及最终写出链",
+        "reason": "确认该 RAS 收集函数返回数据如何绑定到 J00 的固定 `.abc` 文件。",
+        "expected_value": "闭合 RAS/LSA 数据到具体文件 sink 的关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_407B94 的调用者与 `unk_40E9BC` 消费代码",
+        "reason": "解析 LSA 私有数据分段后的目标字段。",
+        "expected_value": "判断处理结果是否为凭据字段及其最终用途。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402914",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E94",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定用户名、密码及 LSA 私有数据如何编码进内部输出缓冲区；当前证据只显示调用关系和部分字段来源。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0440 L146-L151",
+            "observation": "用户名和密码被追加后交给 `sub_401E10`。"
+          },
+          {
+            "location": "F-0430 L43-L59",
+            "observation": "LSA 私有数据经分段后写入内部表，具体字段语义依赖未提供函数和表消费逻辑。"
+          }
+        ]
+      },
+      {
+        "kind": "other",
+        "target": "sub_409A84 的调用者、下游消费链及最终写出调用点",
+        "targets": [],
+        "reason": "需要获取 `sub_409A84` 已返回的 RAS 收集结果的调用者消费/序列化链，以确认其与 J00 固定 `.abc` 输出的绑定关系；`sub_409A84` 本体已在当前包提供，不应重复索取。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0476 L1-L4",
+            "observation": "该函数仅转调 `sub_408238` 并返回，未显示返回数据如何进入最终输出。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "当前材料闭合了一个 RAS/拨号参数与 LSA 私有数据处理路径：函数枚举 RAS 条目，读取拨号参数，并在满足系统版本、配置目录及条目条件时从 RAS 配置文件查询 DialParamsUID、处理相关数据；同时通过当前用户 SID 派生名称及固定名称读取 LSA 私有数据字节并分段处理。其结果被写入调用者提供的缓冲区/内部数据结构。由于序列化函数、调用者消费方式及最终 .abc 文件写入链不在本包内，无法确认最终输出内容或运行时成功。",
+    "claims": [
+      {
+        "behavior": "在 RAS 条目存在且 `n2 == 2`、系统版本回调值至少为 5 时，枚举 RAS 条目并读取每个条目的拨号参数；随后将用户名和密码字段追加到调用者提供的输出对象。",
+        "condition": "`sub_407FF0` 返回非零且 `RasEnumEntriesA` 成功；每个条目循环执行，且排除两个特定无效地址条件。",
+        "source": "RAS 条目名称及 `RasGetEntryDialParamsA` 返回的 `tagRASDIALPARAMSA` 字段，尤其是 `szUserName` 和 `szPassword`。",
+        "action": "对每个 RAS 条目调用 `RasGetEntryDialParamsA`，然后分别把 `v29.szUserName` 和 `v29.szPassword` 交给 `sub_401CAC`，并以类型/标记 7 调用 `sub_401E10`。",
+        "sink": "调用者传入的 `dst_3` 所关联的内部输出对象；本包未显示其最终序列化格式或外部写入。",
+        "evidence": [
+          {
+            "location": "F-0440 L59-L71",
+            "observation": "代码获取 RAS 条目数量并调用 `RasEnumEntriesA`；随后检查 `n2 == 2 && v29.dwCallbackId >= 5`。"
+          },
+          {
+            "location": "F-0440 L94-L100",
+            "observation": "循环中设置条目名称，调用 `RasGetEntryDialParamsA`，并调用 `sub_4081BC` 获取条目属性。"
+          },
+          {
+            "location": "F-0440 L146-L151",
+            "observation": "对每个条目的 `szUserName` 和 `szPassword` 调用 `sub_401CAC`，再调用 `sub_401E10(dst_2, 7)`。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "`sub_401CAC`、`sub_401E10` 及调用者对 `dst_3` 的消费方式未提供，因此不能确认字段编码、是否成功返回完整数据或是否直接形成文件内容。"
+        ]
+      },
+      {
+        "behavior": "在满足 RAS 条目、系统版本及用户目录条件时，代码从 RAS 配置文件中查询 `DialParamsUID`，并在得到非零 UID 后读取和处理对应数据以补充当前条目的密码字段。",
+        "condition": "`n2 == 2`、`v29.dwCallbackId >= 5`，且至少一个由 `SHGetSpecialFolderPathA` 获得并追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk` 的路径存在；随后至少一次 `GetPrivateProfileIntA(..., \"DialParamsUID\", ...)` 返回非零。",
+        "source": "当前 RAS 条目的 `szEntryName` 及用户目录下的 `rasphone.pbk` 配置文件。",
+        "action": "通过 `GetPrivateProfileIntA` 在多个候选配置文件/节名组合中查询 `DialParamsUID`；若获得 UID，则转换并处理该值，再遍历内部表，将匹配数据复制到 `v29.szPassword`。",
+        "sink": "`v29.szPassword`，之后由外层逻辑追加到 `dst_2` 关联的输出对象。",
+        "evidence": [
+          {
+            "location": "F-0440 L73-L85",
+            "observation": "代码获取特殊目录路径，并由 `sub_407F4C` 追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 L101-L125",
+            "observation": "在条目和版本条件下，代码对候选配置路径调用多次 `GetPrivateProfileIntA` 查询 `DialParamsUID`，并仅在 `_RAX` 非零时继续。"
+          },
+          {
+            "location": "F-0440 L127-L138",
+            "observation": "非零 UID 被转换后用于内部表查找；匹配项通过 `sub_408038` 写入 `v29.szPassword`。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未给出 `sub_401E94`、`sub_401D50`、内部表内容或 `sub_408038` 之外的密码数据语义，因此只能确认配置查询和写入密码缓冲区，不能确认实际恢复出的明文内容。"
+        ]
+      },
+      {
+        "behavior": "代码可从 LSA 私有数据读取并处理由当前用户 SID 派生名称及固定名称对应的 LSA 私有数据字节。",
+        "condition": "`sub_407E40` 被调用；在该函数内，`sub_407DD0` 成功打开 LSA Policy 并成功执行 `LsaRetrievePrivateData`。",
+        "source": "由当前用户名转换得到的 SID 字符串，以及固定 LSA 私有数据名称 `L$_RasDefaultCredentials#0`。",
+        "action": "调用 `GetUserNameA`、`LookupAccountNameA` 和 `ConvertSidToStringSidA` 得到 SID；将其转换为 LSA Unicode 名称后，以访问权限 4 调用 `LsaRetrievePrivateData`。成功取得的数据交给 `sub_407B94` 逐字节分段处理；固定名称项也执行同样处理。",
+        "sink": "`sub_407B94` 的内部输出/全局数据表，并由 `sub_407E40` 的调用参数继续传递；本包未显示最终文件、网络或其他外部 sink。",
+        "evidence": [
+          {
+            "location": "F-0431 L22-L37",
+            "observation": "代码读取当前用户名，解析账户 SID，转换为字符串并写入 `a1`。"
+          },
+          {
+            "location": "F-0432 L7-L13",
+            "observation": "代码将输入字符串转换为 LSA Unicode 字符串结构。"
+          },
+          {
+            "location": "F-0433 L12-L18",
+            "observation": "代码打开 LSA Policy，构造键名并调用 `LsaRetrievePrivateData`，成功后关闭句柄。"
+          },
+          {
+            "location": "F-0434 L17-L27",
+            "observation": "代码先读取由 `sub_407CAC` 生成的名称，再读取固定名称 `L$_RasDefaultCredentials#0`；每次成功检索后调用 `sub_407B94` 并释放 LSA 缓冲区。"
+          },
+          {
+            "location": "F-0430 L37-L71",
+            "observation": "代码遍历私有数据字节，按分隔/记录条件复制到临时缓冲区和 `unk_40E9BC` 相关表。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "`sub_407B94` 的输出表字段含义和调用参数语义未提供，不能把该数据明确命名为用户名、密码或其他特定凭据字段；也不能确认 LSA 检索一定成功。"
+        ]
+      },
+      {
+        "behavior": "在 RAS 条目处理前，代码读取并使用当前用户的 RAS 配置路径以及两个特殊文件夹路径。",
+        "condition": "`SHGetSpecialFolderPathA` 对相应特殊目录调用成功。",
+        "source": "系统特殊文件夹路径。",
+        "action": "对路径缓冲区追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`，并将该路径作为 `GetPrivateProfileIntA` 的配置文件参数。",
+        "sink": "对 `rasphone.pbk` 的配置读取。",
+        "evidence": [
+          {
+            "location": "F-0435 L6-L12",
+            "observation": "代码规范化输入路径，并追加固定子路径 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 L73-L83",
+            "observation": "代码通过 `SHGetSpecialFolderPathA` 获取两个目录并保存处理后的路径。"
+          },
+          {
+            "location": "F-0440 L105-L123",
+            "observation": "处理后的路径作为 `GetPrivateProfileIntA` 的文件参数使用。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包没有显示配置文件内容，也没有证明路径存在或查询一定返回有效值。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "Microsoft\\Network\\Connections\\pbk\\rasphone.pbk",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "固定的 RAS 电话簿配置相对路径；代码将其追加到特殊文件夹路径并用于读取 `DialParamsUID`。",
+        "evidence": [
+          {
+            "location": "F-0435 L10-L12",
+            "observation": "明确追加固定字符串 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 L105-L123",
+            "observation": "由该路径构成的文件名传给 `GetPrivateProfileIntA`。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "L$_RasDefaultCredentials#0",
+        "role": "config_marker",
+        "detection_specificity": "high",
+        "meaning": "代码尝试读取的固定 LSA 私有数据名称，具有较高行为识别价值。",
+        "evidence": [
+          {
+            "location": "F-0434 L24-L27",
+            "observation": "代码将固定字符串传给 `sub_407DD0`，成功后处理返回的 LSA 私有数据。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "DialParamsUID",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "RAS 配置查询使用的固定键名，用于定位拨号参数数据。",
+        "evidence": [
+          {
+            "location": "F-0440 L107-L123",
+            "observation": "代码在多个配置节/路径组合中查询固定键 `DialParamsUID`。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "RAS 收集结果如何编码、由哪个调用者传入 J00 的七个 `.abc` 输出之一，以及最终写入的具体内容是什么？",
+        "reason": "当前包包含 `sub_409A84` 到 `sub_408238` 的转调和收集逻辑，但未包含 `sub_401CAC`、`sub_401E10`、`sub_402914` 等关键缓冲区/序列化实现，也未包含最终写出调用者。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "LSA 私有数据经 `sub_407B94` 处理后，各输出表字段是否确实为 RAS 用户名、密码或其他凭据？",
+        "reason": "当前代码直接证明 LSA 私有数据被读取和分段处理，但未提供内部表定义或消费逻辑。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "`sub_407E40` 的调用条件和三个参数在 `sub_408238` 的上游/调用者中如何确定？",
+        "reason": "本函数内部只显示 `sub_407E40(a2, a3, a4)`，无法从当前包确认哪些调用模式启用 LSA 数据路径。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC, sub_401E10, sub_402914, sub_401E94",
+        "reason": "解析 RAS 用户名/密码及私有数据处理后的缓冲区格式和记录语义。",
+        "expected_value": "确认 source 到输出记录的字段含义及序列化方式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409A84 的调用者及最终写出链",
+        "reason": "确认该 RAS 收集函数返回数据如何绑定到 J00 的固定 `.abc` 文件。",
+        "expected_value": "闭合 RAS/LSA 数据到具体文件 sink 的关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_407B94 的调用者与 `unk_40E9BC` 消费代码",
+        "reason": "解析 LSA 私有数据分段后的目标字段。",
+        "expected_value": "判断处理结果是否为凭据字段及其最终用途。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402914",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E94",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定用户名、密码及 LSA 私有数据如何编码进内部输出缓冲区；当前证据只显示调用关系和部分字段来源。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0440 L146-L151",
+            "observation": "用户名和密码被追加后交给 `sub_401E10`。"
+          },
+          {
+            "location": "F-0430 L43-L59",
+            "observation": "LSA 私有数据经分段后写入内部表，具体字段语义依赖未提供函数和表消费逻辑。"
+          }
+        ]
+      },
+      {
+        "kind": "other",
+        "target": "sub_409A84 的调用者、下游消费链及最终写出调用点",
+        "targets": [],
+        "reason": "需要获取 `sub_409A84` 已返回的 RAS 收集结果的调用者消费/序列化链，以确认其与 J00 固定 `.abc` 输出的绑定关系；`sub_409A84` 本体已在当前包提供，不应重复索取。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0476 L1-L4",
+            "observation": "该函数仅转调 `sub_408238` 并返回，未显示返回数据如何进入最终输出。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/0/evidence/1/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/2",
+      "/claims/2/evidence/0/location",
+      "/claims/2/evidence/1/location",
+      "/claims/2/evidence/2/location",
+      "/claims/2/evidence/3/location",
+      "/claims/2/evidence/4/location",
+      "/claims/3/evidence/0/location",
+      "/claims/3/evidence/1/location",
+      "/claims/3/evidence/2/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/0/evidence/1/location",
+      "/material_needs/1",
+      "/material_needs/1/evidence/0/location",
+      "/summary"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [],
+    "applied_paths": [
+      "/summary",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/0/evidence/2/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/1/evidence/2/location",
+      "/claims/2/behavior",
+      "/claims/2/evidence/0/location",
+      "/claims/2/evidence/1/location",
+      "/claims/2/evidence/2/location",
+      "/claims/2/evidence/3/location",
+      "/claims/2/evidence/4/location",
+      "/claims/3/evidence/0/location",
+      "/claims/3/evidence/1/location",
+      "/claims/3/evidence/2/location",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/0/evidence/1/location",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/0/evidence/1/location",
+      "/material_needs/1/kind",
+      "/material_needs/1/target",
+      "/material_needs/1/targets",
+      "/material_needs/1/reason",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/1/evidence/0/observation"
+    ],
+    "ignored_paths": [],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前结果中的全部 claim、artifact 和 material_need 证据位置都使用了“F-xxxx 函数名 原文件 L...”格式，验证器将 21 个引用全部判为 invalid_format；因此即使 observation 与源码大体对应，结果当前不满足可核验的证据边界。",
+        "evidence": [
+          {
+            "location": "evidence_reference_validation: invalid_references",
+            "observation": "验证结果显示 valid_segments=0、invalid_segments=21，覆盖 C001-C004、A001-A003 和 M001 的所有证据引用。"
+          },
+          {
+            "location": "F-0440 L0059-L0071",
+            "observation": "当前材料实际提供了 sub_408238 的这些源码行，可作为 claim 1 的有效来源，但 Analyzer 写成了带函数名和“原文件”的不可解析格式。"
+          },
+          {
+            "location": "F-0434 L0024-L0027",
+            "observation": "当前材料实际提供了固定 LSA 名称调用的源码行，可作为 artifact 2 的有效来源，但现有引用同样不可解析。"
+          }
+        ],
+        "required_fix": "将所有当前无效的 location 改为验证器接受的当前材料格式，例如“F-0440 L59-L71”“F-0434 L24-L27”，并保持 observation 与对应源码一致；不要通过扩大行段或改写 observation 来规避引用错误。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/*",
+              "/artifacts/*",
+              "/material_needs/*"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "unsupported_claim",
+        "description": "claim 3 将 LSA 私有数据称为“与当前用户相关的凭据材料”，并在 summary 中概括为“凭据相关数据”。当前材料只直接证明：通过当前用户 SID 派生的名称及固定名称读取 LSA private data，并将返回字节交给 sub_407B94 分段/入表；没有证明这些私有数据的字段语义确为凭据。现有 limitations 虽然承认不能明确命名为用户名或密码，但没有消除 claim 主体的过度定性。",
+        "evidence": [
+          {
+            "location": "F-0434 L17-L27",
+            "observation": "sub_407E40 对派生名称和 L$_RasDefaultCredentials#0 调用 LsaRetrievePrivateData，成功后把返回缓冲区交给 sub_407B94。"
+          },
+          {
+            "location": "F-0430 L37-L71",
+            "observation": "sub_407B94 仅展示对私有数据字节的分段和写入 unk_40E9BC 相关表，未展示字段定义或凭据语义。"
+          }
+        ],
+        "required_fix": "把 claim 3 及 summary 中的“凭据材料/凭据相关数据”改为证据直接支持的“LSA 私有数据”或“LSA 私有数据字节”；保留已确认的读取、处理和固定名称事实，并在 limitations 中明确字段语义未闭合。不要把该路径升级为已确认的凭据窃取。",
+        "fixes": [
+          {
+            "type": "claim_revision",
+            "targets": [
+              "/claims/2"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "material_need 1 的目标填写为 sub_409A84，但该函数的 4 行转调实现已在当前包提供，且 dependency_handoffs 已确认其作为 J00 的 producer；该需求真正需要的是调用者之后的消费/写出链或对应调用点，而不是再次索要 sub_409A84 本体。",
+        "evidence": [
+          {
+            "location": "F-0476 L1-L4",
+            "observation": "当前包明确显示 sub_409A84 仅调用 sub_408238 并返回。"
+          },
+          {
+            "location": "dependency_handoffs J00 claims / needed material",
+            "observation": "上游摘要已确认 sub_409A84 属于七个 producer/output pair，并指出未闭合的是 producer 结果的具体语义及后续输出消费。"
+          }
+        ],
+        "required_fix": "将 material_need 1 的 target/reason 改为未提供的调用者消费链、序列化函数或最终写出调用点；不要把已读的 sub_409A84 重新列为待补材料。",
+        "fixes": [
+          {
+            "type": "gap_revision",
+            "targets": [
+              "/material_needs/1"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体捕获了当前包新增的 RAS 枚举、拨号参数、rasphone.pbk 查询及 LSA private-data 路径，也正确保留了最终 .abc sink 未闭合的限制。但当前所有证据引用均不可解析，必须修正；另需删除对 LSA 数据“凭据材料”的未证实定性，并校正一项重复/错误的补料目标。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "当前材料闭合了一个 RAS/拨号参数与 LSA 私有数据处理路径：函数枚举 RAS 条目，读取拨号参数，并在满足系统版本、配置目录及条目条件时从 RAS 配置文件查询 DialParamsUID、处理相关数据；同时通过当前用户 SID 派生名称及固定名称读取 LSA 私有数据字节并分段处理。其结果被写入调用者提供的缓冲区/内部数据结构。由于序列化函数、调用者消费方式及最终 .abc 文件写入链不在本包内，无法确认最终输出内容或运行时成功。",
+    "claims": [
+      {
+        "behavior": "在 RAS 条目存在且 `n2 == 2`、系统版本回调值至少为 5 时，枚举 RAS 条目并读取每个条目的拨号参数；随后将用户名和密码字段追加到调用者提供的输出对象。",
+        "condition": "`sub_407FF0` 返回非零且 `RasEnumEntriesA` 成功；每个条目循环执行，且排除两个特定无效地址条件。",
+        "source": "RAS 条目名称及 `RasGetEntryDialParamsA` 返回的 `tagRASDIALPARAMSA` 字段，尤其是 `szUserName` 和 `szPassword`。",
+        "action": "对每个 RAS 条目调用 `RasGetEntryDialParamsA`，然后分别把 `v29.szUserName` 和 `v29.szPassword` 交给 `sub_401CAC`，并以类型/标记 7 调用 `sub_401E10`。",
+        "sink": "调用者传入的 `dst_3` 所关联的内部输出对象；本包未显示其最终序列化格式或外部写入。",
+        "evidence": [
+          {
+            "location": "F-0440 L59-L71",
+            "observation": "代码获取 RAS 条目数量并调用 `RasEnumEntriesA`；随后检查 `n2 == 2 && v29.dwCallbackId >= 5`。"
+          },
+          {
+            "location": "F-0440 L94-L100",
+            "observation": "循环中设置条目名称，调用 `RasGetEntryDialParamsA`，并调用 `sub_4081BC` 获取条目属性。"
+          },
+          {
+            "location": "F-0440 L146-L151",
+            "observation": "对每个条目的 `szUserName` 和 `szPassword` 调用 `sub_401CAC`，再调用 `sub_401E10(dst_2, 7)`。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "`sub_401CAC`、`sub_401E10` 及调用者对 `dst_3` 的消费方式未提供，因此不能确认字段编码、是否成功返回完整数据或是否直接形成文件内容。"
+        ]
+      },
+      {
+        "behavior": "在满足 RAS 条目、系统版本及用户目录条件时，代码从 RAS 配置文件中查询 `DialParamsUID`，并在得到非零 UID 后读取和处理对应数据以补充当前条目的密码字段。",
+        "condition": "`n2 == 2`、`v29.dwCallbackId >= 5`，且至少一个由 `SHGetSpecialFolderPathA` 获得并追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk` 的路径存在；随后至少一次 `GetPrivateProfileIntA(..., \"DialParamsUID\", ...)` 返回非零。",
+        "source": "当前 RAS 条目的 `szEntryName` 及用户目录下的 `rasphone.pbk` 配置文件。",
+        "action": "通过 `GetPrivateProfileIntA` 在多个候选配置文件/节名组合中查询 `DialParamsUID`；若获得 UID，则转换并处理该值，再遍历内部表，将匹配数据复制到 `v29.szPassword`。",
+        "sink": "`v29.szPassword`，之后由外层逻辑追加到 `dst_2` 关联的输出对象。",
+        "evidence": [
+          {
+            "location": "F-0440 L73-L85",
+            "observation": "代码获取特殊目录路径，并由 `sub_407F4C` 追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 L101-L125",
+            "observation": "在条目和版本条件下，代码对候选配置路径调用多次 `GetPrivateProfileIntA` 查询 `DialParamsUID`，并仅在 `_RAX` 非零时继续。"
+          },
+          {
+            "location": "F-0440 L127-L138",
+            "observation": "非零 UID 被转换后用于内部表查找；匹配项通过 `sub_408038` 写入 `v29.szPassword`。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前材料未给出 `sub_401E94`、`sub_401D50`、内部表内容或 `sub_408038` 之外的密码数据语义，因此只能确认配置查询和写入密码缓冲区，不能确认实际恢复出的明文内容。"
+        ]
+      },
+      {
+        "behavior": "代码可从 LSA 私有数据读取并处理由当前用户 SID 派生名称及固定名称对应的 LSA 私有数据字节。",
+        "condition": "`sub_407E40` 被调用；在该函数内，`sub_407DD0` 成功打开 LSA Policy 并成功执行 `LsaRetrievePrivateData`。",
+        "source": "由当前用户名转换得到的 SID 字符串，以及固定 LSA 私有数据名称 `L$_RasDefaultCredentials#0`。",
+        "action": "调用 `GetUserNameA`、`LookupAccountNameA` 和 `ConvertSidToStringSidA` 得到 SID；将其转换为 LSA Unicode 名称后，以访问权限 4 调用 `LsaRetrievePrivateData`。成功取得的数据交给 `sub_407B94` 逐字节分段处理；固定名称项也执行同样处理。",
+        "sink": "`sub_407B94` 的内部输出/全局数据表，并由 `sub_407E40` 的调用参数继续传递；本包未显示最终文件、网络或其他外部 sink。",
+        "evidence": [
+          {
+            "location": "F-0431 L22-L37",
+            "observation": "代码读取当前用户名，解析账户 SID，转换为字符串并写入 `a1`。"
+          },
+          {
+            "location": "F-0432 L7-L13",
+            "observation": "代码将输入字符串转换为 LSA Unicode 字符串结构。"
+          },
+          {
+            "location": "F-0433 L12-L18",
+            "observation": "代码打开 LSA Policy，构造键名并调用 `LsaRetrievePrivateData`，成功后关闭句柄。"
+          },
+          {
+            "location": "F-0434 L17-L27",
+            "observation": "代码先读取由 `sub_407CAC` 生成的名称，再读取固定名称 `L$_RasDefaultCredentials#0`；每次成功检索后调用 `sub_407B94` 并释放 LSA 缓冲区。"
+          },
+          {
+            "location": "F-0430 L37-L71",
+            "observation": "代码遍历私有数据字节，按分隔/记录条件复制到临时缓冲区和 `unk_40E9BC` 相关表。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "`sub_407B94` 的输出表字段含义和调用参数语义未提供，不能把该数据明确命名为用户名、密码或其他特定凭据字段；也不能确认 LSA 检索一定成功。"
+        ]
+      },
+      {
+        "behavior": "在 RAS 条目处理前，代码读取并使用当前用户的 RAS 配置路径以及两个特殊文件夹路径。",
+        "condition": "`SHGetSpecialFolderPathA` 对相应特殊目录调用成功。",
+        "source": "系统特殊文件夹路径。",
+        "action": "对路径缓冲区追加 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`，并将该路径作为 `GetPrivateProfileIntA` 的配置文件参数。",
+        "sink": "对 `rasphone.pbk` 的配置读取。",
+        "evidence": [
+          {
+            "location": "F-0435 L6-L12",
+            "observation": "代码规范化输入路径，并追加固定子路径 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 L73-L83",
+            "observation": "代码通过 `SHGetSpecialFolderPathA` 获取两个目录并保存处理后的路径。"
+          },
+          {
+            "location": "F-0440 L105-L123",
+            "observation": "处理后的路径作为 `GetPrivateProfileIntA` 的文件参数使用。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "本包没有显示配置文件内容，也没有证明路径存在或查询一定返回有效值。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "Microsoft\\Network\\Connections\\pbk\\rasphone.pbk",
+        "role": "read_source",
+        "detection_specificity": "medium",
+        "meaning": "固定的 RAS 电话簿配置相对路径；代码将其追加到特殊文件夹路径并用于读取 `DialParamsUID`。",
+        "evidence": [
+          {
+            "location": "F-0435 L10-L12",
+            "observation": "明确追加固定字符串 `Microsoft\\Network\\Connections\\pbk\\rasphone.pbk`。"
+          },
+          {
+            "location": "F-0440 L105-L123",
+            "observation": "由该路径构成的文件名传给 `GetPrivateProfileIntA`。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "L$_RasDefaultCredentials#0",
+        "role": "config_marker",
+        "detection_specificity": "high",
+        "meaning": "代码尝试读取的固定 LSA 私有数据名称，具有较高行为识别价值。",
+        "evidence": [
+          {
+            "location": "F-0434 L24-L27",
+            "observation": "代码将固定字符串传给 `sub_407DD0`，成功后处理返回的 LSA 私有数据。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "other",
+        "value": "DialParamsUID",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "RAS 配置查询使用的固定键名，用于定位拨号参数数据。",
+        "evidence": [
+          {
+            "location": "F-0440 L107-L123",
+            "observation": "代码在多个配置节/路径组合中查询固定键 `DialParamsUID`。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "RAS 收集结果如何编码、由哪个调用者传入 J00 的七个 `.abc` 输出之一，以及最终写入的具体内容是什么？",
+        "reason": "当前包包含 `sub_409A84` 到 `sub_408238` 的转调和收集逻辑，但未包含 `sub_401CAC`、`sub_401E10`、`sub_402914` 等关键缓冲区/序列化实现，也未包含最终写出调用者。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "LSA 私有数据经 `sub_407B94` 处理后，各输出表字段是否确实为 RAS 用户名、密码或其他凭据？",
+        "reason": "当前代码直接证明 LSA 私有数据被读取和分段处理，但未提供内部表定义或消费逻辑。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "`sub_407E40` 的调用条件和三个参数在 `sub_408238` 的上游/调用者中如何确定？",
+        "reason": "本函数内部只显示 `sub_407E40(a2, a3, a4)`，无法从当前包确认哪些调用模式启用 LSA 数据路径。",
+        "scope": "outside_packet",
+        "impact": "minor"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC, sub_401E10, sub_402914, sub_401E94",
+        "reason": "解析 RAS 用户名/密码及私有数据处理后的缓冲区格式和记录语义。",
+        "expected_value": "确认 source 到输出记录的字段含义及序列化方式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_409A84 的调用者及最终写出链",
+        "reason": "确认该 RAS 收集函数返回数据如何绑定到 J00 的固定 `.abc` 文件。",
+        "expected_value": "闭合 RAS/LSA 数据到具体文件 sink 的关系。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_407B94 的调用者与 `unk_40E9BC` 消费代码",
+        "reason": "解析 LSA 私有数据分段后的目标字段。",
+        "expected_value": "判断处理结果是否为凭据字段及其最终用途。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E10",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402914",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401E94",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定用户名、密码及 LSA 私有数据如何编码进内部输出缓冲区；当前证据只显示调用关系和部分字段来源。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0440 L146-L151",
+            "observation": "用户名和密码被追加后交给 `sub_401E10`。"
+          },
+          {
+            "location": "F-0430 L43-L59",
+            "observation": "LSA 私有数据经分段后写入内部表，具体字段语义依赖未提供函数和表消费逻辑。"
+          }
+        ]
+      },
+      {
+        "kind": "other",
+        "target": "sub_409A84 的调用者、下游消费链及最终写出调用点",
+        "targets": [],
+        "reason": "需要获取 `sub_409A84` 已返回的 RAS 收集结果的调用者消费/序列化链，以确认其与 J00 固定 `.abc` 输出的绑定关系；`sub_409A84` 本体已在当前包提供，不应重复索取。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0476 L1-L4",
+            "observation": "该函数仅转调 `sub_408238` 并返回，未显示返回数据如何进入最终输出。"
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": []
+}

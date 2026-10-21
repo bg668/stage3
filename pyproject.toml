@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bounded-investigator"
+version = "1.7.3"
+description = "Bounded malware investigation with DAG orchestration and three-tier deterministic evidence reporting"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "pydantic-ai-slim[openai]>=2.47.0,<3.0.0",
+  "pydantic>=2.10,<3.0",
+  "python-dotenv>=1.0,<2.0",
+  "PyYAML>=6.0,<7.0",
+  "typer>=0.16,<1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+bounded-investigator = "bounded_investigator.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bounded_investigator"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/bounded_investigator",
+  "tests",
+  "README.md",
+  "config.example.yaml",
+  ".env.example",
+  "pyproject.toml",
+]

@@ -1,0 +1,1385 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J14.json",
+        "sha256": "8b088759375550b4e10e16cc8648ddc1c5fcf99034e307a0f9b8921faf061739"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J14/analyzer/validated_result.json",
+        "sha256": "c1ca516ad4a4ab02b51a769d6122355a078b78cc9106ac5cc15e213c2115546d"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J14/reviewer/validated_result.json",
+        "sha256": "b06a634e274341e585c09719a594113dc28564ba137ce944bc411d12ff068211"
+      },
+      "packet": {
+        "path": "testdata/packets/J14.md",
+        "sha256": "88b996c2cb7c3df5d8536c361323d13da9dafd1b16a5d2bbf8d7e4d332b687f7"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J14/reviser/validated_result.json",
+        "sha256": "e2e71ee97de0c61739abde01d3df9ffd91987791d54e2a7d174e8b078788b6fa"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J14/reviser/revision_scope.json",
+        "sha256": "674317bfa3b97e0bcd671a33feacd9737c1e1b10aa8402ce08910c9a801caed0"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J14",
+  "packet_text": "# J14 PE 导入、重定位及远程辅助\n任务来源：J13 从重定位、导入和入口执行需要的依赖中生成，明确不做数据结构全恢复。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0288 sub_4037DC，原文件 L0001–L0010 / 共 10 行\n```text\nL0001: int __usercall sub_4037DC@<eax>(int a1@<eax>)\nL0002: {\nL0003:   int v1; // edx\nL0004: \nL0005:   v1 = 0;\nL0006:   do\nL0007:     ++v1;\nL0008:   while ( *(_BYTE *)(v1 + a1 - 1) != 0xC3 );\nL0009:   return v1;\nL0010: }\n```\n\n## F-0289 sub_4037EC，原文件 L0001–L0036 / 共 36 行\n```text\nL0001: void *__usercall sub_4037EC@<eax>(void *hProcess@<eax>, _BYTE *n3@<edx>, int a3@<ebx>, int a4@<edi>, int a5@<esi>)\nL0002: {\nL0003:   int v7; // eax\nL0004:   void *lpBaseAddress; // edi\nL0005:   int v9; // eax\nL0006:   unsigned int v11[2]; // [esp-18h] [ebp-24h] BYREF\nL0007:   int *v12; // [esp-10h] [ebp-1Ch]\nL0008:   int v13; // [esp-Ch] [ebp-18h]\nL0009:   int v14; // [esp-8h] [ebp-14h]\nL0010:   int v15; // [esp-4h] [ebp-10h]\nL0011:   char *v16; // [esp+0h] [ebp-Ch] BYREF\nL0012:   char *v17; // [esp+4h] [ebp-8h] BYREF\nL0013:   SIZE_T NumberOfBytesWritten; // [esp+8h] [ebp-4h] BYREF\nL0014:   int savedregs; // [esp+Ch] [ebp+0h] BYREF\nL0015: \nL0016:   NumberOfBytesWritten = 0;\nL0017:   v17 = 0;\nL0018:   v16 = 0;\nL0019:   v15 = a3;\nL0020:   v14 = a5;\nL0021:   v13 = a4;\nL0022:   v12 = &savedregs;\nL0023:   v11[1] = (unsigned int)&loc_40386A;\nL0024:   v11[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0025:   __writefsdword(0, (unsigned int)v11);\nL0026:   sub_401CAC(&v17, n3);\nL0027:   v7 = sub_401D50((int)v17);\nL0028:   lpBaseAddress = VirtualAllocEx(hProcess, 0, v7 + 1, 0x3000u, 0x40u);\nL0029:   sub_401CAC(&v16, n3);\nL0030:   v9 = sub_401D50((int)v16);\nL0031:   WriteProcessMemory(hProcess, lpBaseAddress, n3, v9 + 1, &NumberOfBytesWritten);\nL0032:   __writefsdword(0, v11[0]);\nL0033:   v12 = (int *)&loc_403871;\nL0034:   sub_401AE4((int *)&v16, 2);\nL0035:   return lpBaseAddress;\nL0036: }\n```\n\n## F-0290 sub_40387C，原文件 L0001–L0010 / 共 10 行\n```text\nL0001: void *__usercall sub_40387C@<eax>(SIZE_T nSize@<ecx>, LPCVOID lpBuffer@<edx>, void *hProcess@<eax>)\nL0002: {\nL0003:   void *lpBaseAddress; // edi\nL0004:   SIZE_T nSize_1; // [esp-4h] [ebp-14h] BYREF\nL0005: \nL0006:   nSize_1 = nSize;\nL0007:   lpBaseAddress = VirtualAllocEx(hProcess, 0, nSize, 0x3000u, 0x40u);\nL0008:   WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, &nSize_1);\nL0009:   return lpBaseAddress;\nL0010: }\n```\n\n## F-0291 sub_4038AC，原文件 L0001–L0029 / 共 29 行\n```text\nL0001: HANDLE __userpurge sub_4038AC@<eax>(\nL0002:         void *hProcess@<eax>,\nL0003:         const void *lpBuffer_2@<edx>,\nL0004:         void *lpBuffer_1@<ecx>,\nL0005:         char a4,\nL0006:         SIZE_T nSize)\nL0007: {\nL0008:   void *lpParameter; // esi\nL0009:   SIZE_T nSize_1; // eax\nL0010:   DWORD (__stdcall *lpStartAddress)(LPVOID); // eax\nL0011:   HANDLE hHandle; // eax\nL0012:   HANDLE hHandle_1; // edi\nL0013:   DWORD ThreadId; // [esp+Ch] [ebp-Ch] BYREF\nL0014:   SIZE_T NumberOfBytesRead; // [esp+10h] [ebp-8h] BYREF\nL0015:   LPVOID lpBuffer; // [esp+14h] [ebp-4h]\nL0016: \nL0017:   lpBuffer = lpBuffer_1;\nL0018:   lpParameter = sub_40387C(nSize, lpBuffer_1, hProcess);\nL0019:   nSize_1 = sub_4037DC((int)lpBuffer_2);\nL0020:   lpStartAddress = (DWORD (__stdcall *)(LPVOID))sub_40387C(nSize_1, lpBuffer_2, hProcess);\nL0021:   hHandle = CreateRemoteThread(hProcess, 0, 0, lpStartAddress, lpParameter, 0, &ThreadId);\nL0022:   hHandle_1 = hHandle;\nL0023:   if ( a4 )\nL0024:   {\nL0025:     WaitForSingleObject(hHandle, 0xFFFFFFFF);\nL0026:     ReadProcessMemory(hProcess, lpParameter, lpBuffer, nSize, &NumberOfBytesRead);\nL0027:   }\nL0028:   return hHandle_1;\nL0029: }\n```\n\n## F-0292 sub_403920，原文件 L0001–L0009 / 共 9 行\n```text\nL0001: void __cdecl __noreturn sub_403920(int a1)\nL0002: {\nL0003:   void (__stdcall *v1)(int); // [esp+8h] [ebp-4h]\nL0004: \nL0005:   v1 = *(void (__stdcall **)(int))(a1 + 8);\nL0006:   (*(void (__stdcall **)(_DWORD))a1)(*(_DWORD *)(a1 + 4));\nL0007:   while ( 1 )\nL0008:     v1(-1);\nL0009: }\n```\n\n## F-0293 sub_403954，原文件 L0001–L0037 / 共 37 行\n```text\nL0001: int __usercall sub_403954@<eax>(void *hProcess@<eax>, char *a2@<edx>, int a3@<edi>)\nL0002: {\nL0003:   int v4; // ebx\nL0004:   HMODULE hModule; // eax\nL0005:   HMODULE hModule_1; // eax\nL0006:   char *n3; // eax\nL0007:   HANDLE hObject; // eax\nL0008:   unsigned int v10[2]; // [esp-Ch] [ebp-24h] BYREF\nL0009:   int *v11; // [esp-4h] [ebp-1Ch]\nL0010:   _DWORD lpBuffer_[3]; // [esp+8h] [ebp-10h] BYREF\nL0011:   char *v13; // [esp+14h] [ebp-4h] BYREF\nL0012:   int savedregs; // [esp+18h] [ebp+0h] BYREF\nL0013: \nL0014:   v13 = a2;\nL0015:   sub_401F38((int)a2);\nL0016:   v11 = &savedregs;\nL0017:   v10[1] = (unsigned int)&loc_4039F2;\nL0018:   v10[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0019:   __writefsdword(0, (unsigned int)v10);\nL0020:   v4 = 0;\nL0021:   hModule = GetModuleHandleA_0(\"kernel32\");\nL0022:   lpBuffer_[2] = GetProcAddress(hModule, \"Sleep\");\nL0023:   hModule_1 = GetModuleHandleA_0(\"kernel32\");\nL0024:   lpBuffer_[0] = GetProcAddress(hModule_1, \"LoadLibraryA\");\nL0025:   n3 = sub_401F48(v13);\nL0026:   lpBuffer_[1] = sub_4037EC(hProcess, n3, 0, a3, (int)hProcess);\nL0027:   hObject = sub_4038AC(hProcess, sub_403920, lpBuffer_, 0, 0xCu);\nL0028:   if ( hObject )\nL0029:   {\nL0030:     CloseHandle(hObject);\nL0031:     LOBYTE(v4) = 1;\nL0032:   }\nL0033:   __writefsdword(0, v10[0]);\nL0034:   v11 = (int *)&loc_4039F9;\nL0035:   sub_401AC0(&v13);\nL0036:   return v4;\nL0037: }\n```\n\n## F-0294 sub_403A28，原文件 L0001–L0015 / 共 15 行\n```text\nL0001: int __stdcall sub_403A28(int a1)\nL0002: {\nL0003:   int v1; // eax\nL0004:   int v2; // eax\nL0005:   int (__stdcall *v4)(int); // [esp+8h] [ebp-14h]\nL0006:   int (__stdcall *v5)(int, int); // [esp+Ch] [ebp-10h]\nL0007:   int v6; // [esp+18h] [ebp-4h]\nL0008: \nL0009:   v4 = *(int (__stdcall **)(int))a1;\nL0010:   v5 = *(int (__stdcall **)(int, int))(a1 + 4);\nL0011:   v6 = *(_DWORD *)(a1 + 16);\nL0012:   v1 = (*(int (__stdcall **)(_DWORD))(a1 + 8))(*(_DWORD *)(a1 + 12));\nL0013:   v2 = v5(v1, v6);\nL0014:   return v4(v2);\nL0015: }\n```\n\n## F-0295 sub_403A58，原文件 L0001–L0030 / 共 30 行\n```text\nL0001: DWORD __usercall sub_403A58@<eax>(void *hProcess@<eax>, _BYTE *n3_1@<edx>, _BYTE *n3@<ecx>)\nL0002: {\nL0003:   int v6; // esi\nL0004:   HMODULE hModule; // eax\nL0005:   HMODULE hModule_1; // eax\nL0006:   HMODULE hModule_2; // eax\nL0007:   HANDLE hHandle; // eax\nL0008:   void *hThread; // ebx\nL0009:   DWORD lpExitCode_; // [esp+0h] [ebp-28h] BYREF\nL0010:   _DWORD lpBuffer_[9]; // [esp+4h] [ebp-24h] BYREF\nL0011: \nL0012:   v6 = 0;\nL0013:   hModule = GetModuleHandleA_0(\"kernel32\");\nL0014:   lpBuffer_[2] = GetProcAddress(hModule, \"GetModuleHandleA\");\nL0015:   hModule_1 = GetModuleHandleA_0(\"kernel32\");\nL0016:   lpBuffer_[1] = GetProcAddress(hModule_1, \"GetProcAddress\");\nL0017:   hModule_2 = GetModuleHandleA_0(\"kernel32\");\nL0018:   lpBuffer_[0] = GetProcAddress(hModule_2, \"ExitThread\");\nL0019:   lpBuffer_[4] = sub_4037EC(hProcess, n3, (int)hProcess, (int)n3_1, 0);\nL0020:   lpBuffer_[3] = sub_4037EC(hProcess, n3_1, (int)hProcess, (int)n3_1, 0);\nL0021:   hHandle = sub_4038AC(hProcess, sub_403A28, lpBuffer_, 0, 0x14u);\nL0022:   hThread = hHandle;\nL0023:   if ( hHandle )\nL0024:   {\nL0025:     WaitForSingleObject(hHandle, 0xFFFFFFFF);\nL0026:     GetExitCodeThread(hThread, &lpExitCode_);\nL0027:     return lpExitCode_;\nL0028:   }\nL0029:   return v6;\nL0030: }\n```\n\n## F-0298 sub_403C98，原文件 L0001–L0039 / 共 39 行\n```text\nL0001: int __usercall sub_403C98@<eax>(int a1@<eax>)\nL0002: {\nL0003:   int n512; // edx\nL0004: \nL0005:   n512 = 0;\nL0006:   if ( (a1 & 0x4000000) != 0 )\nL0007:     n512 = 512;\nL0008:   if ( (a1 & 0x20000000) != 0 )\nL0009:   {\nL0010:     if ( (a1 & 0x40000000) != 0 )\nL0011:     {\nL0012:       if ( a1 >= 0 )\nL0013:         return n512 | 0x20;\nL0014:       else\nL0015:         return n512 | 0x40;\nL0016:     }\nL0017:     else\nL0018:     {\nL0019:       if ( a1 >= 0 )\nL0020:         return n512 | 0x10;\nL0021:       return n512 | 0x80;\nL0022:     }\nL0023:   }\nL0024:   else if ( (a1 & 0x40000000) != 0 )\nL0025:   {\nL0026:     if ( a1 >= 0 )\nL0027:       return n512 | 2;\nL0028:     else\nL0029:       return n512 | 4;\nL0030:   }\nL0031:   else if ( a1 >= 0 )\nL0032:   {\nL0033:     return n512 | 1;\nL0034:   }\nL0035:   else\nL0036:   {\nL0037:     return n512 | 8;\nL0038:   }\nL0039: }\n```\n\n## F-0299 sub_403D08，原文件 L0001–L0029 / 共 29 行\n```text\nL0001: _DWORD *__usercall sub_403D08@<eax>(_DWORD *result@<eax>, int a2)\nL0002: {\nL0003:   _DWORD *v2; // edx\nL0004:   unsigned int v3; // ecx\nL0005:   _DWORD *v4; // ebx\nL0006:   unsigned int v5; // [esp+8h] [ebp-8h]\nL0007:   char *v6; // [esp+Ch] [ebp-4h]\nL0008: \nL0009:   v6 = (char *)result;\nL0010:   v5 = *(_DWORD *)(*(_DWORD *)(a2 - 4) + 164);\nL0011:   while ( (char *)result - v6 < v5 )\nL0012:   {\nL0013:     v2 = result + 2;\nL0014:     v3 = (unsigned int)(result[1] - 8) >> 1;\nL0015:     do\nL0016:     {\nL0017:       if ( (*((_BYTE *)v2 + 1) & 0xF0) != 0 )\nL0018:       {\nL0019:         v4 = (_DWORD *)((*(_WORD *)v2 & 0xFFF) + *result + *(_DWORD *)(a2 - 12));\nL0020:         *v4 += *(_DWORD *)(a2 - 8);\nL0021:       }\nL0022:       v2 = (_DWORD *)((char *)v2 + 2);\nL0023:       --v3;\nL0024:     }\nL0025:     while ( v3 );\nL0026:     result = v2;\nL0027:   }\nL0028:   return result;\nL0029: }\n```\n\n## F-0300 sub_403D78，原文件 L0001–L0004 / 共 4 行\n```text\nL0001: bool __usercall sub_403D78@<al>(int a1@<eax>)\nL0002: {\nL0003:   return a1 < 0;\nL0004: }\n```\n\n## F-0301 sub_403D84，原文件 L0001–L0057 / 共 57 行\n```text\nL0001: int *__usercall sub_403D84@<eax>(_DWORD *a1@<eax>, int a2@<edi>, int a3)\nL0002: {\nL0003:   int v3; // ebx\nL0004:   int *v4; // ebx\nL0005:   DWORD v5; // eax\nL0006:   int v6; // eax\nL0007:   int v8; // [esp-14h] [ebp-34h]\nL0008:   unsigned int v9[2]; // [esp-Ch] [ebp-2Ch] BYREF\nL0009:   int *v10; // [esp-4h] [ebp-24h]\nL0010:   char *dst; // [esp+8h] [ebp-18h] BYREF\nL0011:   char *v12; // [esp+Ch] [ebp-14h] BYREF\nL0012:   char *v13; // [esp+10h] [ebp-10h] BYREF\nL0013:   int v14; // [esp+14h] [ebp-Ch] BYREF\nL0014:   _BYTE *n3; // [esp+18h] [ebp-8h]\nL0015:   _DWORD *i; // [esp+1Ch] [ebp-4h]\nL0016:   int savedregs; // [esp+20h] [ebp+0h] BYREF\nL0017: \nL0018:   dst = 0;\nL0019:   v12 = 0;\nL0020:   v13 = 0;\nL0021:   v10 = &savedregs;\nL0022:   v9[1] = (unsigned int)&loc_403EB2;\nL0023:   v9[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0024:   __writefsdword(0, (unsigned int)v9);\nL0025:   for ( i = a1; ; i += 5 )\nL0026:   {\nL0027:     v6 = i[3];\nL0028:     if ( !v6 )\nL0029:       break;\nL0030:     n3 = (_BYTE *)(*(_DWORD *)(a3 - 12) + v6);\nL0031:     v3 = *(_DWORD *)(a3 - 16);\nL0032:     v8 = sub_402E08(v3);\nL0033:     sub_401CAC(&v13, n3);\nL0034:     if ( !sub_403BD0(v3, v8, v13, &v14) )\nL0035:     {\nL0036:       sub_401CAC(&v12, n3);\nL0037:       sub_403954(*(void **)(a3 - 36), v12, a2);\nL0038:       sub_401CAC(&dst, n3);\nL0039:       sub_403B40(*(__int32 **)(a3 - 16), (__int32)dst);\nL0040:     }\nL0041:     if ( i[1] )\nL0042:       v4 = (int *)(*(_DWORD *)(a3 - 12) + *i);\nL0043:     else\nL0044:       v4 = (int *)(*(_DWORD *)(a3 - 12) + i[4]);\nL0045:     while ( *v4 )\nL0046:     {\nL0047:       if ( sub_403D78(*v4) )\nL0048:         v5 = sub_403A58(*(void **)(a3 - 36), n3, (_BYTE *)(unsigned __int16)*v4);\nL0049:       else\nL0050:         v5 = sub_403A58(*(void **)(a3 - 36), n3, (_BYTE *)(*v4 + *(_DWORD *)(a3 - 12) + 2));\nL0051:       *v4++ = v5;\nL0052:     }\nL0053:   }\nL0054:   __writefsdword(0, v9[0]);\nL0055:   v10 = (int *)&loc_403EB9;\nL0056:   return sub_401AE4((int *)&dst, 3);\nL0057: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了映像装载后的关键远程初始化能力：代码在目标进程中分配并写入字符串、数据和位置无关辅助代码，通过 CreateRemoteThread 执行远程入口；同时处理重定位并解析导入表，将导入地址写入远程映像。导入解析中若模块尚未可用会调用远程 LoadLibraryA 路径，函数地址通过远程 GetProcAddress 路径获取。部分名称解析、导入模块加载和 IAT 写入辅助函数仍在包外，最终载荷入口及运行结果也未在本包闭合。",
+    "claims": [
+      {
+        "behavior": "向目标进程分配可执行内存，写入参数缓冲区和辅助代码，并创建远程线程执行该代码；若调用方要求同步，还等待线程并从远程参数缓冲区读回结果。",
+        "condition": "调用 sub_4038AC 时目标进程句柄和待执行代码/参数有效；a4 非零时进入等待和读回分支。",
+        "source": "调用者提供的 hProcess、lpBuffer_1 参数缓冲区和 lpBuffer_2 代码缓冲区。",
+        "action": "sub_40387C 使用 VirtualAllocEx(...,0x3000,0x40) 分配远程内存并用 WriteProcessMemory 写入；sub_4038AC 随后以写入地址作为线程入口调用 CreateRemoteThread，并可 WaitForSingleObject 后 ReadProcessMemory。",
+        "sink": "目标进程远程地址空间和其新建远程线程；同步结果回写到调用者缓冲区。",
+        "evidence": [
+          {
+            "location": "F-0289 sub_40387C 原文件 L0006-L0009",
+            "observation": "函数调用 VirtualAllocEx 分配 PAGE_EXECUTE_READWRITE 风格的远程内存，并用 WriteProcessMemory 写入给定缓冲区。"
+          },
+          {
+            "location": "F-0291 sub_4038AC 原文件 L0017-L0027",
+            "observation": "函数分别写入参数和线程代码，调用 CreateRemoteThread；a4 非零时等待线程并从远程参数地址读取结果。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "静态代码证明了远程线程创建和内存写入能力，但不能证明目标进程实际成功执行或线程最终结果。"
+        ]
+      },
+      {
+        "behavior": "在目标进程中执行一段远程辅助代码，以通过 kernel32 的 LoadLibraryA 和 GetProcAddress 解析模块/函数，并返回解析结果。",
+        "condition": "sub_403A58 被调用；其远程线程创建成功时才会等待并取得线程退出码。",
+        "source": "当前进程中通过 GetModuleHandleA(\"kernel32\") 和 GetProcAddress 获取的 GetModuleHandleA、GetProcAddress、ExitThread 地址，以及传入的两个字符串/序号参数。",
+        "action": "sub_403A58 将两个字符串缓冲区和函数地址写入目标进程，使用 sub_403A28 作为远程线程入口；sub_403A28 调用远程函数指针链并返回结果，调用者等待线程并读取退出码。",
+        "sink": "目标进程中的远程解析线程及其返回的模块/函数地址。",
+        "evidence": [
+          {
+            "location": "F-0295 sub_403A58 原文件 L0012-L0027",
+            "observation": "代码取得 kernel32 的 GetModuleHandleA、GetProcAddress、ExitThread 地址，将两个输入字符串写入目标进程，并通过 sub_4038AC 执行 sub_403A28，等待后读取线程退出码。"
+          },
+          {
+            "location": "F-0294 sub_403A28 原文件 L0009-L0014",
+            "observation": "远程辅助函数从结构中取出三个函数指针，先调用一个函数，再将结果传给第二个函数，最后调用返回函数。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "参数结构与函数指针的精确对应关系依赖远程代码布局；本包未展示 sub_403BD0 对模块是否已加载的判断语义。"
+        ]
+      },
+      {
+        "behavior": "根据重定位块中的条目和映像基址差值，修改远程映像中的重定位目标。",
+        "condition": "调用 sub_403D08 时输入重定位表和 a2 指向的映像上下文有效；仅处理重定位条目高字节的高半部分非零者。",
+        "source": "a1 指向的重定位块，以及 a2 关联结构中位于偏移 +164 的块大小、映像基址和重定位差值字段。",
+        "action": "遍历重定位块，按条目偏移计算目标地址，并将 a2 上下文中的基址差值加到目标 DWORD。",
+        "sink": "映像内被重定位的地址字段。",
+        "evidence": [
+          {
+            "location": "F-0299 sub_403D08 原文件 L0009-L0027",
+            "observation": "代码读取重定位块大小，遍历 16 位条目；对符合条件的条目计算目标地址并执行 *v4 += relocation_delta。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码未在本包中展示调用者如何取得重定位表、基址差值及远程映像布局，因此不能判断该处理在具体载荷中是否实际被触发。"
+        ]
+      },
+      {
+        "behavior": "遍历导入描述符，解析导入模块并为每个导入符号取得地址后写入导入地址表。",
+        "condition": "sub_403D84 遍历到非终止导入描述符；每个描述符的模块名和 thunk 表结构有效。",
+        "source": "a1 指向的导入描述符数组，以及 a3 上下文中映像基址、目标进程句柄和相关 PE 表地址。",
+        "action": "对每个模块名调用 sub_403BD0 判断/获取模块状态；失败分支调用 sub_403954 处理模块，再调用 sub_403B40；随后遍历名称或序号 thunk，按序号/名称调用 sub_403A58，并把返回值写入 *v4。",
+        "sink": "远程映像的导入地址表（IAT），以及目标进程中用于加载/解析导入的远程线程。",
+        "evidence": [
+          {
+            "location": "F-0301 sub_403D84 原文件 L0025-L0052",
+            "observation": "代码遍历导入描述符，依据模块名调用 sub_403BD0；失败时调用 sub_403954 和 sub_403B40；随后逐项调用 sub_403A58 并将返回值写入 IAT 槽位。"
+          },
+          {
+            "location": "F-0293 sub_403954 原文件 L0021-L0031",
+            "observation": "该辅助函数获取 kernel32 的 Sleep 和 LoadLibraryA 地址，把模块名写入目标进程，并通过 sub_403920 创建远程线程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_403BD0、sub_403B40 和 sub_402E08 的实现不在本包，无法确认模块已加载判断、LoadLibraryA 返回值处理及模块名规范化的完整语义。"
+        ]
+      },
+      {
+        "behavior": "在目标进程中执行包含 LoadLibraryA、Sleep 和传入模块句柄/入口数据的远程初始化例程。",
+        "condition": "sub_403954 的目标进程句柄、模块字符串和相关参数有效，且 sub_4038AC 创建远程线程成功。",
+        "source": "sub_403954 获取的 kernel32 导出地址、sub_401F48 处理后的模块字符串，以及传入的 a3 数据。",
+        "action": "将 LoadLibraryA、Sleep 和模块字符串地址组成结构，使用 sub_403920 作为远程线程代码创建线程；sub_403920 调用结构中的函数并持续循环调用另一个函数。",
+        "sink": "目标进程中的远程线程及其加载/初始化调用。",
+        "evidence": [
+          {
+            "location": "F-0293 sub_403954 原文件 L0021-L0031",
+            "observation": "代码获取 Sleep 和 LoadLibraryA 地址，将处理后的模块字符串写入目标进程，并用 sub_403920 作为远程线程入口执行。"
+          },
+          {
+            "location": "F-0292 sub_403920 原文件 L0005-L0008",
+            "observation": "远程例程从结构中取函数指针和参数，先调用一个函数，随后无限循环调用另一个函数并传入 -1。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "虽然 LoadLibraryA 地址被放入远程结构，当前包未直接显示 sub_403920 中两个函数指针对应的字段语义，不能把最终加载模块或循环行为的成功结果确认为已发生。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "string",
+        "value": "LoadLibraryA",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "代码解析并使用 kernel32 的 LoadLibraryA 地址，作为目标进程远程模块处理辅助的一部分。",
+        "evidence": [
+          {
+            "location": "F-0293 sub_403954 原文件 L0021-L0027",
+            "observation": "通过 GetProcAddress(hModule_1, \"LoadLibraryA\") 获取函数地址并放入远程辅助结构。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "GetProcAddress",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "代码解析并使用 kernel32 的 GetProcAddress 地址，供目标进程中的远程解析例程使用。",
+        "evidence": [
+          {
+            "location": "F-0295 sub_403A58 原文件 L0013-L0021",
+            "observation": "通过 GetProcAddress 获取 GetProcAddress 自身的地址，并将其写入远程辅助结构。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "目标进程（hProcess）",
+        "role": "other",
+        "detection_specificity": "none",
+        "meaning": "多个函数对该句柄执行远程分配、写入和线程创建；具体宿主进程由上游包选择。",
+        "evidence": [
+          {
+            "location": "F-0291 sub_4038AC 原文件 L0017-L0026",
+            "observation": "hProcess 被用于 VirtualAllocEx、WriteProcessMemory、CreateRemoteThread、WaitForSingleObject 和 ReadProcessMemory。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_403BD0、sub_403B40 和 sub_402E08 分别如何判断导入模块、加载模块以及计算导入解析所需名称/状态？",
+        "reason": "sub_403D84 依赖这些函数完成导入处理，但其实现不在当前材料包。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_401F48 传给 sub_403954 的模块字符串及 sub_403920 结构字段的精确语义是什么？",
+        "reason": "当前代码显示字符串被写入远程内存并交给远程例程，但无法仅据此确认实际加载对象和初始化结果。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "capability",
+        "question": "PE 映像入口何时调用，以及 sub_403D08/sub_403D84 的结果如何连接到完整映射流程？",
+        "reason": "本包提供重定位和导入处理函数，但未包含其完整调用链及最终入口调用证据。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_403BD0, sub_403B40, sub_402E08",
+        "reason": "闭合导入描述符处理中的模块判断、加载及名称解析语义。",
+        "expected_value": "确认导入模块加载条件、IAT 写入来源和失败分支副作用。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401F48, sub_403920",
+        "reason": "解析远程初始化结构和模块字符串的实际语义。",
+        "expected_value": "确认远程线程是否实际调用 LoadLibraryA、加载何种模块以及后续循环行为。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_403BD0, sub_403B40, sub_402E08",
+        "targets": [
+          {
+            "identifier": "sub_403BD0",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403B40",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402E08",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "这些函数由 sub_403D84 直接调用，决定导入模块检测/加载、名称解析和最终 IAT 更新语义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0301 sub_403D84 原文件 L0030-L0039",
+            "observation": "代码调用 sub_402E08、sub_403BD0 和 sub_403B40 处理每个导入模块。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401F48, sub_403920",
+        "targets": [
+          {
+            "identifier": "sub_401F48",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403920",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认传入远程辅助结构的模块字符串及 sub_403920 中函数指针字段的真实调用关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0293 sub_403954 原文件 L0025-L0027",
+            "observation": "sub_401F48 的结果被写入目标进程，并交给以 sub_403920 为入口的远程线程。"
+          },
+          {
+            "location": "F-0292 sub_403920 原文件 L0005-L0008",
+            "observation": "远程例程按结构偏移间接调用两个函数，但字段来源需结合调用方和辅助实现确认。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的全部核心 claim、artifact 和 material_need 证据引用都使用了不可解析的“F-xxxx sub_x 原文件 L...”格式；验证结果显示 valid_segments=0，15 条引用全部 invalid_format。虽然对应源码确实存在，但按结果格式它们没有形成可验收的材料证据，导致核心远程线程、导入解析、重定位和补料需求均无法被引用定位。",
+        "evidence": [
+          {
+            "location": "claims[0-4].evidence[0-1]、artifacts[0-2].evidence[0]、material_needs[0-1].evidence[*]",
+            "observation": "所有引用均包含如“F-0289 sub_40387C 原文件 L0006-L0009”的前缀，验证器报告 no F-xxxx Lx[-Ly] source reference could be parsed。"
+          },
+          {
+            "location": "F-0289 L0006-L0009",
+            "observation": "当前材料实际显示 sub_40387C 在 L0007-L0008 调用 VirtualAllocEx 和 WriteProcessMemory，说明源码证据可被精确重引用。"
+          },
+          {
+            "location": "F-0291 L0017-L0027",
+            "observation": "当前材料实际显示 sub_4038AC 在 L0018-L0026 分配/写入远程参数和线程代码、创建远程线程，并在 a4 非零时等待和读回。"
+          }
+        ],
+        "required_fix": "仅修正 evidence.location 的引用格式为可解析的 F-XXXX Lx-Ly；不得通过改写 observation 来迁就错误引用。应覆盖所有已列出的 claims、artifacts 和 material_needs 证据位置，使每条核心结论和补料需求都能直接定位到当前材料。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "LoadLibraryA 和 GetProcAddress 被标为 role=read_source，但它们是被解析并写入远程辅助结构的 API/函数名，不是程序读取的环境或数据源。该分类会把通用 API 名称错误表示为读取源；同时这类通用 API 名称不具备感染特异性，应为 detection_specificity=none，而非 low。",
+        "evidence": [
+          {
+            "location": "F-0293 L0021-L0027",
+            "observation": "代码通过 GetProcAddress 获取 LoadLibraryA 地址并放入远程辅助结构；该字符串是 API 名称，不是被读取的样本数据源。"
+          },
+          {
+            "location": "F-0295 L0013-L0021",
+            "observation": "代码获取 GetProcAddress、GetModuleHandleA、ExitThread 地址并写入远程辅助结构；GetProcAddress 是通用 API 名称。"
+          }
+        ],
+        "required_fix": "将 artifacts[0] 和 artifacts[1] 的 role 改为 other，并将 detection_specificity 改为 none；保留其作为远程导入解析辅助 API 的说明，不应将其作为 IOC。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/detection_specificity"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "wrong_claim",
+        "description": "重定位 claim 对上下文字段位置的表达不准确：sub_403D08 并非直接从 a2 的“+164”读取块大小，而是从 *(a2-4)+164 读取；基址差值则从 a2-12 与 a2-8 相关位置读取。核心重定位行为判断仍被源码支持，但 source 描述应避免错误的结构偏移关系。",
+        "evidence": [
+          {
+            "location": "F-0299 L0009-L0020",
+            "observation": "代码从 *(_DWORD *)(*(_DWORD *)(a2 - 4) + 164) 读取遍历长度，并从 a2-12 与 a2-8 取地址/差值参与 *v4 += 差值。"
+          }
+        ],
+        "required_fix": "只修正 claims[2].source 中的上下文字段描述，明确记录间接的 a2-4 指针加 164 以及 a2-12/a2-8 位置；保持 condition、action、sink 和证据等级不变。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/2/source"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体到位：当前包新增的远程可执行内存、CreateRemoteThread、远程 API 解析、重定位和 IAT 处理均已报告，且未把入口执行结果过度升级为 confirmed。主要必须修订的问题是所有证据 location 均不可解析，导致结果无法验收；另有两个通用 API artifact 的 role/specificity 分类错误，以及一处重定位上下文偏移描述不精确。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的全部核心 claim、artifact 和 material_need 证据引用都使用了不可解析的“F-xxxx sub_x 原文件 L...”格式；验证结果显示 valid_segments=0，15 条引用全部 invalid_format。虽然对应源码确实存在，但按结果格式它们没有形成可验收的材料证据，导致核心远程线程、导入解析、重定位和补料需求均无法被引用定位。",
+        "evidence": [
+          {
+            "location": "claims[0-4].evidence[0-1]、artifacts[0-2].evidence[0]、material_needs[0-1].evidence[*]",
+            "observation": "所有引用均包含如“F-0289 sub_40387C 原文件 L0006-L0009”的前缀，验证器报告 no F-xxxx Lx[-Ly] source reference could be parsed。"
+          },
+          {
+            "location": "F-0289 L0006-L0009",
+            "observation": "当前材料实际显示 sub_40387C 在 L0007-L0008 调用 VirtualAllocEx 和 WriteProcessMemory，说明源码证据可被精确重引用。"
+          },
+          {
+            "location": "F-0291 L0017-L0027",
+            "observation": "当前材料实际显示 sub_4038AC 在 L0018-L0026 分配/写入远程参数和线程代码、创建远程线程，并在 a4 非零时等待和读回。"
+          }
+        ],
+        "required_fix": "仅修正 evidence.location 的引用格式为可解析的 F-XXXX Lx-Ly；不得通过改写 observation 来迁就错误引用。应覆盖所有已列出的 claims、artifacts 和 material_needs 证据位置，使每条核心结论和补料需求都能直接定位到当前材料。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "LoadLibraryA 和 GetProcAddress 被标为 role=read_source，但它们是被解析并写入远程辅助结构的 API/函数名，不是程序读取的环境或数据源。该分类会把通用 API 名称错误表示为读取源；同时这类通用 API 名称不具备感染特异性，应为 detection_specificity=none，而非 low。",
+        "evidence": [
+          {
+            "location": "F-0293 L0021-L0027",
+            "observation": "代码通过 GetProcAddress 获取 LoadLibraryA 地址并放入远程辅助结构；该字符串是 API 名称，不是被读取的样本数据源。"
+          },
+          {
+            "location": "F-0295 L0013-L0021",
+            "observation": "代码获取 GetProcAddress、GetModuleHandleA、ExitThread 地址并写入远程辅助结构；GetProcAddress 是通用 API 名称。"
+          }
+        ],
+        "required_fix": "将 artifacts[0] 和 artifacts[1] 的 role 改为 other，并将 detection_specificity 改为 none；保留其作为远程导入解析辅助 API 的说明，不应将其作为 IOC。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/role"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/detection_specificity"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "wrong_claim",
+        "description": "重定位 claim 对上下文字段位置的表达不准确：sub_403D08 并非直接从 a2 的“+164”读取块大小，而是从 *(a2-4)+164 读取；基址差值则从 a2-12 与 a2-8 相关位置读取。核心重定位行为判断仍被源码支持，但 source 描述应避免错误的结构偏移关系。",
+        "evidence": [
+          {
+            "location": "F-0299 L0009-L0020",
+            "observation": "代码从 *(_DWORD *)(*(_DWORD *)(a2 - 4) + 164) 读取遍历长度，并从 a2-12 与 a2-8 取地址/差值参与 *v4 += 差值。"
+          }
+        ],
+        "required_fix": "只修正 claims[2].source 中的上下文字段描述，明确记录间接的 a2-4 指针加 164 以及 a2-12/a2-8 位置；保持 condition、action、sink 和证据等级不变。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/2/source"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体到位：当前包新增的远程可执行内存、CreateRemoteThread、远程 API 解析、重定位和 IAT 处理均已报告，且未把入口执行结果过度升级为 confirmed。主要必须修订的问题是所有证据 location 均不可解析，导致结果无法验收；另有两个通用 API artifact 的 role/specificity 分类错误，以及一处重定位上下文偏移描述不精确。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了映像装载后的关键远程初始化能力：代码在目标进程中分配并写入字符串、数据和位置无关辅助代码，通过 CreateRemoteThread 执行远程入口；同时处理重定位并解析导入表，将导入地址写入远程映像。导入解析中若模块尚未可用会调用远程 LoadLibraryA 路径，函数地址通过远程 GetProcAddress 路径获取。部分名称解析、导入模块加载和 IAT 写入辅助函数仍在包外，最终载荷入口及运行结果也未在本包闭合。",
+    "claims": [
+      {
+        "behavior": "向目标进程分配可执行内存，写入参数缓冲区和辅助代码，并创建远程线程执行该代码；若调用方要求同步，还等待线程并从远程参数缓冲区读回结果。",
+        "condition": "调用 sub_4038AC 时目标进程句柄和待执行代码/参数有效；a4 非零时进入等待和读回分支。",
+        "source": "调用者提供的 hProcess、lpBuffer_1 参数缓冲区和 lpBuffer_2 代码缓冲区。",
+        "action": "sub_40387C 使用 VirtualAllocEx(...,0x3000,0x40) 分配远程内存并用 WriteProcessMemory 写入；sub_4038AC 随后以写入地址作为线程入口调用 CreateRemoteThread，并可 WaitForSingleObject 后 ReadProcessMemory。",
+        "sink": "目标进程远程地址空间和其新建远程线程；同步结果回写到调用者缓冲区。",
+        "evidence": [
+          {
+            "location": "F-0289 L0006-L0009",
+            "observation": "函数调用 VirtualAllocEx 分配 PAGE_EXECUTE_READWRITE 风格的远程内存，并用 WriteProcessMemory 写入给定缓冲区。"
+          },
+          {
+            "location": "F-0291 L0017-L0027",
+            "observation": "函数分别写入参数和线程代码，调用 CreateRemoteThread；a4 非零时等待线程并从远程参数地址读取结果。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "静态代码证明了远程线程创建和内存写入能力，但不能证明目标进程实际成功执行或线程最终结果。"
+        ]
+      },
+      {
+        "behavior": "在目标进程中执行一段远程辅助代码，以通过 kernel32 的 LoadLibraryA 和 GetProcAddress 解析模块/函数，并返回解析结果。",
+        "condition": "sub_403A58 被调用；其远程线程创建成功时才会等待并取得线程退出码。",
+        "source": "当前进程中通过 GetModuleHandleA(\"kernel32\") 和 GetProcAddress 获取的 GetModuleHandleA、GetProcAddress、ExitThread 地址，以及传入的两个字符串/序号参数。",
+        "action": "sub_403A58 将两个字符串缓冲区和函数地址写入目标进程，使用 sub_403A28 作为远程线程入口；sub_403A28 调用远程函数指针链并返回结果，调用者等待线程并读取退出码。",
+        "sink": "目标进程中的远程解析线程及其返回的模块/函数地址。",
+        "evidence": [
+          {
+            "location": "F-0295 L0012-L0027",
+            "observation": "代码取得 kernel32 的 GetModuleHandleA、GetProcAddress、ExitThread 地址，将两个输入字符串写入目标进程，并通过 sub_4038AC 执行 sub_403A28，等待后读取线程退出码。"
+          },
+          {
+            "location": "F-0294 L0009-L0014",
+            "observation": "远程辅助函数从结构中取出三个函数指针，先调用一个函数，再将结果传给第二个函数，最后调用返回函数。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "参数结构与函数指针的精确对应关系依赖远程代码布局；本包未展示 sub_403BD0 对模块是否已加载的判断语义。"
+        ]
+      },
+      {
+        "behavior": "根据重定位块中的条目和映像基址差值，修改远程映像中的重定位目标。",
+        "condition": "调用 sub_403D08 时输入重定位表和 a2 指向的映像上下文有效；仅处理重定位条目高字节的高半部分非零者。",
+        "source": "a1 指向的重定位块；遍历长度从 *(a2-4) 指向结构的 +164 处读取，目标地址基址和重定位差值分别从 a2-12 与 a2-8 相关位置取得。",
+        "action": "遍历重定位块，按条目偏移计算目标地址，并将 a2 上下文中的基址差值加到目标 DWORD。",
+        "sink": "映像内被重定位的地址字段。",
+        "evidence": [
+          {
+            "location": "F-0299 L0009-L0027",
+            "observation": "代码读取重定位块大小，遍历 16 位条目；对符合条件的条目计算目标地址并执行 *v4 += relocation_delta。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码未在本包中展示调用者如何取得重定位表、基址差值及远程映像布局，因此不能判断该处理在具体载荷中是否实际被触发。"
+        ]
+      },
+      {
+        "behavior": "遍历导入描述符，解析导入模块并为每个导入符号取得地址后写入导入地址表。",
+        "condition": "sub_403D84 遍历到非终止导入描述符；每个描述符的模块名和 thunk 表结构有效。",
+        "source": "a1 指向的导入描述符数组，以及 a3 上下文中映像基址、目标进程句柄和相关 PE 表地址。",
+        "action": "对每个模块名调用 sub_403BD0 判断/获取模块状态；失败分支调用 sub_403954 处理模块，再调用 sub_403B40；随后遍历名称或序号 thunk，按序号/名称调用 sub_403A58，并把返回值写入 *v4。",
+        "sink": "远程映像的导入地址表（IAT），以及目标进程中用于加载/解析导入的远程线程。",
+        "evidence": [
+          {
+            "location": "F-0301 L0025-L0052",
+            "observation": "代码遍历导入描述符，依据模块名调用 sub_403BD0；失败时调用 sub_403954 和 sub_403B40；随后逐项调用 sub_403A58 并将返回值写入 IAT 槽位。"
+          },
+          {
+            "location": "F-0293 L0021-L0031",
+            "observation": "该辅助函数获取 kernel32 的 Sleep 和 LoadLibraryA 地址，把模块名写入目标进程，并通过 sub_403920 创建远程线程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_403BD0、sub_403B40 和 sub_402E08 的实现不在本包，无法确认模块已加载判断、LoadLibraryA 返回值处理及模块名规范化的完整语义。"
+        ]
+      },
+      {
+        "behavior": "在目标进程中执行包含 LoadLibraryA、Sleep 和传入模块句柄/入口数据的远程初始化例程。",
+        "condition": "sub_403954 的目标进程句柄、模块字符串和相关参数有效，且 sub_4038AC 创建远程线程成功。",
+        "source": "sub_403954 获取的 kernel32 导出地址、sub_401F48 处理后的模块字符串，以及传入的 a3 数据。",
+        "action": "将 LoadLibraryA、Sleep 和模块字符串地址组成结构，使用 sub_403920 作为远程线程代码创建线程；sub_403920 调用结构中的函数并持续循环调用另一个函数。",
+        "sink": "目标进程中的远程线程及其加载/初始化调用。",
+        "evidence": [
+          {
+            "location": "F-0293 L0021-L0031",
+            "observation": "代码获取 Sleep 和 LoadLibraryA 地址，将处理后的模块字符串写入目标进程，并用 sub_403920 作为远程线程入口执行。"
+          },
+          {
+            "location": "F-0292 L0005-L0008",
+            "observation": "远程例程从结构中取函数指针和参数，先调用一个函数，随后无限循环调用另一个函数并传入 -1。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "虽然 LoadLibraryA 地址被放入远程结构，当前包未直接显示 sub_403920 中两个函数指针对应的字段语义，不能把最终加载模块或循环行为的成功结果确认为已发生。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "string",
+        "value": "LoadLibraryA",
+        "role": "other",
+        "detection_specificity": "none",
+        "meaning": "代码解析并使用 kernel32 的 LoadLibraryA 地址，作为目标进程远程模块处理辅助的一部分。",
+        "evidence": [
+          {
+            "location": "F-0293 L0021-L0027",
+            "observation": "通过 GetProcAddress(hModule_1, \"LoadLibraryA\") 获取函数地址并放入远程辅助结构。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "GetProcAddress",
+        "role": "other",
+        "detection_specificity": "none",
+        "meaning": "代码解析并使用 kernel32 的 GetProcAddress 地址，供目标进程中的远程解析例程使用。",
+        "evidence": [
+          {
+            "location": "F-0295 L0013-L0021",
+            "observation": "通过 GetProcAddress 获取 GetProcAddress 自身的地址，并将其写入远程辅助结构。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "目标进程（hProcess）",
+        "role": "other",
+        "detection_specificity": "none",
+        "meaning": "多个函数对该句柄执行远程分配、写入和线程创建；具体宿主进程由上游包选择。",
+        "evidence": [
+          {
+            "location": "F-0291 L0017-L0026",
+            "observation": "hProcess 被用于 VirtualAllocEx、WriteProcessMemory、CreateRemoteThread、WaitForSingleObject 和 ReadProcessMemory。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_403BD0、sub_403B40 和 sub_402E08 分别如何判断导入模块、加载模块以及计算导入解析所需名称/状态？",
+        "reason": "sub_403D84 依赖这些函数完成导入处理，但其实现不在当前材料包。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_401F48 传给 sub_403954 的模块字符串及 sub_403920 结构字段的精确语义是什么？",
+        "reason": "当前代码显示字符串被写入远程内存并交给远程例程，但无法仅据此确认实际加载对象和初始化结果。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "capability",
+        "question": "PE 映像入口何时调用，以及 sub_403D08/sub_403D84 的结果如何连接到完整映射流程？",
+        "reason": "本包提供重定位和导入处理函数，但未包含其完整调用链及最终入口调用证据。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_403BD0, sub_403B40, sub_402E08",
+        "reason": "闭合导入描述符处理中的模块判断、加载及名称解析语义。",
+        "expected_value": "确认导入模块加载条件、IAT 写入来源和失败分支副作用。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401F48, sub_403920",
+        "reason": "解析远程初始化结构和模块字符串的实际语义。",
+        "expected_value": "确认远程线程是否实际调用 LoadLibraryA、加载何种模块以及后续循环行为。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_403BD0, sub_403B40, sub_402E08",
+        "targets": [
+          {
+            "identifier": "sub_403BD0",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403B40",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402E08",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "这些函数由 sub_403D84 直接调用，决定导入模块检测/加载、名称解析和最终 IAT 更新语义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0301 L0030-L0039",
+            "observation": "代码调用 sub_402E08、sub_403BD0 和 sub_403B40 处理每个导入模块。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401F48, sub_403920",
+        "targets": [
+          {
+            "identifier": "sub_401F48",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403920",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认传入远程辅助结构的模块字符串及 sub_403920 中函数指针字段的真实调用关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0293 L0025-L0027",
+            "observation": "sub_401F48 的结果被写入目标进程，并交给以 sub_403920 为入口的远程线程。"
+          },
+          {
+            "location": "F-0292 L0005-L0008",
+            "observation": "远程例程按结构偏移间接调用两个函数，但字段来源需结合调用方和辅助实现确认。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了映像装载后的关键远程初始化能力：代码在目标进程中分配并写入字符串、数据和位置无关辅助代码，通过 CreateRemoteThread 执行远程入口；同时处理重定位并解析导入表，将导入地址写入远程映像。导入解析中若模块尚未可用会调用远程 LoadLibraryA 路径，函数地址通过远程 GetProcAddress 路径获取。部分名称解析、导入模块加载和 IAT 写入辅助函数仍在包外，最终载荷入口及运行结果也未在本包闭合。",
+    "claims": [
+      {
+        "behavior": "向目标进程分配可执行内存，写入参数缓冲区和辅助代码，并创建远程线程执行该代码；若调用方要求同步，还等待线程并从远程参数缓冲区读回结果。",
+        "condition": "调用 sub_4038AC 时目标进程句柄和待执行代码/参数有效；a4 非零时进入等待和读回分支。",
+        "source": "调用者提供的 hProcess、lpBuffer_1 参数缓冲区和 lpBuffer_2 代码缓冲区。",
+        "action": "sub_40387C 使用 VirtualAllocEx(...,0x3000,0x40) 分配远程内存并用 WriteProcessMemory 写入；sub_4038AC 随后以写入地址作为线程入口调用 CreateRemoteThread，并可 WaitForSingleObject 后 ReadProcessMemory。",
+        "sink": "目标进程远程地址空间和其新建远程线程；同步结果回写到调用者缓冲区。",
+        "evidence": [
+          {
+            "location": "F-0289 L0006-L0009",
+            "observation": "函数调用 VirtualAllocEx 分配 PAGE_EXECUTE_READWRITE 风格的远程内存，并用 WriteProcessMemory 写入给定缓冲区。"
+          },
+          {
+            "location": "F-0291 L0017-L0027",
+            "observation": "函数分别写入参数和线程代码，调用 CreateRemoteThread；a4 非零时等待线程并从远程参数地址读取结果。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "静态代码证明了远程线程创建和内存写入能力，但不能证明目标进程实际成功执行或线程最终结果。"
+        ]
+      },
+      {
+        "behavior": "在目标进程中执行一段远程辅助代码，以通过 kernel32 的 LoadLibraryA 和 GetProcAddress 解析模块/函数，并返回解析结果。",
+        "condition": "sub_403A58 被调用；其远程线程创建成功时才会等待并取得线程退出码。",
+        "source": "当前进程中通过 GetModuleHandleA(\"kernel32\") 和 GetProcAddress 获取的 GetModuleHandleA、GetProcAddress、ExitThread 地址，以及传入的两个字符串/序号参数。",
+        "action": "sub_403A58 将两个字符串缓冲区和函数地址写入目标进程，使用 sub_403A28 作为远程线程入口；sub_403A28 调用远程函数指针链并返回结果，调用者等待线程并读取退出码。",
+        "sink": "目标进程中的远程解析线程及其返回的模块/函数地址。",
+        "evidence": [
+          {
+            "location": "F-0295 L0012-L0027",
+            "observation": "代码取得 kernel32 的 GetModuleHandleA、GetProcAddress、ExitThread 地址，将两个输入字符串写入目标进程，并通过 sub_4038AC 执行 sub_403A28，等待后读取线程退出码。"
+          },
+          {
+            "location": "F-0294 L0009-L0014",
+            "observation": "远程辅助函数从结构中取出三个函数指针，先调用一个函数，再将结果传给第二个函数，最后调用返回函数。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "参数结构与函数指针的精确对应关系依赖远程代码布局；本包未展示 sub_403BD0 对模块是否已加载的判断语义。"
+        ]
+      },
+      {
+        "behavior": "根据重定位块中的条目和映像基址差值，修改远程映像中的重定位目标。",
+        "condition": "调用 sub_403D08 时输入重定位表和 a2 指向的映像上下文有效；仅处理重定位条目高字节的高半部分非零者。",
+        "source": "a1 指向的重定位块；遍历长度从 *(a2-4) 指向结构的 +164 处读取，目标地址基址和重定位差值分别从 a2-12 与 a2-8 相关位置取得。",
+        "action": "遍历重定位块，按条目偏移计算目标地址，并将 a2 上下文中的基址差值加到目标 DWORD。",
+        "sink": "映像内被重定位的地址字段。",
+        "evidence": [
+          {
+            "location": "F-0299 L0009-L0027",
+            "observation": "代码读取重定位块大小，遍历 16 位条目；对符合条件的条目计算目标地址并执行 *v4 += relocation_delta。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码未在本包中展示调用者如何取得重定位表、基址差值及远程映像布局，因此不能判断该处理在具体载荷中是否实际被触发。"
+        ]
+      },
+      {
+        "behavior": "遍历导入描述符，解析导入模块并为每个导入符号取得地址后写入导入地址表。",
+        "condition": "sub_403D84 遍历到非终止导入描述符；每个描述符的模块名和 thunk 表结构有效。",
+        "source": "a1 指向的导入描述符数组，以及 a3 上下文中映像基址、目标进程句柄和相关 PE 表地址。",
+        "action": "对每个模块名调用 sub_403BD0 判断/获取模块状态；失败分支调用 sub_403954 处理模块，再调用 sub_403B40；随后遍历名称或序号 thunk，按序号/名称调用 sub_403A58，并把返回值写入 *v4。",
+        "sink": "远程映像的导入地址表（IAT），以及目标进程中用于加载/解析导入的远程线程。",
+        "evidence": [
+          {
+            "location": "F-0301 L0025-L0052",
+            "observation": "代码遍历导入描述符，依据模块名调用 sub_403BD0；失败时调用 sub_403954 和 sub_403B40；随后逐项调用 sub_403A58 并将返回值写入 IAT 槽位。"
+          },
+          {
+            "location": "F-0293 L0021-L0031",
+            "observation": "该辅助函数获取 kernel32 的 Sleep 和 LoadLibraryA 地址，把模块名写入目标进程，并通过 sub_403920 创建远程线程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_403BD0、sub_403B40 和 sub_402E08 的实现不在本包，无法确认模块已加载判断、LoadLibraryA 返回值处理及模块名规范化的完整语义。"
+        ]
+      },
+      {
+        "behavior": "在目标进程中执行包含 LoadLibraryA、Sleep 和传入模块句柄/入口数据的远程初始化例程。",
+        "condition": "sub_403954 的目标进程句柄、模块字符串和相关参数有效，且 sub_4038AC 创建远程线程成功。",
+        "source": "sub_403954 获取的 kernel32 导出地址、sub_401F48 处理后的模块字符串，以及传入的 a3 数据。",
+        "action": "将 LoadLibraryA、Sleep 和模块字符串地址组成结构，使用 sub_403920 作为远程线程代码创建线程；sub_403920 调用结构中的函数并持续循环调用另一个函数。",
+        "sink": "目标进程中的远程线程及其加载/初始化调用。",
+        "evidence": [
+          {
+            "location": "F-0293 L0021-L0031",
+            "observation": "代码获取 Sleep 和 LoadLibraryA 地址，将处理后的模块字符串写入目标进程，并用 sub_403920 作为远程线程入口执行。"
+          },
+          {
+            "location": "F-0292 L0005-L0008",
+            "observation": "远程例程从结构中取函数指针和参数，先调用一个函数，随后无限循环调用另一个函数并传入 -1。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "虽然 LoadLibraryA 地址被放入远程结构，当前包未直接显示 sub_403920 中两个函数指针对应的字段语义，不能把最终加载模块或循环行为的成功结果确认为已发生。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "string",
+        "value": "LoadLibraryA",
+        "role": "other",
+        "detection_specificity": "none",
+        "meaning": "代码解析并使用 kernel32 的 LoadLibraryA 地址，作为目标进程远程模块处理辅助的一部分。",
+        "evidence": [
+          {
+            "location": "F-0293 L0021-L0027",
+            "observation": "通过 GetProcAddress(hModule_1, \"LoadLibraryA\") 获取函数地址并放入远程辅助结构。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "GetProcAddress",
+        "role": "other",
+        "detection_specificity": "none",
+        "meaning": "代码解析并使用 kernel32 的 GetProcAddress 地址，供目标进程中的远程解析例程使用。",
+        "evidence": [
+          {
+            "location": "F-0295 L0013-L0021",
+            "observation": "通过 GetProcAddress 获取 GetProcAddress 自身的地址，并将其写入远程辅助结构。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "目标进程（hProcess）",
+        "role": "other",
+        "detection_specificity": "none",
+        "meaning": "多个函数对该句柄执行远程分配、写入和线程创建；具体宿主进程由上游包选择。",
+        "evidence": [
+          {
+            "location": "F-0291 L0017-L0026",
+            "observation": "hProcess 被用于 VirtualAllocEx、WriteProcessMemory、CreateRemoteThread、WaitForSingleObject 和 ReadProcessMemory。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_403BD0、sub_403B40 和 sub_402E08 分别如何判断导入模块、加载模块以及计算导入解析所需名称/状态？",
+        "reason": "sub_403D84 依赖这些函数完成导入处理，但其实现不在当前材料包。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_401F48 传给 sub_403954 的模块字符串及 sub_403920 结构字段的精确语义是什么？",
+        "reason": "当前代码显示字符串被写入远程内存并交给远程例程，但无法仅据此确认实际加载对象和初始化结果。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "capability",
+        "question": "PE 映像入口何时调用，以及 sub_403D08/sub_403D84 的结果如何连接到完整映射流程？",
+        "reason": "本包提供重定位和导入处理函数，但未包含其完整调用链及最终入口调用证据。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_403BD0, sub_403B40, sub_402E08",
+        "reason": "闭合导入描述符处理中的模块判断、加载及名称解析语义。",
+        "expected_value": "确认导入模块加载条件、IAT 写入来源和失败分支副作用。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401F48, sub_403920",
+        "reason": "解析远程初始化结构和模块字符串的实际语义。",
+        "expected_value": "确认远程线程是否实际调用 LoadLibraryA、加载何种模块以及后续循环行为。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_403BD0, sub_403B40, sub_402E08",
+        "targets": [
+          {
+            "identifier": "sub_403BD0",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403B40",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402E08",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "这些函数由 sub_403D84 直接调用，决定导入模块检测/加载、名称解析和最终 IAT 更新语义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0301 L0030-L0039",
+            "observation": "代码调用 sub_402E08、sub_403BD0 和 sub_403B40 处理每个导入模块。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401F48, sub_403920",
+        "targets": [
+          {
+            "identifier": "sub_401F48",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403920",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认传入远程辅助结构的模块字符串及 sub_403920 中函数指针字段的真实调用关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0293 L0025-L0027",
+            "observation": "sub_401F48 的结果被写入目标进程，并交给以 sub_403920 为入口的远程线程。"
+          },
+          {
+            "location": "F-0292 L0005-L0008",
+            "observation": "远程例程按结构偏移间接调用两个函数，但字段来源需结合调用方和辅助实现确认。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/artifacts/0/detection_specificity",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/0/role",
+      "/artifacts/1/detection_specificity",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/1/role",
+      "/artifacts/2/evidence/0/location",
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/2/evidence/0/location",
+      "/claims/2/source",
+      "/claims/3/evidence/0/location",
+      "/claims/3/evidence/1/location",
+      "/claims/4/evidence/0/location",
+      "/claims/4/evidence/1/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/1/evidence/1/location"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [],
+    "applied_paths": [
+      "/claims/0/evidence/0/location",
+      "/claims/0/evidence/1/location",
+      "/claims/1/evidence/0/location",
+      "/claims/1/evidence/1/location",
+      "/claims/2/source",
+      "/claims/2/evidence/0/location",
+      "/claims/3/evidence/0/location",
+      "/claims/3/evidence/1/location",
+      "/claims/4/evidence/0/location",
+      "/claims/4/evidence/1/location",
+      "/artifacts/0/role",
+      "/artifacts/0/detection_specificity",
+      "/artifacts/0/evidence/0/location",
+      "/artifacts/1/role",
+      "/artifacts/1/detection_specificity",
+      "/artifacts/1/evidence/0/location",
+      "/artifacts/2/evidence/0/location",
+      "/material_needs/0/evidence/0/location",
+      "/material_needs/1/evidence/0/location",
+      "/material_needs/1/evidence/1/location"
+    ],
+    "ignored_paths": [],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的全部核心 claim、artifact 和 material_need 证据引用都使用了不可解析的“F-xxxx sub_x 原文件 L...”格式；验证结果显示 valid_segments=0，15 条引用全部 invalid_format。虽然对应源码确实存在，但按结果格式它们没有形成可验收的材料证据，导致核心远程线程、导入解析、重定位和补料需求均无法被引用定位。",
+        "evidence": [
+          {
+            "location": "claims[0-4].evidence[0-1]、artifacts[0-2].evidence[0]、material_needs[0-1].evidence[*]",
+            "observation": "所有引用均包含如“F-0289 sub_40387C 原文件 L0006-L0009”的前缀，验证器报告 no F-xxxx Lx[-Ly] source reference could be parsed。"
+          },
+          {
+            "location": "F-0289 L0006-L0009",
+            "observation": "当前材料实际显示 sub_40387C 在 L0007-L0008 调用 VirtualAllocEx 和 WriteProcessMemory，说明源码证据可被精确重引用。"
+          },
+          {
+            "location": "F-0291 L0017-L0027",
+            "observation": "当前材料实际显示 sub_4038AC 在 L0018-L0026 分配/写入远程参数和线程代码、创建远程线程，并在 a4 非零时等待和读回。"
+          }
+        ],
+        "required_fix": "仅修正 evidence.location 的引用格式为可解析的 F-XXXX Lx-Ly；不得通过改写 observation 来迁就错误引用。应覆盖所有已列出的 claims、artifacts 和 material_needs 证据位置，使每条核心结论和补料需求都能直接定位到当前材料。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/*",
+              "/artifacts/*",
+              "/material_needs/*"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_role_error",
+        "description": "LoadLibraryA 和 GetProcAddress 被标为 role=read_source，但它们是被解析并写入远程辅助结构的 API/函数名，不是程序读取的环境或数据源。该分类会把通用 API 名称错误表示为读取源；同时这类通用 API 名称不具备感染特异性，应为 detection_specificity=none，而非 low。",
+        "evidence": [
+          {
+            "location": "F-0293 L0021-L0027",
+            "observation": "代码通过 GetProcAddress 获取 LoadLibraryA 地址并放入远程辅助结构；该字符串是 API 名称，不是被读取的样本数据源。"
+          },
+          {
+            "location": "F-0295 L0013-L0021",
+            "observation": "代码获取 GetProcAddress、GetModuleHandleA、ExitThread 地址并写入远程辅助结构；GetProcAddress 是通用 API 名称。"
+          }
+        ],
+        "required_fix": "将 artifacts[0] 和 artifacts[1] 的 role 改为 other，并将 detection_specificity 改为 none；保留其作为远程导入解析辅助 API 的说明，不应将其作为 IOC。",
+        "fixes": [
+          {
+            "type": "artifact_classification",
+            "targets": [
+              "/artifacts/0",
+              "/artifacts/1"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "wrong_claim",
+        "description": "重定位 claim 对上下文字段位置的表达不准确：sub_403D08 并非直接从 a2 的“+164”读取块大小，而是从 *(a2-4)+164 读取；基址差值则从 a2-12 与 a2-8 相关位置读取。核心重定位行为判断仍被源码支持，但 source 描述应避免错误的结构偏移关系。",
+        "evidence": [
+          {
+            "location": "F-0299 L0009-L0020",
+            "observation": "代码从 *(_DWORD *)(*(_DWORD *)(a2 - 4) + 164) 读取遍历长度，并从 a2-12 与 a2-8 取地址/差值参与 *v4 += 差值。"
+          }
+        ],
+        "required_fix": "只修正 claims[2].source 中的上下文字段描述，明确记录间接的 a2-4 指针加 164 以及 a2-12/a2-8 位置；保持 condition、action、sink 和证据等级不变。",
+        "fixes": [
+          {
+            "type": "claim_revision",
+            "targets": [
+              "/claims/2"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体到位：当前包新增的远程可执行内存、CreateRemoteThread、远程 API 解析、重定位和 IAT 处理均已报告，且未把入口执行结果过度升级为 confirmed。主要必须修订的问题是所有证据 location 均不可解析，导致结果无法验收；另有两个通用 API artifact 的 role/specificity 分类错误，以及一处重定位上下文偏移描述不精确。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包确认了映像装载后的关键远程初始化能力：代码在目标进程中分配并写入字符串、数据和位置无关辅助代码，通过 CreateRemoteThread 执行远程入口；同时处理重定位并解析导入表，将导入地址写入远程映像。导入解析中若模块尚未可用会调用远程 LoadLibraryA 路径，函数地址通过远程 GetProcAddress 路径获取。部分名称解析、导入模块加载和 IAT 写入辅助函数仍在包外，最终载荷入口及运行结果也未在本包闭合。",
+    "claims": [
+      {
+        "behavior": "向目标进程分配可执行内存，写入参数缓冲区和辅助代码，并创建远程线程执行该代码；若调用方要求同步，还等待线程并从远程参数缓冲区读回结果。",
+        "condition": "调用 sub_4038AC 时目标进程句柄和待执行代码/参数有效；a4 非零时进入等待和读回分支。",
+        "source": "调用者提供的 hProcess、lpBuffer_1 参数缓冲区和 lpBuffer_2 代码缓冲区。",
+        "action": "sub_40387C 使用 VirtualAllocEx(...,0x3000,0x40) 分配远程内存并用 WriteProcessMemory 写入；sub_4038AC 随后以写入地址作为线程入口调用 CreateRemoteThread，并可 WaitForSingleObject 后 ReadProcessMemory。",
+        "sink": "目标进程远程地址空间和其新建远程线程；同步结果回写到调用者缓冲区。",
+        "evidence": [
+          {
+            "location": "F-0289 L0006-L0009",
+            "observation": "函数调用 VirtualAllocEx 分配 PAGE_EXECUTE_READWRITE 风格的远程内存，并用 WriteProcessMemory 写入给定缓冲区。"
+          },
+          {
+            "location": "F-0291 L0017-L0027",
+            "observation": "函数分别写入参数和线程代码，调用 CreateRemoteThread；a4 非零时等待线程并从远程参数地址读取结果。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "静态代码证明了远程线程创建和内存写入能力，但不能证明目标进程实际成功执行或线程最终结果。"
+        ]
+      },
+      {
+        "behavior": "在目标进程中执行一段远程辅助代码，以通过 kernel32 的 LoadLibraryA 和 GetProcAddress 解析模块/函数，并返回解析结果。",
+        "condition": "sub_403A58 被调用；其远程线程创建成功时才会等待并取得线程退出码。",
+        "source": "当前进程中通过 GetModuleHandleA(\"kernel32\") 和 GetProcAddress 获取的 GetModuleHandleA、GetProcAddress、ExitThread 地址，以及传入的两个字符串/序号参数。",
+        "action": "sub_403A58 将两个字符串缓冲区和函数地址写入目标进程，使用 sub_403A28 作为远程线程入口；sub_403A28 调用远程函数指针链并返回结果，调用者等待线程并读取退出码。",
+        "sink": "目标进程中的远程解析线程及其返回的模块/函数地址。",
+        "evidence": [
+          {
+            "location": "F-0295 L0012-L0027",
+            "observation": "代码取得 kernel32 的 GetModuleHandleA、GetProcAddress、ExitThread 地址，将两个输入字符串写入目标进程，并通过 sub_4038AC 执行 sub_403A28，等待后读取线程退出码。"
+          },
+          {
+            "location": "F-0294 L0009-L0014",
+            "observation": "远程辅助函数从结构中取出三个函数指针，先调用一个函数，再将结果传给第二个函数，最后调用返回函数。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "参数结构与函数指针的精确对应关系依赖远程代码布局；本包未展示 sub_403BD0 对模块是否已加载的判断语义。"
+        ]
+      },
+      {
+        "behavior": "根据重定位块中的条目和映像基址差值，修改远程映像中的重定位目标。",
+        "condition": "调用 sub_403D08 时输入重定位表和 a2 指向的映像上下文有效；仅处理重定位条目高字节的高半部分非零者。",
+        "source": "a1 指向的重定位块；遍历长度从 *(a2-4) 指向结构的 +164 处读取，目标地址基址和重定位差值分别从 a2-12 与 a2-8 相关位置取得。",
+        "action": "遍历重定位块，按条目偏移计算目标地址，并将 a2 上下文中的基址差值加到目标 DWORD。",
+        "sink": "映像内被重定位的地址字段。",
+        "evidence": [
+          {
+            "location": "F-0299 L0009-L0027",
+            "observation": "代码读取重定位块大小，遍历 16 位条目；对符合条件的条目计算目标地址并执行 *v4 += relocation_delta。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "代码未在本包中展示调用者如何取得重定位表、基址差值及远程映像布局，因此不能判断该处理在具体载荷中是否实际被触发。"
+        ]
+      },
+      {
+        "behavior": "遍历导入描述符，解析导入模块并为每个导入符号取得地址后写入导入地址表。",
+        "condition": "sub_403D84 遍历到非终止导入描述符；每个描述符的模块名和 thunk 表结构有效。",
+        "source": "a1 指向的导入描述符数组，以及 a3 上下文中映像基址、目标进程句柄和相关 PE 表地址。",
+        "action": "对每个模块名调用 sub_403BD0 判断/获取模块状态；失败分支调用 sub_403954 处理模块，再调用 sub_403B40；随后遍历名称或序号 thunk，按序号/名称调用 sub_403A58，并把返回值写入 *v4。",
+        "sink": "远程映像的导入地址表（IAT），以及目标进程中用于加载/解析导入的远程线程。",
+        "evidence": [
+          {
+            "location": "F-0301 L0025-L0052",
+            "observation": "代码遍历导入描述符，依据模块名调用 sub_403BD0；失败时调用 sub_403954 和 sub_403B40；随后逐项调用 sub_403A58 并将返回值写入 IAT 槽位。"
+          },
+          {
+            "location": "F-0293 L0021-L0031",
+            "observation": "该辅助函数获取 kernel32 的 Sleep 和 LoadLibraryA 地址，把模块名写入目标进程，并通过 sub_403920 创建远程线程。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_403BD0、sub_403B40 和 sub_402E08 的实现不在本包，无法确认模块已加载判断、LoadLibraryA 返回值处理及模块名规范化的完整语义。"
+        ]
+      },
+      {
+        "behavior": "在目标进程中执行包含 LoadLibraryA、Sleep 和传入模块句柄/入口数据的远程初始化例程。",
+        "condition": "sub_403954 的目标进程句柄、模块字符串和相关参数有效，且 sub_4038AC 创建远程线程成功。",
+        "source": "sub_403954 获取的 kernel32 导出地址、sub_401F48 处理后的模块字符串，以及传入的 a3 数据。",
+        "action": "将 LoadLibraryA、Sleep 和模块字符串地址组成结构，使用 sub_403920 作为远程线程代码创建线程；sub_403920 调用结构中的函数并持续循环调用另一个函数。",
+        "sink": "目标进程中的远程线程及其加载/初始化调用。",
+        "evidence": [
+          {
+            "location": "F-0293 L0021-L0031",
+            "observation": "代码获取 Sleep 和 LoadLibraryA 地址，将处理后的模块字符串写入目标进程，并用 sub_403920 作为远程线程入口执行。"
+          },
+          {
+            "location": "F-0292 L0005-L0008",
+            "observation": "远程例程从结构中取函数指针和参数，先调用一个函数，随后无限循环调用另一个函数并传入 -1。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "虽然 LoadLibraryA 地址被放入远程结构，当前包未直接显示 sub_403920 中两个函数指针对应的字段语义，不能把最终加载模块或循环行为的成功结果确认为已发生。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "string",
+        "value": "LoadLibraryA",
+        "role": "other",
+        "detection_specificity": "none",
+        "meaning": "代码解析并使用 kernel32 的 LoadLibraryA 地址，作为目标进程远程模块处理辅助的一部分。",
+        "evidence": [
+          {
+            "location": "F-0293 L0021-L0027",
+            "observation": "通过 GetProcAddress(hModule_1, \"LoadLibraryA\") 获取函数地址并放入远程辅助结构。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "GetProcAddress",
+        "role": "other",
+        "detection_specificity": "none",
+        "meaning": "代码解析并使用 kernel32 的 GetProcAddress 地址，供目标进程中的远程解析例程使用。",
+        "evidence": [
+          {
+            "location": "F-0295 L0013-L0021",
+            "observation": "通过 GetProcAddress 获取 GetProcAddress 自身的地址，并将其写入远程辅助结构。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "process",
+        "value": "目标进程（hProcess）",
+        "role": "other",
+        "detection_specificity": "none",
+        "meaning": "多个函数对该句柄执行远程分配、写入和线程创建；具体宿主进程由上游包选择。",
+        "evidence": [
+          {
+            "location": "F-0291 L0017-L0026",
+            "observation": "hProcess 被用于 VirtualAllocEx、WriteProcessMemory、CreateRemoteThread、WaitForSingleObject 和 ReadProcessMemory。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_403BD0、sub_403B40 和 sub_402E08 分别如何判断导入模块、加载模块以及计算导入解析所需名称/状态？",
+        "reason": "sub_403D84 依赖这些函数完成导入处理，但其实现不在当前材料包。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_401F48 传给 sub_403954 的模块字符串及 sub_403920 结构字段的精确语义是什么？",
+        "reason": "当前代码显示字符串被写入远程内存并交给远程例程，但无法仅据此确认实际加载对象和初始化结果。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "capability",
+        "question": "PE 映像入口何时调用，以及 sub_403D08/sub_403D84 的结果如何连接到完整映射流程？",
+        "reason": "本包提供重定位和导入处理函数，但未包含其完整调用链及最终入口调用证据。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_403BD0, sub_403B40, sub_402E08",
+        "reason": "闭合导入描述符处理中的模块判断、加载及名称解析语义。",
+        "expected_value": "确认导入模块加载条件、IAT 写入来源和失败分支副作用。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401F48, sub_403920",
+        "reason": "解析远程初始化结构和模块字符串的实际语义。",
+        "expected_value": "确认远程线程是否实际调用 LoadLibraryA、加载何种模块以及后续循环行为。",
+        "priority": "medium"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_403BD0, sub_403B40, sub_402E08",
+        "targets": [
+          {
+            "identifier": "sub_403BD0",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403B40",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402E08",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "这些函数由 sub_403D84 直接调用，决定导入模块检测/加载、名称解析和最终 IAT 更新语义。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0301 L0030-L0039",
+            "observation": "代码调用 sub_402E08、sub_403BD0 和 sub_403B40 处理每个导入模块。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_401F48, sub_403920",
+        "targets": [
+          {
+            "identifier": "sub_401F48",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_403920",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确认传入远程辅助结构的模块字符串及 sub_403920 中函数指针字段的真实调用关系。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0293 L0025-L0027",
+            "observation": "sub_401F48 的结果被写入目标进程，并交给以 sub_403920 为入口的远程线程。"
+          },
+          {
+            "location": "F-0292 L0005-L0008",
+            "observation": "远程例程按结构偏移间接调用两个函数，但字段来源需结合调用方和辅助实现确认。"
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": []
+}

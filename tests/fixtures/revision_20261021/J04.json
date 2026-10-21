@@ -1,0 +1,1230 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J04.json",
+        "sha256": "77d90b482a305a3f39428ee968a437424b2adc9bd7ebcf8ebbf9dcddb6914da1"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J04/analyzer/validated_result.json",
+        "sha256": "7bae63316fbe7328e3263f8ae9db2d0f4d23fe848b1fbdcde76c712a3b47e082"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J04/reviewer/validated_result.json",
+        "sha256": "ca00b3704c9122a6b5879ea699c04bd277fcdf64e12a1dba1ec53f382023db8e"
+      },
+      "packet": {
+        "path": "testdata/packets/J04.md",
+        "sha256": "41bee4cfd76ead3632a392816f286580d56ad2e0ce3d09b946841542524359f3"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J04/reviser/revision_scope.json",
+        "sha256": "e1ddc0a74429012657fed5bf8deb534a18e0adf84603d399c02f26949f56c6d8"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "no Reviser call in this run; no candidate invented"
+  },
+  "packet_name": "J04",
+  "packet_text": "# J04 安装、自复制、注册表写入\n任务来源：既有 owner F394 和 J00 调用；按写入效果展开 F365/F391/F388。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0394 sub_406B54，原文件 L0001–L0261 / 共 261 行\n```text\nL0001: int *__usercall sub_406B54@<eax>(char *dst_4@<eax>, volatile __int32 *a2@<edx>)\nL0002: {\nL0003:   char *n3; // eax\nL0004:   int v4; // eax\nL0005:   int v5; // eax\nL0006:   char *n3_1; // eax\nL0007:   char *n3_2; // eax\nL0008:   int v8; // eax\nL0009:   char v9; // zf\nL0010:   char *lpExistingFileName; // esi\nL0011:   int v11; // ecx\nL0012:   char *n3_3; // eax\nL0013:   char *n3_4; // edi\nL0014:   char *n3_5; // eax\nL0015:   char *n3_6; // eax\nL0016:   char *n3_7; // eax\nL0017:   char *n3_8; // eax\nL0018:   char *n3_9; // eax\nL0019:   char *n3_10; // eax\nL0020:   char *n3_11; // eax\nL0021:   char *n3_12; // eax\nL0022:   char *n3_13; // eax\nL0023:   char *n3_14; // eax\nL0024:   char *n3_15; // eax\nL0025:   char *n3_16; // eax\nL0026:   char *lpSubKey; // eax\nL0027:   char *hKey; // [esp-14h] [ebp-9Ch]\nL0028:   char *lpNewFileName; // [esp-10h] [ebp-98h]\nL0029:   _DWORD *v30; // [esp-10h] [ebp-98h]\nL0030:   char *ExceptionList; // [esp-Ch] [ebp-94h] BYREF\nL0031:   void *v32; // [esp-8h] [ebp-90h]\nL0032:   int *v33; // [esp-4h] [ebp-8Ch]\nL0033:   void *v34; // [esp+0h] [ebp-88h]\nL0034:   char *v35; // [esp+Ch] [ebp-7Ch] BYREF\nL0035:   char *ExceptionList_5; // [esp+10h] [ebp-78h] BYREF\nL0036:   char *v37; // [esp+14h] [ebp-74h] BYREF\nL0037:   __int32 v38; // [esp+18h] [ebp-70h] BYREF\nL0038:   char *v39; // [esp+1Ch] [ebp-6Ch] BYREF\nL0039:   char *ExceptionList_4; // [esp+20h] [ebp-68h] BYREF\nL0040:   char *v41; // [esp+24h] [ebp-64h] BYREF\nL0041:   __int32 v42; // [esp+28h] [ebp-60h] BYREF\nL0042:   char *v43; // [esp+2Ch] [ebp-5Ch] BYREF\nL0043:   char *ExceptionList_3; // [esp+30h] [ebp-58h] BYREF\nL0044:   char *v45; // [esp+34h] [ebp-54h] BYREF\nL0045:   __int32 v46; // [esp+38h] [ebp-50h] BYREF\nL0046:   char *v47; // [esp+3Ch] [ebp-4Ch] BYREF\nL0047:   char *ExceptionList_2; // [esp+40h] [ebp-48h] BYREF\nL0048:   char *v49; // [esp+44h] [ebp-44h] BYREF\nL0049:   __int32 v50; // [esp+48h] [ebp-40h] BYREF\nL0050:   char *v51; // [esp+4Ch] [ebp-3Ch] BYREF\nL0051:   char *v52; // [esp+50h] [ebp-38h] BYREF\nL0052:   int *v53; // [esp+54h] [ebp-34h] BYREF\nL0053:   char *ExceptionList_6; // [esp+58h] [ebp-30h] BYREF\nL0054:   int *v55; // [esp+5Ch] [ebp-2Ch] BYREF\nL0055:   char *ExceptionList_1; // [esp+60h] [ebp-28h] BYREF\nL0056:   int v57; // [esp+64h] [ebp-24h] BYREF\nL0057:   char *v58; // [esp+68h] [ebp-20h] BYREF\nL0058:   char *v59; // [esp+6Ch] [ebp-1Ch] BYREF\nL0059:   char *v60; // [esp+70h] [ebp-18h] BYREF\nL0060:   char *dst_3; // [esp+74h] [ebp-14h] BYREF\nL0061:   char *dst_; // [esp+78h] [ebp-10h] BYREF\nL0062:   char *dst_2; // [esp+7Ch] [ebp-Ch] BYREF\nL0063:   char *dst_1; // [esp+80h] [ebp-8h] BYREF\nL0064:   char *dst; // [esp+84h] [ebp-4h]\nL0065:   int savedregs; // [esp+88h] [ebp+0h] BYREF\nL0066: \nL0067:   dst = dst_4;\nL0068:   sub_401F38((int)dst_4);\nL0069:   v33 = &savedregs;\nL0070:   v32 = &loc_407061;\nL0071:   ExceptionList = (char *)NtCurrentTeb()->NtTib.ExceptionList;\nL0072:   __writefsdword(0, (unsigned int)&ExceptionList);\nL0073:   sub_401B14(a2, (__int32)dst);\nL0074:   if ( *off_40D1F0 )\nL0075:   {\nL0076:     switch ( *off_40D1F0 )\nL0077:     {\nL0078:       case 1:\nL0079:         sub_405F7C((volatile __int32 *)&dst_1);\nL0080:         break;\nL0081:       case 2:\nL0082:         sub_406034(&dst_1);\nL0083:         break;\nL0084:       case 3:\nL0085:         sub_4061DC((volatile __int32 *)&dst_1);\nL0086:         break;\nL0087:       default:\nL0088:         if ( *(_BYTE *)(*off_40D218[0] + sub_401D50(*off_40D218[0]) - 1) != 92 )\nL0089:           sub_401D58(off_40D218[0], (__int32)dst__3);\nL0090:         sub_401B58((volatile __int32 *)&dst_1, *off_40D218[0]);\nL0091:         n3 = sub_401F48(dst_1);\nL0092:         sub_401CAC(&v60, n3);\nL0093:         sub_406684(v60, (int)a2);\nL0094:         break;\nL0095:     }\nL0096:   }\nL0097:   else\nL0098:   {\nL0099:     sub_405EF0((volatile __int32 *)&dst_1);\nL0100:   }\nL0101:   v4 = sub_401D50((int)dst_1);\nL0102:   if ( dst_1[v4 - 1] != 92 )\nL0103:     sub_401D58((volatile __int32 *)&dst_1, (__int32)dst__3);\nL0104:   sub_401D58((volatile __int32 *)&dst_1, *off_40D208[0]);\nL0105:   v5 = sub_401D50((int)dst_1);\nL0106:   if ( dst_1[v5 - 1] != 92 )\nL0107:     sub_401D58((volatile __int32 *)&dst_1, (__int32)dst__3);\nL0108:   sub_401D9C((volatile __int32 *)&dst_2, (unsigned __int32)dst_1, *off_40D20C[0]);\nL0109:   n3_1 = sub_401F48(dst_1);\nL0110:   sub_401CAC(&v59, n3_1);\nL0111:   sub_406684(v59, (int)a2);\nL0112:   n3_2 = sub_401F48(dst_2);\nL0113:   sub_401CAC(&v58, n3_2);\nL0114:   sub_405A28(v58);\nL0115:   sub_405BEC((int)&v57);\nL0116:   sub_401E10((volatile __int32 *)&dst_, 3);\nL0117:   v8 = sub_401D50((int)dst_);\nL0118:   if ( dst_[v8 - 1] != 92 )\nL0119:     sub_401D58((volatile __int32 *)&dst_, (__int32)dst__3);\nL0120:   sub_401D9C((volatile __int32 *)&dst_3, (unsigned __int32)dst_, *off_40D20C[0]);\nL0121:   sub_404740((int)dst_2, (volatile __int32 *)&ExceptionList_1);\nL0122:   ExceptionList = ExceptionList_1;\nL0123:   sub_404740((int)dst, (volatile __int32 *)&v55);\nL0124:   sub_401E94((int)ExceptionList, v55);\nL0125:   if ( v9\nL0126:     || (sub_404740((int)dst_3, (volatile __int32 *)&ExceptionList_6),\nL0127:         ExceptionList = ExceptionList_6,\nL0128:         sub_404740((int)dst, (volatile __int32 *)&v53),\nL0129:         sub_401E94((int)ExceptionList, v53),\nL0130:         v9) )\nL0131:   {\nL0132:     sub_401B14(a2, (__int32)dst);\nL0133:   }\nL0134:   else\nL0135:   {\nL0136:     ExceptionList = 0;\nL0137:     lpNewFileName = sub_401F48(dst_2);\nL0138:     lpExistingFileName = sub_401F48(dst);\nL0139:     if ( CopyFileA(lpExistingFileName, lpNewFileName, (BOOL)ExceptionList) )\nL0140:     {\nL0141:       sub_401B14(a2, (__int32)dst_2);\nL0142:     }\nL0143:     else\nL0144:     {\nL0145:       n3_3 = sub_401F48(dst_);\nL0146:       sub_401CAC(&v52, n3_3);\nL0147:       sub_406684(v52, (int)a2);\nL0148:       n3_4 = sub_401F48(dst_3);\nL0149:       sub_401CAC(&v51, n3_4);\nL0150:       sub_405A28(v51);\nL0151:       if ( CopyFileA(lpExistingFileName, n3_4, 0) )\nL0152:         sub_401B14(a2, (__int32)dst_3);\nL0153:       else\nL0154:         sub_401B14(a2, (__int32)dst);\nL0155:     }\nL0156:     if ( *off_40D1EC[0] )\nL0157:     {\nL0158:       ExceptionList = 0;\nL0159:       n3_5 = sub_401F48(*(char **)off_40D1EC[0]);\nL0160:       sub_401CAC(&v49, n3_5);\nL0161:       sub_406088(\nL0162:         HKEY_LOCAL_MACHINE,\nL0163:         \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\Run\",\nL0164:         v49,\nL0165:         &v50,\nL0166:         (__int32)ExceptionList);\nL0167:       sub_401E94(v50, *(int **)a2);\nL0168:       if ( !v9 )\nL0169:       {\nL0170:         n3_6 = sub_401F48(*(char **)a2);\nL0171:         sub_401CAC(&ExceptionList_2, n3_6);\nL0172:         ExceptionList = ExceptionList_2;\nL0173:         n3_7 = sub_401F48(*(char **)off_40D1EC[0]);\nL0174:         sub_401CAC(&v47, n3_7);\nL0175:         sub_405C4C(\nL0176:           HKEY_LOCAL_MACHINE,\nL0177:           \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\Run\",\nL0178:           v47,\nL0179:           ExceptionList);\nL0180:       }\nL0181:       ExceptionList = 0;\nL0182:       n3_8 = sub_401F48(*(char **)off_40D1EC[0]);\nL0183:       sub_401CAC(&v45, n3_8);\nL0184:       sub_406088(\nL0185:         HKEY_CURRENT_USER,\nL0186:         \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\Run\",\nL0187:         v45,\nL0188:         &v46,\nL0189:         (__int32)ExceptionList);\nL0190:       sub_401E94(v46, *(int **)a2);\nL0191:       if ( !v9 )\nL0192:       {\nL0193:         n3_9 = sub_401F48(*(char **)a2);\nL0194:         sub_401CAC(&ExceptionList_3, n3_9);\nL0195:         ExceptionList = ExceptionList_3;\nL0196:         n3_10 = sub_401F48(*(char **)off_40D1EC[0]);\nL0197:         sub_401CAC(&v43, n3_10);\nL0198:         sub_405C4C(\nL0199:           HKEY_CURRENT_USER,\nL0200:           \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\Run\",\nL0201:           v43,\nL0202:           ExceptionList);\nL0203:       }\nL0204:     }\nL0205:     if ( *off_40D1D8 )\nL0206:     {\nL0207:       ExceptionList = 0;\nL0208:       n3_11 = sub_401F48((char *)*off_40D1D8);\nL0209:       sub_401CAC(&v41, n3_11);\nL0210:       sub_406088(\nL0211:         HKEY_LOCAL_MACHINE,\nL0212:         \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\",\nL0213:         v41,\nL0214:         &v42,\nL0215:         (__int32)ExceptionList);\nL0216:       sub_401E94(v42, *(int **)a2);\nL0217:       if ( !v9 )\nL0218:       {\nL0219:         n3_12 = sub_401F48(*(char **)a2);\nL0220:         sub_401CAC(&ExceptionList_4, n3_12);\nL0221:         ExceptionList = ExceptionList_4;\nL0222:         n3_13 = sub_401F48((char *)*off_40D1D8);\nL0223:         sub_401CAC(&v39, n3_13);\nL0224:         sub_405C4C(HKEY_LOCAL_MACHINE, \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\", v39, ExceptionList);\nL0225:       }\nL0226:     }\nL0227:     if ( *off_40D1E0[0] )\nL0228:     {\nL0229:       ExceptionList = 0;\nL0230:       n3_14 = sub_401F48(*(char **)off_40D1E0[0]);\nL0231:       sub_401CAC(&v37, n3_14);\nL0232:       sub_406088(\nL0233:         HKEY_CURRENT_USER,\nL0234:         \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\",\nL0235:         v37,\nL0236:         &v38,\nL0237:         (__int32)ExceptionList);\nL0238:       sub_401E94(v38, *(int **)a2);\nL0239:       if ( !v9 )\nL0240:       {\nL0241:         n3_15 = sub_401F48(*(char **)a2);\nL0242:         sub_401CAC(&ExceptionList_5, n3_15);\nL0243:         ExceptionList = ExceptionList_5;\nL0244:         n3_16 = sub_401F48(*(char **)off_40D1E0[0]);\nL0245:         sub_401CAC(&v35, n3_16);\nL0246:         sub_405C4C(HKEY_CURRENT_USER, \"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\", v35, ExceptionList);\nL0247:       }\nL0248:     }\nL0249:     if ( *off_40D1E4 )\nL0250:     {\nL0251:       ExceptionList = (char *)&dword_4070FC;\nL0252:       v30 = sub_406840((int)dword_406834, 1, v11);\nL0253:       hKey = sub_401F48(*(char **)a2);\nL0254:       lpSubKey = sub_401F48((char *)*off_40D1E4);\nL0255:       sub_406ADC(v30, lpSubKey, hKey, ExceptionList);\nL0256:     }\nL0257:   }\nL0258:   __writefsdword(0, (unsigned int)v32);\nL0259:   v34 = &loc_407068;\nL0260:   return sub_401AE4((int *)&v35, 31);\nL0261: }\n```\n\n## F-0365 sub_405C4C，原文件 L0001–L0038 / 共 38 行\n```text\nL0001: int __userpurge sub_405C4C@<eax>(HKEY hKey@<eax>, char *a2@<edx>, char *a3@<ecx>, char *a4)\nL0002: {\nL0003:   int v5; // ebx\nL0004:   char *lpSubKey; // eax\nL0005:   char *lpValueName; // eax\nL0006:   char *lpData; // [esp-14h] [ebp-28h]\nL0007:   DWORD cbData; // [esp-10h] [ebp-24h]\nL0008:   unsigned int v11[2]; // [esp-Ch] [ebp-20h] BYREF\nL0009:   int *v12; // [esp-4h] [ebp-18h]\nL0010:   HKEY phkResult; // [esp+8h] [ebp-Ch] BYREF\nL0011:   char *v14; // [esp+Ch] [ebp-8h] BYREF\nL0012:   char *v15; // [esp+10h] [ebp-4h]\nL0013:   int savedregs; // [esp+14h] [ebp+0h] BYREF\nL0014: \nL0015:   v14 = a3;\nL0016:   v15 = a2;\nL0017:   sub_401F38((int)a2);\nL0018:   sub_401F38((int)v14);\nL0019:   sub_401F38((int)a4);\nL0020:   v12 = &savedregs;\nL0021:   v11[1] = (unsigned int)&loc_405CF1;\nL0022:   v11[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0023:   __writefsdword(0, (unsigned int)v11);\nL0024:   v5 = 0;\nL0025:   lpSubKey = sub_401F48(v15);\nL0026:   RegCreateKeyA(hKey, lpSubKey, &phkResult);\nL0027:   cbData = sub_401D50((int)a4);\nL0028:   lpData = sub_401F48(a4);\nL0029:   lpValueName = sub_401F48(v14);\nL0030:   if ( !RegSetValueExA(phkResult, lpValueName, 0, 2u, (const BYTE *)lpData, cbData) )\nL0031:     LOBYTE(v5) = 1;\nL0032:   RegCloseKey(phkResult);\nL0033:   __writefsdword(0, v11[0]);\nL0034:   v12 = (int *)&loc_405CF8;\nL0035:   sub_401AE4((int *)&v14, 2);\nL0036:   sub_401AC0(&a4);\nL0037:   return v5;\nL0038: }\n```\n\n## F-0388 sub_4068B4，原文件 L0001–L0047 / 共 47 行\n```text\nL0001: int *__usercall sub_4068B4@<eax>(_BYTE *n3@<edx>, _BYTE *n3_1@<ecx>, int a3@<ebx>, int a4@<esi>)\nL0002: {\nL0003:   char *lpSubKey; // eax\nL0004:   int v6; // esi\nL0005:   char *lpData; // eax\nL0006:   DWORD cbData; // [esp-18h] [ebp-2Ch]\nL0007:   unsigned int v10[2]; // [esp-14h] [ebp-28h] BYREF\nL0008:   int *v11; // [esp-Ch] [ebp-20h]\nL0009:   int v12; // [esp-8h] [ebp-1Ch]\nL0010:   int v13; // [esp-4h] [ebp-18h]\nL0011:   char *v14; // [esp+0h] [ebp-14h] BYREF\nL0012:   char *v15; // [esp+4h] [ebp-10h] BYREF\nL0013:   char *dst; // [esp+8h] [ebp-Ch] BYREF\nL0014:   char *v17; // [esp+Ch] [ebp-8h] BYREF\nL0015:   HKEY phkResult; // [esp+10h] [ebp-4h] BYREF\nL0016:   int savedregs; // [esp+14h] [ebp+0h] BYREF\nL0017: \nL0018:   phkResult = 0;\nL0019:   v17 = 0;\nL0020:   dst = 0;\nL0021:   v15 = 0;\nL0022:   v14 = 0;\nL0023:   v13 = a3;\nL0024:   v12 = a4;\nL0025:   v11 = &savedregs;\nL0026:   v10[1] = (unsigned int)&loc_40698A;\nL0027:   v10[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0028:   __writefsdword(0, (unsigned int)v10);\nL0029:   sub_401CAC(&dst, n3);\nL0030:   sub_401D9C(\nL0031:     (volatile __int32 *)&v17,\nL0032:     (unsigned __int32)\"Software\\\\Microsoft\\\\Active Setup\\\\Installed Components\\\\\",\nL0033:     (unsigned __int32)dst);\nL0034:   lpSubKey = sub_401F48(v17);\nL0035:   RegCreateKeyExA(HKEY_LOCAL_MACHINE, lpSubKey, 0, 0, 0, 2u, 0, &phkResult, 0);\nL0036:   sub_401CAC(&v15, n3_1);\nL0037:   v6 = sub_401D50((int)v15);\nL0038:   cbData = sub_401D50((int)::dst) + v6;         // \" Restart\"\nL0039:   sub_401CAC(&v14, n3_1);\nL0040:   sub_401D58((volatile __int32 *)&v14, (__int32)::dst);// \" Restart\"\nL0041:   lpData = sub_401F48(v14);\nL0042:   RegSetValueExA(phkResult, \"StubPath\", 0, 1u, (const BYTE *)lpData, cbData);\nL0043:   RegCloseKey(phkResult);\nL0044:   __writefsdword(0, v10[0]);\nL0045:   v11 = (int *)&loc_406991;\nL0046:   return sub_401AE4((int *)&v14, 4);\nL0047: }\n```\n\n## F-0391 sub_406ADC，原文件 L0001–L0006 / 共 6 行\n```text\nL0001: int *__userpurge sub_406ADC@<eax>(_DWORD *a1@<eax>, CHAR *lpSubKey@<edx>, CHAR *hKey@<ecx>, const CHAR *lpParameters)\nL0002: {\nL0003:   sub_4069E4((HKEY)hKey, lpSubKey);\nL0004:   sub_406A50(a1, hKey, lpParameters);\nL0005:   return sub_4068B4(lpSubKey, hKey, (int)a1, (int)lpSubKey);\nL0006: }\n```\n\n## F-0390 sub_406A50，原文件 L0001–L0025 / 共 25 行\n```text\nL0001: _DWORD *__usercall sub_406A50@<eax>(_DWORD *a1@<eax>, const CHAR *lpFile@<edx>, const CHAR *lpParameters@<ecx>)\nL0002: {\nL0003:   char v6; // zf\nL0004:   unsigned int v8[2]; // [esp-18h] [ebp-1Ch] BYREF\nL0005:   int *v9; // [esp-10h] [ebp-14h]\nL0006:   int v10; // [esp+0h] [ebp-4h] BYREF\nL0007:   int savedregs; // [esp+4h] [ebp+0h] BYREF\nL0008: \nL0009:   v10 = 0;\nL0010:   v9 = &savedregs;\nL0011:   v8[1] = (unsigned int)&loc_406ABE;\nL0012:   v8[0] = (unsigned int)NtCurrentTeb()->NtTib.ExceptionList;\nL0013:   __writefsdword(0, (unsigned int)v8);\nL0014:   sub_4013A4(1, &v10);\nL0015:   sub_401E94(v10, (int *)\"Restart\");\nL0016:   if ( v6 )\nL0017:   {\nL0018:     sub_405AD8(0, 0, lpFile, 5, 0, lpParameters);\nL0019:     sub_406878(a1, 1);\nL0020:     ExitProcess_0(0);\nL0021:   }\nL0022:   __writefsdword(0, v8[0]);\nL0023:   v9 = (int *)&loc_406AC5;\nL0024:   return sub_401AC0(&v10);\nL0025: }\n```\n\n## F-0389 sub_4069E4，原文件 L0001–L0009 / 共 9 行\n```text\nL0001: LSTATUS __fastcall sub_4069E4(HKEY hKey_1, const CHAR *lpSubKey)\nL0002: {\nL0003:   HKEY hKey; // [esp+0h] [ebp-8h] BYREF\nL0004: \nL0005:   hKey = hKey_1;\nL0006:   RegOpenKeyExA(HKEY_CURRENT_USER, \"Software\\\\Microsoft\\\\Active Setup\\\\Installed Components\\\\\", 0, 0x20006u, &hKey);\nL0007:   RegDeleteKeyA(hKey, lpSubKey);\nL0008:   return RegCloseKey(hKey);\nL0009: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "当前包直接证明了安装/自复制与多处注册表持久化能力：sub_406B54 可将输入文件复制到构造的目标路径，并在多个 Run/Policies\\Explorer\\Run 分支写入启动值；sub_406ADC 还删除当前用户 Active Setup 项后创建 HKLM Active Setup 项并写入 StubPath。部分分支由未解析的全局指针控制，复制路径、值名及启动辅助函数的最终语义仍不完整。",
+    "claims": [
+      {
+        "behavior": "在满足 sub_406B54 内部路径比较条件且 CopyFileA 成功时，将输入文件复制到构造的目标路径；失败时尝试备用构造路径，最终至少将传入状态/路径之一交给 sub_401B14 处理。",
+        "condition": "sub_406B54 已构造源路径 dst 和目标路径 dst_2/dst_3，且内部比较分支未直接回退；主复制分支由 CopyFileA 返回成功触发，失败时进入备用复制逻辑。",
+        "source": "sub_406B54 的 dst 输入及由 off_40D208、off_40D20C 和相关路径构造操作形成的源/目标路径。",
+        "action": "调用 CopyFileA(lpExistingFileName, lpNewFileName, 0)，失败后再次调用 CopyFileA 到备用路径。",
+        "sink": "构造的目标文件路径 dst_2 或备用路径 dst_3；代码直接尝试文件复制。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0101-L0155",
+            "observation": "代码构造 dst_1、dst_2、dst_3 等路径，并在 L0139 调用 CopyFileA；失败分支在 L0151 再次调用 CopyFileA，随后按结果选择路径交给 sub_401B14。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包未给出 off_40D208、off_40D20C 的具体字符串，因此不能确定复制目标的实际文件名或完整路径。",
+          "静态证据证明的是复制尝试和成功分支，不证明运行时复制一定成功。"
+        ]
+      },
+      {
+        "behavior": "向策略 Explorer\\Run 注册表位置写入启动值，使用传入 a2 指向的数据作为注册表数据；该行为分别可发生于 HKLM 和 HKCU 分支。",
+        "condition": "sub_406B54 中对应的 off_40D1EC[0] 非零；HKLM/HKCU 两组分支各自执行其 RegCreate/RegSet 封装调用。",
+        "source": "sub_406B54 的 off_40D1EC[0] 指向的值名，以及 a2 指向的数据。",
+        "action": "调用 sub_406088 创建/打开注册表项并通过 sub_401E94 绑定数据；在重复/补写路径中调用 sub_405C4C。sub_405C4C 明确执行 RegCreateKeyA 和 RegSetValueExA。",
+        "sink": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run 和 HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run 下的动态值名。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0156-L0203",
+            "observation": "代码在 off_40D1EC[0] 非零时分别以 HKEY_LOCAL_MACHINE 和 HKEY_CURRENT_USER、固定 Policies\\\\Explorer\\\\Run 子键调用注册表辅助函数，并将 a2 数据传入。"
+          },
+          {
+            "location": "F-0365 sub_405C4C 原文件 L0025-L0032",
+            "observation": "辅助函数调用 RegCreateKeyA，计算 a4 数据长度并调用 RegSetValueExA 写入指定值名和 REG_EXPAND_SZ 类型数据。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "动态值名由 off_40D1EC[0] 提供，当前包未给出其具体字符串。",
+          "sub_406088 和 sub_401E94 的具体错误处理不可见；代码能力已确认，但注册表写入成功与否取决于运行时条件。"
+        ]
+      },
+      {
+        "behavior": "向传统 Run 启动位置写入持久化值，使用 a2 指向的数据作为值数据；该行为可发生于 HKLM 分支。",
+        "condition": "off_40D1D8 非零。",
+        "source": "off_40D1D8 提供的动态值名和 a2 指向的数据。",
+        "action": "sub_406B54 调用 sub_406088 处理 HKEY_LOCAL_MACHINE 与 Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run，并将 a2 数据交给 sub_401E94；补写路径调用 sub_405C4C。",
+        "sink": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run 下的动态值名。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0205-L0225",
+            "observation": "代码在 off_40D1D8 非零时使用 HKEY_LOCAL_MACHINE 和固定 Run 子键，写入由 a2 提供的数据，并在后续分支调用 sub_405C4C。"
+          },
+          {
+            "location": "F-0365 sub_405C4C 原文件 L0025-L0032",
+            "observation": "sub_405C4C 通过 RegCreateKeyA/RegSetValueExA 实际执行注册表值写入。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "动态值名及 a2 所指向数据的具体内容未知。",
+          "当前包未证明该分支在样本运行中实际被触发。"
+        ]
+      },
+      {
+        "behavior": "向 HKCU 的传统 Run 启动位置写入持久化值，使用 a2 指向的数据作为值数据。",
+        "condition": "off_40D1E0[0] 非零。",
+        "source": "off_40D1E0[0] 提供的动态值名和 a2 指向的数据。",
+        "action": "sub_406B54 调用 sub_406088 处理 HKEY_CURRENT_USER 与 Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run，并将 a2 数据交给 sub_401E94；补写路径调用 sub_405C4C。",
+        "sink": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run 下的动态值名。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0227-L0247",
+            "observation": "代码在 off_40D1E0[0] 非零时使用 HKEY_CURRENT_USER 和固定 Run 子键，写入由 a2 提供的数据，并在后续分支调用 sub_405C4C。"
+          },
+          {
+            "location": "F-0365 sub_405C4C 原文件 L0025-L0032",
+            "observation": "sub_405C4C 明确打开/创建子键并调用 RegSetValueExA 写入数据。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "动态值名及 a2 所指向数据的具体内容未知。",
+          "当前包未证明运行时写入成功。"
+        ]
+      },
+      {
+        "behavior": "删除当前用户 Active Setup 项后，在 HKLM Active Setup 下创建对应组件并写入 StubPath；StubPath 数据由传入 n3_1 与固定字符串“ Restart”拼接形成。",
+        "condition": "sub_406ADC 被调用；其调用链先执行清理，再执行 Active Setup 写入。",
+        "source": "sub_406ADC 的 lpSubKey、hKey、lpParameters，以及 sub_4068B4 的 n3/n3_1 参数。",
+        "action": "sub_4069E4 打开 HKCU\\\\Software\\\\Microsoft\\\\Active Setup\\\\Installed Components\\\\ 并删除 lpSubKey；随后 sub_4068B4 在 HKLM\\\\Software\\\\Microsoft\\\\Active Setup\\\\Installed Components\\\\<n3> 下调用 RegCreateKeyExA，并以 REG_SZ 写入 StubPath。",
+        "sink": "HKCU Active Setup 组件键的删除，以及 HKLM Active Setup 组件键的 StubPath 持久化值。",
+        "evidence": [
+          {
+            "location": "F-0391 sub_406ADC 原文件 L0001-L0005",
+            "observation": "调用顺序明确为 sub_4069E4 删除旧项、sub_406A50 处理启动参数、sub_4068B4 创建 Active Setup 项。"
+          },
+          {
+            "location": "F-0389 sub_4069E4 原文件 L0005-L0008",
+            "observation": "代码调用 RegOpenKeyExA 访问 HKCU Active Setup Installed Components，并调用 RegDeleteKeyA 删除 lpSubKey。"
+          },
+          {
+            "location": "F-0388 sub_4068B4 原文件 L0029-L0043",
+            "observation": "代码拼接固定 Active Setup 前缀和 n3，调用 RegCreateKeyExA 创建 HKLM 项，并调用 RegSetValueExA 写入名为 StubPath 的数据；数据由 n3_1 与“ Restart”拼接。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "组件子键名 n3、StubPath 前半部分 n3_1 及完整命令行含义未在当前包中解析。",
+          "Active Setup 的后续系统执行效果未由静态代码直接证明。"
+        ]
+      },
+      {
+        "behavior": "在 sub_406A50 的内部条件 v6 成立时，向 sub_405AD8 传入文件、动作参数 5 和命令行参数，随后终止当前进程。",
+        "condition": "sub_406A50 中的 v6 条件为真。",
+        "source": "lpFile 与 lpParameters 参数，以及 sub_4013A4(1, &v10) 返回并经 sub_401E94 处理的状态。",
+        "action": "调用 sub_405AD8(0, 0, lpFile, 5, 0, lpParameters)，随后调用 ExitProcess_0(0)。",
+        "sink": "未知的 sub_405AD8 下游副作用，以及当前进程终止。",
+        "evidence": [
+          {
+            "location": "F-0390 sub_406A50 原文件 L0014-L0021",
+            "observation": "代码调用 sub_4013A4 和 sub_401E94 后，在 v6 条件分支中调用 sub_405AD8，随后调用 ExitProcess_0(0)。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_405AD8 实现不在当前包内，不能确认它是否启动文件、打开路径或产生其他副作用。",
+          "反编译结果未显示 v6 的可靠赋值，触发条件无法进一步闭合。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "被用于写入动态启动值的本地计算机策略 Run 位置。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0161-L0167",
+            "observation": "代码将该固定子键字符串传给 HKLM 注册表辅助调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "被用于写入动态启动值的当前用户策略 Run 位置。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0184-L0190",
+            "observation": "代码将该固定子键字符串传给 HKCU 注册表辅助调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "被用于写入动态启动值的本地计算机 Run 位置。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0210-L0216",
+            "observation": "代码将该固定 Run 子键字符串传给 HKLM 注册表辅助调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "被用于写入动态启动值的当前用户 Run 位置。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0232-L0238",
+            "observation": "代码将该固定 Run 子键字符串传给 HKCU 注册表辅助调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Active Setup\\Installed Components",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "Active Setup 组件根路径，代码在其下创建动态组件键。",
+        "evidence": [
+          {
+            "location": "F-0388 sub_4068B4 原文件 L0030-L0035",
+            "observation": "代码将固定前缀 Software\\\\Microsoft\\\\Active Setup\\\\Installed Components\\\\ 与动态组件名拼接后调用 RegCreateKeyExA，根键为 HKEY_LOCAL_MACHINE。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKCU\\Software\\Microsoft\\Active Setup\\Installed Components",
+        "role": "other",
+        "detection_specificity": "medium",
+        "meaning": "被用于删除当前用户侧 Active Setup 组件键。",
+        "evidence": [
+          {
+            "location": "F-0389 sub_4069E4 原文件 L0005-L0008",
+            "observation": "代码打开该固定路径并调用 RegDeleteKeyA 删除传入组件子键。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "StubPath",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "Active Setup 组件的固定持久化值名。",
+        "evidence": [
+          {
+            "location": "F-0388 sub_4068B4 原文件 L0039-L0043",
+            "observation": "RegSetValueExA 使用固定值名 StubPath 写入拼接后的数据。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": " Restart",
+        "role": "config_marker",
+        "detection_specificity": "low",
+        "meaning": "被追加到 Active Setup StubPath 数据末尾的固定字符串。",
+        "evidence": [
+          {
+            "location": "F-0388 sub_4068B4 原文件 L0037-L0042",
+            "observation": "代码计算 n3_1 长度并追加固定字符串“ Restart”，再作为 StubPath 数据写入。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "off_40D1EC、off_40D1D8、off_40D1E0、off_40D1E4 及相关路径全局量的具体值和触发来源是什么？",
+        "reason": "当前代码只显示非零门控和动态值使用，未提供这些全局指针所指字符串或调用者设置过程。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "capability",
+        "question": "sub_405AD8 的具体副作用是什么，以及 v6 在 sub_406A50 中的真实触发条件是什么？",
+        "reason": "当前包只显示调用参数和随后 ExitProcess，无法确认是否执行文件、启动进程或进行其他操作。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_406B54 的调用者如何提供 dst/a2，以及其不同模式下的实际安装目标和注册表值名是什么？",
+        "reason": "复制源、目标和写入数据均部分依赖外部全局量及调用上下文。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_405AD8",
+        "reason": "解析 sub_406A50 在 v6 条件成立时的下游动作。",
+        "expected_value": "确认 lpFile/lpParameters 是否导致执行、打开或其他外部副作用，并解释动作参数 5。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_406B54 callers and globals",
+        "reason": "解析安装函数输入及 off_40D1D8/off_40D1E0/off_40D1EC/off_40D1E4 的具体配置。",
+        "expected_value": "确定实际复制目标、注册表值名、写入数据和各持久化分支的触发条件。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_405AD8",
+        "targets": [
+          {
+            "identifier": "sub_405AD8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 sub_406A50 传入 lpFile、动作参数 5 和 lpParameters 后的实际外部副作用；当前包只能证明调用及随后进程终止。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0390 sub_406A50 原文件 L0014-L0021",
+            "observation": "v6 条件成立时调用 sub_405AD8(0, 0, lpFile, 5, 0, lpParameters)，随后调用 ExitProcess_0(0)。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_406B54",
+        "targets": [
+          {
+            "identifier": "sub_406B54",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要其调用者及全局配置的补充源码，以解析动态复制路径、注册表值名和输入数据；当前函数本体仅显示这些量被读取。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0101-L0155",
+            "observation": "复制路径由多个全局字符串和构造操作形成。"
+          },
+          {
+            "location": "F-0394 sub_406B54 原文件 L0156-L0256",
+            "observation": "多个注册表子键/值名由 off_40D1EC、off_40D1D8、off_40D1E0、off_40D1E4 控制。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的所有 claim、artifact 及 material_need 证据 location 都使用了“F-xxxx 函数 原文件 L...-L...”格式；本轮校验显示这些引用全部无法解析（valid_segments=0，invalid_references=22）。因此核心结论虽然大多与源码行为相符，但结果中的证据不能被验收系统定位，等同于未提供可用的包内凭据。",
+        "evidence": [
+          {
+            "location": "evidence_reference_validation",
+            "observation": "valid_segments: 0；22 条 claim/artifact/material_need 引用均被标记为 invalid_format，原因是未匹配 F-xxxx Lx[-Ly] 格式。"
+          },
+          {
+            "location": "F-0394 L101-L155",
+            "observation": "当前材料实际提供 sub_406B54 的原始源码行段，可作为 claim 0 的有效引用，但 Analyzer 写成了带“原文件”字样的不可解析位置。"
+          },
+          {
+            "location": "F-0394 L156-L203",
+            "observation": "当前材料实际提供 Policies\\\\Explorer\\\\Run 分支源码，可作为 claim 1 和相关 artifact 的有效引用，但现有 location 不可解析。"
+          }
+        ],
+        "required_fix": "仅修正证据 location 的格式并重新核对每个范围；例如将“F-0394 sub_406B54 原文件 L0101-L0155”改为“F-0394 L101-L155”，将“F-0365 sub_405C4C 原文件 L0025-L0032”改为“F-0365 L25-L32”。不得通过改写 observation 迁就错误引用。所有现有 claim、artifact、material_need 的引用都必须可被当前材料定位。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "unsupported_claim",
+        "description": "claims 1–3 将调用 sub_406088 概括为已向四个注册表位置写入，但当前材料只显示 sub_406B54 调用该未提供实现的辅助函数；包内明确可见的 RegCreateKeyA/RegSetValueExA 写入仅在 sub_405C4C 的补写分支中。现有证据不足以确认 sub_406088 的主路径确实创建/写入注册表，故 confirmed 的整体写入表述超出当前包证据。",
+        "evidence": [
+          {
+            "location": "F-0394 L156-L203",
+            "observation": "源码在 HKLM/HKCU Policies\\\\Explorer\\\\Run 分支调用 sub_406088 和 sub_401E94，并在条件分支中调用 sub_405C4C；但 sub_406088 的实现不在当前材料。"
+          },
+          {
+            "location": "F-0394 L205-L247",
+            "observation": "源码在 HKLM/HKCU Run 分支同样调用 sub_406088，并仅在后续条件分支调用 sub_405C4C；主辅助函数的注册表副作用未由当前包直接显示。"
+          },
+          {
+            "location": "F-0365 L25-L32",
+            "observation": "只有 sub_405C4C 的实现直接显示 RegCreateKeyA 与 RegSetValueExA 写入指定值。"
+          }
+        ],
+        "required_fix": "将 claims 1–3 的主路径表述收窄为当前包可见的调用/写入能力：明确区分“调用未解析的 sub_406088”与“sub_405C4C 补写分支直接执行 RegSetValueExA”。若仍保留整体“向该位置写入”的结论，必须把证据等级降为 suspected 并在 limitations 中明确 sub_406088 未解析；不得把未见实现的 helper 直接当作已证实写入。必要时为 sub_406088 增加有证据支持的补料需求。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/1/condition"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/sink"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence_level"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/limitations"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/sink"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/evidence_level"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/limitations"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/3/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/3/sink"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/3/evidence_level"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/3/limitations"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_specificity_error",
+        "description": "多个注册表路径 artifact 的 detection_specificity=medium 偏高。HKLM/HKCU Run、Policies\\\\Explorer\\\\Run、Active Setup 根路径以及通用值名 StubPath 本身是常见系统位置/名称，不能单独或近似单独作为感染 IOC；应通常标为 low（或对纯系统位置标为 none），同时保留 persistence_value 等行为 role。",
+        "evidence": [
+          {
+            "location": "F-0394 L156-L247",
+            "observation": "四个 Run/Policies\\\\Explorer\\\\Run 路径是固定系统注册表位置，动态值名和数据并未在当前包确定。"
+          },
+          {
+            "location": "F-0388 L30-L43",
+            "observation": "Active Setup 根路径和 StubPath 是固定系统机制路径/通用值名，组件名和写入数据是动态的。"
+          },
+          {
+            "location": "F-0389 L5-L8",
+            "observation": "HKCU Active Setup 路径仅作为删除目标位置出现，路径本身没有样本特异字符串。"
+          }
+        ],
+        "required_fix": "下调这些通用路径/值名的 detection_specificity，避免把位置性 artifact 误当作中高价值 IOC；不要改变已由源码支持的 role。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/3/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/4/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/5/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/6/detection_specificity"
+          }
+        ]
+      },
+      {
+        "issue_id": "R4",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "material_need[1] 将当前包已经完整提供的 sub_406B54 作为 function_code target，请求其自身源码来解释全局量和调用者，目标类型不准确且与 gaps/handoff 重复。需要的是调用者、全局指针初始化或具体全局字符串定义，而不是再次索取 sub_406B54 本体。",
+        "evidence": [
+          {
+            "location": "F-0394 L1-L261",
+            "observation": "当前材料已完整提供 sub_406B54 本体及其所有相关分支。"
+          },
+          {
+            "location": "material_needs[1]",
+            "observation": "Analyzer 将 target 填为 sub_406B54，并称需要其调用者及全局配置，target 与 reason 不一致。"
+          }
+        ],
+        "required_fix": "删除该重复的 function_code 需求，或改成能够实际获取调用者/全局定义的结构化需求；不要要求 Worker 重新提供当前包已有源码。",
+        "revision_targets": [
+          {
+            "operation": "delete",
+            "path": "/material_needs/1"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心安装、自复制、Active Setup 及多处持久化分支总体覆盖较完整，未发现遗漏一个决定性当前包行为的分支。必须修复全部不可解析的证据引用；此外，claims 1–3 对未提供实现的 sub_406088 作了超出包内证据的 confirmed 写入表述，应收窄或降级并补充明确限制。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的所有 claim、artifact 及 material_need 证据 location 都使用了“F-xxxx 函数 原文件 L...-L...”格式；本轮校验显示这些引用全部无法解析（valid_segments=0，invalid_references=22）。因此核心结论虽然大多与源码行为相符，但结果中的证据不能被验收系统定位，等同于未提供可用的包内凭据。",
+        "evidence": [
+          {
+            "location": "evidence_reference_validation",
+            "observation": "valid_segments: 0；22 条 claim/artifact/material_need 引用均被标记为 invalid_format，原因是未匹配 F-xxxx Lx[-Ly] 格式。"
+          },
+          {
+            "location": "F-0394 L101-L155",
+            "observation": "当前材料实际提供 sub_406B54 的原始源码行段，可作为 claim 0 的有效引用，但 Analyzer 写成了带“原文件”字样的不可解析位置。"
+          },
+          {
+            "location": "F-0394 L156-L203",
+            "observation": "当前材料实际提供 Policies\\\\Explorer\\\\Run 分支源码，可作为 claim 1 和相关 artifact 的有效引用，但现有 location 不可解析。"
+          }
+        ],
+        "required_fix": "仅修正证据 location 的格式并重新核对每个范围；例如将“F-0394 sub_406B54 原文件 L0101-L0155”改为“F-0394 L101-L155”，将“F-0365 sub_405C4C 原文件 L0025-L0032”改为“F-0365 L25-L32”。不得通过改写 observation 迁就错误引用。所有现有 claim、artifact、material_need 的引用都必须可被当前材料定位。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/*/evidence/*/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/*/evidence/*/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "unsupported_claim",
+        "description": "claims 1–3 将调用 sub_406088 概括为已向四个注册表位置写入，但当前材料只显示 sub_406B54 调用该未提供实现的辅助函数；包内明确可见的 RegCreateKeyA/RegSetValueExA 写入仅在 sub_405C4C 的补写分支中。现有证据不足以确认 sub_406088 的主路径确实创建/写入注册表，故 confirmed 的整体写入表述超出当前包证据。",
+        "evidence": [
+          {
+            "location": "F-0394 L156-L203",
+            "observation": "源码在 HKLM/HKCU Policies\\\\Explorer\\\\Run 分支调用 sub_406088 和 sub_401E94，并在条件分支中调用 sub_405C4C；但 sub_406088 的实现不在当前材料。"
+          },
+          {
+            "location": "F-0394 L205-L247",
+            "observation": "源码在 HKLM/HKCU Run 分支同样调用 sub_406088，并仅在后续条件分支调用 sub_405C4C；主辅助函数的注册表副作用未由当前包直接显示。"
+          },
+          {
+            "location": "F-0365 L25-L32",
+            "observation": "只有 sub_405C4C 的实现直接显示 RegCreateKeyA 与 RegSetValueExA 写入指定值。"
+          }
+        ],
+        "required_fix": "将 claims 1–3 的主路径表述收窄为当前包可见的调用/写入能力：明确区分“调用未解析的 sub_406088”与“sub_405C4C 补写分支直接执行 RegSetValueExA”。若仍保留整体“向该位置写入”的结论，必须把证据等级降为 suspected 并在 limitations 中明确 sub_406088 未解析；不得把未见实现的 helper 直接当作已证实写入。必要时为 sub_406088 增加有证据支持的补料需求。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/1/condition"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/sink"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/evidence_level"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1/limitations"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/sink"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/evidence_level"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2/limitations"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/3/action"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/3/sink"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/3/evidence_level"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/3/limitations"
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_specificity_error",
+        "description": "多个注册表路径 artifact 的 detection_specificity=medium 偏高。HKLM/HKCU Run、Policies\\\\Explorer\\\\Run、Active Setup 根路径以及通用值名 StubPath 本身是常见系统位置/名称，不能单独或近似单独作为感染 IOC；应通常标为 low（或对纯系统位置标为 none），同时保留 persistence_value 等行为 role。",
+        "evidence": [
+          {
+            "location": "F-0394 L156-L247",
+            "observation": "四个 Run/Policies\\\\Explorer\\\\Run 路径是固定系统注册表位置，动态值名和数据并未在当前包确定。"
+          },
+          {
+            "location": "F-0388 L30-L43",
+            "observation": "Active Setup 根路径和 StubPath 是固定系统机制路径/通用值名，组件名和写入数据是动态的。"
+          },
+          {
+            "location": "F-0389 L5-L8",
+            "observation": "HKCU Active Setup 路径仅作为删除目标位置出现，路径本身没有样本特异字符串。"
+          }
+        ],
+        "required_fix": "下调这些通用路径/值名的 detection_specificity，避免把位置性 artifact 误当作中高价值 IOC；不要改变已由源码支持的 role。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/2/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/3/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/4/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/5/detection_specificity"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/6/detection_specificity"
+          }
+        ]
+      },
+      {
+        "issue_id": "R4",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "material_need[1] 将当前包已经完整提供的 sub_406B54 作为 function_code target，请求其自身源码来解释全局量和调用者，目标类型不准确且与 gaps/handoff 重复。需要的是调用者、全局指针初始化或具体全局字符串定义，而不是再次索取 sub_406B54 本体。",
+        "evidence": [
+          {
+            "location": "F-0394 L1-L261",
+            "observation": "当前材料已完整提供 sub_406B54 本体及其所有相关分支。"
+          },
+          {
+            "location": "material_needs[1]",
+            "observation": "Analyzer 将 target 填为 sub_406B54，并称需要其调用者及全局配置，target 与 reason 不一致。"
+          }
+        ],
+        "required_fix": "删除该重复的 function_code 需求，或改成能够实际获取调用者/全局定义的结构化需求；不要要求 Worker 重新提供当前包已有源码。",
+        "revision_targets": [
+          {
+            "operation": "delete",
+            "path": "/material_needs/1"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心安装、自复制、Active Setup 及多处持久化分支总体覆盖较完整，未发现遗漏一个决定性当前包行为的分支。必须修复全部不可解析的证据引用；此外，claims 1–3 对未提供实现的 sub_406088 作了超出包内证据的 confirmed 写入表述，应收窄或降级并补充明确限制。"
+  },
+  "candidate_result": null,
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "当前包直接证明了安装/自复制与多处注册表持久化能力：sub_406B54 可将输入文件复制到构造的目标路径，并在多个 Run/Policies\\Explorer\\Run 分支写入启动值；sub_406ADC 还删除当前用户 Active Setup 项后创建 HKLM Active Setup 项并写入 StubPath。部分分支由未解析的全局指针控制，复制路径、值名及启动辅助函数的最终语义仍不完整。",
+    "claims": [
+      {
+        "behavior": "在满足 sub_406B54 内部路径比较条件且 CopyFileA 成功时，将输入文件复制到构造的目标路径；失败时尝试备用构造路径，最终至少将传入状态/路径之一交给 sub_401B14 处理。",
+        "condition": "sub_406B54 已构造源路径 dst 和目标路径 dst_2/dst_3，且内部比较分支未直接回退；主复制分支由 CopyFileA 返回成功触发，失败时进入备用复制逻辑。",
+        "source": "sub_406B54 的 dst 输入及由 off_40D208、off_40D20C 和相关路径构造操作形成的源/目标路径。",
+        "action": "调用 CopyFileA(lpExistingFileName, lpNewFileName, 0)，失败后再次调用 CopyFileA 到备用路径。",
+        "sink": "构造的目标文件路径 dst_2 或备用路径 dst_3；代码直接尝试文件复制。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0101-L0155",
+            "observation": "代码构造 dst_1、dst_2、dst_3 等路径，并在 L0139 调用 CopyFileA；失败分支在 L0151 再次调用 CopyFileA，随后按结果选择路径交给 sub_401B14。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前包未给出 off_40D208、off_40D20C 的具体字符串，因此不能确定复制目标的实际文件名或完整路径。",
+          "静态证据证明的是复制尝试和成功分支，不证明运行时复制一定成功。"
+        ]
+      },
+      {
+        "behavior": "向策略 Explorer\\Run 注册表位置写入启动值，使用传入 a2 指向的数据作为注册表数据；该行为分别可发生于 HKLM 和 HKCU 分支。",
+        "condition": "sub_406B54 中对应的 off_40D1EC[0] 非零；HKLM/HKCU 两组分支各自执行其 RegCreate/RegSet 封装调用。",
+        "source": "sub_406B54 的 off_40D1EC[0] 指向的值名，以及 a2 指向的数据。",
+        "action": "调用 sub_406088 创建/打开注册表项并通过 sub_401E94 绑定数据；在重复/补写路径中调用 sub_405C4C。sub_405C4C 明确执行 RegCreateKeyA 和 RegSetValueExA。",
+        "sink": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run 和 HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run 下的动态值名。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0156-L0203",
+            "observation": "代码在 off_40D1EC[0] 非零时分别以 HKEY_LOCAL_MACHINE 和 HKEY_CURRENT_USER、固定 Policies\\\\Explorer\\\\Run 子键调用注册表辅助函数，并将 a2 数据传入。"
+          },
+          {
+            "location": "F-0365 sub_405C4C 原文件 L0025-L0032",
+            "observation": "辅助函数调用 RegCreateKeyA，计算 a4 数据长度并调用 RegSetValueExA 写入指定值名和 REG_EXPAND_SZ 类型数据。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "动态值名由 off_40D1EC[0] 提供，当前包未给出其具体字符串。",
+          "sub_406088 和 sub_401E94 的具体错误处理不可见；代码能力已确认，但注册表写入成功与否取决于运行时条件。"
+        ]
+      },
+      {
+        "behavior": "向传统 Run 启动位置写入持久化值，使用 a2 指向的数据作为值数据；该行为可发生于 HKLM 分支。",
+        "condition": "off_40D1D8 非零。",
+        "source": "off_40D1D8 提供的动态值名和 a2 指向的数据。",
+        "action": "sub_406B54 调用 sub_406088 处理 HKEY_LOCAL_MACHINE 与 Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run，并将 a2 数据交给 sub_401E94；补写路径调用 sub_405C4C。",
+        "sink": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run 下的动态值名。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0205-L0225",
+            "observation": "代码在 off_40D1D8 非零时使用 HKEY_LOCAL_MACHINE 和固定 Run 子键，写入由 a2 提供的数据，并在后续分支调用 sub_405C4C。"
+          },
+          {
+            "location": "F-0365 sub_405C4C 原文件 L0025-L0032",
+            "observation": "sub_405C4C 通过 RegCreateKeyA/RegSetValueExA 实际执行注册表值写入。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "动态值名及 a2 所指向数据的具体内容未知。",
+          "当前包未证明该分支在样本运行中实际被触发。"
+        ]
+      },
+      {
+        "behavior": "向 HKCU 的传统 Run 启动位置写入持久化值，使用 a2 指向的数据作为值数据。",
+        "condition": "off_40D1E0[0] 非零。",
+        "source": "off_40D1E0[0] 提供的动态值名和 a2 指向的数据。",
+        "action": "sub_406B54 调用 sub_406088 处理 HKEY_CURRENT_USER 与 Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run，并将 a2 数据交给 sub_401E94；补写路径调用 sub_405C4C。",
+        "sink": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run 下的动态值名。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0227-L0247",
+            "observation": "代码在 off_40D1E0[0] 非零时使用 HKEY_CURRENT_USER 和固定 Run 子键，写入由 a2 提供的数据，并在后续分支调用 sub_405C4C。"
+          },
+          {
+            "location": "F-0365 sub_405C4C 原文件 L0025-L0032",
+            "observation": "sub_405C4C 明确打开/创建子键并调用 RegSetValueExA 写入数据。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "动态值名及 a2 所指向数据的具体内容未知。",
+          "当前包未证明运行时写入成功。"
+        ]
+      },
+      {
+        "behavior": "删除当前用户 Active Setup 项后，在 HKLM Active Setup 下创建对应组件并写入 StubPath；StubPath 数据由传入 n3_1 与固定字符串“ Restart”拼接形成。",
+        "condition": "sub_406ADC 被调用；其调用链先执行清理，再执行 Active Setup 写入。",
+        "source": "sub_406ADC 的 lpSubKey、hKey、lpParameters，以及 sub_4068B4 的 n3/n3_1 参数。",
+        "action": "sub_4069E4 打开 HKCU\\\\Software\\\\Microsoft\\\\Active Setup\\\\Installed Components\\\\ 并删除 lpSubKey；随后 sub_4068B4 在 HKLM\\\\Software\\\\Microsoft\\\\Active Setup\\\\Installed Components\\\\<n3> 下调用 RegCreateKeyExA，并以 REG_SZ 写入 StubPath。",
+        "sink": "HKCU Active Setup 组件键的删除，以及 HKLM Active Setup 组件键的 StubPath 持久化值。",
+        "evidence": [
+          {
+            "location": "F-0391 sub_406ADC 原文件 L0001-L0005",
+            "observation": "调用顺序明确为 sub_4069E4 删除旧项、sub_406A50 处理启动参数、sub_4068B4 创建 Active Setup 项。"
+          },
+          {
+            "location": "F-0389 sub_4069E4 原文件 L0005-L0008",
+            "observation": "代码调用 RegOpenKeyExA 访问 HKCU Active Setup Installed Components，并调用 RegDeleteKeyA 删除 lpSubKey。"
+          },
+          {
+            "location": "F-0388 sub_4068B4 原文件 L0029-L0043",
+            "observation": "代码拼接固定 Active Setup 前缀和 n3，调用 RegCreateKeyExA 创建 HKLM 项，并调用 RegSetValueExA 写入名为 StubPath 的数据；数据由 n3_1 与“ Restart”拼接。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "组件子键名 n3、StubPath 前半部分 n3_1 及完整命令行含义未在当前包中解析。",
+          "Active Setup 的后续系统执行效果未由静态代码直接证明。"
+        ]
+      },
+      {
+        "behavior": "在 sub_406A50 的内部条件 v6 成立时，向 sub_405AD8 传入文件、动作参数 5 和命令行参数，随后终止当前进程。",
+        "condition": "sub_406A50 中的 v6 条件为真。",
+        "source": "lpFile 与 lpParameters 参数，以及 sub_4013A4(1, &v10) 返回并经 sub_401E94 处理的状态。",
+        "action": "调用 sub_405AD8(0, 0, lpFile, 5, 0, lpParameters)，随后调用 ExitProcess_0(0)。",
+        "sink": "未知的 sub_405AD8 下游副作用，以及当前进程终止。",
+        "evidence": [
+          {
+            "location": "F-0390 sub_406A50 原文件 L0014-L0021",
+            "observation": "代码调用 sub_4013A4 和 sub_401E94 后，在 v6 条件分支中调用 sub_405AD8，随后调用 ExitProcess_0(0)。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_405AD8 实现不在当前包内，不能确认它是否启动文件、打开路径或产生其他副作用。",
+          "反编译结果未显示 v6 的可靠赋值，触发条件无法进一步闭合。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "被用于写入动态启动值的本地计算机策略 Run 位置。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0161-L0167",
+            "observation": "代码将该固定子键字符串传给 HKLM 注册表辅助调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "被用于写入动态启动值的当前用户策略 Run 位置。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0184-L0190",
+            "observation": "代码将该固定子键字符串传给 HKCU 注册表辅助调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "被用于写入动态启动值的本地计算机 Run 位置。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0210-L0216",
+            "observation": "代码将该固定 Run 子键字符串传给 HKLM 注册表辅助调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "被用于写入动态启动值的当前用户 Run 位置。",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0232-L0238",
+            "observation": "代码将该固定 Run 子键字符串传给 HKCU 注册表辅助调用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Active Setup\\Installed Components",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "Active Setup 组件根路径，代码在其下创建动态组件键。",
+        "evidence": [
+          {
+            "location": "F-0388 sub_4068B4 原文件 L0030-L0035",
+            "observation": "代码将固定前缀 Software\\\\Microsoft\\\\Active Setup\\\\Installed Components\\\\ 与动态组件名拼接后调用 RegCreateKeyExA，根键为 HKEY_LOCAL_MACHINE。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "registry",
+        "value": "HKCU\\Software\\Microsoft\\Active Setup\\Installed Components",
+        "role": "other",
+        "detection_specificity": "medium",
+        "meaning": "被用于删除当前用户侧 Active Setup 组件键。",
+        "evidence": [
+          {
+            "location": "F-0389 sub_4069E4 原文件 L0005-L0008",
+            "observation": "代码打开该固定路径并调用 RegDeleteKeyA 删除传入组件子键。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "StubPath",
+        "role": "persistence_value",
+        "detection_specificity": "medium",
+        "meaning": "Active Setup 组件的固定持久化值名。",
+        "evidence": [
+          {
+            "location": "F-0388 sub_4068B4 原文件 L0039-L0043",
+            "observation": "RegSetValueExA 使用固定值名 StubPath 写入拼接后的数据。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": " Restart",
+        "role": "config_marker",
+        "detection_specificity": "low",
+        "meaning": "被追加到 Active Setup StubPath 数据末尾的固定字符串。",
+        "evidence": [
+          {
+            "location": "F-0388 sub_4068B4 原文件 L0037-L0042",
+            "observation": "代码计算 n3_1 长度并追加固定字符串“ Restart”，再作为 StubPath 数据写入。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "off_40D1EC、off_40D1D8、off_40D1E0、off_40D1E4 及相关路径全局量的具体值和触发来源是什么？",
+        "reason": "当前代码只显示非零门控和动态值使用，未提供这些全局指针所指字符串或调用者设置过程。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "capability",
+        "question": "sub_405AD8 的具体副作用是什么，以及 v6 在 sub_406A50 中的真实触发条件是什么？",
+        "reason": "当前包只显示调用参数和随后 ExitProcess，无法确认是否执行文件、启动进程或进行其他操作。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_406B54 的调用者如何提供 dst/a2，以及其不同模式下的实际安装目标和注册表值名是什么？",
+        "reason": "复制源、目标和写入数据均部分依赖外部全局量及调用上下文。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_405AD8",
+        "reason": "解析 sub_406A50 在 v6 条件成立时的下游动作。",
+        "expected_value": "确认 lpFile/lpParameters 是否导致执行、打开或其他外部副作用，并解释动作参数 5。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_406B54 callers and globals",
+        "reason": "解析安装函数输入及 off_40D1D8/off_40D1E0/off_40D1EC/off_40D1E4 的具体配置。",
+        "expected_value": "确定实际复制目标、注册表值名、写入数据和各持久化分支的触发条件。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "sub_405AD8",
+        "targets": [
+          {
+            "identifier": "sub_405AD8",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要确定 sub_406A50 传入 lpFile、动作参数 5 和 lpParameters 后的实际外部副作用；当前包只能证明调用及随后进程终止。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0390 sub_406A50 原文件 L0014-L0021",
+            "observation": "v6 条件成立时调用 sub_405AD8(0, 0, lpFile, 5, 0, lpParameters)，随后调用 ExitProcess_0(0)。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "sub_406B54",
+        "targets": [
+          {
+            "identifier": "sub_406B54",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要其调用者及全局配置的补充源码，以解析动态复制路径、注册表值名和输入数据；当前函数本体仅显示这些量被读取。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0394 sub_406B54 原文件 L0101-L0155",
+            "observation": "复制路径由多个全局字符串和构造操作形成。"
+          },
+          {
+            "location": "F-0394 sub_406B54 原文件 L0156-L0256",
+            "observation": "多个注册表子键/值名由 off_40D1EC、off_40D1D8、off_40D1E0、off_40D1E4 控制。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": false,
+    "error": "cannot replace and delete the same original item: material_needs"
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "当前 Analyzer 的所有 claim、artifact 及 material_need 证据 location 都使用了“F-xxxx 函数 原文件 L...-L...”格式；本轮校验显示这些引用全部无法解析（valid_segments=0，invalid_references=22）。因此核心结论虽然大多与源码行为相符，但结果中的证据不能被验收系统定位，等同于未提供可用的包内凭据。",
+        "evidence": [
+          {
+            "location": "evidence_reference_validation",
+            "observation": "valid_segments: 0；22 条 claim/artifact/material_need 引用均被标记为 invalid_format，原因是未匹配 F-xxxx Lx[-Ly] 格式。"
+          },
+          {
+            "location": "F-0394 L101-L155",
+            "observation": "当前材料实际提供 sub_406B54 的原始源码行段，可作为 claim 0 的有效引用，但 Analyzer 写成了带“原文件”字样的不可解析位置。"
+          },
+          {
+            "location": "F-0394 L156-L203",
+            "observation": "当前材料实际提供 Policies\\\\Explorer\\\\Run 分支源码，可作为 claim 1 和相关 artifact 的有效引用，但现有 location 不可解析。"
+          }
+        ],
+        "required_fix": "仅修正证据 location 的格式并重新核对每个范围；例如将“F-0394 sub_406B54 原文件 L0101-L0155”改为“F-0394 L101-L155”，将“F-0365 sub_405C4C 原文件 L0025-L0032”改为“F-0365 L25-L32”。不得通过改写 observation 迁就错误引用。所有现有 claim、artifact、material_need 的引用都必须可被当前材料定位。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/*",
+              "/artifacts/*",
+              "/material_needs/*"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "unsupported_claim",
+        "description": "claims 1–3 将调用 sub_406088 概括为已向四个注册表位置写入，但当前材料只显示 sub_406B54 调用该未提供实现的辅助函数；包内明确可见的 RegCreateKeyA/RegSetValueExA 写入仅在 sub_405C4C 的补写分支中。现有证据不足以确认 sub_406088 的主路径确实创建/写入注册表，故 confirmed 的整体写入表述超出当前包证据。",
+        "evidence": [
+          {
+            "location": "F-0394 L156-L203",
+            "observation": "源码在 HKLM/HKCU Policies\\\\Explorer\\\\Run 分支调用 sub_406088 和 sub_401E94，并在条件分支中调用 sub_405C4C；但 sub_406088 的实现不在当前材料。"
+          },
+          {
+            "location": "F-0394 L205-L247",
+            "observation": "源码在 HKLM/HKCU Run 分支同样调用 sub_406088，并仅在后续条件分支调用 sub_405C4C；主辅助函数的注册表副作用未由当前包直接显示。"
+          },
+          {
+            "location": "F-0365 L25-L32",
+            "observation": "只有 sub_405C4C 的实现直接显示 RegCreateKeyA 与 RegSetValueExA 写入指定值。"
+          }
+        ],
+        "required_fix": "将 claims 1–3 的主路径表述收窄为当前包可见的调用/写入能力：明确区分“调用未解析的 sub_406088”与“sub_405C4C 补写分支直接执行 RegSetValueExA”。若仍保留整体“向该位置写入”的结论，必须把证据等级降为 suspected 并在 limitations 中明确 sub_406088 未解析；不得把未见实现的 helper 直接当作已证实写入。必要时为 sub_406088 增加有证据支持的补料需求。",
+        "fixes": [
+          {
+            "type": "claim_revision",
+            "targets": [
+              "/claims/1",
+              "/claims/2",
+              "/claims/3"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R3",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "artifact_specificity_error",
+        "description": "多个注册表路径 artifact 的 detection_specificity=medium 偏高。HKLM/HKCU Run、Policies\\\\Explorer\\\\Run、Active Setup 根路径以及通用值名 StubPath 本身是常见系统位置/名称，不能单独或近似单独作为感染 IOC；应通常标为 low（或对纯系统位置标为 none），同时保留 persistence_value 等行为 role。",
+        "evidence": [
+          {
+            "location": "F-0394 L156-L247",
+            "observation": "四个 Run/Policies\\\\Explorer\\\\Run 路径是固定系统注册表位置，动态值名和数据并未在当前包确定。"
+          },
+          {
+            "location": "F-0388 L30-L43",
+            "observation": "Active Setup 根路径和 StubPath 是固定系统机制路径/通用值名，组件名和写入数据是动态的。"
+          },
+          {
+            "location": "F-0389 L5-L8",
+            "observation": "HKCU Active Setup 路径仅作为删除目标位置出现，路径本身没有样本特异字符串。"
+          }
+        ],
+        "required_fix": "下调这些通用路径/值名的 detection_specificity，避免把位置性 artifact 误当作中高价值 IOC；不要改变已由源码支持的 role。",
+        "fixes": [
+          {
+            "type": "artifact_classification",
+            "targets": [
+              "/artifacts/0",
+              "/artifacts/1",
+              "/artifacts/2",
+              "/artifacts/3",
+              "/artifacts/4",
+              "/artifacts/5",
+              "/artifacts/6"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R4",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "material_need[1] 将当前包已经完整提供的 sub_406B54 作为 function_code target，请求其自身源码来解释全局量和调用者，目标类型不准确且与 gaps/handoff 重复。需要的是调用者、全局指针初始化或具体全局字符串定义，而不是再次索取 sub_406B54 本体。",
+        "evidence": [
+          {
+            "location": "F-0394 L1-L261",
+            "observation": "当前材料已完整提供 sub_406B54 本体及其所有相关分支。"
+          },
+          {
+            "location": "material_needs[1]",
+            "observation": "Analyzer 将 target 填为 sub_406B54，并称需要其调用者及全局配置，target 与 reason 不一致。"
+          }
+        ],
+        "required_fix": "删除该重复的 function_code 需求，或改成能够实际获取调用者/全局定义的结构化需求；不要要求 Worker 重新提供当前包已有源码。",
+        "fixes": [
+          {
+            "type": "delete_item",
+            "targets": [
+              "/material_needs/1"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心安装、自复制、Active Setup 及多处持久化分支总体覆盖较完整，未发现遗漏一个决定性当前包行为的分支。必须修复全部不可解析的证据引用；此外，claims 1–3 对未提供实现的 sub_406088 作了超出包内证据的 confirmed 写入表述，应收窄或降级并补充明确限制。"
+  },
+  "expected_result": null,
+  "recovered_paths": [],
+  "expected_ignored_paths": null
+}

@@ -1,0 +1,545 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J01.json",
+        "sha256": "f9e13a293ad08bae4555cf9e6510313034f06471105adde4ee2e1dbfc203852b"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J01/analyzer/validated_result.json",
+        "sha256": "02717a17dac388ea82df59ebd4076f316277deb9ca05696a1193e33a22efedd1"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J01/reviewer/validated_result.json",
+        "sha256": "06fffc7ee7c1583cd779d5acedae1ec1742157cc4bd9af874ed2995f77b9f640"
+      },
+      "packet": {
+        "path": "testdata/packets/J01.md",
+        "sha256": "3beea3e2b3204ab83fd1e39e8f21db24ac885ae24cfbfb385cfecd75ee0fe0b1"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "no Reviser call in this run; no candidate invented"
+  },
+  "packet_name": "J01",
+  "packet_text": "# J01 共享运行时语义摘要\n任务来源：从 J00/J02 的实参、字符串拼接和内存复制依赖生成；摘要一次，后续共享。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0038 sub_4013A4，原文件 L0001–L0028 / 共 28 行\n```text\nL0001: const CHAR *__usercall sub_4013A4@<eax>(int a1@<eax>, int *a2@<edx>)\nL0002: {\nL0003:   DWORD ModuleFileNameA; // eax\nL0004:   const CHAR *lpsz_1; // eax\nL0005:   int v6; // ecx\nL0006:   CHAR *lpsz; // edi\nL0007:   CHAR Filename[276]; // [esp+0h] [ebp-114h] BYREF\nL0008: \nL0009:   sub_401AC0();\nL0010:   if ( a1 )\nL0011:   {\nL0012:     lpsz = GetCommandLineA();\nL0013:     while ( 1 )\nL0014:     {\nL0015:       lpsz_1 = sub_4012B8(lpsz, a2, v6);\nL0016:       lpsz = (CHAR *)lpsz_1;\nL0017:       if ( !a1 || !*a2 )\nL0018:         break;\nL0019:       --a1;\nL0020:     }\nL0021:   }\nL0022:   else\nL0023:   {\nL0024:     ModuleFileNameA = GetModuleFileNameA(0, Filename, 0x105u);\nL0025:     return (const CHAR *)sub_401BAC(ModuleFileNameA, Filename);\nL0026:   }\nL0027:   return lpsz_1;\nL0028: }\n```\n\n## F-0036 sub_401258，原文件 L0001–L0070 / 共 70 行\n```text\nL0001: unsigned int __usercall sub_401258@<eax>(unsigned int n3@<eax>, _DWORD *dst_1@<edx>, int n4@<ecx>)\nL0002: {\nL0003:   _BYTE *src; // esi\nL0004:   _DWORD *dst; // edi\nL0005:   bool v5; // cc\nL0006:   int v6; // ecx\nL0007:   _BYTE *v7; // esi\nL0008:   _BYTE *v8; // edi\nL0009:   int v9; // ecx\nL0010: \nL0011:   if ( n4 >= 4 )\nL0012:   {\nL0013:     v5 = n3 <= (unsigned int)dst_1;\nL0014:     if ( (_DWORD *)n3 == dst_1 )\nL0015:       return n3;\nL0016:     src = (_BYTE *)n3;\nL0017:     dst = dst_1;\nL0018:     n3 = n4;\nL0019:     if ( !v5 )\nL0020:       goto LABEL_17;\nL0021:     v6 = n4 & 3;\nL0022:     v7 = &src[n3 - 1];\nL0023:     v8 = (char *)dst_1 + n3 - 1;\nL0024:     while ( v6 )\nL0025:     {\nL0026:       *v8-- = *v7--;\nL0027:       --v6;\nL0028:     }\nL0029:     n4 = (int)n3 >> 2;\nL0030:     n3 = 3;\nL0031:     src = v7 - 3;\nL0032:     dst = v8 - 3;\nL0033:     while ( n4 )\nL0034:     {\nL0035:       *dst = *(_DWORD *)src;\nL0036:       src -= 4;\nL0037:       --dst;\nL0038:       --n4;\nL0039:     }\nL0040: LABEL_16:\nL0041:     --n4;\nL0042: LABEL_17:\nL0043:     v9 = n4 >> 2;\nL0044:     if ( v9 >= 0 )\nL0045:     {\nL0046:       qmemcpy(dst, src, 4 * v9);\nL0047:       n3 &= 3u;\nL0048:       qmemcpy(&dst[v9], &src[4 * v9], n3);\nL0049:     }\nL0050:     return n3;\nL0051:   }\nL0052:   if ( (_WORD)n4 && (_DWORD *)n3 != dst_1 )\nL0053:   {\nL0054:     src = (_BYTE *)n3;\nL0055:     dst = dst_1;\nL0056:     if ( n3 <= (unsigned int)dst_1 )\nL0057:     {\nL0058:       src = (_BYTE *)(n4 + n3 - 1);\nL0059:       dst = (_DWORD *)((char *)dst_1 + n4 - 1);\nL0060:     }\nL0061:     while ( n4 )\nL0062:     {\nL0063:       *(_BYTE *)dst = *src--;\nL0064:       dst = (_DWORD *)((char *)dst - 1);\nL0065:       --n4;\nL0066:     }\nL0067:     goto LABEL_16;\nL0068:   }\nL0069:   return n3;\nL0070: }\n```\n\n## F-0086 sub_401B14，原文件 L0001–L0037 / 共 37 行\n```text\nL0001: volatile __int32 *__usercall sub_401B14@<eax>(volatile __int32 *result@<eax>, __int32 dst_2@<edx>)\nL0002: {\nL0003:   int v2; // ecx\nL0004:   char v3; // cc\nL0005:   int v4; // ecx\nL0006:   _DWORD *dst; // edx\nL0007:   unsigned int n3; // eax\nL0008:   __int32 v7; // edx\nL0009:   unsigned int n3_1; // [esp-8h] [ebp-8h]\nL0010:   _DWORD *dst_1; // [esp-8h] [ebp-8h]\nL0011:   volatile __int32 *v11; // [esp-4h] [ebp-4h]\nL0012: \nL0013:   if ( dst_2 )\nL0014:   {\nL0015:     v2 = *(_DWORD *)(dst_2 - 8);\nL0016:     v3 = (v2 + 1 < 0) ^ __OFADD__(1, v2) | (v2 == -1);\nL0017:     v4 = v2 + 1;\nL0018:     if ( v3 )\nL0019:     {\nL0020:       v11 = result;\nL0021:       dst = (_DWORD *)sub_401B80(v4, dst_2);\nL0022:       n3 = n3_1;\nL0023:       dst_1 = dst;\nL0024:       sub_401258(n3, dst, *(_DWORD *)(n3 - 4));\nL0025:       dst_2 = (__int32)dst_1;\nL0026:       result = v11;\nL0027:     }\nL0028:     else\nL0029:     {\nL0030:       ++*(_DWORD *)(dst_2 - 8);\nL0031:     }\nL0032:   }\nL0033:   v7 = _InterlockedExchange(result, dst_2);\nL0034:   if ( v7 && *(int *)(v7 - 8) >= 1 && (*(_DWORD *)(v7 - 8))-- == 1 )\nL0035:     return (volatile __int32 *)sub_40118C((void *)(v7 - 8));\nL0036:   return result;\nL0037: }\n```\n\n## F-0104 sub_401D50，原文件 L0001–L0006 / 共 6 行\n```text\nL0001: int __usercall sub_401D50@<eax>(int result@<eax>)\nL0002: {\nL0003:   if ( result )\nL0004:     return *(_DWORD *)(result - 4);\nL0005:   return result;\nL0006: }\n```\n\n## F-0105 sub_401D58，原文件 L0001–L0038 / 共 38 行\n```text\nL0001: volatile __int32 *__usercall sub_401D58@<eax>(volatile __int32 *result@<eax>, __int32 dst@<edx>)\nL0002: {\nL0003:   volatile __int32 dst_1; // ecx\nL0004:   unsigned int *v3; // ebx\nL0005:   int n4_1; // edi\nL0006:   int v6; // edx\nL0007:   unsigned int n3; // eax\nL0008:   int n4; // ecx\nL0009: \nL0010:   if ( dst )\nL0011:   {\nL0012:     dst_1 = *result;\nL0013:     if ( *result )\nL0014:     {\nL0015:       v3 = (unsigned int *)result;\nL0016:       n4_1 = *(_DWORD *)(dst_1 - 4);\nL0017:       v6 = n4_1 + *(_DWORD *)(dst - 4);\nL0018:       if ( dst == dst_1 )\nL0019:       {\nL0020:         sub_402074(dst_1, v6);\nL0021:         n3 = *v3;\nL0022:         n4 = n4_1;\nL0023:       }\nL0024:       else\nL0025:       {\nL0026:         sub_402074(dst_1, v6);\nL0027:         n3 = dst;\nL0028:         n4 = *(_DWORD *)(dst - 4);\nL0029:       }\nL0030:       return (volatile __int32 *)sub_401258(n3, (_DWORD *)(n4_1 + *v3), n4);\nL0031:     }\nL0032:     else\nL0033:     {\nL0034:       return sub_401B14(result, dst);\nL0035:     }\nL0036:   }\nL0037:   return result;\nL0038: }\n```\n\n## F-0106 sub_401D9C，原文件 L0001–L0028 / 共 28 行\n```text\nL0001: volatile __int32 *__usercall sub_401D9C@<eax>(\nL0002:         volatile __int32 *a1@<eax>,\nL0003:         unsigned __int32 dst_1@<edx>,\nL0004:         unsigned __int32 dst@<ecx>)\nL0005: {\nL0006:   char *dst_2; // edi\nL0007: \nL0008:   if ( !dst_1 )\nL0009:     return sub_401B14(a1, dst);\nL0010:   if ( !dst )\nL0011:     return sub_401B14(a1, dst_1);\nL0012:   if ( dst_1 == *a1 )\nL0013:     return sub_401D58(a1, dst);\nL0014:   if ( dst == *a1 )\nL0015:   {\nL0016:     dst_2 = sub_401B80(*(_DWORD *)(dst - 4) + *(_DWORD *)(dst_1 - 4));\nL0017:     sub_401258(dst_1, dst_2, *(_DWORD *)(dst_1 - 4));\nL0018:     sub_401258(dst, &dst_2[*(_DWORD *)(dst_1 - 4)], *(_DWORD *)(dst - 4));\nL0019:     if ( dst_2 )\nL0020:       --*((_DWORD *)dst_2 - 2);\nL0021:     return sub_401B14(a1, (__int32)dst_2);\nL0022:   }\nL0023:   else\nL0024:   {\nL0025:     sub_401B14(a1, dst_1);\nL0026:     return sub_401D58(a1, dst);\nL0027:   }\nL0028: }\n```\n\n## F-0108 sub_401E10，原文件 L0001–L0070 / 共 70 行\n```text\nL0001: // positive sp value has been detected, the output may be wrong!\nL0002: volatile __int32 *__usercall sub_401E10@<eax>(volatile __int32 *dst_4@<eax>, int a2@<edx>)\nL0003: {\nL0004:   int v2; // ebx\nL0005:   char *dst_2; // edi\nL0006:   int v4; // ecx\nL0007:   int v5; // eax\nL0008:   char *dst_5; // ecx\nL0009:   int v7; // esi\nL0010:   char *dst_3; // esi\nL0011:   unsigned int n3; // eax\nL0012:   char *dst; // edx\nL0013:   int n4; // ecx\nL0014:   volatile __int32 *dst_6; // eax\nL0015:   char *dst_1; // [esp-10h] [ebp-1Ch]\nL0016:   int v15; // [esp+8h] [ebp-4h]\nL0017: \nL0018:   v2 = a2;\nL0019:   dst_2 = 0;\nL0020:   v4 = *(&v15 + a2);\nL0021:   if ( v4 && *dst_4 == v4 )\nL0022:     dst_2 = (char *)dst_4;\nL0023:   v5 = 0;\nL0024:   do\nL0025:   {\nL0026:     dst_5 = (char *)*(&v15 + a2);\nL0027:     if ( dst_5 )\nL0028:     {\nL0029:       v5 += *((_DWORD *)dst_5 - 1);\nL0030:       if ( dst_2 == dst_5 )\nL0031:         dst_2 = 0;\nL0032:     }\nL0033:     --a2;\nL0034:   }\nL0035:   while ( a2 );\nL0036:   if ( dst_2 )\nL0037:   {\nL0038:     v7 = *(_DWORD *)(*(_DWORD *)dst_2 - 4);\nL0039:     sub_402074(dst_5, v5);\nL0040:     dst_1 = dst_2;\nL0041:     dst_3 = (char *)(*(_DWORD *)dst_2 + v7);\nL0042:     --v2;\nL0043:   }\nL0044:   else\nL0045:   {\nL0046:     dst_1 = sub_401B80(v5);\nL0047:     dst_3 = dst_1;\nL0048:   }\nL0049:   do\nL0050:   {\nL0051:     n3 = *(&v15 + v2);\nL0052:     dst = dst_3;\nL0053:     if ( n3 )\nL0054:     {\nL0055:       n4 = *(_DWORD *)(n3 - 4);\nL0056:       dst_3 += n4;\nL0057:       sub_401258(n3, dst, n4);\nL0058:     }\nL0059:     --v2;\nL0060:   }\nL0061:   while ( v2 );\nL0062:   dst_6 = dst_4;\nL0063:   if ( !dst_2 )\nL0064:   {\nL0065:     if ( dst_1 )\nL0066:       --*((_DWORD *)dst_1 - 2);\nL0067:     return sub_401B14(dst_4, (__int32)dst_1);\nL0068:   }\nL0069:   return dst_6;\nL0070: }\n```\n\n## F-0110 sub_401E94，原文件 L0001–L0072 / 共 72 行\n```text\nL0001: int __usercall sub_401E94@<eax>(int result@<eax>, int *a2@<edx>)\nL0002: {\nL0003:   int *v2; // esi\nL0004:   int *v3; // edi\nL0005:   unsigned int v4; // eax\nL0006:   unsigned int v5; // edx\nL0007:   bool v6; // cc\nL0008:   unsigned int v7; // edx\nL0009:   unsigned int v8; // edx\nL0010:   int v9; // ecx\nL0011:   int v10; // ebx\nL0012:   char v11; // [esp-4h] [ebp-10h]\nL0013: \nL0014:   v2 = (int *)result;\nL0015:   v3 = a2;\nL0016:   if ( (int *)result != a2 )\nL0017:   {\nL0018:     if ( result )\nL0019:     {\nL0020:       if ( a2 )\nL0021:       {\nL0022:         v4 = *(_DWORD *)(result - 4);\nL0023:         v5 = *(a2 - 1);\nL0024:         v6 = v4 <= v5;\nL0025:         result = v4 - v5;\nL0026:         if ( v6 )\nL0027:           v5 += result;\nL0028:         v11 = v5;\nL0029:         v7 = v5 >> 2;\nL0030:         if ( v7 )\nL0031:         {\nL0032:           while ( *v2 == *v3 )\nL0033:           {\nL0034:             v8 = v7 - 1;\nL0035:             if ( !v8 )\nL0036:             {\nL0037:               ++v2;\nL0038:               ++v3;\nL0039:               goto LABEL_13;\nL0040:             }\nL0041:             if ( v2[1] != v3[1] )\nL0042:               return result;\nL0043:             v2 += 2;\nL0044:             v3 += 2;\nL0045:             v7 = v8 - 1;\nL0046:             if ( !v7 )\nL0047:               goto LABEL_13;\nL0048:           }\nL0049:         }\nL0050:         else\nL0051:         {\nL0052: LABEL_13:\nL0053:           if ( (v11 & 3) == 0\nL0054:             || (v9 = *v2, v10 = *v3, (unsigned __int8)*v2 == (unsigned __int8)*v3)\nL0055:             && ((v11 & 3) == 1 || BYTE1(v9) == BYTE1(v10) && ((v11 & 3) == 2 || (v9 & 0xFF0000) == (v10 & 0xFF0000))) )\nL0056:           {\nL0057:             result *= 2;\nL0058:           }\nL0059:         }\nL0060:       }\nL0061:       else\nL0062:       {\nL0063:         return *(_DWORD *)(result - 4);\nL0064:       }\nL0065:     }\nL0066:     else\nL0067:     {\nL0068:       return -*(a2 - 1);\nL0069:     }\nL0070:   }\nL0071:   return result;\nL0072: }\n```\n\n## F-0112 sub_401F48，原文件 L0001–L0006 / 共 6 行\n```text\nL0001: char *__usercall sub_401F48@<eax>(char *result@<eax>)\nL0002: {\nL0003:   if ( !result )\nL0004:     return &byte_401F4D;\nL0005:   return result;\nL0006: }\n```\n\n## F-0113 sub_401F54，原文件 L0001–L0021 / 共 21 行\n```text\nL0001: unsigned int __usercall sub_401F54@<eax>(unsigned int *a1@<eax>)\nL0002: {\nL0003:   unsigned int v1; // edx\nL0004:   char *dst; // edx\nL0005:   unsigned int n3; // eax\nL0006:   unsigned int n3_1; // [esp-8h] [ebp-8h]\nL0007: \nL0008:   v1 = *a1;\nL0009:   if ( *a1 && *(_DWORD *)(v1 - 8) != 1 )\nL0010:   {\nL0011:     dst = sub_401B80(*(_DWORD *)(v1 - 4));\nL0012:     n3 = *a1;\nL0013:     *a1 = (unsigned int)dst;\nL0014:     n3_1 = n3;\nL0015:     sub_401258(n3, dst, *(_DWORD *)(n3 - 4));\nL0016:     if ( *(int *)(n3_1 - 8) >= 1 && (*(_DWORD *)(n3_1 - 8))-- == 1 )\nL0017:       sub_40118C((void *)(n3_1 - 8));\nL0018:     return *a1;\nL0019:   }\nL0020:   return v1;\nL0021: }\n```\n\n## F-0116 sub_401F9C，原文件 L0001–L0005 / 共 5 行\n```text\nL0001: // attributes: thunk\nL0002: unsigned int __usercall sub_401F9C@<eax>(unsigned int *a1@<eax>)\nL0003: {\nL0004:   return sub_401F54(a1);\nL0005: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包主要补充了 J00 备用路径中 sub_4013A4 的数据来源语义：该函数按调用参数选择解析命令行，或获取并进一步处理当前模块路径，然后将结果返回给调用者。用于确定解析细节、模块路径处理及最终输出副作用的下游函数仍不在包内，因此不能闭合 XX--XX--XX.txt 路径的完整 source→action→sink。其余可见函数主要是内存复制、引用计数和字符串缓冲区操作，未显示新的外部副作用。",
+    "claims": [
+      {
+        "behavior": "sub_4013A4 在非零参数下从进程命令行取得输入，并通过 sub_4012B8 逐步解析后返回解析结果；在零参数下获取当前模块文件名，经 sub_401BAC 处理后返回结果。",
+        "condition": "调用 sub_4013A4 时，a1 非零或为零分别进入对应分支。",
+        "source": "非零分支的 GetCommandLineA 返回值；零参数分支的 GetModuleFileNameA(0, Filename, 0x105) 返回的当前模块路径及 Filename 缓冲区。",
+        "action": "非零分支循环调用 sub_4012B8，依据 a1 和 *a2 更新解析位置并最终返回 lpsz_1；零参数分支调用 sub_401BAC 处理模块文件名结果。",
+        "sink": "sub_4013A4 的返回值，供调用者继续作为字符串/路径相关数据使用；本包未显示更下游的外部写入或传输。",
+        "evidence": [
+          {
+            "location": "F-0038 sub_4013A4 原文件 L0009-L0027",
+            "observation": "a1 非零时调用 GetCommandLineA，并循环调用 sub_4012B8；a1 为零时调用 GetModuleFileNameA 获取模块文件名，再将结果传给 sub_401BAC 并返回。"
+          },
+          {
+            "location": "F-0112 sub_401F48 原文件 L0001-L0005",
+            "observation": "该辅助函数仅在输入为空时返回 byte_401F4D，否则原样返回输入，说明其可对上游返回的字符串指针执行空值替换，但未提供实际字符串内容。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_4012B8 和 sub_401BAC 的实现不在当前包内，无法确定命令行参数的具体解析规则或模块路径处理结果。",
+          "当前包没有显示 sub_4013A4 返回值在 J00 备用路径中最终如何被转换、写入、传输或作为互斥体名称使用；J00 仅提供了其被调用及被传入后续路径的上游摘要。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "other",
+        "value": "GetCommandLineA",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "程序读取进程命令行作为 sub_4013A4 非零参数分支的输入；这是通用环境输入，不是特异性 IOC。",
+        "evidence": [
+          {
+            "location": "F-0038 sub_4013A4 原文件 L0010-L0016",
+            "observation": "非零 a1 分支调用 GetCommandLineA，并将返回指针交给后续解析循环。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "当前模块文件路径（GetModuleFileNameA 返回值）",
+        "role": "system_path",
+        "detection_specificity": "none",
+        "meaning": "程序在 sub_4013A4 的零参数分支读取自身模块路径，并交给 sub_401BAC 处理；当前材料未给出固定路径或文件名。",
+        "evidence": [
+          {
+            "location": "F-0038 sub_4013A4 原文件 L0022-L0025",
+            "observation": "调用 GetModuleFileNameA(0, Filename, 0x105u)，随后将模块文件名缓冲区传给 sub_401BAC。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_4012B8 的命令行解析输出是什么，哪些参数或位置会被选为 sub_4013A4 的返回值？",
+        "reason": "当前包只有调用循环，没有 sub_4012B8 实现或其调用者提供的具体 a1/a2 语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_401BAC 如何处理 GetModuleFileNameA 的结果？",
+        "reason": "零参数分支的最终返回值依赖 sub_401BAC，但其实现不在当前包内。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_4013A4 返回值在 J00 所述备用路径中是否导致 XX--XX--XX.txt 的创建、写入、传输或其他副作用？",
+        "reason": "当前包未包含 sub_40B93C、备用路径完整调用代码或足以闭合该返回值到 sink 的证据。",
+        "scope": "packet_internal",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_4012B8",
+        "reason": "解析 sub_4013A4 非零分支读取的命令行，并确定实际返回数据及触发条件。",
+        "expected_value": "命令行参数/数据的具体 source→action 语义。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401BAC",
+        "reason": "解析 sub_4013A4 零参数分支对模块文件名的处理。",
+        "expected_value": "模块路径返回值的具体含义及是否存在额外副作用。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_40B93C",
+        "reason": "闭合 J00 备用路径中 sub_4013A4 返回值到 XX--XX--XX.txt 参数的最终效果。",
+        "expected_value": "确认是文件写入、传输还是其他处理，并确定数据来源。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_4012B8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401BAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40B93C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要分别确认命令行解析、模块路径处理以及 J00 备用路径中最终输出参数的行为；当前源码仅显示 sub_4013A4 的调用关系，无法闭合最终 sink。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0038 sub_4013A4 原文件 L0015-L0025",
+            "observation": "sub_4012B8 和 sub_401BAC 分别决定两条输入分支的返回结果，但实现未提供。"
+          },
+          {
+            "location": "dependency J00 摘要中 F-0500 L0172-L0190 的已验证摘要",
+            "observation": "J00 记录 sub_4013A4 的结果随后与临时路径及 XX--XX--XX.txt 绑定并传给 sub_40B93C，但未证明该调用的最终副作用。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": false,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "所有当前包源码证据位置都附加了“sub_... 原文件”文字，未遵循可解析的 F-XXXX Lx-Ly 格式；验证器因此将 5 条引用标为 invalid_format。引用所指向的函数和行段本身与材料一致，不构成核心行为覆盖错误。",
+        "evidence": [
+          {
+            "location": "claims[0].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0009-L0027”，实际材料对应 F-0038 的 L0009-L0027。"
+          },
+          {
+            "location": "claims[0].evidence[1]",
+            "observation": "当前值为“F-0112 sub_401F48 原文件 L0001-L0005”，实际材料对应 F-0112 的 L0001-L0005。"
+          },
+          {
+            "location": "artifacts[0].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0010-L0016”，实际材料对应 F-0038 的 L0010-L0016。"
+          },
+          {
+            "location": "artifacts[1].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0022-L0025”，实际材料对应 F-0038 的 L0022-L0025。"
+          },
+          {
+            "location": "material_needs[0].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0015-L0025”，实际材料对应 F-0038 的 L0015-L0025。"
+          }
+        ],
+        "required_fix": "仅规范化 evidence.location，删除函数名和“原文件”文字，改为 F-0038 L9-L27、F-0112 L1-L5、F-0038 L10-L16、F-0038 L22-L25、F-0038 L15-L25；不得借此改写 observation 或结论。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/0/evidence/0/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "boundary_violation",
+        "description": "关于 XX--XX--XX.txt 最终副作用的 gap 被标为 scope=packet_internal，但该缺失已由 J00 明确说明：sub_40B93C 及其完整调用路径不在当前包，属于 outside_packet 未知，不是当前包内遗漏。该标注可能造成边界判断不一致，但没有把未知效果写成已确认事实。",
+        "evidence": [
+          {
+            "location": "gaps[2]",
+            "observation": "该 gap 明确说当前包未包含 sub_40B93C、备用路径完整调用代码或足以闭合 sink 的证据，同时却标记 scope=packet_internal。"
+          },
+          {
+            "location": "dependency_handoffs[J00]",
+            "observation": "J00 已验证 sub_40B93C 的最终副作用、选定值来源和相关 helper 实现不在包内，并将其列为 outside-packet gap/handoff。"
+          }
+        ],
+        "required_fix": "将 gaps[2].scope 改为 outside_packet；保留其问题、影响和未知状态，不要删除该缺口或把 sub_40B93C 的效果改写为已确认。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/gaps/2/scope"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体充分：Analyzer 正确补充了 sub_4013A4 的命令行/模块路径两条 source 分支，未重复包装 J00 已确认的 mutex、hook 或文件写入事实；XX--XX--XX.txt 的最终 sink 仍被正确保留为未闭合。GetCommandLineA 作为 read_source、模块路径作为 system_path，均与材料和 detection_specificity 一致。仅发现证据位置格式问题及一个 outside_packet 边界标注问题，均不改变最终核心分析，因此不触发修订。"
+  },
+  "reviewer_output": {
+    "requires_revision": false,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "所有当前包源码证据位置都附加了“sub_... 原文件”文字，未遵循可解析的 F-XXXX Lx-Ly 格式；验证器因此将 5 条引用标为 invalid_format。引用所指向的函数和行段本身与材料一致，不构成核心行为覆盖错误。",
+        "evidence": [
+          {
+            "location": "claims[0].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0009-L0027”，实际材料对应 F-0038 的 L0009-L0027。"
+          },
+          {
+            "location": "claims[0].evidence[1]",
+            "observation": "当前值为“F-0112 sub_401F48 原文件 L0001-L0005”，实际材料对应 F-0112 的 L0001-L0005。"
+          },
+          {
+            "location": "artifacts[0].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0010-L0016”，实际材料对应 F-0038 的 L0010-L0016。"
+          },
+          {
+            "location": "artifacts[1].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0022-L0025”，实际材料对应 F-0038 的 L0022-L0025。"
+          },
+          {
+            "location": "material_needs[0].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0015-L0025”，实际材料对应 F-0038 的 L0015-L0025。"
+          }
+        ],
+        "required_fix": "仅规范化 evidence.location，删除函数名和“原文件”文字，改为 F-0038 L9-L27、F-0112 L1-L5、F-0038 L10-L16、F-0038 L22-L25、F-0038 L15-L25；不得借此改写 observation 或结论。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/0/evidence/1/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/0/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/artifacts/1/evidence/0/location"
+          },
+          {
+            "operation": "replace",
+            "path": "/material_needs/0/evidence/0/location"
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "boundary_violation",
+        "description": "关于 XX--XX--XX.txt 最终副作用的 gap 被标为 scope=packet_internal，但该缺失已由 J00 明确说明：sub_40B93C 及其完整调用路径不在当前包，属于 outside_packet 未知，不是当前包内遗漏。该标注可能造成边界判断不一致，但没有把未知效果写成已确认事实。",
+        "evidence": [
+          {
+            "location": "gaps[2]",
+            "observation": "该 gap 明确说当前包未包含 sub_40B93C、备用路径完整调用代码或足以闭合 sink 的证据，同时却标记 scope=packet_internal。"
+          },
+          {
+            "location": "dependency_handoffs[J00]",
+            "observation": "J00 已验证 sub_40B93C 的最终副作用、选定值来源和相关 helper 实现不在包内，并将其列为 outside-packet gap/handoff。"
+          }
+        ],
+        "required_fix": "将 gaps[2].scope 改为 outside_packet；保留其问题、影响和未知状态，不要删除该缺口或把 sub_40B93C 的效果改写为已确认。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/gaps/2/scope"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体充分：Analyzer 正确补充了 sub_4013A4 的命令行/模块路径两条 source 分支，未重复包装 J00 已确认的 mutex、hook 或文件写入事实；XX--XX--XX.txt 的最终 sink 仍被正确保留为未闭合。GetCommandLineA 作为 read_source、模块路径作为 system_path，均与材料和 detection_specificity 一致。仅发现证据位置格式问题及一个 outside_packet 边界标注问题，均不改变最终核心分析，因此不触发修订。"
+  },
+  "candidate_result": null,
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包主要补充了 J00 备用路径中 sub_4013A4 的数据来源语义：该函数按调用参数选择解析命令行，或获取并进一步处理当前模块路径，然后将结果返回给调用者。用于确定解析细节、模块路径处理及最终输出副作用的下游函数仍不在包内，因此不能闭合 XX--XX--XX.txt 路径的完整 source→action→sink。其余可见函数主要是内存复制、引用计数和字符串缓冲区操作，未显示新的外部副作用。",
+    "claims": [
+      {
+        "behavior": "sub_4013A4 在非零参数下从进程命令行取得输入，并通过 sub_4012B8 逐步解析后返回解析结果；在零参数下获取当前模块文件名，经 sub_401BAC 处理后返回结果。",
+        "condition": "调用 sub_4013A4 时，a1 非零或为零分别进入对应分支。",
+        "source": "非零分支的 GetCommandLineA 返回值；零参数分支的 GetModuleFileNameA(0, Filename, 0x105) 返回的当前模块路径及 Filename 缓冲区。",
+        "action": "非零分支循环调用 sub_4012B8，依据 a1 和 *a2 更新解析位置并最终返回 lpsz_1；零参数分支调用 sub_401BAC 处理模块文件名结果。",
+        "sink": "sub_4013A4 的返回值，供调用者继续作为字符串/路径相关数据使用；本包未显示更下游的外部写入或传输。",
+        "evidence": [
+          {
+            "location": "F-0038 sub_4013A4 原文件 L0009-L0027",
+            "observation": "a1 非零时调用 GetCommandLineA，并循环调用 sub_4012B8；a1 为零时调用 GetModuleFileNameA 获取模块文件名，再将结果传给 sub_401BAC 并返回。"
+          },
+          {
+            "location": "F-0112 sub_401F48 原文件 L0001-L0005",
+            "observation": "该辅助函数仅在输入为空时返回 byte_401F4D，否则原样返回输入，说明其可对上游返回的字符串指针执行空值替换，但未提供实际字符串内容。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_4012B8 和 sub_401BAC 的实现不在当前包内，无法确定命令行参数的具体解析规则或模块路径处理结果。",
+          "当前包没有显示 sub_4013A4 返回值在 J00 备用路径中最终如何被转换、写入、传输或作为互斥体名称使用；J00 仅提供了其被调用及被传入后续路径的上游摘要。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "other",
+        "value": "GetCommandLineA",
+        "role": "read_source",
+        "detection_specificity": "none",
+        "meaning": "程序读取进程命令行作为 sub_4013A4 非零参数分支的输入；这是通用环境输入，不是特异性 IOC。",
+        "evidence": [
+          {
+            "location": "F-0038 sub_4013A4 原文件 L0010-L0016",
+            "observation": "非零 a1 分支调用 GetCommandLineA，并将返回指针交给后续解析循环。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "当前模块文件路径（GetModuleFileNameA 返回值）",
+        "role": "system_path",
+        "detection_specificity": "none",
+        "meaning": "程序在 sub_4013A4 的零参数分支读取自身模块路径，并交给 sub_401BAC 处理；当前材料未给出固定路径或文件名。",
+        "evidence": [
+          {
+            "location": "F-0038 sub_4013A4 原文件 L0022-L0025",
+            "observation": "调用 GetModuleFileNameA(0, Filename, 0x105u)，随后将模块文件名缓冲区传给 sub_401BAC。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "evidence",
+        "question": "sub_4012B8 的命令行解析输出是什么，哪些参数或位置会被选为 sub_4013A4 的返回值？",
+        "reason": "当前包只有调用循环，没有 sub_4012B8 实现或其调用者提供的具体 a1/a2 语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "evidence",
+        "question": "sub_401BAC 如何处理 GetModuleFileNameA 的结果？",
+        "reason": "零参数分支的最终返回值依赖 sub_401BAC，但其实现不在当前包内。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "sub_4013A4 返回值在 J00 所述备用路径中是否导致 XX--XX--XX.txt 的创建、写入、传输或其他副作用？",
+        "reason": "当前包未包含 sub_40B93C、备用路径完整调用代码或足以闭合该返回值到 sink 的证据。",
+        "scope": "packet_internal",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_4012B8",
+        "reason": "解析 sub_4013A4 非零分支读取的命令行，并确定实际返回数据及触发条件。",
+        "expected_value": "命令行参数/数据的具体 source→action 语义。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401BAC",
+        "reason": "解析 sub_4013A4 零参数分支对模块文件名的处理。",
+        "expected_value": "模块路径返回值的具体含义及是否存在额外副作用。",
+        "priority": "medium"
+      },
+      {
+        "target": "sub_40B93C",
+        "reason": "闭合 J00 备用路径中 sub_4013A4 返回值到 XX--XX--XX.txt 参数的最终效果。",
+        "expected_value": "确认是文件写入、传输还是其他处理，并确定数据来源。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_4012B8",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401BAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40B93C",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要分别确认命令行解析、模块路径处理以及 J00 备用路径中最终输出参数的行为；当前源码仅显示 sub_4013A4 的调用关系，无法闭合最终 sink。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0038 sub_4013A4 原文件 L0015-L0025",
+            "observation": "sub_4012B8 和 sub_401BAC 分别决定两条输入分支的返回结果，但实现未提供。"
+          },
+          {
+            "location": "dependency J00 摘要中 F-0500 L0172-L0190 的已验证摘要",
+            "observation": "J00 记录 sub_4013A4 的结果随后与临时路径及 XX--XX--XX.txt 绑定并传给 sub_40B93C，但未证明该调用的最终副作用。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": null,
+  "typed_review": {
+    "requires_revision": false,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "other",
+        "description": "所有当前包源码证据位置都附加了“sub_... 原文件”文字，未遵循可解析的 F-XXXX Lx-Ly 格式；验证器因此将 5 条引用标为 invalid_format。引用所指向的函数和行段本身与材料一致，不构成核心行为覆盖错误。",
+        "evidence": [
+          {
+            "location": "claims[0].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0009-L0027”，实际材料对应 F-0038 的 L0009-L0027。"
+          },
+          {
+            "location": "claims[0].evidence[1]",
+            "observation": "当前值为“F-0112 sub_401F48 原文件 L0001-L0005”，实际材料对应 F-0112 的 L0001-L0005。"
+          },
+          {
+            "location": "artifacts[0].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0010-L0016”，实际材料对应 F-0038 的 L0010-L0016。"
+          },
+          {
+            "location": "artifacts[1].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0022-L0025”，实际材料对应 F-0038 的 L0022-L0025。"
+          },
+          {
+            "location": "material_needs[0].evidence[0]",
+            "observation": "当前值为“F-0038 sub_4013A4 原文件 L0015-L0025”，实际材料对应 F-0038 的 L0015-L0025。"
+          }
+        ],
+        "required_fix": "仅规范化 evidence.location，删除函数名和“原文件”文字，改为 F-0038 L9-L27、F-0112 L1-L5、F-0038 L10-L16、F-0038 L22-L25、F-0038 L15-L25；不得借此改写 observation 或结论。",
+        "fixes": [
+          {
+            "type": "reference_format",
+            "targets": [
+              "/claims/0/evidence/0",
+              "/claims/0/evidence/1",
+              "/artifacts/0/evidence/0",
+              "/artifacts/1/evidence/0",
+              "/material_needs/0/evidence/0"
+            ]
+          }
+        ]
+      },
+      {
+        "issue_id": "R2",
+        "scope": "packet_internal",
+        "severity": "minor",
+        "kind": "boundary_violation",
+        "description": "关于 XX--XX--XX.txt 最终副作用的 gap 被标为 scope=packet_internal，但该缺失已由 J00 明确说明：sub_40B93C 及其完整调用路径不在当前包，属于 outside_packet 未知，不是当前包内遗漏。该标注可能造成边界判断不一致，但没有把未知效果写成已确认事实。",
+        "evidence": [
+          {
+            "location": "gaps[2]",
+            "observation": "该 gap 明确说当前包未包含 sub_40B93C、备用路径完整调用代码或足以闭合 sink 的证据，同时却标记 scope=packet_internal。"
+          },
+          {
+            "location": "dependency_handoffs[J00]",
+            "observation": "J00 已验证 sub_40B93C 的最终副作用、选定值来源和相关 helper 实现不在包内，并将其列为 outside-packet gap/handoff。"
+          }
+        ],
+        "required_fix": "将 gaps[2].scope 改为 outside_packet；保留其问题、影响和未知状态，不要删除该缺口或把 sub_40B93C 的效果改写为已确认。",
+        "fixes": [
+          {
+            "type": "gap_revision",
+            "targets": [
+              "/gaps/2"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心覆盖总体充分：Analyzer 正确补充了 sub_4013A4 的命令行/模块路径两条 source 分支，未重复包装 J00 已确认的 mutex、hook 或文件写入事实；XX--XX--XX.txt 的最终 sink 仍被正确保留为未闭合。GetCommandLineA 作为 read_source、模块路径作为 system_path，均与材料和 detection_specificity 一致。仅发现证据位置格式问题及一个 outside_packet 边界标注问题，均不改变最终核心分析，因此不触发修订。"
+  },
+  "expected_result": null,
+  "recovered_paths": [],
+  "expected_ignored_paths": null
+}

@@ -1,0 +1,1360 @@
+{
+  "provenance": {
+    "run_completed_at": "2026-10-21T10:05:31+08:00",
+    "original_records": {
+      "envelope": {
+        "path": "results_v17/J12.json",
+        "sha256": "fecaaade13f0a8fafbc04b4997e83577cccc37c8e7076e5564e1bf99d8b03823"
+      },
+      "analyzer": {
+        "path": "results_v17/_artifacts/J12/analyzer/validated_result.json",
+        "sha256": "627dbdf24db8edd958f5f548c623e8e23b10825f9f97e712efc21e5e3a441ac4"
+      },
+      "reviewer": {
+        "path": "results_v17/_artifacts/J12/reviewer/validated_result.json",
+        "sha256": "92645510f18c772447a3040bb210d1d2001a4e15d56f09d0b4711064a80fc3f2"
+      },
+      "packet": {
+        "path": "testdata/packets/J12.md",
+        "sha256": "e27135bdbf28a64128f42ea1212342293b5c666b27c9a44d616a4884847d0bbb"
+      },
+      "reviser": {
+        "path": "results_v17/_artifacts/J12/reviser/validated_result.json",
+        "sha256": "8c61a0053e4eb4aef0e59435736d60f82c477408bc49eb6052671a0053d14384"
+      },
+      "audit": {
+        "path": "results_v17/_artifacts/J12/reviser/revision_scope.json",
+        "sha256": "e189157a932f7e5eb6ff7f3a6be1f58bf7d5b7bceee7ee3ac6346d691242b98f"
+      }
+    },
+    "typed_review_origin": "curated test input adapting the historical review to the new protocol",
+    "expected_result_origin": "historical final result, with explicitly listed necessary semantic fields recovered from the actual candidate",
+    "candidate_origin": "actual saved Reviser output"
+  },
+  "packet_name": "J12",
+  "packet_text": "# J12 Firefox 后半：读取、解密与返回\n任务来源：J11 的续读范围；不是另建自由调查，必须保留前半的数据接口。\n本文件是本样本的人工重建材料包，不是已运行的 Agent 结果，也不是跨样本固定任务清单。\n执行要求见 worker_contract.md。函数标题和任务方向不是结论证据；分析新材料时同时登记其他分支与副作用。\n\n## F-0483 sub_409EF8，原文件 L0275–L0522 / 共 522 行\n```text\nL0275:                 hFile = CreateFileA(lpFileName_1, 0x80000000, 1u, 0, 3u, 0, 0);\nL0276:                 nNumberOfBytesToRead = GetFileSize(hFile, 0);\nL0277:                 lpBuffer = sub_401174((LPVOID)nNumberOfBytesToRead);\nL0278:                 ReadFile(hFile, lpBuffer, nNumberOfBytesToRead, (LPDWORD)&v96[1], 0);\nL0279:                 CloseHandle(hFile);\nL0280:                 sub_401CAC(&v97, lpBuffer);\nL0281:                 sub_40118C(lpBuffer);\nL0282:                 v19 = sub_40202C(dword_40ADE4, v97);\nL0283:                 sub_401FE4((unsigned int *)&v97, 1, (int)(v19 + 2));\nL0284:                 sub_405BEC((int)&v41);\nL0285:                 v35 = v41;\nL0286:                 __Mozilla__Firefox_ = \"\\\\Mozilla\\\\Firefox\\\\\";\nL0287:                 sub_401D24((char **)&ExceptionList_10, (unsigned int)ReturnedString, 261);\nL0288:                 ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_10;\nL0289:                 sub_401E10((volatile __int32 *)&dst__17, 3);\nL0290:                 v20 = sub_401F48(dst__17);\nL0291:                 if ( !((int (__cdecl *)(char *))NSS_Init)(v20) )\nL0292:                 {\nL0293:                   v92 = PK11_GetInternalKeySlot();\nL0294:                   if ( v92 )\nL0295:                   {\nL0296:                     if ( !((int (__cdecl *)(int, int, _DWORD))PK11_Authenticate)(v92, 1, 0) )\nL0297:                     {\nL0298:                       while ( sub_401D50((int)v97) )\nL0299:                       {\nL0300:                         ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)v96;\nL0301:                         v21 = sub_40202C(dword_40ADE4, v97);\nL0302:                         sub_401FA4((int)v97, 1, (int)(v21 - 1), (char **)ExceptionList);\nL0303:                         v22 = sub_401D50((int)v96[0]);\nL0304:                         sub_401FE4((unsigned int *)&v97, 1, v22 + 3);\nL0305:                         ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&p_nss3.dll_2;\nL0306:                         v23 = sub_40202C(dword_40ADF0, v96[0]);\nL0307:                         sub_401FA4((int)v96[0], 1, (int)(v23 - 1), (char **)ExceptionList);\nL0308:                         v24 = sub_401D50((int)p_nss3.dll_2);\nL0309:                         sub_401FE4((unsigned int *)v96, 1, v24 + 2);\nL0310:                         ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_11;\nL0311:                         __Mozilla__Firefox__1 = \"##$$\";\nL0312:                         p_nss3.dll = p_nss3.dll_2;\nL0313:                         sub_401E10((volatile __int32 *)&ExceptionList_11, 4);\nL0314:                         while ( sub_401D50((int)v96[0]) )\nL0315:                         {\nL0316:                           ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&v94;\nL0317:                           v25 = sub_40202C(dword_40ADF0, v96[0]);\nL0318:                           sub_401FA4((int)v96[0], 1, (int)(v25 - 1), (char **)ExceptionList);\nL0319:                           v26 = sub_401D50(v94);\nL0320:                           sub_401FE4((unsigned int *)v96, 1, v26 + 2);\nL0321:                           ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&v93;\nL0322:                           v27 = sub_40202C(dword_40ADF0, v96[0]);\nL0323:                           sub_401FA4((int)v96[0], 1, (int)(v27 - 1), (char **)ExceptionList);\nL0324:                           v28 = sub_401D50((int)v93);\nL0325:                           sub_401FE4((unsigned int *)v96, 1, v28 + 2);\nL0326:                           ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)sub_401D50((int)v93);\nL0327:                           v29 = sub_401F48(v93);\nL0328:                           ((void (__cdecl *)(_DWORD, CHAR *, char *))NSSBase64_DecodeBuffer)(0, v86, v29);\nL0329:                           if ( !((int (__cdecl *)(CHAR *, _BYTE *, _DWORD))PK11SDR_Decrypt)(v86, v83, 0) )\nL0330:                           {\nL0331:                             sub_401CAC((char **)a1, n3_4);\nL0332:                             sub_402074((unsigned int *)a1, n4);\nL0333:                             if ( !sub_401D50(v94) )\nL0334:                               sub_401B58(&v94, (__int32)\"(unnamed value)\");\nL0335:                             if ( !sub_401D50((int)v93) )\nL0336:                               sub_401B58((volatile __int32 *)&v93, (__int32)\"(unnamed password)\");\nL0337:                             ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)ExceptionList_11;\nL0338:                             __Mozilla__Firefox__1 = (const char *)*a1;\nL0339:                             p_nss3.dll = (const char *)dword_40AE0C;\nL0340:                             sub_401E10((volatile __int32 *)&ExceptionList_11, 3);\nL0341:                           }\nL0342:                         }\nL0343:                       }\nL0344:                     }\nL0345:                     ((void (__cdecl *)(int))PK11_FreeSlot)(v92);\nL0346:                   }\nL0347:                   NSS_Shutdown();\nL0348:                 }\nL0349:                 sub_401D9C(a1, (unsigned __int32)ExceptionList_11, (unsigned __int32)\"##$$\");\nL0350:                 sub_401B58(&v89, (__int32)ExceptionList_11);\nL0351:                 sub_40592C(\"##$$\", 0, v89, &v39);\nL0352:                 sub_401B58(&v89, v39);\nL0353:                 sub_40592C(dword_40AE0C, 0, v89, &v38);\nL0354:                 sub_401B58(&v89, v38);\nL0355:                 sub_40592C(&dword_40AE4C, 0, v89, &v37);\nL0356:                 sub_401B58(&v89, v37);\nL0357:                 if ( !v89 )\nL0358:                   sub_401AC0(a1);\nL0359:                 n7 = 7;\nL0360:                 v88 = (HMODULE *)v82;\nL0361:                 do\nL0362:                 {\nL0363:                   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&savedregs;\nL0364:                   __Mozilla__Firefox__1 = (const char *)&loc_40AB4F;\nL0365:                   p_nss3.dll = (const char *)NtCurrentTeb()->NtTib.ExceptionList;\nL0366:                   __writefsdword(0, (unsigned int)&p_nss3.dll);\nL0367:                   FreeLibrary_0(*v88);\nL0368:                   FreeLibrary_0(hModule);\nL0369:                   __writefsdword(0, (unsigned int)p_nss3.dll);\nL0370:                   ++v88;\nL0371:                   --n7;\nL0372:                 }\nL0373:                 while ( n7 );\nL0374:               }\nL0375:               else\nL0376:               {\nL0377:                 sub_401AC0(a1);\nL0378:                 n7 = 7;\nL0379:                 v88 = (HMODULE *)v82;\nL0380:                 do\nL0381:                 {\nL0382:                   ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&savedregs;\nL0383:                   __Mozilla__Firefox__1 = (const char *)&loc_40A3E8;\nL0384:                   p_nss3.dll = (const char *)NtCurrentTeb()->NtTib.ExceptionList;\nL0385:                   __writefsdword(0, (unsigned int)&p_nss3.dll);\nL0386:                   FreeLibrary_0(*v88);\nL0387:                   FreeLibrary_0(hModule);\nL0388:                   __writefsdword(0, (unsigned int)p_nss3.dll);\nL0389:                   ++v88;\nL0390:                   --n7;\nL0391:                 }\nL0392:                 while ( n7 );\nL0393:               }\nL0394:             }\nL0395:             else\nL0396:             {\nL0397:               sub_401AC0(a1);\nL0398:               n7 = 7;\nL0399:               v88 = (HMODULE *)v82;\nL0400:               do\nL0401:               {\nL0402:                 ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&savedregs;\nL0403:                 __Mozilla__Firefox__1 = (const char *)&loc_40A376;\nL0404:                 p_nss3.dll = (const char *)NtCurrentTeb()->NtTib.ExceptionList;\nL0405:                 __writefsdword(0, (unsigned int)&p_nss3.dll);\nL0406:                 FreeLibrary_0(*v88);\nL0407:                 FreeLibrary_0(hModule);\nL0408:                 __writefsdword(0, (unsigned int)p_nss3.dll);\nL0409:                 ++v88;\nL0410:                 --n7;\nL0411:               }\nL0412:               while ( n7 );\nL0413:             }\nL0414:           }\nL0415:           else\nL0416:           {\nL0417:             sub_401AC0(a1);\nL0418:             n7 = 7;\nL0419:             v88 = (HMODULE *)v82;\nL0420:             do\nL0421:             {\nL0422:               ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&savedregs;\nL0423:               __Mozilla__Firefox__1 = (const char *)&loc_40A304;\nL0424:               p_nss3.dll = (const char *)NtCurrentTeb()->NtTib.ExceptionList;\nL0425:               __writefsdword(0, (unsigned int)&p_nss3.dll);\nL0426:               FreeLibrary_0(*v88);\nL0427:               FreeLibrary_0(hModule);\nL0428:               __writefsdword(0, (unsigned int)p_nss3.dll);\nL0429:               ++v88;\nL0430:               --n7;\nL0431:             }\nL0432:             while ( n7 );\nL0433:           }\nL0434:         }\nL0435:         else\nL0436:         {\nL0437:           sub_401AC0(a1);\nL0438:           n7 = 7;\nL0439:           v88 = (HMODULE *)v82;\nL0440:           do\nL0441:           {\nL0442:             ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&savedregs;\nL0443:             __Mozilla__Firefox__1 = (const char *)&loc_40A295;\nL0444:             p_nss3.dll = (const char *)NtCurrentTeb()->NtTib.ExceptionList;\nL0445:             __writefsdword(0, (unsigned int)&p_nss3.dll);\nL0446:             FreeLibrary_0(*v88);\nL0447:             FreeLibrary_0(hModule);\nL0448:             __writefsdword(0, (unsigned int)p_nss3.dll);\nL0449:             ++v88;\nL0450:             --n7;\nL0451:           }\nL0452:           while ( n7 );\nL0453:         }\nL0454:       }\nL0455:       else\nL0456:       {\nL0457:         sub_401AC0(a1);\nL0458:         n7 = 7;\nL0459:         v88 = (HMODULE *)v82;\nL0460:         do\nL0461:         {\nL0462:           ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&savedregs;\nL0463:           __Mozilla__Firefox__1 = (const char *)&loc_40A223;\nL0464:           p_nss3.dll = (const char *)NtCurrentTeb()->NtTib.ExceptionList;\nL0465:           __writefsdword(0, (unsigned int)&p_nss3.dll);\nL0466:           FreeLibrary_0(*v88);\nL0467:           FreeLibrary_0(hModule);\nL0468:           __writefsdword(0, (unsigned int)p_nss3.dll);\nL0469:           ++v88;\nL0470:           --n7;\nL0471:         }\nL0472:         while ( n7 );\nL0473:       }\nL0474:     }\nL0475:     else\nL0476:     {\nL0477:       sub_401AC0(a1);\nL0478:       n7 = 7;\nL0479:       v88 = (HMODULE *)v82;\nL0480:       do\nL0481:       {\nL0482:         ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&savedregs;\nL0483:         __Mozilla__Firefox__1 = (const char *)&loc_40A1B1;\nL0484:         p_nss3.dll = (const char *)NtCurrentTeb()->NtTib.ExceptionList;\nL0485:         __writefsdword(0, (unsigned int)&p_nss3.dll);\nL0486:         FreeLibrary_0(*v88);\nL0487:         FreeLibrary_0(hModule);\nL0488:         __writefsdword(0, (unsigned int)p_nss3.dll);\nL0489:         ++v88;\nL0490:         --n7;\nL0491:       }\nL0492:       while ( n7 );\nL0493:     }\nL0494:   }\nL0495:   else\nL0496:   {\nL0497:     sub_401AC0(a1);\nL0498:     n7 = 7;\nL0499:     v88 = (HMODULE *)v82;\nL0500:     do\nL0501:     {\nL0502:       ExceptionList = (struct _EXCEPTION_REGISTRATION_RECORD *)&savedregs;\nL0503:       __Mozilla__Firefox__1 = (const char *)&loc_40A140;\nL0504:       p_nss3.dll = (const char *)NtCurrentTeb()->NtTib.ExceptionList;\nL0505:       __writefsdword(0, (unsigned int)&p_nss3.dll);\nL0506:       FreeLibrary_0(*v88);\nL0507:       FreeLibrary_0(hModule);\nL0508:       __writefsdword(0, (unsigned int)p_nss3.dll);\nL0509:       ++v88;\nL0510:       --n7;\nL0511:     }\nL0512:     while ( n7 );\nL0513:   }\nL0514: LABEL_59:\nL0515:   __writefsdword(0, (unsigned int)__Mozilla__Firefox_);\nL0516:   v36 = &loc_40ABAC;\nL0517:   sub_401AE4(&v37, 45);\nL0518:   sub_401AC0(&v89);\nL0519:   sub_401AC0(&ExceptionList_11);\nL0520:   sub_401AE4((int *)&v93, 4);\nL0521:   return sub_401AC0(&v97);\nL0522: }\n```\n",
+  "analyzer_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了 Firefox signons 候选文件从读取到 NSS 解密及结果累积的主要链路：成功打开所选候选路径后读取文件，解析记录，对记录字段进行 Base64 解码并调用 PK11SDR_Decrypt，成功解密的数据被传入调用者提供的累积对象 a1。源码未显示 a1 的最终外部写出/传输，也无法仅凭本包确认其与 J00 的 FIREFOX.abc 写入关系。",
+    "claims": [
+      {
+        "behavior": "在选定的 Firefox signons 候选路径可打开时，程序读取整个文件内容并交给后续解析。",
+        "condition": "上游候选路径选择已完成，且 CreateFileA 返回可用句柄；当前代码未显示失败句柄的专门处理。",
+        "source": "上游选择得到的 lpFileName_1，即 Firefox Profile 下的 signons 候选文件路径。",
+        "action": "以只读方式调用 CreateFileA，使用 GetFileSize 分配缓冲区，并通过 ReadFile 读取文件全部字节；随后调用 sub_401CAC 解析缓冲区。",
+        "sink": "文件内容进入 lpBuffer，并被传给后续 signons 记录解析流程。",
+        "evidence": [
+          {
+            "location": "F-0483 L0275-L0281",
+            "observation": "CreateFileA 使用 lpFileName_1 打开文件，GetFileSize 获取大小，ReadFile 将内容读入 lpBuffer，随后 sub_401CAC 处理该缓冲区。"
+          },
+          {
+            "location": "dependency J11 F-0483 L0150-L0188, L0187-L0216, L0229-L0271",
+            "observation": "上游已验证 lpFileName_1 来源于 Firefox Profile0\\Path 下构造并选中的 signons3.txt、signons2.txt、signons1.txt 或 signons.txt 候选路径。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前片段未显示 CreateFileA/GetFileSize/ReadFile 的错误分支，因此只能确认代码具备该读取能力，不能证明运行时一定成功。"
+        ]
+      },
+      {
+        "behavior": "在 NSS 初始化、内部密钥槽获取及认证成功，并且记录字段解密成功时，程序对 Firefox signons 记录中的编码字段执行 Base64 解码和 NSS SDR 解密，并将解密结果累积到调用者提供的 a1 对象。",
+        "condition": "NSS_Init 返回成功、PK11_GetInternalKeySlot 返回非空、PK11_Authenticate 返回成功，并进入记录循环；单条记录还要求 PK11SDR_Decrypt 返回成功。",
+        "source": "从 signons 文件解析出的记录字段：代码从 v97/v96 等解析字段中取得 v93，随后将其作为待解码数据；解密输出写入 v83。",
+        "action": "通过 NSSBase64_DecodeBuffer 将 v93 解码到 v86，再调用 PK11SDR_Decrypt(v86, v83, 0)；成功后调用 sub_401CAC(a1, n3_4) 和 sub_402074(a1, n4) 更新结果累积对象，并为缺失字段补入默认占位字符串。",
+        "sink": "调用者提供的 a1 累积对象；当前可见代码未证明该对象最终被写入文件、发送到网络或以其他外部方式输出。",
+        "evidence": [
+          {
+            "location": "F-0483 L0291-L0307",
+            "observation": "代码在 NSS_Init 成功且 PK11_GetInternalKeySlot、PK11_Authenticate 条件满足后，循环解析记录字段。"
+          },
+          {
+            "location": "F-0483 L0314-L0329",
+            "observation": "记录字段被提取到 v93，经 NSSBase64_DecodeBuffer 解码后传给 PK11SDR_Decrypt。"
+          },
+          {
+            "location": "F-0483 L0329-L0340",
+            "observation": "PK11SDR_Decrypt 成功分支调用 sub_401CAC(a1, n3_4) 与 sub_402074(a1, n4)，并对缺失字段使用“(unnamed value)”和“(unnamed password)”占位。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "sub_401CAC 和 sub_402074 的实现不在本包，故只能确认解密结果及相关字段被传入 a1，不能确定其精确序列化格式或最终输出介质。",
+          "代码展示了解密调用和成功分支，但不能证明目标系统存在有效 Firefox 数据、NSS 组件或运行时解密必然成功。"
+        ]
+      },
+      {
+        "behavior": "例程在处理完成后将累积结果与固定分隔标记及其他内部值继续组合，并返回清理 v97 后的结果；当前片段不能闭合到样本的最终输出文件。",
+        "condition": "正常处理路径或多个失败/回退路径最终到达清理和返回代码。",
+        "source": "a1 中的已累积 Firefox 处理结果，以及 ExceptionList_11、v39/v38/v37 等内部字符串或值。",
+        "action": "使用“##$$”及其他值调用 sub_401D9C、sub_40592C 等组合操作，必要时对 a1 调用 sub_401AC0；末尾释放局部资源并返回 sub_401AC0(&v97)。",
+        "sink": "调用者可见的例程返回值及 a1 的内部状态；未见本包内的文件、网络或注册表写入。",
+        "evidence": [
+          {
+            "location": "F-0483 L0349-L0358",
+            "observation": "代码将 a1 与“##$$”及其他值组合，调用 sub_40592C，并在 v89 为空时调用 sub_401AC0(a1)。"
+          },
+          {
+            "location": "F-0483 L0367-L0368, L0386-L0387, L0406-L0407, L0426-L0427, L0446-L0447, L0466-L0467, L0486-L0487, L0506-L0507",
+            "observation": "多个成功/失败分支均释放加载的库并回到统一清理流程。"
+          },
+          {
+            "location": "F-0483 L0514-L0522",
+            "observation": "统一清理局部对象后，例程通过 return sub_401AC0(&v97) 返回。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_401D9C、sub_40592C、sub_401AC0 的具体语义不在本包，不能把“##$$”组合结果直接解释为文件输出、网络传输或 FIREFOX.abc 内容。",
+          "J00 中已验证的 FIREFOX.abc 写入调用与本例程返回值之间的完整绑定不在当前源码范围内。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons3.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径；本包后半段显示选定的候选路径会被打开并读取，但不证明每个候选文件都会实际访问。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0187-L0216",
+            "observation": "源码构造 signons3.txt 候选路径并参与候选选择。"
+          },
+          {
+            "location": "F-0483 L0275-L0278",
+            "observation": "最终选中的 lpFileName_1 被 CreateFileA 和 ReadFile 使用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons2.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0192-L0216",
+            "observation": "源码构造 signons2.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons1.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0192-L0216",
+            "observation": "源码构造 signons1.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 更早版本凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0214-L0216",
+            "observation": "源码构造 signons.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "##$$",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "当前函数用于组合 Firefox 处理结果的固定分隔/格式标记；其是否为样本级检测标记或最终输出格式的一部分仍需下游确认。",
+        "evidence": [
+          {
+            "location": "F-0483 L0310-L0313",
+            "observation": "代码设置“##$$”并将其用于内部字符串组合上下文。"
+          },
+          {
+            "location": "F-0483 L0349-L0353",
+            "observation": "代码以“##$$”调用 sub_401D9C 和 sub_40592C 继续处理累积结果。"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "kind": "string",
+        "value": "(unnamed value)",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "当解析出的值字段为空时使用的默认占位字符串。",
+        "evidence": [
+          {
+            "location": "F-0483 L0333-L0336",
+            "observation": "v94 为空时调用 sub_401B58 写入“(unnamed value)”。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "(unnamed password)",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "当解析出的密码字段为空时使用的默认占位字符串。",
+        "evidence": [
+          {
+            "location": "F-0483 L0335-L0336",
+            "observation": "v93 为空时调用 sub_401B58 写入“(unnamed password)”。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_401CAC、sub_402074、sub_401D9C、sub_40592C 和 sub_401AC0 对解析字段、解密结果及 a1 的具体序列化/返回语义是什么？",
+        "reason": "当前代码显示这些调用点和数据流，但未提供 helper 实现；因此无法确定精确输出格式及返回对象语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "Firefox 例程的 a1/返回值是否被 J00 的 FIREFOX.abc 路径写入，最终 sink 是什么？",
+        "reason": "当前包仅显示 a1 的累积和 sub_409EF8 的末尾返回，没有包含调用者到 FIREFOX.abc 的完整绑定。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC / sub_402074",
+        "reason": "确认解密字段如何写入或格式化到 a1。",
+        "expected_value": "精确的凭据记录 source→action→sink 和输出格式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401D9C / sub_40592C / sub_401AC0",
+        "reason": "确认固定分隔标记组合、清理及返回值语义。",
+        "expected_value": "判断是否形成可外传/可写出的结果，以及例程返回值的准确含义。",
+        "priority": "medium"
+      },
+      {
+        "target": "J00 中调用 sub_409EF8 的完整代码",
+        "reason": "闭合 Firefox 例程结果与 FIREFOX.abc 文件写入之间的调用关系。",
+        "expected_value": "确认最终输出文件、写入数据和触发条件。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402074",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40592C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401AC0",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要这些 helper 的原始函数代码，以确认解密结果、默认字段和中间字符串如何进入 a1，以及末尾返回是否形成外部输出。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0329-L0358",
+            "observation": "解密成功后通过 sub_401CAC/sub_402074 更新 a1，并通过 sub_401D9C/sub_40592C 组合结果。"
+          },
+          {
+            "location": "F-0483 L0517-L0522",
+            "observation": "末尾通过 sub_401AC0 清理并返回。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "J00 caller of sub_409EF8",
+        "targets": [],
+        "reason": "需要调用者源码确认 sub_409EF8 的返回值或 a1 内容是否写入 FIREFOX.abc，以及实际写入位置和触发条件。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0329-L0340",
+            "observation": "当前函数将解密结果累积到 a1，但本包未展示其外部消费者。"
+          },
+          {
+            "location": "F-0483 L0520-L0522",
+            "observation": "当前函数仅显示清理并返回，未显示 FIREFOX.abc 写入。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "Analyzer 将解密后的数据“累积到 a1”写成 confirmed，但当前材料只直接显示成功分支把参数传给 sub_401CAC(a1, n3_4) 和 sub_402074(a1, n4)；这两个 helper 的实现不在本包，不能仅凭调用形式确认它们确实写入、累积或如何序列化 a1。该过度闭合还传递到 claim 3 的“a1 中已累积结果”和 summary，造成 source→action→sink 的关键数据去向表述超出证据。NSS Base64 解码与 PK11SDR_Decrypt 成功分支本身仍可保持 confirmed。",
+        "evidence": [
+          {
+            "location": "F-0483 L0328-L0333",
+            "observation": "代码对 v93 执行 NSSBase64_DecodeBuffer，并在 PK11SDR_Decrypt 成功后调用 sub_401CAC(a1, n3_4)。"
+          },
+          {
+            "location": "F-0483 L0337-L0340",
+            "observation": "代码随后再次调用 sub_401E10，传入包含 a1 相关值的参数；未显示 sub_401CAC 或 sub_402074 的函数体及其写入语义。"
+          },
+          {
+            "location": "F-0483 L0349-L0358",
+            "observation": "后续代码继续使用 a1 调用 sub_401D9C，并可能调用 sub_401AC0(a1)，但这些 helper 的具体效果同样不可见。"
+          }
+        ],
+        "required_fix": "保留“从 signons 记录字段进行 Base64 解码并调用 PK11SDR_Decrypt，且成功分支将相关参数传给以 a1 为首参的 helper”这一直接可见事实；删除或降级“已累积到 a1/已累积 Firefox 结果”的确认性表述，明确 helper 语义和精确 sink 未在本包闭合。同步修正 summary、claim 1（原 claims[1]）及 claim 2（原 claims[2]）中依赖该语义的 source/action/sink/limitations；若保留含 helper 效果的完整 claim，应将其 evidence_level 改为 suspected 并说明具体未闭合点。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/summary"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心读取、Base64 解码、NSS SDR 解密及失败路径清理均已覆盖，候选路径和最终 FIREFOX.abc 关系的边界也基本正确。主要问题是把对未知 helper 的调用升级为“结果已累积到 a1”的 confirmed sink；需收窄该数据流结论并同步修正下游 claim 与摘要。"
+  },
+  "reviewer_output": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "Analyzer 将解密后的数据“累积到 a1”写成 confirmed，但当前材料只直接显示成功分支把参数传给 sub_401CAC(a1, n3_4) 和 sub_402074(a1, n4)；这两个 helper 的实现不在本包，不能仅凭调用形式确认它们确实写入、累积或如何序列化 a1。该过度闭合还传递到 claim 3 的“a1 中已累积结果”和 summary，造成 source→action→sink 的关键数据去向表述超出证据。NSS Base64 解码与 PK11SDR_Decrypt 成功分支本身仍可保持 confirmed。",
+        "evidence": [
+          {
+            "location": "F-0483 L0328-L0333",
+            "observation": "代码对 v93 执行 NSSBase64_DecodeBuffer，并在 PK11SDR_Decrypt 成功后调用 sub_401CAC(a1, n3_4)。"
+          },
+          {
+            "location": "F-0483 L0337-L0340",
+            "observation": "代码随后再次调用 sub_401E10，传入包含 a1 相关值的参数；未显示 sub_401CAC 或 sub_402074 的函数体及其写入语义。"
+          },
+          {
+            "location": "F-0483 L0349-L0358",
+            "observation": "后续代码继续使用 a1 调用 sub_401D9C，并可能调用 sub_401AC0(a1)，但这些 helper 的具体效果同样不可见。"
+          }
+        ],
+        "required_fix": "保留“从 signons 记录字段进行 Base64 解码并调用 PK11SDR_Decrypt，且成功分支将相关参数传给以 a1 为首参的 helper”这一直接可见事实；删除或降级“已累积到 a1/已累积 Firefox 结果”的确认性表述，明确 helper 语义和精确 sink 未在本包闭合。同步修正 summary、claim 1（原 claims[1]）及 claim 2（原 claims[2]）中依赖该语义的 source/action/sink/limitations；若保留含 helper 效果的完整 claim，应将其 evidence_level 改为 suspected 并说明具体未闭合点。",
+        "revision_targets": [
+          {
+            "operation": "replace",
+            "path": "/summary"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/1"
+          },
+          {
+            "operation": "replace",
+            "path": "/claims/2"
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心读取、Base64 解码、NSS SDR 解密及失败路径清理均已覆盖，候选路径和最终 FIREFOX.abc 关系的边界也基本正确。主要问题是把对未知 helper 的调用升级为“结果已累积到 a1”的 confirmed sink；需收窄该数据流结论并同步修正下游 claim 与摘要。"
+  },
+  "candidate_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了 Firefox signons 候选文件从读取到 Base64 解码及 NSS SDR 解密调用的主要链路：成功打开所选候选路径后读取文件并解析记录，对记录字段执行 Base64 解码并调用 PK11SDR_Decrypt；解密成功分支随后将相关参数传给以 a1 为首参的 helper，但这些 helper 的具体写入、序列化和最终输出语义未在本包闭合，因此无法确认其与 J00 的 FIREFOX.abc 写入关系。",
+    "claims": [
+      {
+        "behavior": "在选定的 Firefox signons 候选路径可打开时，程序读取整个文件内容并交给后续解析。",
+        "condition": "上游候选路径选择已完成，且 CreateFileA 返回可用句柄；当前代码未显示失败句柄的专门处理。",
+        "source": "上游选择得到的 lpFileName_1，即 Firefox Profile 下的 signons 候选文件路径。",
+        "action": "以只读方式调用 CreateFileA，使用 GetFileSize 分配缓冲区，并通过 ReadFile 读取文件全部字节；随后调用 sub_401CAC 解析缓冲区。",
+        "sink": "文件内容进入 lpBuffer，并被传给后续 signons 记录解析流程。",
+        "evidence": [
+          {
+            "location": "F-0483 L0275-L0281",
+            "observation": "CreateFileA 使用 lpFileName_1 打开文件，GetFileSize 获取大小，ReadFile 将内容读入 lpBuffer，随后 sub_401CAC 处理该缓冲区。"
+          },
+          {
+            "location": "dependency J11 F-0483 L0150-L0188, L0187-L0216, L0229-L0271",
+            "observation": "上游已验证 lpFileName_1 来源于 Firefox Profile0\\Path 下构造并选中的 signons3.txt、signons2.txt、signons1.txt 或 signons.txt 候选路径。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前片段未显示 CreateFileA/GetFileSize/ReadFile 的错误分支，因此只能确认代码具备该读取能力，不能证明运行时一定成功。"
+        ]
+      },
+      {
+        "behavior": "在 NSS 初始化、内部密钥槽获取及认证成功，并且记录字段解密成功时，程序对 Firefox signons 记录中的编码字段执行 Base64 解码和 NSS SDR 解密，并将解密成功分支的相关参数传给以 a1 为首参的 helper。",
+        "condition": "NSS_Init 返回成功、PK11_GetInternalKeySlot 返回非空、PK11_Authenticate 返回成功，并进入记录循环；单条记录还要求 PK11SDR_Decrypt 返回成功。",
+        "source": "从 signons 文件解析出的记录字段：代码从 v97/v96 等解析字段中取得 v93，随后将其作为待解码数据；解密输出参数为 v83。",
+        "action": "通过 NSSBase64_DecodeBuffer 将 v93 解码到 v86，再调用 PK11SDR_Decrypt(v86, v83, 0)；成功后调用 sub_401CAC(a1, n3_4) 和 sub_402074(a1, n4)，并为缺失字段补入默认占位字符串。",
+        "sink": "成功分支将相关参数传给以 a1 为首参的 sub_401CAC/sub_402074；当前可见代码未证明这些 helper 如何写入或序列化 a1，也未证明最终文件、网络或其他外部输出。",
+        "evidence": [
+          {
+            "location": "F-0483 L0291-L0307",
+            "observation": "代码在 NSS_Init 成功且 PK11_GetInternalKeySlot、PK11_Authenticate 条件满足后，循环解析记录字段。"
+          },
+          {
+            "location": "F-0483 L0314-L0329",
+            "observation": "记录字段被提取到 v93，经 NSSBase64_DecodeBuffer 解码后传给 PK11SDR_Decrypt。"
+          },
+          {
+            "location": "F-0483 L0329-L0340",
+            "observation": "PK11SDR_Decrypt 成功分支调用 sub_401CAC(a1, n3_4) 与 sub_402074(a1, n4)，并对缺失字段使用“(unnamed value)”和“(unnamed password)”占位。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "suspected",
+        "limitations": [
+          "NSS Base64 解码和 PK11SDR_Decrypt 调用及其成功条件可由本包直接确认，但 sub_401CAC 和 sub_402074 的实现不在本包，不能确认解密结果确实被写入、累积或以何种格式进入 a1。",
+          "代码不能证明目标系统存在有效 Firefox 数据、NSS 组件或运行时解密必然成功。"
+        ]
+      },
+      {
+        "behavior": "例程在处理完成后将 a1 相关参数与固定分隔标记及其他内部值继续传给组合/处理 helper，并返回清理 v97 后的结果；当前片段不能闭合这些 helper 的具体结果或样本最终输出文件。",
+        "condition": "正常处理路径或多个失败/回退路径最终到达清理和返回代码。",
+        "source": "传入的 a1 相关状态，以及 ExceptionList_11、v39/v38/v37 等内部字符串或值。",
+        "action": "使用“##$$”及其他值调用 sub_401D9C、sub_40592C 等处理操作，必要时对 a1 调用 sub_401AC0；末尾释放局部资源并返回 sub_401AC0(&v97)。",
+        "sink": "调用者可见的例程返回值及 helper 处理中的 a1 相关参数；未见本包内的文件、网络或注册表写入。",
+        "evidence": [
+          {
+            "location": "F-0483 L0349-L0358",
+            "observation": "代码将 a1 与“##$$”及其他值传给 sub_401D9C、sub_40592C，并在 v89 为空时调用 sub_401AC0(a1)。"
+          },
+          {
+            "location": "F-0483 L0367-L0368, L0386-L0387, L0406-L0407, L0426-L0427, L0446-L0447, L0466-L0467, L0486-L0487, L0506-L0507",
+            "observation": "多个成功/失败分支均释放加载的库并回到统一清理流程。"
+          },
+          {
+            "location": "F-0483 L0514-L0522",
+            "observation": "统一清理局部对象后，例程通过 return sub_401AC0(&v97) 返回。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_401D9C、sub_40592C、sub_401AC0 的具体语义不在本包，不能确认“##$$”组合结果、a1 相关参数或返回值是否形成外部输出。",
+          "J00 中已验证的 FIREFOX.abc 写入调用与本例程返回值之间的完整绑定不在当前源码范围内。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons3.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径；本包后半段显示选定的候选路径会被打开并读取，但不证明每个候选文件都会实际访问。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0187-L0216",
+            "observation": "源码构造 signons3.txt 候选路径并参与候选选择。"
+          },
+          {
+            "location": "F-0483 L0275-L0278",
+            "observation": "最终选中的 lpFileName_1 被 CreateFileA 和 ReadFile 使用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons2.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0192-L0216",
+            "observation": "源码构造 signons2.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons1.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0192-L0216",
+            "observation": "源码构造 signons1.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 更早版本凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0214-L0216",
+            "observation": "源码构造 signons.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "##$$",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "当前函数用于组合 Firefox 处理结果的固定分隔/格式标记；其是否为样本级检测标记或最终输出格式的一部分仍需下游确认。",
+        "evidence": [
+          {
+            "location": "F-0483 L0310-L0313",
+            "observation": "代码设置“##$$”并将其用于内部字符串组合上下文。"
+          },
+          {
+            "location": "F-0483 L0349-L0353",
+            "observation": "代码以“##$$”调用 sub_401D9C 和 sub_40592C 继续处理相关参数。"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "kind": "string",
+        "value": "(unnamed value)",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "当解析出的值字段为空时使用的默认占位字符串。",
+        "evidence": [
+          {
+            "location": "F-0483 L0333-L0336",
+            "observation": "v94 为空时调用 sub_401B58 写入“(unnamed value)”。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "(unnamed password)",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "当解析出的密码字段为空时使用的默认占位字符串。",
+        "evidence": [
+          {
+            "location": "F-0483 L0335-L0336",
+            "observation": "v93 为空时调用 sub_401B58 写入“(unnamed password)”。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_401CAC、sub_402074、sub_401D9C、sub_40592C 和 sub_401AC0 对解析字段、解密结果及 a1 的具体序列化/返回语义是什么？",
+        "reason": "当前代码显示这些调用点和数据流，但未提供 helper 实现；因此无法确定精确输出格式及返回对象语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "Firefox 例程的 a1/返回值是否被 J00 的 FIREFOX.abc 路径写入，最终 sink 是什么？",
+        "reason": "当前包仅显示 a1 相关参数被传入 helper 以及 sub_409EF8 的末尾返回，没有包含调用者到 FIREFOX.abc 的完整绑定。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC / sub_402074",
+        "reason": "确认解密字段如何写入或格式化到 a1。",
+        "expected_value": "精确的凭据记录 source→action→sink 和输出格式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401D9C / sub_40592C / sub_401AC0",
+        "reason": "确认固定分隔标记组合、清理及返回值语义。",
+        "expected_value": "判断是否形成可外传/可写出的结果，以及例程返回值的准确含义。",
+        "priority": "medium"
+      },
+      {
+        "target": "J00 中调用 sub_409EF8 的完整代码",
+        "reason": "闭合 Firefox 例程结果与 FIREFOX.abc 文件写入之间的调用关系。",
+        "expected_value": "确认最终输出文件、写入数据和触发条件。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402074",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40592C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401AC0",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要这些 helper 的原始函数代码，以确认解密结果、默认字段和中间字符串如何进入 a1，以及末尾返回是否形成外部输出。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0329-L0358",
+            "observation": "解密成功后通过 sub_401CAC/sub_402074 传递相关参数，并通过 sub_401D9C/sub_40592C 处理相关状态。"
+          },
+          {
+            "location": "F-0483 L0517-L0522",
+            "observation": "末尾通过 sub_401AC0 清理并返回。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "J00 caller of sub_409EF8",
+        "targets": [],
+        "reason": "需要调用者源码确认 sub_409EF8 的返回值或 a1 内容是否写入 FIREFOX.abc，以及实际写入位置和触发条件。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0329-L0340",
+            "observation": "当前函数将相关解密成功分支参数传给以 a1 为首参的 helper，但本包未展示其外部消费者。"
+          },
+          {
+            "location": "F-0483 L0520-L0522",
+            "observation": "当前函数仅显示清理并返回，未显示 FIREFOX.abc 写入。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_final_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了 Firefox signons 候选文件从读取到 Base64 解码及 NSS SDR 解密调用的主要链路：成功打开所选候选路径后读取文件并解析记录，对记录字段执行 Base64 解码并调用 PK11SDR_Decrypt；解密成功分支随后将相关参数传给以 a1 为首参的 helper，但这些 helper 的具体写入、序列化和最终输出语义未在本包闭合，因此无法确认其与 J00 的 FIREFOX.abc 写入关系。",
+    "claims": [
+      {
+        "behavior": "在选定的 Firefox signons 候选路径可打开时，程序读取整个文件内容并交给后续解析。",
+        "condition": "上游候选路径选择已完成，且 CreateFileA 返回可用句柄；当前代码未显示失败句柄的专门处理。",
+        "source": "上游选择得到的 lpFileName_1，即 Firefox Profile 下的 signons 候选文件路径。",
+        "action": "以只读方式调用 CreateFileA，使用 GetFileSize 分配缓冲区，并通过 ReadFile 读取文件全部字节；随后调用 sub_401CAC 解析缓冲区。",
+        "sink": "文件内容进入 lpBuffer，并被传给后续 signons 记录解析流程。",
+        "evidence": [
+          {
+            "location": "F-0483 L0275-L0281",
+            "observation": "CreateFileA 使用 lpFileName_1 打开文件，GetFileSize 获取大小，ReadFile 将内容读入 lpBuffer，随后 sub_401CAC 处理该缓冲区。"
+          },
+          {
+            "location": "dependency J11 F-0483 L0150-L0188, L0187-L0216, L0229-L0271",
+            "observation": "上游已验证 lpFileName_1 来源于 Firefox Profile0\\Path 下构造并选中的 signons3.txt、signons2.txt、signons1.txt 或 signons.txt 候选路径。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前片段未显示 CreateFileA/GetFileSize/ReadFile 的错误分支，因此只能确认代码具备该读取能力，不能证明运行时一定成功。"
+        ]
+      },
+      {
+        "behavior": "在 NSS 初始化、内部密钥槽获取及认证成功，并且记录字段解密成功时，程序对 Firefox signons 记录中的编码字段执行 Base64 解码和 NSS SDR 解密，并将解密成功分支的相关参数传给以 a1 为首参的 helper。",
+        "condition": "NSS_Init 返回成功、PK11_GetInternalKeySlot 返回非空、PK11_Authenticate 返回成功，并进入记录循环；单条记录还要求 PK11SDR_Decrypt 返回成功。",
+        "source": "从 signons 文件解析出的记录字段：代码从 v97/v96 等解析字段中取得 v93，随后将其作为待解码数据；解密输出参数为 v83。",
+        "action": "通过 NSSBase64_DecodeBuffer 将 v93 解码到 v86，再调用 PK11SDR_Decrypt(v86, v83, 0)；成功后调用 sub_401CAC(a1, n3_4) 和 sub_402074(a1, n4)，并为缺失字段补入默认占位字符串。",
+        "sink": "成功分支将相关参数传给以 a1 为首参的 sub_401CAC/sub_402074；当前可见代码未证明这些 helper 如何写入或序列化 a1，也未证明最终文件、网络或其他外部输出。",
+        "evidence": [
+          {
+            "location": "F-0483 L0291-L0307",
+            "observation": "代码在 NSS_Init 成功且 PK11_GetInternalKeySlot、PK11_Authenticate 条件满足后，循环解析记录字段。"
+          },
+          {
+            "location": "F-0483 L0314-L0329",
+            "observation": "记录字段被提取到 v93，经 NSSBase64_DecodeBuffer 解码后传给 PK11SDR_Decrypt。"
+          },
+          {
+            "location": "F-0483 L0329-L0340",
+            "observation": "PK11SDR_Decrypt 成功分支调用 sub_401CAC(a1, n3_4) 与 sub_402074(a1, n4)，并对缺失字段使用“(unnamed value)”和“(unnamed password)”占位。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "suspected",
+        "limitations": [
+          "NSS Base64 解码和 PK11SDR_Decrypt 调用及其成功条件可由本包直接确认，但 sub_401CAC 和 sub_402074 的实现不在本包，不能确认解密结果确实被写入、累积或以何种格式进入 a1。",
+          "代码不能证明目标系统存在有效 Firefox 数据、NSS 组件或运行时解密必然成功。"
+        ]
+      },
+      {
+        "behavior": "例程在处理完成后将 a1 相关参数与固定分隔标记及其他内部值继续传给组合/处理 helper，并返回清理 v97 后的结果；当前片段不能闭合这些 helper 的具体结果或样本最终输出文件。",
+        "condition": "正常处理路径或多个失败/回退路径最终到达清理和返回代码。",
+        "source": "传入的 a1 相关状态，以及 ExceptionList_11、v39/v38/v37 等内部字符串或值。",
+        "action": "使用“##$$”及其他值调用 sub_401D9C、sub_40592C 等处理操作，必要时对 a1 调用 sub_401AC0；末尾释放局部资源并返回 sub_401AC0(&v97)。",
+        "sink": "调用者可见的例程返回值及 helper 处理中的 a1 相关参数；未见本包内的文件、网络或注册表写入。",
+        "evidence": [
+          {
+            "location": "F-0483 L0349-L0358",
+            "observation": "代码将 a1 与“##$$”及其他值传给 sub_401D9C、sub_40592C，并在 v89 为空时调用 sub_401AC0(a1)。"
+          },
+          {
+            "location": "F-0483 L0367-L0368, L0386-L0387, L0406-L0407, L0426-L0427, L0446-L0447, L0466-L0467, L0486-L0487, L0506-L0507",
+            "observation": "多个成功/失败分支均释放加载的库并回到统一清理流程。"
+          },
+          {
+            "location": "F-0483 L0514-L0522",
+            "observation": "统一清理局部对象后，例程通过 return sub_401AC0(&v97) 返回。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_401D9C、sub_40592C、sub_401AC0 的具体语义不在本包，不能确认“##$$”组合结果、a1 相关参数或返回值是否形成外部输出。",
+          "J00 中已验证的 FIREFOX.abc 写入调用与本例程返回值之间的完整绑定不在当前源码范围内。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons3.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径；本包后半段显示选定的候选路径会被打开并读取，但不证明每个候选文件都会实际访问。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0187-L0216",
+            "observation": "源码构造 signons3.txt 候选路径并参与候选选择。"
+          },
+          {
+            "location": "F-0483 L0275-L0278",
+            "observation": "最终选中的 lpFileName_1 被 CreateFileA 和 ReadFile 使用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons2.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0192-L0216",
+            "observation": "源码构造 signons2.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons1.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0192-L0216",
+            "observation": "源码构造 signons1.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 更早版本凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0214-L0216",
+            "observation": "源码构造 signons.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "##$$",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "当前函数用于组合 Firefox 处理结果的固定分隔/格式标记；其是否为样本级检测标记或最终输出格式的一部分仍需下游确认。",
+        "evidence": [
+          {
+            "location": "F-0483 L0310-L0313",
+            "observation": "代码设置“##$$”并将其用于内部字符串组合上下文。"
+          },
+          {
+            "location": "F-0483 L0349-L0353",
+            "observation": "代码以“##$$”调用 sub_401D9C 和 sub_40592C 继续处理累积结果。"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "kind": "string",
+        "value": "(unnamed value)",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "当解析出的值字段为空时使用的默认占位字符串。",
+        "evidence": [
+          {
+            "location": "F-0483 L0333-L0336",
+            "observation": "v94 为空时调用 sub_401B58 写入“(unnamed value)”。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "(unnamed password)",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "当解析出的密码字段为空时使用的默认占位字符串。",
+        "evidence": [
+          {
+            "location": "F-0483 L0335-L0336",
+            "observation": "v93 为空时调用 sub_401B58 写入“(unnamed password)”。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_401CAC、sub_402074、sub_401D9C、sub_40592C 和 sub_401AC0 对解析字段、解密结果及 a1 的具体序列化/返回语义是什么？",
+        "reason": "当前代码显示这些调用点和数据流，但未提供 helper 实现；因此无法确定精确输出格式及返回对象语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "Firefox 例程的 a1/返回值是否被 J00 的 FIREFOX.abc 路径写入，最终 sink 是什么？",
+        "reason": "当前包仅显示 a1 的累积和 sub_409EF8 的末尾返回，没有包含调用者到 FIREFOX.abc 的完整绑定。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC / sub_402074",
+        "reason": "确认解密字段如何写入或格式化到 a1。",
+        "expected_value": "精确的凭据记录 source→action→sink 和输出格式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401D9C / sub_40592C / sub_401AC0",
+        "reason": "确认固定分隔标记组合、清理及返回值语义。",
+        "expected_value": "判断是否形成可外传/可写出的结果，以及例程返回值的准确含义。",
+        "priority": "medium"
+      },
+      {
+        "target": "J00 中调用 sub_409EF8 的完整代码",
+        "reason": "闭合 Firefox 例程结果与 FIREFOX.abc 文件写入之间的调用关系。",
+        "expected_value": "确认最终输出文件、写入数据和触发条件。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402074",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40592C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401AC0",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要这些 helper 的原始函数代码，以确认解密结果、默认字段和中间字符串如何进入 a1，以及末尾返回是否形成外部输出。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0329-L0358",
+            "observation": "解密成功后通过 sub_401CAC/sub_402074 更新 a1，并通过 sub_401D9C/sub_40592C 组合结果。"
+          },
+          {
+            "location": "F-0483 L0517-L0522",
+            "observation": "末尾通过 sub_401AC0 清理并返回。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "J00 caller of sub_409EF8",
+        "targets": [],
+        "reason": "需要调用者源码确认 sub_409EF8 的返回值或 a1 内容是否写入 FIREFOX.abc，以及实际写入位置和触发条件。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0329-L0340",
+            "observation": "当前函数将解密结果累积到 a1，但本包未展示其外部消费者。"
+          },
+          {
+            "location": "F-0483 L0520-L0522",
+            "observation": "当前函数仅显示清理并返回，未显示 FIREFOX.abc 写入。"
+          }
+        ]
+      }
+    ]
+  },
+  "original_scope_audit": {
+    "passed": true,
+    "replacement_paths": [
+      "/claims/1",
+      "/claims/2",
+      "/summary"
+    ],
+    "deleted_paths": [],
+    "appended_paths": [],
+    "applied_paths": [
+      "/summary",
+      "/claims/1/behavior",
+      "/claims/1/source",
+      "/claims/1/action",
+      "/claims/1/sink",
+      "/claims/1/evidence_level",
+      "/claims/1/limitations/0",
+      "/claims/1/limitations/1",
+      "/claims/2/behavior",
+      "/claims/2/source",
+      "/claims/2/action",
+      "/claims/2/sink",
+      "/claims/2/evidence/0/observation",
+      "/claims/2/limitations/0"
+    ],
+    "ignored_paths": [
+      "/artifacts/4/evidence/1/observation",
+      "/gaps/1/reason",
+      "/material_needs/0/evidence/0/observation",
+      "/material_needs/1/evidence/0/observation"
+    ],
+    "consistency_checks": [
+      "InvestigationResult",
+      "evidence_levels",
+      "atomic_artifacts",
+      "new_evidence_references"
+    ]
+  },
+  "typed_review": {
+    "requires_revision": true,
+    "issues": [
+      {
+        "issue_id": "R1",
+        "scope": "packet_internal",
+        "severity": "major",
+        "kind": "evidence_mismatch",
+        "description": "Analyzer 将解密后的数据“累积到 a1”写成 confirmed，但当前材料只直接显示成功分支把参数传给 sub_401CAC(a1, n3_4) 和 sub_402074(a1, n4)；这两个 helper 的实现不在本包，不能仅凭调用形式确认它们确实写入、累积或如何序列化 a1。该过度闭合还传递到 claim 3 的“a1 中已累积结果”和 summary，造成 source→action→sink 的关键数据去向表述超出证据。NSS Base64 解码与 PK11SDR_Decrypt 成功分支本身仍可保持 confirmed。",
+        "evidence": [
+          {
+            "location": "F-0483 L0328-L0333",
+            "observation": "代码对 v93 执行 NSSBase64_DecodeBuffer，并在 PK11SDR_Decrypt 成功后调用 sub_401CAC(a1, n3_4)。"
+          },
+          {
+            "location": "F-0483 L0337-L0340",
+            "observation": "代码随后再次调用 sub_401E10，传入包含 a1 相关值的参数；未显示 sub_401CAC 或 sub_402074 的函数体及其写入语义。"
+          },
+          {
+            "location": "F-0483 L0349-L0358",
+            "observation": "后续代码继续使用 a1 调用 sub_401D9C，并可能调用 sub_401AC0(a1)，但这些 helper 的具体效果同样不可见。"
+          }
+        ],
+        "required_fix": "保留“从 signons 记录字段进行 Base64 解码并调用 PK11SDR_Decrypt，且成功分支将相关参数传给以 a1 为首参的 helper”这一直接可见事实；删除或降级“已累积到 a1/已累积 Firefox 结果”的确认性表述，明确 helper 语义和精确 sink 未在本包闭合。同步修正 summary、claim 1（原 claims[1]）及 claim 2（原 claims[2]）中依赖该语义的 source/action/sink/limitations；若保留含 helper 效果的完整 claim，应将其 evidence_level 改为 suspected 并说明具体未闭合点。",
+        "fixes": [
+          {
+            "type": "claim_revision",
+            "targets": [
+              "/claims/1",
+              "/claims/2"
+            ]
+          },
+          {
+            "type": "evidence_revision",
+            "targets": [
+              "/claims/2/evidence/0"
+            ]
+          }
+        ]
+      }
+    ],
+    "review_summary": "核心读取、Base64 解码、NSS SDR 解密及失败路径清理均已覆盖，候选路径和最终 FIREFOX.abc 关系的边界也基本正确。主要问题是把对未知 helper 的调用升级为“结果已累积到 a1”的 confirmed sink；需收窄该数据流结论并同步修正下游 claim 与摘要。"
+  },
+  "expected_result": {
+    "status": "complete_with_gaps",
+    "summary": "本包闭合了 Firefox signons 候选文件从读取到 Base64 解码及 NSS SDR 解密调用的主要链路：成功打开所选候选路径后读取文件并解析记录，对记录字段执行 Base64 解码并调用 PK11SDR_Decrypt；解密成功分支随后将相关参数传给以 a1 为首参的 helper，但这些 helper 的具体写入、序列化和最终输出语义未在本包闭合，因此无法确认其与 J00 的 FIREFOX.abc 写入关系。",
+    "claims": [
+      {
+        "behavior": "在选定的 Firefox signons 候选路径可打开时，程序读取整个文件内容并交给后续解析。",
+        "condition": "上游候选路径选择已完成，且 CreateFileA 返回可用句柄；当前代码未显示失败句柄的专门处理。",
+        "source": "上游选择得到的 lpFileName_1，即 Firefox Profile 下的 signons 候选文件路径。",
+        "action": "以只读方式调用 CreateFileA，使用 GetFileSize 分配缓冲区，并通过 ReadFile 读取文件全部字节；随后调用 sub_401CAC 解析缓冲区。",
+        "sink": "文件内容进入 lpBuffer，并被传给后续 signons 记录解析流程。",
+        "evidence": [
+          {
+            "location": "F-0483 L0275-L0281",
+            "observation": "CreateFileA 使用 lpFileName_1 打开文件，GetFileSize 获取大小，ReadFile 将内容读入 lpBuffer，随后 sub_401CAC 处理该缓冲区。"
+          },
+          {
+            "location": "dependency J11 F-0483 L0150-L0188, L0187-L0216, L0229-L0271",
+            "observation": "上游已验证 lpFileName_1 来源于 Firefox Profile0\\Path 下构造并选中的 signons3.txt、signons2.txt、signons1.txt 或 signons.txt 候选路径。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": [
+          "当前片段未显示 CreateFileA/GetFileSize/ReadFile 的错误分支，因此只能确认代码具备该读取能力，不能证明运行时一定成功。"
+        ]
+      },
+      {
+        "behavior": "在 NSS 初始化、内部密钥槽获取及认证成功，并且记录字段解密成功时，程序对 Firefox signons 记录中的编码字段执行 Base64 解码和 NSS SDR 解密，并将解密成功分支的相关参数传给以 a1 为首参的 helper。",
+        "condition": "NSS_Init 返回成功、PK11_GetInternalKeySlot 返回非空、PK11_Authenticate 返回成功，并进入记录循环；单条记录还要求 PK11SDR_Decrypt 返回成功。",
+        "source": "从 signons 文件解析出的记录字段：代码从 v97/v96 等解析字段中取得 v93，随后将其作为待解码数据；解密输出参数为 v83。",
+        "action": "通过 NSSBase64_DecodeBuffer 将 v93 解码到 v86，再调用 PK11SDR_Decrypt(v86, v83, 0)；成功后调用 sub_401CAC(a1, n3_4) 和 sub_402074(a1, n4)，并为缺失字段补入默认占位字符串。",
+        "sink": "成功分支将相关参数传给以 a1 为首参的 sub_401CAC/sub_402074；当前可见代码未证明这些 helper 如何写入或序列化 a1，也未证明最终文件、网络或其他外部输出。",
+        "evidence": [
+          {
+            "location": "F-0483 L0291-L0307",
+            "observation": "代码在 NSS_Init 成功且 PK11_GetInternalKeySlot、PK11_Authenticate 条件满足后，循环解析记录字段。"
+          },
+          {
+            "location": "F-0483 L0314-L0329",
+            "observation": "记录字段被提取到 v93，经 NSSBase64_DecodeBuffer 解码后传给 PK11SDR_Decrypt。"
+          },
+          {
+            "location": "F-0483 L0329-L0340",
+            "observation": "PK11SDR_Decrypt 成功分支调用 sub_401CAC(a1, n3_4) 与 sub_402074(a1, n4)，并对缺失字段使用“(unnamed value)”和“(unnamed password)”占位。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "suspected",
+        "limitations": [
+          "NSS Base64 解码和 PK11SDR_Decrypt 调用及其成功条件可由本包直接确认，但 sub_401CAC 和 sub_402074 的实现不在本包，不能确认解密结果确实被写入、累积或以何种格式进入 a1。",
+          "代码不能证明目标系统存在有效 Firefox 数据、NSS 组件或运行时解密必然成功。"
+        ]
+      },
+      {
+        "behavior": "例程在处理完成后将 a1 相关参数与固定分隔标记及其他内部值继续传给组合/处理 helper，并返回清理 v97 后的结果；当前片段不能闭合这些 helper 的具体结果或样本最终输出文件。",
+        "condition": "正常处理路径或多个失败/回退路径最终到达清理和返回代码。",
+        "source": "传入的 a1 相关状态，以及 ExceptionList_11、v39/v38/v37 等内部字符串或值。",
+        "action": "使用“##$$”及其他值调用 sub_401D9C、sub_40592C 等处理操作，必要时对 a1 调用 sub_401AC0；末尾释放局部资源并返回 sub_401AC0(&v97)。",
+        "sink": "调用者可见的例程返回值及 helper 处理中的 a1 相关参数；未见本包内的文件、网络或注册表写入。",
+        "evidence": [
+          {
+            "location": "F-0483 L0349-L0358",
+            "observation": "代码将 a1 与“##$$”及其他值传给 sub_401D9C、sub_40592C，并在 v89 为空时调用 sub_401AC0(a1)。"
+          },
+          {
+            "location": "F-0483 L0367-L0368, L0386-L0387, L0406-L0407, L0426-L0427, L0446-L0447, L0466-L0467, L0486-L0487, L0506-L0507",
+            "observation": "多个成功/失败分支均释放加载的库并回到统一清理流程。"
+          },
+          {
+            "location": "F-0483 L0514-L0522",
+            "observation": "统一清理局部对象后，例程通过 return sub_401AC0(&v97) 返回。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "sub_401D9C、sub_40592C、sub_401AC0 的具体语义不在本包，不能确认“##$$”组合结果、a1 相关参数或返回值是否形成外部输出。",
+          "J00 中已验证的 FIREFOX.abc 写入调用与本例程返回值之间的完整绑定不在当前源码范围内。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons3.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径；本包后半段显示选定的候选路径会被打开并读取，但不证明每个候选文件都会实际访问。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0187-L0216",
+            "observation": "源码构造 signons3.txt 候选路径并参与候选选择。"
+          },
+          {
+            "location": "F-0483 L0275-L0278",
+            "observation": "最终选中的 lpFileName_1 被 CreateFileA 和 ReadFile 使用。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons2.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0192-L0216",
+            "observation": "源码构造 signons2.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons1.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 旧版凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0192-L0216",
+            "observation": "源码构造 signons1.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "file",
+        "value": "\\Mozilla\\Firefox\\signons.txt",
+        "role": "read_source",
+        "detection_specificity": "low",
+        "meaning": "上游已验证的 Firefox 更早版本凭据数据库候选路径。",
+        "evidence": [
+          {
+            "location": "dependency J11 F-0483 L0214-L0216",
+            "observation": "源码构造 signons.txt 候选路径并参与候选选择。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "##$$",
+        "role": "parser_marker",
+        "detection_specificity": "medium",
+        "meaning": "当前函数用于组合 Firefox 处理结果的固定分隔/格式标记；其是否为样本级检测标记或最终输出格式的一部分仍需下游确认。",
+        "evidence": [
+          {
+            "location": "F-0483 L0310-L0313",
+            "observation": "代码设置“##$$”并将其用于内部字符串组合上下文。"
+          },
+          {
+            "location": "F-0483 L0349-L0353",
+            "observation": "代码以“##$$”调用 sub_401D9C 和 sub_40592C 继续处理累积结果。"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "kind": "string",
+        "value": "(unnamed value)",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "当解析出的值字段为空时使用的默认占位字符串。",
+        "evidence": [
+          {
+            "location": "F-0483 L0333-L0336",
+            "observation": "v94 为空时调用 sub_401B58 写入“(unnamed value)”。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "string",
+        "value": "(unnamed password)",
+        "role": "parser_marker",
+        "detection_specificity": "low",
+        "meaning": "当解析出的密码字段为空时使用的默认占位字符串。",
+        "evidence": [
+          {
+            "location": "F-0483 L0335-L0336",
+            "observation": "v93 为空时调用 sub_401B58 写入“(unnamed password)”。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [
+      {
+        "gap_type": "investigation",
+        "question": "sub_401CAC、sub_402074、sub_401D9C、sub_40592C 和 sub_401AC0 对解析字段、解密结果及 a1 的具体序列化/返回语义是什么？",
+        "reason": "当前代码显示这些调用点和数据流，但未提供 helper 实现；因此无法确定精确输出格式及返回对象语义。",
+        "scope": "outside_packet",
+        "impact": "major"
+      },
+      {
+        "gap_type": "investigation",
+        "question": "Firefox 例程的 a1/返回值是否被 J00 的 FIREFOX.abc 路径写入，最终 sink 是什么？",
+        "reason": "当前包仅显示 a1 的累积和 sub_409EF8 的末尾返回，没有包含调用者到 FIREFOX.abc 的完整绑定。",
+        "scope": "outside_packet",
+        "impact": "major"
+      }
+    ],
+    "handoffs": [
+      {
+        "target": "sub_401CAC / sub_402074",
+        "reason": "确认解密字段如何写入或格式化到 a1。",
+        "expected_value": "精确的凭据记录 source→action→sink 和输出格式。",
+        "priority": "high"
+      },
+      {
+        "target": "sub_401D9C / sub_40592C / sub_401AC0",
+        "reason": "确认固定分隔标记组合、清理及返回值语义。",
+        "expected_value": "判断是否形成可外传/可写出的结果，以及例程返回值的准确含义。",
+        "priority": "medium"
+      },
+      {
+        "target": "J00 中调用 sub_409EF8 的完整代码",
+        "reason": "闭合 Firefox 例程结果与 FIREFOX.abc 文件写入之间的调用关系。",
+        "expected_value": "确认最终输出文件、写入数据和触发条件。",
+        "priority": "high"
+      }
+    ],
+    "material_needs": [
+      {
+        "kind": "function_code",
+        "target": "",
+        "targets": [
+          {
+            "identifier": "sub_401CAC",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_402074",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401D9C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_40592C",
+            "start_line": null,
+            "end_line": null
+          },
+          {
+            "identifier": "sub_401AC0",
+            "start_line": null,
+            "end_line": null
+          }
+        ],
+        "reason": "需要这些 helper 的原始函数代码，以确认解密结果、默认字段和中间字符串如何进入 a1，以及末尾返回是否形成外部输出。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0329-L0358",
+            "observation": "解密成功后通过 sub_401CAC/sub_402074 更新 a1，并通过 sub_401D9C/sub_40592C 组合结果。"
+          },
+          {
+            "location": "F-0483 L0517-L0522",
+            "observation": "末尾通过 sub_401AC0 清理并返回。"
+          }
+        ]
+      },
+      {
+        "kind": "function_code",
+        "target": "J00 caller of sub_409EF8",
+        "targets": [],
+        "reason": "需要调用者源码确认 sub_409EF8 的返回值或 a1 内容是否写入 FIREFOX.abc，以及实际写入位置和触发条件。",
+        "impact": "major",
+        "evidence": [
+          {
+            "location": "F-0483 L0329-L0340",
+            "observation": "当前函数将解密结果累积到 a1，但本包未展示其外部消费者。"
+          },
+          {
+            "location": "F-0483 L0520-L0522",
+            "observation": "当前函数仅显示清理并返回，未显示 FIREFOX.abc 写入。"
+          }
+        ]
+      }
+    ]
+  },
+  "recovered_paths": [],
+  "expected_ignored_paths": [
+    "/artifacts/4/evidence/1/observation",
+    "/gaps/1/reason",
+    "/material_needs/0/evidence/0/observation",
+    "/material_needs/1/evidence/0/observation"
+  ]
+}
