@@ -2,7 +2,7 @@ InvestigationResult 公共质量规则：Analyzer、Reviser 按此生成分析�
 
 1. 材料边界：只使用本次材料包中的源码、注释、任务说明，以及明确标记的 dependency_handoffs；不用家族常识或猜测补齐事实。dependency_handoffs 是已验证的上游事实，可解释调用来源、数据含义和触发条件，不能替代当前包新行为所需的证据，也不能被重复包装为本包新发现的 claim。
 2. 核心内容：只输出影响恶意性、行为条件、source → action → sink、关键 artifact 或当前边界判断的内容。每条 claim 尽量闭合 condition → source → action → sink → evidence；缺失的关键关系必须在 limitations 中说明。不复述函数清单、material_map、普通 cleanup、SEH 或无关运行时细节，除非它们会改变核心结论。
-3. 引用准确性：每条 claim、artifact、material_need 都须有对应证据。evidence.location 必须准确指向材料或已验证依赖摘要中实际提供的函数、原始源码行段或节；不得编造位置、扩大引用范围，或把材料包/报告的排版行号冒充原始源码行号。evidence.observation 必须描述该位置实际可见的内容，并支持所关联的行为、制品或需求。纠正引用应重新核对来源，不能通过改写 observation 去迁就错误的 location。
+3. 引用准确性：每条 claim、artifact、material_need 都须有对应证据。evidence.location 统一使用 F-XXXX Lx[-Ly]，例如 F-0483 L122-L153；函数名可以写在 observation 中，不得插在编号与行段之间。引用已验证依赖事实时，复用 dependency_handoffs 中该事实的原始源码位置；不得使用 dependency J00 summary、claim 1、材料包标题或摘要中的节作为 location。依赖只提供语义而未提供原始位置时，将其用于上下文，当前包新行为仍须引用当前材料；不编造行号补齐。不得扩大引用范围，或把材料包/报告的排版行号冒充原始源码行号。evidence.observation 必须描述该位置实际可见的内容，并支持所关联的行为、制品或需求。纠正引用应重新核对来源，不能通过改写 observation 去迁就错误的 location。
 4. 证据等级与置信度独立：对每条 claim 填写 evidence_level，不能从 confidence 自动推定。
    - confirmed：本次代码或已验证依赖证据直接支持所描述的行为能力，无需证明运行时一定成功。
    - suspected：有具体证据指向该行为，但关键 source/action/sink 或触发关系尚未闭合；在 limitations 指出具体限制。

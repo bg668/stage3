@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "id": "HTML-PREVIEW-SYNTHETIC",
+    "title": "配置落地与网络提交 · 合成样本预览",
+    "date": "2026-10-23",
+    "product": "分析报告",
+    "edition": "完整布局示例",
+    "tlp": "TLP:CLEAR"
+  },
+  "hashes": [
+    {
+      "type": "SHA256",
+      "value": "0000000000000000000000000000000000000000000000000000000000000000",
+      "source": "测试数据：全零占位值，不是样本哈希"
+    }
+  ],
+  "attack": [
+    {
+      "id": "T0000",
+      "name": "版式测试条目（测试数据）",
+      "evidence": "测试数据，仅验证模块显示，不代表样本技术映射",
+      "confidence": "测试数据"
+    }
+  ],
+  "attribution": {
+    "family": "示例家族（测试数据）",
+    "confidence": "测试数据，无归因效力",
+    "support": [
+      "测试数据，仅验证归因模块排版"
+    ],
+    "not_confirmed": [
+      "测试数据不构成当前样本的家族归因"
+    ]
+  },
+  "yara": "/* 测试数据：仅用于 HTML 预览，不用于检测 */\nrule HTML_Preview_Test_Only { condition: false }"
+}

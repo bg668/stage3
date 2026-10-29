@@ -1,0 +1,4 @@
+{
+  "type": "UsageLimitExceeded",
+  "message": "Exceeded the total_tokens_limit of 128000 (total_tokens=140521). Consider raising the limit, or see the docs on usage limits for budget-aware patterns: https://pydantic.dev/docs/ai/core-concepts/agent/#usage-limits"
+}

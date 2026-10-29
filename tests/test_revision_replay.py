@@ -7,9 +7,9 @@ from pathlib import Path
 import pytest
 from pydantic_ai import Agent
 
-from bounded_investigator.revision import merge_scoped_revision, validate_revision_scope
+from bounded_investigator.investigation.revision import merge_scoped_revision, validate_revision_scope
 from bounded_investigator.schemas import CoverageReview, InvestigationResult
-from bounded_investigator.source_snippets import build_code_index_from_text
+from bounded_investigator.evidence.snippets import build_code_index_from_text
 
 
 FIXTURES = Path(__file__).parent / "fixtures" / "revision_20261021"

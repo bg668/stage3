@@ -1,0 +1,143 @@
+{
+  "status": "completed",
+  "preview_only": true,
+  "template_version": "1.1",
+  "started_at": "2026-10-29T07:36:17.246768+00:00",
+  "inputs": {
+    "global_result": {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-v11-input\\_global_reconciliation.json",
+      "sha256": "effa347e514084573ad900d15880ddc2ce1eeed17fc1e7f51911171e8abf7b9d"
+    },
+    "context_file": {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-v11-input\\context.json",
+      "sha256": "1525a84278ad7e60c43cfdf2f21c4b24940afcd309d06330456fb1cad7055399"
+    },
+    "packet_results_dir": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-v11-input",
+    "packet_results": [
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-v11-input\\J00.json",
+        "sha256": "cccdfe3fe0fd00cb67189a284fed65887d0061c9d6c6304cc2127358ed302050"
+      }
+    ],
+    "packets": [
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-v11-input\\packets\\J00.md",
+        "sha256": "874ee0370aae6940d9045667597b2aba0b0bcd86d9c95553928fc726e0df294d"
+      }
+    ]
+  },
+  "artifacts": {
+    "attempt_dir": "_html_report_artifacts\\2feecd20b9e2448581b9abb8cb37b28f",
+    "report_agent_snapshot": "_html_report_artifacts\\2feecd20b9e2448581b9abb8cb37b28f\\report_agent_snapshot.json",
+    "report_document": "_report_document.json",
+    "report_json": "_html_report.json",
+    "html": "_final_report.html",
+    "report_agent_diagnostics": {
+      "report_agent_snapshot": "_html_report_artifacts\\2feecd20b9e2448581b9abb8cb37b28f\\report_agent_snapshot.json",
+      "composition_input": "_html_report_artifacts\\2feecd20b9e2448581b9abb8cb37b28f\\composition_input.json",
+      "draft": "_html_report_artifacts\\2feecd20b9e2448581b9abb8cb37b28f\\report_composition\\validated_result.json",
+      "validation_initial": "_html_report_artifacts\\2feecd20b9e2448581b9abb8cb37b28f\\validation_initial.json",
+      "validation_final": "_html_report_artifacts\\2feecd20b9e2448581b9abb8cb37b28f\\validation_final.json"
+    }
+  },
+  "test_fills": [],
+  "validation": {
+    "references": "passed",
+    "template_errors": [],
+    "template_warnings": [
+      "findings[2]: 使用了自定义规则，需人工复核档位，并考虑补进 tier_rules.json"
+    ],
+    "source_audit": {
+      "passed": true,
+      "issues": [],
+      "evidence_reference_status": "completed"
+    },
+    "stage_status": "success",
+    "initial_issues": [],
+    "final_issues": []
+  },
+  "usage": {
+    "composition": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0,
+      "visible_output_tokens": 0,
+      "total_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    },
+    "format_repair": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0,
+      "visible_output_tokens": 0,
+      "total_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    },
+    "total": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0,
+      "visible_output_tokens": 0,
+      "total_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    },
+    "repair_attempts": 0,
+    "draft": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0,
+      "visible_output_tokens": 0,
+      "total_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    },
+    "revision": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0,
+      "visible_output_tokens": 0,
+      "total_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    }
+  },
+  "model": {
+    "stage": "report_composition",
+    "profile": "global_reconciler",
+    "provider": "deepseek",
+    "model_name": "fixed-response/offline-preview-no-network",
+    "max_output_tokens": 16384
+  },
+  "warnings": [],
+  "html_skill": {
+    "name": "malware-report-html",
+    "version": "1.2",
+    "fingerprint": "3c7a1c6a55d0df9fd97f534774e83d5153b931265ecacc9cacf1a94ea03cdd4b",
+    "template_version": "1.1",
+    "template_fingerprint": "bf15b6c040a16030632c65747d82c6e17b3ae78c49703a074299b0919139d191"
+  },
+  "report_agent": {
+    "name": "report",
+    "version": "1.3",
+    "fingerprint": "f53bf52c0d7ccef996538be437f1bb455ceaa227e21902021594ff5581784af1"
+  },
+  "revision": {
+    "triggered": false,
+    "status": "not_needed",
+    "rounds": 0
+  },
+  "finished_at": "2026-10-29T07:36:17.268706+00:00"
+}

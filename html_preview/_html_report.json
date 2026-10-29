@@ -1,0 +1,1404 @@
+{
+  "meta": {
+    "id": "HTML-REPORT",
+    "date": "2026-10-29",
+    "method": "静态分析（基于提供的源码与结构化分析结果）",
+    "edition": "HTML 预览",
+    "status": "HTML 预览",
+    "risk": "critical",
+    "verdict": "该样本表现为具备凭据与浏览器数据收集、临时文件暂存、持久化、反分析及跨进程执行能力的高风险恶意程序；部分具体输出字段和运行时成功状态仍需保留不确定性。",
+    "audit": {
+      "status": "passed",
+      "refs_total": 280,
+      "refs_invalid": 0
+    },
+    "title": "具备凭据收集、持久化与跨进程执行能力的样本"
+  },
+  "hashes": [],
+  "attack": [],
+  "attribution": null,
+  "yara": null,
+  "attribution_empty_reason": "暂无归因资料。",
+  "schema_version": "1.1",
+  "findings": [
+    {
+      "rule": "CRED-DECRYPT",
+      "title": "读取并尝试解密多类本机凭据",
+      "state": "partial",
+      "evidence": [
+        "F-0480 L0019-L0029",
+        "F-0469 L0001-L0005",
+        "F-0472 L0011-L0022",
+        "F-0500 L0057-L0069",
+        "F-0482 L0038-L0060",
+        "F-0482 L0061-L0083",
+        "F-0482 L0084-L0089",
+        "F-0481 L0027-L0076",
+        "F-0436 L008-L014",
+        "F-0440 L059-L071",
+        "F-0440 L088-L100",
+        "F-0440 L146-L155",
+        "F-0440 L067-L085",
+        "F-0435 L006-L012",
+        "F-0440 L101-L124",
+        "F-0440 L125-L143",
+        "F-0437 L010-L031",
+        "F-0434 L017-L028",
+        "F-0433 L011-L019",
+        "F-0431 L022-L039",
+        "F-0430 L033-L071",
+        "F-0466 L0013-L0018",
+        "F-0464 L0057-L0075",
+        "F-0464 L0076-L0087",
+        "F-0463 L0031-L0055",
+        "F-0464 L0099-L0136",
+        "F-0479 L0005-L0009",
+        "F-0465 L0045-L0060",
+        "F-0465 L0061-L0075",
+        "F-0465 L0093-L0097",
+        "F-0465 L0067-L0080",
+        "F-0465 L0081-L0092",
+        "F-0465 L0098-L0103",
+        "F-0465 L0113-L0113",
+        "F-0483 L0291-L0309",
+        "F-0483 L0314-L0329",
+        "F-0483 L0329-L0340"
+      ],
+      "state_note": "Firefox signons 数据的解密成功条件和实际返回内容尚未完全闭合，不能确认所有目标记录均成功解密。",
+      "section": "mechanism-2"
+    },
+    {
+      "rule": "CRED-READ",
+      "title": "访问注册表、Credential Manager、RAS、LSA 与 Protected Storage 凭据",
+      "state": "confirmed",
+      "evidence": [
+        "F-0480 L0019-L0029",
+        "F-0469 L0001-L0005",
+        "F-0472 L0011-L0022",
+        "F-0500 L0057-L0069",
+        "F-0482 L0038-L0060",
+        "F-0482 L0061-L0083",
+        "F-0482 L0084-L0089",
+        "F-0481 L0027-L0076",
+        "F-0436 L008-L014",
+        "F-0440 L059-L071",
+        "F-0440 L088-L100",
+        "F-0440 L146-L155",
+        "F-0440 L067-L085",
+        "F-0435 L006-L012",
+        "F-0440 L101-L124",
+        "F-0440 L125-L143",
+        "F-0437 L010-L031",
+        "F-0434 L017-L028",
+        "F-0433 L011-L019",
+        "F-0431 L022-L039",
+        "F-0430 L033-L071",
+        "F-0477 L0001-L0004",
+        "F-0419 L0030-L0049",
+        "F-0419 L0056-L0071",
+        "F-0417 L0035-L0049",
+        "F-0413 L0048-L0061",
+        "F-0410 L0049-L0082"
+      ],
+      "section": "mechanism-2"
+    },
+    {
+      "rule": "BROWSER-DATA",
+      "title": "收集浏览器历史与浏览器保存数据",
+      "state": "partial",
+      "evidence": [
+        "F-0478 L0005-L0009",
+        "F-0466 L0013-L0018",
+        "F-0449 L0028-L0036",
+        "F-0449 L0036-L0050",
+        "F-0464 L0057-L0075",
+        "F-0464 L0076-L0087",
+        "F-0463 L0031-L0055",
+        "F-0464 L0099-L0136",
+        "F-0483 L0150-L0174",
+        "F-0483 L0175-L0189",
+        "F-0483 L0190-L0204",
+        "F-0483 L0205-L0226",
+        "F-0483 L0227-L0248",
+        "F-0483 L0249-L0271",
+        "F-0483 L0275-L0283",
+        "F-0483 L0284-L0290",
+        "F-0483 L0291-L0309",
+        "F-0483 L0314-L0329",
+        "F-0483 L0329-L0340"
+      ],
+      "state_note": "Firefox 路径虽显示 signons 文件读取及解密处理，但最终返回数据和 FIREFOX.abc 中的实际字段尚未完全闭合。",
+      "section": "mechanism-2"
+    },
+    {
+      "rule": "STAGE-COLLECTED",
+      "title": "将收集结果暂存到临时目录文件",
+      "state": "partial",
+      "evidence": [
+        "F-0500 L0057-L0069",
+        "F-0500 L0070-L0087",
+        "F-0500 L0088-L0105",
+        "F-0500 L0106-L0123",
+        "F-0370 L0005-L0008",
+        "F-0367 L0022-L0031",
+        "F-0497 L0029-L0031",
+        "F-0497 L0032-L0058",
+        "F-0497 L0059-L0060",
+        "F-0500 L0171-L0190",
+        "F-0482 L0038-L0060",
+        "F-0482 L0061-L0083",
+        "F-0482 L0084-L0089",
+        "F-0481 L0027-L0076",
+        "F-0500 L0070-L0123",
+        "F-0482 L0061-L0089",
+        "F-0477 L0001-L0004",
+        "F-0500 L0057-L0123",
+        "F-0483 L0182-L0226",
+        "F-0483 L0227-L0271",
+        "F-0483 L0344-L0358",
+        "F-0483 L0514-L0522"
+      ],
+      "state_note": "部分收集 helper 的数据来源和具体输出内容仍未完全闭合。",
+      "section": "mechanism-2"
+    },
+    {
+      "rule": "INPUT-HOOK",
+      "title": "注册系统级键盘与鼠标 hook",
+      "state": "confirmed",
+      "evidence": [
+        "F-0500 L0125-L0137",
+        "F-0498 L0005-L0014",
+        "F-0492 L0007-L0013",
+        "F-0493 L0001-L0004"
+      ],
+      "section": "mechanism-3"
+    },
+    {
+      "rule": "PERSIST-RUNKEY",
+      "title": "写入 Run 与 Policies Explorer Run 位置",
+      "state": "partial",
+      "evidence": [
+        "F-0394 L0156-L0180",
+        "F-0394 L0181-L0203",
+        "F-0365 L0025-L0032",
+        "F-0394 L0205-L0225",
+        "F-0394 L0227-L0247"
+      ],
+      "state_note": "主写入 helper sub_406088 未解析，但附加的 RegCreateKeyA/RegSetValueExA 分支已可见。",
+      "section": "mechanism-4"
+    },
+    {
+      "rule": "PERSIST-ACTIVESETUP",
+      "title": "创建 Active Setup 组件并设置 StubPath",
+      "state": "confirmed",
+      "evidence": [
+        "F-0394 L0249-L0256",
+        "F-0391 L0001-L0005",
+        "F-0389 L0001-L0008",
+        "F-0388 L0029-L0043"
+      ],
+      "section": "mechanism-4"
+    },
+    {
+      "rule": "INJ-PE-MAP",
+      "title": "向 explorer.exe 或其他目标进程映射 PE 映像",
+      "state": "confirmed",
+      "evidence": [
+        "F-0495 L0040-L0056",
+        "F-0495 L0046-L0050",
+        "F-0304 L0025-L0044",
+        "F-0302 L0039-L0065",
+        "F-0495 L0046-L0060",
+        "F-0495 L0083-L0107",
+        "F-0495 L0109-L0116",
+        "F-0304 L0035-L0051",
+        "F-0495 L0062-L0078",
+        "F-0301 L0025-L0040",
+        "F-0301 L0041-L0052",
+        "F-0300 L0001-L0004",
+        "F-0299 L0009-L0027"
+      ],
+      "section": "mechanism-5"
+    },
+    {
+      "rule": "INJ-REMOTE-THREAD",
+      "title": "写入远程内存并创建远程线程",
+      "state": "partial",
+      "evidence": [
+        "F-0304 L0044-L0051",
+        "F-0303 L0001-L0003",
+        "F-0302 L0067-L0098",
+        "F-0291 L0017-L0027",
+        "F-0290 L0001-L0009",
+        "F-0293 L0021-L0027",
+        "F-0292 L0001-L0008",
+        "F-0289 L0026-L0035",
+        "F-0295 L0012-L0027",
+        "F-0294 L0009-L0014",
+        "F-0489 L0022-L0031",
+        "F-0487 L0007-L0011",
+        "F-0488 L0022-L0031",
+        "F-0038 L022-L027",
+        "F-0488 L0023-L0031",
+        "F-0486 L0001-L0012",
+        "F-0489 L0029-L0031",
+        "F-0488 L0017-L0026",
+        "F-0488 L0027-L0031"
+      ],
+      "state_note": "远程映像写入和远程线程原语已可见，但 sub_4038AC 的具体调度及运行时线程创建、入口执行结果尚未闭合。",
+      "section": "mechanism-5"
+    },
+    {
+      "rule": "EVADE-ANTIVM-EXIT",
+      "title": "探测虚拟机、沙箱和调试环境后退出",
+      "state": "confirmed",
+      "evidence": [
+        "F-0494 L0005-L0026",
+        "F-0494 L0027-L0059",
+        "F-0338 L0005-L0008",
+        "F-0337 L0025-L0039",
+        "F-0339 L0005-L0008",
+        "F-0347 L0007-L0010",
+        "F-0352 L0005-L0011",
+        "F-0355 L0005-L0008",
+        "F-0494 L0027-L0068",
+        "F-0348 L0007-L0014",
+        "F-0350 L0005-L0007"
+      ],
+      "section": "mechanism-6"
+    },
+    {
+      "rule": "EVADE-SELFDELETE",
+      "title": "通过远程线程反复删除指定文件",
+      "state": "confirmed",
+      "evidence": [
+        "F-0489 L0022-L0031",
+        "F-0487 L0007-L0011",
+        "F-0488 L0022-L0031",
+        "F-0038 L022-L027",
+        "F-0488 L0023-L0031",
+        "F-0486 L0001-L0012",
+        "F-0489 L0029-L0031"
+      ],
+      "section": "mechanism-6"
+    },
+    {
+      "rule": "CONFIG-DECODE",
+      "title": "读取并解码嵌入式配置",
+      "state": "confirmed",
+      "evidence": [
+        "F-0309 L0010-L0020",
+        "F-0310 L0027-L0030",
+        "F-0310 L0030-L0050",
+        "F-0307 L0017-L0030",
+        "F-0313 L0007-L0013",
+        "F-0325 L0008-L0029",
+        "F-0325 L0031-L0071",
+        "F-0322 L0016-L0023",
+        "F-0317 L0010-L0020"
+      ],
+      "section": "mechanism-1"
+    },
+    {
+      "rule": "FILE-COPY",
+      "title": "尝试复制文件到候选目标路径",
+      "state": "confirmed",
+      "evidence": [
+        "F-0394 L0101-L0121",
+        "F-0394 L0134-L0155"
+      ],
+      "section": "mechanism-4"
+    },
+    {
+      "rule": "ENV-DISCOVERY",
+      "title": "获取系统目录、用户名与模块路径",
+      "state": "confirmed",
+      "evidence": [
+        "F-0038 L009-L020",
+        "F-0038 L022-L027",
+        "F-0500 L0171-L0190",
+        "F-0344 L0032-L0040",
+        "F-0368 L0006-L0008",
+        "F-0369 L0006-L0008",
+        "F-0377 L0015-L0017",
+        "F-0375 L0029-L0039",
+        "F-0375 L0031-L0041"
+      ],
+      "section": "mechanism-1"
+    },
+    {
+      "rule": "MUTEX-INSTANCE",
+      "title": "使用多个互斥体控制功能分支",
+      "state": "confirmed",
+      "evidence": [
+        "F-0500 L0057-L0069",
+        "F-0500 L0070-L0087",
+        "F-0500 L0088-L0105",
+        "F-0500 L0106-L0123",
+        "F-0370 L0005-L0008",
+        "F-0367 L0022-L0031",
+        "F-0500 L0125-L0137",
+        "F-0496 L0023-L0043",
+        "F-0304 L0025-L0051"
+      ],
+      "section": "mechanism-1"
+    }
+  ],
+  "summary": [
+    "样本具备明显的信息窃取与后续执行能力：在密码列表互斥体已存在时，它从 No-IP DUC、Windows Credential Manager、RAS、LSA、Protected Storage 以及 Internet Explorer/Firefox 相关位置读取或尝试解密凭据和浏览器数据，并将部分结果写入临时目录中的固定文件。",
+    "样本同时包含多层持久化和跨进程执行机制，包括 Run/Policies\\Explorer\\Run、Active Setup、远程 PE 映射、远程内存写入和远程线程创建；这些能力足以支持高风险恶意判定。",
+    "环境探测分支会检查沙箱、虚拟机、调试器和特殊设备，并在相应配置开关启用且探测命中时终止进程；多组互斥体则控制收集、输入 hook 和持久化/宿主处理路径。"
+  ],
+  "risk_judgement": "风险重点在于对多类本机凭据的读取/解密尝试，以及可将 PE 数据写入其他进程并创建远程线程的执行链。Run、Active Setup 和文件删除路径进一步扩大了持久化与清理风险。处置时应优先隔离主机、保护凭据并核查相关注册表、临时目录和进程注入痕迹。",
+  "chain": [],
+  "sections": [
+    {
+      "id": "mechanism-1",
+      "title": "样本入口、配置与分支控制",
+      "question": "样本如何初始化配置并决定进入不同能力路径？",
+      "blocks": [
+        {
+          "type": "callout",
+          "text": "样本通过嵌入式资源配置、全局开关和多个互斥体选择收集、输入处理、持久化或宿主进程操作路径。",
+          "tone": "info",
+          "label": "核心判断"
+        },
+        {
+          "type": "paragraph",
+          "text": "配置初始化从名称为 `XX-XX-XX-XX`、类型为 `0xA` 的模块资源读取数据，复制到内部缓冲区后按 `####@####` 分隔解析，最多处理约 101 个配置槽位。对非空且未满足比较条件的条目，程序逐字节执行 `^ 0xBC` 变换；随后这些值被复制或转换到多个全局配置字段。当前材料只能确认配置解析和变换，不能确定字段分别控制哪些业务功能。"
+        },
+        {
+          "type": "paragraph",
+          "text": "启动控制使用 `_x_X_UPDATE_X_x_`、`_x_X_PASSWORDLIST_X_x_` 和 `_x_X_BLOCKMOUSE_X_x_` 等互斥体区分实例和功能分支。`sub_401F48` 本身不会动态生成互斥体名称：输入非空时原样返回，输入为空时返回内部静态地址；另一路径使用带 `_PERSIST` 后缀的名称参与实例判定。"
+        },
+        {
+          "type": "paragraph",
+          "text": "样本还可读取命令行、当前模块文件名、系统目录、Windows 目录、用户名及 `ProgramFilesDir`，并把部分结果交给内部处理函数或用于路径构造。这些行为本身属于环境输入和辅助定位，不能单独说明其最终用途。"
+        },
+        {
+          "type": "paragraph",
+          "text": "在 `off_40D210` 不等于 2 或 1 的路径中，若 `off_40D1B8 == 1`，样本会从模块文件名取得数据，并与 `dword_40F1E8` 进行比较。比较不满足时调用 `sub_405AD8` 和 `sub_40AFB0`，随后终止进程；比较满足时则转入后续 fallback 路径。两个辅助函数的具体副作用未解析，因此只能确认该条件分支及退出行为，不能进一步确定 `open` 参数所代表的操作。"
+        }
+      ]
+    },
+    {
+      "id": "mechanism-2",
+      "title": "凭据与浏览器数据如何被收集并暂存",
+      "question": "哪些本机敏感数据进入了样本的数据处理链？",
+      "blocks": [
+        {
+          "type": "callout",
+          "text": "样本访问多个凭据存储和浏览器数据源，并对部分数据执行 DPAPI、LSA 或 NSS/PK11 解密；至少部分结果会进入临时目录文件。",
+          "tone": "risk",
+          "label": "高风险能力"
+        },
+        {
+          "type": "paragraph",
+          "text": "在 `_x_X_PASSWORDLIST_X_x_` 已存在的分支中，程序调用七个收集 helper，并在各自结果复制到 `dword_40F1EC` 后非零时写入临时目录。已闭合的路径包括：从 `HKLM\\SOFTWARE\\Vitalwerks\\DUC` 读取 No-IP 的 `UserName` 和 `Password`；通过 `CredEnumerateA` 查询 `WindowsLive:name=*` 凭据并将组合结果写入 `xxxyyyzzz.dat`；以及由 RAS helper 枚举拨号条目并读取用户名、密码字段。"
+        },
+        {
+          "type": "paragraph",
+          "text": "RAS 路径还可在特定系统版本、回调标志和配置目录条件下读取 `rasphone.pbk` 中的 `DialParamsUID`，处理关联数据后写回当前 RAS 条目的密码字段；另一分支通过当前用户名生成 SID 相关键，并读取 `L$_RasDefaultCredentials#0` 等 LSA 私有数据。Protected Storage 路径枚举包含 `:StringData` 的记录，解析字段并将处理结果提交到内部状态。"
+        },
+        {
+          "type": "paragraph",
+          "text": "Internet Explorer 路径枚举 URL History，并读取 `HKCU\\Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2` 中的值；在 `CryptUnprotectData` 成功时，将记录整理为 `User:` 或 `Password:` 字段。Credential Manager 路径则使用由固定 GUID `abe2869f-9b47-4cd9-a358-c22904dba7f7` 派生的 74 字节可选熵尝试解密 `CredentialBlob`，再提取 Address、User 和 Password 结果。"
+        },
+        {
+          "type": "paragraph",
+          "text": "Firefox 路径加载 `nss3.dll` 并解析 NSS/PK11 入口，读取 Profile0/Path 后依次检查 `signons3.txt`、`signons2.txt`、`signons1.txt` 和 `signons.txt`。当前材料已确认候选文件的打开、读入、Base64 解码和 `PK11SDR_Decrypt` 成功分支，但尚不能把所有返回数据确定为成功解密的凭据，也不能确认每个目标环境都能完成读取。"
+        },
+        {
+          "type": "paragraph",
+          "text": "收集结果的外部输出并未全部闭合。已直接观察到的固定暂存文件包括 `NOIP.abc`、`MSN.abc`、`FIREFOX.abc`、`IELOGIN.abc`、`IEPASS.abc`、`IEAUTO.abc`、`IEWEB.abc`、`xxxyyyzzz.dat`，以及由配置组装后尝试写入的 `XX--XX--XX.txt`。各 helper 的调用和写入门控不等同于运行时写入成功。"
+        }
+      ]
+    },
+    {
+      "id": "mechanism-3",
+      "title": "输入 hook 与消息处理",
+      "question": "样本是否记录或阻断用户输入？",
+      "blocks": [
+        {
+          "type": "callout",
+          "text": "样本在特定互斥体条件下注册两个系统 hook；现有代码足以证明 hook 注册尝试和一个键盘转换调用，但不足以认定为键盘记录器或确认输入被阻断。",
+          "tone": "boundary",
+          "label": "认定边界"
+        },
+        {
+          "type": "paragraph",
+          "text": "当密码列表互斥体未命中、而 `_x_X_BLOCKMOUSE_X_x_` 已存在时，程序调用 `SetWindowsHookExA` 注册 hook ID 13 和 14，随后循环调用辅助函数直至其返回非零并退出进程。一个回调在 `n256 == 256` 时读取键盘状态并调用 `ToAscii`，另一个回调直接返回 1；当前代码未显示转换结果被保存、写文件或发送。"
+        },
+        {
+          "type": "paragraph",
+          "text": "轮询 helper 从当前线程消息队列取出消息，非 `WM_QUIT` 消息进入 `TranslateMessage` 和 `DispatchMessageA`，之后短暂睡眠并继续处理，直到一次没有消息。该消息循环与 hook 注册存在调用关系，但没有证据表明它本身完成输入记录或阻断。"
+        }
+      ]
+    },
+    {
+      "id": "mechanism-4",
+      "title": "持久化、文件操作与宿主准备",
+      "question": "样本如何保持运行或准备目标文件与目录？",
+      "blocks": [
+        {
+          "type": "callout",
+          "text": "样本具备多种持久化位置写入能力，并可创建目录、复制文件和设置 Active Setup；其中部分主 helper 的具体数据内容仍未解析。",
+          "tone": "risk",
+          "label": "持久化能力"
+        },
+        {
+          "type": "paragraph",
+          "text": "在开关启用时，程序针对 HKLM 和 HKCU 的 `Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run` 以及 HKLM/HKCU 的 `Software\\Microsoft\\Windows\\CurrentVersion\\Run` 调用注册表处理逻辑。附加分支明确调用 `RegCreateKeyA` 和 `RegSetValueExA` 写入 REG 类型 2 数据；未解析的 `sub_406088` 是否在主调用中实施相同写入，当前不能完全确认。"
+        },
+        {
+          "type": "paragraph",
+          "text": "Active Setup 流程先删除当前用户 `Installed Components` 下的指定子键，再在 HKLM 下创建对应组件并设置 `StubPath`；数据由输入字符串追加固定的 `Restart` 构成。另一路径在 `v6` 条件满足时调用未解析的执行相关 helper，随后终止当前进程，因此不能进一步断言其一定启动或执行文件。"
+        },
+        {
+          "type": "paragraph",
+          "text": "样本可按路径逐级调用 `CreateDirectoryA` 创建缺失目录；另有复制分支根据构造出的候选路径调用 `CopyFileA`，首次复制失败时尝试备用目标。具体源文件、目标路径和后续用途未闭合，静态代码只证明复制与目录创建尝试。"
+        }
+      ]
+    },
+    {
+      "id": "mechanism-5",
+      "title": "跨进程映射与远程线程执行",
+      "question": "样本如何把代码或数据转入其他进程？",
+      "blocks": [
+        {
+          "type": "callout",
+          "text": "样本包含完整度较高的远程内存写入、PE 重定位/导入处理和远程线程原语，可针对 explorer.exe 或其他由配置选择的应用进程执行映射尝试。",
+          "tone": "risk",
+          "label": "关键执行能力"
+        },
+        {
+          "type": "paragraph",
+          "text": "当 `off_40D210 == 2` 且 explorer.exe 宿主条件满足时，程序定位 `Shell_TrayWnd` 所属进程，调用 `VirtualAllocEx` 和远程映像准备逻辑；若现有映射失败，则创建新的 `explorer.exe` 并再次尝试。若 explorer.exe 判断不满足，程序根据 `sub_4064DC` 结果选择应用路径数据，启动应用后交给同一映射例程。"
+        },
+        {
+          "type": "paragraph",
+          "text": "远程映像准备包括按 PE 头分配映像和节区域、复制节数据、遍历重定位块并按基址差值修正目标地址；导入描述符和导入项也会被遍历，非零导入项通过远程辅助路径解析地址并回写导入表。`sub_4038AC` 在缓冲区有效时向目标进程写入数据并调用未解析的后续处理函数。"
+        },
+        {
+          "type": "paragraph",
+          "text": "独立的远程线程原语先通过 `VirtualAllocEx`/`WriteProcessMemory` 写入参数和入口代码，再调用 `CreateRemoteThread`；同步模式还会等待线程并读取结果。另一路径将字符串、`LoadLibraryA`/`Sleep` 地址和间接调用结构写入目标进程；还有路径在目标进程中解析模块和导出符号，并以线程退出码返回地址。"
+        },
+        {
+          "type": "paragraph",
+          "text": "`_PERSIST` 互斥体分支同样会检查 shell 宿主并在映射失败时创建 explorer.exe。另一路径向 `Shell_TrayWnd` 所属进程写入两块数据并尝试以 `sub_40AE94` 作为远程线程入口；该回调反复调用 `DeleteFileA`，直至删除调用返回非零。静态证据不证明远程线程、映射或删除最终成功。"
+        }
+      ]
+    },
+    {
+      "id": "mechanism-6",
+      "title": "反分析与环境探测",
+      "question": "样本如何识别分析环境并改变流程？",
+      "blocks": [
+        {
+          "type": "callout",
+          "text": "多个独立配置开关分别控制沙箱、虚拟机、调试器、特殊设备和时间条件探测；命中对应探测后可直接终止进程。",
+          "tone": "warning",
+          "label": "反分析行为"
+        },
+        {
+          "type": "paragraph",
+          "text": "探测集合包括检查 `SbieDll.dll`、枚举并匹配 `VBoxService.exe`、检查 `dbghelp.dll`、读取调试状态或 PEB 的 `BeingDebugged` 标志，以及探测 `\\\\.\\Syser`、`\\\\.\\SyserDbgMsg`、`\\\\.\\SyserBoot`、`\\\\.\\SICE` 和 `\\\\.\\NTICE`。此外还有针对 ProductId、特殊设备和其他环境状态的独立 helper。"
+        },
+        {
+          "type": "paragraph",
+          "text": "各探测分支分别要求自身开关为 1 且对应 helper 返回 1，随后调用 `ExitProcess_0(0)`；不能把这些分支合并为一个统一条件，也不能据静态代码断言目标环境必然命中。`off_40D200` 分支还会检查调试状态和超过 5000 毫秒的时间差，并修改加载模块链表相关字段。"
+        }
+      ]
+    },
+    {
+      "id": "mechanism-7",
+      "title": "其他已确认但用途未完全闭合的行为",
+      "question": "哪些行为已观察到，但当前不能可靠归入主要目的？",
+      "blocks": [
+        {
+          "type": "callout",
+          "text": "样本还读取当前用户名并交给内部处理函数，生成配置组装结果并写入固定文件；这些行为的最终业务用途或外部去向尚未完全确定。",
+          "tone": "info",
+          "label": "辅助行为"
+        },
+        {
+          "type": "paragraph",
+          "text": "`sub_40555C` 分配用户名缓冲区并调用 `GetUserNameA`，随后将用户名相关数据和 `CurrentUser` 标记交给 `sub_401E94`；当前材料未证明其被写入文件、持久化或发送网络。"
+        },
+        {
+          "type": "paragraph",
+          "text": "非互斥体碰撞路径中，程序从模块文件名相关输入和 101 个配置项组装带 `####@####` 分隔符的数据，按条件使用默认值或 XOR 变换值，最后调用文件写入辅助函数。上游提供的目标名为 `XX--XX--XX.txt`，因此可确认写入尝试，但不能确定字段语义或额外编码。"
+        }
+      ]
+    }
+  ],
+  "ioc": {
+    "host": [
+      {
+        "type": "mutex",
+        "value": "_x_X_UPDATE_X_x_",
+        "role": "实例控制",
+        "specificity": "high",
+        "note": "",
+        "evidence": [
+          "F-0500 L0047-L0056"
+        ]
+      },
+      {
+        "type": "mutex",
+        "value": "_x_X_PASSWORDLIST_X_x_",
+        "role": "实例控制",
+        "specificity": "high",
+        "note": "关联密码列表收集和多个临时输出文件。",
+        "evidence": [
+          "F-0500 L0057-L0064"
+        ]
+      },
+      {
+        "type": "mutex",
+        "value": "_x_X_BLOCKMOUSE_X_x_",
+        "role": "实例控制",
+        "specificity": "high",
+        "note": "",
+        "evidence": [
+          "F-0500 L0128-L0136"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "NOIP.abc",
+        "role": "输出落地",
+        "specificity": "high",
+        "note": "No-IP 收集结果的固定临时输出名。",
+        "evidence": [
+          "F-0500 L0065-L0069",
+          "F-0500 L0057-L0069"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "MSN.abc",
+        "role": "输出落地",
+        "specificity": "high",
+        "note": "",
+        "evidence": [
+          "F-0500 L0074-L0077"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "FIREFOX.abc",
+        "role": "输出落地",
+        "specificity": "high",
+        "note": "",
+        "evidence": [
+          "F-0500 L0083-L0087",
+          "F-0500 L0088-L0105"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "IELOGIN.abc",
+        "role": "输出落地",
+        "specificity": "high",
+        "note": "",
+        "evidence": [
+          "F-0500 L0092-L0096"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "IEPASS.abc",
+        "role": "输出落地",
+        "specificity": "high",
+        "note": "",
+        "evidence": [
+          "F-0500 L0101-L0105"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "IEAUTO.abc",
+        "role": "输出落地",
+        "specificity": "high",
+        "note": "",
+        "evidence": [
+          "F-0500 L0110-L0114"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "IEWEB.abc",
+        "role": "输出落地",
+        "specificity": "high",
+        "note": "",
+        "evidence": [
+          "F-0500 L0119-L0123"
+        ]
+      },
+      {
+        "type": "file",
+        "value": "XX--XX--XX.txt",
+        "role": "输出落地；其他对象",
+        "specificity": "high",
+        "note": "",
+        "evidence": [
+          "F-0500 L0182-L0184",
+          "F-0497 L0059-L0060",
+          "F-0367 L0022-L0031"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "xxxyyyzzz.dat",
+        "role": "输出落地",
+        "specificity": "high",
+        "note": "Windows Live 凭据组合结果的固定输出名。",
+        "evidence": [
+          "F-0482 L0061-L0062",
+          "F-0482 L0084-L0089"
+        ]
+      },
+      {
+        "type": "guid",
+        "value": "abe2869f-9b47-4cd9-a358-c22904dba7f7",
+        "role": "配置标记",
+        "specificity": "high",
+        "note": "Credential Manager DPAPI 解密使用的固定派生熵来源。",
+        "evidence": [
+          "F-0465 L0045-L0059"
+        ]
+      },
+      {
+        "type": "mutex",
+        "value": "_PERSIST",
+        "role": "实例控制",
+        "specificity": "high",
+        "note": "持久化/宿主处理实例判定使用的互斥体后缀。",
+        "evidence": [
+          "F-0496 L0023-L0026"
+        ]
+      },
+      {
+        "type": "resource",
+        "value": "XX-XX-XX-XX",
+        "role": "读取来源",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0309 L0010-L0013"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "####@####",
+        "role": "解析标记",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0310 L0027-L0029",
+          "F-0497 L0038-L0049"
+        ]
+      },
+      {
+        "type": "process",
+        "value": "VBoxService.exe",
+        "role": "环境探测",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0337 L0027-L0039"
+        ]
+      },
+      {
+        "type": "resource",
+        "value": "SbieDll.dll",
+        "role": "环境探测",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0338 L0005-L0008"
+        ]
+      },
+      {
+        "type": "resource",
+        "value": "\\\\.\\Syser",
+        "role": "环境探测",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0352 L0005-L0008",
+          "F-0351 L0006-L0012"
+        ]
+      },
+      {
+        "type": "resource",
+        "value": "\\\\.\\SyserDbgMsg",
+        "role": "环境探测",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0352 L0005-L0008",
+          "F-0351 L0006-L0012"
+        ]
+      },
+      {
+        "type": "resource",
+        "value": "\\\\.\\SyserBoot",
+        "role": "环境探测",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0352 L0005-L0008",
+          "F-0351 L0006-L0012"
+        ]
+      },
+      {
+        "type": "resource",
+        "value": "\\\\.\\SICE",
+        "role": "环境探测",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0353 L0006-L0012"
+        ]
+      },
+      {
+        "type": "resource",
+        "value": "\\\\.\\NTICE",
+        "role": "环境探测",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0354 L0006-L0012"
+        ]
+      },
+      {
+        "type": "registry",
+        "value": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run",
+        "role": "持久化",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0394 L0161-L0179",
+          "F-0394 L0175-L0202"
+        ]
+      },
+      {
+        "type": "registry",
+        "value": "Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+        "role": "持久化",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0394 L0210-L0224",
+          "F-0394 L0232-L0246"
+        ]
+      },
+      {
+        "type": "registry",
+        "value": "Software\\Microsoft\\Active Setup\\Installed Components\\",
+        "role": "持久化",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0388 L0030-L0042",
+          "F-0389 L0005-L0008"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "StubPath",
+        "role": "持久化",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0388 L0039-L0043"
+        ]
+      },
+      {
+        "type": "registry",
+        "value": "HKLM\\SOFTWARE\\Vitalwerks\\DUC",
+        "role": "读取来源",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0480 L0019-L0020"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "UserName",
+        "role": "读取来源",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0480 L0019-L0021"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "Password",
+        "role": "读取来源",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0480 L0019-L0020"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "WindowsLive:name=*",
+        "role": "解析标记",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0482 L0039-L0046"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "DialParamsUID",
+        "role": "解析标记",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0440 L105-L123"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "L$_RasDefaultCredentials#0",
+        "role": "读取来源",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0434 L024-L027"
+        ]
+      },
+      {
+        "type": "registry",
+        "value": "HKCU\\Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2",
+        "role": "读取来源",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0466 L0013-L0018",
+          "F-0464 L0057-L0062"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "User:",
+        "role": "解析标记",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0463 L0041-L0049",
+          "F-0465 L0073-L0080"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "Password:",
+        "role": "解析标记",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0463 L0045-L0049",
+          "F-0465 L0081-L0092"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "CLSID_CLSID_CUrlHistory",
+        "role": "读取来源",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0449 L0028-L0035"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "CryptUnprotectData",
+        "role": "其他对象",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0464 L0076-L0087",
+          "F-0465 L0058-L0068"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "CredEnumerateA",
+        "role": "读取来源",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0465 L0058-L0064"
+        ]
+      },
+      {
+        "type": "process",
+        "value": "CreateRemoteThread",
+        "role": "其他对象",
+        "specificity": "medium",
+        "note": "跨进程远程线程能力的关键 API。",
+        "evidence": [
+          "F-0291 L0017-L0026"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "LoadLibraryA",
+        "role": "其他对象",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0293 L0021-L0027"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "GetProcAddress",
+        "role": "其他对象",
+        "specificity": "medium",
+        "note": "",
+        "evidence": [
+          "F-0295 L0013-L0021"
+        ]
+      },
+      {
+        "type": "other",
+        "value": "GetTempPathA",
+        "role": "其他对象",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0370 L0006-L0008"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "GetCommandLineA",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0038 L009-L015"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "GetModuleFileNameA",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0038 L022-L025"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "TRUE",
+        "role": "配置标记",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0322 L0016-L0023"
+        ]
+      },
+      {
+        "type": "resource",
+        "value": "dbghelp.dll",
+        "role": "环境探测",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0339 L0005-L0008"
+        ]
+      },
+      {
+        "type": "registry",
+        "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProductId",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0340 L0009-L0014",
+          "F-0341 L0009-L0014",
+          "F-0342 L0009-L0014"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "CurrentUser",
+        "role": "其他对象",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0344 L0037-L0040"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "Restart",
+        "role": "配置标记",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0388 L0037-L0042",
+          "F-0390 L0014-L0019"
+        ]
+      },
+      {
+        "type": "resource",
+        "value": "kernel32.dll",
+        "role": "系统路径",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0368 L0006-L0007",
+          "F-0369 L0006-L0007"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "GetSystemDirectoryA",
+        "role": "环境探测",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0368 L0006-L0008"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "GetWindowsDirectoryA",
+        "role": "环境探测",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0369 L0006-L0008"
+        ]
+      },
+      {
+        "type": "registry",
+        "value": "Software\\Microsoft\\Windows\\CurrentVersion",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0377 L0015-L0017"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "ProgramFilesDir",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0377 L0015-L0017"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "advapi32.dll",
+        "role": "系统路径",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0482 L0038-L0043"
+        ]
+      },
+      {
+        "type": "file",
+        "value": "Microsoft\\Network\\Connections\\pbk\\rasphone.pbk",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0435 L006-L012"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "RasGetEntryDialParams",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0440 L094-L100"
+        ]
+      },
+      {
+        "type": "other",
+        "value": "LsaRetrievePrivateData",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0433 L013-L018"
+        ]
+      },
+      {
+        "type": "string",
+        "value": ":StringData",
+        "role": "解析标记",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0419 L0040-L0048"
+        ]
+      },
+      {
+        "type": "other",
+        "value": "PStoreCreateInstance",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0419 L0030-L0033"
+        ]
+      },
+      {
+        "type": "file",
+        "value": "nss3.dll",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0483 L0150-L0154"
+        ]
+      },
+      {
+        "type": "file",
+        "value": "userenv.dll",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0483 L0172-L0179"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "\\Mozilla\\Firefox\\",
+        "role": "系统路径",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0483 L0187-L0193",
+          "F-0483 L0198-L0203"
+        ]
+      },
+      {
+        "type": "file",
+        "value": "signons3.txt",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0483 L0190-L0195"
+        ]
+      },
+      {
+        "type": "file",
+        "value": "signons2.txt",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0483 L0201-L0216"
+        ]
+      },
+      {
+        "type": "file",
+        "value": "signons1.txt",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0483 L0223-L0238"
+        ]
+      },
+      {
+        "type": "file",
+        "value": "signons.txt",
+        "role": "读取来源",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0483 L0234-L0260"
+        ]
+      },
+      {
+        "type": "other",
+        "value": "PK11SDR_Decrypt",
+        "role": "其他对象",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0483 L0163-L0168",
+          "F-0483 L0327-L0329"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "##$$",
+        "role": "解析标记",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0483 L0310-L0313",
+          "F-0483 L0349-L0353"
+        ]
+      },
+      {
+        "type": "process",
+        "value": "explorer.exe",
+        "role": "其他对象",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0495 L0042-L0055",
+          "F-0496 L0034-L0042"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "Shell_TrayWnd",
+        "role": "环境探测",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0496 L0034-L0036",
+          "F-0489 L0024-L0026"
+        ]
+      },
+      {
+        "type": "other",
+        "value": "VirtualAllocEx",
+        "role": "其他对象",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0304 L0035-L0040",
+          "F-0289 L0026-L0031"
+        ]
+      },
+      {
+        "type": "other",
+        "value": "WriteProcessMemory",
+        "role": "其他对象",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0304 L0045-L0050",
+          "F-0289 L0028-L0031"
+        ]
+      },
+      {
+        "type": "process",
+        "value": "Shell_TrayWnd 所属进程",
+        "role": "其他对象",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0489 L0024-L0031"
+        ]
+      },
+      {
+        "type": "string",
+        "value": "DeleteFileA",
+        "role": "其他对象",
+        "specificity": "context",
+        "note": "",
+        "evidence": [
+          "F-0486 L0005-L0011"
+        ]
+      }
+    ],
+    "network": [],
+    "network_empty_reason": "暂无网络指标或相关对象。"
+  },
+  "detection": [
+    {
+      "type": "steps",
+      "items": [
+        {
+          "title": "监控凭据访问与解密组合行为",
+          "text": "检测进程对 `CredEnumerateA`、`CryptUnprotectData`、`LsaRetrievePrivateData`、RAS 凭据 API、Protected Storage 或 NSS/PK11 解密的组合使用，尤其关注其与浏览器数据路径、固定 GUID 可选熵及临时目录输出的同一进程关联。"
+        },
+        {
+          "title": "监控固定临时文件与互斥体",
+          "text": "在临时目录监控 `NOIP.abc`、`MSN.abc`、`FIREFOX.abc`、`IELOGIN.abc`、`IEPASS.abc`、`IEAUTO.abc`、`IEWEB.abc`、`xxxyyyzzz.dat` 和 `XX--XX--XX.txt` 的创建或写入，并关联 `_x_X_PASSWORDLIST_X_x_` 等互斥体。"
+        },
+        {
+          "title": "监控跨进程映射链",
+          "text": "重点检测同一进程连续执行 `VirtualAllocEx`、`WriteProcessMemory`、PE 重定位/导入处理和 `CreateRemoteThread`，以及针对 explorer.exe 或 `Shell_TrayWnd` 所属进程的目标句柄操作。"
+        },
+        {
+          "title": "核查持久化注册表位置",
+          "text": "检查 HKLM/HKCU 的 `Software\\Microsoft\\Windows\\CurrentVersion\\Run`、`Policies\\Explorer\\Run` 及 Active Setup `StubPath` 的新增或修改，并关联样本进程、启动路径和 `Restart` 字符串。"
+        }
+      ]
+    }
+  ],
+  "response": [
+    {
+      "title": "立即隔离并保护凭据",
+      "text": "将相关主机从网络和共享环境隔离，避免收集结果继续被使用；对浏览器、Windows Credential Manager、RAS、No-IP 和相关业务账户凭据执行轮换，并保留原始证据后再清理。"
+    },
+    {
+      "title": "排查持久化与注入痕迹",
+      "text": "核查 Run、Policies\\Explorer\\Run、Active Setup、临时目录固定文件、异常 explorer.exe/其他宿主进程、远程线程和跨进程内存写入记录；在确认取证完成后移除恶意持久化项。"
+    },
+    {
+      "title": "结合环境探测行为复核分析结果",
+      "text": "由于样本可在命中沙箱、虚拟机或调试器探测时退出，应将静态结论与终端遥测、注册表和文件系统时间线交叉核对，避免仅以未命中探测或未见写入成功否定其能力。"
+    }
+  ],
+  "gaps": [
+    {
+      "gap": "七个 .abc 输出及相关暂存文件的部分数据来源、字段语义和最终写入内容尚未完全闭合。",
+      "impact": "会影响对各输出文件敏感信息种类及收集范围的精确判断，但不改变样本已具备多类凭据访问和文件暂存能力的结论。",
+      "blocking": false
+    },
+    {
+      "gap": "`XX--XX--XX.txt` 的组装数据字段和下游用途仍未完全确定。",
+      "impact": "会影响对该文件是否承载特定敏感数据或配置的判断。",
+      "blocking": false
+    },
+    {
+      "gap": "hook 回调的完整输入拦截或阻断语义、完成条件和运行时注册成功状态尚未闭合。",
+      "impact": "不能将该路径进一步定性为键盘记录或确定的输入阻断，但已确认系统级 hook 注册尝试。",
+      "blocking": false
+    },
+    {
+      "gap": "Firefox helper 的返回组装与 FIREFOX.abc 中实际写入字段仍未完全确定。",
+      "impact": "会影响对 Firefox 输出是否始终为成功解密凭据的判断。",
+      "blocking": false
+    },
+    {
+      "gap": "Active Setup 辅助执行分支中的 `sub_405AD8`、`sub_406878` 及条件变量语义未解析。",
+      "impact": "不能确认该分支是否实际启动或执行文件。",
+      "blocking": false
+    },
+    {
+      "gap": "远程映射和线程链的运行时成功状态、具体映像来源及最终入口执行效果未由静态材料证明。",
+      "impact": "不影响对跨进程执行能力的判断，但限制了对实际载荷和运行时影响的确认。",
+      "blocking": false
+    },
+    {
+      "gap": "Run 与 Policies\\Explorer\\Run 路径中主写入 helper `sub_406088` 的具体副作用尚未闭合；仅附加的注册表写入分支已直接可见。",
+      "impact": "会影响对各持久化位置是否均实际写入以及写入数据内容的精确判断，但不改变样本具备相关注册表操作路径的结论。",
+      "blocking": false
+    }
+  ],
+  "functions": [],
+  "final": "综合现有事实，样本的主要目的可判断为收集本机凭据与浏览器数据，并通过临时文件整理结果；同时具备持久化、反分析、文件清理和跨进程映射/远程线程执行能力。部分 helper、配置字段和运行时成功结果尚未闭合，因此报告保留对具体输出内容及实际执行结果的限定，但不改变其 critical 风险等级。"
+}

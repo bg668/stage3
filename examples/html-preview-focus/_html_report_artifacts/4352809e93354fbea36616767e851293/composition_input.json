@@ -1,0 +1,316 @@
+{
+  "claims": [
+    {
+      "canonical_id": "G:C001",
+      "behavior": "读取并解码配置资源",
+      "condition": "入口被调用且配置解码成功",
+      "source": "HTML_PREVIEW_TEST 资源",
+      "action": "read_demo_resource → decode_demo_config",
+      "sink": "config 配置对象",
+      "evidence": [
+        {
+          "location": "F-0010 L1-L3",
+          "observation": "读取具名资源并解码；解码失败时返回。"
+        }
+      ],
+      "confidence": "high",
+      "evidence_level": "confirmed",
+      "limitations": [],
+      "source_claim_ids": [
+        "J00:C001"
+      ],
+      "superseded_claim_ids": [],
+      "resolution": "unchanged",
+      "resolution_reason": "合成样本测试夹具"
+    },
+    {
+      "canonical_id": "G:C002",
+      "behavior": "将配置写入本地文件",
+      "condition": "config 非空",
+      "source": "解码后的 config",
+      "action": "CreateFileA → WriteFile → CloseHandle",
+      "sink": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+      "evidence": [
+        {
+          "location": "F-0010 L4-L7",
+          "observation": "创建配置路径并将配置缓冲区写入文件。"
+        }
+      ],
+      "confidence": "high",
+      "evidence_level": "confirmed",
+      "limitations": [],
+      "source_claim_ids": [
+        "J00:C002"
+      ],
+      "superseded_claim_ids": [],
+      "resolution": "unchanged",
+      "resolution_reason": "合成样本测试夹具"
+    },
+    {
+      "canonical_id": "G:C003",
+      "behavior": "按开关将配置文件提交至网络端点",
+      "condition": "config->send_enabled 为真",
+      "source": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+      "action": "read_demo_file → demo_http_post",
+      "sink": "https://collector.invalid/preview",
+      "evidence": [
+        {
+          "location": "F-0010 L8-L11",
+          "observation": "发送开关分支内读取落地文件并将其作为请求体提交到指定端点。"
+        }
+      ],
+      "confidence": "high",
+      "evidence_level": "confirmed",
+      "limitations": [],
+      "source_claim_ids": [
+        "J00:C003"
+      ],
+      "superseded_claim_ids": [],
+      "resolution": "unchanged",
+      "resolution_reason": "合成样本测试夹具"
+    },
+    {
+      "canonical_id": "G:C004",
+      "behavior": "可能按配置切换额外数据处理模式",
+      "condition": "config->mode 等于 2",
+      "source": "配置 mode 字段",
+      "action": "解析处理例程并间接调用",
+      "sink": "用途未明确的目标例程",
+      "evidence": [
+        {
+          "location": "F-0020 L1-L5",
+          "observation": "模式值为2时解析目标函数并传入配置对象调用；目标函数体不在材料中。"
+        }
+      ],
+      "confidence": "medium",
+      "evidence_level": "suspected",
+      "limitations": [
+        "目标例程未恢复，额外模式的具体用途及其与主流程的联系尚未明确。"
+      ],
+      "source_claim_ids": [
+        "J00:C004"
+      ],
+      "superseded_claim_ids": [],
+      "resolution": "unchanged",
+      "resolution_reason": "合成样本未确认行为测试夹具"
+    }
+  ],
+  "artifacts": [
+    {
+      "canonical_id": "G:A001",
+      "kind": "file",
+      "value": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+      "role": "created_output",
+      "detection_specificity": "high",
+      "meaning": "合成样本的配置落地文件（测试数据）",
+      "evidence": [
+        {
+          "location": "F-0010 L4-L7",
+          "observation": "创建配置路径并将配置缓冲区写入文件。"
+        }
+      ],
+      "confidence": "high",
+      "source_artifact_ids": [
+        "J00:A001"
+      ]
+    },
+    {
+      "canonical_id": "G:A002",
+      "kind": "network",
+      "value": "https://collector.invalid/preview",
+      "role": "other",
+      "detection_specificity": "high",
+      "meaning": "合成样本的保留域名端点（测试数据，不是真实基础设施）",
+      "evidence": [
+        {
+          "location": "F-0010 L8-L11",
+          "observation": "发送开关分支内读取落地文件并将其作为请求体提交到指定端点。"
+        }
+      ],
+      "confidence": "high",
+      "source_artifact_ids": [
+        "J00:A002"
+      ]
+    },
+    {
+      "canonical_id": "G:A003",
+      "kind": "resource",
+      "value": "HTML_PREVIEW_TEST",
+      "role": "config_marker",
+      "detection_specificity": "high",
+      "meaning": "合成样本配置资源名（测试数据）",
+      "evidence": [
+        {
+          "location": "F-0010 L1-L3",
+          "observation": "读取具名资源并解码；解码失败时返回。"
+        }
+      ],
+      "confidence": "high",
+      "source_artifact_ids": [
+        "J00:A003"
+      ]
+    }
+  ],
+  "all_behavior_ids": [
+    "G:C001",
+    "G:C002",
+    "G:C003",
+    "G:C004"
+  ],
+  "iocs": [
+    {
+      "canonical_id": "G:A001",
+      "kind": "file",
+      "value": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+      "role": "created_output",
+      "detection_specificity": "high",
+      "meaning": "合成样本的配置落地文件（测试数据）",
+      "evidence": [
+        {
+          "location": "F-0010 L4-L7",
+          "observation": "创建配置路径并将配置缓冲区写入文件。"
+        }
+      ],
+      "confidence": "high",
+      "source_artifact_ids": [
+        "J00:A001"
+      ]
+    },
+    {
+      "canonical_id": "G:A002",
+      "kind": "network",
+      "value": "https://collector.invalid/preview",
+      "role": "other",
+      "detection_specificity": "high",
+      "meaning": "合成样本的保留域名端点（测试数据，不是真实基础设施）",
+      "evidence": [
+        {
+          "location": "F-0010 L8-L11",
+          "observation": "发送开关分支内读取落地文件并将其作为请求体提交到指定端点。"
+        }
+      ],
+      "confidence": "high",
+      "source_artifact_ids": [
+        "J00:A002"
+      ]
+    },
+    {
+      "canonical_id": "G:A003",
+      "kind": "resource",
+      "value": "HTML_PREVIEW_TEST",
+      "role": "config_marker",
+      "detection_specificity": "high",
+      "meaning": "合成样本配置资源名（测试数据）",
+      "evidence": [
+        {
+          "location": "F-0010 L1-L3",
+          "observation": "读取具名资源并解码；解码失败时返回。"
+        }
+      ],
+      "confidence": "high",
+      "source_artifact_ids": [
+        "J00:A003"
+      ]
+    }
+  ],
+  "detection_features": [],
+  "code_excerpts": {
+    "G:C001": [
+      {
+        "function_id": "F-0010",
+        "evidence_location": "F-0010 L1-L3",
+        "start_line": 1,
+        "end_line": 3,
+        "source_packets": [
+          "J00.md"
+        ],
+        "code": "L0001: resource = read_demo_resource(\"HTML_PREVIEW_TEST\");\nL0002: config = decode_demo_config(resource);\nL0003: if (!config) return false;",
+        "excerpt_index": 0
+      }
+    ],
+    "G:C002": [
+      {
+        "function_id": "F-0010",
+        "evidence_location": "F-0010 L4-L7",
+        "start_line": 4,
+        "end_line": 7,
+        "source_packets": [
+          "J00.md"
+        ],
+        "code": "L0004: path = \"C:\\HTML_PREVIEW_TEST\\demo.cfg\";\nL0005: h = CreateFileA(path, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, 0, 0);\nL0006: WriteFile(h, config, config_size, &written, 0);\nL0007: CloseHandle(h);",
+        "excerpt_index": 0
+      }
+    ],
+    "G:C003": [
+      {
+        "function_id": "F-0010",
+        "evidence_location": "F-0010 L8-L11",
+        "start_line": 8,
+        "end_line": 11,
+        "source_packets": [
+          "J00.md"
+        ],
+        "code": "L0008: if (config->send_enabled) {\nL0009:   body = read_demo_file(path);\nL0010:   endpoint = \"https://collector.invalid/preview\";\nL0011:   demo_http_post(endpoint, body);",
+        "excerpt_index": 0
+      }
+    ],
+    "G:C004": [
+      {
+        "function_id": "F-0020",
+        "evidence_location": "F-0020 L1-L5",
+        "start_line": 1,
+        "end_line": 5,
+        "source_packets": [
+          "J00.md"
+        ],
+        "code": "L0001: mode = config->mode;\nL0002: if (mode == 2) {\nL0003:   target = resolve_mode_handler(mode);\nL0004:   target(config);\nL0005: }",
+        "excerpt_index": 0
+      }
+    ]
+  },
+  "historical_gaps": [
+    {
+      "gap_id": "R:G001",
+      "gap_type": "investigation",
+      "question": "模式2目标例程承担什么作用？",
+      "reason": "间接调用目标尚未恢复",
+      "source_packets": [
+        "J00"
+      ],
+      "impact": "major"
+    }
+  ],
+  "unresolved_conflicts": [],
+  "functions": [
+    {
+      "function_id": "F-0010",
+      "symbol": "sub_preview_main",
+      "provided_ranges": [
+        {
+          "start_line": 1,
+          "end_line": 14
+        }
+      ],
+      "total_lines": 14,
+      "complete": true,
+      "packet_ids": [
+        "J00"
+      ]
+    },
+    {
+      "function_id": "F-0020",
+      "symbol": "sub_preview_mode",
+      "provided_ranges": [
+        {
+          "start_line": 1,
+          "end_line": 5
+        }
+      ],
+      "total_lines": 5,
+      "complete": true,
+      "packet_ids": [
+        "J00"
+      ]
+    }
+  ]
+}

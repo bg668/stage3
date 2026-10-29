@@ -1,7 +1,5 @@
 from bounded_investigator.reconciliation import (
-    apply_gap_reconciliation,
     assemble_reconciliation_result,
-    project_gap_reconciliation_input,
     project_reconciliation_input,
     validate_and_finalize_reconciliation,
 )
@@ -14,8 +12,7 @@ from bounded_investigator.schemas import (
     Confidence,
     DeliveryStatus,
     EvidenceRef,
-    GapReconciliationDecisionResult,
-    GlobalGap,
+    GapItem,
     GlobalReconciliationDecisionResult,
     InvestigationResult,
     InvestigationStatus,
@@ -230,45 +227,31 @@ def test_missing_artifact_conflict_decision_degrades_conservatively():
     assert any("Resolve metadata" in gap.question for gap in final.gaps)
 
 
-def test_gap_reconciliation_removes_resolved_and_keeps_open():
-    projection = project_reconciliation_input(
-        {"J01": _env("J01", "inject", "CreateRemoteThread", "x.bin")}, {}
+def test_upstream_projection_preserves_worker_gap_types():
+    evidence = [EvidenceRef(location="F-0483 L1", observation="read profile")]
+    worker = RunEnvelope(
+        packet_name="J11", elapsed_seconds=1, revision_performed=False,
+        delivery_status=DeliveryStatus.SUCCESS, usage=UsageSummary(),
+        result=InvestigationResult(
+            status=InvestigationStatus.COMPLETE_WITH_GAPS,
+            summary="Partial Firefox analysis",
+            claims=[BehaviorClaim(
+                behavior="Firefox", condition="if profile", source="profile",
+                action="ReadFile", sink="buffer", evidence=evidence, confidence=Confidence.HIGH,
+            )],
+            artifacts=[ArtifactFinding(
+                kind="file", value="signons.txt", role="read_source",
+                detection_specificity="none", meaning="browser source",
+                evidence=evidence, confidence=Confidence.HIGH,
+            )],
+            gaps=[
+                GapItem(gap_type="investigation", question="read remaining function",
+                        reason="truncated", scope="outside_packet", impact="major"),
+                GapItem(gap_type="evidence", question="need resource bytes",
+                        reason="not provided", scope="outside_packet", impact="major"),
+            ],
+        ),
     )
-    final = validate_and_finalize_reconciliation(
-        assemble_reconciliation_result(_keep_all(projection), projection), projection
-    )
-    final.gaps = [
-        GlobalGap(gap_id="R:G001", question="Is injection CreateRemoteThread?", reason="upstream unknown", impact="major"),
-        GlobalGap(gap_id="R:G002", question="What is inner PE C2?", reason="bytes unavailable", impact="major"),
-    ]
-    gap_projection = project_gap_reconciliation_input(final)
-    decisions = GapReconciliationDecisionResult(
-        resolved_gap_ids=["R:G001"],
-        still_open_gap_ids=["R:G002"],
-    )
-    updated, resolved, open_ids = apply_gap_reconciliation(final, decisions, gap_projection)
-    assert resolved == ["R:G001"]
-    assert open_ids == ["R:G002"]
-    assert [g.gap_id for g in updated.gaps] == ["R:G002"]
-
-
-def test_gap_reconciliation_omitted_or_conflicting_ids_stay_open():
-    projection = project_reconciliation_input(
-        {"J01": _env("J01", "inject", "CreateRemoteThread", "x.bin")}, {}
-    )
-    final = validate_and_finalize_reconciliation(
-        assemble_reconciliation_result(_keep_all(projection), projection), projection
-    )
-    final.gaps = [
-        GlobalGap(gap_id="R:G001", question="q1", reason="r1", impact="major"),
-        GlobalGap(gap_id="R:G002", question="q2", reason="r2", impact="minor"),
-    ]
-    gap_projection = project_gap_reconciliation_input(final)
-    decisions = GapReconciliationDecisionResult(
-        resolved_gap_ids=["R:G001"],
-        still_open_gap_ids=["R:G001"],
-    )
-    updated, resolved, open_ids = apply_gap_reconciliation(final, decisions, gap_projection)
-    assert resolved == []
-    assert open_ids == ["R:G001", "R:G002"]
-    assert len(updated.gaps) == 2
+    global_projection = project_reconciliation_input({"J11": worker}, {})
+    assert {gap.gap_type for gap in global_projection.gaps} == {"investigation", "evidence"}
+    assert all(gap.gap_type != "report" for gap in global_projection.gaps)

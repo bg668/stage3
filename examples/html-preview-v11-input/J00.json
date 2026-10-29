@@ -1,0 +1,166 @@
+{
+  "packet_name": "J00",
+  "elapsed_seconds": 0.0,
+  "revision_performed": false,
+  "delivery_status": "success",
+  "schema_version": "11.0",
+  "stage_models": {},
+  "stage_statuses": {},
+  "stage_usage": {},
+  "format_repair": {
+    "triggered": 0,
+    "successful": 0,
+    "failed": 0,
+    "attempts": 0,
+    "stage_attempts": {},
+    "usage": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0,
+      "visible_output_tokens": 0,
+      "total_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    }
+  },
+  "usage": {
+    "requests": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_tokens": 0,
+    "visible_output_tokens": 0,
+    "total_tokens": 0,
+    "cache_read_tokens": 0,
+    "cache_write_tokens": 0,
+    "cost_usd": null
+  },
+  "dependency_ids": [],
+  "dependency_context_chars": 0,
+  "review_completed": true,
+  "revision_failed": false,
+  "review": null,
+  "result": {
+    "status": "complete_with_gaps",
+    "summary": "合成样本测试夹具：包括一个用途尚未明确的模式调用。",
+    "claims": [
+      {
+        "behavior": "读取并解码配置资源",
+        "condition": "入口被调用且配置解码成功",
+        "source": "HTML_PREVIEW_TEST 资源",
+        "action": "read_demo_resource → decode_demo_config",
+        "sink": "config 配置对象",
+        "evidence": [
+          {
+            "location": "F-0010 L1-L3",
+            "observation": "读取具名资源并解码；解码失败时返回。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": []
+      },
+      {
+        "behavior": "将配置写入本地文件",
+        "condition": "config 非空",
+        "source": "解码后的 config",
+        "action": "CreateFileA → WriteFile → CloseHandle",
+        "sink": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+        "evidence": [
+          {
+            "location": "F-0010 L4-L7",
+            "observation": "创建配置路径并将配置缓冲区写入文件。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": []
+      },
+      {
+        "behavior": "按开关将配置文件提交至网络端点",
+        "condition": "config->send_enabled 为真",
+        "source": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+        "action": "read_demo_file → demo_http_post",
+        "sink": "https://collector.invalid/preview",
+        "evidence": [
+          {
+            "location": "F-0010 L8-L11",
+            "observation": "发送开关分支内读取落地文件并将其作为请求体提交到指定端点。"
+          }
+        ],
+        "confidence": "high",
+        "evidence_level": "confirmed",
+        "limitations": []
+      },
+      {
+        "behavior": "可能按配置切换额外数据处理模式",
+        "condition": "config->mode 等于 2",
+        "source": "配置 mode 字段",
+        "action": "解析处理例程并间接调用",
+        "sink": "用途未明确的目标例程",
+        "evidence": [
+          {
+            "location": "F-0020 L1-L5",
+            "observation": "模式值为2时解析目标函数并传入配置对象调用；目标函数体不在材料中。"
+          }
+        ],
+        "confidence": "medium",
+        "evidence_level": "suspected",
+        "limitations": [
+          "目标例程未恢复，额外模式的具体用途及其与主流程的联系尚未明确。"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "kind": "file",
+        "value": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+        "role": "created_output",
+        "detection_specificity": "high",
+        "meaning": "合成样本的配置落地文件（测试数据）",
+        "evidence": [
+          {
+            "location": "F-0010 L4-L7",
+            "observation": "创建配置路径并将配置缓冲区写入文件。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "network",
+        "value": "https://collector.invalid/preview",
+        "role": "other",
+        "detection_specificity": "high",
+        "meaning": "合成样本的保留域名端点（测试数据，不是真实基础设施）",
+        "evidence": [
+          {
+            "location": "F-0010 L8-L11",
+            "observation": "发送开关分支内读取落地文件并将其作为请求体提交到指定端点。"
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "kind": "resource",
+        "value": "HTML_PREVIEW_TEST",
+        "role": "config_marker",
+        "detection_specificity": "high",
+        "meaning": "合成样本配置资源名（测试数据）",
+        "evidence": [
+          {
+            "location": "F-0010 L1-L3",
+            "observation": "读取具名资源并解码；解码失败时返回。"
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "gaps": [],
+    "handoffs": [],
+    "material_needs": []
+  },
+  "partial_result": null,
+  "raw_output_paths": {},
+  "validation_errors": {}
+}

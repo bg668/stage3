@@ -1,0 +1,234 @@
+{
+  "meta": {
+    "id": "HTML-PREVIEW-SYNTHETIC",
+    "title": "配置落地、条件提交与模式调用 · 合成样本预览",
+    "date": "2026-10-25",
+    "product": "分析报告",
+    "edition": "完整布局示例 · HTML 预览 · 含测试数据",
+    "tlp": "TLP:CLEAR",
+    "status": "HTML 预览 · 含测试数据",
+    "risk": "medium",
+    "verdict": "具备配置落地与条件网络提交机制，并存在用途未闭合的模式调用。"
+  },
+  "hashes": [
+    {
+      "type": "SHA256",
+      "value": "0000000000000000000000000000000000000000000000000000000000000000",
+      "source": "测试数据：全零占位值，不是样本哈希"
+    }
+  ],
+  "attack": [
+    {
+      "id": "T0000",
+      "name": "版式测试条目（测试数据）",
+      "evidence": "测试数据，仅验证模块显示，不代表样本技术映射",
+      "confidence": "测试数据"
+    }
+  ],
+  "attribution": {
+    "family": "示例家族（测试数据）",
+    "confidence": "测试数据，无归因效力",
+    "support": [
+      "测试数据，仅验证归因模块排版"
+    ],
+    "not_confirmed": [
+      "测试数据不构成当前样本的家族归因"
+    ]
+  },
+  "yara": "/* 测试数据：仅用于 HTML 预览，不用于检测 */\nrule HTML_Preview_Test_Only { condition: false }",
+  "schema_version": "1.0",
+  "summary": [
+    "配置资源解码后写入本地文件；发送开关开启时，程序读取该文件并提交至指定端点。",
+    "另有受配置模式值控制的间接调用，可能扩展数据处理方式，其具体用途尚未明确。"
+  ],
+  "risk_judgement": "网络提交使配置内容具备离开本机的路径；影响取决于配置内容与发送开关，应优先核对这两项。",
+  "chain": [
+    {
+      "name": "解码资源",
+      "action": "配置解码失败则返回；成功后继续处理。",
+      "evidence": [
+        "F-0010 L1-L3"
+      ],
+      "key": false,
+      "phase": "配置准备"
+    },
+    {
+      "name": "写出配置",
+      "action": "将解码后的配置缓冲区保存到本地路径。",
+      "evidence": [
+        "F-0010 L4-L7"
+      ],
+      "key": false,
+      "phase": "数据落地"
+    },
+    {
+      "name": "条件提交",
+      "action": "发送开关开启时读取已写出的文件并提交。",
+      "evidence": [
+        "F-0010 L8-L11"
+      ],
+      "key": true,
+      "phase": "外部提交"
+    }
+  ],
+  "sections": [
+    {
+      "id": "mechanism-1",
+      "title": "资源配置如何落地并驱动后续流程",
+      "question": "配置来自哪里，如何进入后续数据流？",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "主流程先读取具名资源并解码。只有配置解码成功才创建文件，写出的缓冲区随后成为网络提交的数据来源。"
+        },
+        {
+          "type": "kv",
+          "mono": true,
+          "items": [
+            {
+              "k": "配置资源",
+              "v": "HTML_PREVIEW_TEST"
+            },
+            {
+              "k": "落地路径",
+              "v": "C:\\HTML_PREVIEW_TEST\\demo.cfg"
+            }
+          ]
+        },
+        {
+          "type": "subheading",
+          "text": "配置写入的关键步骤 · F-0010 L4-L7"
+        },
+        {
+          "type": "code",
+          "language": "c",
+          "text": "L0004: path = \"C:\\HTML_PREVIEW_TEST\\demo.cfg\";\nL0005: h = CreateFileA(path, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, 0, 0);\nL0006: WriteFile(h, config, config_size, &written, 0);\nL0007: CloseHandle(h);"
+        }
+      ]
+    },
+    {
+      "id": "mechanism-2",
+      "title": "发送开关如何控制配置提交",
+      "question": "何时发送，发送的数据来自哪里？",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "提交逻辑位于 send_enabled 分支：请求体通过读取落地配置文件取得，目标端点在分支内指定。该条件将本地写出与网络提交连接起来。"
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "检查发送条件",
+              "text": "config->send_enabled 为真"
+            },
+            {
+              "title": "读取待提交数据",
+              "text": "C:\\HTML_PREVIEW_TEST\\demo.cfg"
+            },
+            {
+              "title": "提交至目标端点",
+              "text": "https://collector.invalid/preview"
+            }
+          ]
+        },
+        {
+          "type": "subheading",
+          "text": "开关、请求体与端点的对应关系 · F-0010 L8-L11"
+        },
+        {
+          "type": "code",
+          "language": "c",
+          "text": "L0008: if (config->send_enabled) {\nL0009:   body = read_demo_file(path);\nL0010:   endpoint = \"https://collector.invalid/preview\";\nL0011:   demo_http_post(endpoint, body);"
+        }
+      ]
+    },
+    {
+      "id": "mechanism-3",
+      "title": "额外处理模式的用途尚未闭合",
+      "question": "模式2分支与主要流程是什么关系？",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "配置模式值为2时，程序解析一个目标函数并传入配置对象调用。这可能承担额外的数据处理，但目标例程未恢复，暂不能确定其作用或与提交流程的联系。"
+        },
+        {
+          "type": "callout",
+          "text": "当前可见的是条件分支和间接调用，后续应恢复目标例程以明确模式2承担的工作。",
+          "tone": "boundary",
+          "label": "待明确的关系"
+        }
+      ]
+    }
+  ],
+  "ioc": {
+    "host": [
+      {
+        "type": "file",
+        "value": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+        "note": "合成样本的配置落地文件（测试数据）；F-0010 L4-L7：创建配置路径并将配置缓冲区写入文件。"
+      },
+      {
+        "type": "resource",
+        "value": "HTML_PREVIEW_TEST",
+        "note": "合成样本配置资源名（测试数据）；F-0010 L1-L3：读取具名资源并解码；解码失败时返回。"
+      }
+    ],
+    "network": [
+      {
+        "type": "network",
+        "value": "https://collector.invalid/preview",
+        "note": "合成样本的保留域名端点（测试数据，不是真实基础设施）；F-0010 L8-L11：发送开关分支内读取落地文件并将其作为请求体提交到指定端点。"
+      }
+    ]
+  },
+  "detection": [
+    {
+      "type": "steps",
+      "items": [
+        {
+          "title": "关联本地配置与外部提交",
+          "text": "关联同一进程的配置文件写入、随后读取与请求活动，重点核对发送开关及请求体来源。"
+        },
+        {
+          "title": "核对关联对象",
+          "text": "结合配置资源名、落地路径及提交端点检索，按具体对象用途进行比对。"
+        }
+      ]
+    }
+  ],
+  "response": [
+    {
+      "title": "保全配置与进程线索",
+      "text": "保全落地配置，核对其内容、关联进程及写入时间。"
+    },
+    {
+      "title": "确认提交范围",
+      "text": "结合发送开关与端点访问记录核查哪些配置数据具备外部提交路径。"
+    },
+    {
+      "title": "恢复模式调用目标",
+      "text": "明确模式2调用的实现及输入输出，再判断其与主要机制的联系。"
+    }
+  ],
+  "gaps": [
+    {
+      "gap": "模式2目标例程承担什么作用？",
+      "impact": "影响额外处理能力及其与主流程关系的判断。",
+      "blocking": false
+    }
+  ],
+  "functions": [
+    {
+      "function": "F-0010 sub_preview_main",
+      "role": "配置写入的关键步骤",
+      "lines": "L0004-L0007"
+    },
+    {
+      "function": "F-0010 sub_preview_main",
+      "role": "开关、请求体与端点的对应关系",
+      "lines": "L0008-L0011"
+    }
+  ],
+  "final": "优先核对配置内容和发送条件，随后恢复模式2目标例程，补全对主要数据流与辅助能力的整体理解。"
+}

@@ -1,0 +1,324 @@
+{
+  "meta": {
+    "id": "HTML-PREVIEW-SYNTHETIC",
+    "title": "配置落地与网络提交 · 合成样本预览",
+    "date": "2026-10-23",
+    "product": "分析报告",
+    "edition": "完整布局示例 · HTML 预览 · 含测试数据",
+    "tlp": "TLP:CLEAR",
+    "status": "HTML 预览 · 含测试数据",
+    "risk": "high",
+    "verdict": "具备配置落地与条件网络提交机制。"
+  },
+  "hashes": [
+    {
+      "type": "SHA256",
+      "value": "0000000000000000000000000000000000000000000000000000000000000000",
+      "source": "测试数据：全零占位值，不是样本哈希"
+    }
+  ],
+  "attack": [
+    {
+      "id": "T0000",
+      "name": "版式测试条目（测试数据）",
+      "evidence": "测试数据，仅验证模块显示，不代表样本技术映射",
+      "confidence": "测试数据"
+    }
+  ],
+  "attribution": {
+    "family": "示例家族（测试数据）",
+    "confidence": "测试数据，无归因效力",
+    "support": [
+      "测试数据，仅验证归因模块排版"
+    ],
+    "not_confirmed": [
+      "测试数据不构成当前样本的家族归因"
+    ]
+  },
+  "yara": "/* 测试数据：仅用于 HTML 预览，不用于检测 */\nrule HTML_Preview_Test_Only { condition: false }",
+  "schema_version": "1.0",
+  "summary": [
+    "流程由资源配置驱动：解码后写入本地文件，启用发送开关时读取该文件并提交。",
+    "关键对象是配置资源、落地路径和提交端点；均可回到对应函数行段复核。"
+  ],
+  "risk_judgement": "网络提交会使配置内容离开本机，应结合文件内容和发送开关判断影响范围；风险依据数据流与外部提交能力研判。",
+  "chain": [
+    {
+      "name": "解码资源",
+      "action": "从具名资源取得配置；解码失败则返回。",
+      "evidence": [
+        "F-0010 L1-L3"
+      ],
+      "key": false,
+      "phase": "准备"
+    },
+    {
+      "name": "写出配置",
+      "action": "将解码后的配置缓冲区写入本地路径。",
+      "evidence": [
+        "F-0010 L4-L7"
+      ],
+      "key": true,
+      "phase": "落地"
+    },
+    {
+      "name": "条件提交",
+      "action": "发送开关开启时读取该路径，并向指定端点提交。",
+      "evidence": [
+        "F-0010 L8-L11"
+      ],
+      "key": true,
+      "phase": "通信"
+    }
+  ],
+  "sections": [
+    {
+      "id": "mechanism-1",
+      "title": "配置解码与落地",
+      "question": "配置来自哪里，如何保存？",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "资源解码成功后才进入文件写入流程，落地路径与缓冲区去向明确。"
+        },
+        {
+          "type": "table",
+          "columns": [
+            "行为",
+            "条件",
+            "来源",
+            "动作",
+            "去向",
+            "证据",
+            "证据等级",
+            "来源 ID"
+          ],
+          "mono_columns": [
+            2,
+            3,
+            4,
+            5,
+            7
+          ],
+          "rows": [
+            [
+              "读取并解码配置资源",
+              "入口被调用且配置解码成功",
+              "HTML_PREVIEW_TEST 资源",
+              "read_demo_resource → decode_demo_config",
+              "config 配置对象",
+              "F-0010 L1-L3：读取具名资源并解码；解码失败时返回。",
+              "confirmed",
+              "G:C001；J00:C001"
+            ],
+            [
+              "将配置写入本地文件",
+              "config 非空",
+              "解码后的 config",
+              "CreateFileA → WriteFile → CloseHandle",
+              "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+              "F-0010 L4-L7：创建配置路径并将配置缓冲区写入文件。",
+              "confirmed",
+              "G:C002；J00:C002"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "columns": [
+            "类型",
+            "原值",
+            "角色",
+            "含义",
+            "证据",
+            "来源 ID"
+          ],
+          "mono_columns": [
+            1,
+            4,
+            5
+          ],
+          "rows": [
+            [
+              "file",
+              "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+              "created_output",
+              "合成样本的配置落地文件（测试数据）",
+              "F-0010 L4-L7：创建配置路径并将配置缓冲区写入文件。",
+              "G:A001；J00:A001"
+            ],
+            [
+              "resource",
+              "HTML_PREVIEW_TEST",
+              "config_marker",
+              "合成样本配置资源名（测试数据）",
+              "F-0010 L1-L3：读取具名资源并解码；解码失败时返回。",
+              "G:A003；J00:A003"
+            ]
+          ]
+        },
+        {
+          "type": "subheading",
+          "text": "G:C001 · F-0010 L1-L3"
+        },
+        {
+          "type": "code",
+          "language": "c",
+          "text": "L0001: resource = read_demo_resource(\"HTML_PREVIEW_TEST\");\nL0002: config = decode_demo_config(resource);\nL0003: if (!config) return false;"
+        },
+        {
+          "type": "subheading",
+          "text": "G:C002 · F-0010 L4-L7"
+        },
+        {
+          "type": "code",
+          "language": "c",
+          "text": "L0004: path = \"C:\\HTML_PREVIEW_TEST\\demo.cfg\";\nL0005: h = CreateFileA(path, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, 0, 0);\nL0006: WriteFile(h, config, config_size, &written, 0);\nL0007: CloseHandle(h);"
+        }
+      ]
+    },
+    {
+      "id": "mechanism-2",
+      "title": "开关控制的网络提交",
+      "question": "何时发送，发送什么？",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "网络提交位于发送开关分支，请求体来自刚写出的配置文件。"
+        },
+        {
+          "type": "table",
+          "columns": [
+            "行为",
+            "条件",
+            "来源",
+            "动作",
+            "去向",
+            "证据",
+            "证据等级",
+            "来源 ID"
+          ],
+          "mono_columns": [
+            2,
+            3,
+            4,
+            5,
+            7
+          ],
+          "rows": [
+            [
+              "按开关将配置文件提交至网络端点",
+              "config->send_enabled 为真",
+              "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+              "read_demo_file → demo_http_post",
+              "https://collector.invalid/preview",
+              "F-0010 L8-L11：发送开关分支内读取落地文件并将其作为请求体提交到指定端点。",
+              "confirmed",
+              "G:C003；J00:C003"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "columns": [
+            "类型",
+            "原值",
+            "角色",
+            "含义",
+            "证据",
+            "来源 ID"
+          ],
+          "mono_columns": [
+            1,
+            4,
+            5
+          ],
+          "rows": [
+            [
+              "network",
+              "https://collector.invalid/preview",
+              "other",
+              "合成样本的保留域名端点（测试数据，不是真实基础设施）",
+              "F-0010 L8-L11：发送开关分支内读取落地文件并将其作为请求体提交到指定端点。",
+              "G:A002；J00:A002"
+            ]
+          ]
+        },
+        {
+          "type": "subheading",
+          "text": "G:C003 · F-0010 L8-L11"
+        },
+        {
+          "type": "code",
+          "language": "c",
+          "text": "L0008: if (config->send_enabled) {\nL0009:   body = read_demo_file(path);\nL0010:   endpoint = \"https://collector.invalid/preview\";\nL0011:   demo_http_post(endpoint, body);"
+        }
+      ]
+    }
+  ],
+  "ioc": {
+    "host": [
+      {
+        "type": "file",
+        "value": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+        "note": "合成样本的配置落地文件（测试数据）；F-0010 L4-L7：创建配置路径并将配置缓冲区写入文件。；G:A001；J00:A001"
+      },
+      {
+        "type": "resource",
+        "value": "HTML_PREVIEW_TEST",
+        "note": "合成样本配置资源名（测试数据）；F-0010 L1-L3：读取具名资源并解码；解码失败时返回。；G:A003；J00:A003"
+      }
+    ],
+    "network": [
+      {
+        "type": "network",
+        "value": "https://collector.invalid/preview",
+        "note": "合成样本的保留域名端点（测试数据，不是真实基础设施）；F-0010 L8-L11：发送开关分支内读取落地文件并将其作为请求体提交到指定端点。；G:A002；J00:A002"
+      }
+    ]
+  },
+  "detection": [
+    {
+      "type": "steps",
+      "items": [
+        {
+          "title": "关联文件与网络活动",
+          "text": "关联配置文件创建、随后读取及网络请求，核对其进程与时间关系。"
+        },
+        {
+          "title": "核对关键对象",
+          "text": "结合配置资源名、落地路径和请求端点筛查，保留对象原值及证据位置。"
+        }
+      ]
+    }
+  ],
+  "response": [
+    {
+      "title": "保全配置与进程线索",
+      "text": "先保全落地配置，记录关联进程、父进程和写入时间。"
+    },
+    {
+      "title": "核查发送范围",
+      "text": "检查发送开关与端点访问记录，确认配置内容和相关主机范围。"
+    }
+  ],
+  "gaps": [],
+  "functions": [
+    {
+      "function": "F-0010 sub_preview_main",
+      "role": "读取并解码配置资源；合成样本配置资源名（测试数据）",
+      "lines": "L0001-L0003"
+    },
+    {
+      "function": "F-0010 sub_preview_main",
+      "role": "将配置写入本地文件；合成样本的配置落地文件（测试数据）",
+      "lines": "L0004-L0007"
+    },
+    {
+      "function": "F-0010 sub_preview_main",
+      "role": "按开关将配置文件提交至网络端点；合成样本的保留域名端点（测试数据，不是真实基础设施）",
+      "lines": "L0008-L0011"
+    }
+  ],
+  "final": "优先串联“资源解码—配置写出—条件提交”三段证据，围绕落地配置及对应网络请求开展复核与处置。"
+}

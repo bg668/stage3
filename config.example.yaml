@@ -1,3 +1,5 @@
+# Optional versioned policy directory; relative to this config file.
+# harness_dir: ./my-harness
 providers:
   deepseek:
     type: deepseek
@@ -67,14 +69,14 @@ stages:
   format_repair:
     model: repair_fast
     max_output_tokens: 40960
-  # v0.7: relationship decisions only; canonical facts are assembled by Python.
+  # Relationship decisions only; canonical facts are assembled by Python.
   global_reconciliation:
     model: global_reconciler
     max_output_tokens: 40960
-  # v0.8: ID-only cleanup of stale historical gaps after canonical facts exist.
-  gap_reconciliation:
+  # Read-only HTML narrative composition; does not rerun investigation roles.
+  report_composition:
     model: global_reconciler
-    max_output_tokens: 15360
+    max_output_tokens: 16384
 
 workflow:
   max_model_requests: 3
@@ -95,11 +97,10 @@ global_reconciliation:
   total_tokens_limit: 160000
   wall_clock_seconds: 300
 
-gap_reconciliation:
-  enabled: true
-  max_model_requests: 1
-  total_tokens_limit: 60000
-  wall_clock_seconds: 120
+html_report:
+  max_model_requests: 2
+  total_tokens_limit: 64000
+  wall_clock_seconds: 300
 
 batch:
   concurrency: 4

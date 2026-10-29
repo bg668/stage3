@@ -4,11 +4,8 @@ from enum import Enum
 from typing import Literal
 
 from pydantic import BaseModel, Field, model_validator
-from pydantic.json_schema import SkipJsonSchema
 
-SCHEMA_VERSION = "10.0"
-
-
+SCHEMA_VERSION = "11.0"
 
 
 class DeliveryStatus(str, Enum):
@@ -54,7 +51,7 @@ class InvestigationStatus(str, Enum):
 
 
 class EvidenceRef(BaseModel):
-    location: str = Field(description="Function/range/section, e.g. F-0482 L39-L93")
+    location: str = Field(description="Source location in F-XXXX Lx[-Ly] form, e.g. F-0482 L39-L93. Reuse original locations from dependencies; never cite summary labels or insert function names between the ID and line range.")
     observation: str = Field(description="What is directly visible at this location")
 
 
@@ -111,7 +108,6 @@ class GapItem(BaseModel):
     impact: Literal["critical", "major", "minor"]
 
 
-
 class MaterialTarget(BaseModel):
     """One exact function/symbol and optional requested source-line interval.
 
@@ -162,34 +158,6 @@ class MaterialNeed(BaseModel):
             if target.start_line is not None else target.identifier
             for target in self.targets
         )
-
-
-class FinalUncertainty(BaseModel):
-    """Report-level unknown with explicit provenance and non-conflated causes."""
-
-    question: str = Field(min_length=1)
-    impact: Literal["critical", "major", "minor"]
-    reason: str = Field(min_length=1)
-    uncertainty_type: Literal[
-        "material_unavailable", "material_not_in_input", "material_not_analyzed",
-        "analysis_incomplete", "runtime_unverified", "unresolved_behavior"
-    ] = "unresolved_behavior"
-    related_claim_ids: list[str] = Field(default_factory=list)
-    related_artifact_ids: list[str] = Field(default_factory=list)
-    related_gap_ids: list[str] = Field(default_factory=list)
-    related_scope_ids: list[str] = Field(default_factory=list)
-    related_packet_ids: list[str] = Field(default_factory=list)
-
-
-class FinalEvidenceAssessment(BaseModel):
-    """Final evidence-limited behavior uncertainties, not a material-absence checklist.
-
-    `FinalUncertainty` retains legacy types so saved v1.5 results remain readable;
-    operational/material-only entries are removed before final provenance validation.
-    """
-
-    summary: str = Field(min_length=1)
-    remaining_uncertainties: list[FinalUncertainty] = Field(default_factory=list)
 
 
 class MaterialSuggestion(BaseModel):
@@ -245,20 +213,6 @@ class PartialInvestigationResult(BaseModel):
     rejected_artifacts: int = 0
 
 
-class RevisionTarget(BaseModel):
-    """A permitted edit using zero-based paths into the ORIGINAL Analyzer result."""
-
-    operation: Literal["replace", "append", "delete"]
-    path: str = Field(
-        min_length=1,
-        description=(
-            "Original-result path, e.g. /claims/0/source or /claims/*/evidence/*/location. "
-            "replace selects an existing field/item; append selects a new top-level list slot "
-            "starting at the original list length; delete selects one original top-level item."
-        ),
-    )
-
-
 class RevisionFix(BaseModel):
     """Correction intent; the program, not the Reviewer, grants field permissions."""
 
@@ -288,8 +242,6 @@ class ReviewIssue(BaseModel):
             "packet_internal issue must supply fixes; multiple types may target one object."
         ),
     )
-    # Read historical reviews, but never expose or execute their raw permissions.
-    revision_targets: SkipJsonSchema[list[RevisionTarget]] = Field(default_factory=list)
 
 
 class CoverageReview(BaseModel):
@@ -320,8 +272,6 @@ class UsageSummary(BaseModel):
     cache_read_tokens: int = 0
     cache_write_tokens: int = 0
     cost_usd: str | None = None
-
-
 
 
 class FormatRepairStats(BaseModel):
@@ -390,24 +340,6 @@ class GlobalReconciliationDecisionResult(BaseModel):
     artifact_conflict_decisions: list[ArtifactConflictDecision] = Field(default_factory=list)
 
 
-
-
-class GapReconciliationDecision(BaseModel):
-    gap_id: str
-    status: Literal["resolved", "still_open"]
-    resolved_by_claim_ids: list[str] = Field(default_factory=list)
-    reason: str = ""
-
-
-class GapReconciliationDecisionResult(BaseModel):
-    """Decision-only cleanup of historical gaps after canonical facts exist."""
-
-    decisions: list[GapReconciliationDecision] = Field(default_factory=list)
-    # backward compatibility for previous v0.8 decision format
-    resolved_gap_ids: list[str] = Field(default_factory=list)
-    still_open_gap_ids: list[str] = Field(default_factory=list)
-
-
 class CanonicalClaim(BaseModel):
     canonical_id: str = Field(description="Stable global id such as G:C001")
     behavior: str
@@ -455,7 +387,6 @@ class GlobalGap(BaseModel):
     reason: str
     source_packets: list[str] = Field(default_factory=list)
     impact: Literal["critical", "major", "minor"]
-    resolved_by_claim_ids: list[str] = Field(default_factory=list)
 
 
 class GlobalReconciliationResult(BaseModel):
@@ -468,30 +399,6 @@ class GlobalReconciliationResult(BaseModel):
     unavailable_packets: list[str] = Field(default_factory=list)
     unaccounted_input_claim_ids: list[str] = Field(default_factory=list)
     unaccounted_input_artifact_ids: list[str] = Field(default_factory=list)
-
-
-class FinalAssessmentEnvelope(BaseModel):
-    """Preserve stage status even if the final assessment cannot be trusted."""
-
-    delivery_status: DeliveryStatus
-    completed: bool = False
-    elapsed_seconds: float = 0.0
-    result: FinalEvidenceAssessment | None = None
-    usage: UsageSummary = Field(default_factory=UsageSummary)
-    format_repair: FormatRepairStats = Field(default_factory=FormatRepairStats)
-    raw_output_path: str | None = None
-    validation_errors: list[dict[str, object]] = Field(default_factory=list)
-    source_gap_count: int = 0
-    source_claim_count: int = 0
-    source_artifact_count: int = 0
-    provenance_valid: bool = False
-    warning: str | None = None
-    # Program-produced audit fields, NEVER generated by the assessment model.
-    material_scope: list[dict[str, object]] = Field(default_factory=list)
-    input_coverage_warnings: list[dict[str, object]] = Field(default_factory=list)
-    fallback_material_scope_ids: list[str] = Field(default_factory=list)  # legacy, always empty in v1.6
-    material_suggestions: list[MaterialSuggestion] = Field(default_factory=list)
-    redirected_uncertainties: list[dict[str, object]] = Field(default_factory=list)
 
 
 class GlobalReconciliationEnvelope(BaseModel):
@@ -508,12 +415,4 @@ class GlobalReconciliationEnvelope(BaseModel):
     reduced_artifact_count: int = 0
     artifact_conflict_count: int = 0
     provenance_valid: bool = False
-    final_assessment: FinalAssessmentEnvelope | None = None
-    # Deprecated legacy stats: old gap reconciliation is no longer executed.
-    gap_reconciliation_completed: bool = False
     source_gap_count: int = 0
-    resolved_gap_count: int = 0
-    still_open_gap_count: int = 0
-    gap_reconciliation_delivery_status: DeliveryStatus | None = None
-    gap_reconciliation_usage: UsageSummary = Field(default_factory=UsageSummary)
-    gap_reconciliation_raw_output_path: str | None = None

@@ -1,0 +1,115 @@
+{
+  "schema": "evidence_reference_validation_v1",
+  "scope": "full_material",
+  "total_segments": 7,
+  "valid_segments": 7,
+  "not_in_current_packet": 0,
+  "invalid_segments": 0,
+  "counts_by_status": {
+    "valid": 7
+  },
+  "passed": true,
+  "checks": [
+    {
+      "owner_kind": "canonical_claim",
+      "owner_id": "G:C001",
+      "location": "F-0010 L1-L3",
+      "observation": "读取具名资源并解码；解码失败时返回。",
+      "function_id": "F-0010",
+      "start_line": 1,
+      "end_line": 3,
+      "status": "valid",
+      "reason": "referenced source range exists",
+      "source_packets": [
+        "J00.md"
+      ]
+    },
+    {
+      "owner_kind": "canonical_claim",
+      "owner_id": "G:C002",
+      "location": "F-0010 L4-L7",
+      "observation": "创建配置路径并将配置缓冲区写入文件。",
+      "function_id": "F-0010",
+      "start_line": 4,
+      "end_line": 7,
+      "status": "valid",
+      "reason": "referenced source range exists",
+      "source_packets": [
+        "J00.md"
+      ]
+    },
+    {
+      "owner_kind": "canonical_claim",
+      "owner_id": "G:C003",
+      "location": "F-0010 L8-L11",
+      "observation": "发送开关分支内读取落地文件并将其作为请求体提交到指定端点。",
+      "function_id": "F-0010",
+      "start_line": 8,
+      "end_line": 11,
+      "status": "valid",
+      "reason": "referenced source range exists",
+      "source_packets": [
+        "J00.md"
+      ]
+    },
+    {
+      "owner_kind": "canonical_claim",
+      "owner_id": "G:C004",
+      "location": "F-0020 L1-L5",
+      "observation": "模式值为2时解析目标函数并传入配置对象调用；目标函数体不在材料中。",
+      "function_id": "F-0020",
+      "start_line": 1,
+      "end_line": 5,
+      "status": "valid",
+      "reason": "referenced source range exists",
+      "source_packets": [
+        "J00.md"
+      ]
+    },
+    {
+      "owner_kind": "canonical_artifact",
+      "owner_id": "G:A001",
+      "location": "F-0010 L4-L7",
+      "observation": "创建配置路径并将配置缓冲区写入文件。",
+      "function_id": "F-0010",
+      "start_line": 4,
+      "end_line": 7,
+      "status": "valid",
+      "reason": "referenced source range exists",
+      "source_packets": [
+        "J00.md"
+      ]
+    },
+    {
+      "owner_kind": "canonical_artifact",
+      "owner_id": "G:A002",
+      "location": "F-0010 L8-L11",
+      "observation": "发送开关分支内读取落地文件并将其作为请求体提交到指定端点。",
+      "function_id": "F-0010",
+      "start_line": 8,
+      "end_line": 11,
+      "status": "valid",
+      "reason": "referenced source range exists",
+      "source_packets": [
+        "J00.md"
+      ]
+    },
+    {
+      "owner_kind": "canonical_artifact",
+      "owner_id": "G:A003",
+      "location": "F-0010 L1-L3",
+      "observation": "读取具名资源并解码；解码失败时返回。",
+      "function_id": "F-0010",
+      "start_line": 1,
+      "end_line": 3,
+      "status": "valid",
+      "reason": "referenced source range exists",
+      "source_packets": [
+        "J00.md"
+      ]
+    }
+  ],
+  "claims_without_valid_evidence": [],
+  "confirmed_claims_without_valid_evidence": [],
+  "artifacts_without_valid_evidence": []
+}

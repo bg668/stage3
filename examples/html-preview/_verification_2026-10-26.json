@@ -1,0 +1,51 @@
+{
+  "checked_on": "2026-10-26",
+  "timezone": "Asia/Shanghai",
+  "generation": "passed_with_fixed_response",
+  "real_model_requests": 0,
+  "current_deliverables_match_regeneration": {
+    "_report_document.json": true,
+    "_html_report.json": true,
+    "_final_report.html": true
+  },
+  "claims": 4,
+  "unconfirmed_claims": 1,
+  "sections": 3,
+  "mechanism_blocks": {
+    "paragraph": 3,
+    "kv": 1,
+    "subheading": 2,
+    "code": 2,
+    "steps": 1,
+    "callout": 1
+  },
+  "verbatim_code_blocks": 2,
+  "canonical_iocs": 3,
+  "all_behaviors_referenced_in_body": "passed_existing_validation",
+  "template_validation": {
+    "errors": [],
+    "warnings": []
+  },
+  "embedded_json": "identical_to_template_json",
+  "source_files": "unchanged",
+  "css": "byte_identical_to_original",
+  "anchor_targets": "all_exist",
+  "internal_id_leak": "not_found_in_reader_text",
+  "external_page_assets": [],
+  "test_fills": 12,
+  "automated_tests": {
+    "command": "uv run --offline pytest tests -q -rs",
+    "passed": 383,
+    "skipped": 1,
+    "skip_reason": "Windows symlink creation permission"
+  },
+  "browser_visual_review": {
+    "status": "blocked",
+    "reason": "privileged native pipe bridge is not available; browser-client is not trusted"
+  },
+  "limitations": [
+    "Synthetic sample and fixed report response; does not establish real model writing quality.",
+    "No browser screenshot, layout or responsiveness review completed."
+  ],
+  "generation_manifest": "C:\\Users\\biguncle\\AppData\\Local\\Temp\\html-report-check-20261026-8qn4yui0\\_html_report_manifest.json"
+}

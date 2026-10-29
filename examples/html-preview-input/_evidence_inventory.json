@@ -1,0 +1,38 @@
+{
+  "schema_version": "1",
+  "packet_files": [
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-input\\packets\\J00.md",
+      "relative_path": "J00.md",
+      "size_bytes": 974,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    }
+  ],
+  "additional_files": [],
+  "code_sections": [
+    {
+      "function_id": "F-0010",
+      "symbol": "sub_preview_main",
+      "packet_id": "J00",
+      "start_line": 1,
+      "end_line": 14,
+      "total_lines": 14,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-input\\packets\\J00.md"
+    },
+    {
+      "function_id": "F-0020",
+      "symbol": "sub_preview_mode",
+      "packet_id": "J00",
+      "start_line": 1,
+      "end_line": 5,
+      "total_lines": 5,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-input\\packets\\J00.md"
+    }
+  ],
+  "scanned_roots": [
+    "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-input\\packets"
+  ],
+  "scan_complete": true,
+  "warnings": []
+}

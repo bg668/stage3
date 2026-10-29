@@ -1,0 +1,1241 @@
+{
+  "schema_version": "1",
+  "packet_files": [
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J00.md",
+      "relative_path": "J00.md",
+      "size_bytes": 10507,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md",
+      "relative_path": "J01.md",
+      "size_bytes": 11958,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md",
+      "relative_path": "J02.md",
+      "size_bytes": 13370,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md",
+      "relative_path": "J03.md",
+      "size_bytes": 16065,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J04.md",
+      "relative_path": "J04.md",
+      "size_bytes": 15927,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J05.md",
+      "relative_path": "J05.md",
+      "size_bytes": 8921,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J06.md",
+      "relative_path": "J06.md",
+      "size_bytes": 12643,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md",
+      "relative_path": "J07.md",
+      "size_bytes": 17170,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md",
+      "relative_path": "J08.md",
+      "size_bytes": 16769,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J09.md",
+      "relative_path": "J09.md",
+      "size_bytes": 16661,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J10.md",
+      "relative_path": "J10.md",
+      "size_bytes": 6009,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J11.md",
+      "relative_path": "J11.md",
+      "size_bytes": 14934,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J12.md",
+      "relative_path": "J12.md",
+      "size_bytes": 12479,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J13.md",
+      "relative_path": "J13.md",
+      "size_bytes": 13676,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md",
+      "relative_path": "J14.md",
+      "size_bytes": 11964,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    },
+    {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J15.md",
+      "relative_path": "J15.md",
+      "size_bytes": 4327,
+      "origin": "packet",
+      "format_hint": "markdown_file"
+    }
+  ],
+  "additional_files": [],
+  "code_sections": [
+    {
+      "function_id": "F-0500",
+      "symbol": "start",
+      "packet_id": "J00",
+      "start_line": 1,
+      "end_line": 196,
+      "total_lines": 196,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J00.md"
+    },
+    {
+      "function_id": "F-0373",
+      "symbol": "sub_406008",
+      "packet_id": "J00",
+      "start_line": 1,
+      "end_line": 7,
+      "total_lines": 7,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J00.md"
+    },
+    {
+      "function_id": "F-0370",
+      "symbol": "sub_405EAC",
+      "packet_id": "J00",
+      "start_line": 1,
+      "end_line": 9,
+      "total_lines": 9,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J00.md"
+    },
+    {
+      "function_id": "F-0367",
+      "symbol": "sub_405D70",
+      "packet_id": "J00",
+      "start_line": 1,
+      "end_line": 36,
+      "total_lines": 36,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J00.md"
+    },
+    {
+      "function_id": "F-0038",
+      "symbol": "sub_4013A4",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 28,
+      "total_lines": 28,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0036",
+      "symbol": "sub_401258",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 70,
+      "total_lines": 70,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0086",
+      "symbol": "sub_401B14",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 37,
+      "total_lines": 37,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0104",
+      "symbol": "sub_401D50",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 6,
+      "total_lines": 6,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0105",
+      "symbol": "sub_401D58",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 38,
+      "total_lines": 38,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0106",
+      "symbol": "sub_401D9C",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 28,
+      "total_lines": 28,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0108",
+      "symbol": "sub_401E10",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 70,
+      "total_lines": 70,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0110",
+      "symbol": "sub_401E94",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 72,
+      "total_lines": 72,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0112",
+      "symbol": "sub_401F48",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 6,
+      "total_lines": 6,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0113",
+      "symbol": "sub_401F54",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 21,
+      "total_lines": 21,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0116",
+      "symbol": "sub_401F9C",
+      "packet_id": "J01",
+      "start_line": 1,
+      "end_line": 5,
+      "total_lines": 5,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md"
+    },
+    {
+      "function_id": "F-0309",
+      "symbol": "sub_404460",
+      "packet_id": "J02",
+      "start_line": 1,
+      "end_line": 23,
+      "total_lines": 23,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md"
+    },
+    {
+      "function_id": "F-0310",
+      "symbol": "sub_4044D4",
+      "packet_id": "J02",
+      "start_line": 1,
+      "end_line": 56,
+      "total_lines": 56,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md"
+    },
+    {
+      "function_id": "F-0307",
+      "symbol": "sub_4042DC",
+      "packet_id": "J02",
+      "start_line": 1,
+      "end_line": 34,
+      "total_lines": 34,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md"
+    },
+    {
+      "function_id": "F-0308",
+      "symbol": "sub_404358",
+      "packet_id": "J02",
+      "start_line": 1,
+      "end_line": 42,
+      "total_lines": 42,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md"
+    },
+    {
+      "function_id": "F-0313",
+      "symbol": "sub_404604",
+      "packet_id": "J02",
+      "start_line": 1,
+      "end_line": 15,
+      "total_lines": 15,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md"
+    },
+    {
+      "function_id": "F-0325",
+      "symbol": "sub_40491C",
+      "packet_id": "J02",
+      "start_line": 1,
+      "end_line": 72,
+      "total_lines": 72,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md"
+    },
+    {
+      "function_id": "F-0317",
+      "symbol": "sub_4046E8",
+      "packet_id": "J02",
+      "start_line": 1,
+      "end_line": 21,
+      "total_lines": 21,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md"
+    },
+    {
+      "function_id": "F-0322",
+      "symbol": "sub_404880",
+      "packet_id": "J02",
+      "start_line": 1,
+      "end_line": 24,
+      "total_lines": 24,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md"
+    },
+    {
+      "function_id": "F-0497",
+      "symbol": "sub_40B93C",
+      "packet_id": "J02",
+      "start_line": 1,
+      "end_line": 64,
+      "total_lines": 64,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md"
+    },
+    {
+      "function_id": "F-0494",
+      "symbol": "sub_40B118",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 70,
+      "total_lines": 70,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0334",
+      "symbol": "sub_405124",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 13,
+      "total_lines": 13,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0335",
+      "symbol": "sub_405168",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 5,
+      "total_lines": 5,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0337",
+      "symbol": "sub_4051CC",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 48,
+      "total_lines": 48,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0338",
+      "symbol": "sub_4052EC",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 9,
+      "total_lines": 9,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0339",
+      "symbol": "sub_405310",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 9,
+      "total_lines": 9,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0340",
+      "symbol": "sub_405334",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 18,
+      "total_lines": 18,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0341",
+      "symbol": "sub_4053EC",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 18,
+      "total_lines": 18,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0342",
+      "symbol": "sub_4054A4",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 18,
+      "total_lines": 18,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0344",
+      "symbol": "sub_40555C",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 46,
+      "total_lines": 46,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0345",
+      "symbol": "sub_40562C",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 16,
+      "total_lines": 16,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0346",
+      "symbol": "sub_405684",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 11,
+      "total_lines": 11,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0347",
+      "symbol": "sub_4056C0",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 11,
+      "total_lines": 11,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0348",
+      "symbol": "sub_4056DC",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 15,
+      "total_lines": 15,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0349",
+      "symbol": "sub_405750",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 4,
+      "total_lines": 4,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0350",
+      "symbol": "sub_405770",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 8,
+      "total_lines": 8,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0351",
+      "symbol": "sub_405788",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 14,
+      "total_lines": 14,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0352",
+      "symbol": "sub_4057B4",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 13,
+      "total_lines": 13,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0353",
+      "symbol": "sub_405814",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 14,
+      "total_lines": 14,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0354",
+      "symbol": "sub_405850",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 14,
+      "total_lines": 14,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0355",
+      "symbol": "sub_40588C",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 9,
+      "total_lines": 9,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0492",
+      "symbol": "fn",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 14,
+      "total_lines": 14,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0493",
+      "symbol": "sub_40B108",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 4,
+      "total_lines": 4,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0498",
+      "symbol": "sub_40BA84",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 16,
+      "total_lines": 16,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0358",
+      "symbol": "sub_4058E0",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 17,
+      "total_lines": 17,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0359",
+      "symbol": "sub_405918",
+      "packet_id": "J03",
+      "start_line": 1,
+      "end_line": 10,
+      "total_lines": 10,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md"
+    },
+    {
+      "function_id": "F-0394",
+      "symbol": "sub_406B54",
+      "packet_id": "J04",
+      "start_line": 1,
+      "end_line": 261,
+      "total_lines": 261,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J04.md"
+    },
+    {
+      "function_id": "F-0365",
+      "symbol": "sub_405C4C",
+      "packet_id": "J04",
+      "start_line": 1,
+      "end_line": 38,
+      "total_lines": 38,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J04.md"
+    },
+    {
+      "function_id": "F-0388",
+      "symbol": "sub_4068B4",
+      "packet_id": "J04",
+      "start_line": 1,
+      "end_line": 47,
+      "total_lines": 47,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J04.md"
+    },
+    {
+      "function_id": "F-0391",
+      "symbol": "sub_406ADC",
+      "packet_id": "J04",
+      "start_line": 1,
+      "end_line": 6,
+      "total_lines": 6,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J04.md"
+    },
+    {
+      "function_id": "F-0390",
+      "symbol": "sub_406A50",
+      "packet_id": "J04",
+      "start_line": 1,
+      "end_line": 25,
+      "total_lines": 25,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J04.md"
+    },
+    {
+      "function_id": "F-0389",
+      "symbol": "sub_4069E4",
+      "packet_id": "J04",
+      "start_line": 1,
+      "end_line": 9,
+      "total_lines": 9,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J04.md"
+    },
+    {
+      "function_id": "F-0368",
+      "symbol": "sub_405E18",
+      "packet_id": "J05",
+      "start_line": 1,
+      "end_line": 9,
+      "total_lines": 9,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J05.md"
+    },
+    {
+      "function_id": "F-0369",
+      "symbol": "sub_405E60",
+      "packet_id": "J05",
+      "start_line": 1,
+      "end_line": 9,
+      "total_lines": 9,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J05.md"
+    },
+    {
+      "function_id": "F-0371",
+      "symbol": "sub_405EF0",
+      "packet_id": "J05",
+      "start_line": 1,
+      "end_line": 20,
+      "total_lines": 20,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J05.md"
+    },
+    {
+      "function_id": "F-0372",
+      "symbol": "sub_405F7C",
+      "packet_id": "J05",
+      "start_line": 1,
+      "end_line": 20,
+      "total_lines": 20,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J05.md"
+    },
+    {
+      "function_id": "F-0374",
+      "symbol": "sub_406034",
+      "packet_id": "J05",
+      "start_line": 1,
+      "end_line": 18,
+      "total_lines": 18,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J05.md"
+    },
+    {
+      "function_id": "F-0377",
+      "symbol": "sub_4061DC",
+      "packet_id": "J05",
+      "start_line": 1,
+      "end_line": 21,
+      "total_lines": 21,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J05.md"
+    },
+    {
+      "function_id": "F-0383",
+      "symbol": "sub_406684",
+      "packet_id": "J05",
+      "start_line": 1,
+      "end_line": 64,
+      "total_lines": 64,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J05.md"
+    },
+    {
+      "function_id": "F-0375",
+      "symbol": "sub_406088",
+      "packet_id": "J05",
+      "start_line": 1,
+      "end_line": 47,
+      "total_lines": 47,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J05.md"
+    },
+    {
+      "function_id": "F-0480",
+      "symbol": "sub_409AD4",
+      "packet_id": "J06",
+      "start_line": 1,
+      "end_line": 33,
+      "total_lines": 33,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J06.md"
+    },
+    {
+      "function_id": "F-0469",
+      "symbol": "sub_4097BC",
+      "packet_id": "J06",
+      "start_line": 1,
+      "end_line": 5,
+      "total_lines": 5,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J06.md"
+    },
+    {
+      "function_id": "F-0470",
+      "symbol": "sub_4097C4",
+      "packet_id": "J06",
+      "start_line": 1,
+      "end_line": 19,
+      "total_lines": 19,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J06.md"
+    },
+    {
+      "function_id": "F-0471",
+      "symbol": "sub_4097F8",
+      "packet_id": "J06",
+      "start_line": 1,
+      "end_line": 105,
+      "total_lines": 105,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J06.md"
+    },
+    {
+      "function_id": "F-0472",
+      "symbol": "sub_4098DC",
+      "packet_id": "J06",
+      "start_line": 1,
+      "end_line": 23,
+      "total_lines": 23,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J06.md"
+    },
+    {
+      "function_id": "F-0482",
+      "symbol": "sub_409D28",
+      "packet_id": "J06",
+      "start_line": 1,
+      "end_line": 94,
+      "total_lines": 94,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J06.md"
+    },
+    {
+      "function_id": "F-0481",
+      "symbol": "sub_409C1C",
+      "packet_id": "J06",
+      "start_line": 1,
+      "end_line": 81,
+      "total_lines": 81,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J06.md"
+    },
+    {
+      "function_id": "F-0440",
+      "symbol": "sub_408238",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 166,
+      "total_lines": 166,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0433",
+      "symbol": "sub_407DD0",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 21,
+      "total_lines": 21,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0434",
+      "symbol": "sub_407E40",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 32,
+      "total_lines": 32,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0435",
+      "symbol": "sub_407F4C",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 13,
+      "total_lines": 13,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0436",
+      "symbol": "sub_407FF0",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 15,
+      "total_lines": 15,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0430",
+      "symbol": "sub_407B94",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 76,
+      "total_lines": 76,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0431",
+      "symbol": "sub_407CAC",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 44,
+      "total_lines": 44,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0432",
+      "symbol": "sub_407D90",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 14,
+      "total_lines": 14,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0437",
+      "symbol": "sub_408038",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 33,
+      "total_lines": 33,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0439",
+      "symbol": "sub_4081BC",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 7,
+      "total_lines": 7,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0476",
+      "symbol": "sub_409A84",
+      "packet_id": "J07",
+      "start_line": 1,
+      "end_line": 4,
+      "total_lines": 4,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md"
+    },
+    {
+      "function_id": "F-0419",
+      "symbol": "sub_407834",
+      "packet_id": "J08",
+      "start_line": 1,
+      "end_line": 80,
+      "total_lines": 80,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md"
+    },
+    {
+      "function_id": "F-0417",
+      "symbol": "sub_4076C0",
+      "packet_id": "J08",
+      "start_line": 1,
+      "end_line": 55,
+      "total_lines": 55,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md"
+    },
+    {
+      "function_id": "F-0416",
+      "symbol": "sub_407598",
+      "packet_id": "J08",
+      "start_line": 1,
+      "end_line": 61,
+      "total_lines": 61,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md"
+    },
+    {
+      "function_id": "F-0418",
+      "symbol": "sub_4077D4",
+      "packet_id": "J08",
+      "start_line": 1,
+      "end_line": 25,
+      "total_lines": 25,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md"
+    },
+    {
+      "function_id": "F-0410",
+      "symbol": "sub_407244",
+      "packet_id": "J08",
+      "start_line": 1,
+      "end_line": 88,
+      "total_lines": 88,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md"
+    },
+    {
+      "function_id": "F-0411",
+      "symbol": "sub_4073A0",
+      "packet_id": "J08",
+      "start_line": 1,
+      "end_line": 25,
+      "total_lines": 25,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md"
+    },
+    {
+      "function_id": "F-0412",
+      "symbol": "sub_4073FC",
+      "packet_id": "J08",
+      "start_line": 1,
+      "end_line": 19,
+      "total_lines": 19,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md"
+    },
+    {
+      "function_id": "F-0413",
+      "symbol": "sub_40744C",
+      "packet_id": "J08",
+      "start_line": 1,
+      "end_line": 67,
+      "total_lines": 67,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md"
+    },
+    {
+      "function_id": "F-0415",
+      "symbol": "sub_40756C",
+      "packet_id": "J08",
+      "start_line": 1,
+      "end_line": 13,
+      "total_lines": 13,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md"
+    },
+    {
+      "function_id": "F-0477",
+      "symbol": "sub_409A90",
+      "packet_id": "J08",
+      "start_line": 1,
+      "end_line": 4,
+      "total_lines": 4,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md"
+    },
+    {
+      "function_id": "F-0466",
+      "symbol": "sub_4096EC",
+      "packet_id": "J09",
+      "start_line": 1,
+      "end_line": 19,
+      "total_lines": 19,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J09.md"
+    },
+    {
+      "function_id": "F-0464",
+      "symbol": "sub_408E58",
+      "packet_id": "J09",
+      "start_line": 1,
+      "end_line": 148,
+      "total_lines": 148,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J09.md"
+    },
+    {
+      "function_id": "F-0461",
+      "symbol": "sub_408AF8",
+      "packet_id": "J09",
+      "start_line": 1,
+      "end_line": 72,
+      "total_lines": 72,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J09.md"
+    },
+    {
+      "function_id": "F-0463",
+      "symbol": "sub_408CCC",
+      "packet_id": "J09",
+      "start_line": 1,
+      "end_line": 60,
+      "total_lines": 60,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J09.md"
+    },
+    {
+      "function_id": "F-0449",
+      "symbol": "sub_40879C",
+      "packet_id": "J09",
+      "start_line": 1,
+      "end_line": 58,
+      "total_lines": 58,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J09.md"
+    },
+    {
+      "function_id": "F-0475",
+      "symbol": "sub_409980",
+      "packet_id": "J09",
+      "start_line": 1,
+      "end_line": 31,
+      "total_lines": 31,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J09.md"
+    },
+    {
+      "function_id": "F-0478",
+      "symbol": "sub_409A9C",
+      "packet_id": "J09",
+      "start_line": 1,
+      "end_line": 10,
+      "total_lines": 10,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J09.md"
+    },
+    {
+      "function_id": "F-0465",
+      "symbol": "sub_40930C",
+      "packet_id": "J10",
+      "start_line": 1,
+      "end_line": 114,
+      "total_lines": 114,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J10.md"
+    },
+    {
+      "function_id": "F-0479",
+      "symbol": "sub_409AB8",
+      "packet_id": "J10",
+      "start_line": 1,
+      "end_line": 10,
+      "total_lines": 10,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J10.md"
+    },
+    {
+      "function_id": "F-0483",
+      "symbol": "sub_409EF8",
+      "packet_id": "J11",
+      "start_line": 1,
+      "end_line": 274,
+      "total_lines": 522,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J11.md"
+    },
+    {
+      "function_id": "F-0483",
+      "symbol": "sub_409EF8",
+      "packet_id": "J12",
+      "start_line": 275,
+      "end_line": 522,
+      "total_lines": 522,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J12.md"
+    },
+    {
+      "function_id": "F-0495",
+      "symbol": "sub_40B3C0",
+      "packet_id": "J13",
+      "start_line": 1,
+      "end_line": 121,
+      "total_lines": 121,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J13.md"
+    },
+    {
+      "function_id": "F-0496",
+      "symbol": "sub_40B7FC",
+      "packet_id": "J13",
+      "start_line": 1,
+      "end_line": 48,
+      "total_lines": 48,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J13.md"
+    },
+    {
+      "function_id": "F-0304",
+      "symbol": "sub_4040F4",
+      "packet_id": "J13",
+      "start_line": 1,
+      "end_line": 57,
+      "total_lines": 57,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J13.md"
+    },
+    {
+      "function_id": "F-0302",
+      "symbol": "sub_403EC0",
+      "packet_id": "J13",
+      "start_line": 1,
+      "end_line": 99,
+      "total_lines": 99,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J13.md"
+    },
+    {
+      "function_id": "F-0303",
+      "symbol": "sub_4040CC",
+      "packet_id": "J13",
+      "start_line": 1,
+      "end_line": 4,
+      "total_lines": 4,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J13.md"
+    },
+    {
+      "function_id": "F-0288",
+      "symbol": "sub_4037DC",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 10,
+      "total_lines": 10,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0289",
+      "symbol": "sub_4037EC",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 36,
+      "total_lines": 36,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0290",
+      "symbol": "sub_40387C",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 10,
+      "total_lines": 10,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0291",
+      "symbol": "sub_4038AC",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 29,
+      "total_lines": 29,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0292",
+      "symbol": "sub_403920",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 9,
+      "total_lines": 9,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0293",
+      "symbol": "sub_403954",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 37,
+      "total_lines": 37,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0294",
+      "symbol": "sub_403A28",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 15,
+      "total_lines": 15,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0295",
+      "symbol": "sub_403A58",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 30,
+      "total_lines": 30,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0298",
+      "symbol": "sub_403C98",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 39,
+      "total_lines": 39,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0299",
+      "symbol": "sub_403D08",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 29,
+      "total_lines": 29,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0300",
+      "symbol": "sub_403D78",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 4,
+      "total_lines": 4,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0301",
+      "symbol": "sub_403D84",
+      "packet_id": "J14",
+      "start_line": 1,
+      "end_line": 57,
+      "total_lines": 57,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md"
+    },
+    {
+      "function_id": "F-0489",
+      "symbol": "sub_40AFB0",
+      "packet_id": "J15",
+      "start_line": 1,
+      "end_line": 35,
+      "total_lines": 35,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J15.md"
+    },
+    {
+      "function_id": "F-0486",
+      "symbol": "sub_40AE94",
+      "packet_id": "J15",
+      "start_line": 1,
+      "end_line": 13,
+      "total_lines": 13,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J15.md"
+    },
+    {
+      "function_id": "F-0487",
+      "symbol": "sub_40AEBC",
+      "packet_id": "J15",
+      "start_line": 1,
+      "end_line": 12,
+      "total_lines": 12,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J15.md"
+    },
+    {
+      "function_id": "F-0488",
+      "symbol": "sub_40AF08",
+      "packet_id": "J15",
+      "start_line": 1,
+      "end_line": 35,
+      "total_lines": 35,
+      "source_path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J15.md"
+    }
+  ],
+  "scanned_roots": [
+    "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets"
+  ],
+  "scan_complete": true,
+  "warnings": []
+}

@@ -1,4 +1,4 @@
-from bounded_investigator.repair import validate_candidate
+from bounded_investigator.execution.repair import validate_candidate
 from bounded_investigator.schemas import InvestigationResult
 
 
@@ -23,7 +23,7 @@ def test_noisy_prefix_can_extract_first_json_object():
     result = validate_candidate(InvestigationResult, raw)
     assert result.output is not None
 
-from bounded_investigator.repair import salvage_investigation_result
+from bounded_investigator.execution.repair import salvage_investigation_result
 
 
 def test_required_missing_is_detected_without_repair_guessing():

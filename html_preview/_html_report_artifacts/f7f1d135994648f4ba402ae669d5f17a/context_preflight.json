@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "id": "HTML-REPORT",
+    "date": "2026-10-29",
+    "method": "静态分析（基于提供的源码与结构化分析结果）"
+  },
+  "hashes": [],
+  "attack": [],
+  "attribution": null,
+  "yara": null,
+  "attribution_empty_reason": "暂无归因资料。"
+}

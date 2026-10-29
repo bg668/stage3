@@ -32,6 +32,10 @@ pythonpath = ["src"]
 include = [
   "src/bounded_investigator",
   "tests",
+  "examples",
+  "malware-report-html.skill",
+  "src/malware-report-html-1.1.zip",
+  "docs/html-report.md",
   "README.md",
   "config.example.yaml",
   ".env.example",

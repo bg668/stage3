@@ -3,9 +3,8 @@ from pathlib import Path
 
 from typer.testing import CliRunner
 
-from bounded_investigator.cli import app, _save_final_outputs
-from bounded_investigator.config import AppConfig, load_config
-from bounded_investigator.knowledge_report import project_knowledge, render_knowledge_markdown
+from bounded_investigator.cli import app
+from bounded_investigator.reporting.knowledge_report import project_knowledge, render_knowledge_markdown
 from bounded_investigator.schemas import (
     CanonicalArtifact, CanonicalClaim, Confidence, DeliveryStatus,
     EvidenceLevel, EvidenceRef, GlobalGap, GlobalReconciliationEnvelope,
@@ -99,7 +98,7 @@ def test_markdown_has_distinct_locations_and_does_not_repeat_generic_caveats():
     assert "静态分析不能证明运行时必然成功" not in md
     assert "## 三、IOC 与检测特征" in md
     assert "%TEMP%\\NOIP.abc" in md
-    assert "历史未分级" in md
+    assert "未声明证据等级" in md
 
 
 
@@ -177,13 +176,6 @@ def test_reports_keep_unaccounted_and_missing_inputs_visible():
     assert audit["passed"] is False
 
 
-def test_legacy_final_assessment_config_does_not_require_model_stage(tmp_path):
-    base = load_config(Path(__file__).parents[1] / "config.example.yaml")
-    raw = base.model_dump()
-    raw["final_evidence_assessment"]["enabled"] = True
-    raw["stages"].pop("final_evidence_assessment", None)
-    old_cfg = AppConfig.model_validate(raw)
-    assert old_cfg.final_evidence_assessment.enabled  # can parse old config but not used
 
 
 def test_cli_report_is_offline_without_model_calls(tmp_path, monkeypatch):
@@ -194,7 +186,7 @@ def test_cli_report_is_offline_without_model_calls(tmp_path, monkeypatch):
         provenance_valid=True, source_claim_count=6, source_artifact_count=3,
     )
     global_path.write_text(env.model_dump_json(indent=2), encoding="utf-8")
-    cfg = Path(__file__).parents[1] / "config.yaml"
+    cfg = Path(__file__).parents[1] / "config.example.yaml"
     monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
     output = tmp_path / "report"
     reply = CliRunner().invoke(app, ["report", str(global_path), "--config", str(cfg), "--output-dir", str(output)])

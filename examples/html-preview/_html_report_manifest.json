@@ -1,0 +1,154 @@
+{
+  "status": "completed",
+  "preview_only": true,
+  "template_version": "1.0",
+  "started_at": "2026-10-25T08:11:14.571067+00:00",
+  "inputs": {
+    "global_result": {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-input\\_global_reconciliation.json",
+      "sha256": "effa347e514084573ad900d15880ddc2ce1eeed17fc1e7f51911171e8abf7b9d"
+    },
+    "context_file": {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-input\\context.json",
+      "sha256": "bb2289bbec4042b8779c257c254d6054c7eff19ee2a23096bfef7f4ebbffa2e8"
+    },
+    "packet_results_dir": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-input",
+    "packet_results": [
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-input\\J00.json",
+        "sha256": "cccdfe3fe0fd00cb67189a284fed65887d0061c9d6c6304cc2127358ed302050"
+      }
+    ],
+    "packets": [
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-input\\packets\\J00.md",
+        "sha256": "874ee0370aae6940d9045667597b2aba0b0bcd86d9c95553928fc726e0df294d"
+      }
+    ]
+  },
+  "artifacts": {
+    "attempt_dir": "_html_report_artifacts\\f1b76cf1acd44f19922d3f03a5ae0742",
+    "report_agent_snapshot": "_html_report_artifacts\\f1b76cf1acd44f19922d3f03a5ae0742\\report_agent_snapshot.json",
+    "report_document": "_report_document.json",
+    "report_json": "_html_report.json",
+    "html": "_final_report.html"
+  },
+  "test_fills": [
+    {
+      "path": "hashes[0].type",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "hashes[0].value",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "hashes[0].source",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "attack[0].id",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "attack[0].name",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "attack[0].evidence",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "attack[0].confidence",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "attribution.family",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "attribution.confidence",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "attribution.support[0]",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "attribution.not_confirmed[0]",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    },
+    {
+      "path": "yara",
+      "source": "内置 preview_data.json 测试数据，不是样本事实"
+    }
+  ],
+  "validation": {
+    "references": "passed",
+    "template_errors": [],
+    "template_warnings": [],
+    "source_audit": {
+      "passed": true,
+      "issues": [],
+      "evidence_reference_status": "completed"
+    },
+    "stage_status": "success"
+  },
+  "usage": {
+    "composition": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0,
+      "visible_output_tokens": 0,
+      "total_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    },
+    "format_repair": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0,
+      "visible_output_tokens": 0,
+      "total_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    },
+    "total": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0,
+      "visible_output_tokens": 0,
+      "total_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    },
+    "repair_attempts": 0
+  },
+  "model": {
+    "stage": "report_composition",
+    "profile": "global_reconciler",
+    "provider": "deepseek",
+    "model_name": "fixed-response/offline-preview-no-network",
+    "max_output_tokens": 16384
+  },
+  "warnings": [],
+  "html_skill": {
+    "name": "malware-report-html",
+    "version": "1.0",
+    "fingerprint": "4a83b92c5d894dc9df4b5101024d2407c8a553e936f5b3011ec3003246f43996",
+    "template_version": "1.0",
+    "template_fingerprint": "287ca0b19bdb63bbfb91fb0790aa73990e06393e714bdedee3d0572e207ff7c0"
+  },
+  "report_agent": {
+    "name": "report",
+    "version": "1.0",
+    "fingerprint": "cc5e87df437a33785df8f9b31026baf513c337da3a90b4f1a342883d7148c856"
+  },
+  "finished_at": "2026-10-25T08:11:14.589408+00:00"
+}

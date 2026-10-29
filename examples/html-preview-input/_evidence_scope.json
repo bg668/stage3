@@ -1,0 +1,18 @@
+{
+  "schema_version": "1",
+  "materials": [],
+  "inventory_summary": {
+    "packet_count": 1,
+    "indexed_function_count": 2,
+    "indexed_code_sections": 2,
+    "partial_function_count": 0,
+    "partial_function_ids": [],
+    "additional_file_count": 0,
+    "additional_file_format_hints": [],
+    "inventory_scan_complete": true,
+    "material_requests_count": 0,
+    "scanned_roots": [
+      "D:\\Work\\01_processing\\bounded_investigator_mvp\\examples\\html-preview-input\\packets"
+    ]
+  }
+}

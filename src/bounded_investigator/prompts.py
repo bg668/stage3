@@ -3,7 +3,8 @@ from __future__ import annotations
 import re
 from importlib.resources import files
 
-from .revision import render_revision_scope, revision_policy_context
+from .harness import ResolvedHarness, load_harness
+from .investigation.revision import render_revision_scope
 from .schemas import CoverageReview, InvestigationResult
 
 _PROMPT_PACKAGE = "bounded_investigator"
@@ -33,20 +34,16 @@ def render_prompt(name: str, **values: str) -> str:
     return _TOKEN_RE.sub(replace, template)
 
 
-def _result_instructions(role_prompt: str) -> str:
-    return f"{load_prompt(role_prompt)}\n\n{load_prompt('investigation_result.rules.md')}"
+def analyzer_instructions(harness: ResolvedHarness | None = None) -> str:
+    return (harness or load_harness()).instructions('analyzer')
 
 
-def analyzer_instructions() -> str:
-    return _result_instructions("analyzer.instructions.md")
+def reviewer_instructions(harness: ResolvedHarness | None = None) -> str:
+    return (harness or load_harness()).instructions('reviewer')
 
 
-def reviewer_instructions() -> str:
-    return f"{_result_instructions('reviewer.instructions.md')}\n\n{revision_policy_context()}"
-
-
-def reviser_instructions() -> str:
-    return f"{_result_instructions('reviser.instructions.md')}\n\n{revision_policy_context()}"
+def reviser_instructions(harness: ResolvedHarness | None = None) -> str:
+    return (harness or load_harness()).instructions('reviser')
 
 
 def format_repair_instructions() -> str:
@@ -55,18 +52,6 @@ def format_repair_instructions() -> str:
 
 def global_reconciliation_instructions() -> str:
     return load_prompt("global_reconciliation.instructions.md")
-
-
-def final_assessment_instructions() -> str:
-    return load_prompt("final_evidence_assessment.instructions.md")
-
-
-def final_assessment_prompt(assessment_context: str) -> str:
-    return render_prompt("final_evidence_assessment.input.md", assessment_context=assessment_context)
-
-
-def gap_reconciliation_instructions() -> str:
-    return load_prompt("gap_reconciliation.instructions.md")
 
 
 def _ev_lines(evidence) -> list[str]:
@@ -241,11 +226,4 @@ def global_reconciliation_prompt(packet_results: str) -> str:
     return render_prompt(
         "global_reconciliation.input.md",
         packet_results=packet_results,
-    )
-
-
-def gap_reconciliation_prompt(gap_context: str) -> str:
-    return render_prompt(
-        "gap_reconciliation.input.md",
-        gap_context=gap_context,
     )

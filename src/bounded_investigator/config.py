@@ -6,7 +6,7 @@ from typing import Literal
 
 import yaml
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 ProviderType = Literal["openai", "deepseek", "openai_compatible"]
 APIMode = Literal["chat", "responses"]
@@ -14,7 +14,7 @@ OutputMode = Literal["tool", "native", "prompted"]
 ReasoningMode = Literal["omit", "disabled", "minimal", "low", "medium", "high", "xhigh"]
 StageName = Literal[
     "analyzer", "reviewer", "reviser", "format_repair",
-    "global_reconciliation", "final_evidence_assessment", "gap_reconciliation"
+    "global_reconciliation", "report_composition"
 ]
 
 
@@ -67,18 +67,10 @@ class GlobalReconciliationConfig(BaseModel):
     wall_clock_seconds: float = Field(default=300, gt=0)
 
 
-class FinalEvidenceAssessmentConfig(BaseModel):
-    enabled: bool = False
-    max_model_requests: int = Field(default=1, ge=1, le=3)
-    total_tokens_limit: int | None = Field(default=60000, ge=1000)
-    wall_clock_seconds: float = Field(default=180, gt=0)
-
-
-class GapReconciliationConfig(BaseModel):
-    enabled: bool = False
-    max_model_requests: int = Field(default=1, ge=1, le=3)
-    total_tokens_limit: int | None = Field(default=60000, ge=1000)
-    wall_clock_seconds: float = Field(default=120, gt=0)
+class HtmlReportConfig(BaseModel):
+    max_model_requests: int = Field(default=2, ge=1, le=2)
+    total_tokens_limit: int = Field(default=64000, ge=1000)
+    wall_clock_seconds: float = Field(default=300, gt=0)
 
 
 class WorkflowConfig(BaseModel):
@@ -109,15 +101,16 @@ class LoggingConfig(BaseModel):
 
 
 class AppConfig(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    harness_dir: Path | None = None
     providers: dict[str, ProviderConfig]
     models: dict[str, ModelConfig]
     stages: dict[StageName, StageConfig]
     workflow: WorkflowConfig = WorkflowConfig()
     format_repair: FormatRepairConfig = FormatRepairConfig()
     global_reconciliation: GlobalReconciliationConfig = GlobalReconciliationConfig()
-    final_evidence_assessment: FinalEvidenceAssessmentConfig = FinalEvidenceAssessmentConfig()
-    # Accepted for legacy v1.0 configs, but intentionally no longer executed.
-    gap_reconciliation: GapReconciliationConfig = GapReconciliationConfig()
+    html_report: HtmlReportConfig = HtmlReportConfig()
     batch: BatchConfig = BatchConfig()
     logging: LoggingConfig = LoggingConfig()
 
@@ -133,8 +126,8 @@ class AppConfig(BaseModel):
             required_stages.append("format_repair")
         if self.global_reconciliation.enabled:
             required_stages.append("global_reconciliation")
-        # Legacy final_evidence_assessment configuration is accepted but ignored
-        # by the v1.7 automatic report workflow, which does not invoke an LLM.
+        if "report_composition" in self.stages:
+            required_stages.append("report_composition")
         for stage in required_stages:
             if stage not in self.stages:
                 raise ValueError(f"Missing stages.{stage}")
@@ -166,6 +159,11 @@ class AppConfig(BaseModel):
                     "stages.global_reconciliation.max_output_tokens "
                     f"({global_max})"
                 )
+        if "report_composition" in self.stages:
+            if self.html_report.total_tokens_limit < self.stages["report_composition"].max_output_tokens:
+                raise ValueError(
+                    "html_report.total_tokens_limit must be >= stages.report_composition.max_output_tokens"
+                )
         return self
 
     def provider_api_key(self, provider_name: str) -> str:
@@ -185,7 +183,7 @@ class AppConfig(BaseModel):
         return stage_cfg, model_cfg, provider_cfg
 
 
-def load_config(config_path: str | Path, env_file: str | Path | None = None) -> AppConfig:
+def load_config(config_path: str | Path, env_file: str | Path | None = None, *, harness_dir: Path | None = None) -> AppConfig:
     config_path = Path(config_path)
     if env_file:
         load_dotenv(Path(env_file), override=False)
@@ -197,4 +195,9 @@ def load_config(config_path: str | Path, env_file: str | Path | None = None) -> 
             load_dotenv(override=False)
 
     raw = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
-    return AppConfig.model_validate(raw)
+    config = AppConfig.model_validate(raw)
+    if harness_dir is not None:
+        config.harness_dir = harness_dir.resolve()
+    elif config.harness_dir is not None:
+        config.harness_dir = (config_path.resolve().parent / config.harness_dir).resolve()
+    return config

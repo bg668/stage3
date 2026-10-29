@@ -4,7 +4,7 @@ from types import SimpleNamespace
 import pytest
 
 from bounded_investigator.prompts import reviewer_instructions, reviser_instructions, reviser_prompt
-from bounded_investigator.revision import merge_scoped_revision, validate_revision_scope
+from bounded_investigator.investigation.revision import merge_scoped_revision, validate_revision_scope
 from bounded_investigator.schemas import Confidence, CoverageReview, EvidenceLevel, InvestigationResult, ReviewIssue
 
 
@@ -48,7 +48,7 @@ def test_actual_agent_output_schema_uses_typed_review_protocol(output_mode):
     from pydantic_ai import Agent
     from pydantic_ai.models.test import TestModel
 
-    from bounded_investigator.llm import wrap_output
+    from bounded_investigator.execution.llm import wrap_output
 
     # Construct the same output wrapper as production without running any model.
     agent = Agent(TestModel(), output_type=wrap_output(SimpleNamespace(output_mode=output_mode), CoverageReview))
@@ -191,9 +191,9 @@ def test_unknown_type_and_empty_targets_are_rejected(entry):
         review_for(entry)
 
 
-def test_legacy_raw_targets_are_readable_but_never_authorize_new_revision(draft):
+def test_unknown_raw_targets_never_authorize_revision(draft):
     review = review_for(revision_targets=[dict(operation="replace", path="/claims/0")])
-    assert review.issues[0].revision_targets
+    assert "revision_targets" not in type(review.issues[0]).model_fields
     with pytest.raises(ValueError, match="fixes"):
         validate_revision_scope(draft, review)
 

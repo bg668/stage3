@@ -1,0 +1,155 @@
+{
+  "summary": [
+    {
+      "text": "流程由资源配置驱动：解码后写入本地文件，启用发送开关时读取该文件并提交。",
+      "claim_ids": [
+        "G:C001",
+        "G:C002",
+        "G:C003"
+      ],
+      "artifact_ids": []
+    },
+    {
+      "text": "关键对象是配置资源、落地路径和提交端点；均可回到对应函数行段复核。",
+      "claim_ids": [],
+      "artifact_ids": [
+        "G:A001",
+        "G:A002",
+        "G:A003"
+      ]
+    }
+  ],
+  "verdict": {
+    "text": "具备配置落地与条件网络提交机制。",
+    "claim_ids": [
+      "G:C002",
+      "G:C003"
+    ],
+    "artifact_ids": []
+  },
+  "risk": "high",
+  "risk_judgement": {
+    "text": "网络提交会使配置内容离开本机，应结合文件内容和发送开关判断影响范围；风险依据数据流与外部提交能力研判。",
+    "claim_ids": [
+      "G:C003"
+    ],
+    "artifact_ids": []
+  },
+  "chain": [
+    {
+      "name": "解码资源",
+      "action": "从具名资源取得配置；解码失败则返回。",
+      "claim_ids": [
+        "G:C001"
+      ],
+      "phase": "准备",
+      "key": false
+    },
+    {
+      "name": "写出配置",
+      "action": "将解码后的配置缓冲区写入本地路径。",
+      "claim_ids": [
+        "G:C002"
+      ],
+      "phase": "落地",
+      "key": true
+    },
+    {
+      "name": "条件提交",
+      "action": "发送开关开启时读取该路径，并向指定端点提交。",
+      "claim_ids": [
+        "G:C003"
+      ],
+      "phase": "通信",
+      "key": true
+    }
+  ],
+  "sections": [
+    {
+      "title": "配置解码与落地",
+      "question": "配置来自哪里，如何保存？",
+      "overview": {
+        "text": "资源解码成功后才进入文件写入流程，落地路径与缓冲区去向明确。",
+        "claim_ids": [
+          "G:C001",
+          "G:C002"
+        ],
+        "artifact_ids": []
+      },
+      "claim_ids": [
+        "G:C001",
+        "G:C002"
+      ],
+      "artifact_ids": [
+        "G:A001",
+        "G:A003"
+      ]
+    },
+    {
+      "title": "开关控制的网络提交",
+      "question": "何时发送，发送什么？",
+      "overview": {
+        "text": "网络提交位于发送开关分支，请求体来自刚写出的配置文件。",
+        "claim_ids": [
+          "G:C003"
+        ],
+        "artifact_ids": []
+      },
+      "claim_ids": [
+        "G:C003"
+      ],
+      "artifact_ids": [
+        "G:A002"
+      ]
+    }
+  ],
+  "detection": [
+    {
+      "title": "关联文件与网络活动",
+      "text": "关联配置文件创建、随后读取及网络请求，核对其进程与时间关系。",
+      "claim_ids": [
+        "G:C002",
+        "G:C003"
+      ],
+      "artifact_ids": []
+    },
+    {
+      "title": "核对关键对象",
+      "text": "结合配置资源名、落地路径和请求端点筛查，保留对象原值及证据位置。",
+      "claim_ids": [],
+      "artifact_ids": [
+        "G:A001",
+        "G:A002",
+        "G:A003"
+      ]
+    }
+  ],
+  "response": [
+    {
+      "title": "保全配置与进程线索",
+      "text": "先保全落地配置，记录关联进程、父进程和写入时间。",
+      "claim_ids": [],
+      "artifact_ids": [
+        "G:A001"
+      ]
+    },
+    {
+      "title": "核查发送范围",
+      "text": "检查发送开关与端点访问记录，确认配置内容和相关主机范围。",
+      "claim_ids": [
+        "G:C003"
+      ],
+      "artifact_ids": []
+    }
+  ],
+  "gaps": [],
+  "final": {
+    "text": "优先串联“资源解码—配置写出—条件提交”三段证据，围绕落地配置及对应网络请求开展复核与处置。",
+    "claim_ids": [
+      "G:C001",
+      "G:C002",
+      "G:C003"
+    ],
+    "artifact_ids": []
+  }
+}

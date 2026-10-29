@@ -1,0 +1,4 @@
+{
+  "type": "ModelHTTPError",
+  "message": "status_code: 502, model_name: gpt-5.6-luna, body: "
+}

@@ -1,4 +1,4 @@
-# Bounded Investigator MVP v1.7
+# Bounded Investigator MVP v1.7.3
 
 用于恶意代码静态分析的“有界调查 Worker”。完整流程为：材料包 → DAG 调度 → `Analyzer → Reviewer → 条件 Reviser` → 全局事实整合 → 程序生成三层证据报告。上游包完成后，只向下游传递已验证结果的紧凑摘要。
 
@@ -6,12 +6,15 @@
 
 当前核心能力：
 
+已支持版本化 harness、独立角色定义和程序按角色加载的技能。目录、运行参数与迁移方式见 [harness 使用说明](docs/harness-runtime.md)。
+
 1. **DAG handoff**：按 `manifest.json` 的 `depends_on` 动态调度，只传递上游紧凑事实投影。
 2. **Artifact detection specificity**：artifact 同时输出行为 `role` 与检测价值 `detection_specificity`。
 3. **Reasoning token 统计**：总 usage 和每阶段 usage 单独记录 reasoning token。
 4. **Clean-context Format Repair + Result Preservation**：structured-output 校验失败时，独立 Repair LLM 只修格式；required 字段缺失立即停止 Repair，并保存 raw/partial 结果，避免已完成分析丢失。
 5. **Decision-only Global Reconciliation**：程序先 exact-reduce claims/artifacts，Global LLM 只输出 `keep / merge_into / superseded_by / unresolved` 关系决策，不再重写事实全文；程序随后从原 validated facts 组装 canonical result。
-6. **三层证据报告与审计**：canonical facts 按显式 `evidence_level` 分为已确认行为、疑似行为和调查线索；历史 gap/handoff 保留为调查记录。报告由程序生成，无最终评估模型调用。旧 Gap Reconciliation 配置仅保留兼容，不再执行。
+6. **三层证据报告与审计**：canonical facts 按显式 `evidence_level` 分为已确认行为、疑似行为和调查线索；gap/handoff 保留为调查记录。报告由程序生成，无最终评估模型调用。
+7. **独立 HTML 报告预览**：从通过来源校验的全局事实编排摘要与机制章节，使用 `malware-report-html.skill` 原模板生成单文件 HTML。缺失的补充模块使用明确标注的固定测试数据，不写回分析事实。该命令单独调用报告编排模型，不改变现有离线报告路径。
 
 ## 1. 安装
 
@@ -77,6 +80,9 @@ stages:
   global_reconciliation:
     model: global_reconciler
     max_output_tokens: 40960
+  report_composition:
+    model: global_reconciler
+    max_output_tokens: 16384
 
 workflow:
   max_model_requests: 3       # 仅 Analyzer/Reviewer/Reviser
@@ -97,9 +103,16 @@ global_reconciliation:
   total_tokens_limit: 160000
   wall_clock_seconds: 300
 
+html_report:
+  max_model_requests: 2
+  total_tokens_limit: 64000
+  wall_clock_seconds: 300
+
 ```
 
-你本地已经验证较小的 `4096 / 1536 / 2048` 容易触发输出截断/格式失败，所以本版默认采用 `40960 / 15360 / 20480`。相应地，单包总 token 上限提高到 `130000`，否则 Analyzer 单阶段上限会和总预算互相打架。所有值仍可自行调整。
+示例的 Analyzer / Reviewer / Reviser 输出上限为 `40960 / 15360 / 20480`，单包总 token 上限为 `130000`。总上限不得低于任一核心阶段的输出上限；具体值按模型和材料规模调整。
+
+配置顶层拒绝未知字段。已删除的 `gap_reconciliation`、`final_evidence_assessment` 及其 stage 配置不再接受，使用当前 `config.example.yaml` 配置运行阶段；其余供应商、模型、预算和环境变量约定不变。
 
 `reasoning: omit` 表示完全不发送 reasoning/thinking 参数；`disabled` 才显式发送关闭值。
 
@@ -139,6 +152,12 @@ uv run bounded-investigator batch \
   --config config.yaml \
   --output-dir results
 ```
+
+默认在 DAG 全局整合得到有效 canonical result 后自动生成 HTML，无需再执行 `report-html`。页面位于 `results/html_report/_final_report.html`，命令结束时打印该路径；结构化报告、模板 JSON、manifest 和阶段诊断保存在同一子目录。
+
+自动报告按 `html_report` 预算正常调用一次报告模型，内容校验失败时最多修订一次，两次共享预算；格式修复另行计量且额度不翻倍。`--no-html-report` 可关闭；`--context-file report-context.json` 可传入已有的样本身份和补充资料。启用自动报告时缺少 `stages.report_composition` 会在分析前报错。没有 manifest、全局整合关闭或未得到有效全局结果时，明确记录跳过原因。
+
+HTML 失败不会删除分析 JSON 或 Markdown，`_dag_summary.json` 独立记录 HTML 状态及诊断位置，命令返回失败状态；可使用保留的全局结果单独重试 `report-html`，不必重新分析。新 batch 开始时只清理 `html_report/` 内旧的发布文件，保留历史 attempt 诊断及其他文件。
 
 调度器只在依赖完成后启动子任务，但不同分支仍按 `batch.concurrency` 并发执行。父包失败时，子包不会被整体取消，而会收到：
 
@@ -253,19 +272,19 @@ reasoning_tokens / thinking_tokens / thoughts_tokens
 
 LLM 输入继续使用紧凑 Markdown/XML；机器输出继续由 PydanticAI structured output 强约束。
 
-Prompt 位于：
+三角色策略和技能位于 `src/bounded_investigator/harnesses/baseline-v1/`；共享证据规则、输入模板和其他阶段提示词位于：
 
 ```text
 src/bounded_investigator/prompts/
 ```
 
-Schema 唯一真源：
+调查与全局结果的 schema 唯一真源：
 
 ```text
 src/bounded_investigator/schemas.py
 ```
 
-不要另维护第二份 JSON/YAML schema。
+不要另维护第二份 JSON/YAML schema。独立 HTML 报告的编排契约 `ReportComposition` 位于 `reporting/composition.py`，它只描述展示组织，不替代分析结果契约。
 
 ## 7. 运行
 
@@ -388,11 +407,13 @@ uv run python -m pytest tests -q
 - raw-only/partial DAG handoff 降级；
 - repair/core usage 合并不重复计算 reasoning；
 - Global Reconciliation deterministic reducer、decision-only resolver、canonical assembler、provenance/coverage gate；
-- 三层知识报告、来源去向审计、材料核查与补料建议；另保留旧阶段的兼容逻辑测试。
+- 三层知识报告、来源去向审计、材料核查与补料建议；
+- 角色技能展开、不可变 harness 快照、指令与模型输出 schema 的回归检查。
+- 独立报告角色与 HTML skill 加载、目的聚类和有序内容块、上下文与测试填充、原模板资源和失败产物处理。
 
 ## 10. Decision-only Global Reconciliation
 
-DAG 所有 Worker 完成后，不再把全部 claims/artifacts 交给一个 LLM 重新生成 canonical 全文。v0.7 改为方案 A：
+DAG 所有 Worker 完成后，由程序归并事实，LLM 只处理关系决策：
 
 ```text
 validated / partial packet facts
@@ -504,13 +525,13 @@ artifact_conflict_count
 
 ## 11. 三层报告与结果重放
 
-v1.7 在全局来源校验通过后，直接用程序生成：
+全局来源校验通过后，直接用程序生成：
 
 - `_report_ready.json`：三层行为知识、IOC、检测特征、上下文对象、材料建议和输入覆盖告警。
 - `_final_report.md`：可阅读报告。
 - `_knowledge_audit.json`：每条原始 claim/artifact 的最终去向与覆盖审计。
 
-`confirmed` 表示证据直接支持描述的行为能力；不代表运行时一定发生。旧结果未声明 `evidence_level` 时，进入调查附录，不由 `confidence` 自动升级。历史 gaps 作为调查记录保留，可能已被后续节点回答，不作为重新评估的当前未知项。
+`confirmed` 表示证据直接支持描述的行为能力；不代表运行时一定发生。未声明 `evidence_level` 的结论进入调查线索，不由 `confidence` 自动升级。调查过程中的 gaps 作为记录保留，可能已被后续节点回答，不作为重新评估的当前未知项。
 
 从已保存的 Worker 结果重新执行全局整合及报告，不重跑 Workers：
 
@@ -526,4 +547,39 @@ uv run bounded-investigator report results/_global_reconciliation.json --output-
 
 `assess` 是 `report` 的别名。完整 DAG 报告要求启用 `global_reconciliation`；无 manifest 的独立批处理分支只生成单包结果。
 
-旧 `gap_reconciliation` 和 `final_evidence_assessment` 配置仍接受兼容读取，但当前自动报告主链路不执行这两个模型阶段。更多说明见 [src 架构与处理流程](docs/src-architecture.md)。
+当前保存结果的结构版本为 `11.0`。本次清理删除旧最终评估与 Gap Reconciliation 的执行实现、配置和提示词，不提供旧 Python 导入路径或历史 JSON 转换器。模型输出契约、角色指令及修订保护保持原有规则；软件包版本仍为 `1.7.3`，本次未发布新版本。
+
+## 12. 报告 Agent 与 HTML 预览
+
+```bash
+uv run bounded-investigator report-html \
+  results/_global_reconciliation.json \
+  --output-dir html_preview \
+  --context-file report-context.json \
+  --packets-dir testdata/packets \
+  --packet-results-dir results \
+  --config config.yaml \
+  --env-file .env
+```
+
+仅全局结果路径必填；其余参数可选。输出目录不得与输入全局结果所在目录、显式单包结果目录或材料目录重合。`report-html` 使用一个报告 Agent 加载 HTML 生成 skill，正常只调用一次；正文遗漏或引用错误等内容校验失败时，向同一角色提交具体问题，最多再修订一次。程序不自动补写正文。`html_report.max_model_requests` 默认为 2，设为 1 可关闭语义修订。示例中的 `stages.report_composition` 复用 `global_reconciler` 模型配置；两次请求共享默认 64000 tokens、300 秒，单次最大输出为 16384 tokens，实际按配置执行，不自动增加额度。缺少该阶段配置时此命令及默认启用 HTML 的 DAG batch 明确报错。格式修复共用独立额度，不占 A/R/R 请求额度。现有 `report/assess` 仍完全离线，reconcile 不自动生成 HTML；batch 默认在全局结果有效时自动生成，见前文。
+
+报告角色定义在 `reporting/agents/report.md`，以 `{{skill:malware-report-html}}` 引用 `reporting/skills/malware-report-html/SKILL.md`。程序确定性展开技能及组件说明，不扩展 A/R/R harness 的角色集合，不自主发现或安装个人技能。报告 Agent 围绕样本目的聚类全部行为，包括未确认行为，解释机制协同并按重要性排序。HTML skill 根据有序内容块绑定原始对象和源码，选择文字、列表、表格及代码等已有组件，不再机械生成全字段表。正文不展示内部证据等级、confidence 和来源 ID；关键对象原值及必要源码位置保留。不增加取舍台账或额外内容审计。
+
+生成结构化报告 `_report_document.json`、模板数据 `_html_report.json`、页面 `_final_report.html`、运行记录 `_html_report_manifest.json`，以及 `_html_report_artifacts/` 中的指令快照和阶段诊断，不额外生成 Markdown。开始新运行时清理旧文档和页面；报告 Agent 成功后即保存本次有效文档，后续 HTML 失败时保留它与诊断，撤去最终 HTML 和模板 JSON。manifest 记录报告角色与 skill 的版本和指纹。
+
+HTML 使用新版 malware-report-html 1.1 的 CSS、首屏规则分档关键发现、审计徽章和 IOC 分类。`context-file` 可提供样本元信息、哈希、ATT&CK、归因和 YARA；缺失资料显示真实空状态，无哈希也可生成，不再自动填入测试资料。HTML skill 的程序接口也能独立校验和渲染已有模板数据，无需调用模型。
+
+详细字段、空值约定与失败行为见 [HTML 报告说明](docs/html-report.md)。开发验收使用固定模型响应，不自动调用真实模型。HTML 文件可下载后在本地浏览器打开；文件生成验证不等于已经完成视觉核对。
+
+当前新版演示：[全字段 HTML](examples/html-preview-v11/_final_report.html)、[空上下文 HTML](examples/html-preview-v11-empty/_final_report.html)、[结构化报告](examples/html-preview-v11/_report_document.json)、[模板 JSON](examples/html-preview-v11/_html_report.json)。整个样本均为合成数据，采用固定响应、零真实模型调用；全字段版的演示资料由上下文显式提供，空上下文版验证真实空状态。旧版演示和原始输入保留。
+
+报告角色 1.3、内部 HTML skill 1.2、模板 1.1：新增必填 title/findings，规则表决定能力档位，程序绑定证据与确定程度。partial 发现关联缺口，调查线索不升级为关键发现。IOC、检测特征和上下文对象统一展示并去重，审计未运行或状态未知时不会显示通过。保留一次局部修订与独立预算；分析 schema 仍为 11.0，原始事实及历史结果不改写。
+
+离线复现：`uv run --offline python examples/generate_html_preview.py --output-dir html_preview_v11`。空上下文版另加 `--context-file examples/html-preview-v11-input/empty-context.json`。脚本不连接模型供应商。
+
+## 13. 代码职责与已知限制
+
+代码按模型执行（`execution/`）、包内调查（`investigation/`）、材料与证据（`evidence/`）、报告（`reporting/`）、批次与重放调度（`orchestration/`）组织。`cli.py` 负责命令适配，`workflow.py` 编排单包与全局流程；具体执行和格式修复由组合的 `StageRunner` 承担。更多说明见 [src 架构与处理流程](docs/src-architecture.md)。
+
+本次报告升级不接入 harness2、不增加发布门禁、不进行真实模型实验。底层知识审计未提供材料时仍可能记录 `not_run/passed=true`；HTML 会识别未执行状态并显示“证据未审计”，不会据此展示通过。报告完成状态不能单独作为证据质量或发布批准的依据。

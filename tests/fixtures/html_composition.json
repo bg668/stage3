@@ -1,0 +1,124 @@
+{
+  "title": "数据处理与结果输出样本",
+  "findings": [],
+  "summary": [
+    {
+      "text": "发现数据处理与结果写出机制。",
+      "claim_ids": [
+        "G:C001"
+      ],
+      "artifact_ids": [
+        "G:A001"
+      ]
+    }
+  ],
+  "verdict": {
+    "text": "具备数据处理及结果输出行为。",
+    "claim_ids": [
+      "G:C001"
+    ],
+    "artifact_ids": [
+      "G:A001"
+    ]
+  },
+  "risk": "medium",
+  "risk_judgement": {
+    "text": "应结合处理的数据内容与结果去向判断影响范围。",
+    "claim_ids": [
+      "G:C001"
+    ],
+    "artifact_ids": [
+      "G:A001"
+    ]
+  },
+  "chain": [
+    {
+      "name": "数据处理",
+      "action": "根据输入条件处理数据并产生结果。",
+      "claim_ids": [
+        "G:C001"
+      ],
+      "key": false
+    }
+  ],
+  "sections": [
+    {
+      "title": "数据如何被处理和保存",
+      "question": "处理动作与结果对象是什么？",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "处理动作与输出对象共同构成需要核查的数据流。",
+          "claim_ids": [
+            "G:C001"
+          ],
+          "artifact_ids": [
+            "G:A001"
+          ]
+        },
+        {
+          "type": "kv",
+          "items": [
+            {
+              "label": "处理动作",
+              "value": {
+                "fact_id": "G:C001",
+                "field": "action"
+              }
+            },
+            {
+              "label": "输出对象",
+              "value": {
+                "fact_id": "G:A001",
+                "field": "value"
+              }
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            {
+              "fact_id": "G:C001",
+              "field": "evidence"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "detection": [
+    {
+      "title": "关联筛查",
+      "text": "关联数据读取、处理与结果写出活动，核对进程及对象。",
+      "claim_ids": [
+        "G:C001"
+      ],
+      "artifact_ids": [
+        "G:A001"
+      ]
+    }
+  ],
+  "response": [
+    {
+      "title": "保全与核查",
+      "text": "保全结果文件及进程线索，核对数据用途。",
+      "claim_ids": [
+        "G:C001"
+      ],
+      "artifact_ids": [
+        "G:A001"
+      ]
+    }
+  ],
+  "gaps": [],
+  "final": {
+    "text": "优先核对数据处理路径、结果文件及关联进程。",
+    "claim_ids": [
+      "G:C001"
+    ],
+    "artifact_ids": [
+      "G:A001"
+    ]
+  }
+}

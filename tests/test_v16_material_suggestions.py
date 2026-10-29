@@ -1,26 +1,19 @@
-"""v1.6: material availability is a follow-up suggestion, never a malware fact."""
+"""Material availability is a follow-up suggestion, never a malware fact."""
 from __future__ import annotations
 
 import json
 
-import pytest
-
-from bounded_investigator.evidence_scope import EvidenceScope, MaterialScopeItem, PacketCoverage
-from bounded_investigator.final_assessment import (
-    FinalAssessmentProvenanceError,
-    build_material_suggestions,
-    project_final_assessment_input,
-    render_report_markdown,
-    report_projection,
-    separate_operational_uncertainties,
-    validate_assessment,
+from bounded_investigator.evidence.scope import EvidenceScope, MaterialScopeItem, PacketCoverage
+from bounded_investigator.reporting.material_suggestions import build_material_suggestions
+from bounded_investigator.reporting.knowledge_report import (
+    project_knowledge, render_knowledge_markdown, save_knowledge_outputs,
 )
-from bounded_investigator.material_inventory import build_automatic_scope, build_input_inventory
+from bounded_investigator.evidence.inventory import build_automatic_scope, build_input_inventory
 from bounded_investigator.schemas import (
-    DeliveryStatus, EvidenceRef, FinalEvidenceAssessment, FinalUncertainty,
+    DeliveryStatus, EvidenceRef,
     InvestigationResult, InvestigationStatus, MaterialNeed, RunEnvelope, UsageSummary,
 )
-from test_final_assessment import canonical
+from factories import canonical
 
 
 def entry(scope_id, status, *, submit="unknown", kind="function_code", reason="检查远程调用入口", packets=None):
@@ -74,47 +67,19 @@ def test_expert_unknown_without_worker_request_is_not_a_material_hint():
     assert build_material_suggestions(EvidenceScope(materials=[item])) == []
 
 
-def test_material_and_delivery_outputs_are_redirected_but_behavior_stays():
-    assessment = FinalEvidenceAssessment(summary="facts", remaining_uncertainties=[
-        FinalUncertainty(question="not found", impact="major", reason="missing", uncertainty_type="material_not_in_input"),
-        FinalUncertainty(question="resource missing", impact="major", reason="material", uncertainty_type="material_unavailable"),
-        FinalUncertainty(question="packet failed", impact="minor", reason="JSON invalid", uncertainty_type="analysis_incomplete"),
-        FinalUncertainty(question="success at runtime unknown", impact="major", reason="static only", uncertainty_type="runtime_unverified", related_claim_ids=["G:C001"]),
-    ])
-    cleaned, redirected = separate_operational_uncertainties(assessment)
-    assert len(redirected) == 3
-    assert len(cleaned.remaining_uncertainties) == 1
-    assert cleaned.remaining_uncertainties[0].uncertainty_type == "runtime_unverified"
-    assert validate_assessment(cleaned, project_final_assessment_input(canonical())) is cleaned
-    with pytest.raises(FinalAssessmentProvenanceError):
-        validate_assessment(assessment, project_final_assessment_input(canonical()))
-
-
-def test_invalid_behavioral_source_is_still_rejected():
-    bad = FinalEvidenceAssessment(summary="facts", remaining_uncertainties=[
-        FinalUncertainty(question="unknown", impact="major", reason="test", uncertainty_type="unresolved_behavior", related_claim_ids=["G:C999"])
-    ])
-    cleaned, redirected = separate_operational_uncertainties(bad)
-    assert not redirected
-    with pytest.raises(FinalAssessmentProvenanceError):
-        validate_assessment(cleaned, project_final_assessment_input(canonical()))
-
-
-def test_report_material_hint_is_independent_from_unknown_and_delivery_warning():
+def test_report_material_hint_is_independent_from_behavior_and_delivery_warning():
     scope = EvidenceScope(materials=[entry("requested_1", "not_in_input")])
-    assessment = FinalEvidenceAssessment(summary="behavior validated")
     warnings = [PacketCoverage(packet_id="J08", delivery_status="raw_only").model_dump()]
     suggestions = build_material_suggestions(scope)
-    report = report_projection(canonical(), assessment,
-                               input_coverage_warnings=warnings, material_suggestions=suggestions)
-    assert report["remaining_uncertainties"] == []
+    report, _ = project_knowledge(canonical(), input_coverage_warnings=warnings,
+                                  material_suggestions=suggestions)
+    assert "remaining_uncertainties" not in report
     assert report["input_coverage_warnings"][0]["packet_id"] == "J08"
     assert [s["scope_id"] for s in report["material_suggestions"]] == ["requested_1"]
-    rendered = render_report_markdown(canonical(), assessment, input_coverage_warnings=warnings,
-                                      material_suggestions=suggestions)
-    assert "后续可补充的分析材料" in rendered
+    rendered = render_knowledge_markdown(report)
+    assert "可补充材料建议" in rendered
     assert "检查远程调用入口" in rendered
-    assert "调查结果交付覆盖警告" in rendered
+    assert "raw_only" in rendered
     assert "已确认样本缺失" not in rendered
 
 
@@ -136,49 +101,47 @@ def test_real_worker_material_need_remains_actionable_without_gold(tmp_path):
     assert len(suggestions) == 1
     assert "查明远程线程创建条件" in suggestions[0].recommendation
     assert "sub_401234" in suggestions[0].recommendation
-    assert "sub_401234" not in project_final_assessment_input(canonical(), evidence_scope=scope).text
-
-
-def test_canonical_source_packet_ids_are_accepted_without_saved_packet_envelopes():
-    facts = canonical()
-    projection = project_final_assessment_input(facts)
-    assert "J12" in projection.source_packet_ids
-    assert "J00" in projection.source_packet_ids
-    good = FinalEvidenceAssessment(summary="Static scope only", remaining_uncertainties=[
-        FinalUncertainty(question="Runtime result unknown", impact="major", reason="Only static evidence",
-                         uncertainty_type="runtime_unverified", related_claim_ids=["G:C001"], related_packet_ids=["J12"])
-    ])
-    assert validate_assessment(good, projection) is good
-    bad = good.model_copy(deep=True)
-    bad.remaining_uncertainties[0].related_packet_ids = ["J99"]
-    with pytest.raises(FinalAssessmentProvenanceError):
-        validate_assessment(bad, projection)
-
-
-def test_redirected_material_unknown_does_not_leak_into_summary_or_invent_a_suggestion():
-    original = FinalEvidenceAssessment(
-        summary="样本缺失资源，因此注入和C2均未知", remaining_uncertainties=[
-            FinalUncertainty(question="No data", reason="not found", impact="major",
-                             uncertainty_type="material_not_in_input", related_scope_ids=["fictional_scope"])
-        ],
-    )
-    clean, audit = separate_operational_uncertainties(original)
-    assert clean.remaining_uncertainties == []
-    assert "缺失资源" not in clean.summary
-    assert audit[0]["original_summary"] == original.summary
-    assert validate_assessment(clean, project_final_assessment_input(canonical())) is clean
-    assert build_material_suggestions(EvidenceScope()) == []
+    report, _ = project_knowledge(canonical(), material_suggestions=suggestions)
+    assert "sub_401234" not in json.dumps(report["core_behaviors"] + report["suspected_behaviors"], ensure_ascii=False)
 
 
 def test_report_files_serialize_suggestions_without_promoting_material_to_behavior(tmp_path):
-    from bounded_investigator.final_assessment import save_report_outputs
-    facts = canonical()
     scope = EvidenceScope(materials=[entry("requested_1", "partial")])
     suggestions = build_material_suggestions(scope)
-    doc, md = save_report_outputs(tmp_path, facts, FinalEvidenceAssessment(summary="bounded"),
-                                  material_suggestions=suggestions)
+    doc, md, _, _ = save_knowledge_outputs(tmp_path, canonical(), material_suggestions=suggestions)
     loaded = json.loads(doc.read_text(encoding="utf-8"))
-    assert loaded["remaining_uncertainties"] == []
+    assert "remaining_uncertainties" not in loaded
     assert loaded["material_suggestions"][0]["availability"] == "partial"
     assert "如补充" in md.read_text(encoding="utf-8")
     assert "sample_target" in md.read_text(encoding="utf-8")
+
+
+def test_attested_unavailable_material_remains_a_conditional_hint():
+    scope = EvidenceScope(materials=[
+        MaterialScopeItem(scope_id="resource_body", label="RCDATA content", status="unavailable",
+                          source="operator-checked resource export", details="No resource bytes available"),
+        MaterialScopeItem(scope_id="inner_pe", label="Inner PE bytes", status="unavailable",
+                          source="operator-checked PE data export", details="Inner PE not present"),
+        MaterialScopeItem(scope_id="runtime_logs", label="Runtime log events", status="unknown"),
+    ])
+    suggestions = build_material_suggestions(scope)
+    assert {x.scope_id for x in suggestions} == {"resource_body", "inner_pe"}
+    assert all("如后续能提供" in x.recommendation for x in suggestions)
+    assert all("样本中没有" not in x.recommendation for x in suggestions)
+    report, _ = project_knowledge(canonical(), material_suggestions=suggestions)
+    assert not report["core_behaviors"] and not report["suspected_behaviors"]
+    assert "runtime_logs" not in {x["scope_id"] for x in report["material_suggestions"]}
+
+
+def test_delivery_failure_does_not_invent_material_requests_or_behavior_gaps():
+    from bounded_investigator.evidence.scope import coverage_warnings
+
+    coverage = [PacketCoverage(packet_id="J02", delivery_status="raw_only")]
+    warnings = [item.model_dump() for item in coverage_warnings(coverage)]
+    facts = canonical()
+    report, audit = project_knowledge(facts, input_coverage_warnings=warnings)
+    assert report["material_suggestions"] == []
+    assert report["input_coverage_warnings"][0]["packet_id"] == "J02"
+    assert audit["source_gap_count"] == len(facts.gaps)
+    assert not any(x["kind"] == "historical_gap" and "J02" in x.get("source_packets", [])
+                   for x in report["investigation_leads"])

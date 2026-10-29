@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 
-from bounded_investigator.usage_utils import reasoning_tokens_from_usage, usage_delta, usage_summary
+from bounded_investigator.execution.usage_utils import reasoning_tokens_from_usage, usage_delta, usage_summary
 
 
 def test_reasoning_tokens_are_recorded_as_output_subset():
@@ -55,7 +55,7 @@ def test_stage_usage_delta():
 
 def test_merge_usage_summaries_keeps_reasoning_as_output_subset():
     from bounded_investigator.schemas import UsageSummary
-    from bounded_investigator.usage_utils import merge_usage_summaries
+    from bounded_investigator.execution.usage_utils import merge_usage_summaries
 
     merged = merge_usage_summaries(
         UsageSummary(requests=1, input_tokens=10, output_tokens=20, reasoning_tokens=15, visible_output_tokens=5, total_tokens=30),

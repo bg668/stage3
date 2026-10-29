@@ -88,9 +88,6 @@ def test_missing_stage_model_is_rejected(tmp_path: Path):
 
 
 def test_global_reconciliation_stage_can_be_enabled(tmp_path: Path, monkeypatch):
-    text = _config_text() + """
-models:
-"""
     # Build a complete config explicitly because YAML duplicate keys are not portable.
     cfg_text = _config_text().replace(
         "  repair:\n    provider: ds\n    model_name: deepseek-chat\n    reasoning: omit\n    stream_output: false\n",
@@ -114,37 +111,4 @@ global_reconciliation:
     assert loaded.global_reconciliation.enabled is True
     stage, model, _ = loaded.stage("global_reconciliation")
     assert stage.model == "global"
-    assert model.model_name == "deepseek-chat"
-
-
-def test_gap_reconciliation_stage_can_be_enabled(tmp_path: Path, monkeypatch):
-    cfg_text = _config_text().replace(
-        "  repair:\n    provider: ds\n    model_name: deepseek-chat\n    reasoning: omit\n    stream_output: false\n",
-        "  repair:\n    provider: ds\n    model_name: deepseek-chat\n    reasoning: omit\n    stream_output: false\n"
-        "  global:\n    provider: ds\n    model_name: deepseek-chat\n    reasoning: omit\n    stream_output: false\n"
-    ).replace(
-        "  format_repair:\n    model: repair\n    max_output_tokens: 4096\n",
-        "  format_repair:\n    model: repair\n    max_output_tokens: 4096\n"
-        "  global_reconciliation:\n    model: global\n    max_output_tokens: 4096\n"
-        "  gap_reconciliation:\n    model: global\n    max_output_tokens: 2048\n"
-    ) + """
-global_reconciliation:
-  enabled: true
-  max_model_requests: 1
-  total_tokens_limit: 16000
-  wall_clock_seconds: 30
-gap_reconciliation:
-  enabled: true
-  max_model_requests: 1
-  total_tokens_limit: 8000
-  wall_clock_seconds: 30
-"""
-    cfg = tmp_path / "config.yaml"
-    cfg.write_text(cfg_text, encoding="utf-8")
-    monkeypatch.setenv("DS_KEY", "test-key")
-    loaded = load_config(cfg)
-    assert loaded.gap_reconciliation.enabled is True
-    stage, model, _ = loaded.stage("gap_reconciliation")
-    assert stage.model == "global"
-    assert stage.max_output_tokens == 2048
     assert model.model_name == "deepseek-chat"

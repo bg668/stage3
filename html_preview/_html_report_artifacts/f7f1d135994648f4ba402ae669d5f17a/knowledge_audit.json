@@ -1,0 +1,5613 @@
+{
+  "schema": "knowledge_audit_v1",
+  "passed": true,
+  "issues": [],
+  "destination_collisions": [],
+  "source_claim_count": 60,
+  "source_artifact_count": 87,
+  "source_gap_count": 89,
+  "claim_dispositions": {
+    "J00:C001": "core_behaviors",
+    "J00:C002": "core_behaviors",
+    "J01:C001": "core_behaviors",
+    "J01:C002": "core_behaviors",
+    "J00:C003": "superseded_audit",
+    "J02:C001": "core_behaviors",
+    "J02:C002": "core_behaviors",
+    "J00:C004": "superseded_audit",
+    "J02:C003": "core_behaviors",
+    "J03:C001": "core_behaviors",
+    "J03:C002": "core_behaviors",
+    "J03:C003": "core_behaviors",
+    "J03:C004": "core_behaviors",
+    "J03:C005": "core_behaviors",
+    "J04:C001": "core_behaviors",
+    "J04:C002": "suspected_behaviors",
+    "J04:C003": "suspected_behaviors",
+    "J04:C004": "suspected_behaviors",
+    "J04:C005": "core_behaviors",
+    "J04:C006": "suspected_behaviors",
+    "J05:C001": "core_behaviors",
+    "J05:C002": "core_behaviors",
+    "J05:C003": "core_behaviors",
+    "J05:C004": "core_behaviors",
+    "J06:C001": "core_behaviors",
+    "J06:C002": "core_behaviors",
+    "J06:C003": "core_behaviors",
+    "J07:C001": "core_behaviors",
+    "J07:C002": "core_behaviors",
+    "J07:C003": "core_behaviors",
+    "J07:C004": "core_behaviors",
+    "J08:C001": "core_behaviors",
+    "J08:C002": "core_behaviors",
+    "J08:C003": "suspected_behaviors",
+    "J09:C001": "core_behaviors",
+    "J09:C002": "core_behaviors",
+    "J09:C003": "core_behaviors",
+    "J10:C001": "core_behaviors",
+    "J10:C002": "core_behaviors",
+    "J11:C001": "core_behaviors",
+    "J11:C002": "core_behaviors",
+    "J11:C003": "suspected_behaviors",
+    "J12:C001": "core_behaviors",
+    "J12:C002": "suspected_behaviors",
+    "J12:C003": "suspected_behaviors",
+    "J13:C001": "core_behaviors",
+    "J13:C002": "core_behaviors",
+    "J13:C003": "core_behaviors",
+    "J13:C004": "suspected_behaviors",
+    "J13:C005": "core_behaviors",
+    "J13:C006": "core_behaviors",
+    "J13:C007": "core_behaviors",
+    "J14:C001": "core_behaviors",
+    "J14:C002": "core_behaviors",
+    "J14:C003": "core_behaviors",
+    "J14:C004": "core_behaviors",
+    "J14:C005": "core_behaviors",
+    "J15:C001": "core_behaviors",
+    "J15:C002": "core_behaviors",
+    "J15:C003": "core_behaviors"
+  },
+  "artifact_dispositions": {
+    "J00:A001": "iocs",
+    "J00:A002": "iocs",
+    "J00:A003": "iocs",
+    "J00:A004": "iocs",
+    "J06:A006": "iocs",
+    "J00:A005": "iocs",
+    "J00:A006": "iocs",
+    "J00:A007": "iocs",
+    "J00:A008": "iocs",
+    "J00:A009": "iocs",
+    "J00:A010": "iocs",
+    "J00:A011": "detection_features",
+    "J00:A012": "context_artifacts",
+    "J01:A001": "context_artifacts",
+    "J01:A002": "context_artifacts",
+    "J02:A001": "detection_features",
+    "J02:A002": "detection_features",
+    "J02:A003": "iocs",
+    "J02:A004": "context_artifacts",
+    "J03:A001": "detection_features",
+    "J03:A002": "detection_features",
+    "J03:A003": "context_artifacts",
+    "J03:A004": "context_artifacts",
+    "J03:A005": "detection_features",
+    "J03:A006": "detection_features",
+    "J03:A007": "detection_features",
+    "J03:A008": "detection_features",
+    "J03:A009": "detection_features",
+    "J03:A010": "context_artifacts",
+    "J04:A001": "detection_features",
+    "J04:A002": "detection_features",
+    "J04:A003": "detection_features",
+    "J04:A004": "detection_features",
+    "J04:A005": "detection_features",
+    "J04:A006": "context_artifacts",
+    "J05:A001": "context_artifacts",
+    "J05:A002": "context_artifacts",
+    "J05:A003": "context_artifacts",
+    "J05:A004": "context_artifacts",
+    "J05:A005": "context_artifacts",
+    "J06:A001": "detection_features",
+    "J06:A002": "detection_features",
+    "J06:A003": "detection_features",
+    "J06:A004": "detection_features",
+    "J06:A005": "iocs",
+    "J06:A007": "context_artifacts",
+    "J07:A001": "context_artifacts",
+    "J07:A002": "detection_features",
+    "J07:A003": "detection_features",
+    "J07:A004": "context_artifacts",
+    "J07:A005": "context_artifacts",
+    "J08:A001": "context_artifacts",
+    "J08:A002": "context_artifacts",
+    "J09:A001": "detection_features",
+    "J09:A002": "detection_features",
+    "J10:A004": "detection_features",
+    "J09:A003": "detection_features",
+    "J10:A005": "detection_features",
+    "J09:A004": "detection_features",
+    "J09:A005": "detection_features",
+    "J10:A003": "detection_features",
+    "J10:A001": "iocs",
+    "J10:A002": "detection_features",
+    "J11:A001": "context_artifacts",
+    "J11:A002": "context_artifacts",
+    "J11:A003": "context_artifacts",
+    "J11:A004": "context_artifacts",
+    "J11:A005": "context_artifacts",
+    "J11:A006": "context_artifacts",
+    "J11:A007": "context_artifacts",
+    "J11:A008": "context_artifacts",
+    "J12:A003": "context_artifacts",
+    "J12:A001": "iocs",
+    "J12:A002": "context_artifacts",
+    "J13:A001": "iocs",
+    "J13:A002": "context_artifacts",
+    "J13:A003": "context_artifacts",
+    "J15:A001": "context_artifacts",
+    "J13:A004": "context_artifacts",
+    "J14:A004": "context_artifacts",
+    "J13:A005": "context_artifacts",
+    "J14:A005": "context_artifacts",
+    "J14:A001": "detection_features",
+    "J14:A002": "detection_features",
+    "J14:A003": "detection_features",
+    "J15:A002": "context_artifacts",
+    "J15:A003": "context_artifacts"
+  },
+  "gap_dispositions": {
+    "R:G001": "investigation_leads",
+    "R:G002": "investigation_leads",
+    "R:G003": "investigation_leads",
+    "R:G004": "investigation_leads",
+    "R:G005": "investigation_leads",
+    "R:G006": "investigation_leads",
+    "R:G007": "investigation_leads",
+    "R:G008": "investigation_leads",
+    "R:G009": "investigation_leads",
+    "R:G010": "investigation_leads",
+    "R:G011": "investigation_leads",
+    "R:G012": "investigation_leads",
+    "R:G013": "investigation_leads",
+    "R:G014": "investigation_leads",
+    "R:G015": "investigation_leads",
+    "R:G016": "investigation_leads",
+    "R:G017": "investigation_leads",
+    "R:G018": "investigation_leads",
+    "R:G019": "investigation_leads",
+    "R:G020": "investigation_leads",
+    "R:G021": "investigation_leads",
+    "R:G022": "investigation_leads",
+    "R:G023": "investigation_leads",
+    "R:G024": "investigation_leads",
+    "R:G025": "investigation_leads",
+    "R:G026": "investigation_leads",
+    "R:G027": "investigation_leads",
+    "R:G028": "investigation_leads",
+    "R:G029": "investigation_leads",
+    "R:G030": "investigation_leads",
+    "R:G031": "investigation_leads",
+    "R:G032": "investigation_leads",
+    "R:G033": "investigation_leads",
+    "R:G034": "investigation_leads",
+    "R:G035": "investigation_leads",
+    "R:G036": "investigation_leads",
+    "R:G037": "investigation_leads",
+    "R:G038": "investigation_leads",
+    "R:G039": "investigation_leads",
+    "R:G040": "investigation_leads",
+    "R:G041": "investigation_leads",
+    "R:G042": "investigation_leads",
+    "R:G043": "investigation_leads",
+    "R:G044": "investigation_leads",
+    "R:G045": "investigation_leads",
+    "R:G046": "investigation_leads",
+    "R:G047": "investigation_leads",
+    "R:G048": "investigation_leads",
+    "R:G049": "investigation_leads",
+    "R:G050": "investigation_leads",
+    "R:G051": "investigation_leads",
+    "R:G052": "investigation_leads",
+    "R:G053": "investigation_leads",
+    "R:G054": "investigation_leads",
+    "R:G055": "investigation_leads",
+    "R:G056": "investigation_leads",
+    "R:G057": "investigation_leads",
+    "R:G058": "investigation_leads",
+    "R:G059": "investigation_leads",
+    "R:G060": "investigation_leads",
+    "R:G061": "investigation_leads",
+    "R:G062": "investigation_leads",
+    "R:G063": "investigation_leads",
+    "R:G064": "investigation_leads",
+    "R:G065": "investigation_leads",
+    "R:G066": "investigation_leads",
+    "R:G067": "investigation_leads",
+    "R:G068": "investigation_leads",
+    "R:G069": "investigation_leads",
+    "R:G070": "investigation_leads",
+    "R:G071": "investigation_leads",
+    "R:G072": "investigation_leads",
+    "R:G073": "investigation_leads",
+    "R:G074": "investigation_leads",
+    "R:G075": "investigation_leads",
+    "R:G076": "investigation_leads",
+    "R:G077": "investigation_leads",
+    "R:G078": "investigation_leads",
+    "R:G079": "investigation_leads",
+    "R:G080": "investigation_leads",
+    "R:G081": "investigation_leads",
+    "R:G082": "investigation_leads",
+    "R:G083": "investigation_leads",
+    "R:G084": "investigation_leads",
+    "R:G085": "investigation_leads",
+    "R:G086": "investigation_leads",
+    "R:G087": "investigation_leads",
+    "R:G088": "investigation_leads",
+    "R:G089": "investigation_leads"
+  },
+  "dispositions": [
+    {
+      "kind": "claim",
+      "source_id": "J00:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C001"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J00:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C002"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J01:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C003"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J01:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C004"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J00:C003",
+      "destination": "superseded_audit",
+      "target_id": "G:C004"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J02:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C005"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J02:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C006"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J00:C004",
+      "destination": "superseded_audit",
+      "target_id": "G:C006"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J02:C003",
+      "destination": "core_behaviors",
+      "target_id": "G:C007"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J03:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C008"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J03:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C009"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J03:C003",
+      "destination": "core_behaviors",
+      "target_id": "G:C010"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J03:C004",
+      "destination": "core_behaviors",
+      "target_id": "G:C011"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J03:C005",
+      "destination": "core_behaviors",
+      "target_id": "G:C012"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J04:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C013"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J04:C002",
+      "destination": "suspected_behaviors",
+      "target_id": "G:C014"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J04:C003",
+      "destination": "suspected_behaviors",
+      "target_id": "G:C015"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J04:C004",
+      "destination": "suspected_behaviors",
+      "target_id": "G:C016"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J04:C005",
+      "destination": "core_behaviors",
+      "target_id": "G:C017"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J04:C006",
+      "destination": "suspected_behaviors",
+      "target_id": "G:C018"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J05:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C019"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J05:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C020"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J05:C003",
+      "destination": "core_behaviors",
+      "target_id": "G:C021"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J05:C004",
+      "destination": "core_behaviors",
+      "target_id": "G:C022"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J06:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C023"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J06:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C024"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J06:C003",
+      "destination": "core_behaviors",
+      "target_id": "G:C025"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J07:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C026"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J07:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C027"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J07:C003",
+      "destination": "core_behaviors",
+      "target_id": "G:C028"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J07:C004",
+      "destination": "core_behaviors",
+      "target_id": "G:C029"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J08:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C030"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J08:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C031"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J08:C003",
+      "destination": "suspected_behaviors",
+      "target_id": "G:C032"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J09:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C033"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J09:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C034"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J09:C003",
+      "destination": "core_behaviors",
+      "target_id": "G:C035"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J10:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C036"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J10:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C037"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J11:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C038"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J11:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C039"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J11:C003",
+      "destination": "suspected_behaviors",
+      "target_id": "G:C040"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J12:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C041"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J12:C002",
+      "destination": "suspected_behaviors",
+      "target_id": "G:C042"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J12:C003",
+      "destination": "suspected_behaviors",
+      "target_id": "G:C043"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J13:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C044"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J13:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C045"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J13:C003",
+      "destination": "core_behaviors",
+      "target_id": "G:C046"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J13:C004",
+      "destination": "suspected_behaviors",
+      "target_id": "G:C047"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J13:C005",
+      "destination": "core_behaviors",
+      "target_id": "G:C048"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J13:C006",
+      "destination": "core_behaviors",
+      "target_id": "G:C049"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J13:C007",
+      "destination": "core_behaviors",
+      "target_id": "G:C050"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J14:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C051"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J14:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C052"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J14:C003",
+      "destination": "core_behaviors",
+      "target_id": "G:C053"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J14:C004",
+      "destination": "core_behaviors",
+      "target_id": "G:C054"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J14:C005",
+      "destination": "core_behaviors",
+      "target_id": "G:C055"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J15:C001",
+      "destination": "core_behaviors",
+      "target_id": "G:C056"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J15:C002",
+      "destination": "core_behaviors",
+      "target_id": "G:C057"
+    },
+    {
+      "kind": "claim",
+      "source_id": "J15:C003",
+      "destination": "core_behaviors",
+      "target_id": "G:C058"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A001",
+      "destination": "iocs",
+      "target_id": "G:A001"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A002",
+      "destination": "iocs",
+      "target_id": "G:A002"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A003",
+      "destination": "iocs",
+      "target_id": "G:A003"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A004",
+      "destination": "iocs",
+      "target_id": "G:A004"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J06:A006",
+      "destination": "iocs",
+      "target_id": "G:A004"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A005",
+      "destination": "iocs",
+      "target_id": "G:A005"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A006",
+      "destination": "iocs",
+      "target_id": "G:A006"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A007",
+      "destination": "iocs",
+      "target_id": "G:A007"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A008",
+      "destination": "iocs",
+      "target_id": "G:A008"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A009",
+      "destination": "iocs",
+      "target_id": "G:A009"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A010",
+      "destination": "iocs",
+      "target_id": "G:A010"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A011",
+      "destination": "detection_features",
+      "target_id": "G:A011"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J00:A012",
+      "destination": "context_artifacts",
+      "target_id": "G:A012"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J01:A001",
+      "destination": "context_artifacts",
+      "target_id": "G:A013"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J01:A002",
+      "destination": "context_artifacts",
+      "target_id": "G:A014"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J02:A001",
+      "destination": "detection_features",
+      "target_id": "G:A015"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J02:A002",
+      "destination": "detection_features",
+      "target_id": "G:A016"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J02:A003",
+      "destination": "iocs",
+      "target_id": "G:A017"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J02:A004",
+      "destination": "context_artifacts",
+      "target_id": "G:A018"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J03:A001",
+      "destination": "detection_features",
+      "target_id": "G:A019"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J03:A002",
+      "destination": "detection_features",
+      "target_id": "G:A020"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J03:A003",
+      "destination": "context_artifacts",
+      "target_id": "G:A021"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J03:A004",
+      "destination": "context_artifacts",
+      "target_id": "G:A022"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J03:A005",
+      "destination": "detection_features",
+      "target_id": "G:A023"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J03:A006",
+      "destination": "detection_features",
+      "target_id": "G:A024"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J03:A007",
+      "destination": "detection_features",
+      "target_id": "G:A025"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J03:A008",
+      "destination": "detection_features",
+      "target_id": "G:A026"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J03:A009",
+      "destination": "detection_features",
+      "target_id": "G:A027"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J03:A010",
+      "destination": "context_artifacts",
+      "target_id": "G:A028"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J04:A001",
+      "destination": "detection_features",
+      "target_id": "G:A029"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J04:A002",
+      "destination": "detection_features",
+      "target_id": "G:A030"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J04:A003",
+      "destination": "detection_features",
+      "target_id": "G:A031"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J04:A004",
+      "destination": "detection_features",
+      "target_id": "G:A031"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J04:A005",
+      "destination": "detection_features",
+      "target_id": "G:A032"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J04:A006",
+      "destination": "context_artifacts",
+      "target_id": "G:A033"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J05:A001",
+      "destination": "context_artifacts",
+      "target_id": "G:A034"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J05:A002",
+      "destination": "context_artifacts",
+      "target_id": "G:A035"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J05:A003",
+      "destination": "context_artifacts",
+      "target_id": "G:A036"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J05:A004",
+      "destination": "context_artifacts",
+      "target_id": "G:A037"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J05:A005",
+      "destination": "context_artifacts",
+      "target_id": "G:A038"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J06:A001",
+      "destination": "detection_features",
+      "target_id": "G:A039"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J06:A002",
+      "destination": "detection_features",
+      "target_id": "G:A040"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J06:A003",
+      "destination": "detection_features",
+      "target_id": "G:A041"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J06:A004",
+      "destination": "detection_features",
+      "target_id": "G:A042"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J06:A005",
+      "destination": "iocs",
+      "target_id": "G:A043"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J06:A007",
+      "destination": "context_artifacts",
+      "target_id": "G:A044"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J07:A001",
+      "destination": "context_artifacts",
+      "target_id": "G:A045"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J07:A002",
+      "destination": "detection_features",
+      "target_id": "G:A046"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J07:A003",
+      "destination": "detection_features",
+      "target_id": "G:A047"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J07:A004",
+      "destination": "context_artifacts",
+      "target_id": "G:A048"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J07:A005",
+      "destination": "context_artifacts",
+      "target_id": "G:A049"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J08:A001",
+      "destination": "context_artifacts",
+      "target_id": "G:A050"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J08:A002",
+      "destination": "context_artifacts",
+      "target_id": "G:A051"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J09:A001",
+      "destination": "detection_features",
+      "target_id": "G:A052"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J09:A002",
+      "destination": "detection_features",
+      "target_id": "G:A053"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J10:A004",
+      "destination": "detection_features",
+      "target_id": "G:A053"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J09:A003",
+      "destination": "detection_features",
+      "target_id": "G:A054"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J10:A005",
+      "destination": "detection_features",
+      "target_id": "G:A054"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J09:A004",
+      "destination": "detection_features",
+      "target_id": "G:A055"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J09:A005",
+      "destination": "detection_features",
+      "target_id": "G:A056"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J10:A003",
+      "destination": "detection_features",
+      "target_id": "G:A056"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J10:A001",
+      "destination": "iocs",
+      "target_id": "G:A057"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J10:A002",
+      "destination": "detection_features",
+      "target_id": "G:A058"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J11:A001",
+      "destination": "context_artifacts",
+      "target_id": "G:A059"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J11:A002",
+      "destination": "context_artifacts",
+      "target_id": "G:A060"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J11:A003",
+      "destination": "context_artifacts",
+      "target_id": "G:A061"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J11:A004",
+      "destination": "context_artifacts",
+      "target_id": "G:A062"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J11:A005",
+      "destination": "context_artifacts",
+      "target_id": "G:A063"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J11:A006",
+      "destination": "context_artifacts",
+      "target_id": "G:A064"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J11:A007",
+      "destination": "context_artifacts",
+      "target_id": "G:A065"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J11:A008",
+      "destination": "context_artifacts",
+      "target_id": "G:A066"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J12:A003",
+      "destination": "context_artifacts",
+      "target_id": "G:A066"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J12:A001",
+      "destination": "iocs",
+      "target_id": "G:A067"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J12:A002",
+      "destination": "context_artifacts",
+      "target_id": "G:A068"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J13:A001",
+      "destination": "iocs",
+      "target_id": "G:A069"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J13:A002",
+      "destination": "context_artifacts",
+      "target_id": "G:A070"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J13:A003",
+      "destination": "context_artifacts",
+      "target_id": "G:A071"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J15:A001",
+      "destination": "context_artifacts",
+      "target_id": "G:A071"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J13:A004",
+      "destination": "context_artifacts",
+      "target_id": "G:A072"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J14:A004",
+      "destination": "context_artifacts",
+      "target_id": "G:A072"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J13:A005",
+      "destination": "context_artifacts",
+      "target_id": "G:A073"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J14:A005",
+      "destination": "context_artifacts",
+      "target_id": "G:A073"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J14:A001",
+      "destination": "detection_features",
+      "target_id": "G:A074"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J14:A002",
+      "destination": "detection_features",
+      "target_id": "G:A075"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J14:A003",
+      "destination": "detection_features",
+      "target_id": "G:A076"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J15:A002",
+      "destination": "context_artifacts",
+      "target_id": "G:A077"
+    },
+    {
+      "kind": "artifact",
+      "source_id": "J15:A003",
+      "destination": "context_artifacts",
+      "target_id": "G:A078"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G001",
+      "destination": "investigation_leads",
+      "target_id": "R:G001"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G002",
+      "destination": "investigation_leads",
+      "target_id": "R:G002"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G003",
+      "destination": "investigation_leads",
+      "target_id": "R:G003"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G004",
+      "destination": "investigation_leads",
+      "target_id": "R:G004"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G005",
+      "destination": "investigation_leads",
+      "target_id": "R:G005"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G006",
+      "destination": "investigation_leads",
+      "target_id": "R:G006"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G007",
+      "destination": "investigation_leads",
+      "target_id": "R:G007"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G008",
+      "destination": "investigation_leads",
+      "target_id": "R:G008"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G009",
+      "destination": "investigation_leads",
+      "target_id": "R:G009"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G010",
+      "destination": "investigation_leads",
+      "target_id": "R:G010"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G011",
+      "destination": "investigation_leads",
+      "target_id": "R:G011"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G012",
+      "destination": "investigation_leads",
+      "target_id": "R:G012"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G013",
+      "destination": "investigation_leads",
+      "target_id": "R:G013"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G014",
+      "destination": "investigation_leads",
+      "target_id": "R:G014"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G015",
+      "destination": "investigation_leads",
+      "target_id": "R:G015"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G016",
+      "destination": "investigation_leads",
+      "target_id": "R:G016"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G017",
+      "destination": "investigation_leads",
+      "target_id": "R:G017"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G018",
+      "destination": "investigation_leads",
+      "target_id": "R:G018"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G019",
+      "destination": "investigation_leads",
+      "target_id": "R:G019"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G020",
+      "destination": "investigation_leads",
+      "target_id": "R:G020"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G021",
+      "destination": "investigation_leads",
+      "target_id": "R:G021"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G022",
+      "destination": "investigation_leads",
+      "target_id": "R:G022"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G023",
+      "destination": "investigation_leads",
+      "target_id": "R:G023"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G024",
+      "destination": "investigation_leads",
+      "target_id": "R:G024"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G025",
+      "destination": "investigation_leads",
+      "target_id": "R:G025"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G026",
+      "destination": "investigation_leads",
+      "target_id": "R:G026"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G027",
+      "destination": "investigation_leads",
+      "target_id": "R:G027"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G028",
+      "destination": "investigation_leads",
+      "target_id": "R:G028"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G029",
+      "destination": "investigation_leads",
+      "target_id": "R:G029"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G030",
+      "destination": "investigation_leads",
+      "target_id": "R:G030"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G031",
+      "destination": "investigation_leads",
+      "target_id": "R:G031"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G032",
+      "destination": "investigation_leads",
+      "target_id": "R:G032"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G033",
+      "destination": "investigation_leads",
+      "target_id": "R:G033"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G034",
+      "destination": "investigation_leads",
+      "target_id": "R:G034"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G035",
+      "destination": "investigation_leads",
+      "target_id": "R:G035"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G036",
+      "destination": "investigation_leads",
+      "target_id": "R:G036"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G037",
+      "destination": "investigation_leads",
+      "target_id": "R:G037"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G038",
+      "destination": "investigation_leads",
+      "target_id": "R:G038"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G039",
+      "destination": "investigation_leads",
+      "target_id": "R:G039"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G040",
+      "destination": "investigation_leads",
+      "target_id": "R:G040"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G041",
+      "destination": "investigation_leads",
+      "target_id": "R:G041"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G042",
+      "destination": "investigation_leads",
+      "target_id": "R:G042"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G043",
+      "destination": "investigation_leads",
+      "target_id": "R:G043"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G044",
+      "destination": "investigation_leads",
+      "target_id": "R:G044"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G045",
+      "destination": "investigation_leads",
+      "target_id": "R:G045"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G046",
+      "destination": "investigation_leads",
+      "target_id": "R:G046"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G047",
+      "destination": "investigation_leads",
+      "target_id": "R:G047"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G048",
+      "destination": "investigation_leads",
+      "target_id": "R:G048"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G049",
+      "destination": "investigation_leads",
+      "target_id": "R:G049"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G050",
+      "destination": "investigation_leads",
+      "target_id": "R:G050"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G051",
+      "destination": "investigation_leads",
+      "target_id": "R:G051"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G052",
+      "destination": "investigation_leads",
+      "target_id": "R:G052"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G053",
+      "destination": "investigation_leads",
+      "target_id": "R:G053"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G054",
+      "destination": "investigation_leads",
+      "target_id": "R:G054"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G055",
+      "destination": "investigation_leads",
+      "target_id": "R:G055"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G056",
+      "destination": "investigation_leads",
+      "target_id": "R:G056"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G057",
+      "destination": "investigation_leads",
+      "target_id": "R:G057"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G058",
+      "destination": "investigation_leads",
+      "target_id": "R:G058"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G059",
+      "destination": "investigation_leads",
+      "target_id": "R:G059"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G060",
+      "destination": "investigation_leads",
+      "target_id": "R:G060"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G061",
+      "destination": "investigation_leads",
+      "target_id": "R:G061"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G062",
+      "destination": "investigation_leads",
+      "target_id": "R:G062"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G063",
+      "destination": "investigation_leads",
+      "target_id": "R:G063"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G064",
+      "destination": "investigation_leads",
+      "target_id": "R:G064"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G065",
+      "destination": "investigation_leads",
+      "target_id": "R:G065"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G066",
+      "destination": "investigation_leads",
+      "target_id": "R:G066"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G067",
+      "destination": "investigation_leads",
+      "target_id": "R:G067"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G068",
+      "destination": "investigation_leads",
+      "target_id": "R:G068"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G069",
+      "destination": "investigation_leads",
+      "target_id": "R:G069"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G070",
+      "destination": "investigation_leads",
+      "target_id": "R:G070"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G071",
+      "destination": "investigation_leads",
+      "target_id": "R:G071"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G072",
+      "destination": "investigation_leads",
+      "target_id": "R:G072"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G073",
+      "destination": "investigation_leads",
+      "target_id": "R:G073"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G074",
+      "destination": "investigation_leads",
+      "target_id": "R:G074"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G075",
+      "destination": "investigation_leads",
+      "target_id": "R:G075"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G076",
+      "destination": "investigation_leads",
+      "target_id": "R:G076"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G077",
+      "destination": "investigation_leads",
+      "target_id": "R:G077"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G078",
+      "destination": "investigation_leads",
+      "target_id": "R:G078"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G079",
+      "destination": "investigation_leads",
+      "target_id": "R:G079"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G080",
+      "destination": "investigation_leads",
+      "target_id": "R:G080"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G081",
+      "destination": "investigation_leads",
+      "target_id": "R:G081"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G082",
+      "destination": "investigation_leads",
+      "target_id": "R:G082"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G083",
+      "destination": "investigation_leads",
+      "target_id": "R:G083"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G084",
+      "destination": "investigation_leads",
+      "target_id": "R:G084"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G085",
+      "destination": "investigation_leads",
+      "target_id": "R:G085"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G086",
+      "destination": "investigation_leads",
+      "target_id": "R:G086"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G087",
+      "destination": "investigation_leads",
+      "target_id": "R:G087"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G088",
+      "destination": "investigation_leads",
+      "target_id": "R:G088"
+    },
+    {
+      "kind": "gap",
+      "source_id": "R:G089",
+      "destination": "investigation_leads",
+      "target_id": "R:G089"
+    }
+  ],
+  "superseded_claim_ids": [
+    "J00:C003",
+    "J00:C004"
+  ],
+  "unaccounted_claim_ids": [],
+  "unaccounted_artifact_ids": [],
+  "delivery_coverage_warnings": [],
+  "evidence_reference_audit": {
+    "schema": "evidence_reference_validation_v1",
+    "scope": "full_material",
+    "total_segments": 280,
+    "valid_segments": 280,
+    "not_in_current_packet": 0,
+    "invalid_segments": 0,
+    "counts_by_status": {
+      "valid": 280
+    },
+    "passed": true,
+    "checks": [
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C001",
+        "location": "F-0500 L0057-L0069",
+        "observation": "The _x_X_PASSWORDLIST_X_x_ mutex is created; on GetLastError()==183, sub_409AD4 is called, and a nonzero dword_40F1EC leads to a temporary path plus NOIP.abc and sub_405D70.",
+        "function_id": "F-0500",
+        "start_line": 57,
+        "end_line": 69,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C001",
+        "location": "F-0500 L0070-L0087",
+        "observation": "The same existing-mutex branch calls sub_409D28 and sub_409EF8; nonzero results lead to MSN.abc and FIREFOX.abc writes.",
+        "function_id": "F-0500",
+        "start_line": 70,
+        "end_line": 87,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C001",
+        "location": "F-0500 L0088-L0105",
+        "observation": "The branch calls sub_409A84 and sub_409A90; nonzero results lead to IELOGIN.abc and IEPASS.abc writes.",
+        "function_id": "F-0500",
+        "start_line": 88,
+        "end_line": 105,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C001",
+        "location": "F-0500 L0106-L0123",
+        "observation": "The branch calls sub_409A9C and sub_409AB8; nonzero results lead to IEAUTO.abc and IEWEB.abc writes.",
+        "function_id": "F-0500",
+        "start_line": 106,
+        "end_line": 123,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C001",
+        "location": "F-0370 L0005-L0008",
+        "observation": "The path helper obtains GetTempPathA dynamically and invokes it.",
+        "function_id": "F-0370",
+        "start_line": 5,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C001",
+        "location": "F-0367 L0022-L0031",
+        "observation": "sub_405D70 resolves the supplied path, opens it with CreateFileA for write access, calls WriteFile with the supplied byte count and buffer, and closes the handle.",
+        "function_id": "F-0367",
+        "start_line": 22,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C002",
+        "location": "F-0500 L0125-L0137",
+        "observation": "The else branch creates _x_X_BLOCKMOUSE_X_x_; when GetLastError()==183 it closes the handle, calls SetWindowsHookExA twice with IDs 13 and 14, loops on sub_40BA84/sub_405918, and exits when the loop condition clears.",
+        "function_id": "F-0500",
+        "start_line": 125,
+        "end_line": 137,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C003",
+        "location": "F-0038 L009-L020",
+        "observation": "a1 非零时调用 GetCommandLineA，将指针传给 sub_4012B8；循环在 !a1 或 !*a2 时退出，并返回 lpsz_1。",
+        "function_id": "F-0038",
+        "start_line": 9,
+        "end_line": 20,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J01.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C003",
+        "location": "F-0038 L022-L027",
+        "observation": "a1 为零时调用 GetModuleFileNameA(0, Filename, 0x105u)，再将结果传给 sub_401BAC 并返回。",
+        "function_id": "F-0038",
+        "start_line": 22,
+        "end_line": 27,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J01.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C003",
+        "location": "F-0500 L0171-L0190",
+        "observation": "J00 的调用点在动态互斥体流程之后调用 sub_4013A4，并将组装值与临时目录路径传给 sub_40B93C；该位置不显示 sub_4013A4 返回值的更深层语义。",
+        "function_id": "F-0500",
+        "start_line": 171,
+        "end_line": 190,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C004",
+        "location": "F-0112 L001-L005",
+        "observation": "源码明确显示 result 为空时返回 &byte_401F4D，否则返回 result，不执行拼接、复制或其他名称生成操作。",
+        "function_id": "F-0112",
+        "start_line": 1,
+        "end_line": 5,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J01.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C004",
+        "location": "F-0500 L0146-L0170",
+        "observation": "J00 调用点将 sub_401F48 的结果用于动态互斥体重试，但该调用点本身不能证明该函数生成了名称。",
+        "function_id": "F-0500",
+        "start_line": 146,
+        "end_line": 170,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C005",
+        "location": "F-0309 L0010-L0020",
+        "observation": "查找、取得大小、加载并锁定类型为 0xA、名称为 XX-XX-XX-XX 的资源；成功锁定后分配缓冲区并复制资源数据。",
+        "function_id": "F-0309",
+        "start_line": 10,
+        "end_line": 20,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C005",
+        "location": "F-0310 L0027-L0030",
+        "observation": "调用资源读取函数后，以 ####@#### 作为分隔符处理数据，并将解析结果写入 a1+4 指向的数组。",
+        "function_id": "F-0310",
+        "start_line": 27,
+        "end_line": 30,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C005",
+        "location": "F-0310 L0030-L0050",
+        "observation": "取得解析数组的条目数后进入循环；空条目或比较返回真时清理，否则调用 sub_4042DC 处理该条目。",
+        "function_id": "F-0310",
+        "start_line": 30,
+        "end_line": 50,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C005",
+        "location": "F-0307 L0017-L0030",
+        "observation": "sub_4042DC 对正长度数据逐字节执行源字节 XOR 0xBC，并将变换后的结果保存到输出对象。",
+        "function_id": "F-0307",
+        "start_line": 17,
+        "end_line": 30,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C005",
+        "location": "F-0313 L0007-L0013",
+        "observation": "sub_404604 调用配置解析函数，随后循环 101 次把解析数组中的值复制到全局配置区域。",
+        "function_id": "F-0313",
+        "start_line": 7,
+        "end_line": 13,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C006",
+        "location": "F-0497 L0029-L0031",
+        "observation": "调用 sub_4013A4(0) 获取输入，并将其交给后续组装辅助函数；J01 的原始证据确认 a1 为零时该函数使用 GetModuleFileNameA 路径。",
+        "function_id": "F-0497",
+        "start_line": 29,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C006",
+        "location": "F-0497 L0032-L0058",
+        "observation": "循环恰好处理 101 个 off_40D1C4 条目；空条目或与 dword_40BA6C 比较为真时使用默认值，否则调用 sub_4042DC；两条分支均继续追加 ####@#### 分隔处理。",
+        "function_id": "F-0497",
+        "start_line": 32,
+        "end_line": 58,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C006",
+        "location": "F-0497 L0059-L0060",
+        "observation": "计算组装结果长度后调用 sub_405D70，传入数据指针和构造中的目标字符串。",
+        "function_id": "F-0497",
+        "start_line": 59,
+        "end_line": 60,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C006",
+        "location": "F-0367 L0022-L0031",
+        "observation": "sub_405D70 打开/创建传入路径并调用 WriteFile，直接支持该辅助函数的文件写入副作用。",
+        "function_id": "F-0367",
+        "start_line": 22,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C006",
+        "location": "F-0500 L0171-L0190",
+        "observation": "上游调用点在动态互斥体重试块之后组装临时目录路径并将其作为 sub_40B93C 的路径参数传入；路径追加 XX--XX--XX.txt。",
+        "function_id": "F-0500",
+        "start_line": 171,
+        "end_line": 190,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C007",
+        "location": "F-0325 L0008-L0029",
+        "observation": "sub_40491C 从 off_40D1C4 读取配置数组，将前 20 项及后续索引写入全局位置；部分字段调用 sub_404880 或 sub_4046E8 转换。",
+        "function_id": "F-0325",
+        "start_line": 8,
+        "end_line": 29,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C007",
+        "location": "F-0325 L0031-L0071",
+        "observation": "sub_40491C 继续将多个配置索引复制或转换到 dword_ 和 byte_ 全局配置槽位。",
+        "function_id": "F-0325",
+        "start_line": 31,
+        "end_line": 71,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C007",
+        "location": "F-0322 L0016-L0023",
+        "observation": "sub_404880 将配置值与固定字符串 TRUE 比较，并据此返回 0 或 1。",
+        "function_id": "F-0322",
+        "start_line": 16,
+        "end_line": 23,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C007",
+        "location": "F-0317 L0010-L0020",
+        "observation": "sub_4046E8 接收配置输入并调用 sub_402BDC 转换，随后返回转换结果。",
+        "function_id": "F-0317",
+        "start_line": 10,
+        "end_line": 20,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C008",
+        "location": "F-0494 L0005-L0026",
+        "observation": "多个彼此独立的 off_* 标志分别门控探测 helper；每个 helper 返回 1 时紧接 ExitProcess_0(0)。",
+        "function_id": "F-0494",
+        "start_line": 5,
+        "end_line": 26,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C008",
+        "location": "F-0494 L0027-L0059",
+        "observation": "off_40D200 分支内的 sub_405750 调用和 sub_4056DC 返回值也可分别导致 ExitProcess_0(0)。",
+        "function_id": "F-0494",
+        "start_line": 27,
+        "end_line": 59,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C008",
+        "location": "F-0338 L0005-L0008",
+        "observation": "sub_4052EC 通过 GetModuleHandleA 检查 SbieDll.dll 是否已加载。",
+        "function_id": "F-0338",
+        "start_line": 5,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C008",
+        "location": "F-0337 L0025-L0039",
+        "observation": "sub_4051CC 枚举进程并将进程名与 VBoxService.exe 比较，匹配时返回 1。",
+        "function_id": "F-0337",
+        "start_line": 25,
+        "end_line": 39,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C008",
+        "location": "F-0339 L0005-L0008",
+        "observation": "sub_405310 检查 dbghelp.dll 是否已加载。",
+        "function_id": "F-0339",
+        "start_line": 5,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C008",
+        "location": "F-0347 L0007-L0010",
+        "observation": "sub_4056C0 在 IsDebuggerPresent 或 PEB BeingDebugged 检查成功时返回 1。",
+        "function_id": "F-0347",
+        "start_line": 7,
+        "end_line": 10,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C008",
+        "location": "F-0352 L0005-L0011",
+        "observation": "sub_4057B4 通过打开 Syser 相关设备路径检测其存在，相关结果由 sub_40588C 汇总。",
+        "function_id": "F-0352",
+        "start_line": 5,
+        "end_line": 11,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C008",
+        "location": "F-0355 L0005-L0008",
+        "observation": "sub_40588C 通过 sub_405814 和 sub_405850 检测 SICE/NTICE 设备。",
+        "function_id": "F-0355",
+        "start_line": 5,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C009",
+        "location": "F-0500 L0125-L0137",
+        "observation": "上游调用点在 blockmouse 互斥体已存在的门控下调用 SetWindowsHookExA 两次，使用 hook ID 13、14 及 fn、sub_40B108 地址。",
+        "function_id": "F-0500",
+        "start_line": 125,
+        "end_line": 137,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C009",
+        "location": "F-0498 L0005-L0014",
+        "observation": "sub_40BA84 创建 _x_X_BLOCKMOUSE_X_x_；GetLastError()==183 时关闭句柄并返回 0，否则返回 1。",
+        "function_id": "F-0498",
+        "start_line": 5,
+        "end_line": 14,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C009",
+        "location": "F-0492 L0007-L0013",
+        "observation": "fn 仅在 n256==256 时调用 GetKeyboardState 和 ToAscii，随后返回 1；Char 未被进一步写出。",
+        "function_id": "F-0492",
+        "start_line": 7,
+        "end_line": 13,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C009",
+        "location": "F-0493 L0001-L0004",
+        "observation": "sub_40B108 不执行其他操作，直接返回 1。",
+        "function_id": "F-0493",
+        "start_line": 1,
+        "end_line": 4,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C010",
+        "location": "F-0358 L0005-L0016",
+        "observation": "PeekMessageA 成功时设置返回值为 1；仅非 18 消息进入 TranslateMessage/DispatchMessageA，之后始终 Sleep(1)。",
+        "function_id": "F-0358",
+        "start_line": 5,
+        "end_line": 16,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C010",
+        "location": "F-0359 L0006-L0009",
+        "observation": "sub_405918 以 do/while 调用 sub_4058E0，并在其返回非零时继续。",
+        "function_id": "F-0359",
+        "start_line": 6,
+        "end_line": 9,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C010",
+        "location": "F-0500 L0132-L0137",
+        "observation": "上游 blockmouse 分支在 helper 返回零的循环体内调用 sub_405918。",
+        "function_id": "F-0500",
+        "start_line": 132,
+        "end_line": 137,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C011",
+        "location": "F-0344 L0032-L0040",
+        "observation": "代码分配 256 字节缓冲区，调用 GetUserNameA，并将生成的用户名数据与 CurrentUser 传给 sub_401E94。",
+        "function_id": "F-0344",
+        "start_line": 32,
+        "end_line": 40,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C012",
+        "location": "F-0494 L0027-L0068",
+        "observation": "off_40D200==1 时执行重复 sub_405750、sub_4056DC 及时间差检查；sub_4056DC 返回真或时间差大于 5000 时调用 ExitProcess_0(0)。",
+        "function_id": "F-0494",
+        "start_line": 27,
+        "end_line": 68,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C012",
+        "location": "F-0348 L0007-L0014",
+        "observation": "sub_4056DC 建立异常处理上下文并返回 NtCurrentPeb()->BeingDebugged != 0。",
+        "function_id": "F-0348",
+        "start_line": 7,
+        "end_line": 14,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C012",
+        "location": "F-0350 L0005-L0007",
+        "observation": "sub_405770 取得 PEB 加载模块链表并将 Flink[4].Flink 增加 1024。",
+        "function_id": "F-0350",
+        "start_line": 5,
+        "end_line": 7,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C013",
+        "location": "F-0394 L0101-L0121",
+        "observation": "代码为 dst_1、dst_2、dst_3 拼接目录、全局路径片段和文件名，并通过 sub_404740 获取比较/路径相关结果。",
+        "function_id": "F-0394",
+        "start_line": 101,
+        "end_line": 121,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C013",
+        "location": "F-0394 L0134-L0155",
+        "observation": "else 分支把 dst 作为现有文件路径、dst_2 作为首个目标调用 CopyFileA；失败后将现有文件复制到 dst_3，两个复制结果分别控制后续 helper 调用。",
+        "function_id": "F-0394",
+        "start_line": 134,
+        "end_line": 155,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C014",
+        "location": "F-0394 L0156-L0180",
+        "observation": "非零 off_40D1EC 开关下，代码调用 sub_406088/sub_401E94 处理 HKLM Policies\\Explorer\\Run，并在 !v9 分支调用 sub_405C4C。",
+        "function_id": "F-0394",
+        "start_line": 156,
+        "end_line": 180,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C014",
+        "location": "F-0394 L0181-L0203",
+        "observation": "同一开关下，代码对 HKCU Policies\\Explorer\\Run 执行对应的 sub_406088/sub_401E94 和条件性 sub_405C4C 操作。",
+        "function_id": "F-0394",
+        "start_line": 181,
+        "end_line": 203,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C014",
+        "location": "F-0365 L0025-L0032",
+        "observation": "sub_405C4C 调用 RegCreateKeyA，并以 RegSetValueExA 写入 REG type 2 数据后关闭注册表句柄。",
+        "function_id": "F-0365",
+        "start_line": 25,
+        "end_line": 32,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C015",
+        "location": "F-0394 L0205-L0225",
+        "observation": "off_40D1D8 非零时，代码调用 sub_406088，明确传入 HKLM 和 Software\\Microsoft\\Windows\\CurrentVersion\\Run；随后 !v9 分支调用 sub_405C4C。",
+        "function_id": "F-0394",
+        "start_line": 205,
+        "end_line": 225,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C015",
+        "location": "F-0365 L0025-L0032",
+        "observation": "sub_405C4C 通过 RegCreateKeyA 和 RegSetValueExA 创建/设置指定注册表值。",
+        "function_id": "F-0365",
+        "start_line": 25,
+        "end_line": 32,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C016",
+        "location": "F-0394 L0227-L0247",
+        "observation": "off_40D1E0 非零时，代码向 HKCU 和 Software\\Microsoft\\Windows\\CurrentVersion\\Run 传递参数，并在 !v9 分支再次调用 sub_405C4C。",
+        "function_id": "F-0394",
+        "start_line": 227,
+        "end_line": 247,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C016",
+        "location": "F-0365 L0025-L0032",
+        "observation": "sub_405C4C 实际调用 RegCreateKeyA 与 RegSetValueExA 写入值。",
+        "function_id": "F-0365",
+        "start_line": 25,
+        "end_line": 32,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C017",
+        "location": "F-0394 L0249-L0256",
+        "observation": "off_40D1E4 非零时，sub_406B54 取出组件/值参数并调用 sub_406ADC。",
+        "function_id": "F-0394",
+        "start_line": 249,
+        "end_line": 256,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C017",
+        "location": "F-0391 L0001-L0005",
+        "observation": "sub_406ADC 先调用 sub_4069E4，再调用 sub_406A50 和 sub_4068B4。",
+        "function_id": "F-0391",
+        "start_line": 1,
+        "end_line": 5,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C017",
+        "location": "F-0389 L0001-L0008",
+        "observation": "sub_4069E4 打开 HKCU\\Software\\Microsoft\\Active Setup\\Installed Components\\ 并调用 RegDeleteKeyA 删除传入子键。",
+        "function_id": "F-0389",
+        "start_line": 1,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C017",
+        "location": "F-0388 L0029-L0043",
+        "observation": "sub_4068B4 拼接固定 HKLM Active Setup\\Installed Components\\ 前缀，创建键，并以传入字符串加上 Restart 设置 StubPath。",
+        "function_id": "F-0388",
+        "start_line": 29,
+        "end_line": 43,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C018",
+        "location": "F-0390 L0014-L0020",
+        "observation": "代码调用 sub_4013A4 和 Restart 处理参数；在 v6 分支中调用 sub_405AD8、sub_406878，随后退出进程。",
+        "function_id": "F-0390",
+        "start_line": 14,
+        "end_line": 20,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C018",
+        "location": "F-0391 L0001-L0005",
+        "observation": "sub_406ADC 将同一输入转交给 sub_406A50 和 sub_4068B4。",
+        "function_id": "F-0391",
+        "start_line": 1,
+        "end_line": 5,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C019",
+        "location": "F-0368 L0006-L0008",
+        "observation": "代码加载 kernel32.dll，解析 GetSystemDirectoryA，并将调用者的缓冲区和大小传入该 API。",
+        "function_id": "F-0368",
+        "start_line": 6,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C020",
+        "location": "F-0369 L0006-L0008",
+        "observation": "代码加载 kernel32.dll，解析 GetWindowsDirectoryA，并将调用者的缓冲区和大小传入该 API。",
+        "function_id": "F-0369",
+        "start_line": 6,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C021",
+        "location": "F-0383 L0028-L0048",
+        "observation": "非空路径先经 sub_406660 检查；不存在时按路径分段，构造各级目录，并在每级不存在时继续处理。",
+        "function_id": "F-0383",
+        "start_line": 28,
+        "end_line": 48,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C021",
+        "location": "F-0383 L0048-L0056",
+        "observation": "对不存在的路径调用 CreateDirectoryA；循环结束后再次检查原目标路径并将检查结果作为返回标志。",
+        "function_id": "F-0383",
+        "start_line": 48,
+        "end_line": 56,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C021",
+        "location": "F-0383 L0050-L0053",
+        "observation": "CreateDirectoryA 失败会跳转到统一返回位置，因此后续成功状态依赖目录创建是否失败。",
+        "function_id": "F-0383",
+        "start_line": 50,
+        "end_line": 53,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C022",
+        "location": "F-0377 L0015-L0017",
+        "observation": "代码构造固定子键 Software\\\\Microsoft\\\\Windows\\\\CurrentVersion 和值名 ProgramFilesDir，并以 HKEY_LOCAL_MACHINE 传给 sub_406088。",
+        "function_id": "F-0377",
+        "start_line": 15,
+        "end_line": 17,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C022",
+        "location": "F-0375 L0029-L0039",
+        "observation": "sub_406088 先调用 sub_401B14 初始化/处理输出对象，打开注册表键；键和值查询成功后按返回长度分配缓冲区并读取值数据。",
+        "function_id": "F-0375",
+        "start_line": 29,
+        "end_line": 39,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C022",
+        "location": "F-0375 L0031-L0041",
+        "observation": "RegOpenKeyExA 成功才进入值查询；第一次 RegQueryValueExA 成功才进行缓冲区扩展和第二次数据读取，随后关闭注册表键。",
+        "function_id": "F-0375",
+        "start_line": 31,
+        "end_line": 41,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C023",
+        "location": "F-0480 L0019-L0029",
+        "observation": "函数从 HKLM 的固定键 SOFTWARE\\Vitalwerks\\DUC 读取 UserName 和 Password；随后以 v9 是否非零分别调用 sub_4097BC 或 sub_401AC0(dst)。",
+        "function_id": "F-0480",
+        "start_line": 19,
+        "end_line": 29,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C023",
+        "location": "F-0469 L0001-L0005",
+        "observation": "sub_4097BC 是转入 sub_4098DC 的 thunk。",
+        "function_id": "F-0469",
+        "start_line": 1,
+        "end_line": 5,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C023",
+        "location": "F-0472 L0011-L0022",
+        "observation": "sub_4098DC 计算输入长度，向目标缓冲追加 '.'，调用 sub_4097F8 转换数据，并在转换失败时将目标长度置零。",
+        "function_id": "F-0472",
+        "start_line": 11,
+        "end_line": 22,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C023",
+        "location": "F-0500 L0057-L0069",
+        "observation": "上游在调用 sub_409AD4 后，仅当结果缓冲非零时取得临时目录、追加 NOIP.abc 并调用写入例程。",
+        "function_id": "F-0500",
+        "start_line": 57,
+        "end_line": 69,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C024",
+        "location": "F-0482 L0038-L0060",
+        "observation": "函数加载 advapi32.dll，解析 CredEnumerateA/CredFree，并以 WindowsLive:name=* 作为查询过滤器调用 CredEnumerateA。",
+        "function_id": "F-0482",
+        "start_line": 38,
+        "end_line": 60,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C024",
+        "location": "F-0482 L0061-L0083",
+        "observation": "Messenger_2 非零时循环遍历 v22 条目，读取条目字段，调用 sub_401CAC 和 sub_409C1C 组合数据。",
+        "function_id": "F-0482",
+        "start_line": 61,
+        "end_line": 83,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C024",
+        "location": "F-0482 L0084-L0089",
+        "observation": "处理完成后构造 xxxyyyzzz.dat，并调用 sub_405D70，传入临时路径和组合缓冲。",
+        "function_id": "F-0482",
+        "start_line": 84,
+        "end_line": 89,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C024",
+        "location": "F-0481 L0027-L0076",
+        "observation": "sub_409C1C 按 v17 指定长度循环读取 a1 指向的字节，对 0x20–0xFA 范围内字节执行追加转换，对其他字节走另一追加路径。",
+        "function_id": "F-0481",
+        "start_line": 27,
+        "end_line": 76,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C025",
+        "location": "F-0500 L0070-L0123",
+        "observation": "上游依次调用其余六个 helper，并在各自结果非零时追加固定文件名和调用写入例程。",
+        "function_id": "F-0500",
+        "start_line": 70,
+        "end_line": 123,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C025",
+        "location": "F-0482 L0061-L0089",
+        "observation": "本包闭合了其中 sub_409D28 的具体来源：WindowsLive:name=* 凭据枚举、逐项组合及 xxxyyyzzz.dat 写入。",
+        "function_id": "F-0482",
+        "start_line": 61,
+        "end_line": 89,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C026",
+        "location": "F-0436 L008-L014",
+        "observation": "sub_407FF0 调用 RasEnumEntriesA，并在成功或 ERROR_BUFFER_TOO_SMALL 情况下返回枚举数量 v3。",
+        "function_id": "F-0436",
+        "start_line": 8,
+        "end_line": 14,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C026",
+        "location": "F-0440 L059-L071",
+        "observation": "sub_408238 在 v39 非零时分配 RAS 条目数组并调用 RasEnumEntriesA；成功后进入后续处理。",
+        "function_id": "F-0440",
+        "start_line": 59,
+        "end_line": 71,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C026",
+        "location": "F-0440 L088-L100",
+        "observation": "代码在条目循环内取得条目名，调用 RasGetEntryDialParamsA，并调用 sub_4081BC；sub_4081BC 动态解析并调用 RasGetEntryProperties。",
+        "function_id": "F-0440",
+        "start_line": 88,
+        "end_line": 100,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C026",
+        "location": "F-0440 L146-L155",
+        "observation": "每个条目循环中将 v29.szUserName 和 v29.szPassword 分别复制到 v24 和 v23，然后调用 sub_401E10(dst_2, 7)，最后推进条目索引。",
+        "function_id": "F-0440",
+        "start_line": 146,
+        "end_line": 155,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C027",
+        "location": "F-0440 L067-L085",
+        "observation": "代码读取系统版本，取得两个特殊目录；仅在 n2 == 2 且 v29.dwCallbackId >= 5 时继续，并调用 sub_407E40。",
+        "function_id": "F-0440",
+        "start_line": 67,
+        "end_line": 85,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C027",
+        "location": "F-0435 L006-L012",
+        "observation": "sub_407F4C 将目录缓冲规范化并追加 Microsoft\\Network\\Connections\\pbk\\rasphone.pbk。",
+        "function_id": "F-0435",
+        "start_line": 6,
+        "end_line": 12,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C027",
+        "location": "F-0440 L101-L124",
+        "observation": "在配置条件分支内，代码以 DialParamsUID 为键，依次针对两个路径和两个候选节名调用 GetPrivateProfileIntA。",
+        "function_id": "F-0440",
+        "start_line": 101,
+        "end_line": 124,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C027",
+        "location": "F-0440 L125-L143",
+        "observation": "仅当最终 _RAX 非零时，代码处理该值并遍历 256 个表项；满足子条件时调用 sub_408038 将数据写入 v29.szPassword。",
+        "function_id": "F-0440",
+        "start_line": 125,
+        "end_line": 143,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C027",
+        "location": "F-0437 L010-L031",
+        "observation": "sub_408038 按给定长度扫描源数据并复制到目标缓冲区，同时写入终止零字节。",
+        "function_id": "F-0437",
+        "start_line": 10,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C028",
+        "location": "F-0440 L067-L085",
+        "observation": "sub_408238 在系统/配置门控满足时调用 sub_407E40(a2, a3, a4)。",
+        "function_id": "F-0440",
+        "start_line": 67,
+        "end_line": 85,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C028",
+        "location": "F-0434 L017-L028",
+        "observation": "sub_407E40 先取得当前用户相关键并调用 sub_407DD0；成功后把 LSA 私有数据缓冲区和长度传给 sub_407B94。随后对固定字符串 L$_RasDefaultCredentials#0 重复同样的读取和处理。",
+        "function_id": "F-0434",
+        "start_line": 17,
+        "end_line": 28,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C028",
+        "location": "F-0433 L011-L019",
+        "observation": "sub_407DD0 打开 LSA policy、构造 Unicode key、调用 LsaRetrievePrivateData，并在成功后返回真值。",
+        "function_id": "F-0433",
+        "start_line": 11,
+        "end_line": 19,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C028",
+        "location": "F-0431 L022-L039",
+        "observation": "sub_407CAC 调用 GetUserNameA、LookupAccountNameA、IsValidSid 和 ConvertSidToStringSidA，将当前用户名转换为 SID 字符串作为输出键。",
+        "function_id": "F-0431",
+        "start_line": 22,
+        "end_line": 39,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C028",
+        "location": "F-0430 L033-L071",
+        "observation": "sub_407B94 对传入私有数据按循环解析，并在特定计数条件下更新 unk_40E9BC/dword_40E9C0 关联状态。",
+        "function_id": "F-0430",
+        "start_line": 33,
+        "end_line": 71,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C029",
+        "location": "F-0476 L001-L004",
+        "observation": "sub_409A84 直接返回 sub_408238(dst, (int)dst, a2, a3) 的结果，没有其他条件或副作用。",
+        "function_id": "F-0476",
+        "start_line": 1,
+        "end_line": 4,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C030",
+        "location": "F-0477 L0001-L0004",
+        "observation": "sub_409A90 直接转调 sub_407834，并把调用者提供的 dst 指针作为参数传入。",
+        "function_id": "F-0477",
+        "start_line": 1,
+        "end_line": 4,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J08.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C030",
+        "location": "F-0419 L0030-L0049",
+        "observation": "sub_407834 创建 PStore 实例、获取记录集合，并在记录包含 \":StringData\" 时提取字符串并调用 sub_401D9C 解析字段。",
+        "function_id": "F-0419",
+        "start_line": 30,
+        "end_line": 49,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J08.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C030",
+        "location": "F-0419 L0056-L0071",
+        "observation": "对记录中的两个字段分别调用 sub_401D9C；仅当 v20 与 v19 均非零时调用 sub_401E10(dst_3, 7)。",
+        "function_id": "F-0419",
+        "start_line": 56,
+        "end_line": 71,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J08.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C031",
+        "location": "F-0417 L0035-L0049",
+        "observation": "sub_4076C0 循环枚举记录，并在每个返回项上调用 sub_40756C、sub_4073FC 和 sub_407598。",
+        "function_id": "F-0417",
+        "start_line": 35,
+        "end_line": 49,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J08.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C031",
+        "location": "F-0413 L0048-L0061",
+        "observation": "sub_40744C 枚举返回的宽字符标识，并对每个有效项调用 sub_407244。",
+        "function_id": "F-0413",
+        "start_line": 48,
+        "end_line": 61,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J08.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C031",
+        "location": "F-0410 L0049-L0082",
+        "observation": "sub_407244 获取宽字符数据；按字符内容追加转换结果，释放返回内存，并将 dst_1 传给 sub_401B14。",
+        "function_id": "F-0410",
+        "start_line": 49,
+        "end_line": 82,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J08.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C032",
+        "location": "F-0477 L0001-L0004",
+        "observation": "当前包确认 sub_409A90 是 sub_407834 的直接包装。",
+        "function_id": "F-0477",
+        "start_line": 1,
+        "end_line": 4,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J08.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C032",
+        "location": "F-0500 L0057-L0123",
+        "observation": "已验证上游源码范围显示密码列表分支依次调用七个 helper，并对非零结果执行固定临时目录文件输出。",
+        "function_id": "F-0500",
+        "start_line": 57,
+        "end_line": 123,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C033",
+        "location": "F-0478 L0005-L0009",
+        "observation": "sub_409A9C 调用 sub_409980，并仅在其低字节为 1 时调用 sub_4096EC。",
+        "function_id": "F-0478",
+        "start_line": 5,
+        "end_line": 9,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C033",
+        "location": "F-0466 L0013-L0018",
+        "observation": "sub_4096EC 调用 sub_40879C(&v5)，随后将 v5 传给 Storage2 处理函数。",
+        "function_id": "F-0466",
+        "start_line": 13,
+        "end_line": 18,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C033",
+        "location": "F-0449 L0028-L0036",
+        "observation": "sub_40879C 初始化 OLE，解析 CLSID_CLSID_CUrlHistory，并建立 URL History 接口。",
+        "function_id": "F-0449",
+        "start_line": 28,
+        "end_line": 36,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C033",
+        "location": "F-0449 L0036-L0050",
+        "observation": "循环枚举历史项；每项被复制到新分配的宽字符串缓冲区并写入 (*a1)[v2 - 1]。",
+        "function_id": "F-0449",
+        "start_line": 36,
+        "end_line": 50,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C034",
+        "location": "F-0466 L0013-L0018",
+        "observation": "sub_4096EC 将固定 Storage2 子键传给 sub_408E58，并随后返回经 sub_402FC8 处理的结果对象。",
+        "function_id": "F-0466",
+        "start_line": 13,
+        "end_line": 18,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C034",
+        "location": "F-0464 L0057-L0075",
+        "observation": "成功打开 HKCU 指定子键后枚举值，先查询数据长度，再分配缓冲区并在第二次 RegQueryValueExA 成功时进入数据处理。",
+        "function_id": "F-0464",
+        "start_line": 57,
+        "end_line": 75,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C034",
+        "location": "F-0464 L0076-L0087",
+        "observation": "注册表数据被装入 pDataIn，随后在 CryptUnprotectData 成功分支中调用 sub_408CCC 处理 pDataOut。",
+        "function_id": "F-0464",
+        "start_line": 76,
+        "end_line": 87,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C034",
+        "location": "F-0463 L0031-L0055",
+        "observation": "sub_408CCC 从解密数据读取记录字段；每条记录根据 sub_408C94 的结果追加 User: 或 Password:，并把对应字符串追加到传入结果对象。",
+        "function_id": "F-0463",
+        "start_line": 31,
+        "end_line": 55,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C034",
+        "location": "F-0464 L0099-L0136",
+        "observation": "解密记录结果随后被从内部字符串对象中取出并继续拼接处理，说明其结果还会经过后续内部格式化。",
+        "function_id": "F-0464",
+        "start_line": 99,
+        "end_line": 136,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C035",
+        "location": "F-0461 L0028-L0039",
+        "observation": "函数获取密码学上下文和哈希对象，对 strIn 的 UTF-16 长度数据调用 CryptHashData，并读取哈希参数。",
+        "function_id": "F-0461",
+        "start_line": 28,
+        "end_line": 39,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C035",
+        "location": "F-0461 L0043-L0062",
+        "observation": "函数逐字节以 %2.2X 格式追加摘要，并将字节累加值再次格式化后追加到 a2。",
+        "function_id": "F-0461",
+        "start_line": 43,
+        "end_line": 62,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C036",
+        "location": "F-0479 L0005-L0009",
+        "observation": "sub_409AB8 先调用 sub_409980，仅在其返回值低字节为 1 时调用 sub_40930C。",
+        "function_id": "F-0479",
+        "start_line": 5,
+        "end_line": 9,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C036",
+        "location": "F-0465 L0045-L0060",
+        "observation": "sub_40930C 初始化结果对象，构造固定 GUID 字符串的派生缓冲区并将其设置为 74 字节 pOptionalEntropy，然后调用 CredEnumerateA。",
+        "function_id": "F-0465",
+        "start_line": 45,
+        "end_line": 60,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C036",
+        "location": "F-0465 L0061-L0075",
+        "observation": "Count 至少为 1 时循环访问 Credential 数组，从 CredentialBlobSize/Blob 构造 pDataIn，调用 CryptUnprotectData，并读取 TargetName 与 pDataOut。",
+        "function_id": "F-0465",
+        "start_line": 61,
+        "end_line": 75,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C036",
+        "location": "F-0465 L0093-L0097",
+        "observation": "循环按 Count 逐项处理枚举到的凭据。",
+        "function_id": "F-0465",
+        "start_line": 93,
+        "end_line": 97,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C037",
+        "location": "F-0465 L0067-L0080",
+        "observation": "代码调用 CryptUnprotectData 后读取 pDataOut.pbData，并构造 User: 标签及对应字符串片段追加到 dst。",
+        "function_id": "F-0465",
+        "start_line": 67,
+        "end_line": 80,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C037",
+        "location": "F-0465 L0081-L0092",
+        "observation": "代码继续构造 Password: 标签，从 pDataOut 的不同偏移提取字符串并追加到 dst。",
+        "function_id": "F-0465",
+        "start_line": 81,
+        "end_line": 92,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C037",
+        "location": "F-0465 L0098-L0103",
+        "observation": "函数还从 dst 中提取 Address、User、Password 三类结果，分别传入 sub_401B14。",
+        "function_id": "F-0465",
+        "start_line": 98,
+        "end_line": 103,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C037",
+        "location": "F-0465 L0113-L0113",
+        "observation": "sub_40930C 最终调用 sub_402FC8，并传入 Credential 指针地址和 dword_4086C0。",
+        "function_id": "F-0465",
+        "start_line": 113,
+        "end_line": 113,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C038",
+        "location": "F-0483 L0150-L0174",
+        "observation": "代码从 nss3.dll 解析七个 NSS/PK11 入口，并以嵌套条件包围后续 Firefox 配置处理。",
+        "function_id": "F-0483",
+        "start_line": 150,
+        "end_line": 174,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C038",
+        "location": "F-0483 L0175-L0189",
+        "observation": "代码加载 userenv.dll，解析 GetUserProfileDirectoryA，调用辅助函数取得配置相关数据，并调用 GetPrivateProfileStringA(\"Profile0\", \"Path\", ...) 将结果写入 ReturnedString。",
+        "function_id": "F-0483",
+        "start_line": 175,
+        "end_line": 189,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C038",
+        "location": "F-0483 L0190-L0204",
+        "observation": "代码构造 Firefox 子目录和 signons3.txt，调用 sub_405D04 检查该路径，并在成功时将路径保存到 lpFileName_1。",
+        "function_id": "F-0483",
+        "start_line": 190,
+        "end_line": 204,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C038",
+        "location": "F-0483 L0205-L0226",
+        "observation": "signons3.txt 检查失败时，代码构造并检查 signons2.txt；成功时将该候选路径保存到 lpFileName_1。",
+        "function_id": "F-0483",
+        "start_line": 205,
+        "end_line": 226,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C038",
+        "location": "F-0483 L0227-L0248",
+        "observation": "signons2.txt 检查失败时，代码构造并检查 signons1.txt；成功时保存到 lpFileName_1。",
+        "function_id": "F-0483",
+        "start_line": 227,
+        "end_line": 248,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C038",
+        "location": "F-0483 L0249-L0271",
+        "observation": "signons1.txt 检查失败时，代码构造并检查 signons.txt；若检查成功则构造 Firefox 目录相关路径并保存候选结果，否则跳转到 LABEL_59。",
+        "function_id": "F-0483",
+        "start_line": 249,
+        "end_line": 271,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C039",
+        "location": "F-0483 L0150-L0175",
+        "observation": "代码加载 nss3.dll，并连续调用 GetProcAddress 解析 NSS/PK11 入口；所有后续解析位于前一入口非零的嵌套分支内，随后加载 userenv.dll。",
+        "function_id": "F-0483",
+        "start_line": 150,
+        "end_line": 175,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C039",
+        "location": "F-0483 L0175-L0179",
+        "observation": "代码从 userenv.dll 解析 GetUserProfileDirectoryA，取得当前进程句柄并调用 OpenProcessToken。",
+        "function_id": "F-0483",
+        "start_line": 175,
+        "end_line": 179,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C040",
+        "location": "F-0483 L0182-L0226",
+        "observation": "当前函数读取 Firefox Profile0/Path 并选择 signons3.txt 或 signons2.txt 候选路径。",
+        "function_id": "F-0483",
+        "start_line": 182,
+        "end_line": 226,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C040",
+        "location": "F-0483 L0227-L0271",
+        "observation": "当前函数继续回退检查 signons1.txt 和 signons.txt，并在成功时保存候选路径，但源码随后被截断。",
+        "function_id": "F-0483",
+        "start_line": 227,
+        "end_line": 271,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C040",
+        "location": "F-0500 L0088-L0105",
+        "observation": "依赖源码范围支持密码列表分支中调用 sub_409EF8 并将对应非零结果送入 FIREFOX.abc 输出序列；该上游关系不由当前截断片段单独闭合。",
+        "function_id": "F-0500",
+        "start_line": 88,
+        "end_line": 105,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C041",
+        "location": "F-0483 L0275-L0283",
+        "observation": "代码调用 CreateFileA(lpFileName_1, 0x80000000, ...)、GetFileSize、sub_401174 分配缓冲区、ReadFile，并随后解析 v97。",
+        "function_id": "F-0483",
+        "start_line": 275,
+        "end_line": 283,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J12.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C041",
+        "location": "F-0483 L0284-L0290",
+        "observation": "代码重新取得配置相关字符串并构造 NSS 初始化所需的内部参数，表明文件读取后的状态继续进入后续 Firefox/NSS 流程。",
+        "function_id": "F-0483",
+        "start_line": 284,
+        "end_line": 290,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J12.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C042",
+        "location": "F-0483 L0291-L0309",
+        "observation": "NSS_Init 成功路径进入 PK11_GetInternalKeySlot、PK11_Authenticate，并在循环中拆分 v97/v96[0] 内容。",
+        "function_id": "F-0483",
+        "start_line": 291,
+        "end_line": 309,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J12.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C042",
+        "location": "F-0483 L0314-L0329",
+        "observation": "内层循环从 v96[0] 取得字段，调用 NSSBase64_DecodeBuffer 写入 v86，随后调用 PK11SDR_Decrypt。",
+        "function_id": "F-0483",
+        "start_line": 314,
+        "end_line": 329,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J12.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C042",
+        "location": "F-0483 L0329-L0340",
+        "observation": "仅当 PK11SDR_Decrypt 返回 0 时，代码才调用 sub_401CAC 和 sub_402074 追加到 a1，并为缺失字段设置默认文本。",
+        "function_id": "F-0483",
+        "start_line": 329,
+        "end_line": 340,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J12.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C043",
+        "location": "F-0483 L0344-L0358",
+        "observation": "代码释放 NSS slot、调用 NSS_Shutdown，随后以“##$$”、dword_40AE0C 和 dword_40AE4C 参与状态组装，并在 v89 为空时调用 sub_401AC0(a1)。",
+        "function_id": "F-0483",
+        "start_line": 344,
+        "end_line": 358,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J12.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C043",
+        "location": "F-0483 L0514-L0522",
+        "observation": "统一清理多个内部缓冲区后，函数通过 sub_401AC0(&v97) 返回。",
+        "function_id": "F-0483",
+        "start_line": 514,
+        "end_line": 522,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J12.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C043",
+        "location": "F-0500 L0088-L0105",
+        "observation": "已验证依赖显示上游在 Firefox helper 结果非零时将相关结果写入临时目录中的 FIREFOX.abc。",
+        "function_id": "F-0500",
+        "start_line": 88,
+        "end_line": 105,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C044",
+        "location": "F-0495 L0040-L0056",
+        "observation": "在 *off_40D210 == 2 且 explorer.exe 判断为真时，代码从 Shell_TrayWnd 获取进程并调用 sub_4040F4；返回假时调用 CreateProcessA 创建 explorer.exe，再次调用 sub_4040F4。",
+        "function_id": "F-0495",
+        "start_line": 40,
+        "end_line": 56,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C044",
+        "location": "F-0495 L0046-L0050",
+        "observation": "*off_40D214[0] == 1 会直接进入启动分支；否则先查找 Shell_TrayWnd、取得进程 ID、打开进程，并以 sub_4040F4 的返回值决定是否启动新 explorer.exe。",
+        "function_id": "F-0495",
+        "start_line": 46,
+        "end_line": 50,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C044",
+        "location": "F-0304 L0025-L0044",
+        "observation": "sub_4040F4 从 n3_1 的 PE 头读取映像参数，调用 VirtualAlloc/VirtualAllocEx 尝试分配目标地址，并调用 sub_403EC0 准备远程映像数据。",
+        "function_id": "F-0304",
+        "start_line": 25,
+        "end_line": 44,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C044",
+        "location": "F-0302 L0039-L0065",
+        "observation": "sub_403EC0 按 PE 头分配映像和各节区域，并把各节数据复制到目标映像地址。",
+        "function_id": "F-0302",
+        "start_line": 39,
+        "end_line": 65,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C045",
+        "location": "F-0495 L0046-L0060",
+        "observation": "代码明确将 *off_40D214[0] == 1 与现有进程映射失败分别作为进入创建分支的条件，并在创建 explorer.exe 后再次调用 sub_4040F4。",
+        "function_id": "F-0495",
+        "start_line": 46,
+        "end_line": 60,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C046",
+        "location": "F-0495 L0083-L0107",
+        "observation": "在 *off_40D210 != 2 且 *off_40D210 == 1 时，代码调用 sub_406294、更新 off_40D21C、以 sub_401F48(*off_40D21C) 为应用名调用 CreateProcessA，并在 sub_4040F4 返回假时跳转 LABEL_19。",
+        "function_id": "F-0495",
+        "start_line": 83,
+        "end_line": 107,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C046",
+        "location": "F-0495 L0109-L0116",
+        "observation": "LABEL_19 调用 sub_4013A4 更新 off_40D21C，随后再次调用 CreateProcessA 和 sub_4040F4。",
+        "function_id": "F-0495",
+        "start_line": 109,
+        "end_line": 116,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C046",
+        "location": "F-0304 L0035-L0051",
+        "observation": "映射例程在目标地址分配后调用 sub_403EC0，并在获得缓冲区后调用 WriteProcessMemory，随后尝试 sub_4038AC。",
+        "function_id": "F-0304",
+        "start_line": 35,
+        "end_line": 51,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C047",
+        "location": "F-0304 L0044-L0051",
+        "observation": "lpBuffer[0] 非零时，代码取出 lpBuffer[0]/lpBuffer[3]，调用 WriteProcessMemory 写入 hProcess，并在 sub_4038AC 返回真时将 v13 置为 1。",
+        "function_id": "F-0304",
+        "start_line": 44,
+        "end_line": 51,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C047",
+        "location": "F-0303 L0001-L0003",
+        "observation": "sub_4040CC 通过 a1+4 的函数指针间接调用目标函数。",
+        "function_id": "F-0303",
+        "start_line": 1,
+        "end_line": 3,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C047",
+        "location": "F-0302 L0067-L0098",
+        "observation": "sub_403EC0 处理映像基址、入口/偏移相关数据、各节保护并调用 sub_402704，随后返回清理结果。",
+        "function_id": "F-0302",
+        "start_line": 67,
+        "end_line": 98,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C048",
+        "location": "F-0496 L0023-L0043",
+        "observation": "代码用 sub_401D9C(...,\"_PERSIST\") 生成名称并调用 CreateMutexA_w；已有互斥体时只关闭句柄，否则获取 Shell_TrayWnd 进程、调用 sub_4040F4，失败时创建 explorer.exe 并再次映射。",
+        "function_id": "F-0496",
+        "start_line": 23,
+        "end_line": 43,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C048",
+        "location": "F-0304 L0025-L0051",
+        "observation": "被调用的 sub_4040F4 执行目标地址分配、远程准备和 WriteProcessMemory/后续回调尝试。",
+        "function_id": "F-0304",
+        "start_line": 25,
+        "end_line": 51,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C049",
+        "location": "F-0495 L0062-L0078",
+        "observation": "在 explorer.exe 判断为假时，代码根据 sub_4064DC 的返回值调用 sub_4063FC 或 sub_406294，随后经 sub_401B14 更新 off_40D21C，调用 CreateProcessA，并把新进程交给 sub_4040F4。",
+        "function_id": "F-0495",
+        "start_line": 62,
+        "end_line": 78,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C050",
+        "location": "F-0495 L0083-L0099",
+        "observation": "当 *off_40D210 != 2 且不等于 1 时，代码检查 *off_40D1B8；满足时调用 sub_4013A4(0,&v18)、sub_401E94，并在比较为假时调用 sub_405AD8、sub_40AFB0 和 ExitProcess_0(0)，否则跳到 LABEL_19。",
+        "function_id": "F-0495",
+        "start_line": 83,
+        "end_line": 99,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C050",
+        "location": "F-0038 L022-L027",
+        "observation": "sub_4013A4 的零值分支调用 GetModuleFileNameA 处理模块文件名结果，并返回相关指针。",
+        "function_id": "F-0038",
+        "start_line": 22,
+        "end_line": 27,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J01.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C051",
+        "location": "F-0291 L0017-L0027",
+        "observation": "函数先以 nSize 和 lpBuffer_1 调用 sub_40387C，再计算 lpBuffer_2 的代码长度并调用 sub_40387C，随后调用 CreateRemoteThread；a4 非零时等待线程并调用 ReadProcessMemory。",
+        "function_id": "F-0291",
+        "start_line": 17,
+        "end_line": 27,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C051",
+        "location": "F-0290 L0001-L0009",
+        "observation": "sub_40387C 使用 VirtualAllocEx 分配 0x3000/0x40 权限的内存，并用 WriteProcessMemory 写入指定缓冲区。",
+        "function_id": "F-0290",
+        "start_line": 1,
+        "end_line": 9,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C052",
+        "location": "F-0293 L0021-L0027",
+        "observation": "函数从 kernel32 解析 Sleep 和 LoadLibraryA，调用 sub_401F48 取得字符串，使用 sub_4037EC 写入目标进程，再以 sub_403920 和 lpBuffer_ 调用 sub_4038AC。",
+        "function_id": "F-0293",
+        "start_line": 21,
+        "end_line": 27,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C052",
+        "location": "F-0292 L0001-L0008",
+        "observation": "sub_403920 从传入结构读取两个函数指针，先用结构偏移 4 的值调用偏移 0 的函数，随后无限循环调用偏移 8 的函数并传入 -1。",
+        "function_id": "F-0292",
+        "start_line": 1,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C052",
+        "location": "F-0289 L0026-L0035",
+        "observation": "sub_4037EC 复制字符串长度、调用 VirtualAllocEx 分配可执行内存并通过 WriteProcessMemory 写入 n3。",
+        "function_id": "F-0289",
+        "start_line": 26,
+        "end_line": 35,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C053",
+        "location": "F-0295 L0012-L0027",
+        "observation": "函数解析 GetModuleHandleA、GetProcAddress 和 ExitThread，将 n3 与 n3_1 分别通过 sub_4037EC 写入目标进程，调用 sub_4038AC 执行 sub_403A28，并在句柄非零时等待和读取线程退出码。",
+        "function_id": "F-0295",
+        "start_line": 12,
+        "end_line": 27,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C053",
+        "location": "F-0294 L0009-L0014",
+        "observation": "sub_403A28 从结构中取出三个函数指针，先调用 GetModuleHandleA，再调用 GetProcAddress，最后将结果传给 ExitThread。",
+        "function_id": "F-0294",
+        "start_line": 9,
+        "end_line": 14,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C054",
+        "location": "F-0301 L0025-L0040",
+        "observation": "函数按五个 DWORD 步进描述符，遇到 i[3] 为零退出；对每个模块名计算 n3，在 !sub_403BD0 条件下调用 sub_403954 和 sub_403B40。",
+        "function_id": "F-0301",
+        "start_line": 25,
+        "end_line": 40,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C054",
+        "location": "F-0301 L0041-L0052",
+        "observation": "函数在 *v4 非零时循环，依据 sub_403D78 选择序号或名称形式调用 sub_403A58，并把返回值写回 *v4。",
+        "function_id": "F-0301",
+        "start_line": 41,
+        "end_line": 52,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C054",
+        "location": "F-0300 L0001-L0004",
+        "observation": "sub_403D78 直接以条目值是否小于零区分两种路径。",
+        "function_id": "F-0300",
+        "start_line": 1,
+        "end_line": 4,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C055",
+        "location": "F-0299 L0009-L0027",
+        "observation": "函数读取重定位总长度，循环遍历块和条目；在条目类型高位满足条件时计算目标地址并执行 *v4 += 差值。",
+        "function_id": "F-0299",
+        "start_line": 9,
+        "end_line": 27,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C056",
+        "location": "F-0489 L0022-L0031",
+        "observation": "代码读取模块文件名相关值，定位 Shell_TrayWnd 窗口所属进程并调用 OpenProcess；随后两次调用 sub_40AEBC，并将 sub_40AE94 和第二次分配结果传给 sub_40AF08。",
+        "function_id": "F-0489",
+        "start_line": 22,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C056",
+        "location": "F-0487 L0007-L0011",
+        "observation": "sub_40AEBC 调用 VirtualAllocEx、VirtualProtectEx，并在地址非空且 WriteProcessMemory 失败时返回零。",
+        "function_id": "F-0487",
+        "start_line": 7,
+        "end_line": 11,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C056",
+        "location": "F-0488 L0022-L0031",
+        "observation": "sub_40AF08 在远程分配、写入条件满足时调用 CreateRemoteThread，线程入口和参数分别来自调用者。",
+        "function_id": "F-0488",
+        "start_line": 22,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C056",
+        "location": "F-0038 L022-L027",
+        "observation": "已验证依赖表明 sub_4013A4 的零值路径读取 GetModuleFileNameA 并返回模块文件名相关指针。",
+        "function_id": "F-0038",
+        "start_line": 22,
+        "end_line": 27,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J01.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C057",
+        "location": "F-0488 L0023-L0031",
+        "observation": "满足远程分配地址非空且写入字节数达到映像大小时，代码调用 CreateRemoteThread，入口为调用者传入的 lpStartAddress_1，参数为 lpParameter_1。",
+        "function_id": "F-0488",
+        "start_line": 23,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C057",
+        "location": "F-0486 L0001-L0012",
+        "observation": "sub_40AE94 将 *a1 作为 DeleteFileA 参数；失败时持续 Sleep(0x64) 并重试，成功时跳出循环并返回。",
+        "function_id": "F-0486",
+        "start_line": 1,
+        "end_line": 12,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C057",
+        "location": "F-0489 L0029-L0031",
+        "observation": "sub_40AFB0 将第二次 sub_40AEBC 的返回值作为 lpParameter，并把 sub_40AE94 作为远程线程入口传入 sub_40AF08。",
+        "function_id": "F-0489",
+        "start_line": 29,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C058",
+        "location": "F-0488 L0017-L0026",
+        "observation": "代码从当前模块句柄和映像头字段取得 dwSize 与 lpAddress，调用 VirtualFreeEx、VirtualAllocEx，并把当前模块句柄指向的映像写入目标进程。",
+        "function_id": "F-0488",
+        "start_line": 17,
+        "end_line": 26,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_claim",
+        "owner_id": "G:C058",
+        "location": "F-0488 L0027-L0031",
+        "observation": "当 NumberOfBytesWritten 至少达到 dwSize 时，代码调用 CreateRemoteThread，随后关闭目标进程句柄并返回分配地址。",
+        "function_id": "F-0488",
+        "start_line": 27,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A001",
+        "location": "F-0500 L0047-L0056",
+        "observation": "CreateMutexA_w is called with the fixed name _x_X_UPDATE_X_x_; ERROR_ALREADY_EXISTS causes CloseHandle and Sleep.",
+        "function_id": "F-0500",
+        "start_line": 47,
+        "end_line": 56,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A002",
+        "location": "F-0500 L0057-L0064",
+        "observation": "CreateMutexA_w is called with _x_X_PASSWORDLIST_X_x_, and ERROR_ALREADY_EXISTS selects the collection/output branch.",
+        "function_id": "F-0500",
+        "start_line": 57,
+        "end_line": 64,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A003",
+        "location": "F-0500 L0128-L0136",
+        "observation": "CreateMutexA_w is called with _x_X_BLOCKMOUSE_X_x_; ERROR_ALREADY_EXISTS gates the hook registration and loop.",
+        "function_id": "F-0500",
+        "start_line": 128,
+        "end_line": 136,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A004",
+        "location": "F-0500 L0065-L0069",
+        "observation": "The code appends NOIP.abc to a path obtained by sub_406008 and passes it to sub_405D70 after a nonzero result check.",
+        "function_id": "F-0500",
+        "start_line": 65,
+        "end_line": 69,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A004",
+        "location": "F-0500 L0057-L0069",
+        "observation": "密码列表互斥体分支调用 sub_409AD4，并在结果非零时将 NOIP.abc 追加到临时路径后写入。",
+        "function_id": "F-0500",
+        "start_line": 57,
+        "end_line": 69,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A005",
+        "location": "F-0500 L0074-L0077",
+        "observation": "The code appends MSN.abc and passes the resulting path to sub_405D70 when dword_40F1EC is nonzero.",
+        "function_id": "F-0500",
+        "start_line": 74,
+        "end_line": 77,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A006",
+        "location": "F-0500 L0083-L0087",
+        "observation": "The code appends FIREFOX.abc and passes the resulting path to sub_405D70 when dword_40F1EC is nonzero.",
+        "function_id": "F-0500",
+        "start_line": 83,
+        "end_line": 87,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A007",
+        "location": "F-0500 L0092-L0096",
+        "observation": "The code appends IELOGIN.abc and passes the resulting path to sub_405D70 when dword_40F1EC is nonzero.",
+        "function_id": "F-0500",
+        "start_line": 92,
+        "end_line": 96,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A008",
+        "location": "F-0500 L0101-L0105",
+        "observation": "The code appends IEPASS.abc and passes the resulting path to sub_405D70 when dword_40F1EC is nonzero.",
+        "function_id": "F-0500",
+        "start_line": 101,
+        "end_line": 105,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A009",
+        "location": "F-0500 L0110-L0114",
+        "observation": "The code appends IEAUTO.abc and passes the resulting path to sub_405D70 when dword_40F1EC is nonzero.",
+        "function_id": "F-0500",
+        "start_line": 110,
+        "end_line": 114,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A010",
+        "location": "F-0500 L0119-L0123",
+        "observation": "The code appends IEWEB.abc and passes the resulting path to sub_405D70 when dword_40F1EC is nonzero.",
+        "function_id": "F-0500",
+        "start_line": 119,
+        "end_line": 123,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A011",
+        "location": "F-0500 L0182-L0184",
+        "observation": "The code obtains a temporary path, appends XX--XX--XX.txt, and passes it to sub_40B93C.",
+        "function_id": "F-0500",
+        "start_line": 182,
+        "end_line": 184,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A012",
+        "location": "F-0370 L0006-L0008",
+        "observation": "GetTempPathA is resolved from kernel32.dll and invoked with the supplied buffer.",
+        "function_id": "F-0370",
+        "start_line": 6,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A013",
+        "location": "F-0038 L009-L015",
+        "observation": "非零 a1 分支调用 GetCommandLineA，并将结果交给后续解析。",
+        "function_id": "F-0038",
+        "start_line": 9,
+        "end_line": 15,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J01.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A014",
+        "location": "F-0038 L022-L025",
+        "observation": "零值分支调用 GetModuleFileNameA(0, Filename, 0x105u)，随后处理 Filename。",
+        "function_id": "F-0038",
+        "start_line": 22,
+        "end_line": 25,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J01.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A015",
+        "location": "F-0309 L0010-L0013",
+        "observation": "FindResourceA 使用固定名称 XX-XX-XX-XX 和类型 0xA，随后调用 LoadResource 与 LockResource。",
+        "function_id": "F-0309",
+        "start_line": 10,
+        "end_line": 13,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A016",
+        "location": "F-0310 L0027-L0029",
+        "observation": "资源解析阶段将 ####@#### 传给 sub_404358。",
+        "function_id": "F-0310",
+        "start_line": 27,
+        "end_line": 29,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A016",
+        "location": "F-0497 L0038-L0049",
+        "observation": "每个配置项处理后将 ####@#### 作为组装状态的一部分继续追加。",
+        "function_id": "F-0497",
+        "start_line": 38,
+        "end_line": 49,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A017",
+        "location": "F-0500 L0182-L0184",
+        "observation": "上游将固定字符串 XX--XX--XX.txt 追加到临时目录路径。",
+        "function_id": "F-0500",
+        "start_line": 182,
+        "end_line": 184,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A017",
+        "location": "F-0497 L0059-L0060",
+        "observation": "sub_40B93C 计算长度后调用 sub_405D70 输出组装数据。",
+        "function_id": "F-0497",
+        "start_line": 59,
+        "end_line": 60,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A017",
+        "location": "F-0367 L0022-L0031",
+        "observation": "sub_405D70 对传入路径执行打开/创建并调用 WriteFile。",
+        "function_id": "F-0367",
+        "start_line": 22,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A018",
+        "location": "F-0322 L0016-L0023",
+        "observation": "调用 sub_401E94 将配置值与固定字符串 TRUE 比较，并据此返回 0/1。",
+        "function_id": "F-0322",
+        "start_line": 16,
+        "end_line": 23,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J02.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A019",
+        "location": "F-0337 L0027-L0039",
+        "observation": "枚举 PROCESSENTRY32 项并将进程名与 VBoxService.exe 比较，比较结果大于 0 时返回 1。",
+        "function_id": "F-0337",
+        "start_line": 27,
+        "end_line": 39,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A020",
+        "location": "F-0338 L0005-L0008",
+        "observation": "GetModuleHandleA 检查 SbieDll.dll，存在时返回 1。",
+        "function_id": "F-0338",
+        "start_line": 5,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A021",
+        "location": "F-0339 L0005-L0008",
+        "observation": "GetModuleHandleA 检查 dbghelp.dll，存在时返回 1。",
+        "function_id": "F-0339",
+        "start_line": 5,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A022",
+        "location": "F-0340 L0009-L0014",
+        "observation": "打开 CurrentVersion 键并查询 ProductId 后进行比较。",
+        "function_id": "F-0340",
+        "start_line": 9,
+        "end_line": 14,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A022",
+        "location": "F-0341 L0009-L0014",
+        "observation": "另一 helper 以相同 ProductId 路径执行第二个比较。",
+        "function_id": "F-0341",
+        "start_line": 9,
+        "end_line": 14,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A022",
+        "location": "F-0342 L0009-L0014",
+        "observation": "第三个 helper 以相同 ProductId 路径执行比较。",
+        "function_id": "F-0342",
+        "start_line": 9,
+        "end_line": 14,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A023",
+        "location": "F-0352 L0005-L0008",
+        "observation": "sub_4057B4 将 \\\\.\\Syser 作为待打开设备路径之一。",
+        "function_id": "F-0352",
+        "start_line": 5,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A023",
+        "location": "F-0351 L0006-L0012",
+        "observation": "sub_405788 对传入路径调用 CreateFileA_0，并在获得有效句柄时返回 1。",
+        "function_id": "F-0351",
+        "start_line": 6,
+        "end_line": 12,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A024",
+        "location": "F-0352 L0005-L0008",
+        "observation": "sub_4057B4 将 \\\\.\\SyserDbgMsg 作为待打开设备路径之一。",
+        "function_id": "F-0352",
+        "start_line": 5,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A024",
+        "location": "F-0351 L0006-L0012",
+        "observation": "sub_405788 对传入路径调用 CreateFileA_0，并在获得有效句柄时返回 1。",
+        "function_id": "F-0351",
+        "start_line": 6,
+        "end_line": 12,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A025",
+        "location": "F-0352 L0005-L0008",
+        "observation": "sub_4057B4 将 \\\\.\\SyserBoot 作为待打开设备路径之一。",
+        "function_id": "F-0352",
+        "start_line": 5,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A025",
+        "location": "F-0351 L0006-L0012",
+        "observation": "sub_405788 对传入路径调用 CreateFileA_0，并在获得有效句柄时返回 1。",
+        "function_id": "F-0351",
+        "start_line": 6,
+        "end_line": 12,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A026",
+        "location": "F-0353 L0006-L0012",
+        "observation": "CreateFileA 成功打开 \\\\.\\SICE 时返回 1。",
+        "function_id": "F-0353",
+        "start_line": 6,
+        "end_line": 12,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A027",
+        "location": "F-0354 L0006-L0012",
+        "observation": "CreateFileA 成功打开 \\\\.\\NTICE 时返回 1。",
+        "function_id": "F-0354",
+        "start_line": 6,
+        "end_line": 12,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A028",
+        "location": "F-0344 L0037-L0040",
+        "observation": "代码构造固定字符串 CurrentUser，并将其与用户名相关数据传给 sub_401E94。",
+        "function_id": "F-0344",
+        "start_line": 37,
+        "end_line": 40,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J03.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A029",
+        "location": "F-0394 L0161-L0179",
+        "observation": "代码将该路径传给 HKLM 分支的注册表写入 helper。",
+        "function_id": "F-0394",
+        "start_line": 161,
+        "end_line": 179,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A029",
+        "location": "F-0394 L0175-L0202",
+        "observation": "代码将同一路径传给 HKCU 分支及其补充写入 helper。",
+        "function_id": "F-0394",
+        "start_line": 175,
+        "end_line": 202,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A030",
+        "location": "F-0394 L0210-L0224",
+        "observation": "代码将该路径传给 HKLM Run 分支的注册表写入 helper。",
+        "function_id": "F-0394",
+        "start_line": 210,
+        "end_line": 224,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A030",
+        "location": "F-0394 L0232-L0246",
+        "observation": "代码将该路径传给 HKCU Run 分支的注册表写入 helper。",
+        "function_id": "F-0394",
+        "start_line": 232,
+        "end_line": 246,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A031",
+        "location": "F-0388 L0030-L0042",
+        "observation": "代码把该固定前缀与输入组件名拼接，创建 HKLM 键并设置 StubPath。",
+        "function_id": "F-0388",
+        "start_line": 30,
+        "end_line": 42,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A031",
+        "location": "F-0389 L0005-L0008",
+        "observation": "代码打开 HKCU 下该固定前缀并调用 RegDeleteKeyA。",
+        "function_id": "F-0389",
+        "start_line": 5,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A032",
+        "location": "F-0388 L0039-L0043",
+        "observation": "代码以 StubPath 名称调用 RegSetValueExA。",
+        "function_id": "F-0388",
+        "start_line": 39,
+        "end_line": 43,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A033",
+        "location": "F-0388 L0037-L0042",
+        "observation": "代码将输入字符串与固定 Restart 拼接后作为 StubPath 数据。",
+        "function_id": "F-0388",
+        "start_line": 37,
+        "end_line": 42,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A033",
+        "location": "F-0390 L0014-L0019",
+        "observation": "代码将 sub_4013A4 的结果与 Restart 交给参数处理逻辑。",
+        "function_id": "F-0390",
+        "start_line": 14,
+        "end_line": 19,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J04.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A034",
+        "location": "F-0368 L0006-L0007",
+        "observation": "代码加载 kernel32.dll 并解析 GetSystemDirectoryA。",
+        "function_id": "F-0368",
+        "start_line": 6,
+        "end_line": 7,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A034",
+        "location": "F-0369 L0006-L0007",
+        "observation": "代码加载 kernel32.dll 并解析 GetWindowsDirectoryA。",
+        "function_id": "F-0369",
+        "start_line": 6,
+        "end_line": 7,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A035",
+        "location": "F-0368 L0006-L0008",
+        "observation": "代码通过 GetProcAddress 获取并调用 GetSystemDirectoryA。",
+        "function_id": "F-0368",
+        "start_line": 6,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A036",
+        "location": "F-0369 L0006-L0008",
+        "observation": "代码通过 GetProcAddress 获取并调用 GetWindowsDirectoryA。",
+        "function_id": "F-0369",
+        "start_line": 6,
+        "end_line": 8,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A037",
+        "location": "F-0377 L0015-L0017",
+        "observation": "代码将该固定子键与 HKEY_LOCAL_MACHINE 一起传给注册表读取 helper。",
+        "function_id": "F-0377",
+        "start_line": 15,
+        "end_line": 17,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A038",
+        "location": "F-0377 L0015-L0017",
+        "observation": "代码构造固定值名 ProgramFilesDir 并传给 sub_406088。",
+        "function_id": "F-0377",
+        "start_line": 15,
+        "end_line": 17,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J05.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A039",
+        "location": "F-0480 L0019-L0020",
+        "observation": "sub_406088 从 HKLM\\SOFTWARE\\Vitalwerks\\DUC 读取 UserName 和 Password。",
+        "function_id": "F-0480",
+        "start_line": 19,
+        "end_line": 20,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A040",
+        "location": "F-0480 L0019-L0021",
+        "observation": "代码读取 UserName 到 v9，并用 v9 是否非零选择后续处理。",
+        "function_id": "F-0480",
+        "start_line": 19,
+        "end_line": 21,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A041",
+        "location": "F-0480 L0019-L0020",
+        "observation": "代码从同一 No-IP DUC 注册表键读取 Password 到 v8。",
+        "function_id": "F-0480",
+        "start_line": 19,
+        "end_line": 20,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A042",
+        "location": "F-0482 L0039-L0046",
+        "observation": "代码动态解析 CredEnumerateA，并以 WindowsLive:name=* 作为其首个查询参数。",
+        "function_id": "F-0482",
+        "start_line": 39,
+        "end_line": 46,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A043",
+        "location": "F-0482 L0061-L0062",
+        "observation": "Messenger_2 非零时进入输出处理分支。",
+        "function_id": "F-0482",
+        "start_line": 61,
+        "end_line": 62,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A043",
+        "location": "F-0482 L0084-L0089",
+        "observation": "代码构造 xxxyyyzzz.dat 并调用 sub_405D70 写入组合缓冲。",
+        "function_id": "F-0482",
+        "start_line": 84,
+        "end_line": 89,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A044",
+        "location": "F-0482 L0038-L0043",
+        "observation": "代码调用 LoadLibraryA 加载 advapi32.dll 并解析 CredEnumerateA/CredFree。",
+        "function_id": "F-0482",
+        "start_line": 38,
+        "end_line": 43,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J06.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A045",
+        "location": "F-0435 L006-L012",
+        "observation": "sub_407F4C 对目录路径进行规范化并追加固定的 rasphone.pbk 相对路径。",
+        "function_id": "F-0435",
+        "start_line": 6,
+        "end_line": 12,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A046",
+        "location": "F-0440 L105-L123",
+        "observation": "代码在两个候选配置路径和两个候选节名组合中读取 DialParamsUID。",
+        "function_id": "F-0440",
+        "start_line": 105,
+        "end_line": 123,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A047",
+        "location": "F-0434 L024-L027",
+        "observation": "sub_407E40 以该固定字符串调用 sub_407DD0，成功后将返回的私有数据交给 sub_407B94。",
+        "function_id": "F-0434",
+        "start_line": 24,
+        "end_line": 27,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A048",
+        "location": "F-0440 L094-L100",
+        "observation": "代码对每个 RAS 条目调用 RasGetEntryDialParamsA 并随后读取条目属性。",
+        "function_id": "F-0440",
+        "start_line": 94,
+        "end_line": 100,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A048",
+        "location": "F-0440 L094-L100",
+        "observation": "代码对每个条目调用 RasGetEntryDialParamsA 并随后读取条目属性。",
+        "function_id": "F-0440",
+        "start_line": 94,
+        "end_line": 100,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A049",
+        "location": "F-0433 L013-L018",
+        "observation": "sub_407DD0 打开 LSA policy 并调用 LsaRetrievePrivateData。",
+        "function_id": "F-0433",
+        "start_line": 13,
+        "end_line": 18,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J07.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A050",
+        "location": "F-0419 L0040-L0048",
+        "observation": "代码比较记录字符串与 \":StringData\"，匹配时截取并继续解析相关字段。",
+        "function_id": "F-0419",
+        "start_line": 40,
+        "end_line": 48,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J08.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A051",
+        "location": "F-0419 L0030-L0033",
+        "observation": "sub_407834 调用 PStoreCreateInstance，并将实例句柄用于后续枚举辅助函数。",
+        "function_id": "F-0419",
+        "start_line": 30,
+        "end_line": 33,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J08.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A052",
+        "location": "F-0466 L0013-L0018",
+        "observation": "sub_4096EC 将该固定子键传入 sub_408E58。",
+        "function_id": "F-0466",
+        "start_line": 13,
+        "end_line": 18,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A052",
+        "location": "F-0464 L0057-L0062",
+        "observation": "sub_408E58 在 HKCU 下打开该子键并枚举值名。",
+        "function_id": "F-0464",
+        "start_line": 57,
+        "end_line": 62,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A053",
+        "location": "F-0463 L0041-L0049",
+        "observation": "当 sub_408C94(v11) 返回 1 时，代码将 User: 追加到结果。",
+        "function_id": "F-0463",
+        "start_line": 41,
+        "end_line": 49,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A053",
+        "location": "F-0465 L0073-L0080",
+        "observation": "代码将 User: 作为前缀构造字符串并追加到内部结果对象。",
+        "function_id": "F-0465",
+        "start_line": 73,
+        "end_line": 80,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A054",
+        "location": "F-0463 L0045-L0049",
+        "observation": "当记录分类条件不满足时，代码将 Password: 追加到结果。",
+        "function_id": "F-0463",
+        "start_line": 45,
+        "end_line": 49,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A054",
+        "location": "F-0465 L0081-L0092",
+        "observation": "代码将 Password: 作为前缀构造字符串并追加到内部结果对象。",
+        "function_id": "F-0465",
+        "start_line": 81,
+        "end_line": 92,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A055",
+        "location": "F-0449 L0028-L0035",
+        "observation": "sub_40879C 初始化 OLE，并使用 CLSID_CLSID_CUrlHistory 创建 URL History 相关接口。",
+        "function_id": "F-0449",
+        "start_line": 28,
+        "end_line": 35,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A056",
+        "location": "F-0464 L0076-L0087",
+        "observation": "代码将注册表值放入 pDataIn，并在 CryptUnprotectData 成功后处理 pDataOut。",
+        "function_id": "F-0464",
+        "start_line": 76,
+        "end_line": 87,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J09.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A056",
+        "location": "F-0465 L0058-L0068",
+        "observation": "代码设置 pOptionalEntropy 后，从每个 CredentialBlob 构造 pDataIn 并调用 CryptUnprotectData。",
+        "function_id": "F-0465",
+        "start_line": 58,
+        "end_line": 68,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A057",
+        "location": "F-0465 L0045-L0059",
+        "observation": "代码将固定 GUID 字符串复制到栈缓冲区，逐字符生成宽字节式派生数据，并将派生缓冲区及长度 74 设置为 pOptionalEntropy。",
+        "function_id": "F-0465",
+        "start_line": 45,
+        "end_line": 59,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A058",
+        "location": "F-0465 L0058-L0064",
+        "observation": "代码调用 CredEnumerateA(0, 0, &Count, &Credential)，随后按 Count 遍历返回的凭据数组。",
+        "function_id": "F-0465",
+        "start_line": 58,
+        "end_line": 64,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J10.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A059",
+        "location": "F-0483 L0150-L0154",
+        "observation": "代码将 nss3.dll 作为模块名加载，并从其句柄解析 NSS_Init。",
+        "function_id": "F-0483",
+        "start_line": 150,
+        "end_line": 154,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A060",
+        "location": "F-0483 L0172-L0179",
+        "observation": "代码调用 LoadLibraryA(\"userenv.dll\") 并解析 GetUserProfileDirectoryA。",
+        "function_id": "F-0483",
+        "start_line": 172,
+        "end_line": 179,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A061",
+        "location": "F-0483 L0187-L0193",
+        "observation": "代码将该固定子路径与 ReturnedString 组合后继续构造 signons3.txt 候选路径。",
+        "function_id": "F-0483",
+        "start_line": 187,
+        "end_line": 193,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A061",
+        "location": "F-0483 L0198-L0203",
+        "observation": "在 signons3.txt 分支中再次使用该 Firefox 子路径构造候选路径。",
+        "function_id": "F-0483",
+        "start_line": 198,
+        "end_line": 203,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A062",
+        "location": "F-0483 L0190-L0195",
+        "observation": "代码将 signons3.txt 拼接到 Firefox 路径并调用 sub_405D04 检查。",
+        "function_id": "F-0483",
+        "start_line": 190,
+        "end_line": 195,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A063",
+        "location": "F-0483 L0201-L0216",
+        "observation": "代码在 signons3.txt 分支失败后构造 signons2.txt 并检查。",
+        "function_id": "F-0483",
+        "start_line": 201,
+        "end_line": 216,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A064",
+        "location": "F-0483 L0223-L0238",
+        "observation": "代码在 signons2.txt 分支失败后构造 signons1.txt 并检查。",
+        "function_id": "F-0483",
+        "start_line": 223,
+        "end_line": 238,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A065",
+        "location": "F-0483 L0234-L0260",
+        "observation": "代码在 signons1.txt 分支失败后构造 signons.txt 并检查。",
+        "function_id": "F-0483",
+        "start_line": 234,
+        "end_line": 260,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A066",
+        "location": "F-0483 L0163-L0168",
+        "observation": "代码通过 GetProcAddress 解析 PK11SDR_Decrypt，并仅在其返回地址非零时继续。",
+        "function_id": "F-0483",
+        "start_line": 163,
+        "end_line": 168,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J11.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A066",
+        "location": "F-0483 L0327-L0329",
+        "observation": "代码先调用 NSSBase64_DecodeBuffer，再实际调用 PK11SDR_Decrypt。",
+        "function_id": "F-0483",
+        "start_line": 327,
+        "end_line": 329,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J12.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A067",
+        "location": "F-0500 L0088-L0105",
+        "observation": "已验证依赖显示 helper 返回结果非零时，数据被写入临时目录中的 FIREFOX.abc。",
+        "function_id": "F-0500",
+        "start_line": 88,
+        "end_line": 105,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J00.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A068",
+        "location": "F-0483 L0310-L0313",
+        "observation": "代码设置“##$$”并建立相关内部状态。",
+        "function_id": "F-0483",
+        "start_line": 310,
+        "end_line": 313,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J12.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A068",
+        "location": "F-0483 L0349-L0353",
+        "observation": "代码再次以“##$$”参与 sub_401D9C 和 sub_40592C 的输出状态组装。",
+        "function_id": "F-0483",
+        "start_line": 349,
+        "end_line": 353,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J12.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A069",
+        "location": "F-0496 L0023-L0026",
+        "observation": "sub_401D9C 将字符串 _PERSIST 作为后缀参与生成 v10，随后 v10 被传给 CreateMutexA_w。",
+        "function_id": "F-0496",
+        "start_line": 23,
+        "end_line": 26,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A070",
+        "location": "F-0495 L0042-L0055",
+        "observation": "代码比较 explorer.exe，并在条件满足时以该字符串作为 CreateProcessA 的命令行，同时调用 sub_4040F4。",
+        "function_id": "F-0495",
+        "start_line": 42,
+        "end_line": 55,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A070",
+        "location": "F-0496 L0034-L0042",
+        "observation": "_PERSIST 分支检查 Shell_TrayWnd 对应进程，失败时创建 explorer.exe 并调用 sub_4040F4。",
+        "function_id": "F-0496",
+        "start_line": 34,
+        "end_line": 42,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A071",
+        "location": "F-0496 L0034-L0036",
+        "observation": "FindWindowA 使用 Shell_TrayWnd，随后 GetWindowThreadProcessId 获取其进程 ID。",
+        "function_id": "F-0496",
+        "start_line": 34,
+        "end_line": 36,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A071",
+        "location": "F-0489 L0024-L0026",
+        "observation": "代码以 Shell_TrayWnd 调用 FindWindowA，并据此取得窗口所属进程 ID。",
+        "function_id": "F-0489",
+        "start_line": 24,
+        "end_line": 26,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A072",
+        "location": "F-0304 L0035-L0040",
+        "observation": "代码对目标 hProcess 调用 VirtualAllocEx，并以 PE 映像参数申请远程内存。",
+        "function_id": "F-0304",
+        "start_line": 35,
+        "end_line": 40,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A072",
+        "location": "F-0289 L0026-L0031",
+        "observation": "sub_4037EC 以可执行保护调用 VirtualAllocEx，并随后写入字符串或代码。",
+        "function_id": "F-0289",
+        "start_line": 26,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A073",
+        "location": "F-0304 L0045-L0050",
+        "observation": "lpBuffer[0] 非零时，代码调用 WriteProcessMemory 将数据写入 hProcess。",
+        "function_id": "F-0304",
+        "start_line": 45,
+        "end_line": 50,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J13.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A073",
+        "location": "F-0289 L0028-L0031",
+        "observation": "函数在目标地址分配后调用 WriteProcessMemory 写入 n3。",
+        "function_id": "F-0289",
+        "start_line": 28,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A074",
+        "location": "F-0291 L0017-L0026",
+        "observation": "sub_4038AC 在写入远程参数和入口代码后调用 CreateRemoteThread。",
+        "function_id": "F-0291",
+        "start_line": 17,
+        "end_line": 26,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A075",
+        "location": "F-0293 L0021-L0027",
+        "observation": "函数从 kernel32 获取 LoadLibraryA 地址并把它放入传给远程线程的结构。",
+        "function_id": "F-0293",
+        "start_line": 21,
+        "end_line": 27,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A076",
+        "location": "F-0295 L0013-L0021",
+        "observation": "函数从 kernel32 获取 GetProcAddress 地址并将其用于远程辅助结构。",
+        "function_id": "F-0295",
+        "start_line": 13,
+        "end_line": 21,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J14.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A077",
+        "location": "F-0489 L0024-L0031",
+        "observation": "代码从 Shell_TrayWnd 获取进程 ID，打开该进程并将句柄用于远程数据写入和线程创建。",
+        "function_id": "F-0489",
+        "start_line": 24,
+        "end_line": 31,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      },
+      {
+        "owner_kind": "canonical_artifact",
+        "owner_id": "G:A078",
+        "location": "F-0486 L0005-L0011",
+        "observation": "回调循环调用 DeleteFileA，失败后休眠并重试。",
+        "function_id": "F-0486",
+        "start_line": 5,
+        "end_line": 11,
+        "status": "valid",
+        "reason": "referenced source range exists",
+        "source_packets": [
+          "J15.md"
+        ]
+      }
+    ],
+    "claims_without_valid_evidence": [],
+    "confirmed_claims_without_valid_evidence": [],
+    "artifacts_without_valid_evidence": []
+  }
+}

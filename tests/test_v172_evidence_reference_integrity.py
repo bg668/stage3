@@ -1,12 +1,12 @@
 import json
 from pathlib import Path
 
-from bounded_investigator.evidence_validation import (
+from bounded_investigator.evidence.validation import (
     validate_canonical_references,
     validate_evidence_refs,
     validate_investigation_result,
 )
-from bounded_investigator.knowledge_report import project_knowledge, save_knowledge_outputs
+from bounded_investigator.reporting.knowledge_report import project_knowledge, save_knowledge_outputs
 from bounded_investigator.schemas import (
     BehaviorClaim,
     CanonicalClaim,
@@ -18,7 +18,7 @@ from bounded_investigator.schemas import (
     InvestigationStatus,
     ReconciliationStatus,
 )
-from bounded_investigator.source_snippets import (
+from bounded_investigator.evidence.snippets import (
     build_code_index_from_text,
     parse_evidence_location,
 )

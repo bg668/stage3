@@ -1,0 +1,321 @@
+{
+  "status": "completed",
+  "preview_only": true,
+  "template_version": "1.1",
+  "started_at": "2026-10-29T09:08:29.015911+00:00",
+  "inputs": {
+    "global_result": {
+      "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\_global_reconciliation.json",
+      "sha256": "7dd9f5a729ef227910c3011ec4bd849ac83bb2f173e6feffaf5bfba165311f7a"
+    },
+    "packet_results_dir": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results",
+    "packet_results": [
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J00.json",
+        "sha256": "0c5024506b33178be50424d3027b7b6ac370ae9a7d56c773719979e8c661d5c9"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J01.json",
+        "sha256": "1d2392c774d738e267d5b75861c5bb337b77c2fcd14e2e1e225f7181f85b7176"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J02.json",
+        "sha256": "ad87debfd6d90c91830cea89f5a62673be99a0f281c428c3d27f0f6692ad2677"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J03.json",
+        "sha256": "9b8ce69363f8c58ca881004e6f637dba646f156458538299f688ba4432ec0b73"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J04.json",
+        "sha256": "669787c08cd253399ca4a885cfa3c174ef9e08740b3f7bc1678491f263362a3a"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J05.json",
+        "sha256": "221a3b476712dbfbdb72f25b32b6bc7ad25d7bffc3add2415cfe8a3c8e3d5031"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J06.json",
+        "sha256": "ff0383bea3be46e1258b0896548d7e0356804007e9f7a7be42c13a9114f5e04e"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J07.json",
+        "sha256": "47c2b3939fd32847ff4086ef5b0a11d1156b9c1be402c61db590a40e16eef93b"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J08.json",
+        "sha256": "de12d0ef8d17fe280ef3f072761a03e8235982c165fce5abdd2c80fdd5955069"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J09.json",
+        "sha256": "e5afe55ece7db08b29ffa638cd04a35cefdf83dd784bc50434139cd561a57582"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J10.json",
+        "sha256": "150409240eeb5876c58fad3056acf2eb6e696b54d8ab8bcdca65e5442a030121"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J11.json",
+        "sha256": "7e50d34e698b908f24bfff109c553a20b2ed75aba3c0f66a2469145102549ffc"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J12.json",
+        "sha256": "41172018991d083973bc94708ba15f57d86533d2f77996991755f945fa0c4cf7"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J13.json",
+        "sha256": "3cc173be67a2145a24601279a0bcfad628d98d17816ddd4d243f2c4313e9f101"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J14.json",
+        "sha256": "5af7d6fe6c644367b8457aa7b1438ab53fabfb7313ac1a6ee150875975021935"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\results\\J15.json",
+        "sha256": "0438c3f9d0537bd0e45caaaae3b101d675488f2bd4b89562c365d3650e8655e6"
+      }
+    ],
+    "packets": [
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J00.md",
+        "sha256": "9147df07c6b4f01608f7dc2e116c5e325467cbb54b14d31618bebaa91d25b606"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J01.md",
+        "sha256": "3beea3e2b3204ab83fd1e39e8f21db24ac885ae24cfbfb385cfecd75ee0fe0b1"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J02.md",
+        "sha256": "a5a6f82ed3574e2149453cbb6dd054fa840a7eef6dcc999d1bf880c99fc09070"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J03.md",
+        "sha256": "088717b0d165b99834209ba23e7bc64a032099a78ec70b9385b7c33e1998aba7"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J04.md",
+        "sha256": "41bee4cfd76ead3632a392816f286580d56ad2e0ce3d09b946841542524359f3"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J05.md",
+        "sha256": "acbd7671e39951a22e4ba39e2176014f196860ae9b91f9ea24c8bf2a78073b20"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J06.md",
+        "sha256": "102a24d67e15b33f7ad056157f405266e71824be5ad168a24a9d6a3431bd3768"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J07.md",
+        "sha256": "94f5a24a786eb52ba75ca067f671ff6f014b7e6f4e6d76d3c10d6b9b0b9d6b83"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J08.md",
+        "sha256": "fe000958b67a424075c369821f6ee56f9f6ff19c2f64c952a1ab76b06f9f39ce"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J09.md",
+        "sha256": "d5e202599d82d654cb3bb92dfe4ee582b1cd356ed71be1edd63dd886ecccee90"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J10.md",
+        "sha256": "55735e516cb530eb8690ca54c0ae7cc277cf0469881060c1fa271afcec151173"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J11.md",
+        "sha256": "5a99b0ecefc759c35b8f100c21b7a868536b438b829a518d8e611b231ba36eee"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J12.md",
+        "sha256": "e27135bdbf28a64128f42ea1212342293b5c666b27c9a44d616a4884847d0bbb"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J13.md",
+        "sha256": "0447b3e66b533b2361f20e7df94f35968ece317045e4c982db6a6acc3dd1521a"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J14.md",
+        "sha256": "88b996c2cb7c3df5d8536c361323d13da9dafd1b16a5d2bbf8d7e4d332b687f7"
+      },
+      {
+        "path": "D:\\Work\\01_processing\\bounded_investigator_mvp\\testdata\\packets\\J15.md",
+        "sha256": "c962c3f41406d22d7ea6797e7d1a0b550f00a676bb64a23b28311027d688cdea"
+      }
+    ]
+  },
+  "artifacts": {
+    "attempt_dir": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2",
+    "report_agent_snapshot": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2\\report_agent_snapshot.json",
+    "report_document": "_report_document.json",
+    "report_json": "_html_report.json",
+    "html": "_final_report.html",
+    "report_agent_diagnostics": {
+      "report_agent_snapshot": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2\\report_agent_snapshot.json",
+      "composition_input": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2\\composition_input.json",
+      "draft": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2\\report_composition\\validated_result.json",
+      "validation_initial": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2\\validation_initial.json",
+      "revision_1_input": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2\\revision_1\\input.json",
+      "revision": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2\\revision_1\\report_composition\\validated_result.json",
+      "revision_patch": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2\\revision_1\\report_composition\\validated_result.json",
+      "revision_1_candidate": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2\\revision_1\\candidate.json",
+      "validation_final": "_html_report_artifacts\\39c2c6d255354af49c1db38d810193b2\\validation_final.json"
+    }
+  },
+  "test_fills": [],
+  "validation": {
+    "references": "passed",
+    "template_errors": [],
+    "template_warnings": [
+      "chain: 行为链为空，将显示“未建立行为链”空状态",
+      "sections[0]: 4 段文字、没有结构化积木；3 个以上同构对象请用 table，先给 callout 结论",
+      "sections[1]: 5 段文字、没有结构化积木；3 个以上同构对象请用 table，先给 callout 结论",
+      "sections[4]: 4 段文字、没有结构化积木；3 个以上同构对象请用 table，先给 callout 结论",
+      "findings[1].title: 标题约 35 字宽，超过 32；首屏只放一句话，细节放章节",
+      "ioc: 70/76 条没有说明；读者无法判断每个指标的用途"
+    ],
+    "source_audit": {
+      "passed": true,
+      "issues": [],
+      "evidence_reference_status": "completed"
+    },
+    "stage_status": "success",
+    "initial_issues": [
+      {
+        "code": "missing_behavior",
+        "path": "/sections",
+        "fact_ids": [
+          "G:C050"
+        ],
+        "message": "正文遗漏分析行为: G:C050",
+        "correction": "在合适机制章节实质表述这些行为及关键条件，不能只补引用"
+      },
+      {
+        "code": "missing_state_note",
+        "path": "/findings/0/state_note",
+        "fact_ids": [
+          "G:C042"
+        ],
+        "message": "部分证实的发现缺少证据缺口说明",
+        "correction": "用一句话说明疑似行为尚缺什么，不得升级事实确定程度"
+      },
+      {
+        "code": "missing_state_note",
+        "path": "/findings/2/state_note",
+        "fact_ids": [
+          "G:C042"
+        ],
+        "message": "部分证实的发现缺少证据缺口说明",
+        "correction": "用一句话说明疑似行为尚缺什么，不得升级事实确定程度"
+      },
+      {
+        "code": "missing_finding_gap",
+        "path": "/gaps",
+        "fact_ids": [
+          "G:C014",
+          "G:C015",
+          "G:C016"
+        ],
+        "message": "部分证实的发现必须关联缺口",
+        "correction": "在 gaps 中说明未闭合部分，并用 claim_ids 关联对应疑似行为"
+      },
+      {
+        "code": "missing_state_note",
+        "path": "/findings/8/state_note",
+        "fact_ids": [
+          "G:C047"
+        ],
+        "message": "部分证实的发现缺少证据缺口说明",
+        "correction": "用一句话说明疑似行为尚缺什么，不得升级事实确定程度"
+      }
+    ],
+    "final_issues": []
+  },
+  "usage": {
+    "composition": {
+      "requests": 2,
+      "input_tokens": 137300,
+      "output_tokens": 9659,
+      "reasoning_tokens": 594,
+      "visible_output_tokens": 9065,
+      "total_tokens": 146959,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": "0.0390508"
+    },
+    "format_repair": {
+      "requests": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "reasoning_tokens": 0,
+      "visible_output_tokens": 0,
+      "total_tokens": 0,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    },
+    "total": {
+      "requests": 2,
+      "input_tokens": 137300,
+      "output_tokens": 9659,
+      "reasoning_tokens": 594,
+      "visible_output_tokens": 9065,
+      "total_tokens": 146959,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    },
+    "repair_attempts": 0,
+    "draft": {
+      "requests": 1,
+      "input_tokens": 87739,
+      "output_tokens": 7046,
+      "reasoning_tokens": 199,
+      "visible_output_tokens": 6847,
+      "total_tokens": 94785,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": null
+    },
+    "revision": {
+      "requests": 1,
+      "input_tokens": 49561,
+      "output_tokens": 2613,
+      "reasoning_tokens": 395,
+      "visible_output_tokens": 2218,
+      "total_tokens": 52174,
+      "cache_read_tokens": 0,
+      "cache_write_tokens": 0,
+      "cost_usd": "0.0130478"
+    }
+  },
+  "model": {
+    "stage": "report_composition",
+    "profile": "global_reconciler",
+    "provider": "internal",
+    "model_name": "gpt-5.6-luna",
+    "max_output_tokens": 16384
+  },
+  "warnings": [],
+  "html_skill": {
+    "name": "malware-report-html",
+    "version": "1.2",
+    "fingerprint": "3c7a1c6a55d0df9fd97f534774e83d5153b931265ecacc9cacf1a94ea03cdd4b",
+    "template_version": "1.1",
+    "template_fingerprint": "bf15b6c040a16030632c65747d82c6e17b3ae78c49703a074299b0919139d191"
+  },
+  "report_agent": {
+    "name": "report",
+    "version": "1.3",
+    "fingerprint": "85ca5157e883449c3e472556031095e6f38a0a8ab9621e1e2ead186933bc9733"
+  },
+  "revision": {
+    "triggered": true,
+    "status": "applied",
+    "rounds": 1,
+    "issue_codes": [
+      "missing_behavior",
+      "missing_finding_gap",
+      "missing_state_note"
+    ]
+  },
+  "finished_at": "2026-10-29T09:09:33.983085+00:00"
+}

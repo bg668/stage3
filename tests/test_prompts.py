@@ -8,8 +8,6 @@ from bounded_investigator.prompts import (
     analyzer_prompt,
     format_repair_instructions,
     format_repair_prompt,
-    gap_reconciliation_instructions,
-    gap_reconciliation_prompt,
     render_result_context,
     reviewer_instructions,
     reviewer_prompt,
@@ -71,11 +69,6 @@ def test_global_reconciliation_prompt_renders():
     assert "packet J00" in rendered
 
 
-def test_gap_reconciliation_prompt_renders():
-    assert "Global Gap Reconciler" in gap_reconciliation_instructions()
-    rendered = gap_reconciliation_prompt("<historical_gaps>R:G001</historical_gaps>")
-    assert "R:G001" in rendered
-    assert "{{gap_context}}" not in rendered
 
 
 @pytest.mark.parametrize(
@@ -115,6 +108,7 @@ def test_workflow_supplies_shared_instructions_without_changing_agent_schemas(mo
 
     monkeypatch.setattr(workflow, "build_stage_agent", capture_agent)
     config = SimpleNamespace(
+        harness_dir=None,
         format_repair=SimpleNamespace(enabled=False),
         global_reconciliation=SimpleNamespace(enabled=False),
     )
@@ -134,7 +128,7 @@ def test_workflow_supplies_shared_instructions_without_changing_agent_schemas(mo
 
 @pytest.fixture
 def complete_result():
-    # Distinct values expose fields lost in the compact handoff, including legacy
+    # Distinct values expose fields lost in the compact handoff, including scalar
     # target + structured targets coexisting on the same request.
     return InvestigationResult.model_validate({
         "status": "complete_with_gaps",
@@ -176,7 +170,7 @@ def complete_result():
         }],
         "material_needs": [
             {
-                "kind": "function_code", "target": "legacy-function-target",
+                "kind": "function_code", "target": "scalar-function-target",
                 "targets": [
                     {"identifier": "F-0101", "start_line": 101, "end_line": 119},
                     {"identifier": "sub_402000", "start_line": 221, "end_line": 249},
@@ -217,7 +211,7 @@ def test_result_context_preserves_every_field_value(complete_result):
         assert f"evidence_level={claim.evidence_level.value}" in text
     for gap in complete_result.gaps:
         assert f"gap_type={gap.gap_type}" in text
-    assert "target: legacy-function-target" in text
+    assert "target: scalar-function-target" in text
     assert "targets:" in text
     for start, end in ((101, 119), (221, 249)):
         assert f"start_line: {start}" in text
@@ -253,16 +247,16 @@ def test_empty_result_collections_remain_visible(status):
         assert f"{field}:\n  - none" in text
 
 
-def test_legacy_unclassified_is_not_upgraded_during_handoff(complete_result):
+def test_unclassified_evidence_is_not_upgraded_during_handoff(complete_result):
     raw = complete_result.model_dump(mode="json")
     raw["claims"] = [raw["claims"][0]]
     del raw["claims"][0]["evidence_level"]
-    legacy = InvestigationResult.model_validate(raw)
-    text = render_result_context(legacy)
+    unclassified = InvestigationResult.model_validate(raw)
+    text = render_result_context(unclassified)
     assert "confidence=high" in text
     assert "evidence_level=unclassified" in text
     assert "evidence_level=confirmed" not in text
-    assert legacy.claims[0].evidence_level is EvidenceLevel.UNCLASSIFIED
+    assert unclassified.claims[0].evidence_level is EvidenceLevel.UNCLASSIFIED
 
 
 def test_rendering_and_handoffs_do_not_mutate_original_result(complete_result):

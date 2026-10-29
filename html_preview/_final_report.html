@@ -1,0 +1,1680 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="malware-report-html 1.1">
+<title>具备凭据收集、持久化与跨进程执行能力的样本</title>
+<style>
+/* 恶意样本分析报告 · 样式（render.py 会把本文件内联进输出 HTML）
+   不引用任何外部字体或资源，离线环境也能正常显示。 */
+:root{
+  --ground:#F4F5F7; --surface:#FFFFFF; --ink:#111827; --ink-2:#1F2937; --muted:#4B5563; --faint:#6B7280;
+  --line:#E5E7EB; --line-2:#EEF0F3; --line-strong:#D1D5DB; --soft:#F9FAFB;
+  --navy:#0F172A; --navy-2:#1E293B; --on-navy:#F9FAFB; --on-navy-muted:#94A3B8;
+  --red:#B42318; --red-soft:#FEF3F2; --red-line:#FECDCA; --red-ink:#7A271A;
+  --blue-soft:#F5F8FF; --blue-line:#C7D7FB; --amber-soft:#FFFBF2; --amber-line:#F3D9A4;
+  --amber:#B54708; --amber-ink:#93370D;
+  --sans:"IBM Plex Sans","PingFang SC","Microsoft YaHei","Noto Sans SC","Hiragino Sans GB",system-ui,sans-serif;
+  --mono:"IBM Plex Mono","JetBrains Mono",Consolas,Menlo,ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:#1D4ED8}a:hover{color:#1E3A8A}
+code,.mono{font-family:var(--mono)}
+p code,li code,td code,.card-text code,.callout code{font-size:.9em;background:#F3F4F6;padding:1px 5px;border-radius:3px;word-break:break-all}
+
+/* ---- 标签 ---- */
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;line-height:18px;white-space:nowrap}
+.t-neutral{background:#EEF0F3;color:#1F2937}
+.t-risk{background:#FEE4E2;color:#912018}
+.t-ext{background:#DBE7FE;color:#1E40AF}
+.t-empty{background:#FDECC8;color:#7A4306}
+.t-ok{background:#D5F2EC;color:#0B5D52}
+.t-muted{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line-strong)}
+
+/* ---- 报告头 ---- */
+.hero{background:var(--navy);color:var(--on-navy)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:32px;padding-right:32px}
+.hero .wrap{padding-top:40px;padding-bottom:32px;display:flex;flex-direction:column;gap:24px}
+.hero-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:#CBD5E1;font-family:var(--mono)}
+.hero-head{display:flex;flex-direction:column;gap:12px}
+.sample-line{font-family:var(--mono);font-size:13px;color:#CBD5E1;overflow-wrap:anywhere}
+.hero-title{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+.hero-title h1{margin-right:8px}
+.audit{display:inline-flex;align-items:center;padding:5px 12px;border-radius:6px;font-size:13px;font-weight:600;border:1px solid}
+.audit-pass{color:#A6F4C5;border-color:#3B7C6A}
+.audit-fail{color:#FEDF89;border-color:#DC6803;background:rgba(220,104,3,.16)}
+.audit-none{color:#CBD5E1;border-color:#475569;border-style:dashed}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px}
+.htag{display:inline-flex;padding:2px 10px;border-radius:4px;font-size:13px;color:#E2E8F0;border:1px solid #475569}
+.htag.mal{color:#FECDCA;border-color:#D92D20;background:rgba(217,45,32,.14)}
+.hero h1{margin:0;font-size:40px;line-height:48px;font-weight:700;letter-spacing:-.01em}
+.risk-badge{display:inline-flex;padding:6px 14px;border-radius:6px;font-size:15px;font-weight:700;color:#fff}
+.verdict{margin:0;font-size:18px;line-height:1.6;color:#E2E8F0;max-width:920px}
+.hero-grid{display:flex;flex-wrap:wrap;gap:24px}
+.hashes{flex:3 1 520px;min-width:0;align-self:flex-start;background:var(--navy-2);border-radius:8px;padding:16px 20px;display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px 12px;font-size:13px;font-family:var(--mono)}
+.hashes dt{color:var(--on-navy-muted)}.hashes dd{margin:0;color:#F1F5F9;word-break:break-all}
+.facts{flex:2 1 320px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px;font-size:14px;margin:0}
+.facts div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.facts dt{font-size:12px;color:var(--on-navy-muted)}.facts dd{margin:0;overflow-wrap:anywhere}
+
+/* ---- 主体 ---- */
+.page{padding-top:24px;padding-bottom:64px;display:flex;flex-direction:column;gap:24px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.kpi .l,.kpi .s{font-size:12px;color:var(--muted)}
+.kpi .v{font-family:var(--mono);font-size:26px;line-height:32px;font-weight:600}
+
+/* ---- 行为链总览 ---- */
+.flow{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px 32px 0;overflow:hidden}
+.flow-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:24px}
+.flow-head .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--faint)}
+.flow-head h2{margin:6px 0;font-size:24px;line-height:32px}
+.flow-head p{margin:0;font-size:14px;color:var(--muted)}
+.legend{display:flex;gap:8px;align-items:center;font-size:13px;color:#374151}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--red);flex:none}
+.flow-scroll{overflow-x:auto;margin:-10px -32px 0;padding:10px 32px 0}
+.flow-grid{display:grid;column-gap:12px;row-gap:28px;padding-bottom:28px}
+.phase{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;background:#F1F5F9;border-top:3px solid #334155;min-width:0}
+.phase b{font-size:13px;color:#1E293B;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.phase span{font-family:var(--mono);font-size:11px;color:#475569;white-space:nowrap}
+.track{grid-column:1/-1;position:relative;display:grid;column-gap:12px}
+.track-line{position:absolute;top:21px;height:2px;background:#CBD5E1}
+.stop{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;min-width:0}
+.stop-name{font-size:16px;line-height:22px;font-weight:700}
+.node{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:14px;font-weight:600;position:relative;z-index:1;flex:none;background:var(--navy);color:#fff;border:2px solid var(--navy);box-shadow:0 0 0 6px #fff}
+.node.key{background:var(--red);border-color:var(--red);box-shadow:0 0 0 6px #fff,0 0 0 9px var(--red-line)}
+.vflow{display:flex;flex-direction:column;max-width:920px;padding-bottom:12px}
+.vstep{display:flex;gap:20px}
+.vrail{flex:none;width:44px;display:flex;flex-direction:column;align-items:center}
+.vrail i{flex:1;width:2px;min-height:20px;background:#CBD5E1;margin-top:6px}
+.vbody{flex:1;min-width:0;padding:10px 0 22px;display:flex;flex-direction:column;gap:4px}
+.vbody .ph{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:#475569}
+.vbody .stop-name{font-size:17px;line-height:24px}
+.flow-stats{margin:0 -32px;padding:16px 32px;background:#F8FAFC;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 40px;align-items:baseline}
+.flow-stats span{display:inline-flex;align-items:baseline;gap:8px;font-size:13px;color:var(--muted)}
+.flow-stats b{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--ink)}
+.flow-stats b.red{color:var(--red)}
+
+/* ---- 关键发现（1.1） ---- */
+.findings{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px 32px}
+.fhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:8px}
+.fhead .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--faint)}
+.fhead h2{margin:6px 0;font-size:24px;line-height:32px}
+.fhead p{margin:0;font-size:14px;color:var(--muted)}
+.fcount{display:flex;gap:20px;font-size:13px;color:var(--muted)}
+.fcount span{display:inline-flex;align-items:baseline;gap:6px}
+.fcount b{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--ink)}
+.fcount .c-mal b{color:var(--red)}.fcount .c-sus b{color:var(--amber)}
+.tier{margin-top:20px;padding-left:16px;border-left:3px solid var(--line-strong)}
+.tier-mal{border-left-color:var(--red)}.tier-sus{border-left-color:var(--amber)}
+.tier-h{display:flex;align-items:baseline;gap:8px;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--muted);padding-bottom:4px}
+.tier-h b{font-family:var(--mono);font-weight:600}
+.tier-mal .tier-h{color:var(--red)}.tier-sus .tier-h{color:var(--amber)}
+details.tier>summary{cursor:pointer;list-style:none}
+details.tier>summary::-webkit-details-marker{display:none}
+.tier-tip{font-weight:400;font-size:12px;color:var(--faint);letter-spacing:0}
+details[open] .tier-tip{display:none}
+.fd{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line-2)}
+.tier-h+.fd,summary+.fd{border-top:0}
+.fd-none{display:block;color:var(--faint);font-size:14px}
+.fcat{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fmain{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;min-width:0}
+.ft{font-size:15px;font-weight:600;color:var(--ink)}
+.st{display:inline-flex;padding:1px 7px;border-radius:4px;font-size:12px;font-weight:600;line-height:18px;white-space:nowrap}
+.st-ok{background:#EEF0F3;color:#1F2937}
+.st-part{color:var(--amber-ink);box-shadow:inset 0 0 0 1px var(--amber-line);background:var(--amber-soft)}
+.fnote{font-size:13px;color:var(--muted)}
+.fmeta{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.fmeta a{text-decoration:none}
+
+/* ---- 行为链节点说明 / IOC 计数 / 证据折叠（1.1） ---- */
+.stop-brief{display:block;margin-top:-10px;font-size:13px;line-height:18px;color:var(--muted)}
+.vbody .stop-brief{margin-top:0}
+.ioc-sum{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;font-size:13px;color:var(--ink-2);margin:-4px 0 10px}
+.ioc-sum span{font-size:12px;color:var(--faint);margin-left:8px}
+.ioc-sum span:first-child{margin-left:0}
+.ioc-sum b{font-family:var(--mono);font-weight:600}
+.ioc-t td:nth-child(3),.ioc-t td:nth-child(4){white-space:nowrap}
+.ev-more{margin-top:4px}
+.ev-more summary{cursor:pointer;font-family:var(--sans);font-size:12px;color:#1D4ED8;width:max-content}
+
+/* ---- 目录 + 正文 ---- */
+.layout{display:flex;flex-wrap:wrap;align-items:flex-start;gap:24px}
+.toc{flex:1 1 220px;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 8px}
+.toc .t{font-size:12px;font-weight:600;color:var(--muted);padding:0 12px 8px}
+.toc a{display:flex;gap:10px;align-items:center;min-height:36px;padding:0 12px;border-radius:4px;text-decoration:none;color:var(--ink-2);font-size:14px}
+.toc a:hover{background:var(--soft)}
+.toc a span{font-family:var(--mono);font-size:12px;color:var(--faint);min-width:20px}
+main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px}
+
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px 32px;scroll-margin-top:16px}
+.sh{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.sn{font-family:var(--mono);font-size:13px;color:var(--faint);min-width:28px}
+.sec h2{margin:0;font-size:22px;line-height:30px;font-weight:700}
+.sec h3{margin:24px 0 12px;font-size:16px;line-height:24px;font-weight:600}
+.sec>.sh+h3,.sec>h3:first-child{margin-top:0}
+.sec p{margin:0 0 12px;line-height:1.75;color:var(--ink-2)}
+.sec .q{margin:-8px 0 16px;font-size:13px;color:var(--faint)}
+.note{font-size:13px!important;color:var(--muted)!important;margin-top:12px!important}
+
+/* ---- 表格 ---- */
+.tbox{overflow-x:auto;border:1px solid var(--line);border-radius:6px;margin-bottom:4px}
+table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.6}
+th{text-align:left;background:var(--soft);border-bottom:1px solid var(--line-strong);font-size:12px;font-weight:600;color:var(--muted);padding:10px 14px;white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid var(--line-2);vertical-align:top;color:var(--ink)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+td.m{font-family:var(--mono);font-size:13px;overflow-wrap:anywhere;font-weight:400}
+td.m:first-child{font-weight:600}
+td.dim{color:var(--muted);font-weight:400}
+
+/* ---- 积木 ---- */
+.callout{border-radius:6px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px 12px;align-items:flex-start;margin:4px 0 12px;border:1px solid var(--line);background:var(--soft)}
+.callout>div{flex:1 1 360px;font-size:14px;line-height:1.7}
+.callout-risk{background:var(--red-soft);border-color:var(--red-line)}
+.callout-risk>div{color:var(--red-ink);font-weight:500;font-size:15px}
+.callout-warning{background:var(--amber-soft);border-color:var(--amber-line)}
+.callout-info{background:var(--blue-soft);border-color:var(--blue-line)}
+.kv{display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);border:1px solid var(--line);border-radius:6px;margin:0 0 12px;font-size:14px}
+.kv dt,.kv dd{margin:0;padding:10px 14px;border-bottom:1px solid var(--line-2)}
+.kv dt{font-weight:600;background:var(--soft)}
+.kv dd.m{font-family:var(--mono);font-size:13px;word-break:break-all}
+.kv dt:nth-last-of-type(1),.kv dd:last-of-type{border-bottom:0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:12px}
+.card{border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.card-title{font-size:15px;font-weight:600}
+.card-meta{font-family:var(--mono);font-size:12px;color:#374151;overflow-wrap:anywhere}
+.card-text{font-size:14px;line-height:1.65;color:#374151}
+.list{margin:0 0 12px;padding:0;list-style:none;display:flex;flex-direction:column}
+.list li{padding:10px 0 10px 18px;border-top:1px solid var(--line-2);font-size:14px;line-height:1.65;position:relative}
+.list li:first-child{border-top:0}
+.list li::before{content:"";position:absolute;left:2px;top:19px;width:6px;height:6px;border-radius:50%;background:#94A3B8}
+.steps{margin:0 0 12px;padding:0;list-style:none}
+.steps li{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line-2)}
+.steps li:last-child{border-bottom:0}
+.steps .n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:600}
+.steps b{display:block;font-size:15px}
+.steps span{font-size:14px;line-height:1.65;color:#374151}
+.code-block{margin:0 0 12px;background:var(--navy);color:#E2E8F0;border-radius:6px;padding:20px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.65;white-space:pre}
+.tags{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.tags .lbl{font-size:13px;color:var(--muted);margin-right:4px}
+.empty{border:1px dashed #9CA3AF;border-radius:6px;padding:18px 20px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;background:#FAFAFB;margin-bottom:12px}
+.empty>span:last-child{flex:1 1 320px;font-size:14px;line-height:1.7}
+
+/* ---- 分析范围 / 归因 / 收尾 ---- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.tile{border:1px solid var(--line);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:4px}
+.tile .l,.tile .s{font-size:12px;color:var(--muted)}.tile .s{font-size:13px}
+.tile .v{font-weight:600;line-height:1.5}.tile .v.m{font-family:var(--mono);font-size:22px}
+.attrib{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.attrib>div{border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.attrib .yes{border:1px solid var(--blue-line);background:var(--blue-soft)}
+.attrib .no{border:1px solid var(--amber-line);background:var(--amber-soft)}
+.attrib .fam{font-size:18px;font-weight:700}
+.attrib p{margin:0;font-size:14px;line-height:1.65}
+.refs{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.refs li{display:flex;gap:12px;font-size:14px}
+.refs .n{font-family:var(--mono);font-size:12px;color:var(--faint);padding-top:2px}
+.refs a{font-family:var(--mono);font-size:12px;word-break:break-all;display:block}
+.final{background:var(--navy);border-color:var(--navy)}
+.final h2{color:var(--on-navy)}.final .sn{color:var(--on-navy-muted)}
+.final p{color:#E2E8F0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px}
+.chips span{background:var(--navy-2);color:#F1F5F9;border-radius:4px;padding:6px 10px;font-size:14px;font-weight:500}
+.chips span.key{background:var(--red)}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);padding:8px 4px}
+
+@media (min-width:900px){
+  .toc{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto}
+}
+@media (max-width:720px){
+  .findings{padding-left:16px;padding-right:16px}
+  .fd{grid-template-columns:1fr;gap:4px}
+  .fmeta{white-space:normal}
+  .wrap{padding-left:16px;padding-right:16px}
+  .hero h1{font-size:30px;line-height:38px}
+  .sec,.flow{padding-left:16px;padding-right:16px}
+  .flow-scroll,.flow-stats{margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}
+  .kv{grid-template-columns:1fr}.kv dt{border-bottom:0}
+}
+@media print{
+  body{background:#fff;font-size:12pt}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .toc{display:none}
+  .page{padding-bottom:0}
+  .sec,.flow,.kpi{break-inside:avoid-page;border-color:#D1D5DB}
+  .findings{break-inside:avoid-page}
+  details::details-content{content-visibility:visible}
+  .ev-more summary,.tier-tip{display:none}
+  tr,.card,.steps li{break-inside:avoid}
+  .flow-scroll,.tbox{overflow:visible}
+  a{color:inherit;text-decoration:none}
+}
+
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap"><div class="hero-top"><span>样本恶意代码分析报告 · HTML 预览</span><span>报告日期 2026-10-29</span></div><div class="hero-head"><div class="hero-title"><h1>具备凭据收集、持久化与跨进程执行能力的样本</h1><span class="risk-badge" style="background:#B42318">严重 · CRITICAL</span><span class="audit audit-pass">证据审计通过 · 280 条引用</span></div><div class="hero-tags"><span class="htag mal">凭据访问</span><span class="htag mal">进程注入</span><span class="htag">信息收集</span><span class="htag">持久化</span><span class="htag">防御规避</span></div></div><p class="verdict">该样本表现为具备凭据与浏览器数据收集、临时文件暂存、持久化、反分析及跨进程执行能力的高风险恶意程序；部分具体输出字段和运行时成功状态仍需保留不确定性。</p><div class="hero-grid"><dl class="hashes"><dt>样本哈希</dt><dd>未提供样本哈希</dd></dl><dl class="facts"><div><dt>家族归因</dt><dd>未归因</dd></div><div><dt>分析方式</dt><dd>静态分析（基于提供的源码与结构化分析结果）</dd></div><div><dt>报告状态</dt><dd>HTML 预览</dd></div><div><dt>样本标识</dt><dd>HTML-REPORT</dd></div></dl></div></div></header>
+<div class="wrap page">
+<div class="kpis"><div class="kpi"><span class="l">恶意行为</span><span class="v" style=color:#B42318>4</span><span class="s">2 条已证实</span></div><div class="kpi"><span class="l">可疑行为</span><span class="v" style=color:#B54708>7</span><span class="s">4 条已证实</span></div><div class="kpi"><span class="l">主机 IOC</span><span class="v">76</span><span class="s">其中 IOC 14 条</span></div><div class="kpi"><span class="l">网络 IOC</span><span class="v">0</span><span class="s">未发现</span></div><div class="kpi"><span class="l">未决缺口</span><span class="v" style=color:#8A4B08>7</span><span class="s">均不阻塞报告</span></div></div>
+<section class="findings" aria-labelledby="findings-h"><div class="fhead"><div><div class="eyebrow">KEY FINDINGS</div><h2 id="findings-h">关键发现</h2><p>按规则表分档：恶意＝良性软件几乎不会做；可疑＝需结合上下文；信息＝背景操作。</p></div><div class="fcount"><span class="c-mal"><b>4</b>恶意</span><span class="c-sus"><b>7</b>可疑</span><span class="c-info"><b>4</b>信息</span></div></div><div class="tier tier-mal"><div class="tier-h">恶意<b>4</b></div><div class="fd"><span class="fcat" title="规则 CRED-READ">凭据访问</span><div class="fmain"><span class="ft">访问注册表、Credential Manager、RAS、LSA 与 Protected Storage 凭据</span><span class="st st-ok">已证实</span></div><div class="fmeta">27 条证据 · <a href="#mechanism-2">§03</a></div></div><div class="fd"><span class="fcat" title="规则 INJ-PE-MAP">进程注入</span><div class="fmain"><span class="ft">向 explorer.exe 或其他目标进程映射 PE 映像</span><span class="st st-ok">已证实</span></div><div class="fmeta">13 条证据 · <a href="#mechanism-5">§06</a></div></div><div class="fd"><span class="fcat" title="规则 CRED-DECRYPT">凭据访问</span><div class="fmain"><span class="ft">读取并尝试解密多类本机凭据</span><span class="st st-part">部分证实</span><span class="fnote">Firefox signons 数据的解密成功条件和实际返回内容尚未完全闭合，不能确认所有目标记录均成功解密。</span></div><div class="fmeta">37 条证据 · <a href="#mechanism-2">§03</a></div></div><div class="fd"><span class="fcat" title="规则 INJ-REMOTE-THREAD">进程注入</span><div class="fmain"><span class="ft">写入远程内存并创建远程线程</span><span class="st st-part">部分证实</span><span class="fnote">远程映像写入和远程线程原语已可见，但 sub_4038AC 的具体调度及运行时线程创建、入口执行结果尚未闭合。</span></div><div class="fmeta">19 条证据 · <a href="#mechanism-5">§06</a></div></div></div><div class="tier tier-sus"><div class="tier-h">可疑<b>7</b></div><div class="fd"><span class="fcat" title="规则 INPUT-HOOK">信息收集</span><div class="fmain"><span class="ft">注册系统级键盘与鼠标 hook</span><span class="st st-ok">已证实</span></div><div class="fmeta">4 条证据 · <a href="#mechanism-3">§04</a></div></div><div class="fd"><span class="fcat" title="规则 PERSIST-ACTIVESETUP">持久化</span><div class="fmain"><span class="ft">创建 Active Setup 组件并设置 StubPath</span><span class="st st-ok">已证实</span></div><div class="fmeta">4 条证据 · <a href="#mechanism-4">§05</a></div></div><div class="fd"><span class="fcat" title="规则 EVADE-ANTIVM-EXIT">防御规避</span><div class="fmain"><span class="ft">探测虚拟机、沙箱和调试环境后退出</span><span class="st st-ok">已证实</span></div><div class="fmeta">11 条证据 · <a href="#mechanism-6">§07</a></div></div><div class="fd"><span class="fcat" title="规则 EVADE-SELFDELETE">防御规避</span><div class="fmain"><span class="ft">通过远程线程反复删除指定文件</span><span class="st st-ok">已证实</span></div><div class="fmeta">7 条证据 · <a href="#mechanism-6">§07</a></div></div><div class="fd"><span class="fcat" title="规则 BROWSER-DATA">信息收集</span><div class="fmain"><span class="ft">收集浏览器历史与浏览器保存数据</span><span class="st st-part">部分证实</span><span class="fnote">Firefox 路径虽显示 signons 文件读取及解密处理，但最终返回数据和 FIREFOX.abc 中的实际字段尚未完全闭合。</span></div><div class="fmeta">19 条证据 · <a href="#mechanism-2">§03</a></div></div><div class="fd"><span class="fcat" title="规则 STAGE-COLLECTED">信息收集</span><div class="fmain"><span class="ft">将收集结果暂存到临时目录文件</span><span class="st st-part">部分证实</span><span class="fnote">部分收集 helper 的数据来源和具体输出内容仍未完全闭合。</span></div><div class="fmeta">22 条证据 · <a href="#mechanism-2">§03</a></div></div><div class="fd"><span class="fcat" title="规则 PERSIST-RUNKEY">持久化</span><div class="fmain"><span class="ft">写入 Run 与 Policies Explorer Run 位置</span><span class="st st-part">部分证实</span><span class="fnote">主写入 helper sub_406088 未解析，但附加的 RegCreateKeyA/RegSetValueExA 分支已可见。</span></div><div class="fmeta">5 条证据 · <a href="#mechanism-4">§05</a></div></div></div><details class="tier tier-info"><summary class="tier-h">信息<b>4</b><span class="tier-tip">展开</span></summary><div class="fd"><span class="fcat" title="规则 CONFIG-DECODE">配置与资源</span><div class="fmain"><span class="ft">读取并解码嵌入式配置</span><span class="st st-ok">已证实</span></div><div class="fmeta">9 条证据 · <a href="#mechanism-1">§02</a></div></div><div class="fd"><span class="fcat" title="规则 FILE-COPY">文件操作</span><div class="fmain"><span class="ft">尝试复制文件到候选目标路径</span><span class="st st-ok">已证实</span></div><div class="fmeta">2 条证据 · <a href="#mechanism-4">§05</a></div></div><div class="fd"><span class="fcat" title="规则 ENV-DISCOVERY">环境探测</span><div class="fmain"><span class="ft">获取系统目录、用户名与模块路径</span><span class="st st-ok">已证实</span></div><div class="fmeta">9 条证据 · <a href="#mechanism-1">§02</a></div></div><div class="fd"><span class="fcat" title="规则 MUTEX-INSTANCE">执行</span><div class="fmain"><span class="ft">使用多个互斥体控制功能分支</span><span class="st st-ok">已证实</span></div><div class="fmeta">9 条证据 · <a href="#mechanism-1">§02</a></div></div></details></section>
+<section class="flow" aria-labelledby="flow-h"><div class="flow-head"><div><div class="eyebrow">ATTACK FLOW · 0 STAGES</div><h2 id="flow-h">核心行为链</h2><p>展示有依据的关键行为关系，具体机制见下文章节。</p></div></div><div style="padding-bottom:28px"><div class="empty"><span class="tag t-empty">未建立行为链</span><span>当前材料未建立可串联的行为路径；单项行为见下文章节。</span></div></div><div class="flow-stats"><span><b>0</b>个执行阶段</span></div></section>
+<div class="layout">
+<nav class="toc" aria-label="报告目录"><div class="t">目录</div><a href="#summary"><span>01</span>执行摘要</a><a href="#mechanism-1"><span>02</span>样本入口、配置与分支控制</a><a href="#mechanism-2"><span>03</span>凭据与浏览器数据如何被收集并暂存</a><a href="#mechanism-3"><span>04</span>输入 hook 与消息处理</a><a href="#mechanism-4"><span>05</span>持久化、文件操作与宿主准备</a><a href="#mechanism-5"><span>06</span>跨进程映射与远程线程执行</a><a href="#mechanism-6"><span>07</span>反分析与环境探测</a><a href="#mechanism-7"><span>08</span>其他已确认但用途未完全闭合的行为</a><a href="#ioc"><span>09</span>IOC</a><a href="#detection"><span>10</span>检测建议</a><a href="#response"><span>11</span>应急处置建议</a><a href="#attribution"><span>12</span>家族归因</a><a href="#gaps"><span>13</span>未决缺口与边界</a><a href="#final"><span>A</span>最终判断</a></nav>
+<main>
+<section id="summary" class="sec "><div class="sh"><span class="sn">01</span><h2>执行摘要</h2></div><p>样本具备明显的信息窃取与后续执行能力：在密码列表互斥体已存在时，它从 No-IP DUC、Windows Credential Manager、RAS、LSA、Protected Storage 以及 Internet Explorer/Firefox 相关位置读取或尝试解密凭据和浏览器数据，并将部分结果写入临时目录中的固定文件。</p><p>样本同时包含多层持久化和跨进程执行机制，包括 Run/Policies\Explorer\Run、Active Setup、远程 PE 映射、远程内存写入和远程线程创建；这些能力足以支持高风险恶意判定。</p><p>环境探测分支会检查沙箱、虚拟机、调试器和特殊设备，并在相应配置开关启用且探测命中时终止进程；多组互斥体则控制收集、输入 hook 和持久化/宿主处理路径。</p><div class="callout callout-risk"><span class="tag t-risk">风险判断</span><div>风险重点在于对多类本机凭据的读取/解密尝试，以及可将 PE 数据写入其他进程并创建远程线程的执行链。Run、Active Setup 和文件删除路径进一步扩大了持久化与清理风险。处置时应优先隔离主机、保护凭据并核查相关注册表、临时目录和进程注入痕迹。</div></div></section><section id="mechanism-1" class="sec "><div class="sh"><span class="sn">02</span><h2>样本入口、配置与分支控制</h2></div><p class="q">样本如何初始化配置并决定进入不同能力路径？</p><div class="callout callout-info"><span class="tag t-ext">核心判断</span><div>样本通过嵌入式资源配置、全局开关和多个互斥体选择收集、输入处理、持久化或宿主进程操作路径。</div></div><p>配置初始化从名称为 <code>XX-XX-XX-XX</code>、类型为 <code>0xA</code> 的模块资源读取数据，复制到内部缓冲区后按 <code>####@####</code> 分隔解析，最多处理约 101 个配置槽位。对非空且未满足比较条件的条目，程序逐字节执行 <code>^ 0xBC</code> 变换；随后这些值被复制或转换到多个全局配置字段。当前材料只能确认配置解析和变换，不能确定字段分别控制哪些业务功能。</p><p>启动控制使用 <code>_x_X_UPDATE_X_x_</code>、<code>_x_X_PASSWORDLIST_X_x_</code> 和 <code>_x_X_BLOCKMOUSE_X_x_</code> 等互斥体区分实例和功能分支。<code>sub_401F48</code> 本身不会动态生成互斥体名称：输入非空时原样返回，输入为空时返回内部静态地址；另一路径使用带 <code>_PERSIST</code> 后缀的名称参与实例判定。</p><p>样本还可读取命令行、当前模块文件名、系统目录、Windows 目录、用户名及 <code>ProgramFilesDir</code>，并把部分结果交给内部处理函数或用于路径构造。这些行为本身属于环境输入和辅助定位，不能单独说明其最终用途。</p><p>在 <code>off_40D210</code> 不等于 2 或 1 的路径中，若 <code>off_40D1B8 == 1</code>，样本会从模块文件名取得数据，并与 <code>dword_40F1E8</code> 进行比较。比较不满足时调用 <code>sub_405AD8</code> 和 <code>sub_40AFB0</code>，随后终止进程；比较满足时则转入后续 fallback 路径。两个辅助函数的具体副作用未解析，因此只能确认该条件分支及退出行为，不能进一步确定 <code>open</code> 参数所代表的操作。</p></section><section id="mechanism-2" class="sec "><div class="sh"><span class="sn">03</span><h2>凭据与浏览器数据如何被收集并暂存</h2></div><p class="q">哪些本机敏感数据进入了样本的数据处理链？</p><div class="callout callout-risk"><span class="tag t-risk">高风险能力</span><div>样本访问多个凭据存储和浏览器数据源，并对部分数据执行 DPAPI、LSA 或 NSS/PK11 解密；至少部分结果会进入临时目录文件。</div></div><p>在 <code>_x_X_PASSWORDLIST_X_x_</code> 已存在的分支中，程序调用七个收集 helper，并在各自结果复制到 <code>dword_40F1EC</code> 后非零时写入临时目录。已闭合的路径包括：从 <code>HKLM\SOFTWARE\Vitalwerks\DUC</code> 读取 No-IP 的 <code>UserName</code> 和 <code>Password</code>；通过 <code>CredEnumerateA</code> 查询 <code>WindowsLive:name=*</code> 凭据并将组合结果写入 <code>xxxyyyzzz.dat</code>；以及由 RAS helper 枚举拨号条目并读取用户名、密码字段。</p><p>RAS 路径还可在特定系统版本、回调标志和配置目录条件下读取 <code>rasphone.pbk</code> 中的 <code>DialParamsUID</code>，处理关联数据后写回当前 RAS 条目的密码字段；另一分支通过当前用户名生成 SID 相关键，并读取 <code>L$_RasDefaultCredentials#0</code> 等 LSA 私有数据。Protected Storage 路径枚举包含 <code>:StringData</code> 的记录，解析字段并将处理结果提交到内部状态。</p><p>Internet Explorer 路径枚举 URL History，并读取 <code>HKCU\Software\Microsoft\Internet Explorer\IntelliForms\Storage2</code> 中的值；在 <code>CryptUnprotectData</code> 成功时，将记录整理为 <code>User:</code> 或 <code>Password:</code> 字段。Credential Manager 路径则使用由固定 GUID <code>abe2869f-9b47-4cd9-a358-c22904dba7f7</code> 派生的 74 字节可选熵尝试解密 <code>CredentialBlob</code>，再提取 Address、User 和 Password 结果。</p><p>Firefox 路径加载 <code>nss3.dll</code> 并解析 NSS/PK11 入口，读取 Profile0/Path 后依次检查 <code>signons3.txt</code>、<code>signons2.txt</code>、<code>signons1.txt</code> 和 <code>signons.txt</code>。当前材料已确认候选文件的打开、读入、Base64 解码和 <code>PK11SDR_Decrypt</code> 成功分支，但尚不能把所有返回数据确定为成功解密的凭据，也不能确认每个目标环境都能完成读取。</p><p>收集结果的外部输出并未全部闭合。已直接观察到的固定暂存文件包括 <code>NOIP.abc</code>、<code>MSN.abc</code>、<code>FIREFOX.abc</code>、<code>IELOGIN.abc</code>、<code>IEPASS.abc</code>、<code>IEAUTO.abc</code>、<code>IEWEB.abc</code>、<code>xxxyyyzzz.dat</code>，以及由配置组装后尝试写入的 <code>XX--XX--XX.txt</code>。各 helper 的调用和写入门控不等同于运行时写入成功。</p></section><section id="mechanism-3" class="sec "><div class="sh"><span class="sn">04</span><h2>输入 hook 与消息处理</h2></div><p class="q">样本是否记录或阻断用户输入？</p><div class="callout callout-boundary"><span class="tag t-neutral">认定边界</span><div>样本在特定互斥体条件下注册两个系统 hook；现有代码足以证明 hook 注册尝试和一个键盘转换调用，但不足以认定为键盘记录器或确认输入被阻断。</div></div><p>当密码列表互斥体未命中、而 <code>_x_X_BLOCKMOUSE_X_x_</code> 已存在时，程序调用 <code>SetWindowsHookExA</code> 注册 hook ID 13 和 14，随后循环调用辅助函数直至其返回非零并退出进程。一个回调在 <code>n256 == 256</code> 时读取键盘状态并调用 <code>ToAscii</code>，另一个回调直接返回 1；当前代码未显示转换结果被保存、写文件或发送。</p><p>轮询 helper 从当前线程消息队列取出消息，非 <code>WM_QUIT</code> 消息进入 <code>TranslateMessage</code> 和 <code>DispatchMessageA</code>，之后短暂睡眠并继续处理，直到一次没有消息。该消息循环与 hook 注册存在调用关系，但没有证据表明它本身完成输入记录或阻断。</p></section><section id="mechanism-4" class="sec "><div class="sh"><span class="sn">05</span><h2>持久化、文件操作与宿主准备</h2></div><p class="q">样本如何保持运行或准备目标文件与目录？</p><div class="callout callout-risk"><span class="tag t-risk">持久化能力</span><div>样本具备多种持久化位置写入能力，并可创建目录、复制文件和设置 Active Setup；其中部分主 helper 的具体数据内容仍未解析。</div></div><p>在开关启用时，程序针对 HKLM 和 HKCU 的 <code>Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run</code> 以及 HKLM/HKCU 的 <code>Software\Microsoft\Windows\CurrentVersion\Run</code> 调用注册表处理逻辑。附加分支明确调用 <code>RegCreateKeyA</code> 和 <code>RegSetValueExA</code> 写入 REG 类型 2 数据；未解析的 <code>sub_406088</code> 是否在主调用中实施相同写入，当前不能完全确认。</p><p>Active Setup 流程先删除当前用户 <code>Installed Components</code> 下的指定子键，再在 HKLM 下创建对应组件并设置 <code>StubPath</code>；数据由输入字符串追加固定的 <code>Restart</code> 构成。另一路径在 <code>v6</code> 条件满足时调用未解析的执行相关 helper，随后终止当前进程，因此不能进一步断言其一定启动或执行文件。</p><p>样本可按路径逐级调用 <code>CreateDirectoryA</code> 创建缺失目录；另有复制分支根据构造出的候选路径调用 <code>CopyFileA</code>，首次复制失败时尝试备用目标。具体源文件、目标路径和后续用途未闭合，静态代码只证明复制与目录创建尝试。</p></section><section id="mechanism-5" class="sec "><div class="sh"><span class="sn">06</span><h2>跨进程映射与远程线程执行</h2></div><p class="q">样本如何把代码或数据转入其他进程？</p><div class="callout callout-risk"><span class="tag t-risk">关键执行能力</span><div>样本包含完整度较高的远程内存写入、PE 重定位/导入处理和远程线程原语，可针对 explorer.exe 或其他由配置选择的应用进程执行映射尝试。</div></div><p>当 <code>off_40D210 == 2</code> 且 explorer.exe 宿主条件满足时，程序定位 <code>Shell_TrayWnd</code> 所属进程，调用 <code>VirtualAllocEx</code> 和远程映像准备逻辑；若现有映射失败，则创建新的 <code>explorer.exe</code> 并再次尝试。若 explorer.exe 判断不满足，程序根据 <code>sub_4064DC</code> 结果选择应用路径数据，启动应用后交给同一映射例程。</p><p>远程映像准备包括按 PE 头分配映像和节区域、复制节数据、遍历重定位块并按基址差值修正目标地址；导入描述符和导入项也会被遍历，非零导入项通过远程辅助路径解析地址并回写导入表。<code>sub_4038AC</code> 在缓冲区有效时向目标进程写入数据并调用未解析的后续处理函数。</p><p>独立的远程线程原语先通过 <code>VirtualAllocEx</code>/<code>WriteProcessMemory</code> 写入参数和入口代码，再调用 <code>CreateRemoteThread</code>；同步模式还会等待线程并读取结果。另一路径将字符串、<code>LoadLibraryA</code>/<code>Sleep</code> 地址和间接调用结构写入目标进程；还有路径在目标进程中解析模块和导出符号，并以线程退出码返回地址。</p><p><code>_PERSIST</code> 互斥体分支同样会检查 shell 宿主并在映射失败时创建 explorer.exe。另一路径向 <code>Shell_TrayWnd</code> 所属进程写入两块数据并尝试以 <code>sub_40AE94</code> 作为远程线程入口；该回调反复调用 <code>DeleteFileA</code>，直至删除调用返回非零。静态证据不证明远程线程、映射或删除最终成功。</p></section><section id="mechanism-6" class="sec "><div class="sh"><span class="sn">07</span><h2>反分析与环境探测</h2></div><p class="q">样本如何识别分析环境并改变流程？</p><div class="callout callout-warning"><span class="tag t-empty">反分析行为</span><div>多个独立配置开关分别控制沙箱、虚拟机、调试器、特殊设备和时间条件探测；命中对应探测后可直接终止进程。</div></div><p>探测集合包括检查 <code>SbieDll.dll</code>、枚举并匹配 <code>VBoxService.exe</code>、检查 <code>dbghelp.dll</code>、读取调试状态或 PEB 的 <code>BeingDebugged</code> 标志，以及探测 <code>\\.\Syser</code>、<code>\\.\SyserDbgMsg</code>、<code>\\.\SyserBoot</code>、<code>\\.\SICE</code> 和 <code>\\.\NTICE</code>。此外还有针对 ProductId、特殊设备和其他环境状态的独立 helper。</p><p>各探测分支分别要求自身开关为 1 且对应 helper 返回 1，随后调用 <code>ExitProcess_0(0)</code>；不能把这些分支合并为一个统一条件，也不能据静态代码断言目标环境必然命中。<code>off_40D200</code> 分支还会检查调试状态和超过 5000 毫秒的时间差，并修改加载模块链表相关字段。</p></section><section id="mechanism-7" class="sec "><div class="sh"><span class="sn">08</span><h2>其他已确认但用途未完全闭合的行为</h2></div><p class="q">哪些行为已观察到，但当前不能可靠归入主要目的？</p><div class="callout callout-info"><span class="tag t-ext">辅助行为</span><div>样本还读取当前用户名并交给内部处理函数，生成配置组装结果并写入固定文件；这些行为的最终业务用途或外部去向尚未完全确定。</div></div><p><code>sub_40555C</code> 分配用户名缓冲区并调用 <code>GetUserNameA</code>，随后将用户名相关数据和 <code>CurrentUser</code> 标记交给 <code>sub_401E94</code>；当前材料未证明其被写入文件、持久化或发送网络。</p><p>非互斥体碰撞路径中，程序从模块文件名相关输入和 101 个配置项组装带 <code>####@####</code> 分隔符的数据，按条件使用默认值或 XOR 变换值，最后调用文件写入辅助函数。上游提供的目标名为 <code>XX--XX--XX.txt</code>，因此可确认写入尝试，但不能确定字段语义或额外编码。</p></section><section id="ioc" class="sec "><div class="sh"><span class="sn">09</span><h2>IOC</h2></div><div class="empty"><span class="tag t-empty">样本哈希</span><span>未提供样本哈希。</span></div><h3>主机 IOC</h3><div class="ioc-sum"><span>按类型</span>mutex <b>4</b> · string <b>37</b> · file <b>8</b> · guid <b>1</b> · resource <b>9</b> · process <b>4</b> · registry <b>7</b> · other <b>6</b><span>按特异性</span>IOC <b>14</b> · 检测特征 <b>28</b> · 上下文 <b>34</b></div><div class="ioc-t"><div class="tbox"><table><thead><tr><th>类型</th><th>值</th><th>角色</th><th>特异性</th><th>说明</th></tr></thead><tbody><tr><td>mutex</td><td class="m">_x_X_UPDATE_X_x_</td><td>实例控制</td><td><span class="tag t-ext">IOC</span></td><td class="dim"></td></tr><tr><td>mutex</td><td class="m">_x_X_PASSWORDLIST_X_x_</td><td>实例控制</td><td><span class="tag t-ext">IOC</span></td><td class="dim">关联密码列表收集和多个临时输出文件。</td></tr><tr><td>mutex</td><td class="m">_x_X_BLOCKMOUSE_X_x_</td><td>实例控制</td><td><span class="tag t-ext">IOC</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">NOIP.abc</td><td>输出落地</td><td><span class="tag t-ext">IOC</span></td><td class="dim">No-IP 收集结果的固定临时输出名。</td></tr><tr><td>string</td><td class="m">MSN.abc</td><td>输出落地</td><td><span class="tag t-ext">IOC</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">FIREFOX.abc</td><td>输出落地</td><td><span class="tag t-ext">IOC</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">IELOGIN.abc</td><td>输出落地</td><td><span class="tag t-ext">IOC</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">IEPASS.abc</td><td>输出落地</td><td><span class="tag t-ext">IOC</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">IEAUTO.abc</td><td>输出落地</td><td><span class="tag t-ext">IOC</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">IEWEB.abc</td><td>输出落地</td><td><span class="tag t-ext">IOC</span></td><td class="dim"></td></tr><tr><td>file</td><td class="m">XX--XX--XX.txt</td><td>输出落地；其他对象</td><td><span class="tag t-ext">IOC</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">xxxyyyzzz.dat</td><td>输出落地</td><td><span class="tag t-ext">IOC</span></td><td class="dim">Windows Live 凭据组合结果的固定输出名。</td></tr><tr><td>guid</td><td class="m">abe2869f-9b47-4cd9-a358-c22904dba7f7</td><td>配置标记</td><td><span class="tag t-ext">IOC</span></td><td class="dim">Credential Manager DPAPI 解密使用的固定派生熵来源。</td></tr><tr><td>mutex</td><td class="m">_PERSIST</td><td>实例控制</td><td><span class="tag t-ext">IOC</span></td><td class="dim">持久化/宿主处理实例判定使用的互斥体后缀。</td></tr><tr><td>resource</td><td class="m">XX-XX-XX-XX</td><td>读取来源</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">####@####</td><td>解析标记</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>process</td><td class="m">VBoxService.exe</td><td>环境探测</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>resource</td><td class="m">SbieDll.dll</td><td>环境探测</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>resource</td><td class="m">\\.\Syser</td><td>环境探测</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>resource</td><td class="m">\\.\SyserDbgMsg</td><td>环境探测</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>resource</td><td class="m">\\.\SyserBoot</td><td>环境探测</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>resource</td><td class="m">\\.\SICE</td><td>环境探测</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>resource</td><td class="m">\\.\NTICE</td><td>环境探测</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>registry</td><td class="m">Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run</td><td>持久化</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>registry</td><td class="m">Software\Microsoft\Windows\CurrentVersion\Run</td><td>持久化</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>registry</td><td class="m">Software\Microsoft\Active Setup\Installed Components\</td><td>持久化</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">StubPath</td><td>持久化</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>registry</td><td class="m">HKLM\SOFTWARE\Vitalwerks\DUC</td><td>读取来源</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">UserName</td><td>读取来源</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">Password</td><td>读取来源</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">WindowsLive:name=*</td><td>解析标记</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">DialParamsUID</td><td>解析标记</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">L$_RasDefaultCredentials#0</td><td>读取来源</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>registry</td><td class="m">HKCU\Software\Microsoft\Internet Explorer\IntelliForms\Storage2</td><td>读取来源</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">User:</td><td>解析标记</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">Password:</td><td>解析标记</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">CLSID_CLSID_CUrlHistory</td><td>读取来源</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">CryptUnprotectData</td><td>其他对象</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">CredEnumerateA</td><td>读取来源</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>process</td><td class="m">CreateRemoteThread</td><td>其他对象</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim">跨进程远程线程能力的关键 API。</td></tr><tr><td>string</td><td class="m">LoadLibraryA</td><td>其他对象</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">GetProcAddress</td><td>其他对象</td><td><span class="tag t-neutral">检测特征</span></td><td class="dim"></td></tr><tr><td>other</td><td class="m">GetTempPathA</td><td>其他对象</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">GetCommandLineA</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">GetModuleFileNameA</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">TRUE</td><td>配置标记</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>resource</td><td class="m">dbghelp.dll</td><td>环境探测</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>registry</td><td class="m">HKLM\Software\Microsoft\Windows\CurrentVersion\ProductId</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">CurrentUser</td><td>其他对象</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">Restart</td><td>配置标记</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>resource</td><td class="m">kernel32.dll</td><td>系统路径</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">GetSystemDirectoryA</td><td>环境探测</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">GetWindowsDirectoryA</td><td>环境探测</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>registry</td><td class="m">Software\Microsoft\Windows\CurrentVersion</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">ProgramFilesDir</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">advapi32.dll</td><td>系统路径</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>file</td><td class="m">Microsoft\Network\Connections\pbk\rasphone.pbk</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">RasGetEntryDialParams</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>other</td><td class="m">LsaRetrievePrivateData</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">:StringData</td><td>解析标记</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>other</td><td class="m">PStoreCreateInstance</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>file</td><td class="m">nss3.dll</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>file</td><td class="m">userenv.dll</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">\Mozilla\Firefox\</td><td>系统路径</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>file</td><td class="m">signons3.txt</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>file</td><td class="m">signons2.txt</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>file</td><td class="m">signons1.txt</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>file</td><td class="m">signons.txt</td><td>读取来源</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>other</td><td class="m">PK11SDR_Decrypt</td><td>其他对象</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">##$$</td><td>解析标记</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>process</td><td class="m">explorer.exe</td><td>其他对象</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">Shell_TrayWnd</td><td>环境探测</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>other</td><td class="m">VirtualAllocEx</td><td>其他对象</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>other</td><td class="m">WriteProcessMemory</td><td>其他对象</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>process</td><td class="m">Shell_TrayWnd 所属进程</td><td>其他对象</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr><tr><td>string</td><td class="m">DeleteFileA</td><td>其他对象</td><td><span class="tag t-muted">上下文</span></td><td class="dim"></td></tr></tbody></table></div></div><h3>网络 IOC</h3><div class="empty"><span class="tag t-empty">无网络 IOC</span><span>暂无网络指标或相关对象。</span></div></section><section id="detection" class="sec "><div class="sh"><span class="sn">10</span><h2>检测建议</h2></div><ol class="steps"><li><span class="n">1</span><div><b>监控凭据访问与解密组合行为</b><span>检测进程对 <code>CredEnumerateA</code>、<code>CryptUnprotectData</code>、<code>LsaRetrievePrivateData</code>、RAS 凭据 API、Protected Storage 或 NSS/PK11 解密的组合使用，尤其关注其与浏览器数据路径、固定 GUID 可选熵及临时目录输出的同一进程关联。</span></div></li><li><span class="n">2</span><div><b>监控固定临时文件与互斥体</b><span>在临时目录监控 <code>NOIP.abc</code>、<code>MSN.abc</code>、<code>FIREFOX.abc</code>、<code>IELOGIN.abc</code>、<code>IEPASS.abc</code>、<code>IEAUTO.abc</code>、<code>IEWEB.abc</code>、<code>xxxyyyzzz.dat</code> 和 <code>XX--XX--XX.txt</code> 的创建或写入，并关联 <code>_x_X_PASSWORDLIST_X_x_</code> 等互斥体。</span></div></li><li><span class="n">3</span><div><b>监控跨进程映射链</b><span>重点检测同一进程连续执行 <code>VirtualAllocEx</code>、<code>WriteProcessMemory</code>、PE 重定位/导入处理和 <code>CreateRemoteThread</code>，以及针对 explorer.exe 或 <code>Shell_TrayWnd</code> 所属进程的目标句柄操作。</span></div></li><li><span class="n">4</span><div><b>核查持久化注册表位置</b><span>检查 HKLM/HKCU 的 <code>Software\Microsoft\Windows\CurrentVersion\Run</code>、<code>Policies\Explorer\Run</code> 及 Active Setup <code>StubPath</code> 的新增或修改，并关联样本进程、启动路径和 <code>Restart</code> 字符串。</span></div></li></ol></section><section id="response" class="sec "><div class="sh"><span class="sn">11</span><h2>应急处置建议</h2></div><ol class="steps"><li><span class="n">1</span><div><b>立即隔离并保护凭据</b><span>将相关主机从网络和共享环境隔离，避免收集结果继续被使用；对浏览器、Windows Credential Manager、RAS、No-IP 和相关业务账户凭据执行轮换，并保留原始证据后再清理。</span></div></li><li><span class="n">2</span><div><b>排查持久化与注入痕迹</b><span>核查 Run、Policies\Explorer\Run、Active Setup、临时目录固定文件、异常 explorer.exe/其他宿主进程、远程线程和跨进程内存写入记录；在确认取证完成后移除恶意持久化项。</span></div></li><li><span class="n">3</span><div><b>结合环境探测行为复核分析结果</b><span>由于样本可在命中沙箱、虚拟机或调试器探测时退出，应将静态结论与终端遥测、注册表和文件系统时间线交叉核对，避免仅以未命中探测或未见写入成功否定其能力。</span></div></li></ol></section><section id="attribution" class="sec "><div class="sh"><span class="sn">12</span><h2>家族归因</h2></div><div class="empty"><span class="tag t-empty">未归因</span><span>暂无归因资料。</span></div></section><section id="gaps" class="sec "><div class="sh"><span class="sn">13</span><h2>未决缺口与边界</h2></div><div class="tbox"><table><thead><tr><th>缺口</th><th>影响</th><th>阻塞报告</th></tr></thead><tbody><tr><td>七个 .abc 输出及相关暂存文件的部分数据来源、字段语义和最终写入内容尚未完全闭合。</td><td>会影响对各输出文件敏感信息种类及收集范围的精确判断，但不改变样本已具备多类凭据访问和文件暂存能力的结论。</td><td class="dim">否</td></tr><tr><td><code>XX--XX--XX.txt</code> 的组装数据字段和下游用途仍未完全确定。</td><td>会影响对该文件是否承载特定敏感数据或配置的判断。</td><td class="dim">否</td></tr><tr><td>hook 回调的完整输入拦截或阻断语义、完成条件和运行时注册成功状态尚未闭合。</td><td>不能将该路径进一步定性为键盘记录或确定的输入阻断，但已确认系统级 hook 注册尝试。</td><td class="dim">否</td></tr><tr><td>Firefox helper 的返回组装与 FIREFOX.abc 中实际写入字段仍未完全确定。</td><td>会影响对 Firefox 输出是否始终为成功解密凭据的判断。</td><td class="dim">否</td></tr><tr><td>Active Setup 辅助执行分支中的 <code>sub_405AD8</code>、<code>sub_406878</code> 及条件变量语义未解析。</td><td>不能确认该分支是否实际启动或执行文件。</td><td class="dim">否</td></tr><tr><td>远程映射和线程链的运行时成功状态、具体映像来源及最终入口执行效果未由静态材料证明。</td><td>不影响对跨进程执行能力的判断，但限制了对实际载荷和运行时影响的确认。</td><td class="dim">否</td></tr><tr><td>Run 与 Policies\Explorer\Run 路径中主写入 helper <code>sub_406088</code> 的具体副作用尚未闭合；仅附加的注册表写入分支已直接可见。</td><td>会影响对各持久化位置是否均实际写入以及写入数据内容的精确判断，但不改变样本具备相关注册表操作路径的结论。</td><td class="dim">否</td></tr></tbody></table></div></section><section id="final" class="sec final"><div class="sh"><span class="sn">A</span><h2>最终判断</h2></div><p style="margin:0">综合现有事实，样本的主要目的可判断为收集本机凭据与浏览器数据，并通过临时文件整理结果；同时具备持久化、反分析、文件清理和跨进程映射/远程线程执行能力。部分 helper、配置字段和运行时成功结果尚未闭合，因此报告保留对具体输出内容及实际执行结果的限定，但不改变其 critical 风险等级。</p></section>
+<footer><span>行为结论与关键对象可通过函数及行号复核。</span><span class="mono">TLP:AMBER · 模板 v1.1</span></footer>
+</main>
+</div>
+</div>
+<script type="application/json" id="report-data">
+{
+ "meta": {
+  "id": "HTML-REPORT",
+  "date": "2026-10-29",
+  "method": "静态分析（基于提供的源码与结构化分析结果）",
+  "edition": "HTML 预览",
+  "status": "HTML 预览",
+  "risk": "critical",
+  "verdict": "该样本表现为具备凭据与浏览器数据收集、临时文件暂存、持久化、反分析及跨进程执行能力的高风险恶意程序；部分具体输出字段和运行时成功状态仍需保留不确定性。",
+  "audit": {
+   "status": "passed",
+   "refs_total": 280,
+   "refs_invalid": 0
+  },
+  "title": "具备凭据收集、持久化与跨进程执行能力的样本"
+ },
+ "hashes": [],
+ "attack": [],
+ "attribution": null,
+ "yara": null,
+ "attribution_empty_reason": "暂无归因资料。",
+ "schema_version": "1.1",
+ "findings": [
+  {
+   "rule": "CRED-DECRYPT",
+   "title": "读取并尝试解密多类本机凭据",
+   "state": "partial",
+   "evidence": [
+    "F-0480 L0019-L0029",
+    "F-0469 L0001-L0005",
+    "F-0472 L0011-L0022",
+    "F-0500 L0057-L0069",
+    "F-0482 L0038-L0060",
+    "F-0482 L0061-L0083",
+    "F-0482 L0084-L0089",
+    "F-0481 L0027-L0076",
+    "F-0436 L008-L014",
+    "F-0440 L059-L071",
+    "F-0440 L088-L100",
+    "F-0440 L146-L155",
+    "F-0440 L067-L085",
+    "F-0435 L006-L012",
+    "F-0440 L101-L124",
+    "F-0440 L125-L143",
+    "F-0437 L010-L031",
+    "F-0434 L017-L028",
+    "F-0433 L011-L019",
+    "F-0431 L022-L039",
+    "F-0430 L033-L071",
+    "F-0466 L0013-L0018",
+    "F-0464 L0057-L0075",
+    "F-0464 L0076-L0087",
+    "F-0463 L0031-L0055",
+    "F-0464 L0099-L0136",
+    "F-0479 L0005-L0009",
+    "F-0465 L0045-L0060",
+    "F-0465 L0061-L0075",
+    "F-0465 L0093-L0097",
+    "F-0465 L0067-L0080",
+    "F-0465 L0081-L0092",
+    "F-0465 L0098-L0103",
+    "F-0465 L0113-L0113",
+    "F-0483 L0291-L0309",
+    "F-0483 L0314-L0329",
+    "F-0483 L0329-L0340"
+   ],
+   "state_note": "Firefox signons 数据的解密成功条件和实际返回内容尚未完全闭合，不能确认所有目标记录均成功解密。",
+   "section": "mechanism-2"
+  },
+  {
+   "rule": "CRED-READ",
+   "title": "访问注册表、Credential Manager、RAS、LSA 与 Protected Storage 凭据",
+   "state": "confirmed",
+   "evidence": [
+    "F-0480 L0019-L0029",
+    "F-0469 L0001-L0005",
+    "F-0472 L0011-L0022",
+    "F-0500 L0057-L0069",
+    "F-0482 L0038-L0060",
+    "F-0482 L0061-L0083",
+    "F-0482 L0084-L0089",
+    "F-0481 L0027-L0076",
+    "F-0436 L008-L014",
+    "F-0440 L059-L071",
+    "F-0440 L088-L100",
+    "F-0440 L146-L155",
+    "F-0440 L067-L085",
+    "F-0435 L006-L012",
+    "F-0440 L101-L124",
+    "F-0440 L125-L143",
+    "F-0437 L010-L031",
+    "F-0434 L017-L028",
+    "F-0433 L011-L019",
+    "F-0431 L022-L039",
+    "F-0430 L033-L071",
+    "F-0477 L0001-L0004",
+    "F-0419 L0030-L0049",
+    "F-0419 L0056-L0071",
+    "F-0417 L0035-L0049",
+    "F-0413 L0048-L0061",
+    "F-0410 L0049-L0082"
+   ],
+   "section": "mechanism-2"
+  },
+  {
+   "rule": "BROWSER-DATA",
+   "title": "收集浏览器历史与浏览器保存数据",
+   "state": "partial",
+   "evidence": [
+    "F-0478 L0005-L0009",
+    "F-0466 L0013-L0018",
+    "F-0449 L0028-L0036",
+    "F-0449 L0036-L0050",
+    "F-0464 L0057-L0075",
+    "F-0464 L0076-L0087",
+    "F-0463 L0031-L0055",
+    "F-0464 L0099-L0136",
+    "F-0483 L0150-L0174",
+    "F-0483 L0175-L0189",
+    "F-0483 L0190-L0204",
+    "F-0483 L0205-L0226",
+    "F-0483 L0227-L0248",
+    "F-0483 L0249-L0271",
+    "F-0483 L0275-L0283",
+    "F-0483 L0284-L0290",
+    "F-0483 L0291-L0309",
+    "F-0483 L0314-L0329",
+    "F-0483 L0329-L0340"
+   ],
+   "state_note": "Firefox 路径虽显示 signons 文件读取及解密处理，但最终返回数据和 FIREFOX.abc 中的实际字段尚未完全闭合。",
+   "section": "mechanism-2"
+  },
+  {
+   "rule": "STAGE-COLLECTED",
+   "title": "将收集结果暂存到临时目录文件",
+   "state": "partial",
+   "evidence": [
+    "F-0500 L0057-L0069",
+    "F-0500 L0070-L0087",
+    "F-0500 L0088-L0105",
+    "F-0500 L0106-L0123",
+    "F-0370 L0005-L0008",
+    "F-0367 L0022-L0031",
+    "F-0497 L0029-L0031",
+    "F-0497 L0032-L0058",
+    "F-0497 L0059-L0060",
+    "F-0500 L0171-L0190",
+    "F-0482 L0038-L0060",
+    "F-0482 L0061-L0083",
+    "F-0482 L0084-L0089",
+    "F-0481 L0027-L0076",
+    "F-0500 L0070-L0123",
+    "F-0482 L0061-L0089",
+    "F-0477 L0001-L0004",
+    "F-0500 L0057-L0123",
+    "F-0483 L0182-L0226",
+    "F-0483 L0227-L0271",
+    "F-0483 L0344-L0358",
+    "F-0483 L0514-L0522"
+   ],
+   "state_note": "部分收集 helper 的数据来源和具体输出内容仍未完全闭合。",
+   "section": "mechanism-2"
+  },
+  {
+   "rule": "INPUT-HOOK",
+   "title": "注册系统级键盘与鼠标 hook",
+   "state": "confirmed",
+   "evidence": [
+    "F-0500 L0125-L0137",
+    "F-0498 L0005-L0014",
+    "F-0492 L0007-L0013",
+    "F-0493 L0001-L0004"
+   ],
+   "section": "mechanism-3"
+  },
+  {
+   "rule": "PERSIST-RUNKEY",
+   "title": "写入 Run 与 Policies Explorer Run 位置",
+   "state": "partial",
+   "evidence": [
+    "F-0394 L0156-L0180",
+    "F-0394 L0181-L0203",
+    "F-0365 L0025-L0032",
+    "F-0394 L0205-L0225",
+    "F-0394 L0227-L0247"
+   ],
+   "state_note": "主写入 helper sub_406088 未解析，但附加的 RegCreateKeyA/RegSetValueExA 分支已可见。",
+   "section": "mechanism-4"
+  },
+  {
+   "rule": "PERSIST-ACTIVESETUP",
+   "title": "创建 Active Setup 组件并设置 StubPath",
+   "state": "confirmed",
+   "evidence": [
+    "F-0394 L0249-L0256",
+    "F-0391 L0001-L0005",
+    "F-0389 L0001-L0008",
+    "F-0388 L0029-L0043"
+   ],
+   "section": "mechanism-4"
+  },
+  {
+   "rule": "INJ-PE-MAP",
+   "title": "向 explorer.exe 或其他目标进程映射 PE 映像",
+   "state": "confirmed",
+   "evidence": [
+    "F-0495 L0040-L0056",
+    "F-0495 L0046-L0050",
+    "F-0304 L0025-L0044",
+    "F-0302 L0039-L0065",
+    "F-0495 L0046-L0060",
+    "F-0495 L0083-L0107",
+    "F-0495 L0109-L0116",
+    "F-0304 L0035-L0051",
+    "F-0495 L0062-L0078",
+    "F-0301 L0025-L0040",
+    "F-0301 L0041-L0052",
+    "F-0300 L0001-L0004",
+    "F-0299 L0009-L0027"
+   ],
+   "section": "mechanism-5"
+  },
+  {
+   "rule": "INJ-REMOTE-THREAD",
+   "title": "写入远程内存并创建远程线程",
+   "state": "partial",
+   "evidence": [
+    "F-0304 L0044-L0051",
+    "F-0303 L0001-L0003",
+    "F-0302 L0067-L0098",
+    "F-0291 L0017-L0027",
+    "F-0290 L0001-L0009",
+    "F-0293 L0021-L0027",
+    "F-0292 L0001-L0008",
+    "F-0289 L0026-L0035",
+    "F-0295 L0012-L0027",
+    "F-0294 L0009-L0014",
+    "F-0489 L0022-L0031",
+    "F-0487 L0007-L0011",
+    "F-0488 L0022-L0031",
+    "F-0038 L022-L027",
+    "F-0488 L0023-L0031",
+    "F-0486 L0001-L0012",
+    "F-0489 L0029-L0031",
+    "F-0488 L0017-L0026",
+    "F-0488 L0027-L0031"
+   ],
+   "state_note": "远程映像写入和远程线程原语已可见，但 sub_4038AC 的具体调度及运行时线程创建、入口执行结果尚未闭合。",
+   "section": "mechanism-5"
+  },
+  {
+   "rule": "EVADE-ANTIVM-EXIT",
+   "title": "探测虚拟机、沙箱和调试环境后退出",
+   "state": "confirmed",
+   "evidence": [
+    "F-0494 L0005-L0026",
+    "F-0494 L0027-L0059",
+    "F-0338 L0005-L0008",
+    "F-0337 L0025-L0039",
+    "F-0339 L0005-L0008",
+    "F-0347 L0007-L0010",
+    "F-0352 L0005-L0011",
+    "F-0355 L0005-L0008",
+    "F-0494 L0027-L0068",
+    "F-0348 L0007-L0014",
+    "F-0350 L0005-L0007"
+   ],
+   "section": "mechanism-6"
+  },
+  {
+   "rule": "EVADE-SELFDELETE",
+   "title": "通过远程线程反复删除指定文件",
+   "state": "confirmed",
+   "evidence": [
+    "F-0489 L0022-L0031",
+    "F-0487 L0007-L0011",
+    "F-0488 L0022-L0031",
+    "F-0038 L022-L027",
+    "F-0488 L0023-L0031",
+    "F-0486 L0001-L0012",
+    "F-0489 L0029-L0031"
+   ],
+   "section": "mechanism-6"
+  },
+  {
+   "rule": "CONFIG-DECODE",
+   "title": "读取并解码嵌入式配置",
+   "state": "confirmed",
+   "evidence": [
+    "F-0309 L0010-L0020",
+    "F-0310 L0027-L0030",
+    "F-0310 L0030-L0050",
+    "F-0307 L0017-L0030",
+    "F-0313 L0007-L0013",
+    "F-0325 L0008-L0029",
+    "F-0325 L0031-L0071",
+    "F-0322 L0016-L0023",
+    "F-0317 L0010-L0020"
+   ],
+   "section": "mechanism-1"
+  },
+  {
+   "rule": "FILE-COPY",
+   "title": "尝试复制文件到候选目标路径",
+   "state": "confirmed",
+   "evidence": [
+    "F-0394 L0101-L0121",
+    "F-0394 L0134-L0155"
+   ],
+   "section": "mechanism-4"
+  },
+  {
+   "rule": "ENV-DISCOVERY",
+   "title": "获取系统目录、用户名与模块路径",
+   "state": "confirmed",
+   "evidence": [
+    "F-0038 L009-L020",
+    "F-0038 L022-L027",
+    "F-0500 L0171-L0190",
+    "F-0344 L0032-L0040",
+    "F-0368 L0006-L0008",
+    "F-0369 L0006-L0008",
+    "F-0377 L0015-L0017",
+    "F-0375 L0029-L0039",
+    "F-0375 L0031-L0041"
+   ],
+   "section": "mechanism-1"
+  },
+  {
+   "rule": "MUTEX-INSTANCE",
+   "title": "使用多个互斥体控制功能分支",
+   "state": "confirmed",
+   "evidence": [
+    "F-0500 L0057-L0069",
+    "F-0500 L0070-L0087",
+    "F-0500 L0088-L0105",
+    "F-0500 L0106-L0123",
+    "F-0370 L0005-L0008",
+    "F-0367 L0022-L0031",
+    "F-0500 L0125-L0137",
+    "F-0496 L0023-L0043",
+    "F-0304 L0025-L0051"
+   ],
+   "section": "mechanism-1"
+  }
+ ],
+ "summary": [
+  "样本具备明显的信息窃取与后续执行能力：在密码列表互斥体已存在时，它从 No-IP DUC、Windows Credential Manager、RAS、LSA、Protected Storage 以及 Internet Explorer/Firefox 相关位置读取或尝试解密凭据和浏览器数据，并将部分结果写入临时目录中的固定文件。",
+  "样本同时包含多层持久化和跨进程执行机制，包括 Run/Policies\\Explorer\\Run、Active Setup、远程 PE 映射、远程内存写入和远程线程创建；这些能力足以支持高风险恶意判定。",
+  "环境探测分支会检查沙箱、虚拟机、调试器和特殊设备，并在相应配置开关启用且探测命中时终止进程；多组互斥体则控制收集、输入 hook 和持久化/宿主处理路径。"
+ ],
+ "risk_judgement": "风险重点在于对多类本机凭据的读取/解密尝试，以及可将 PE 数据写入其他进程并创建远程线程的执行链。Run、Active Setup 和文件删除路径进一步扩大了持久化与清理风险。处置时应优先隔离主机、保护凭据并核查相关注册表、临时目录和进程注入痕迹。",
+ "chain": [],
+ "sections": [
+  {
+   "id": "mechanism-1",
+   "title": "样本入口、配置与分支控制",
+   "question": "样本如何初始化配置并决定进入不同能力路径？",
+   "blocks": [
+    {
+     "type": "callout",
+     "text": "样本通过嵌入式资源配置、全局开关和多个互斥体选择收集、输入处理、持久化或宿主进程操作路径。",
+     "tone": "info",
+     "label": "核心判断"
+    },
+    {
+     "type": "paragraph",
+     "text": "配置初始化从名称为 `XX-XX-XX-XX`、类型为 `0xA` 的模块资源读取数据，复制到内部缓冲区后按 `####@####` 分隔解析，最多处理约 101 个配置槽位。对非空且未满足比较条件的条目，程序逐字节执行 `^ 0xBC` 变换；随后这些值被复制或转换到多个全局配置字段。当前材料只能确认配置解析和变换，不能确定字段分别控制哪些业务功能。"
+    },
+    {
+     "type": "paragraph",
+     "text": "启动控制使用 `_x_X_UPDATE_X_x_`、`_x_X_PASSWORDLIST_X_x_` 和 `_x_X_BLOCKMOUSE_X_x_` 等互斥体区分实例和功能分支。`sub_401F48` 本身不会动态生成互斥体名称：输入非空时原样返回，输入为空时返回内部静态地址；另一路径使用带 `_PERSIST` 后缀的名称参与实例判定。"
+    },
+    {
+     "type": "paragraph",
+     "text": "样本还可读取命令行、当前模块文件名、系统目录、Windows 目录、用户名及 `ProgramFilesDir`，并把部分结果交给内部处理函数或用于路径构造。这些行为本身属于环境输入和辅助定位，不能单独说明其最终用途。"
+    },
+    {
+     "type": "paragraph",
+     "text": "在 `off_40D210` 不等于 2 或 1 的路径中，若 `off_40D1B8 == 1`，样本会从模块文件名取得数据，并与 `dword_40F1E8` 进行比较。比较不满足时调用 `sub_405AD8` 和 `sub_40AFB0`，随后终止进程；比较满足时则转入后续 fallback 路径。两个辅助函数的具体副作用未解析，因此只能确认该条件分支及退出行为，不能进一步确定 `open` 参数所代表的操作。"
+    }
+   ]
+  },
+  {
+   "id": "mechanism-2",
+   "title": "凭据与浏览器数据如何被收集并暂存",
+   "question": "哪些本机敏感数据进入了样本的数据处理链？",
+   "blocks": [
+    {
+     "type": "callout",
+     "text": "样本访问多个凭据存储和浏览器数据源，并对部分数据执行 DPAPI、LSA 或 NSS/PK11 解密；至少部分结果会进入临时目录文件。",
+     "tone": "risk",
+     "label": "高风险能力"
+    },
+    {
+     "type": "paragraph",
+     "text": "在 `_x_X_PASSWORDLIST_X_x_` 已存在的分支中，程序调用七个收集 helper，并在各自结果复制到 `dword_40F1EC` 后非零时写入临时目录。已闭合的路径包括：从 `HKLM\\SOFTWARE\\Vitalwerks\\DUC` 读取 No-IP 的 `UserName` 和 `Password`；通过 `CredEnumerateA` 查询 `WindowsLive:name=*` 凭据并将组合结果写入 `xxxyyyzzz.dat`；以及由 RAS helper 枚举拨号条目并读取用户名、密码字段。"
+    },
+    {
+     "type": "paragraph",
+     "text": "RAS 路径还可在特定系统版本、回调标志和配置目录条件下读取 `rasphone.pbk` 中的 `DialParamsUID`，处理关联数据后写回当前 RAS 条目的密码字段；另一分支通过当前用户名生成 SID 相关键，并读取 `L$_RasDefaultCredentials#0` 等 LSA 私有数据。Protected Storage 路径枚举包含 `:StringData` 的记录，解析字段并将处理结果提交到内部状态。"
+    },
+    {
+     "type": "paragraph",
+     "text": "Internet Explorer 路径枚举 URL History，并读取 `HKCU\\Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2` 中的值；在 `CryptUnprotectData` 成功时，将记录整理为 `User:` 或 `Password:` 字段。Credential Manager 路径则使用由固定 GUID `abe2869f-9b47-4cd9-a358-c22904dba7f7` 派生的 74 字节可选熵尝试解密 `CredentialBlob`，再提取 Address、User 和 Password 结果。"
+    },
+    {
+     "type": "paragraph",
+     "text": "Firefox 路径加载 `nss3.dll` 并解析 NSS/PK11 入口，读取 Profile0/Path 后依次检查 `signons3.txt`、`signons2.txt`、`signons1.txt` 和 `signons.txt`。当前材料已确认候选文件的打开、读入、Base64 解码和 `PK11SDR_Decrypt` 成功分支，但尚不能把所有返回数据确定为成功解密的凭据，也不能确认每个目标环境都能完成读取。"
+    },
+    {
+     "type": "paragraph",
+     "text": "收集结果的外部输出并未全部闭合。已直接观察到的固定暂存文件包括 `NOIP.abc`、`MSN.abc`、`FIREFOX.abc`、`IELOGIN.abc`、`IEPASS.abc`、`IEAUTO.abc`、`IEWEB.abc`、`xxxyyyzzz.dat`，以及由配置组装后尝试写入的 `XX--XX--XX.txt`。各 helper 的调用和写入门控不等同于运行时写入成功。"
+    }
+   ]
+  },
+  {
+   "id": "mechanism-3",
+   "title": "输入 hook 与消息处理",
+   "question": "样本是否记录或阻断用户输入？",
+   "blocks": [
+    {
+     "type": "callout",
+     "text": "样本在特定互斥体条件下注册两个系统 hook；现有代码足以证明 hook 注册尝试和一个键盘转换调用，但不足以认定为键盘记录器或确认输入被阻断。",
+     "tone": "boundary",
+     "label": "认定边界"
+    },
+    {
+     "type": "paragraph",
+     "text": "当密码列表互斥体未命中、而 `_x_X_BLOCKMOUSE_X_x_` 已存在时，程序调用 `SetWindowsHookExA` 注册 hook ID 13 和 14，随后循环调用辅助函数直至其返回非零并退出进程。一个回调在 `n256 == 256` 时读取键盘状态并调用 `ToAscii`，另一个回调直接返回 1；当前代码未显示转换结果被保存、写文件或发送。"
+    },
+    {
+     "type": "paragraph",
+     "text": "轮询 helper 从当前线程消息队列取出消息，非 `WM_QUIT` 消息进入 `TranslateMessage` 和 `DispatchMessageA`，之后短暂睡眠并继续处理，直到一次没有消息。该消息循环与 hook 注册存在调用关系，但没有证据表明它本身完成输入记录或阻断。"
+    }
+   ]
+  },
+  {
+   "id": "mechanism-4",
+   "title": "持久化、文件操作与宿主准备",
+   "question": "样本如何保持运行或准备目标文件与目录？",
+   "blocks": [
+    {
+     "type": "callout",
+     "text": "样本具备多种持久化位置写入能力，并可创建目录、复制文件和设置 Active Setup；其中部分主 helper 的具体数据内容仍未解析。",
+     "tone": "risk",
+     "label": "持久化能力"
+    },
+    {
+     "type": "paragraph",
+     "text": "在开关启用时，程序针对 HKLM 和 HKCU 的 `Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run` 以及 HKLM/HKCU 的 `Software\\Microsoft\\Windows\\CurrentVersion\\Run` 调用注册表处理逻辑。附加分支明确调用 `RegCreateKeyA` 和 `RegSetValueExA` 写入 REG 类型 2 数据；未解析的 `sub_406088` 是否在主调用中实施相同写入，当前不能完全确认。"
+    },
+    {
+     "type": "paragraph",
+     "text": "Active Setup 流程先删除当前用户 `Installed Components` 下的指定子键，再在 HKLM 下创建对应组件并设置 `StubPath`；数据由输入字符串追加固定的 `Restart` 构成。另一路径在 `v6` 条件满足时调用未解析的执行相关 helper，随后终止当前进程，因此不能进一步断言其一定启动或执行文件。"
+    },
+    {
+     "type": "paragraph",
+     "text": "样本可按路径逐级调用 `CreateDirectoryA` 创建缺失目录；另有复制分支根据构造出的候选路径调用 `CopyFileA`，首次复制失败时尝试备用目标。具体源文件、目标路径和后续用途未闭合，静态代码只证明复制与目录创建尝试。"
+    }
+   ]
+  },
+  {
+   "id": "mechanism-5",
+   "title": "跨进程映射与远程线程执行",
+   "question": "样本如何把代码或数据转入其他进程？",
+   "blocks": [
+    {
+     "type": "callout",
+     "text": "样本包含完整度较高的远程内存写入、PE 重定位/导入处理和远程线程原语，可针对 explorer.exe 或其他由配置选择的应用进程执行映射尝试。",
+     "tone": "risk",
+     "label": "关键执行能力"
+    },
+    {
+     "type": "paragraph",
+     "text": "当 `off_40D210 == 2` 且 explorer.exe 宿主条件满足时，程序定位 `Shell_TrayWnd` 所属进程，调用 `VirtualAllocEx` 和远程映像准备逻辑；若现有映射失败，则创建新的 `explorer.exe` 并再次尝试。若 explorer.exe 判断不满足，程序根据 `sub_4064DC` 结果选择应用路径数据，启动应用后交给同一映射例程。"
+    },
+    {
+     "type": "paragraph",
+     "text": "远程映像准备包括按 PE 头分配映像和节区域、复制节数据、遍历重定位块并按基址差值修正目标地址；导入描述符和导入项也会被遍历，非零导入项通过远程辅助路径解析地址并回写导入表。`sub_4038AC` 在缓冲区有效时向目标进程写入数据并调用未解析的后续处理函数。"
+    },
+    {
+     "type": "paragraph",
+     "text": "独立的远程线程原语先通过 `VirtualAllocEx`/`WriteProcessMemory` 写入参数和入口代码，再调用 `CreateRemoteThread`；同步模式还会等待线程并读取结果。另一路径将字符串、`LoadLibraryA`/`Sleep` 地址和间接调用结构写入目标进程；还有路径在目标进程中解析模块和导出符号，并以线程退出码返回地址。"
+    },
+    {
+     "type": "paragraph",
+     "text": "`_PERSIST` 互斥体分支同样会检查 shell 宿主并在映射失败时创建 explorer.exe。另一路径向 `Shell_TrayWnd` 所属进程写入两块数据并尝试以 `sub_40AE94` 作为远程线程入口；该回调反复调用 `DeleteFileA`，直至删除调用返回非零。静态证据不证明远程线程、映射或删除最终成功。"
+    }
+   ]
+  },
+  {
+   "id": "mechanism-6",
+   "title": "反分析与环境探测",
+   "question": "样本如何识别分析环境并改变流程？",
+   "blocks": [
+    {
+     "type": "callout",
+     "text": "多个独立配置开关分别控制沙箱、虚拟机、调试器、特殊设备和时间条件探测；命中对应探测后可直接终止进程。",
+     "tone": "warning",
+     "label": "反分析行为"
+    },
+    {
+     "type": "paragraph",
+     "text": "探测集合包括检查 `SbieDll.dll`、枚举并匹配 `VBoxService.exe`、检查 `dbghelp.dll`、读取调试状态或 PEB 的 `BeingDebugged` 标志，以及探测 `\\\\.\\Syser`、`\\\\.\\SyserDbgMsg`、`\\\\.\\SyserBoot`、`\\\\.\\SICE` 和 `\\\\.\\NTICE`。此外还有针对 ProductId、特殊设备和其他环境状态的独立 helper。"
+    },
+    {
+     "type": "paragraph",
+     "text": "各探测分支分别要求自身开关为 1 且对应 helper 返回 1，随后调用 `ExitProcess_0(0)`；不能把这些分支合并为一个统一条件，也不能据静态代码断言目标环境必然命中。`off_40D200` 分支还会检查调试状态和超过 5000 毫秒的时间差，并修改加载模块链表相关字段。"
+    }
+   ]
+  },
+  {
+   "id": "mechanism-7",
+   "title": "其他已确认但用途未完全闭合的行为",
+   "question": "哪些行为已观察到，但当前不能可靠归入主要目的？",
+   "blocks": [
+    {
+     "type": "callout",
+     "text": "样本还读取当前用户名并交给内部处理函数，生成配置组装结果并写入固定文件；这些行为的最终业务用途或外部去向尚未完全确定。",
+     "tone": "info",
+     "label": "辅助行为"
+    },
+    {
+     "type": "paragraph",
+     "text": "`sub_40555C` 分配用户名缓冲区并调用 `GetUserNameA`，随后将用户名相关数据和 `CurrentUser` 标记交给 `sub_401E94`；当前材料未证明其被写入文件、持久化或发送网络。"
+    },
+    {
+     "type": "paragraph",
+     "text": "非互斥体碰撞路径中，程序从模块文件名相关输入和 101 个配置项组装带 `####@####` 分隔符的数据，按条件使用默认值或 XOR 变换值，最后调用文件写入辅助函数。上游提供的目标名为 `XX--XX--XX.txt`，因此可确认写入尝试，但不能确定字段语义或额外编码。"
+    }
+   ]
+  }
+ ],
+ "ioc": {
+  "host": [
+   {
+    "type": "mutex",
+    "value": "_x_X_UPDATE_X_x_",
+    "role": "实例控制",
+    "specificity": "high",
+    "note": "",
+    "evidence": [
+     "F-0500 L0047-L0056"
+    ]
+   },
+   {
+    "type": "mutex",
+    "value": "_x_X_PASSWORDLIST_X_x_",
+    "role": "实例控制",
+    "specificity": "high",
+    "note": "关联密码列表收集和多个临时输出文件。",
+    "evidence": [
+     "F-0500 L0057-L0064"
+    ]
+   },
+   {
+    "type": "mutex",
+    "value": "_x_X_BLOCKMOUSE_X_x_",
+    "role": "实例控制",
+    "specificity": "high",
+    "note": "",
+    "evidence": [
+     "F-0500 L0128-L0136"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "NOIP.abc",
+    "role": "输出落地",
+    "specificity": "high",
+    "note": "No-IP 收集结果的固定临时输出名。",
+    "evidence": [
+     "F-0500 L0065-L0069",
+     "F-0500 L0057-L0069"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "MSN.abc",
+    "role": "输出落地",
+    "specificity": "high",
+    "note": "",
+    "evidence": [
+     "F-0500 L0074-L0077"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "FIREFOX.abc",
+    "role": "输出落地",
+    "specificity": "high",
+    "note": "",
+    "evidence": [
+     "F-0500 L0083-L0087",
+     "F-0500 L0088-L0105"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "IELOGIN.abc",
+    "role": "输出落地",
+    "specificity": "high",
+    "note": "",
+    "evidence": [
+     "F-0500 L0092-L0096"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "IEPASS.abc",
+    "role": "输出落地",
+    "specificity": "high",
+    "note": "",
+    "evidence": [
+     "F-0500 L0101-L0105"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "IEAUTO.abc",
+    "role": "输出落地",
+    "specificity": "high",
+    "note": "",
+    "evidence": [
+     "F-0500 L0110-L0114"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "IEWEB.abc",
+    "role": "输出落地",
+    "specificity": "high",
+    "note": "",
+    "evidence": [
+     "F-0500 L0119-L0123"
+    ]
+   },
+   {
+    "type": "file",
+    "value": "XX--XX--XX.txt",
+    "role": "输出落地；其他对象",
+    "specificity": "high",
+    "note": "",
+    "evidence": [
+     "F-0500 L0182-L0184",
+     "F-0497 L0059-L0060",
+     "F-0367 L0022-L0031"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "xxxyyyzzz.dat",
+    "role": "输出落地",
+    "specificity": "high",
+    "note": "Windows Live 凭据组合结果的固定输出名。",
+    "evidence": [
+     "F-0482 L0061-L0062",
+     "F-0482 L0084-L0089"
+    ]
+   },
+   {
+    "type": "guid",
+    "value": "abe2869f-9b47-4cd9-a358-c22904dba7f7",
+    "role": "配置标记",
+    "specificity": "high",
+    "note": "Credential Manager DPAPI 解密使用的固定派生熵来源。",
+    "evidence": [
+     "F-0465 L0045-L0059"
+    ]
+   },
+   {
+    "type": "mutex",
+    "value": "_PERSIST",
+    "role": "实例控制",
+    "specificity": "high",
+    "note": "持久化/宿主处理实例判定使用的互斥体后缀。",
+    "evidence": [
+     "F-0496 L0023-L0026"
+    ]
+   },
+   {
+    "type": "resource",
+    "value": "XX-XX-XX-XX",
+    "role": "读取来源",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0309 L0010-L0013"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "####@####",
+    "role": "解析标记",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0310 L0027-L0029",
+     "F-0497 L0038-L0049"
+    ]
+   },
+   {
+    "type": "process",
+    "value": "VBoxService.exe",
+    "role": "环境探测",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0337 L0027-L0039"
+    ]
+   },
+   {
+    "type": "resource",
+    "value": "SbieDll.dll",
+    "role": "环境探测",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0338 L0005-L0008"
+    ]
+   },
+   {
+    "type": "resource",
+    "value": "\\\\.\\Syser",
+    "role": "环境探测",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0352 L0005-L0008",
+     "F-0351 L0006-L0012"
+    ]
+   },
+   {
+    "type": "resource",
+    "value": "\\\\.\\SyserDbgMsg",
+    "role": "环境探测",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0352 L0005-L0008",
+     "F-0351 L0006-L0012"
+    ]
+   },
+   {
+    "type": "resource",
+    "value": "\\\\.\\SyserBoot",
+    "role": "环境探测",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0352 L0005-L0008",
+     "F-0351 L0006-L0012"
+    ]
+   },
+   {
+    "type": "resource",
+    "value": "\\\\.\\SICE",
+    "role": "环境探测",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0353 L0006-L0012"
+    ]
+   },
+   {
+    "type": "resource",
+    "value": "\\\\.\\NTICE",
+    "role": "环境探测",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0354 L0006-L0012"
+    ]
+   },
+   {
+    "type": "registry",
+    "value": "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\Run",
+    "role": "持久化",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0394 L0161-L0179",
+     "F-0394 L0175-L0202"
+    ]
+   },
+   {
+    "type": "registry",
+    "value": "Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+    "role": "持久化",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0394 L0210-L0224",
+     "F-0394 L0232-L0246"
+    ]
+   },
+   {
+    "type": "registry",
+    "value": "Software\\Microsoft\\Active Setup\\Installed Components\\",
+    "role": "持久化",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0388 L0030-L0042",
+     "F-0389 L0005-L0008"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "StubPath",
+    "role": "持久化",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0388 L0039-L0043"
+    ]
+   },
+   {
+    "type": "registry",
+    "value": "HKLM\\SOFTWARE\\Vitalwerks\\DUC",
+    "role": "读取来源",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0480 L0019-L0020"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "UserName",
+    "role": "读取来源",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0480 L0019-L0021"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "Password",
+    "role": "读取来源",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0480 L0019-L0020"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "WindowsLive:name=*",
+    "role": "解析标记",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0482 L0039-L0046"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "DialParamsUID",
+    "role": "解析标记",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0440 L105-L123"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "L$_RasDefaultCredentials#0",
+    "role": "读取来源",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0434 L024-L027"
+    ]
+   },
+   {
+    "type": "registry",
+    "value": "HKCU\\Software\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2",
+    "role": "读取来源",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0466 L0013-L0018",
+     "F-0464 L0057-L0062"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "User:",
+    "role": "解析标记",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0463 L0041-L0049",
+     "F-0465 L0073-L0080"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "Password:",
+    "role": "解析标记",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0463 L0045-L0049",
+     "F-0465 L0081-L0092"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "CLSID_CLSID_CUrlHistory",
+    "role": "读取来源",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0449 L0028-L0035"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "CryptUnprotectData",
+    "role": "其他对象",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0464 L0076-L0087",
+     "F-0465 L0058-L0068"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "CredEnumerateA",
+    "role": "读取来源",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0465 L0058-L0064"
+    ]
+   },
+   {
+    "type": "process",
+    "value": "CreateRemoteThread",
+    "role": "其他对象",
+    "specificity": "medium",
+    "note": "跨进程远程线程能力的关键 API。",
+    "evidence": [
+     "F-0291 L0017-L0026"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "LoadLibraryA",
+    "role": "其他对象",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0293 L0021-L0027"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "GetProcAddress",
+    "role": "其他对象",
+    "specificity": "medium",
+    "note": "",
+    "evidence": [
+     "F-0295 L0013-L0021"
+    ]
+   },
+   {
+    "type": "other",
+    "value": "GetTempPathA",
+    "role": "其他对象",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0370 L0006-L0008"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "GetCommandLineA",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0038 L009-L015"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "GetModuleFileNameA",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0038 L022-L025"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "TRUE",
+    "role": "配置标记",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0322 L0016-L0023"
+    ]
+   },
+   {
+    "type": "resource",
+    "value": "dbghelp.dll",
+    "role": "环境探测",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0339 L0005-L0008"
+    ]
+   },
+   {
+    "type": "registry",
+    "value": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProductId",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0340 L0009-L0014",
+     "F-0341 L0009-L0014",
+     "F-0342 L0009-L0014"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "CurrentUser",
+    "role": "其他对象",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0344 L0037-L0040"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "Restart",
+    "role": "配置标记",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0388 L0037-L0042",
+     "F-0390 L0014-L0019"
+    ]
+   },
+   {
+    "type": "resource",
+    "value": "kernel32.dll",
+    "role": "系统路径",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0368 L0006-L0007",
+     "F-0369 L0006-L0007"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "GetSystemDirectoryA",
+    "role": "环境探测",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0368 L0006-L0008"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "GetWindowsDirectoryA",
+    "role": "环境探测",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0369 L0006-L0008"
+    ]
+   },
+   {
+    "type": "registry",
+    "value": "Software\\Microsoft\\Windows\\CurrentVersion",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0377 L0015-L0017"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "ProgramFilesDir",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0377 L0015-L0017"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "advapi32.dll",
+    "role": "系统路径",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0482 L0038-L0043"
+    ]
+   },
+   {
+    "type": "file",
+    "value": "Microsoft\\Network\\Connections\\pbk\\rasphone.pbk",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0435 L006-L012"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "RasGetEntryDialParams",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0440 L094-L100"
+    ]
+   },
+   {
+    "type": "other",
+    "value": "LsaRetrievePrivateData",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0433 L013-L018"
+    ]
+   },
+   {
+    "type": "string",
+    "value": ":StringData",
+    "role": "解析标记",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0419 L0040-L0048"
+    ]
+   },
+   {
+    "type": "other",
+    "value": "PStoreCreateInstance",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0419 L0030-L0033"
+    ]
+   },
+   {
+    "type": "file",
+    "value": "nss3.dll",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0483 L0150-L0154"
+    ]
+   },
+   {
+    "type": "file",
+    "value": "userenv.dll",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0483 L0172-L0179"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "\\Mozilla\\Firefox\\",
+    "role": "系统路径",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0483 L0187-L0193",
+     "F-0483 L0198-L0203"
+    ]
+   },
+   {
+    "type": "file",
+    "value": "signons3.txt",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0483 L0190-L0195"
+    ]
+   },
+   {
+    "type": "file",
+    "value": "signons2.txt",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0483 L0201-L0216"
+    ]
+   },
+   {
+    "type": "file",
+    "value": "signons1.txt",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0483 L0223-L0238"
+    ]
+   },
+   {
+    "type": "file",
+    "value": "signons.txt",
+    "role": "读取来源",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0483 L0234-L0260"
+    ]
+   },
+   {
+    "type": "other",
+    "value": "PK11SDR_Decrypt",
+    "role": "其他对象",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0483 L0163-L0168",
+     "F-0483 L0327-L0329"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "##$$",
+    "role": "解析标记",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0483 L0310-L0313",
+     "F-0483 L0349-L0353"
+    ]
+   },
+   {
+    "type": "process",
+    "value": "explorer.exe",
+    "role": "其他对象",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0495 L0042-L0055",
+     "F-0496 L0034-L0042"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "Shell_TrayWnd",
+    "role": "环境探测",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0496 L0034-L0036",
+     "F-0489 L0024-L0026"
+    ]
+   },
+   {
+    "type": "other",
+    "value": "VirtualAllocEx",
+    "role": "其他对象",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0304 L0035-L0040",
+     "F-0289 L0026-L0031"
+    ]
+   },
+   {
+    "type": "other",
+    "value": "WriteProcessMemory",
+    "role": "其他对象",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0304 L0045-L0050",
+     "F-0289 L0028-L0031"
+    ]
+   },
+   {
+    "type": "process",
+    "value": "Shell_TrayWnd 所属进程",
+    "role": "其他对象",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0489 L0024-L0031"
+    ]
+   },
+   {
+    "type": "string",
+    "value": "DeleteFileA",
+    "role": "其他对象",
+    "specificity": "context",
+    "note": "",
+    "evidence": [
+     "F-0486 L0005-L0011"
+    ]
+   }
+  ],
+  "network": [],
+  "network_empty_reason": "暂无网络指标或相关对象。"
+ },
+ "detection": [
+  {
+   "type": "steps",
+   "items": [
+    {
+     "title": "监控凭据访问与解密组合行为",
+     "text": "检测进程对 `CredEnumerateA`、`CryptUnprotectData`、`LsaRetrievePrivateData`、RAS 凭据 API、Protected Storage 或 NSS/PK11 解密的组合使用，尤其关注其与浏览器数据路径、固定 GUID 可选熵及临时目录输出的同一进程关联。"
+    },
+    {
+     "title": "监控固定临时文件与互斥体",
+     "text": "在临时目录监控 `NOIP.abc`、`MSN.abc`、`FIREFOX.abc`、`IELOGIN.abc`、`IEPASS.abc`、`IEAUTO.abc`、`IEWEB.abc`、`xxxyyyzzz.dat` 和 `XX--XX--XX.txt` 的创建或写入，并关联 `_x_X_PASSWORDLIST_X_x_` 等互斥体。"
+    },
+    {
+     "title": "监控跨进程映射链",
+     "text": "重点检测同一进程连续执行 `VirtualAllocEx`、`WriteProcessMemory`、PE 重定位/导入处理和 `CreateRemoteThread`，以及针对 explorer.exe 或 `Shell_TrayWnd` 所属进程的目标句柄操作。"
+    },
+    {
+     "title": "核查持久化注册表位置",
+     "text": "检查 HKLM/HKCU 的 `Software\\Microsoft\\Windows\\CurrentVersion\\Run`、`Policies\\Explorer\\Run` 及 Active Setup `StubPath` 的新增或修改，并关联样本进程、启动路径和 `Restart` 字符串。"
+    }
+   ]
+  }
+ ],
+ "response": [
+  {
+   "title": "立即隔离并保护凭据",
+   "text": "将相关主机从网络和共享环境隔离，避免收集结果继续被使用；对浏览器、Windows Credential Manager、RAS、No-IP 和相关业务账户凭据执行轮换，并保留原始证据后再清理。"
+  },
+  {
+   "title": "排查持久化与注入痕迹",
+   "text": "核查 Run、Policies\\Explorer\\Run、Active Setup、临时目录固定文件、异常 explorer.exe/其他宿主进程、远程线程和跨进程内存写入记录；在确认取证完成后移除恶意持久化项。"
+  },
+  {
+   "title": "结合环境探测行为复核分析结果",
+   "text": "由于样本可在命中沙箱、虚拟机或调试器探测时退出，应将静态结论与终端遥测、注册表和文件系统时间线交叉核对，避免仅以未命中探测或未见写入成功否定其能力。"
+  }
+ ],
+ "gaps": [
+  {
+   "gap": "七个 .abc 输出及相关暂存文件的部分数据来源、字段语义和最终写入内容尚未完全闭合。",
+   "impact": "会影响对各输出文件敏感信息种类及收集范围的精确判断，但不改变样本已具备多类凭据访问和文件暂存能力的结论。",
+   "blocking": false
+  },
+  {
+   "gap": "`XX--XX--XX.txt` 的组装数据字段和下游用途仍未完全确定。",
+   "impact": "会影响对该文件是否承载特定敏感数据或配置的判断。",
+   "blocking": false
+  },
+  {
+   "gap": "hook 回调的完整输入拦截或阻断语义、完成条件和运行时注册成功状态尚未闭合。",
+   "impact": "不能将该路径进一步定性为键盘记录或确定的输入阻断，但已确认系统级 hook 注册尝试。",
+   "blocking": false
+  },
+  {
+   "gap": "Firefox helper 的返回组装与 FIREFOX.abc 中实际写入字段仍未完全确定。",
+   "impact": "会影响对 Firefox 输出是否始终为成功解密凭据的判断。",
+   "blocking": false
+  },
+  {
+   "gap": "Active Setup 辅助执行分支中的 `sub_405AD8`、`sub_406878` 及条件变量语义未解析。",
+   "impact": "不能确认该分支是否实际启动或执行文件。",
+   "blocking": false
+  },
+  {
+   "gap": "远程映射和线程链的运行时成功状态、具体映像来源及最终入口执行效果未由静态材料证明。",
+   "impact": "不影响对跨进程执行能力的判断，但限制了对实际载荷和运行时影响的确认。",
+   "blocking": false
+  },
+  {
+   "gap": "Run 与 Policies\\Explorer\\Run 路径中主写入 helper `sub_406088` 的具体副作用尚未闭合；仅附加的注册表写入分支已直接可见。",
+   "impact": "会影响对各持久化位置是否均实际写入以及写入数据内容的精确判断，但不改变样本具备相关注册表操作路径的结论。",
+   "blocking": false
+  }
+ ],
+ "functions": [],
+ "final": "综合现有事实，样本的主要目的可判断为收集本机凭据与浏览器数据，并通过临时文件整理结果；同时具备持久化、反分析、文件清理和跨进程映射/远程线程执行能力。部分 helper、配置字段和运行时成功结果尚未闭合，因此报告保留对具体输出内容及实际执行结果的限定，但不改变其 critical 风险等级。"
+}
+</script>
+</body>
+</html>

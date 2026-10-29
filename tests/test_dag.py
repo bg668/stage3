@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from bounded_investigator.dag import DagManifest, load_manifest, render_dependency_handoffs
+from bounded_investigator.orchestration.dag import DagManifest, load_manifest, render_dependency_handoffs
 from bounded_investigator.schemas import (
     ArtifactFinding,
     BehaviorClaim,

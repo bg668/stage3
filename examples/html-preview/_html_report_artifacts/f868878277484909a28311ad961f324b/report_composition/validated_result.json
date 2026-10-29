@@ -1,0 +1,245 @@
+{
+  "summary": [
+    {
+      "text": "配置资源解码后写入本地文件；发送开关开启时，程序读取该文件并提交至指定端点。",
+      "claim_ids": [
+        "G:C001",
+        "G:C002",
+        "G:C003"
+      ],
+      "artifact_ids": []
+    },
+    {
+      "text": "另有受配置模式值控制的间接调用，可能扩展数据处理方式，其具体用途尚未明确。",
+      "claim_ids": [
+        "G:C004"
+      ],
+      "artifact_ids": []
+    }
+  ],
+  "verdict": {
+    "text": "具备配置落地与条件网络提交机制，并存在用途未闭合的模式调用。",
+    "claim_ids": [
+      "G:C002",
+      "G:C003",
+      "G:C004"
+    ],
+    "artifact_ids": []
+  },
+  "risk": "medium",
+  "risk_judgement": {
+    "text": "网络提交使配置内容具备离开本机的路径；影响取决于配置内容与发送开关，应优先核对这两项。",
+    "claim_ids": [
+      "G:C003"
+    ],
+    "artifact_ids": []
+  },
+  "chain": [
+    {
+      "name": "解码资源",
+      "action": "配置解码失败则返回；成功后继续处理。",
+      "claim_ids": [
+        "G:C001"
+      ],
+      "phase": "配置准备",
+      "key": false
+    },
+    {
+      "name": "写出配置",
+      "action": "将解码后的配置缓冲区保存到本地路径。",
+      "claim_ids": [
+        "G:C002"
+      ],
+      "phase": "数据落地",
+      "key": false
+    },
+    {
+      "name": "条件提交",
+      "action": "发送开关开启时读取已写出的文件并提交。",
+      "claim_ids": [
+        "G:C003"
+      ],
+      "phase": "外部提交",
+      "key": true
+    }
+  ],
+  "sections": [
+    {
+      "title": "资源配置如何落地并驱动后续流程",
+      "question": "配置来自哪里，如何进入后续数据流？",
+      "blocks": [
+        {
+          "text": "主流程先读取具名资源并解码。只有配置解码成功才创建文件，写出的缓冲区随后成为网络提交的数据来源。",
+          "claim_ids": [
+            "G:C001",
+            "G:C002",
+            "G:C003"
+          ],
+          "artifact_ids": [],
+          "type": "paragraph"
+        },
+        {
+          "type": "kv",
+          "items": [
+            {
+              "label": "配置资源",
+              "value": {
+                "fact_id": "G:A003",
+                "field": "value"
+              }
+            },
+            {
+              "label": "落地路径",
+              "value": {
+                "fact_id": "G:A001",
+                "field": "value"
+              }
+            }
+          ],
+          "mono": true
+        },
+        {
+          "type": "code",
+          "claim_id": "G:C002",
+          "excerpt_index": 0,
+          "caption": "配置写入的关键步骤"
+        }
+      ]
+    },
+    {
+      "title": "发送开关如何控制配置提交",
+      "question": "何时发送，发送的数据来自哪里？",
+      "blocks": [
+        {
+          "text": "提交逻辑位于 send_enabled 分支：请求体通过读取落地配置文件取得，目标端点在分支内指定。该条件将本地写出与网络提交连接起来。",
+          "claim_ids": [
+            "G:C002",
+            "G:C003"
+          ],
+          "artifact_ids": [],
+          "type": "paragraph"
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "检查发送条件",
+              "content": {
+                "fact_id": "G:C003",
+                "field": "condition"
+              }
+            },
+            {
+              "title": "读取待提交数据",
+              "content": {
+                "fact_id": "G:C003",
+                "field": "source"
+              }
+            },
+            {
+              "title": "提交至目标端点",
+              "content": {
+                "fact_id": "G:A002",
+                "field": "value"
+              }
+            }
+          ]
+        },
+        {
+          "type": "code",
+          "claim_id": "G:C003",
+          "excerpt_index": 0,
+          "caption": "开关、请求体与端点的对应关系"
+        }
+      ]
+    },
+    {
+      "title": "额外处理模式的用途尚未闭合",
+      "question": "模式2分支与主要流程是什么关系？",
+      "blocks": [
+        {
+          "text": "配置模式值为2时，程序解析一个目标函数并传入配置对象调用。这可能承担额外的数据处理，但目标例程未恢复，暂不能确定其作用或与提交流程的联系。",
+          "claim_ids": [
+            "G:C004"
+          ],
+          "artifact_ids": [],
+          "type": "paragraph"
+        },
+        {
+          "text": "当前可见的是条件分支和间接调用，后续应恢复目标例程以明确模式2承担的工作。",
+          "claim_ids": [
+            "G:C004"
+          ],
+          "artifact_ids": [],
+          "type": "callout",
+          "tone": "boundary",
+          "label": "待明确的关系"
+        }
+      ]
+    }
+  ],
+  "detection": [
+    {
+      "text": "关联同一进程的配置文件写入、随后读取与请求活动，重点核对发送开关及请求体来源。",
+      "claim_ids": [
+        "G:C002",
+        "G:C003"
+      ],
+      "artifact_ids": [],
+      "title": "关联本地配置与外部提交"
+    },
+    {
+      "text": "结合配置资源名、落地路径及提交端点检索，按具体对象用途进行比对。",
+      "claim_ids": [],
+      "artifact_ids": [
+        "G:A001",
+        "G:A002",
+        "G:A003"
+      ],
+      "title": "核对关联对象"
+    }
+  ],
+  "response": [
+    {
+      "text": "保全落地配置，核对其内容、关联进程及写入时间。",
+      "claim_ids": [],
+      "artifact_ids": [
+        "G:A001"
+      ],
+      "title": "保全配置与进程线索"
+    },
+    {
+      "text": "结合发送开关与端点访问记录核查哪些配置数据具备外部提交路径。",
+      "claim_ids": [
+        "G:C003"
+      ],
+      "artifact_ids": [],
+      "title": "确认提交范围"
+    },
+    {
+      "text": "明确模式2调用的实现及输入输出，再判断其与主要机制的联系。",
+      "claim_ids": [
+        "G:C004"
+      ],
+      "artifact_ids": [],
+      "title": "恢复模式调用目标"
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "R:G001",
+      "impact": "影响额外处理能力及其与主流程关系的判断。",
+      "blocking": false
+    }
+  ],
+  "final": {
+    "text": "优先核对配置内容和发送条件，随后恢复模式2目标例程，补全对主要数据流与辅助能力的整体理解。",
+    "claim_ids": [
+      "G:C001",
+      "G:C002",
+      "G:C003",
+      "G:C004"
+    ],
+    "artifact_ids": []
+  }
+}

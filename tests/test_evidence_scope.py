@@ -5,7 +5,7 @@ import json
 import pytest
 from pydantic import ValidationError
 
-from bounded_investigator.evidence_scope import (
+from bounded_investigator.evidence.scope import (
     EvidenceScope, MaterialScopeItem, PacketCoverage,
     load_evidence_scope, packet_coverage_from_directory, packet_coverage_from_results,
 )

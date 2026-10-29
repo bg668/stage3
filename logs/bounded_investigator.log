@@ -5129,3 +5129,839 @@ pydantic_ai.exceptions.ModelAPIError: Server disconnected
 2026-10-21 10:46:58 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
 2026-10-21 15:50:27 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1693\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
 2026-10-21 15:50:27 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-26 12:52:23 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1763\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-26 12:52:23 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-26 12:56:52 | INFO    | batch=start packets=16 concurrency=1 input_dir=testdata\packets output_dir=results pattern=J*.md mode=dag manifest=testdata\manifest.json
+2026-10-26 12:56:52 | INFO    | batch=dag_start jobs=16 concurrency=1 manifest=testdata\manifest.json purpose=example3 bounded-investigation agent test
+2026-10-26 12:56:52 | INFO    | batch=dag_worker_start packet=J00 title=共同调用者：模式分派与输出绑定 dependencies=[] dependency_context_chars=4 chars=10209
+2026-10-26 12:56:52 | INFO    | packet=J00 start chars=10209 dependencies=[] dependency_context_chars=4 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 12:56:52 | INFO    | packet=J00 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 12:57:15 | INFO    | packet=J00 stage=analyzer done elapsed=23.2s requests=1 input_tokens=6803 output_tokens=3416 reasoning_tokens=385 visible_output_tokens=3031 total_tokens=10219
+2026-10-26 12:57:15 | INFO    | packet=J00 stage=analyzer result status=complete_with_gaps claims=2 artifacts=11 gaps=3 handoffs=2
+2026-10-26 12:57:15 | INFO    | packet=J00 stage=evidence_validation analyzer_valid=24 deferred_cross_packet=0 invalid=0
+2026-10-26 12:57:15 | INFO    | packet=J00 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 12:57:33 | INFO    | packet=J00 stage=reviewer done elapsed=17.8s requests=1 input_tokens=10582 output_tokens=2174 reasoning_tokens=1247 visible_output_tokens=927 total_tokens=12756
+2026-10-26 12:57:33 | INFO    | packet=J00 stage=reviewer result requires_revision=True issues=2 major_or_critical=1
+2026-10-26 12:57:33 | INFO    | packet=J00 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 12:57:57 | INFO    | packet=J00 stage=reviser done elapsed=24.1s requests=1 input_tokens=11754 output_tokens=4258 reasoning_tokens=244 visible_output_tokens=4014 total_tokens=16012
+2026-10-26 12:57:57 | INFO    | packet=J00 stage=reviser result status=complete_with_gaps claims=3 artifacts=12 gaps=3 handoffs=2 ignored_changes=1
+2026-10-26 12:57:57 | INFO    | packet=J00 stage=evidence_validation final_valid=28 deferred_cross_packet=0 invalid=0
+2026-10-26 12:57:57 | INFO    | packet=J00 complete elapsed=65.2s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=38987 reasoning_tokens=1876 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=12
+2026-10-26 12:57:57 | INFO    | batch=dag_worker_done packet=J00 output=J00.json
+2026-10-26 12:57:57 | INFO    | batch=dag_progress completed=1/16 succeeded=1 failed=0 running=0 pending=15 elapsed=65.2s
+2026-10-26 12:57:57 | INFO    | batch=dag_worker_start packet=J01 title=共享运行时语义摘要 dependencies=['J00'] dependency_context_chars=4249 chars=11558
+2026-10-26 12:57:57 | INFO    | packet=J01 start chars=11558 dependencies=['J00'] dependency_context_chars=4249 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 12:57:57 | INFO    | packet=J01 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 12:58:11 | INFO    | packet=J01 stage=analyzer done elapsed=13.8s requests=1 input_tokens=9653 output_tokens=1945 reasoning_tokens=516 visible_output_tokens=1429 total_tokens=11598
+2026-10-26 12:58:11 | INFO    | packet=J01 stage=analyzer result status=complete_with_gaps claims=1 artifacts=2 gaps=3 handoffs=2
+2026-10-26 12:58:11 | INFO    | packet=J01 stage=evidence_validation analyzer_valid=3 deferred_cross_packet=2 invalid=0
+2026-10-26 12:58:11 | INFO    | packet=J01 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 12:58:16 | INFO    | packet=J01 stage=reviewer done elapsed=4.5s requests=1 input_tokens=11836 output_tokens=439 reasoning_tokens=252 visible_output_tokens=187 total_tokens=12275
+2026-10-26 12:58:16 | INFO    | packet=J01 stage=reviewer result requires_revision=False issues=0 major_or_critical=0
+2026-10-26 12:58:16 | INFO    | packet=J01 stage=reviser skipped reason=no_major_internal_issue
+2026-10-26 12:58:16 | INFO    | packet=J01 stage=evidence_validation final_valid=3 deferred_cross_packet=2 invalid=0
+2026-10-26 12:58:16 | INFO    | packet=J01 complete elapsed=18.3s delivery_status=success revision=False revision_failed=False requests=2 total_tokens=23873 reasoning_tokens=768 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=1 artifacts=2
+2026-10-26 12:58:16 | INFO    | batch=dag_worker_done packet=J01 output=J01.json
+2026-10-26 12:58:16 | INFO    | batch=dag_progress completed=2/16 succeeded=2 failed=0 running=0 pending=14 elapsed=83.6s
+2026-10-26 12:58:16 | INFO    | batch=dag_worker_start packet=J02 title=配置读取、转换与写回 dependencies=['J00', 'J01'] dependency_context_chars=6032 chars=13034
+2026-10-26 12:58:16 | INFO    | packet=J02 start chars=13034 dependencies=['J00', 'J01'] dependency_context_chars=6032 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 12:58:16 | INFO    | packet=J02 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 12:58:37 | INFO    | packet=J02 stage=analyzer done elapsed=21.3s requests=1 input_tokens=11708 output_tokens=3017 reasoning_tokens=516 visible_output_tokens=2501 total_tokens=14725
+2026-10-26 12:58:37 | INFO    | packet=J02 stage=analyzer result status=complete_with_gaps claims=2 artifacts=4 gaps=3 handoffs=2
+2026-10-26 12:58:37 | INFO    | packet=J02 stage=evidence_validation analyzer_valid=18 deferred_cross_packet=2 invalid=0
+2026-10-26 12:58:37 | INFO    | packet=J02 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 12:58:52 | INFO    | packet=J02 stage=reviewer done elapsed=14.8s requests=1 input_tokens=14931 output_tokens=1656 reasoning_tokens=1188 visible_output_tokens=468 total_tokens=16587
+2026-10-26 12:58:52 | INFO    | packet=J02 stage=reviewer result requires_revision=True issues=1 major_or_critical=1
+2026-10-26 12:58:52 | INFO    | packet=J02 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 12:59:08 | INFO    | packet=J02 stage=reviser done elapsed=15.9s requests=1 input_tokens=15683 output_tokens=2810 reasoning_tokens=150 visible_output_tokens=2660 total_tokens=18493
+2026-10-26 12:59:08 | INFO    | packet=J02 stage=reviser result status=complete_with_gaps claims=2 artifacts=4 gaps=3 handoffs=2 ignored_changes=4
+2026-10-26 12:59:08 | INFO    | packet=J02 stage=evidence_validation final_valid=19 deferred_cross_packet=2 invalid=0
+2026-10-26 12:59:08 | INFO    | packet=J02 complete elapsed=52.0s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=49805 reasoning_tokens=1854 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=4
+2026-10-26 12:59:08 | INFO    | batch=dag_worker_done packet=J02 output=J02.json
+2026-10-26 12:59:08 | INFO    | batch=dag_worker_start packet=J03 title=环境检查与输入分支 dependencies=['J00', 'J01'] dependency_context_chars=6032 chars=15479
+2026-10-26 12:59:08 | INFO    | packet=J03 start chars=15479 dependencies=['J00', 'J01'] dependency_context_chars=6032 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 12:59:08 | INFO    | packet=J03 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 12:59:08 | INFO    | batch=dag_progress completed=3/16 succeeded=3 failed=0 running=8 pending=5 elapsed=135.6s
+2026-10-26 12:59:35 | INFO    | packet=J03 stage=analyzer done elapsed=27.1s requests=1 input_tokens=12530 output_tokens=3875 reasoning_tokens=516 visible_output_tokens=3359 total_tokens=16405
+2026-10-26 12:59:35 | INFO    | packet=J03 stage=analyzer result status=complete_with_gaps claims=5 artifacts=10 gaps=3 handoffs=2
+2026-10-26 12:59:35 | INFO    | packet=J03 stage=evidence_validation analyzer_valid=28 deferred_cross_packet=2 invalid=0
+2026-10-26 12:59:35 | INFO    | packet=J03 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:00:01 | INFO    | packet=J03 stage=reviewer done elapsed=26.8s requests=1 input_tokens=16637 output_tokens=3274 reasoning_tokens=2412 visible_output_tokens=862 total_tokens=19911
+2026-10-26 13:00:01 | INFO    | packet=J03 stage=reviewer result requires_revision=True issues=2 major_or_critical=1
+2026-10-26 13:00:01 | INFO    | packet=J03 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:00:24 | INFO    | packet=J03 stage=reviser done elapsed=22.2s requests=1 input_tokens=17878 output_tokens=3939 reasoning_tokens=304 visible_output_tokens=3635 total_tokens=21817
+2026-10-26 13:00:24 | INFO    | packet=J03 stage=reviser result status=complete_with_gaps claims=5 artifacts=10 gaps=3 handoffs=2 ignored_changes=0
+2026-10-26 13:00:24 | INFO    | packet=J03 stage=evidence_validation final_valid=28 deferred_cross_packet=2 invalid=0
+2026-10-26 13:00:24 | INFO    | packet=J03 complete elapsed=76.0s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=58133 reasoning_tokens=3232 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=5 artifacts=10
+2026-10-26 13:00:24 | INFO    | batch=dag_worker_done packet=J03 output=J03.json
+2026-10-26 13:00:24 | INFO    | batch=dag_worker_start packet=J04 title=安装、自复制、注册表写入 dependencies=['J00', 'J01'] dependency_context_chars=6032 chars=15623
+2026-10-26 13:00:24 | INFO    | packet=J04 start chars=15623 dependencies=['J00', 'J01'] dependency_context_chars=6032 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:00:24 | INFO    | packet=J04 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:00:24 | INFO    | batch=dag_progress completed=4/16 succeeded=4 failed=0 running=7 pending=5 elapsed=211.6s
+2026-10-26 13:00:53 | INFO    | packet=J04 stage=analyzer done elapsed=29.5s requests=1 input_tokens=12290 output_tokens=4230 reasoning_tokens=688 visible_output_tokens=3542 total_tokens=16520
+2026-10-26 13:00:53 | INFO    | packet=J04 stage=analyzer result status=complete_with_gaps claims=5 artifacts=7 gaps=3 handoffs=2
+2026-10-26 13:00:53 | INFO    | packet=J04 stage=evidence_validation analyzer_valid=22 deferred_cross_packet=0 invalid=0
+2026-10-26 13:00:53 | INFO    | packet=J04 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:01:14 | INFO    | packet=J04 stage=reviewer done elapsed=20.7s requests=1 input_tokens=16557 output_tokens=2563 reasoning_tokens=1916 visible_output_tokens=647 total_tokens=19120
+2026-10-26 13:01:14 | INFO    | packet=J04 stage=reviewer result requires_revision=True issues=2 major_or_critical=1
+2026-10-26 13:01:14 | INFO    | packet=J04 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:01:34 | INFO    | packet=J04 stage=reviser done elapsed=20.7s requests=1 input_tokens=17545 output_tokens=3825 reasoning_tokens=116 visible_output_tokens=3709 total_tokens=21370
+2026-10-26 13:01:34 | INFO    | packet=J04 stage=reviser result status=complete_with_gaps claims=5 artifacts=7 gaps=3 handoffs=2 ignored_changes=5
+2026-10-26 13:01:34 | INFO    | packet=J04 stage=evidence_validation final_valid=23 deferred_cross_packet=0 invalid=0
+2026-10-26 13:01:34 | INFO    | packet=J04 complete elapsed=70.8s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=57010 reasoning_tokens=2720 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=5 artifacts=7
+2026-10-26 13:01:34 | INFO    | batch=dag_worker_done packet=J04 output=J04.json
+2026-10-26 13:01:34 | INFO    | batch=dag_worker_start packet=J06 title=No-IP 与 Windows Live 数据提取 dependencies=['J00', 'J01'] dependency_context_chars=6032 chars=12325
+2026-10-26 13:01:34 | INFO    | packet=J06 start chars=12325 dependencies=['J00', 'J01'] dependency_context_chars=6032 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:01:34 | INFO    | packet=J06 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:01:34 | INFO    | batch=dag_progress completed=5/16 succeeded=5 failed=0 running=6 pending=5 elapsed=282.5s
+2026-10-26 13:01:58 | INFO    | packet=J06 stage=analyzer done elapsed=23.1s requests=1 input_tokens=10842 output_tokens=3172 reasoning_tokens=330 visible_output_tokens=2842 total_tokens=14014
+2026-10-26 13:01:58 | INFO    | packet=J06 stage=analyzer result status=complete_with_gaps claims=3 artifacts=7 gaps=3 handoffs=2
+2026-10-26 13:01:58 | INFO    | packet=J06 stage=evidence_validation analyzer_valid=16 deferred_cross_packet=2 invalid=0
+2026-10-26 13:01:58 | INFO    | packet=J06 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:02:21 | INFO    | packet=J06 stage=reviewer done elapsed=22.9s requests=1 input_tokens=14436 output_tokens=2890 reasoning_tokens=1784 visible_output_tokens=1106 total_tokens=17326
+2026-10-26 13:02:21 | INFO    | packet=J06 stage=reviewer result requires_revision=True issues=3 major_or_critical=2
+2026-10-26 13:02:21 | INFO    | packet=J06 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:02:39 | INFO    | packet=J06 stage=reviser done elapsed=18.5s requests=1 input_tokens=15856 output_tokens=3194 reasoning_tokens=169 visible_output_tokens=3025 total_tokens=19050
+2026-10-26 13:02:39 | INFO    | packet=J06 stage=reviser result status=complete_with_gaps claims=3 artifacts=7 gaps=3 handoffs=2 ignored_changes=6
+2026-10-26 13:02:39 | INFO    | packet=J06 stage=evidence_validation final_valid=16 deferred_cross_packet=2 invalid=0
+2026-10-26 13:02:39 | INFO    | packet=J06 complete elapsed=64.5s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=50390 reasoning_tokens=2283 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=7
+2026-10-26 13:02:39 | INFO    | batch=dag_worker_done packet=J06 output=J06.json
+2026-10-26 13:02:39 | INFO    | batch=dag_worker_start packet=J07 title=RAS 收集与私有数据 dependencies=['J00', 'J01'] dependency_context_chars=6032 chars=16804
+2026-10-26 13:02:39 | INFO    | packet=J07 start chars=16804 dependencies=['J00', 'J01'] dependency_context_chars=6032 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:02:39 | INFO    | packet=J07 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:02:39 | INFO    | batch=dag_progress completed=6/16 succeeded=6 failed=0 running=6 pending=4 elapsed=347.0s
+2026-10-26 13:03:01 | INFO    | packet=J07 stage=analyzer done elapsed=22.1s requests=1 input_tokens=12753 output_tokens=3209 reasoning_tokens=516 visible_output_tokens=2693 total_tokens=15962
+2026-10-26 13:03:01 | INFO    | packet=J07 stage=analyzer result status=complete_with_gaps claims=3 artifacts=5 gaps=3 handoffs=2
+2026-10-26 13:03:01 | INFO    | packet=J07 stage=evidence_validation analyzer_valid=19 deferred_cross_packet=0 invalid=0
+2026-10-26 13:03:01 | INFO    | packet=J07 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:03:35 | INFO    | packet=J07 stage=reviewer done elapsed=34.3s requests=1 input_tokens=16148 output_tokens=4392 reasoning_tokens=3164 visible_output_tokens=1228 total_tokens=20540
+2026-10-26 13:03:35 | INFO    | packet=J07 stage=reviewer result requires_revision=True issues=3 major_or_critical=3
+2026-10-26 13:03:35 | INFO    | packet=J07 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:03:58 | INFO    | packet=J07 stage=reviser done elapsed=22.3s requests=1 input_tokens=17682 output_tokens=3419 reasoning_tokens=438 visible_output_tokens=2981 total_tokens=21101
+2026-10-26 13:03:58 | WARNING | packet=J07 stage=reviser recovery=preserve_analyzer_result scope_error=candidate list length disagrees with declared edits: claims
+2026-10-26 13:03:58 | INFO    | packet=J07 stage=evidence_validation final_valid=19 deferred_cross_packet=0 invalid=0
+2026-10-26 13:03:58 | INFO    | packet=J07 complete elapsed=78.7s delivery_status=success revision=False revision_failed=True requests=3 total_tokens=57603 reasoning_tokens=4118 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=5
+2026-10-26 13:03:58 | INFO    | batch=dag_worker_done packet=J07 output=J07.json
+2026-10-26 13:03:58 | INFO    | batch=dag_worker_start packet=J08 title=Protected Storage 收集 dependencies=['J00', 'J01'] dependency_context_chars=6032 chars=16423
+2026-10-26 13:03:58 | INFO    | packet=J08 start chars=16423 dependencies=['J00', 'J01'] dependency_context_chars=6032 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:03:58 | INFO    | packet=J08 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:03:58 | INFO    | batch=dag_progress completed=7/16 succeeded=7 failed=0 running=5 pending=4 elapsed=425.8s
+2026-10-26 13:04:13 | INFO    | packet=J08 stage=analyzer done elapsed=15.1s requests=1 input_tokens=13040 output_tokens=1975 reasoning_tokens=516 visible_output_tokens=1459 total_tokens=15015
+2026-10-26 13:04:13 | INFO    | packet=J08 stage=analyzer result status=complete_with_gaps claims=1 artifacts=2 gaps=3 handoffs=2
+2026-10-26 13:04:13 | INFO    | packet=J08 stage=evidence_validation analyzer_valid=8 deferred_cross_packet=0 invalid=0
+2026-10-26 13:04:13 | INFO    | packet=J08 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:04:24 | INFO    | packet=J08 stage=reviewer done elapsed=10.7s requests=1 input_tokens=15183 output_tokens=1024 reasoning_tokens=502 visible_output_tokens=522 total_tokens=16207
+2026-10-26 13:04:24 | INFO    | packet=J08 stage=reviewer result requires_revision=True issues=1 major_or_critical=1
+2026-10-26 13:04:24 | INFO    | packet=J08 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:04:35 | INFO    | packet=J08 stage=reviser done elapsed=11.3s requests=1 input_tokens=15982 output_tokens=1669 reasoning_tokens=104 visible_output_tokens=1565 total_tokens=17651
+2026-10-26 13:04:35 | INFO    | packet=J08 stage=reviser result status=complete_with_gaps claims=1 artifacts=2 gaps=3 handoffs=2 ignored_changes=10
+2026-10-26 13:04:35 | INFO    | packet=J08 stage=evidence_validation final_valid=8 deferred_cross_packet=0 invalid=0
+2026-10-26 13:04:35 | INFO    | packet=J08 complete elapsed=37.2s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=48873 reasoning_tokens=1122 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=1 artifacts=2
+2026-10-26 13:04:35 | INFO    | batch=dag_worker_done packet=J08 output=J08.json
+2026-10-26 13:04:35 | INFO    | batch=dag_worker_start packet=J09 title=Storage2 及 URL 派生 dependencies=['J00', 'J01'] dependency_context_chars=6032 chars=16367
+2026-10-26 13:04:35 | INFO    | packet=J09 start chars=16367 dependencies=['J00', 'J01'] dependency_context_chars=6032 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:04:35 | INFO    | packet=J09 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:04:35 | INFO    | batch=dag_progress completed=8/16 succeeded=8 failed=0 running=4 pending=4 elapsed=463.0s
+2026-10-26 13:04:56 | INFO    | packet=J09 stage=analyzer done elapsed=21.4s requests=1 input_tokens=12919 output_tokens=2845 reasoning_tokens=516 visible_output_tokens=2329 total_tokens=15764
+2026-10-26 13:04:56 | INFO    | packet=J09 stage=analyzer result status=complete_with_gaps claims=2 artifacts=4 gaps=3 handoffs=1
+2026-10-26 13:04:56 | INFO    | packet=J09 stage=evidence_validation analyzer_valid=18 deferred_cross_packet=0 invalid=0
+2026-10-26 13:04:56 | INFO    | packet=J09 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:05:14 | INFO    | packet=J09 stage=reviewer done elapsed=18.0s requests=1 input_tokens=15921 output_tokens=2219 reasoning_tokens=1281 visible_output_tokens=938 total_tokens=18140
+2026-10-26 13:05:14 | INFO    | packet=J09 stage=reviewer result requires_revision=True issues=2 major_or_critical=1
+2026-10-26 13:05:14 | INFO    | packet=J09 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:05:32 | INFO    | packet=J09 stage=reviser done elapsed=17.8s requests=1 input_tokens=17296 output_tokens=2895 reasoning_tokens=250 visible_output_tokens=2645 total_tokens=20191
+2026-10-26 13:05:32 | INFO    | packet=J09 stage=reviser result status=complete_with_gaps claims=2 artifacts=5 gaps=3 handoffs=1 ignored_changes=0
+2026-10-26 13:05:32 | INFO    | packet=J09 stage=evidence_validation final_valid=22 deferred_cross_packet=0 invalid=0
+2026-10-26 13:05:32 | INFO    | packet=J09 complete elapsed=57.2s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=54095 reasoning_tokens=2047 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=5
+2026-10-26 13:05:32 | INFO    | batch=dag_worker_done packet=J09 output=J09.json
+2026-10-26 13:05:32 | INFO    | batch=dag_worker_start packet=J11 title=Firefox 前半：定位及初始化 dependencies=['J00', 'J01'] dependency_context_chars=6032 chars=14690
+2026-10-26 13:05:32 | INFO    | packet=J11 start chars=14690 dependencies=['J00', 'J01'] dependency_context_chars=6032 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:05:32 | INFO    | packet=J11 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:05:32 | INFO    | batch=dag_progress completed=9/16 succeeded=9 failed=0 running=3 pending=4 elapsed=520.2s
+2026-10-26 13:05:54 | INFO    | packet=J11 stage=analyzer done elapsed=21.8s requests=1 input_tokens=10832 output_tokens=3040 reasoning_tokens=701 visible_output_tokens=2339 total_tokens=13872
+2026-10-26 13:05:54 | INFO    | packet=J11 stage=analyzer result status=complete_with_gaps claims=2 artifacts=7 gaps=3 handoffs=2
+2026-10-26 13:05:54 | INFO    | packet=J11 stage=evidence_validation analyzer_valid=17 deferred_cross_packet=0 invalid=0
+2026-10-26 13:05:54 | INFO    | packet=J11 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:06:16 | INFO    | packet=J11 stage=reviewer done elapsed=22.0s requests=1 input_tokens=13882 output_tokens=2628 reasoning_tokens=1567 visible_output_tokens=1061 total_tokens=16510
+2026-10-26 13:06:16 | INFO    | packet=J11 stage=reviewer result requires_revision=True issues=3 major_or_critical=1
+2026-10-26 13:06:16 | INFO    | packet=J11 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:06:33 | INFO    | packet=J11 stage=reviser done elapsed=16.5s requests=1 input_tokens=15273 output_tokens=2665 reasoning_tokens=261 visible_output_tokens=2404 total_tokens=17938
+2026-10-26 13:06:33 | WARNING | packet=J11 stage=reviser recovery=preserve_analyzer_result scope_error=candidate list length disagrees with declared edits: claims
+2026-10-26 13:06:33 | INFO    | packet=J11 stage=evidence_validation final_valid=17 deferred_cross_packet=0 invalid=0
+2026-10-26 13:06:33 | INFO    | packet=J11 complete elapsed=60.3s delivery_status=success revision=False revision_failed=True requests=3 total_tokens=48320 reasoning_tokens=2529 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=7
+2026-10-26 13:06:33 | INFO    | batch=dag_worker_done packet=J11 output=J11.json
+2026-10-26 13:06:33 | INFO    | batch=dag_worker_start packet=J13 title=宿主选择与 PE 映射主路径 dependencies=['J00', 'J01'] dependency_context_chars=6032 chars=13372
+2026-10-26 13:06:33 | INFO    | packet=J13 start chars=13372 dependencies=['J00', 'J01'] dependency_context_chars=6032 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:06:33 | INFO    | packet=J13 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:06:33 | INFO    | batch=dag_progress completed=10/16 succeeded=10 failed=0 running=3 pending=3 elapsed=580.5s
+2026-10-26 13:07:01 | INFO    | packet=J13 stage=analyzer done elapsed=28.0s requests=1 input_tokens=11228 output_tokens=3066 reasoning_tokens=541 visible_output_tokens=2525 total_tokens=14294
+2026-10-26 13:07:01 | INFO    | packet=J13 stage=analyzer result status=complete_with_gaps claims=3 artifacts=3 gaps=3 handoffs=2
+2026-10-26 13:07:01 | INFO    | packet=J13 stage=evidence_validation analyzer_valid=18 deferred_cross_packet=0 invalid=0
+2026-10-26 13:07:01 | INFO    | packet=J13 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:07:19 | INFO    | packet=J13 stage=reviewer done elapsed=18.7s requests=1 input_tokens=14469 output_tokens=2285 reasoning_tokens=1587 visible_output_tokens=698 total_tokens=16754
+2026-10-26 13:07:19 | INFO    | packet=J13 stage=reviewer result requires_revision=True issues=2 major_or_critical=2
+2026-10-26 13:07:19 | INFO    | packet=J13 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:07:38 | INFO    | packet=J13 stage=reviser done elapsed=19.3s requests=1 input_tokens=15389 output_tokens=3197 reasoning_tokens=233 visible_output_tokens=2964 total_tokens=18586
+2026-10-26 13:07:38 | INFO    | packet=J13 stage=reviser result status=complete_with_gaps claims=4 artifacts=4 gaps=3 handoffs=2 ignored_changes=2
+2026-10-26 13:07:38 | INFO    | packet=J13 stage=evidence_validation final_valid=19 deferred_cross_packet=0 invalid=0
+2026-10-26 13:07:38 | INFO    | packet=J13 complete elapsed=65.9s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=49634 reasoning_tokens=2361 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=4 artifacts=4
+2026-10-26 13:07:38 | INFO    | batch=dag_worker_done packet=J13 output=J13.json
+2026-10-26 13:07:38 | INFO    | batch=dag_worker_start packet=J05 title=安装路径辅助 dependencies=['J04', 'J01'] dependency_context_chars=6607 chars=8575
+2026-10-26 13:07:38 | INFO    | packet=J05 start chars=8575 dependencies=['J04', 'J01'] dependency_context_chars=6607 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:07:38 | INFO    | packet=J05 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:07:38 | INFO    | batch=dag_progress completed=11/16 succeeded=11 failed=0 running=3 pending=2 elapsed=646.5s
+2026-10-26 13:08:01 | INFO    | packet=J05 stage=analyzer done elapsed=22.5s requests=1 input_tokens=9191 output_tokens=2811 reasoning_tokens=516 visible_output_tokens=2295 total_tokens=12002
+2026-10-26 13:08:01 | INFO    | packet=J05 stage=analyzer result status=complete_with_gaps claims=4 artifacts=3 gaps=3 handoffs=2
+2026-10-26 13:08:01 | INFO    | packet=J05 stage=evidence_validation analyzer_valid=17 deferred_cross_packet=0 invalid=0
+2026-10-26 13:08:01 | INFO    | packet=J05 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:08:13 | INFO    | packet=J05 stage=reviewer done elapsed=11.6s requests=1 input_tokens=12215 output_tokens=1253 reasoning_tokens=819 visible_output_tokens=434 total_tokens=13468
+2026-10-26 13:08:13 | INFO    | packet=J05 stage=reviewer result requires_revision=True issues=1 major_or_critical=1
+2026-10-26 13:08:13 | INFO    | packet=J05 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:08:27 | INFO    | packet=J05 stage=reviser done elapsed=14.3s requests=1 input_tokens=12870 output_tokens=2526 reasoning_tokens=186 visible_output_tokens=2340 total_tokens=15396
+2026-10-26 13:08:27 | INFO    | packet=J05 stage=reviser result status=complete_with_gaps claims=4 artifacts=3 gaps=3 handoffs=2 ignored_changes=1
+2026-10-26 13:08:27 | INFO    | packet=J05 stage=evidence_validation final_valid=17 deferred_cross_packet=0 invalid=0
+2026-10-26 13:08:27 | INFO    | packet=J05 complete elapsed=48.4s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=40866 reasoning_tokens=1521 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=4 artifacts=3
+2026-10-26 13:08:27 | INFO    | batch=dag_worker_done packet=J05 output=J05.json
+2026-10-26 13:08:27 | INFO    | batch=dag_worker_start packet=J10 title=Credential Manager 与可选熵 dependencies=['J00', 'J01', 'J09'] dependency_context_chars=9134 chars=5779
+2026-10-26 13:08:27 | INFO    | packet=J10 start chars=5779 dependencies=['J00', 'J01', 'J09'] dependency_context_chars=9134 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:08:27 | INFO    | packet=J10 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:08:27 | INFO    | batch=dag_progress completed=12/16 succeeded=12 failed=0 running=4 pending=0 elapsed=694.9s
+2026-10-26 13:08:44 | INFO    | packet=J10 stage=analyzer done elapsed=16.7s requests=1 input_tokens=9424 output_tokens=1999 reasoning_tokens=572 visible_output_tokens=1427 total_tokens=11423
+2026-10-26 13:08:44 | INFO    | packet=J10 stage=analyzer result status=complete_with_gaps claims=1 artifacts=3 gaps=2 handoffs=1
+2026-10-26 13:08:44 | INFO    | packet=J10 stage=evidence_validation analyzer_valid=8 deferred_cross_packet=0 invalid=0
+2026-10-26 13:08:44 | INFO    | packet=J10 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:09:01 | WARNING | packet=J10 stage=reviewer structured_output_validation_failed raw_chars=2287 error=UnexpectedModelBehavior: Exceeded maximum output retries (0) caused by: ValidationError: 1 validation error for CoverageReview   Value error, requires_revision must be true iff there is a critical/major packet_internal issue [type=value_error, input_value={'requires_revision': Tru...标地址”表述。'}, input_type=dict]     For further information visit https://errors.pydantic.dev/2.13/v/value_error
+2026-10-26 13:09:01 | WARNING | packet=J10 stage=reviewer format_repair=start attempt=1/3 raw_chars=2287 candidate_chars=2287 error=ValidationError: 1 validation error for CoverageReview   Value error, requires_revision must be true iff there is a critical/major packet_internal issue [type=value_error, input_value={'requires_revision': Tru...标地址”表述。'}, input_type=dict]     For further information visit https://errors.pydantic.dev/2.13/v/value_error
+2026-10-26 13:09:09 | INFO    | packet=J10 stage=reviewer format_repair=attempt_done attempt=1 elapsed=7.5s requests=1 input_tokens=2644 output_tokens=897 reasoning_tokens=27 candidate_chars=2288
+2026-10-26 13:09:09 | INFO    | packet=J10 stage=reviewer format_repair=success attempt=1
+2026-10-26 13:09:09 | INFO    | packet=J10 stage=reviewer done elapsed=25.3s requests=1 input_tokens=11501 output_tokens=2192 reasoning_tokens=1313 visible_output_tokens=879 total_tokens=13693
+2026-10-26 13:09:09 | INFO    | packet=J10 stage=reviewer result requires_revision=False issues=3 major_or_critical=0
+2026-10-26 13:09:09 | INFO    | packet=J10 stage=reviser skipped reason=no_major_internal_issue
+2026-10-26 13:09:09 | INFO    | packet=J10 stage=evidence_validation final_valid=8 deferred_cross_packet=0 invalid=0
+2026-10-26 13:09:09 | INFO    | packet=J10 complete elapsed=42.0s delivery_status=success_after_repair revision=False revision_failed=False requests=3 total_tokens=28657 reasoning_tokens=1912 repair_triggered=1 repair_attempts=1 final_status=complete_with_gaps claims=1 artifacts=3
+2026-10-26 13:09:09 | INFO    | batch=dag_worker_done packet=J10 output=J10.json
+2026-10-26 13:09:09 | INFO    | batch=dag_worker_start packet=J12 title=Firefox 后半：读取、解密与返回 dependencies=['J11', 'J01'] dependency_context_chars=4684 chars=12221
+2026-10-26 13:09:09 | INFO    | packet=J12 start chars=12221 dependencies=['J11', 'J01'] dependency_context_chars=4684 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:09:09 | INFO    | packet=J12 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:09:09 | INFO    | batch=dag_progress completed=13/16 succeeded=13 failed=0 running=3 pending=0 elapsed=736.9s
+2026-10-26 13:09:29 | INFO    | packet=J12 stage=analyzer done elapsed=20.5s requests=1 input_tokens=8271 output_tokens=2744 reasoning_tokens=320 visible_output_tokens=2424 total_tokens=11015
+2026-10-26 13:09:29 | INFO    | packet=J12 stage=analyzer result status=complete_with_gaps claims=2 artifacts=5 gaps=3 handoffs=2
+2026-10-26 13:09:29 | INFO    | packet=J12 stage=evidence_validation analyzer_valid=17 deferred_cross_packet=0 invalid=0
+2026-10-26 13:09:29 | INFO    | packet=J12 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:09:52 | INFO    | packet=J12 stage=reviewer done elapsed=22.6s requests=1 input_tokens=11395 output_tokens=2871 reasoning_tokens=1657 visible_output_tokens=1214 total_tokens=14266
+2026-10-26 13:09:52 | INFO    | packet=J12 stage=reviewer result requires_revision=True issues=4 major_or_critical=2
+2026-10-26 13:09:52 | INFO    | packet=J12 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:10:13 | INFO    | packet=J12 stage=reviser done elapsed=21.1s requests=1 input_tokens=12977 output_tokens=2794 reasoning_tokens=260 visible_output_tokens=2534 total_tokens=15771
+2026-10-26 13:10:13 | INFO    | packet=J12 stage=reviser result status=complete_with_gaps claims=2 artifacts=5 gaps=3 handoffs=2 ignored_changes=16
+2026-10-26 13:10:13 | INFO    | packet=J12 stage=evidence_validation final_valid=17 deferred_cross_packet=0 invalid=0
+2026-10-26 13:10:13 | INFO    | packet=J12 complete elapsed=64.1s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=41052 reasoning_tokens=2237 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=5
+2026-10-26 13:10:13 | INFO    | batch=dag_worker_done packet=J12 output=J12.json
+2026-10-26 13:10:13 | INFO    | batch=dag_worker_start packet=J14 title=PE 导入、重定位及远程辅助 dependencies=['J13', 'J01'] dependency_context_chars=5192 chars=11540
+2026-10-26 13:10:13 | INFO    | packet=J14 start chars=11540 dependencies=['J13', 'J01'] dependency_context_chars=5192 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:10:13 | INFO    | packet=J14 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:10:13 | INFO    | batch=dag_progress completed=14/16 succeeded=14 failed=0 running=2 pending=0 elapsed=801.0s
+2026-10-26 13:10:38 | INFO    | packet=J14 stage=analyzer done elapsed=25.2s requests=1 input_tokens=10117 output_tokens=3479 reasoning_tokens=550 visible_output_tokens=2929 total_tokens=13596
+2026-10-26 13:10:38 | INFO    | packet=J14 stage=analyzer result status=complete_with_gaps claims=4 artifacts=5 gaps=4 handoffs=2
+2026-10-26 13:10:38 | INFO    | packet=J14 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=19
+2026-10-26 13:10:38 | INFO    | packet=J14 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:10:55 | INFO    | packet=J14 stage=reviewer done elapsed=17.1s requests=1 input_tokens=14514 output_tokens=2182 reasoning_tokens=1412 visible_output_tokens=770 total_tokens=16696
+2026-10-26 13:10:55 | INFO    | packet=J14 stage=reviewer result requires_revision=True issues=2 major_or_critical=2
+2026-10-26 13:10:55 | INFO    | packet=J14 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:11:13 | INFO    | packet=J14 stage=reviser done elapsed=18.0s requests=1 input_tokens=15767 output_tokens=3180 reasoning_tokens=245 visible_output_tokens=2935 total_tokens=18947
+2026-10-26 13:11:13 | INFO    | packet=J14 stage=reviser result status=complete_with_gaps claims=4 artifacts=5 gaps=4 handoffs=2 ignored_changes=3
+2026-10-26 13:11:13 | INFO    | packet=J14 stage=evidence_validation final_valid=19 deferred_cross_packet=0 invalid=0
+2026-10-26 13:11:13 | INFO    | packet=J14 complete elapsed=60.4s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=49239 reasoning_tokens=2207 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=4 artifacts=5
+2026-10-26 13:11:13 | INFO    | batch=dag_worker_done packet=J14 output=J14.json
+2026-10-26 13:11:13 | INFO    | batch=dag_worker_start packet=J15 title=独立的远程删除分支 dependencies=['J13', 'J01'] dependency_context_chars=5192 chars=4061
+2026-10-26 13:11:13 | INFO    | packet=J15 start chars=4061 dependencies=['J13', 'J01'] dependency_context_chars=5192 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 13:11:13 | INFO    | packet=J15 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 13:11:13 | INFO    | batch=dag_progress completed=15/16 succeeded=15 failed=0 running=1 pending=0 elapsed=861.4s
+2026-10-26 13:11:32 | INFO    | packet=J15 stage=analyzer done elapsed=18.3s requests=1 input_tokens=6559 output_tokens=2358 reasoning_tokens=414 visible_output_tokens=1944 total_tokens=8917
+2026-10-26 13:11:32 | INFO    | packet=J15 stage=analyzer result status=complete_with_gaps claims=2 artifacts=4 gaps=2 handoffs=1
+2026-10-26 13:11:32 | INFO    | packet=J15 stage=evidence_validation analyzer_valid=11 deferred_cross_packet=0 invalid=0
+2026-10-26 13:11:32 | INFO    | packet=J15 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 13:11:51 | INFO    | packet=J15 stage=reviewer done elapsed=19.1s requests=1 input_tokens=9183 output_tokens=2477 reasoning_tokens=1549 visible_output_tokens=928 total_tokens=11660
+2026-10-26 13:11:51 | INFO    | packet=J15 stage=reviewer result requires_revision=True issues=3 major_or_critical=2
+2026-10-26 13:11:51 | INFO    | packet=J15 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 13:12:05 | INFO    | packet=J15 stage=reviser done elapsed=14.5s requests=1 input_tokens=10400 output_tokens=2292 reasoning_tokens=179 visible_output_tokens=2113 total_tokens=12692
+2026-10-26 13:12:05 | INFO    | packet=J15 stage=reviser result status=complete_with_gaps claims=2 artifacts=4 gaps=2 handoffs=1 ignored_changes=2
+2026-10-26 13:12:05 | INFO    | packet=J15 stage=evidence_validation final_valid=13 deferred_cross_packet=0 invalid=0
+2026-10-26 13:12:05 | INFO    | packet=J15 complete elapsed=52.0s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=33269 reasoning_tokens=2142 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=4
+2026-10-26 13:12:05 | INFO    | batch=dag_worker_done packet=J15 output=J15.json
+2026-10-26 13:12:05 | INFO    | batch=dag_progress completed=16/16 succeeded=16 failed=0 running=0 pending=0 elapsed=913.4s
+2026-10-26 13:12:05 | INFO    | batch=material_inventory indexed_functions=123 additional_files=0 requests=68 resolved_materials=42 scan_complete=True
+2026-10-26 13:12:05 | INFO    | stage=global_reconciliation start packets=16 source_claims=44 reduced_claims=44 source_artifacts=85 reduced_artifacts=80 artifact_conflicts=2 unavailable=0 input_chars=41632 request_budget=1 token_budget=160000 wall_clock=300.0s
+2026-10-26 13:12:10 | INFO    | stage=global_reconciliation complete elapsed=4.6s status=complete canonical_claims=44 canonical_artifacts=80 conflicts=0 historical_gaps=76 report_projection=deterministic unaccounted_claims=0 unaccounted_artifacts=0
+2026-10-26 13:12:10 | INFO    | batch=global_reconciliation_done status=success result_status=complete provenance_valid=True output=_global_reconciliation.json elapsed=4.7s
+2026-10-26 13:12:10 | INFO    | batch=complete mode=dag packets=16 succeeded=16 failed=0 elapsed=918.2s
+2026-10-26 15:41:56 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1765\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-26 15:41:56 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-26 15:48:42 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1768\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-26 15:48:42 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-26 16:17:39 | INFO    | batch=start packets=16 concurrency=1 input_dir=testdata\packets output_dir=results pattern=J*.md mode=dag manifest=testdata\manifest.json
+2026-10-26 16:17:39 | INFO    | batch=dag_start jobs=16 concurrency=1 manifest=testdata\manifest.json purpose=example3 bounded-investigation agent test
+2026-10-26 16:17:39 | INFO    | batch=dag_worker_start packet=J00 title=共同调用者：模式分派与输出绑定 dependencies=[] dependency_context_chars=4 chars=10209
+2026-10-26 16:17:39 | INFO    | packet=J00 start chars=10209 dependencies=[] dependency_context_chars=4 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:17:39 | INFO    | packet=J00 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:18:04 | INFO    | packet=J00 stage=analyzer done elapsed=24.6s requests=1 input_tokens=6803 output_tokens=3696 reasoning_tokens=456 visible_output_tokens=3240 total_tokens=10499
+2026-10-26 16:18:04 | INFO    | packet=J00 stage=analyzer result status=complete_with_gaps claims=2 artifacts=10 gaps=3 handoffs=3
+2026-10-26 16:18:04 | INFO    | packet=J00 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=21
+2026-10-26 16:18:04 | INFO    | packet=J00 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:18:23 | INFO    | packet=J00 stage=reviewer done elapsed=19.5s requests=1 input_tokens=11543 output_tokens=2389 reasoning_tokens=922 visible_output_tokens=1467 total_tokens=13932
+2026-10-26 16:18:23 | INFO    | packet=J00 stage=reviewer result requires_revision=True issues=4 major_or_critical=3
+2026-10-26 16:18:23 | INFO    | packet=J00 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:18:50 | INFO    | packet=J00 stage=reviser done elapsed=26.6s requests=1 input_tokens=14423 output_tokens=4619 reasoning_tokens=208 visible_output_tokens=4411 total_tokens=19042
+2026-10-26 16:18:50 | INFO    | packet=J00 stage=reviser result status=complete_with_gaps claims=3 artifacts=11 gaps=4 handoffs=3 ignored_changes=9
+2026-10-26 16:18:50 | INFO    | packet=J00 stage=evidence_validation final_valid=25 deferred_cross_packet=0 invalid=0
+2026-10-26 16:18:50 | INFO    | packet=J00 complete elapsed=70.7s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=43473 reasoning_tokens=1586 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=11
+2026-10-26 16:18:50 | INFO    | batch=dag_worker_done packet=J00 output=J00.json
+2026-10-26 16:18:50 | INFO    | batch=dag_progress completed=1/16 succeeded=1 failed=0 running=0 pending=15 elapsed=70.8s
+2026-10-26 16:18:50 | INFO    | batch=dag_worker_start packet=J01 title=共享运行时语义摘要 dependencies=['J00'] dependency_context_chars=4771 chars=11558
+2026-10-26 16:18:50 | INFO    | packet=J01 start chars=11558 dependencies=['J00'] dependency_context_chars=4771 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:18:50 | INFO    | packet=J01 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:19:11 | INFO    | packet=J01 stage=analyzer done elapsed=20.7s requests=1 input_tokens=9927 output_tokens=2783 reasoning_tokens=973 visible_output_tokens=1810 total_tokens=12710
+2026-10-26 16:19:11 | INFO    | packet=J01 stage=analyzer result status=complete_with_gaps claims=3 artifacts=0 gaps=3 handoffs=3
+2026-10-26 16:19:11 | INFO    | packet=J01 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=9
+2026-10-26 16:19:11 | INFO    | packet=J01 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:23:19 | INFO    | packet=J01 stage=reviewer done elapsed=248.8s requests=1 input_tokens=12807 output_tokens=2137 reasoning_tokens=1543 visible_output_tokens=594 total_tokens=14944
+2026-10-26 16:23:19 | INFO    | packet=J01 stage=reviewer result requires_revision=True issues=1 major_or_critical=1
+2026-10-26 16:23:19 | INFO    | packet=J01 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:23:32 | INFO    | packet=J01 stage=reviser done elapsed=12.4s requests=1 input_tokens=14292 output_tokens=1833 reasoning_tokens=118 visible_output_tokens=1715 total_tokens=16125
+2026-10-26 16:23:32 | WARNING | packet=J01 stage=reviser recovery=preserve_analyzer_result scope_error=candidate is missing selected field: /claims/0/evidence/1
+2026-10-26 16:23:32 | INFO    | packet=J01 stage=evidence_validation final_valid=0 deferred_cross_packet=0 invalid=9
+2026-10-26 16:23:32 | INFO    | packet=J01 complete elapsed=281.9s delivery_status=success revision=False revision_failed=True requests=3 total_tokens=43779 reasoning_tokens=2634 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=0
+2026-10-26 16:23:32 | INFO    | batch=dag_worker_done packet=J01 output=J01.json
+2026-10-26 16:23:32 | INFO    | batch=dag_progress completed=2/16 succeeded=2 failed=0 running=0 pending=14 elapsed=352.7s
+2026-10-26 16:23:32 | INFO    | batch=dag_worker_start packet=J02 title=配置读取、转换与写回 dependencies=['J00', 'J01'] dependency_context_chars=7076 chars=13034
+2026-10-26 16:23:32 | INFO    | packet=J02 start chars=13034 dependencies=['J00', 'J01'] dependency_context_chars=7076 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:23:32 | INFO    | packet=J02 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:23:56 | INFO    | packet=J02 stage=analyzer done elapsed=24.4s requests=1 input_tokens=12291 output_tokens=3406 reasoning_tokens=516 visible_output_tokens=2890 total_tokens=15697
+2026-10-26 16:23:56 | INFO    | packet=J02 stage=analyzer result status=complete_with_gaps claims=3 artifacts=4 gaps=3 handoffs=3
+2026-10-26 16:23:56 | INFO    | packet=J02 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=20
+2026-10-26 16:23:56 | INFO    | packet=J02 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:24:16 | INFO    | packet=J02 stage=reviewer done elapsed=19.6s requests=1 input_tokens=16723 output_tokens=2411 reasoning_tokens=1402 visible_output_tokens=1009 total_tokens=19134
+2026-10-26 16:24:16 | INFO    | packet=J02 stage=reviewer result requires_revision=True issues=3 major_or_critical=2
+2026-10-26 16:24:16 | INFO    | packet=J02 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:24:36 | INFO    | packet=J02 stage=reviser done elapsed=20.1s requests=1 input_tokens=18912 output_tokens=3113 reasoning_tokens=360 visible_output_tokens=2753 total_tokens=22025
+2026-10-26 16:24:36 | WARNING | packet=J02 stage=reviser recovery=preserve_analyzer_result scope_error=new invalid evidence: dependency J00 summary: dynamic mutex retry and XX--XX--XX.txt path
+2026-10-26 16:24:36 | INFO    | packet=J02 stage=evidence_validation final_valid=0 deferred_cross_packet=0 invalid=20
+2026-10-26 16:24:36 | INFO    | packet=J02 complete elapsed=64.1s delivery_status=success revision=False revision_failed=True requests=3 total_tokens=56856 reasoning_tokens=2278 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=4
+2026-10-26 16:24:36 | INFO    | batch=dag_worker_done packet=J02 output=J02.json
+2026-10-26 16:24:36 | INFO    | batch=dag_worker_start packet=J03 title=环境检查与输入分支 dependencies=['J00', 'J01'] dependency_context_chars=7076 chars=15479
+2026-10-26 16:24:36 | INFO    | packet=J03 start chars=15479 dependencies=['J00', 'J01'] dependency_context_chars=7076 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:24:36 | INFO    | packet=J03 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:24:36 | INFO    | batch=dag_progress completed=3/16 succeeded=3 failed=0 running=8 pending=5 elapsed=416.8s
+2026-10-26 16:25:03 | INFO    | packet=J03 stage=analyzer done elapsed=27.2s requests=1 input_tokens=13113 output_tokens=3972 reasoning_tokens=578 visible_output_tokens=3394 total_tokens=17085
+2026-10-26 16:25:03 | INFO    | packet=J03 stage=analyzer result status=complete_with_gaps claims=4 artifacts=8 gaps=3 handoffs=2
+2026-10-26 16:25:03 | INFO    | packet=J03 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=26
+2026-10-26 16:25:03 | INFO    | packet=J03 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:25:26 | INFO    | packet=J03 stage=reviewer done elapsed=23.0s requests=1 input_tokens=18062 output_tokens=2686 reasoning_tokens=1484 visible_output_tokens=1202 total_tokens=20748
+2026-10-26 16:25:26 | INFO    | packet=J03 stage=reviewer result requires_revision=True issues=3 major_or_critical=2
+2026-10-26 16:25:26 | INFO    | packet=J03 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:25:51 | INFO    | packet=J03 stage=reviser done elapsed=25.2s requests=1 input_tokens=20419 output_tokens=4316 reasoning_tokens=400 visible_output_tokens=3916 total_tokens=24735
+2026-10-26 16:25:51 | WARNING | packet=J03 stage=reviser recovery=preserve_analyzer_result scope_error=new invalid evidence: dependency J00
+2026-10-26 16:25:51 | INFO    | packet=J03 stage=evidence_validation final_valid=0 deferred_cross_packet=0 invalid=26
+2026-10-26 16:25:51 | INFO    | packet=J03 complete elapsed=75.4s delivery_status=success revision=False revision_failed=True requests=3 total_tokens=62568 reasoning_tokens=2462 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=4 artifacts=8
+2026-10-26 16:25:51 | INFO    | batch=dag_worker_done packet=J03 output=J03.json
+2026-10-26 16:25:51 | INFO    | batch=dag_worker_start packet=J04 title=安装、自复制、注册表写入 dependencies=['J00', 'J01'] dependency_context_chars=7076 chars=15623
+2026-10-26 16:25:51 | INFO    | packet=J04 start chars=15623 dependencies=['J00', 'J01'] dependency_context_chars=7076 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:25:51 | INFO    | packet=J04 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:25:51 | INFO    | batch=dag_progress completed=4/16 succeeded=4 failed=0 running=7 pending=5 elapsed=492.3s
+2026-10-26 16:26:19 | INFO    | packet=J04 stage=analyzer done elapsed=28.1s requests=1 input_tokens=12873 output_tokens=3919 reasoning_tokens=556 visible_output_tokens=3363 total_tokens=16792
+2026-10-26 16:26:19 | INFO    | packet=J04 stage=analyzer result status=complete_with_gaps claims=4 artifacts=6 gaps=3 handoffs=3
+2026-10-26 16:26:19 | INFO    | packet=J04 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=21
+2026-10-26 16:26:19 | INFO    | packet=J04 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:26:42 | INFO    | packet=J04 stage=reviewer done elapsed=22.8s requests=1 input_tokens=17794 output_tokens=2641 reasoning_tokens=1511 visible_output_tokens=1130 total_tokens=20435
+2026-10-26 16:26:42 | INFO    | packet=J04 stage=reviewer result requires_revision=True issues=3 major_or_critical=1
+2026-10-26 16:26:42 | INFO    | packet=J04 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:27:07 | WARNING | packet=J04 stage=reviser structured_output_validation_failed raw_chars=8249 error=UnexpectedModelBehavior: Exceeded maximum output retries (0) caused by: ValidationError: 1 validation error for InvestigationResult material_needs.2   Value error, structured targets are only supported for function_code [type=value_error, input_value={'kind': 'data_bytes', 't...或组件参数。'}]}, input_type=dict]     For further information visit https://errors.pydantic.dev/2.13/v/value_error
+2026-10-26 16:27:07 | WARNING | packet=J04 stage=reviser format_repair=start attempt=1/3 raw_chars=8249 candidate_chars=8249 error=ValidationError: 1 validation error for InvestigationResult material_needs.2   Value error, structured targets are only supported for function_code [type=value_error, input_value={'kind': 'data_bytes', 't...或组件参数。'}]}, input_type=dict]     For further information visit https://errors.pydantic.dev/2.13/v/value_error
+2026-10-26 16:27:32 | INFO    | packet=J04 stage=reviser format_repair=attempt_done attempt=1 elapsed=24.6s requests=1 input_tokens=8432 output_tokens=3366 reasoning_tokens=120 candidate_chars=8022
+2026-10-26 16:27:32 | INFO    | packet=J04 stage=reviser format_repair=success attempt=1
+2026-10-26 16:27:32 | INFO    | packet=J04 stage=reviser done elapsed=49.5s requests=1 input_tokens=20295 output_tokens=3595 reasoning_tokens=281 visible_output_tokens=3314 total_tokens=23890
+2026-10-26 16:27:32 | INFO    | packet=J04 stage=reviser result status=complete_with_gaps claims=4 artifacts=6 gaps=3 handoffs=3 ignored_changes=7
+2026-10-26 16:27:32 | INFO    | packet=J04 stage=evidence_validation final_valid=21 deferred_cross_packet=0 invalid=0
+2026-10-26 16:27:32 | INFO    | packet=J04 complete elapsed=100.4s delivery_status=success_after_repair revision=True revision_failed=False requests=4 total_tokens=72915 reasoning_tokens=2468 repair_triggered=1 repair_attempts=1 final_status=complete_with_gaps claims=4 artifacts=6
+2026-10-26 16:27:32 | INFO    | batch=dag_worker_done packet=J04 output=J04.json
+2026-10-26 16:27:32 | INFO    | batch=dag_worker_start packet=J06 title=No-IP 与 Windows Live 数据提取 dependencies=['J00', 'J01'] dependency_context_chars=7076 chars=12325
+2026-10-26 16:27:32 | INFO    | packet=J06 start chars=12325 dependencies=['J00', 'J01'] dependency_context_chars=7076 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:27:32 | INFO    | packet=J06 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:27:32 | INFO    | batch=dag_progress completed=5/16 succeeded=5 failed=0 running=6 pending=5 elapsed=592.7s
+2026-10-26 16:27:55 | INFO    | packet=J06 stage=analyzer done elapsed=23.1s requests=1 input_tokens=11425 output_tokens=3025 reasoning_tokens=602 visible_output_tokens=2423 total_tokens=14450
+2026-10-26 16:27:55 | INFO    | packet=J06 stage=analyzer result status=complete_with_gaps claims=2 artifacts=5 gaps=2 handoffs=2
+2026-10-26 16:27:55 | INFO    | packet=J06 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=2 invalid=13
+2026-10-26 16:27:55 | INFO    | packet=J06 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:28:09 | INFO    | packet=J06 stage=reviewer done elapsed=14.0s requests=1 input_tokens=15078 output_tokens=1625 reasoning_tokens=912 visible_output_tokens=713 total_tokens=16703
+2026-10-26 16:28:09 | INFO    | packet=J06 stage=reviewer result requires_revision=True issues=2 major_or_critical=1
+2026-10-26 16:28:09 | INFO    | packet=J06 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:28:24 | INFO    | packet=J06 stage=reviser done elapsed=15.5s requests=1 input_tokens=16852 output_tokens=2450 reasoning_tokens=103 visible_output_tokens=2347 total_tokens=19302
+2026-10-26 16:28:24 | INFO    | packet=J06 stage=reviser result status=complete_with_gaps claims=2 artifacts=5 gaps=2 handoffs=2 ignored_changes=1
+2026-10-26 16:28:24 | INFO    | packet=J06 stage=evidence_validation final_valid=13 deferred_cross_packet=2 invalid=0
+2026-10-26 16:28:24 | INFO    | packet=J06 complete elapsed=52.6s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=50455 reasoning_tokens=1617 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=5
+2026-10-26 16:28:24 | INFO    | batch=dag_worker_done packet=J06 output=J06.json
+2026-10-26 16:28:24 | INFO    | batch=dag_worker_start packet=J07 title=RAS 收集与私有数据 dependencies=['J00', 'J01'] dependency_context_chars=7076 chars=16804
+2026-10-26 16:28:24 | INFO    | packet=J07 start chars=16804 dependencies=['J00', 'J01'] dependency_context_chars=7076 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:28:24 | INFO    | packet=J07 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:28:24 | INFO    | batch=dag_progress completed=6/16 succeeded=6 failed=0 running=6 pending=4 elapsed=645.3s
+2026-10-26 16:28:50 | INFO    | packet=J07 stage=analyzer done elapsed=26.0s requests=1 input_tokens=13336 output_tokens=3588 reasoning_tokens=789 visible_output_tokens=2799 total_tokens=16924
+2026-10-26 16:28:50 | INFO    | packet=J07 stage=analyzer result status=complete_with_gaps claims=3 artifacts=3 gaps=2 handoffs=2
+2026-10-26 16:28:50 | INFO    | packet=J07 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=21
+2026-10-26 16:28:50 | INFO    | packet=J07 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:29:10 | INFO    | packet=J07 stage=reviewer done elapsed=19.6s requests=1 input_tokens=17611 output_tokens=2292 reasoning_tokens=1426 visible_output_tokens=866 total_tokens=19903
+2026-10-26 16:29:10 | INFO    | packet=J07 stage=reviewer result requires_revision=True issues=2 major_or_critical=2
+2026-10-26 16:29:10 | INFO    | packet=J07 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:29:27 | INFO    | packet=J07 stage=reviser done elapsed=17.2s requests=1 input_tokens=19687 output_tokens=3038 reasoning_tokens=94 visible_output_tokens=2944 total_tokens=22725
+2026-10-26 16:29:27 | INFO    | packet=J07 stage=reviser result status=complete_with_gaps claims=3 artifacts=3 gaps=2 handoffs=2 ignored_changes=2
+2026-10-26 16:29:27 | INFO    | packet=J07 stage=evidence_validation final_valid=21 deferred_cross_packet=0 invalid=0
+2026-10-26 16:29:27 | INFO    | packet=J07 complete elapsed=62.9s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=59552 reasoning_tokens=2309 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=3
+2026-10-26 16:29:27 | INFO    | batch=dag_worker_done packet=J07 output=J07.json
+2026-10-26 16:29:27 | INFO    | batch=dag_worker_start packet=J08 title=Protected Storage 收集 dependencies=['J00', 'J01'] dependency_context_chars=7076 chars=16423
+2026-10-26 16:29:27 | INFO    | packet=J08 start chars=16423 dependencies=['J00', 'J01'] dependency_context_chars=7076 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:29:27 | INFO    | packet=J08 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:29:27 | INFO    | batch=dag_progress completed=7/16 succeeded=7 failed=0 running=5 pending=4 elapsed=708.1s
+2026-10-26 16:29:47 | INFO    | packet=J08 stage=analyzer done elapsed=19.9s requests=1 input_tokens=13623 output_tokens=2636 reasoning_tokens=516 visible_output_tokens=2120 total_tokens=16259
+2026-10-26 16:29:47 | INFO    | packet=J08 stage=analyzer result status=complete_with_gaps claims=2 artifacts=2 gaps=3 handoffs=2
+2026-10-26 16:29:47 | INFO    | packet=J08 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=1 invalid=12
+2026-10-26 16:29:47 | INFO    | packet=J08 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:30:12 | INFO    | packet=J08 stage=reviewer done elapsed=24.6s requests=1 input_tokens=16910 output_tokens=3206 reasoning_tokens=1830 visible_output_tokens=1376 total_tokens=20116
+2026-10-26 16:30:12 | INFO    | packet=J08 stage=reviewer result requires_revision=True issues=4 major_or_critical=2
+2026-10-26 16:30:12 | INFO    | packet=J08 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:30:27 | INFO    | packet=J08 stage=reviser done elapsed=15.1s requests=1 input_tokens=19293 output_tokens=2276 reasoning_tokens=143 visible_output_tokens=2133 total_tokens=21569
+2026-10-26 16:30:27 | INFO    | packet=J08 stage=reviser result status=complete_with_gaps claims=2 artifacts=2 gaps=3 handoffs=2 ignored_changes=2
+2026-10-26 16:30:27 | INFO    | packet=J08 stage=evidence_validation final_valid=11 deferred_cross_packet=2 invalid=0
+2026-10-26 16:30:27 | INFO    | packet=J08 complete elapsed=59.5s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=57944 reasoning_tokens=2489 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=2
+2026-10-26 16:30:27 | INFO    | batch=dag_worker_done packet=J08 output=J08.json
+2026-10-26 16:30:27 | INFO    | batch=dag_worker_start packet=J09 title=Storage2 及 URL 派生 dependencies=['J00', 'J01'] dependency_context_chars=7076 chars=16367
+2026-10-26 16:30:27 | INFO    | packet=J09 start chars=16367 dependencies=['J00', 'J01'] dependency_context_chars=7076 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:30:27 | INFO    | packet=J09 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:30:27 | INFO    | batch=dag_progress completed=8/16 succeeded=8 failed=0 running=4 pending=4 elapsed=767.7s
+2026-10-26 16:30:57 | INFO    | packet=J09 stage=analyzer done elapsed=29.9s requests=1 input_tokens=13502 output_tokens=3589 reasoning_tokens=778 visible_output_tokens=2811 total_tokens=17091
+2026-10-26 16:30:57 | INFO    | packet=J09 stage=analyzer result status=complete_with_gaps claims=4 artifacts=4 gaps=3 handoffs=2
+2026-10-26 16:30:57 | INFO    | packet=J09 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=21
+2026-10-26 16:30:57 | INFO    | packet=J09 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:31:23 | INFO    | packet=J09 stage=reviewer done elapsed=26.3s requests=1 input_tokens=17779 output_tokens=3240 reasoning_tokens=1908 visible_output_tokens=1332 total_tokens=21019
+2026-10-26 16:31:23 | INFO    | packet=J09 stage=reviewer result requires_revision=True issues=4 major_or_critical=2
+2026-10-26 16:31:23 | INFO    | packet=J09 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:31:50 | INFO    | packet=J09 stage=reviser done elapsed=27.5s requests=1 input_tokens=20431 output_tokens=3841 reasoning_tokens=809 visible_output_tokens=3032 total_tokens=24272
+2026-10-26 16:31:50 | WARNING | packet=J09 stage=reviser recovery=preserve_analyzer_result scope_error=new invalid evidence: dependency J00 / claims/0
+2026-10-26 16:31:50 | INFO    | packet=J09 stage=evidence_validation final_valid=0 deferred_cross_packet=0 invalid=21
+2026-10-26 16:31:50 | INFO    | packet=J09 complete elapsed=83.6s delivery_status=success revision=False revision_failed=True requests=3 total_tokens=62382 reasoning_tokens=3495 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=4 artifacts=4
+2026-10-26 16:31:50 | INFO    | batch=dag_worker_done packet=J09 output=J09.json
+2026-10-26 16:31:50 | INFO    | batch=dag_worker_start packet=J11 title=Firefox 前半：定位及初始化 dependencies=['J00', 'J01'] dependency_context_chars=7076 chars=14690
+2026-10-26 16:31:50 | INFO    | packet=J11 start chars=14690 dependencies=['J00', 'J01'] dependency_context_chars=7076 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:31:50 | INFO    | packet=J11 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:31:50 | INFO    | batch=dag_progress completed=9/16 succeeded=9 failed=0 running=3 pending=4 elapsed=851.3s
+2026-10-26 16:32:14 | INFO    | packet=J11 stage=analyzer done elapsed=24.2s requests=1 input_tokens=11415 output_tokens=3270 reasoning_tokens=516 visible_output_tokens=2754 total_tokens=14685
+2026-10-26 16:32:14 | INFO    | packet=J11 stage=analyzer result status=complete_with_gaps claims=3 artifacts=7 gaps=3 handoffs=2
+2026-10-26 16:32:14 | INFO    | packet=J11 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=18
+2026-10-26 16:32:14 | INFO    | packet=J11 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:32:25 | INFO    | packet=J11 stage=reviewer done elapsed=10.4s requests=1 input_tokens=15579 output_tokens=1132 reasoning_tokens=674 visible_output_tokens=458 total_tokens=16711
+2026-10-26 16:32:25 | INFO    | packet=J11 stage=reviewer result requires_revision=True issues=1 major_or_critical=1
+2026-10-26 16:32:25 | INFO    | packet=J11 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:32:41 | INFO    | packet=J11 stage=reviser done elapsed=16.6s requests=1 input_tokens=17205 output_tokens=2745 reasoning_tokens=81 visible_output_tokens=2664 total_tokens=19950
+2026-10-26 16:32:41 | INFO    | packet=J11 stage=reviser result status=complete_with_gaps claims=3 artifacts=7 gaps=3 handoffs=2 ignored_changes=1
+2026-10-26 16:32:41 | INFO    | packet=J11 stage=evidence_validation final_valid=18 deferred_cross_packet=0 invalid=0
+2026-10-26 16:32:41 | INFO    | packet=J11 complete elapsed=51.1s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=51346 reasoning_tokens=1271 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=7
+2026-10-26 16:32:41 | INFO    | batch=dag_worker_done packet=J11 output=J11.json
+2026-10-26 16:32:41 | INFO    | batch=dag_worker_start packet=J13 title=宿主选择与 PE 映射主路径 dependencies=['J00', 'J01'] dependency_context_chars=7076 chars=13372
+2026-10-26 16:32:41 | INFO    | packet=J13 start chars=13372 dependencies=['J00', 'J01'] dependency_context_chars=7076 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:32:41 | INFO    | packet=J13 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:32:41 | INFO    | batch=dag_progress completed=10/16 succeeded=10 failed=0 running=3 pending=3 elapsed=902.5s
+2026-10-26 16:33:11 | INFO    | packet=J13 stage=analyzer done elapsed=29.4s requests=1 input_tokens=11811 output_tokens=4164 reasoning_tokens=736 visible_output_tokens=3428 total_tokens=15975
+2026-10-26 16:33:11 | INFO    | packet=J13 stage=analyzer result status=complete_with_gaps claims=3 artifacts=2 gaps=3 handoffs=2
+2026-10-26 16:33:11 | INFO    | packet=J13 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=21
+2026-10-26 16:33:11 | INFO    | packet=J13 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:33:27 | INFO    | packet=J13 stage=reviewer done elapsed=16.3s requests=1 input_tokens=16785 output_tokens=1644 reasoning_tokens=1034 visible_output_tokens=610 total_tokens=18429
+2026-10-26 16:33:27 | INFO    | packet=J13 stage=reviewer result requires_revision=True issues=1 major_or_critical=1
+2026-10-26 16:33:27 | INFO    | packet=J13 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:33:47 | INFO    | packet=J13 stage=reviser done elapsed=19.5s requests=1 input_tokens=18505 output_tokens=3362 reasoning_tokens=65 visible_output_tokens=3297 total_tokens=21867
+2026-10-26 16:33:47 | INFO    | packet=J13 stage=reviser result status=complete_with_gaps claims=3 artifacts=2 gaps=3 handoffs=2 ignored_changes=1
+2026-10-26 16:33:47 | INFO    | packet=J13 stage=evidence_validation final_valid=20 deferred_cross_packet=1 invalid=0
+2026-10-26 16:33:47 | INFO    | packet=J13 complete elapsed=65.2s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=56271 reasoning_tokens=1835 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=2
+2026-10-26 16:33:47 | INFO    | batch=dag_worker_done packet=J13 output=J13.json
+2026-10-26 16:33:47 | INFO    | batch=dag_worker_start packet=J05 title=安装路径辅助 dependencies=['J04', 'J01'] dependency_context_chars=6536 chars=8575
+2026-10-26 16:33:47 | INFO    | packet=J05 start chars=8575 dependencies=['J04', 'J01'] dependency_context_chars=6536 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:33:47 | INFO    | packet=J05 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:33:47 | INFO    | batch=dag_progress completed=11/16 succeeded=11 failed=0 running=3 pending=2 elapsed=967.7s
+2026-10-26 16:34:05 | INFO    | packet=J05 stage=analyzer done elapsed=18.6s requests=1 input_tokens=9243 output_tokens=2587 reasoning_tokens=399 visible_output_tokens=2188 total_tokens=11830
+2026-10-26 16:34:05 | INFO    | packet=J05 stage=analyzer result status=complete_with_gaps claims=3 artifacts=4 gaps=3 handoffs=2
+2026-10-26 16:34:05 | INFO    | packet=J05 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=15
+2026-10-26 16:34:05 | INFO    | packet=J05 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:34:24 | INFO    | packet=J05 stage=reviewer done elapsed=18.8s requests=1 input_tokens=12754 output_tokens=2265 reasoning_tokens=1515 visible_output_tokens=750 total_tokens=15019
+2026-10-26 16:34:24 | INFO    | packet=J05 stage=reviewer result requires_revision=True issues=2 major_or_critical=2
+2026-10-26 16:34:24 | INFO    | packet=J05 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:34:39 | INFO    | packet=J05 stage=reviser done elapsed=14.5s requests=1 input_tokens=14618 output_tokens=2197 reasoning_tokens=66 visible_output_tokens=2131 total_tokens=16815
+2026-10-26 16:34:39 | INFO    | packet=J05 stage=reviser result status=complete_with_gaps claims=3 artifacts=4 gaps=3 handoffs=2 ignored_changes=2
+2026-10-26 16:34:39 | INFO    | packet=J05 stage=evidence_validation final_valid=15 deferred_cross_packet=0 invalid=0
+2026-10-26 16:34:39 | INFO    | packet=J05 complete elapsed=51.9s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=43664 reasoning_tokens=1980 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=4
+2026-10-26 16:34:39 | INFO    | batch=dag_worker_done packet=J05 output=J05.json
+2026-10-26 16:34:39 | INFO    | batch=dag_worker_start packet=J10 title=Credential Manager 与可选熵 dependencies=['J00', 'J01', 'J09'] dependency_context_chars=10824 chars=5779
+2026-10-26 16:34:39 | INFO    | packet=J10 start chars=5779 dependencies=['J00', 'J01', 'J09'] dependency_context_chars=10824 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:34:39 | INFO    | packet=J10 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:34:39 | INFO    | batch=dag_progress completed=12/16 succeeded=12 failed=0 running=4 pending=0 elapsed=1019.6s
+2026-10-26 16:34:58 | INFO    | packet=J10 stage=analyzer done elapsed=19.3s requests=1 input_tokens=10220 output_tokens=2381 reasoning_tokens=516 visible_output_tokens=1865 total_tokens=12601
+2026-10-26 16:34:58 | INFO    | packet=J10 stage=analyzer result status=complete_with_gaps claims=2 artifacts=4 gaps=2 handoffs=1
+2026-10-26 16:34:58 | INFO    | packet=J10 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=13
+2026-10-26 16:34:58 | INFO    | packet=J10 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:35:22 | INFO    | packet=J10 stage=reviewer done elapsed=24.4s requests=1 input_tokens=13239 output_tokens=2672 reasoning_tokens=1538 visible_output_tokens=1134 total_tokens=15911
+2026-10-26 16:35:22 | INFO    | packet=J10 stage=reviewer result requires_revision=True issues=3 major_or_critical=2
+2026-10-26 16:35:22 | INFO    | packet=J10 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:35:36 | INFO    | packet=J10 stage=reviser done elapsed=13.8s requests=1 input_tokens=15423 output_tokens=2208 reasoning_tokens=240 visible_output_tokens=1968 total_tokens=17631
+2026-10-26 16:35:36 | INFO    | packet=J10 stage=reviser result status=complete_with_gaps claims=2 artifacts=4 gaps=2 handoffs=1 ignored_changes=10
+2026-10-26 16:35:36 | INFO    | packet=J10 stage=evidence_validation final_valid=10 deferred_cross_packet=3 invalid=0
+2026-10-26 16:35:36 | INFO    | packet=J10 complete elapsed=57.5s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=46143 reasoning_tokens=2294 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=4
+2026-10-26 16:35:36 | INFO    | batch=dag_worker_done packet=J10 output=J10.json
+2026-10-26 16:35:36 | INFO    | batch=dag_worker_start packet=J12 title=Firefox 后半：读取、解密与返回 dependencies=['J11', 'J01'] dependency_context_chars=5637 chars=12221
+2026-10-26 16:35:36 | INFO    | packet=J12 start chars=12221 dependencies=['J11', 'J01'] dependency_context_chars=5637 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:35:36 | INFO    | packet=J12 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:35:36 | INFO    | batch=dag_progress completed=13/16 succeeded=13 failed=0 running=3 pending=0 elapsed=1077.1s
+2026-10-26 16:36:03 | INFO    | packet=J12 stage=analyzer done elapsed=27.1s requests=1 input_tokens=8779 output_tokens=3199 reasoning_tokens=516 visible_output_tokens=2683 total_tokens=11978
+2026-10-26 16:36:03 | INFO    | packet=J12 stage=analyzer result status=complete_with_gaps claims=3 artifacts=5 gaps=3 handoffs=2
+2026-10-26 16:36:03 | INFO    | packet=J12 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=15
+2026-10-26 16:36:03 | INFO    | packet=J12 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:36:26 | INFO    | packet=J12 stage=reviewer done elapsed=22.7s requests=1 input_tokens=12726 output_tokens=2414 reasoning_tokens=1440 visible_output_tokens=974 total_tokens=15140
+2026-10-26 16:36:26 | INFO    | packet=J12 stage=reviewer result requires_revision=True issues=3 major_or_critical=1
+2026-10-26 16:36:26 | WARNING | packet=J12 stage=reviser recovery=preserve_analyzer_result scope_error=cannot replace and delete the same original item: artifacts
+2026-10-26 16:36:26 | INFO    | packet=J12 stage=evidence_validation final_valid=0 deferred_cross_packet=0 invalid=15
+2026-10-26 16:36:26 | INFO    | packet=J12 complete elapsed=49.7s delivery_status=success revision=False revision_failed=True requests=2 total_tokens=27118 reasoning_tokens=1956 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=5
+2026-10-26 16:36:26 | INFO    | batch=dag_worker_done packet=J12 output=J12.json
+2026-10-26 16:36:26 | INFO    | batch=dag_worker_start packet=J14 title=PE 导入、重定位及远程辅助 dependencies=['J13', 'J01'] dependency_context_chars=5947 chars=11540
+2026-10-26 16:36:26 | INFO    | packet=J14 start chars=11540 dependencies=['J13', 'J01'] dependency_context_chars=5947 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:36:26 | INFO    | packet=J14 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:36:26 | INFO    | batch=dag_progress completed=14/16 succeeded=14 failed=0 running=2 pending=0 elapsed=1126.8s
+2026-10-26 16:36:53 | INFO    | packet=J14 stage=analyzer done elapsed=26.7s requests=1 input_tokens=10597 output_tokens=3590 reasoning_tokens=942 visible_output_tokens=2648 total_tokens=14187
+2026-10-26 16:36:53 | INFO    | packet=J14 stage=analyzer result status=complete_with_gaps claims=4 artifacts=0 gaps=4 handoffs=2
+2026-10-26 16:36:53 | INFO    | packet=J14 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=13
+2026-10-26 16:36:53 | INFO    | packet=J14 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:37:06 | INFO    | packet=J14 stage=reviewer done elapsed=13.0s requests=1 input_tokens=14467 output_tokens=1563 reasoning_tokens=895 visible_output_tokens=668 total_tokens=16030
+2026-10-26 16:37:06 | INFO    | packet=J14 stage=reviewer result requires_revision=True issues=1 major_or_critical=1
+2026-10-26 16:37:06 | INFO    | packet=J14 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:37:21 | INFO    | packet=J14 stage=reviser done elapsed=15.3s requests=1 input_tokens=16104 output_tokens=2651 reasoning_tokens=65 visible_output_tokens=2586 total_tokens=18755
+2026-10-26 16:37:21 | INFO    | packet=J14 stage=reviser result status=complete_with_gaps claims=4 artifacts=0 gaps=4 handoffs=2 ignored_changes=0
+2026-10-26 16:37:21 | INFO    | packet=J14 stage=evidence_validation final_valid=13 deferred_cross_packet=0 invalid=0
+2026-10-26 16:37:21 | INFO    | packet=J14 complete elapsed=54.9s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=48972 reasoning_tokens=1902 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=4 artifacts=0
+2026-10-26 16:37:21 | INFO    | batch=dag_worker_done packet=J14 output=J14.json
+2026-10-26 16:37:21 | INFO    | batch=dag_worker_start packet=J15 title=独立的远程删除分支 dependencies=['J13', 'J01'] dependency_context_chars=5947 chars=4061
+2026-10-26 16:37:21 | INFO    | packet=J15 start chars=4061 dependencies=['J13', 'J01'] dependency_context_chars=5947 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-26 16:37:21 | INFO    | packet=J15 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-26 16:37:21 | INFO    | batch=dag_progress completed=15/16 succeeded=15 failed=0 running=1 pending=0 elapsed=1181.8s
+2026-10-26 16:37:41 | INFO    | packet=J15 stage=analyzer done elapsed=20.0s requests=1 input_tokens=7039 output_tokens=2612 reasoning_tokens=516 visible_output_tokens=2096 total_tokens=9651
+2026-10-26 16:37:41 | INFO    | packet=J15 stage=analyzer result status=complete_with_gaps claims=2 artifacts=1 gaps=3 handoffs=2
+2026-10-26 16:37:41 | INFO    | packet=J15 stage=evidence_validation analyzer_valid=0 deferred_cross_packet=0 invalid=9
+2026-10-26 16:37:41 | INFO    | packet=J15 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-26 16:38:07 | INFO    | packet=J15 stage=reviewer done elapsed=26.5s requests=1 input_tokens=10200 output_tokens=2981 reasoning_tokens=1632 visible_output_tokens=1349 total_tokens=13181
+2026-10-26 16:38:07 | INFO    | packet=J15 stage=reviewer result requires_revision=True issues=3 major_or_critical=2
+2026-10-26 16:38:07 | INFO    | packet=J15 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-26 16:38:24 | INFO    | packet=J15 stage=reviser done elapsed=16.5s requests=1 input_tokens=12476 output_tokens=2617 reasoning_tokens=350 visible_output_tokens=2267 total_tokens=15093
+2026-10-26 16:38:24 | WARNING | packet=J15 stage=reviser recovery=preserve_analyzer_result scope_error=new invalid evidence: dependency J01 claims[1]
+2026-10-26 16:38:24 | INFO    | packet=J15 stage=evidence_validation final_valid=0 deferred_cross_packet=0 invalid=9
+2026-10-26 16:38:24 | INFO    | packet=J15 complete elapsed=63.0s delivery_status=success revision=False revision_failed=True requests=3 total_tokens=37925 reasoning_tokens=2498 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=1
+2026-10-26 16:38:24 | INFO    | batch=dag_worker_done packet=J15 output=J15.json
+2026-10-26 16:38:24 | INFO    | batch=dag_progress completed=16/16 succeeded=16 failed=0 running=0 pending=0 elapsed=1244.8s
+2026-10-26 16:38:24 | INFO    | batch=material_inventory indexed_functions=123 additional_files=0 requests=72 resolved_materials=56 scan_complete=True
+2026-10-26 16:38:24 | INFO    | stage=global_reconciliation start packets=16 source_claims=48 reduced_claims=48 source_artifacts=66 reduced_artifacts=55 artifact_conflicts=3 unavailable=0 input_chars=46147 request_budget=1 token_budget=160000 wall_clock=300.0s
+2026-10-26 16:38:34 | INFO    | stage=global_reconciliation complete elapsed=10.4s status=complete canonical_claims=47 canonical_artifacts=55 conflicts=0 historical_gaps=82 report_projection=deterministic unaccounted_claims=0 unaccounted_artifacts=0
+2026-10-26 16:38:34 | INFO    | batch=global_reconciliation_done status=success result_status=complete provenance_valid=True output=_global_reconciliation.json elapsed=10.4s
+2026-10-26 16:38:34 | INFO    | batch=complete mode=dag packets=16 succeeded=16 failed=0 elapsed=1255.2s
+2026-10-27 09:40:57 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1770\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 09:40:57 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 09:47:52 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1774\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 09:47:52 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 09:53:27 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1776\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 09:53:27 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 09:58:43 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1780\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 09:58:43 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 10:25:05 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1781\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 10:25:05 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 10:29:33 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1786\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 10:29:33 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 10:31:54 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1788\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 10:31:54 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 10:38:37 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1796\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 10:38:37 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 10:38:52 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1797\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 10:38:52 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 10:43:58 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1802\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 10:43:58 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 11:06:41 | INFO    | batch=start packets=16 concurrency=1 input_dir=testdata\packets output_dir=results pattern=J*.md mode=dag manifest=testdata\manifest.json
+2026-10-27 11:06:41 | INFO    | batch=dag_start jobs=16 concurrency=1 manifest=testdata\manifest.json purpose=example3 bounded-investigation agent test
+2026-10-27 11:06:41 | INFO    | batch=dag_worker_start packet=J00 title=共同调用者：模式分派与输出绑定 dependencies=[] dependency_context_chars=4 chars=10209
+2026-10-27 11:06:41 | INFO    | packet=J00 start chars=10209 dependencies=[] dependency_context_chars=4 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:06:41 | INFO    | packet=J00 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:07:10 | INFO    | packet=J00 stage=analyzer done elapsed=28.5s requests=1 input_tokens=7273 output_tokens=4288 reasoning_tokens=422 visible_output_tokens=3866 total_tokens=11561
+2026-10-27 11:07:10 | INFO    | packet=J00 stage=analyzer result status=complete_with_gaps claims=4 artifacts=12 gaps=3 handoffs=3
+2026-10-27 11:07:10 | INFO    | packet=J00 stage=evidence_validation analyzer_valid=26 deferred_cross_packet=0 invalid=0
+2026-10-27 11:07:10 | INFO    | packet=J00 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:07:27 | INFO    | packet=J00 stage=reviewer done elapsed=17.3s requests=1 input_tokens=11878 output_tokens=1950 reasoning_tokens=1127 visible_output_tokens=823 total_tokens=13828
+2026-10-27 11:07:27 | INFO    | packet=J00 stage=reviewer result requires_revision=True issues=3 major_or_critical=1
+2026-10-27 11:07:27 | INFO    | packet=J00 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:07:49 | INFO    | packet=J00 stage=reviser done elapsed=21.9s requests=1 input_tokens=13658 output_tokens=4050 reasoning_tokens=51 visible_output_tokens=3999 total_tokens=17708
+2026-10-27 11:07:49 | INFO    | packet=J00 stage=reviser result status=complete_with_gaps claims=4 artifacts=12 gaps=3 handoffs=3 ignored_changes=8
+2026-10-27 11:07:49 | INFO    | packet=J00 stage=evidence_validation final_valid=26 deferred_cross_packet=0 invalid=0
+2026-10-27 11:07:49 | INFO    | packet=J00 complete elapsed=67.6s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=43097 reasoning_tokens=1600 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=4 artifacts=12
+2026-10-27 11:07:49 | INFO    | batch=dag_worker_done packet=J00 output=J00.json
+2026-10-27 11:07:49 | INFO    | batch=dag_progress completed=1/16 succeeded=1 failed=0 running=0 pending=15 elapsed=67.7s
+2026-10-27 11:07:49 | INFO    | batch=dag_worker_start packet=J01 title=共享运行时语义摘要 dependencies=['J00'] dependency_context_chars=8898 chars=11558
+2026-10-27 11:07:49 | INFO    | packet=J01 start chars=11558 dependencies=['J00'] dependency_context_chars=8898 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:07:49 | INFO    | packet=J01 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:08:10 | INFO    | packet=J01 stage=analyzer done elapsed=21.1s requests=1 input_tokens=10212 output_tokens=2808 reasoning_tokens=626 visible_output_tokens=2182 total_tokens=13020
+2026-10-27 11:08:10 | INFO    | packet=J01 stage=analyzer result status=complete_with_gaps claims=2 artifacts=2 gaps=3 handoffs=3
+2026-10-27 11:08:10 | INFO    | packet=J01 stage=evidence_validation analyzer_valid=5 deferred_cross_packet=5 invalid=0
+2026-10-27 11:08:10 | INFO    | packet=J01 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:08:23 | INFO    | packet=J01 stage=reviewer done elapsed=12.8s requests=1 input_tokens=13102 output_tokens=1538 reasoning_tokens=1162 visible_output_tokens=376 total_tokens=14640
+2026-10-27 11:08:23 | INFO    | packet=J01 stage=reviewer result requires_revision=False issues=1 major_or_critical=0
+2026-10-27 11:08:23 | INFO    | packet=J01 stage=reviser skipped reason=no_major_internal_issue
+2026-10-27 11:08:23 | INFO    | packet=J01 stage=evidence_validation final_valid=5 deferred_cross_packet=5 invalid=0
+2026-10-27 11:08:23 | INFO    | packet=J01 complete elapsed=33.9s delivery_status=success revision=False revision_failed=False requests=2 total_tokens=27660 reasoning_tokens=1788 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=2
+2026-10-27 11:08:23 | INFO    | batch=dag_worker_done packet=J01 output=J01.json
+2026-10-27 11:08:23 | INFO    | batch=dag_progress completed=2/16 succeeded=2 failed=0 running=0 pending=14 elapsed=101.6s
+2026-10-27 11:08:23 | INFO    | batch=dag_worker_start packet=J02 title=配置读取、转换与写回 dependencies=['J00', 'J01'] dependency_context_chars=11614 chars=13034
+2026-10-27 11:08:23 | INFO    | packet=J02 start chars=13034 dependencies=['J00', 'J01'] dependency_context_chars=11614 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:08:23 | INFO    | packet=J02 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:08:53 | INFO    | packet=J02 stage=analyzer done elapsed=30.5s requests=1 input_tokens=12724 output_tokens=4243 reasoning_tokens=1114 visible_output_tokens=3129 total_tokens=16967
+2026-10-27 11:08:53 | INFO    | packet=J02 stage=analyzer result status=complete_with_gaps claims=2 artifacts=4 gaps=3 handoffs=2
+2026-10-27 11:08:53 | INFO    | packet=J02 stage=evidence_validation analyzer_valid=16 deferred_cross_packet=5 invalid=0
+2026-10-27 11:08:53 | INFO    | packet=J02 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:09:16 | INFO    | packet=J02 stage=reviewer done elapsed=22.3s requests=1 input_tokens=16543 output_tokens=2727 reasoning_tokens=2161 visible_output_tokens=566 total_tokens=19270
+2026-10-27 11:09:16 | INFO    | packet=J02 stage=reviewer result requires_revision=True issues=1 major_or_critical=1
+2026-10-27 11:09:16 | INFO    | packet=J02 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:09:37 | INFO    | packet=J02 stage=reviser done elapsed=21.0s requests=1 input_tokens=17716 output_tokens=3863 reasoning_tokens=98 visible_output_tokens=3765 total_tokens=21579
+2026-10-27 11:09:37 | INFO    | packet=J02 stage=reviser result status=complete_with_gaps claims=3 artifacts=4 gaps=3 handoffs=2 ignored_changes=1
+2026-10-27 11:09:37 | INFO    | packet=J02 stage=evidence_validation final_valid=20 deferred_cross_packet=5 invalid=0
+2026-10-27 11:09:37 | INFO    | packet=J02 complete elapsed=73.8s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=57816 reasoning_tokens=3373 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=4
+2026-10-27 11:09:37 | INFO    | batch=dag_worker_done packet=J02 output=J02.json
+2026-10-27 11:09:37 | INFO    | batch=dag_worker_start packet=J03 title=环境检查与输入分支 dependencies=['J00', 'J01'] dependency_context_chars=11614 chars=15479
+2026-10-27 11:09:37 | INFO    | packet=J03 start chars=15479 dependencies=['J00', 'J01'] dependency_context_chars=11614 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:09:37 | INFO    | packet=J03 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:09:37 | INFO    | batch=dag_progress completed=3/16 succeeded=3 failed=0 running=8 pending=5 elapsed=175.5s
+2026-10-27 11:10:17 | INFO    | packet=J03 stage=analyzer done elapsed=40.5s requests=1 input_tokens=13546 output_tokens=5649 reasoning_tokens=1497 visible_output_tokens=4152 total_tokens=19195
+2026-10-27 11:10:17 | INFO    | packet=J03 stage=analyzer result status=complete_with_gaps claims=5 artifacts=10 gaps=3 handoffs=3
+2026-10-27 11:10:17 | INFO    | packet=J03 stage=evidence_validation analyzer_valid=32 deferred_cross_packet=2 invalid=0
+2026-10-27 11:10:17 | INFO    | packet=J03 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:10:42 | INFO    | packet=J03 stage=reviewer done elapsed=25.0s requests=1 input_tokens=18389 output_tokens=3167 reasoning_tokens=2085 visible_output_tokens=1082 total_tokens=21556
+2026-10-27 11:10:42 | INFO    | packet=J03 stage=reviewer result requires_revision=True issues=4 major_or_critical=1
+2026-10-27 11:10:42 | INFO    | packet=J03 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:11:14 | INFO    | packet=J03 stage=reviser done elapsed=31.5s requests=1 input_tokens=20394 output_tokens=4697 reasoning_tokens=226 visible_output_tokens=4471 total_tokens=25091
+2026-10-27 11:11:14 | INFO    | packet=J03 stage=reviser result status=complete_with_gaps claims=5 artifacts=10 gaps=3 handoffs=3 ignored_changes=5
+2026-10-27 11:11:14 | INFO    | packet=J03 stage=evidence_validation final_valid=35 deferred_cross_packet=2 invalid=0
+2026-10-27 11:11:14 | INFO    | packet=J03 complete elapsed=97.0s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=65842 reasoning_tokens=3808 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=5 artifacts=10
+2026-10-27 11:11:14 | INFO    | batch=dag_worker_done packet=J03 output=J03.json
+2026-10-27 11:11:14 | INFO    | batch=dag_worker_start packet=J04 title=安装、自复制、注册表写入 dependencies=['J00', 'J01'] dependency_context_chars=11614 chars=15623
+2026-10-27 11:11:14 | INFO    | packet=J04 start chars=15623 dependencies=['J00', 'J01'] dependency_context_chars=11614 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:11:14 | INFO    | packet=J04 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:11:14 | INFO    | batch=dag_progress completed=4/16 succeeded=4 failed=0 running=7 pending=5 elapsed=272.5s
+2026-10-27 11:11:47 | INFO    | packet=J04 stage=analyzer done elapsed=32.9s requests=1 input_tokens=13306 output_tokens=4768 reasoning_tokens=754 visible_output_tokens=4014 total_tokens=18074
+2026-10-27 11:11:47 | INFO    | packet=J04 stage=analyzer result status=complete_with_gaps claims=6 artifacts=6 gaps=4 handoffs=3
+2026-10-27 11:11:47 | INFO    | packet=J04 stage=evidence_validation analyzer_valid=26 deferred_cross_packet=0 invalid=0
+2026-10-27 11:11:47 | INFO    | packet=J04 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:12:08 | INFO    | packet=J04 stage=reviewer done elapsed=21.8s requests=1 input_tokens=17988 output_tokens=2518 reasoning_tokens=1722 visible_output_tokens=796 total_tokens=20506
+2026-10-27 11:12:08 | INFO    | packet=J04 stage=reviewer result requires_revision=True issues=2 major_or_critical=1
+2026-10-27 11:12:08 | INFO    | packet=J04 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:12:34 | INFO    | packet=J04 stage=reviser done elapsed=25.7s requests=1 input_tokens=19773 output_tokens=4566 reasoning_tokens=198 visible_output_tokens=4368 total_tokens=24339
+2026-10-27 11:12:34 | INFO    | packet=J04 stage=reviser result status=complete_with_gaps claims=6 artifacts=6 gaps=4 handoffs=3 ignored_changes=15
+2026-10-27 11:12:34 | INFO    | packet=J04 stage=evidence_validation final_valid=26 deferred_cross_packet=0 invalid=0
+2026-10-27 11:12:34 | INFO    | packet=J04 complete elapsed=80.4s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=62919 reasoning_tokens=2674 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=6 artifacts=6
+2026-10-27 11:12:34 | INFO    | batch=dag_worker_done packet=J04 output=J04.json
+2026-10-27 11:12:34 | INFO    | batch=dag_worker_start packet=J06 title=No-IP 与 Windows Live 数据提取 dependencies=['J00', 'J01'] dependency_context_chars=11614 chars=12325
+2026-10-27 11:12:34 | INFO    | packet=J06 start chars=12325 dependencies=['J00', 'J01'] dependency_context_chars=11614 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:12:34 | INFO    | packet=J06 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:12:34 | INFO    | batch=dag_progress completed=5/16 succeeded=5 failed=0 running=6 pending=5 elapsed=352.9s
+2026-10-27 11:13:04 | INFO    | packet=J06 stage=analyzer done elapsed=29.6s requests=1 input_tokens=11858 output_tokens=4255 reasoning_tokens=516 visible_output_tokens=3739 total_tokens=16113
+2026-10-27 11:13:04 | INFO    | packet=J06 stage=analyzer result status=complete_with_gaps claims=3 artifacts=7 gaps=3 handoffs=2
+2026-10-27 11:13:04 | INFO    | packet=J06 stage=evidence_validation analyzer_valid=17 deferred_cross_packet=4 invalid=0
+2026-10-27 11:13:04 | INFO    | packet=J06 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:13:30 | INFO    | packet=J06 stage=reviewer done elapsed=26.6s requests=1 input_tokens=16311 output_tokens=2929 reasoning_tokens=2197 visible_output_tokens=732 total_tokens=19240
+2026-10-27 11:13:30 | INFO    | packet=J06 stage=reviewer result requires_revision=False issues=2 major_or_critical=0
+2026-10-27 11:13:30 | INFO    | packet=J06 stage=reviser skipped reason=no_major_internal_issue
+2026-10-27 11:13:30 | INFO    | packet=J06 stage=evidence_validation final_valid=17 deferred_cross_packet=4 invalid=0
+2026-10-27 11:13:30 | INFO    | packet=J06 complete elapsed=56.1s delivery_status=success revision=False revision_failed=False requests=2 total_tokens=35353 reasoning_tokens=2713 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=7
+2026-10-27 11:13:30 | INFO    | batch=dag_worker_done packet=J06 output=J06.json
+2026-10-27 11:13:30 | INFO    | batch=dag_worker_start packet=J07 title=RAS 收集与私有数据 dependencies=['J00', 'J01'] dependency_context_chars=11614 chars=16804
+2026-10-27 11:13:30 | INFO    | packet=J07 start chars=16804 dependencies=['J00', 'J01'] dependency_context_chars=11614 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:13:30 | INFO    | packet=J07 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:13:30 | INFO    | batch=dag_progress completed=6/16 succeeded=6 failed=0 running=6 pending=4 elapsed=409.1s
+2026-10-27 11:14:00 | INFO    | packet=J07 stage=analyzer done elapsed=30.2s requests=1 input_tokens=13769 output_tokens=4217 reasoning_tokens=516 visible_output_tokens=3701 total_tokens=17986
+2026-10-27 11:14:00 | INFO    | packet=J07 stage=analyzer result status=complete_with_gaps claims=4 artifacts=5 gaps=4 handoffs=3
+2026-10-27 11:14:00 | INFO    | packet=J07 stage=evidence_validation analyzer_valid=25 deferred_cross_packet=0 invalid=0
+2026-10-27 11:14:00 | INFO    | packet=J07 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:14:17 | INFO    | packet=J07 stage=reviewer done elapsed=16.3s requests=1 input_tokens=18149 output_tokens=2016 reasoning_tokens=1116 visible_output_tokens=900 total_tokens=20165
+2026-10-27 11:14:17 | INFO    | packet=J07 stage=reviewer result requires_revision=True issues=3 major_or_critical=1
+2026-10-27 11:14:17 | INFO    | packet=J07 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:14:40 | INFO    | packet=J07 stage=reviser done elapsed=22.9s requests=1 input_tokens=19849 output_tokens=3913 reasoning_tokens=92 visible_output_tokens=3821 total_tokens=23762
+2026-10-27 11:14:40 | INFO    | packet=J07 stage=reviser result status=complete_with_gaps claims=4 artifacts=5 gaps=4 handoffs=3 ignored_changes=3
+2026-10-27 11:14:40 | INFO    | packet=J07 stage=evidence_validation final_valid=25 deferred_cross_packet=0 invalid=0
+2026-10-27 11:14:40 | INFO    | packet=J07 complete elapsed=69.4s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=61913 reasoning_tokens=1724 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=4 artifacts=5
+2026-10-27 11:14:40 | INFO    | batch=dag_worker_done packet=J07 output=J07.json
+2026-10-27 11:14:40 | INFO    | batch=dag_worker_start packet=J08 title=Protected Storage 收集 dependencies=['J00', 'J01'] dependency_context_chars=11614 chars=16423
+2026-10-27 11:14:40 | INFO    | packet=J08 start chars=16423 dependencies=['J00', 'J01'] dependency_context_chars=11614 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:14:40 | INFO    | packet=J08 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:14:40 | INFO    | batch=dag_progress completed=7/16 succeeded=7 failed=0 running=5 pending=4 elapsed=478.5s
+2026-10-27 11:15:05 | INFO    | packet=J08 stage=analyzer done elapsed=25.2s requests=1 input_tokens=14056 output_tokens=3389 reasoning_tokens=910 visible_output_tokens=2479 total_tokens=17445
+2026-10-27 11:15:05 | INFO    | packet=J08 stage=analyzer result status=complete_with_gaps claims=3 artifacts=2 gaps=3 handoffs=3
+2026-10-27 11:15:05 | INFO    | packet=J08 stage=evidence_validation analyzer_valid=13 deferred_cross_packet=1 invalid=0
+2026-10-27 11:15:05 | INFO    | packet=J08 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:15:23 | INFO    | packet=J08 stage=reviewer done elapsed=17.6s requests=1 input_tokens=17211 output_tokens=2117 reasoning_tokens=1296 visible_output_tokens=821 total_tokens=19328
+2026-10-27 11:15:23 | INFO    | packet=J08 stage=reviewer result requires_revision=True issues=3 major_or_critical=1
+2026-10-27 11:15:23 | INFO    | packet=J08 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:15:39 | INFO    | packet=J08 stage=reviser done elapsed=16.9s requests=1 input_tokens=18697 output_tokens=2710 reasoning_tokens=141 visible_output_tokens=2569 total_tokens=21407
+2026-10-27 11:15:39 | INFO    | packet=J08 stage=reviser result status=complete_with_gaps claims=3 artifacts=2 gaps=3 handoffs=3 ignored_changes=4
+2026-10-27 11:15:39 | INFO    | packet=J08 stage=evidence_validation final_valid=13 deferred_cross_packet=1 invalid=0
+2026-10-27 11:15:39 | INFO    | packet=J08 complete elapsed=59.7s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=58180 reasoning_tokens=2347 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=2
+2026-10-27 11:15:39 | INFO    | batch=dag_worker_done packet=J08 output=J08.json
+2026-10-27 11:15:39 | INFO    | batch=dag_worker_start packet=J09 title=Storage2 及 URL 派生 dependencies=['J00', 'J01'] dependency_context_chars=11614 chars=16367
+2026-10-27 11:15:39 | INFO    | packet=J09 start chars=16367 dependencies=['J00', 'J01'] dependency_context_chars=11614 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:15:39 | INFO    | packet=J09 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:15:39 | INFO    | batch=dag_progress completed=8/16 succeeded=8 failed=0 running=4 pending=4 elapsed=538.2s
+2026-10-27 11:16:13 | INFO    | packet=J09 stage=analyzer done elapsed=33.1s requests=1 input_tokens=13935 output_tokens=3882 reasoning_tokens=1034 visible_output_tokens=2848 total_tokens=17817
+2026-10-27 11:16:13 | INFO    | packet=J09 stage=analyzer result status=complete_with_gaps claims=3 artifacts=5 gaps=3 handoffs=2
+2026-10-27 11:16:13 | INFO    | packet=J09 stage=evidence_validation analyzer_valid=20 deferred_cross_packet=0 invalid=0
+2026-10-27 11:16:13 | INFO    | packet=J09 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:16:34 | INFO    | packet=J09 stage=reviewer done elapsed=21.8s requests=1 input_tokens=17417 output_tokens=2626 reasoning_tokens=1809 visible_output_tokens=817 total_tokens=20043
+2026-10-27 11:16:34 | INFO    | packet=J09 stage=reviewer result requires_revision=True issues=2 major_or_critical=1
+2026-10-27 11:16:34 | INFO    | packet=J09 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:16:54 | INFO    | packet=J09 stage=reviser done elapsed=19.2s requests=1 input_tokens=18996 output_tokens=3373 reasoning_tokens=158 visible_output_tokens=3215 total_tokens=22369
+2026-10-27 11:16:54 | INFO    | packet=J09 stage=reviser result status=complete_with_gaps claims=3 artifacts=5 gaps=3 handoffs=2 ignored_changes=5
+2026-10-27 11:16:54 | INFO    | packet=J09 stage=evidence_validation final_valid=20 deferred_cross_packet=0 invalid=0
+2026-10-27 11:16:54 | INFO    | packet=J09 complete elapsed=74.1s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=60229 reasoning_tokens=3001 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=5
+2026-10-27 11:16:54 | INFO    | batch=dag_worker_done packet=J09 output=J09.json
+2026-10-27 11:16:54 | INFO    | batch=dag_worker_start packet=J11 title=Firefox 前半：定位及初始化 dependencies=['J00', 'J01'] dependency_context_chars=11614 chars=14690
+2026-10-27 11:16:54 | INFO    | packet=J11 start chars=14690 dependencies=['J00', 'J01'] dependency_context_chars=11614 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:16:54 | INFO    | packet=J11 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:16:54 | INFO    | batch=dag_progress completed=9/16 succeeded=9 failed=0 running=3 pending=4 elapsed=612.4s
+2026-10-27 11:17:21 | INFO    | packet=J11 stage=analyzer done elapsed=27.0s requests=1 input_tokens=11848 output_tokens=3806 reasoning_tokens=439 visible_output_tokens=3367 total_tokens=15654
+2026-10-27 11:17:21 | INFO    | packet=J11 stage=analyzer result status=complete_with_gaps claims=3 artifacts=8 gaps=3 handoffs=2
+2026-10-27 11:17:21 | INFO    | packet=J11 stage=evidence_validation analyzer_valid=22 deferred_cross_packet=1 invalid=0
+2026-10-27 11:17:21 | INFO    | packet=J11 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:17:48 | INFO    | packet=J11 stage=reviewer done elapsed=27.5s requests=1 input_tokens=15907 output_tokens=3195 reasoning_tokens=1716 visible_output_tokens=1479 total_tokens=19102
+2026-10-27 11:17:48 | INFO    | packet=J11 stage=reviewer result requires_revision=True issues=4 major_or_critical=3
+2026-10-27 11:17:48 | INFO    | packet=J11 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:18:08 | INFO    | packet=J11 stage=reviser done elapsed=20.1s requests=1 input_tokens=18566 output_tokens=3636 reasoning_tokens=162 visible_output_tokens=3474 total_tokens=22202
+2026-10-27 11:18:08 | INFO    | packet=J11 stage=reviser result status=complete_with_gaps claims=3 artifacts=8 gaps=3 handoffs=2 ignored_changes=5
+2026-10-27 11:18:08 | INFO    | packet=J11 stage=evidence_validation final_valid=22 deferred_cross_packet=1 invalid=0
+2026-10-27 11:18:08 | INFO    | packet=J11 complete elapsed=74.6s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=56958 reasoning_tokens=2317 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=8
+2026-10-27 11:18:08 | INFO    | batch=dag_worker_done packet=J11 output=J11.json
+2026-10-27 11:18:08 | INFO    | batch=dag_worker_start packet=J13 title=宿主选择与 PE 映射主路径 dependencies=['J00', 'J01'] dependency_context_chars=11614 chars=13372
+2026-10-27 11:18:08 | INFO    | packet=J13 start chars=13372 dependencies=['J00', 'J01'] dependency_context_chars=11614 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:18:08 | INFO    | packet=J13 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:18:08 | INFO    | batch=dag_progress completed=10/16 succeeded=10 failed=0 running=3 pending=3 elapsed=687.0s
+2026-10-27 11:18:41 | INFO    | packet=J13 stage=analyzer done elapsed=32.9s requests=1 input_tokens=12244 output_tokens=4806 reasoning_tokens=565 visible_output_tokens=4241 total_tokens=17050
+2026-10-27 11:18:41 | INFO    | packet=J13 stage=analyzer result status=complete_with_gaps claims=5 artifacts=5 gaps=4 handoffs=3
+2026-10-27 11:18:41 | INFO    | packet=J13 stage=evidence_validation analyzer_valid=23 deferred_cross_packet=0 invalid=0
+2026-10-27 11:18:41 | INFO    | packet=J13 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:19:02 | INFO    | packet=J13 stage=reviewer done elapsed=20.7s requests=1 input_tokens=17169 output_tokens=2593 reasoning_tokens=1600 visible_output_tokens=993 total_tokens=19762
+2026-10-27 11:19:02 | INFO    | packet=J13 stage=reviewer result requires_revision=True issues=2 major_or_critical=2
+2026-10-27 11:19:02 | INFO    | packet=J13 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:19:35 | INFO    | packet=J13 stage=reviser done elapsed=33.0s requests=1 input_tokens=18973 output_tokens=5516 reasoning_tokens=107 visible_output_tokens=5409 total_tokens=24489
+2026-10-27 11:19:35 | INFO    | packet=J13 stage=reviser result status=complete_with_gaps claims=7 artifacts=5 gaps=4 handoffs=3 ignored_changes=4
+2026-10-27 11:19:35 | INFO    | packet=J13 stage=evidence_validation final_valid=25 deferred_cross_packet=1 invalid=0
+2026-10-27 11:19:35 | INFO    | packet=J13 complete elapsed=86.5s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=61301 reasoning_tokens=2272 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=7 artifacts=5
+2026-10-27 11:19:35 | INFO    | batch=dag_worker_done packet=J13 output=J13.json
+2026-10-27 11:19:35 | INFO    | batch=dag_worker_start packet=J05 title=安装路径辅助 dependencies=['J04', 'J01'] dependency_context_chars=8941 chars=8575
+2026-10-27 11:19:35 | INFO    | packet=J05 start chars=8575 dependencies=['J04', 'J01'] dependency_context_chars=8941 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:19:35 | INFO    | packet=J05 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:19:35 | INFO    | batch=dag_progress completed=11/16 succeeded=11 failed=0 running=3 pending=2 elapsed=773.5s
+2026-10-27 11:19:56 | INFO    | packet=J05 stage=analyzer done elapsed=21.1s requests=1 input_tokens=10760 output_tokens=2658 reasoning_tokens=424 visible_output_tokens=2234 total_tokens=13418
+2026-10-27 11:19:56 | INFO    | packet=J05 stage=analyzer result status=complete_with_gaps claims=4 artifacts=5 gaps=3 handoffs=2
+2026-10-27 11:19:56 | INFO    | packet=J05 stage=evidence_validation analyzer_valid=17 deferred_cross_packet=0 invalid=0
+2026-10-27 11:19:56 | INFO    | packet=J05 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:20:05 | INFO    | packet=J05 stage=reviewer done elapsed=9.0s requests=1 input_tokens=13661 output_tokens=920 reasoning_tokens=752 visible_output_tokens=168 total_tokens=14581
+2026-10-27 11:20:05 | INFO    | packet=J05 stage=reviewer result requires_revision=False issues=0 major_or_critical=0
+2026-10-27 11:20:05 | INFO    | packet=J05 stage=reviser skipped reason=no_major_internal_issue
+2026-10-27 11:20:05 | INFO    | packet=J05 stage=evidence_validation final_valid=17 deferred_cross_packet=0 invalid=0
+2026-10-27 11:20:05 | INFO    | packet=J05 complete elapsed=30.2s delivery_status=success revision=False revision_failed=False requests=2 total_tokens=27999 reasoning_tokens=1176 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=4 artifacts=5
+2026-10-27 11:20:05 | INFO    | batch=dag_worker_done packet=J05 output=J05.json
+2026-10-27 11:20:05 | INFO    | batch=dag_worker_start packet=J10 title=Credential Manager 与可选熵 dependencies=['J00', 'J01', 'J09'] dependency_context_chars=15617 chars=5779
+2026-10-27 11:20:05 | INFO    | packet=J10 start chars=5779 dependencies=['J00', 'J01', 'J09'] dependency_context_chars=15617 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:20:05 | INFO    | packet=J10 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:20:05 | INFO    | batch=dag_progress completed=12/16 succeeded=12 failed=0 running=4 pending=0 elapsed=803.7s
+2026-10-27 11:20:27 | INFO    | packet=J10 stage=analyzer done elapsed=22.3s requests=1 input_tokens=10859 output_tokens=2547 reasoning_tokens=417 visible_output_tokens=2130 total_tokens=13406
+2026-10-27 11:20:27 | INFO    | packet=J10 stage=analyzer result status=complete_with_gaps claims=2 artifacts=5 gaps=3 handoffs=1
+2026-10-27 11:20:27 | INFO    | packet=J10 stage=evidence_validation analyzer_valid=14 deferred_cross_packet=0 invalid=0
+2026-10-27 11:20:27 | INFO    | packet=J10 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:20:52 | INFO    | packet=J10 stage=reviewer done elapsed=24.6s requests=1 input_tokens=13608 output_tokens=3107 reasoning_tokens=2233 visible_output_tokens=874 total_tokens=16715
+2026-10-27 11:20:52 | INFO    | packet=J10 stage=reviewer result requires_revision=True issues=2 major_or_critical=2
+2026-10-27 11:20:52 | INFO    | packet=J10 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:21:08 | INFO    | packet=J10 stage=reviser done elapsed=16.1s requests=1 input_tokens=15164 output_tokens=2699 reasoning_tokens=124 visible_output_tokens=2575 total_tokens=17863
+2026-10-27 11:21:08 | INFO    | packet=J10 stage=reviser result status=complete_with_gaps claims=2 artifacts=5 gaps=3 handoffs=1 ignored_changes=8
+2026-10-27 11:21:08 | INFO    | packet=J10 stage=evidence_validation final_valid=14 deferred_cross_packet=0 invalid=0
+2026-10-27 11:21:08 | INFO    | packet=J10 complete elapsed=63.1s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=47984 reasoning_tokens=2774 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=2 artifacts=5
+2026-10-27 11:21:08 | INFO    | batch=dag_worker_done packet=J10 output=J10.json
+2026-10-27 11:21:08 | INFO    | batch=dag_worker_start packet=J12 title=Firefox 后半：读取、解密与返回 dependencies=['J11', 'J01'] dependency_context_chars=7205 chars=12221
+2026-10-27 11:21:08 | INFO    | packet=J12 start chars=12221 dependencies=['J11', 'J01'] dependency_context_chars=7205 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:21:08 | INFO    | packet=J12 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:21:08 | INFO    | batch=dag_progress completed=13/16 succeeded=13 failed=0 running=3 pending=0 elapsed=866.8s
+2026-10-27 11:21:34 | INFO    | packet=J12 stage=analyzer done elapsed=26.3s requests=1 input_tokens=9940 output_tokens=3512 reasoning_tokens=773 visible_output_tokens=2739 total_tokens=13452
+2026-10-27 11:21:34 | INFO    | packet=J12 stage=analyzer result status=complete_with_gaps claims=3 artifacts=4 gaps=4 handoffs=1
+2026-10-27 11:21:34 | INFO    | packet=J12 stage=evidence_validation analyzer_valid=13 deferred_cross_packet=2 invalid=0
+2026-10-27 11:21:34 | INFO    | packet=J12 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:22:05 | INFO    | packet=J12 stage=reviewer done elapsed=30.6s requests=1 input_tokens=13343 output_tokens=3490 reasoning_tokens=2212 visible_output_tokens=1278 total_tokens=16833
+2026-10-27 11:22:05 | INFO    | packet=J12 stage=reviewer result requires_revision=True issues=4 major_or_critical=2
+2026-10-27 11:22:05 | INFO    | packet=J12 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:22:24 | INFO    | packet=J12 stage=reviser done elapsed=19.1s requests=1 input_tokens=15381 output_tokens=2911 reasoning_tokens=101 visible_output_tokens=2810 total_tokens=18292
+2026-10-27 11:22:24 | INFO    | packet=J12 stage=reviser result status=complete_with_gaps claims=3 artifacts=3 gaps=4 handoffs=1 ignored_changes=5
+2026-10-27 11:22:24 | INFO    | packet=J12 stage=evidence_validation final_valid=12 deferred_cross_packet=2 invalid=0
+2026-10-27 11:22:24 | INFO    | packet=J12 complete elapsed=76.1s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=48577 reasoning_tokens=3086 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=3
+2026-10-27 11:22:24 | INFO    | batch=dag_worker_done packet=J12 output=J12.json
+2026-10-27 11:22:24 | INFO    | batch=dag_worker_start packet=J14 title=PE 导入、重定位及远程辅助 dependencies=['J13', 'J01'] dependency_context_chars=9513 chars=11540
+2026-10-27 11:22:24 | INFO    | packet=J14 start chars=11540 dependencies=['J13', 'J01'] dependency_context_chars=9513 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:22:24 | INFO    | packet=J14 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:22:24 | INFO    | batch=dag_progress completed=14/16 succeeded=14 failed=0 running=2 pending=0 elapsed=942.9s
+2026-10-27 11:22:55 | INFO    | packet=J14 stage=analyzer done elapsed=30.9s requests=1 input_tokens=12720 output_tokens=4303 reasoning_tokens=673 visible_output_tokens=3630 total_tokens=17023
+2026-10-27 11:22:55 | INFO    | packet=J14 stage=analyzer result status=complete_with_gaps claims=5 artifacts=5 gaps=4 handoffs=2
+2026-10-27 11:22:55 | INFO    | packet=J14 stage=evidence_validation analyzer_valid=19 deferred_cross_packet=0 invalid=0
+2026-10-27 11:22:55 | INFO    | packet=J14 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:23:12 | INFO    | packet=J14 stage=reviewer done elapsed=16.8s requests=1 input_tokens=17044 output_tokens=1958 reasoning_tokens=1222 visible_output_tokens=736 total_tokens=19002
+2026-10-27 11:23:12 | INFO    | packet=J14 stage=reviewer result requires_revision=True issues=2 major_or_critical=2
+2026-10-27 11:23:12 | INFO    | packet=J14 stage=reviser start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=20480 stream=True
+2026-10-27 11:23:33 | INFO    | packet=J14 stage=reviser done elapsed=20.7s requests=1 input_tokens=18587 output_tokens=3867 reasoning_tokens=63 visible_output_tokens=3804 total_tokens=22454
+2026-10-27 11:23:33 | INFO    | packet=J14 stage=reviser result status=complete_with_gaps claims=5 artifacts=5 gaps=4 handoffs=2 ignored_changes=9
+2026-10-27 11:23:33 | INFO    | packet=J14 stage=evidence_validation final_valid=19 deferred_cross_packet=0 invalid=0
+2026-10-27 11:23:33 | INFO    | packet=J14 complete elapsed=68.4s delivery_status=success revision=True revision_failed=False requests=3 total_tokens=58479 reasoning_tokens=1958 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=5 artifacts=5
+2026-10-27 11:23:33 | INFO    | batch=dag_worker_done packet=J14 output=J14.json
+2026-10-27 11:23:33 | INFO    | batch=dag_worker_start packet=J15 title=独立的远程删除分支 dependencies=['J13', 'J01'] dependency_context_chars=9513 chars=4061
+2026-10-27 11:23:33 | INFO    | packet=J15 start chars=4061 dependencies=['J13', 'J01'] dependency_context_chars=9513 request_budget=3 token_budget=130000 wall_clock=600.0s stage_models={'analyzer': 'internal:gpt-5.6-luna', 'reviewer': 'internal:gpt-5.6-luna', 'reviser': 'internal:gpt-5.6-luna', 'format_repair': 'internal:gpt-5.6-luna'} format_repair_enabled=True repair_attempts=3
+2026-10-27 11:23:33 | INFO    | packet=J15 stage=analyzer start model_profile=investigator provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=40960 stream=True
+2026-10-27 11:23:33 | INFO    | batch=dag_progress completed=15/16 succeeded=15 failed=0 running=1 pending=0 elapsed=1011.3s
+2026-10-27 11:23:54 | INFO    | packet=J15 stage=analyzer done elapsed=21.7s requests=1 input_tokens=9162 output_tokens=2941 reasoning_tokens=516 visible_output_tokens=2425 total_tokens=12103
+2026-10-27 11:23:54 | INFO    | packet=J15 stage=analyzer result status=complete_with_gaps claims=3 artifacts=3 gaps=2 handoffs=2
+2026-10-27 11:23:54 | INFO    | packet=J15 stage=evidence_validation analyzer_valid=12 deferred_cross_packet=1 invalid=0
+2026-10-27 11:23:54 | INFO    | packet=J15 stage=reviewer start model_profile=reviewer_fast provider=internal model=gpt-5.6-luna api=chat output_mode=tool reasoning=omit max_output_tokens=15360 stream=True
+2026-10-27 11:24:07 | INFO    | packet=J15 stage=reviewer done elapsed=12.5s requests=1 input_tokens=12242 output_tokens=1412 reasoning_tokens=1255 visible_output_tokens=157 total_tokens=13654
+2026-10-27 11:24:07 | INFO    | packet=J15 stage=reviewer result requires_revision=False issues=0 major_or_critical=0
+2026-10-27 11:24:07 | INFO    | packet=J15 stage=reviser skipped reason=no_major_internal_issue
+2026-10-27 11:24:07 | INFO    | packet=J15 stage=evidence_validation final_valid=12 deferred_cross_packet=1 invalid=0
+2026-10-27 11:24:07 | INFO    | packet=J15 complete elapsed=34.2s delivery_status=success revision=False revision_failed=False requests=2 total_tokens=25757 reasoning_tokens=1771 repair_triggered=0 repair_attempts=0 final_status=complete_with_gaps claims=3 artifacts=3
+2026-10-27 11:24:07 | INFO    | batch=dag_worker_done packet=J15 output=J15.json
+2026-10-27 11:24:07 | INFO    | batch=dag_progress completed=16/16 succeeded=16 failed=0 running=0 pending=0 elapsed=1045.5s
+2026-10-27 11:24:07 | INFO    | batch=material_inventory indexed_functions=123 additional_files=0 requests=97 resolved_materials=56 scan_complete=True
+2026-10-27 11:24:07 | INFO    | stage=global_reconciliation start packets=16 source_claims=60 reduced_claims=60 source_artifacts=87 reduced_artifacts=78 artifact_conflicts=1 unavailable=0 input_chars=63939 request_budget=1 token_budget=160000 wall_clock=300.0s
+2026-10-27 11:24:18 | INFO    | stage=global_reconciliation complete elapsed=11.6s status=complete canonical_claims=58 canonical_artifacts=78 conflicts=0 historical_gaps=89 report_projection=deterministic unaccounted_claims=0 unaccounted_artifacts=0
+2026-10-27 11:24:18 | INFO    | batch=global_reconciliation_done status=success result_status=complete provenance_valid=True output=_global_reconciliation.json elapsed=11.7s
+2026-10-27 11:24:18 | INFO    | batch=html_report_start input=results\_global_reconciliation.json output_dir=results\html_report
+2026-10-27 11:25:00 | ERROR   | batch=html_report_failed analysis_preserved=true error=ValueError message=正文遗漏分析行为: G:C037
+2026-10-27 12:36:17 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1804\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 12:36:17 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 12:41:38 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1807\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 12:41:38 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 12:48:09 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1816\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 12:48:09 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 16:10:20 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1818\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 16:10:20 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 16:15:34 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1821\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 16:15:34 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 16:18:12 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1823\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 16:18:12 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 16:38:00 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1829\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 16:38:00 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-27 16:44:14 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1833\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-27 16:44:14 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-28 15:30:25 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1835\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-28 15:30:25 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-28 15:47:17 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1837\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-28 15:47:17 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-28 16:22:36 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1838\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-28 16:22:36 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-28 16:28:57 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1842\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-28 16:28:57 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-10-29 15:35:51 | WARNING | command=assess missing_auto_inventory source=C:\Users\biguncle\AppData\Local\Temp\pytest-of-biguncle\pytest-1846\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-10-29 15:35:51 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0

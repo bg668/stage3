@@ -1,23 +1,20 @@
 from __future__ import annotations
 
 import asyncio
-import importlib
 import json
-import sys
-import types
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 from pydantic import ValidationError
 
-from bounded_investigator.artifact_normalization import (
+from bounded_investigator.investigation.artifact_normalization import (
     normalize_investigation_result, split_artifact,
 )
-from bounded_investigator.json_compat import ensure_json_keyword
-from bounded_investigator.material_inventory import build_automatic_scope, build_input_inventory
+from bounded_investigator.execution.json_compat import ensure_json_keyword
+from bounded_investigator.evidence.inventory import build_automatic_scope, build_input_inventory
 from bounded_investigator.reconciliation import project_reconciliation_input
-from bounded_investigator.review_guard import constrain_reviewer_scope
+from bounded_investigator.investigation.review_guard import constrain_reviewer_scope
 from bounded_investigator.schemas import (
     ArtifactFinding, CoverageReview, DeliveryStatus, EvidenceRef, InvestigationResult,
     InvestigationStatus, MaterialNeed, MaterialTarget, ReviewIssue, RunEnvelope,
@@ -125,7 +122,7 @@ def test_atomic_file_artifact_list_split_without_rewriting_evidence():
     assert split_artifact(_artifact(r"C:\some, dir\only.abc"))[0].value == r"C:\some, dir\only.abc"
 
 
-def test_runtime_and_legacy_reconciliation_both_normalize_atomic_values():
+def test_runtime_and_global_reconciliation_both_normalize_atomic_values():
     original = _env(artifacts=[_artifact("NOIP.abc; MSN.abc")]).result
     updated = normalize_investigation_result(original)
     assert [a.value for a in updated.artifacts] == ["NOIP.abc", "MSN.abc"]
@@ -177,38 +174,40 @@ def test_json_object_keyword_is_in_user_input_for_prompted_and_native():
     assert ensure_json_keyword("<task>resolve</task>","tool") == "<task>resolve</task>"
 
 
-def test_reconcile_cli_runs_from_saved_envelopes_without_worker(monkeypatch,tmp_path):
-    # Stub only the uninstalled external PydanticAI runtime. The CLI and
-    # entire persisted-file loading/replay boundary are exercised for real.
-    seen={}
+def test_reconcile_cli_runs_from_saved_envelopes_without_worker(monkeypatch, tmp_path):
+    from typer.testing import CliRunner
+    from bounded_investigator import cli, workflow
+    from bounded_investigator.schemas import GlobalReconciliationEnvelope
+
+    seen = {}
+
     class FakeWorkflow:
-        def __init__(self, config):pass
+        def __init__(self, config):
+            pass
+
         async def run(self, **kwargs):
             raise AssertionError("replay must not execute Worker")
+
         async def run_global_reconciliation(self, **kwargs):
             seen.update(kwargs)
-            return SimpleNamespace(
-                final_assessment=None,result=None,delivery_status=DeliveryStatus.SUCCESS,
-                provenance_valid=True,usage=UsageSummary(),
-                model_dump_json=lambda **kwargs:'{"delivery_status":"success"}'
+            return GlobalReconciliationEnvelope(
+                result=None, delivery_status=DeliveryStatus.SUCCESS,
+                elapsed_seconds=0, provenance_valid=True,
             )
-    stub=types.ModuleType("bounded_investigator.workflow")
-    stub.BoundedInvestigationWorkflow=FakeWorkflow
-    monkeypatch.setitem(sys.modules,"bounded_investigator.workflow",stub)
-    sys.modules.pop("bounded_investigator.cli",None)
-    try:
-        cli=importlib.import_module("bounded_investigator.cli")
-        src=tmp_path/"saved"
-        src.mkdir()
-        (src/"J00.json").write_text(_env().model_dump_json(),encoding="utf-8")
-        (src/"J01.error.json").write_text('{"error":"failed"}',encoding="utf-8")
-        out=tmp_path/"replayed"
-        cfg=SimpleNamespace(global_reconciliation=SimpleNamespace(enabled=True))
-        summary=asyncio.run(cli._reconcile_saved_results(packet_results_dir=src,output_dir=out,config=cfg))
-        assert summary["completed_packets"] == ["J00"]
-        assert "J01" in summary["failed_packets"]
-        assert "J00" in seen["completed_results"]
-        assert (out/"_global_reconciliation.json").is_file()
-        assert (out/"_reconcile_summary.json").is_file()
-    finally:
-        sys.modules.pop("bounded_investigator.cli",None)
+
+    monkeypatch.setattr(workflow, "BoundedInvestigationWorkflow", FakeWorkflow)
+    monkeypatch.setattr(cli, "configure_logging", lambda *_: None)
+    src = tmp_path / "saved"
+    src.mkdir()
+    (src / "J00.json").write_text(_env().model_dump_json(), encoding="utf-8")
+    (src / "J01.error.json").write_text('{"error":"failed"}', encoding="utf-8")
+    out = tmp_path / "replayed"
+    result = CliRunner().invoke(cli.app, [
+        "reconcile", str(src), "--output-dir", str(out), "--config", "config.example.yaml",
+    ])
+    assert result.exit_code == 0, result.exception
+    summary = json.loads((out / "_reconcile_summary.json").read_text(encoding="utf-8"))
+    assert summary["completed_packets"] == ["J00"]
+    assert "J01" in summary["failed_packets"]
+    assert "J00" in seen["completed_results"]
+    assert (out / "_global_reconciliation.json").is_file()

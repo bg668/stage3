@@ -3,9 +3,9 @@ from pathlib import Path
 from typer.testing import CliRunner
 
 from bounded_investigator.cli import app
-from bounded_investigator.knowledge_report import _valuable_limitations
-from bounded_investigator.source_snippets import (
-    build_code_index, extract_evidence_excerpt, extract_evidence_excerpts, report_code_excerpts,
+from bounded_investigator.reporting.knowledge_report import _valuable_limitations
+from bounded_investigator.evidence.snippets import (
+    build_code_index, extract_evidence_excerpts, report_code_excerpts,
 )
 
 
@@ -21,14 +21,15 @@ def test_snippets_are_verbatim_and_strictly_cited(tmp_path: Path):
     index = build_code_index([folder/'J00.md'])
     item = {'canonical_id':'G:C001','behavior':'call do_work', 'action':'do_work()',
             'sink':'done','evidence':[{'location':'F-0123 L2-L3', 'observation':'do_work'}]}
-    excerpt = extract_evidence_excerpt(item,index)
+    excerpts = extract_evidence_excerpts(item, index, max_excerpts=1)
+    excerpt = excerpts[0]
     assert excerpt is not None
     assert excerpt['function_id'] == 'F-0123'
     assert excerpt['code'] == 'L0002:   do_work();\nL0003:   return 1;'
     assert excerpt['source_packets'] == ['J00.md']
     assert 'imagined line' not in excerpt['code']
-    assert extract_evidence_excerpt({**item,'evidence':[{'location':'F-0123 L6-L10','observation':'missing'}]},index) is None
-    assert extract_evidence_excerpt({**item,'evidence':[{'location':'F-9999 L1-L3','observation':'missing'}]},index) is None
+    assert extract_evidence_excerpts({**item,'evidence':[{'location':'F-0123 L6-L10','observation':'missing'}]},index) == []
+    assert extract_evidence_excerpts({**item,'evidence':[{'location':'F-9999 L1-L3','observation':'missing'}]},index) == []
     assert report_code_excerpts({'core_behaviors':[{'source_claim_ids':['J00:C001'],**item}]},folder)
 
 
@@ -117,7 +118,7 @@ def test_evidence_ranges_merge_across_real_packets(tmp_path: Path):
         )
     idx=build_code_index(list(tmp_path.glob('J*.md')))
     item={'behavior':'test','evidence':[{'location':'F-0483 L3-L4','observation':'last segment'}]}
-    ex=extract_evidence_excerpt(item,idx)
+    ex=extract_evidence_excerpts(item,idx,max_excerpts=1)[0]
     assert ex is not None and 'code_line_4' in ex['code']
     assert ex['source_packets']==['J12.md']
 
@@ -136,6 +137,8 @@ def test_boilerplate_filter_does_not_modify_original_values():
 def test_cli_version_exposes_loaded_module_and_schema():
     output=CliRunner().invoke(app,['version'])
     assert output.exit_code==0,output.stdout
-    assert '1.7.2' in output.stdout
-    assert 'schema_version: 10.0' in output.stdout
+    from bounded_investigator import __version__
+    from bounded_investigator.schemas import SCHEMA_VERSION
+    assert __version__ in output.stdout
+    assert f'schema_version: {SCHEMA_VERSION}' in output.stdout
     assert 'loaded_module:' in output.stdout

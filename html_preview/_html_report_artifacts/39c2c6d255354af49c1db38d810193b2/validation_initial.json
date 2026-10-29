@@ -1,0 +1,51 @@
+{
+  "issues": [
+    {
+      "code": "missing_behavior",
+      "path": "/sections",
+      "fact_ids": [
+        "G:C050"
+      ],
+      "message": "正文遗漏分析行为: G:C050",
+      "correction": "在合适机制章节实质表述这些行为及关键条件，不能只补引用"
+    },
+    {
+      "code": "missing_state_note",
+      "path": "/findings/0/state_note",
+      "fact_ids": [
+        "G:C042"
+      ],
+      "message": "部分证实的发现缺少证据缺口说明",
+      "correction": "用一句话说明疑似行为尚缺什么，不得升级事实确定程度"
+    },
+    {
+      "code": "missing_state_note",
+      "path": "/findings/2/state_note",
+      "fact_ids": [
+        "G:C042"
+      ],
+      "message": "部分证实的发现缺少证据缺口说明",
+      "correction": "用一句话说明疑似行为尚缺什么，不得升级事实确定程度"
+    },
+    {
+      "code": "missing_finding_gap",
+      "path": "/gaps",
+      "fact_ids": [
+        "G:C014",
+        "G:C015",
+        "G:C016"
+      ],
+      "message": "部分证实的发现必须关联缺口",
+      "correction": "在 gaps 中说明未闭合部分，并用 claim_ids 关联对应疑似行为"
+    },
+    {
+      "code": "missing_state_note",
+      "path": "/findings/8/state_note",
+      "fact_ids": [
+        "G:C047"
+      ],
+      "message": "部分证实的发现缺少证据缺口说明",
+      "correction": "用一句话说明疑似行为尚缺什么，不得升级事实确定程度"
+    }
+  ]
+}

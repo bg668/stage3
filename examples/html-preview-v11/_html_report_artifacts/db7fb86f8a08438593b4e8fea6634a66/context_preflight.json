@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "id": "SYNTHETIC-REPORT-1.1",
+    "title": "配置解码、落地与条件提交样本（合成演示）",
+    "date": "2026-10-28",
+    "product": "合成样本 · 版式验收",
+    "edition": "显式提供的演示上下文",
+    "tlp": "TLP:CLEAR",
+    "sample": {
+      "filename": "synthetic-config-demo.exe",
+      "filetype": "合成输入，无实际样本文件",
+      "arch": "x64（演示字段）"
+    },
+    "method": "静态分析（基于提供的源码与结构化分析结果）"
+  },
+  "hashes": [
+    {
+      "type": "SHA256",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source": "显式合成演示值，不是实际样本哈希"
+    }
+  ],
+  "attack": [
+    {
+      "id": "T1027",
+      "name": "配置解码模块（合成映射）",
+      "evidence": "仅验证 ATT&CK 排版，不构成实际样本技术认定"
+    }
+  ],
+  "attribution": {
+    "family": "演示家族（合成）",
+    "confidence": "仅验证版式，无归因效力",
+    "support": [
+      "显式提供的合成上下文，不代表实际家族情报"
+    ],
+    "not_confirmed": [
+      "不能据此推断本样本具有其他家族能力"
+    ]
+  },
+  "yara": "/* 显式合成演示规则，仅验证附录排版，不用于检测 */\nrule Synthetic_Layout_Only { condition: false }"
+}

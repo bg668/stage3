@@ -67,10 +67,14 @@ stages:
   format_repair:
     model: repair_fast
     max_output_tokens: 40960
-  # v0.7: relationship decisions only; canonical facts are assembled by Python.
+  # Relationship decisions only; canonical facts are assembled by Python.
   global_reconciliation:
     model: global_reconciler
     max_output_tokens: 40960
+  # Read-only HTML narrative composition; does not rerun investigation roles.
+  report_composition:
+    model: global_reconciler
+    max_output_tokens: 16384
 
 
 workflow:
@@ -92,11 +96,10 @@ global_reconciliation:
   total_tokens_limit: 160000
   wall_clock_seconds: 300
 
-final_evidence_assessment:
-  enabled: false
-  max_model_requests: 1
-  total_tokens_limit: 60000
-  wall_clock_seconds: 180
+html_report:
+  max_model_requests: 2
+  total_tokens_limit: 256000
+  wall_clock_seconds: 300
 
 batch:
   concurrency: 1

@@ -6,11 +6,12 @@ from types import SimpleNamespace
 
 import pytest
 
+from bounded_investigator.execution.stage_runner import RepairRuntime, StageRunner, StageOutcome
 from bounded_investigator.prompts import render_result_context, reviser_prompt
 from bounded_investigator.schemas import (
     CoverageReview, DetectionSpecificity, EvidenceLevel, InvestigationResult, InvestigationStatus,
 )
-from bounded_investigator.source_snippets import build_code_index_from_text
+from bounded_investigator.evidence.snippets import build_code_index_from_text
 
 
 MATERIAL = """## F-0001 sub_main
@@ -58,8 +59,8 @@ def review_for(*targets, severity="major", scope="packet_internal"):
 
 
 def apply_revision(draft, candidate, review, **kwargs):
-    assert importlib.util.find_spec("bounded_investigator.revision") is not None, "Scoped merge is missing"
-    from bounded_investigator.revision import merge_scoped_revision
+    assert importlib.util.find_spec("bounded_investigator.investigation.revision") is not None, "Scoped merge is missing"
+    from bounded_investigator.investigation.revision import merge_scoped_revision
 
     return merge_scoped_revision(draft, candidate, review, **kwargs)
 
@@ -296,6 +297,71 @@ def test_handoff_exposes_original_paths_and_allowed_operations(draft):
     assert "material {{raw}}" in prompt
 
 
+def test_reviser_input_requests_complete_result_without_omitting_items(draft):
+    prompt = reviser_prompt('J00', 'material', draft, review_for(('claim_revision', '/claims/0')))
+    assert '返回完整最终结果；可以精简文字，不得省略条目' in prompt
+    assert 'Analyzer 原始零基编号' in prompt
+    assert '返回精简最终结果' not in prompt
+
+
+@pytest.mark.parametrize('targets, expected', [
+    ([('claim_revision', '/claims/0')], [
+        'claims：原有 2；删除 0；新增 0；最终必须为 2。',
+        '原 /claims/0 → 输出 /claims/0：保留条目，仅修改已授权字段。',
+        '原 /claims/1 → 输出 /claims/1：原样保留。',
+    ]),
+    ([('append_item', '/claims/2')], [
+        'claims：原有 2；删除 0；新增 1；最终必须为 3。',
+        '原 /claims/0 → 输出 /claims/0：原样保留。',
+        '原 /claims/1 → 输出 /claims/1：原样保留。',
+        '新增授权 /claims/2 → 输出 /claims/2：追加完整条目。',
+    ]),
+    ([('delete_item', '/claims/0')], [
+        'claims：原有 2；删除 1；新增 0；最终必须为 1。',
+        '原 /claims/0：删除，不进入输出。',
+        '原 /claims/1 → 输出 /claims/0：原样保留。',
+    ]),
+    ([('delete_item', '/claims/0'), ('append_item', '/claims/2')], [
+        'claims：原有 2；删除 1；新增 1；最终必须为 2。',
+        '原 /claims/1 → 输出 /claims/0：原样保留。',
+        '新增授权 /claims/2 → 输出 /claims/1：追加完整条目。',
+    ]),
+    ([('delete_item', '/claims/0'), ('delete_item', '/claims/1'), ('append_item', '/claims/2')], [
+        'claims：原有 2；删除 2；新增 1；最终必须为 1。',
+        '新增授权 /claims/2 → 输出 /claims/0：追加完整条目。',
+    ]),
+    ([('reference_format', '/claims/*')], [
+        '原 /claims/0 → 输出 /claims/0：保留条目，仅修改已授权字段。',
+        '原 /claims/1 → 输出 /claims/1：保留条目，仅修改已授权字段。',
+    ]),
+])
+def test_scope_explains_final_counts_and_original_to_output_positions(draft, targets, expected):
+    from bounded_investigator.investigation.revision import render_revision_scope
+    before = draft.model_dump()
+    review = review_for(*targets)
+    text = render_revision_scope(draft, review)
+    assert '最终列表结构' in text
+    for line in expected:
+        assert line in text
+    assert 'artifacts：原有 2；删除 0；新增 0；最终必须为 2。' in text
+    assert 'gaps：原有 1；删除 0；新增 0；最终必须为 1。' in text
+    assert 'handoffs：原有 0；删除 0；新增 0；最终必须为 0。' in text
+    assert 'material_needs：原有 0；删除 0；新增 0；最终必须为 0。' in text
+    assert render_revision_scope(draft, review) == text
+    assert draft.model_dump() == before
+
+
+def test_minor_append_is_explained_after_major_issue_triggers_revision(draft):
+    from bounded_investigator.investigation.revision import render_revision_scope
+    minor = review_for(('append_item', '/claims/2'), severity='minor')
+    assert '未触发修订' in render_revision_scope(draft, minor)
+    review = review_for(('claim_revision', '/claims/0'))
+    review.issues.append(minor.issues[0].model_copy(update={'issue_id': 'R2'}))
+    text = render_revision_scope(draft, review)
+    assert 'claims：原有 2；删除 0；新增 1；最终必须为 3。' in text
+    assert '新增授权 /claims/2 → 输出 /claims/2：追加完整条目。' in text
+
+
 @pytest.mark.parametrize(("stage", "expected_count"), [("analyzer", 3), ("reviser", 2)])
 def test_reviser_candidate_is_not_normalized_before_original_indices_are_applied(draft, tmp_path, stage, expected_count):
     from bounded_investigator import workflow
@@ -308,15 +374,15 @@ def test_reviser_candidate_is_not_normalized_before_original_indices_are_applied
     async def fake_run(*args, **kwargs):
         return SimpleNamespace(output=candidate)
 
-    runner = workflow.BoundedInvestigationWorkflow.__new__(workflow.BoundedInvestigationWorkflow)
+    runner = StageRunner(config=SimpleNamespace(), format_repair=None, log=__import__("logging").getLogger("test.stage"))
     agent = SimpleNamespace(
         stage=stage, schema=InvestigationResult,
         agent=SimpleNamespace(run=fake_run),
         model_config=SimpleNamespace(stream_output=False, output_mode="tool"),
     )
-    outcome = asyncio.run(runner._run_agent(
+    outcome = asyncio.run(runner.run(
         stage_agent=agent, prompt="material", packet_name="J00", usage=RunUsage(),
-        limits=UsageLimits(), repair_runtime=workflow._RepairRuntime(), artifact_dir=tmp_path,
+        limits=UsageLimits(), repair_runtime=RepairRuntime(), artifact_dir=tmp_path,
     ))
     assert len(outcome.output.artifacts) == expected_count
     assert len(candidate.artifacts) == 2
@@ -356,12 +422,12 @@ def test_workflow_uses_guarded_result_and_records_failures_without_extra_calls(d
     async def run_agent(**kwargs):
         stage = kwargs["stage_agent"].stage
         calls.append(stage)
-        return workflow._StageOutcome(
+        return StageOutcome(
             status=workflow.DeliveryStatus.SUCCESS,
             output={"analyzer": draft, "reviewer": review, "reviser": candidate}[stage],
         )
 
-    monkeypatch.setattr(runner, "_run_agent", run_agent)
+    monkeypatch.setattr(runner.stage_runner, "run", run_agent)
     envelope = asyncio.run(runner.run(packet_name="J00", packet_text=MATERIAL, artifact_dir=tmp_path))
     assert calls == (["analyzer", "reviewer"] if mode == "bad_scope" else ["analyzer", "reviewer", "reviser"])
     if mode == "accepted":

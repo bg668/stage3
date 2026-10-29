@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="malware-report-html 1.1">
+<title>配置解码、落地与条件提交样本（合成演示）</title>
+<style>
+/* 恶意样本分析报告 · 样式（render.py 会把本文件内联进输出 HTML）
+   不引用任何外部字体或资源，离线环境也能正常显示。 */
+:root{
+  --ground:#F4F5F7; --surface:#FFFFFF; --ink:#111827; --ink-2:#1F2937; --muted:#4B5563; --faint:#6B7280;
+  --line:#E5E7EB; --line-2:#EEF0F3; --line-strong:#D1D5DB; --soft:#F9FAFB;
+  --navy:#0F172A; --navy-2:#1E293B; --on-navy:#F9FAFB; --on-navy-muted:#94A3B8;
+  --red:#B42318; --red-soft:#FEF3F2; --red-line:#FECDCA; --red-ink:#7A271A;
+  --blue-soft:#F5F8FF; --blue-line:#C7D7FB; --amber-soft:#FFFBF2; --amber-line:#F3D9A4;
+  --amber:#B54708; --amber-ink:#93370D;
+  --sans:"IBM Plex Sans","PingFang SC","Microsoft YaHei","Noto Sans SC","Hiragino Sans GB",system-ui,sans-serif;
+  --mono:"IBM Plex Mono","JetBrains Mono",Consolas,Menlo,ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:#1D4ED8}a:hover{color:#1E3A8A}
+code,.mono{font-family:var(--mono)}
+p code,li code,td code,.card-text code,.callout code{font-size:.9em;background:#F3F4F6;padding:1px 5px;border-radius:3px;word-break:break-all}
+
+/* ---- 标签 ---- */
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;line-height:18px;white-space:nowrap}
+.t-neutral{background:#EEF0F3;color:#1F2937}
+.t-risk{background:#FEE4E2;color:#912018}
+.t-ext{background:#DBE7FE;color:#1E40AF}
+.t-empty{background:#FDECC8;color:#7A4306}
+.t-ok{background:#D5F2EC;color:#0B5D52}
+.t-muted{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line-strong)}
+
+/* ---- 报告头 ---- */
+.hero{background:var(--navy);color:var(--on-navy)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:32px;padding-right:32px}
+.hero .wrap{padding-top:40px;padding-bottom:32px;display:flex;flex-direction:column;gap:24px}
+.hero-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:#CBD5E1;font-family:var(--mono)}
+.hero-head{display:flex;flex-direction:column;gap:12px}
+.sample-line{font-family:var(--mono);font-size:13px;color:#CBD5E1;overflow-wrap:anywhere}
+.hero-title{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+.hero-title h1{margin-right:8px}
+.audit{display:inline-flex;align-items:center;padding:5px 12px;border-radius:6px;font-size:13px;font-weight:600;border:1px solid}
+.audit-pass{color:#A6F4C5;border-color:#3B7C6A}
+.audit-fail{color:#FEDF89;border-color:#DC6803;background:rgba(220,104,3,.16)}
+.audit-none{color:#CBD5E1;border-color:#475569;border-style:dashed}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px}
+.htag{display:inline-flex;padding:2px 10px;border-radius:4px;font-size:13px;color:#E2E8F0;border:1px solid #475569}
+.htag.mal{color:#FECDCA;border-color:#D92D20;background:rgba(217,45,32,.14)}
+.hero h1{margin:0;font-size:40px;line-height:48px;font-weight:700;letter-spacing:-.01em}
+.risk-badge{display:inline-flex;padding:6px 14px;border-radius:6px;font-size:15px;font-weight:700;color:#fff}
+.verdict{margin:0;font-size:18px;line-height:1.6;color:#E2E8F0;max-width:920px}
+.hero-grid{display:flex;flex-wrap:wrap;gap:24px}
+.hashes{flex:3 1 520px;min-width:0;align-self:flex-start;background:var(--navy-2);border-radius:8px;padding:16px 20px;display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px 12px;font-size:13px;font-family:var(--mono)}
+.hashes dt{color:var(--on-navy-muted)}.hashes dd{margin:0;color:#F1F5F9;word-break:break-all}
+.facts{flex:2 1 320px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px;font-size:14px;margin:0}
+.facts div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.facts dt{font-size:12px;color:var(--on-navy-muted)}.facts dd{margin:0;overflow-wrap:anywhere}
+
+/* ---- 主体 ---- */
+.page{padding-top:24px;padding-bottom:64px;display:flex;flex-direction:column;gap:24px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:6px}
+.kpi .l,.kpi .s{font-size:12px;color:var(--muted)}
+.kpi .v{font-family:var(--mono);font-size:26px;line-height:32px;font-weight:600}
+
+/* ---- 行为链总览 ---- */
+.flow{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px 32px 0;overflow:hidden}
+.flow-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:24px}
+.flow-head .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--faint)}
+.flow-head h2{margin:6px 0;font-size:24px;line-height:32px}
+.flow-head p{margin:0;font-size:14px;color:var(--muted)}
+.legend{display:flex;gap:8px;align-items:center;font-size:13px;color:#374151}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--red);flex:none}
+.flow-scroll{overflow-x:auto;margin:-10px -32px 0;padding:10px 32px 0}
+.flow-grid{display:grid;column-gap:12px;row-gap:28px;padding-bottom:28px}
+.phase{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 12px;border-radius:6px;background:#F1F5F9;border-top:3px solid #334155;min-width:0}
+.phase b{font-size:13px;color:#1E293B;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.phase span{font-family:var(--mono);font-size:11px;color:#475569;white-space:nowrap}
+.track{grid-column:1/-1;position:relative;display:grid;column-gap:12px}
+.track-line{position:absolute;top:21px;height:2px;background:#CBD5E1}
+.stop{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;min-width:0}
+.stop-name{font-size:16px;line-height:22px;font-weight:700}
+.node{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:14px;font-weight:600;position:relative;z-index:1;flex:none;background:var(--navy);color:#fff;border:2px solid var(--navy);box-shadow:0 0 0 6px #fff}
+.node.key{background:var(--red);border-color:var(--red);box-shadow:0 0 0 6px #fff,0 0 0 9px var(--red-line)}
+.vflow{display:flex;flex-direction:column;max-width:920px;padding-bottom:12px}
+.vstep{display:flex;gap:20px}
+.vrail{flex:none;width:44px;display:flex;flex-direction:column;align-items:center}
+.vrail i{flex:1;width:2px;min-height:20px;background:#CBD5E1;margin-top:6px}
+.vbody{flex:1;min-width:0;padding:10px 0 22px;display:flex;flex-direction:column;gap:4px}
+.vbody .ph{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:#475569}
+.vbody .stop-name{font-size:17px;line-height:24px}
+.flow-stats{margin:0 -32px;padding:16px 32px;background:#F8FAFC;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 40px;align-items:baseline}
+.flow-stats span{display:inline-flex;align-items:baseline;gap:8px;font-size:13px;color:var(--muted)}
+.flow-stats b{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--ink)}
+.flow-stats b.red{color:var(--red)}
+
+/* ---- 关键发现（1.1） ---- */
+.findings{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px 32px}
+.fhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:8px}
+.fhead .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--faint)}
+.fhead h2{margin:6px 0;font-size:24px;line-height:32px}
+.fhead p{margin:0;font-size:14px;color:var(--muted)}
+.fcount{display:flex;gap:20px;font-size:13px;color:var(--muted)}
+.fcount span{display:inline-flex;align-items:baseline;gap:6px}
+.fcount b{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--ink)}
+.fcount .c-mal b{color:var(--red)}.fcount .c-sus b{color:var(--amber)}
+.tier{margin-top:20px;padding-left:16px;border-left:3px solid var(--line-strong)}
+.tier-mal{border-left-color:var(--red)}.tier-sus{border-left-color:var(--amber)}
+.tier-h{display:flex;align-items:baseline;gap:8px;font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--muted);padding-bottom:4px}
+.tier-h b{font-family:var(--mono);font-weight:600}
+.tier-mal .tier-h{color:var(--red)}.tier-sus .tier-h{color:var(--amber)}
+details.tier>summary{cursor:pointer;list-style:none}
+details.tier>summary::-webkit-details-marker{display:none}
+.tier-tip{font-weight:400;font-size:12px;color:var(--faint);letter-spacing:0}
+details[open] .tier-tip{display:none}
+.fd{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:4px 16px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line-2)}
+.tier-h+.fd,summary+.fd{border-top:0}
+.fd-none{display:block;color:var(--faint);font-size:14px}
+.fcat{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fmain{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;min-width:0}
+.ft{font-size:15px;font-weight:600;color:var(--ink)}
+.st{display:inline-flex;padding:1px 7px;border-radius:4px;font-size:12px;font-weight:600;line-height:18px;white-space:nowrap}
+.st-ok{background:#EEF0F3;color:#1F2937}
+.st-part{color:var(--amber-ink);box-shadow:inset 0 0 0 1px var(--amber-line);background:var(--amber-soft)}
+.fnote{font-size:13px;color:var(--muted)}
+.fmeta{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.fmeta a{text-decoration:none}
+
+/* ---- 行为链节点说明 / IOC 计数 / 证据折叠（1.1） ---- */
+.stop-brief{display:block;margin-top:-10px;font-size:13px;line-height:18px;color:var(--muted)}
+.vbody .stop-brief{margin-top:0}
+.ioc-sum{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;font-size:13px;color:var(--ink-2);margin:-4px 0 10px}
+.ioc-sum span{font-size:12px;color:var(--faint);margin-left:8px}
+.ioc-sum span:first-child{margin-left:0}
+.ioc-sum b{font-family:var(--mono);font-weight:600}
+.ioc-t td:nth-child(3),.ioc-t td:nth-child(4){white-space:nowrap}
+.ev-more{margin-top:4px}
+.ev-more summary{cursor:pointer;font-family:var(--sans);font-size:12px;color:#1D4ED8;width:max-content}
+
+/* ---- 目录 + 正文 ---- */
+.layout{display:flex;flex-wrap:wrap;align-items:flex-start;gap:24px}
+.toc{flex:1 1 220px;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 8px}
+.toc .t{font-size:12px;font-weight:600;color:var(--muted);padding:0 12px 8px}
+.toc a{display:flex;gap:10px;align-items:center;min-height:36px;padding:0 12px;border-radius:4px;text-decoration:none;color:var(--ink-2);font-size:14px}
+.toc a:hover{background:var(--soft)}
+.toc a span{font-family:var(--mono);font-size:12px;color:var(--faint);min-width:20px}
+main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px}
+
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px 32px;scroll-margin-top:16px}
+.sh{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.sn{font-family:var(--mono);font-size:13px;color:var(--faint);min-width:28px}
+.sec h2{margin:0;font-size:22px;line-height:30px;font-weight:700}
+.sec h3{margin:24px 0 12px;font-size:16px;line-height:24px;font-weight:600}
+.sec>.sh+h3,.sec>h3:first-child{margin-top:0}
+.sec p{margin:0 0 12px;line-height:1.75;color:var(--ink-2)}
+.sec .q{margin:-8px 0 16px;font-size:13px;color:var(--faint)}
+.note{font-size:13px!important;color:var(--muted)!important;margin-top:12px!important}
+
+/* ---- 表格 ---- */
+.tbox{overflow-x:auto;border:1px solid var(--line);border-radius:6px;margin-bottom:4px}
+table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.6}
+th{text-align:left;background:var(--soft);border-bottom:1px solid var(--line-strong);font-size:12px;font-weight:600;color:var(--muted);padding:10px 14px;white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid var(--line-2);vertical-align:top;color:var(--ink)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+td.m{font-family:var(--mono);font-size:13px;overflow-wrap:anywhere;font-weight:400}
+td.m:first-child{font-weight:600}
+td.dim{color:var(--muted);font-weight:400}
+
+/* ---- 积木 ---- */
+.callout{border-radius:6px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px 12px;align-items:flex-start;margin:4px 0 12px;border:1px solid var(--line);background:var(--soft)}
+.callout>div{flex:1 1 360px;font-size:14px;line-height:1.7}
+.callout-risk{background:var(--red-soft);border-color:var(--red-line)}
+.callout-risk>div{color:var(--red-ink);font-weight:500;font-size:15px}
+.callout-warning{background:var(--amber-soft);border-color:var(--amber-line)}
+.callout-info{background:var(--blue-soft);border-color:var(--blue-line)}
+.kv{display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);border:1px solid var(--line);border-radius:6px;margin:0 0 12px;font-size:14px}
+.kv dt,.kv dd{margin:0;padding:10px 14px;border-bottom:1px solid var(--line-2)}
+.kv dt{font-weight:600;background:var(--soft)}
+.kv dd.m{font-family:var(--mono);font-size:13px;word-break:break-all}
+.kv dt:nth-last-of-type(1),.kv dd:last-of-type{border-bottom:0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:12px}
+.card{border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.card-title{font-size:15px;font-weight:600}
+.card-meta{font-family:var(--mono);font-size:12px;color:#374151;overflow-wrap:anywhere}
+.card-text{font-size:14px;line-height:1.65;color:#374151}
+.list{margin:0 0 12px;padding:0;list-style:none;display:flex;flex-direction:column}
+.list li{padding:10px 0 10px 18px;border-top:1px solid var(--line-2);font-size:14px;line-height:1.65;position:relative}
+.list li:first-child{border-top:0}
+.list li::before{content:"";position:absolute;left:2px;top:19px;width:6px;height:6px;border-radius:50%;background:#94A3B8}
+.steps{margin:0 0 12px;padding:0;list-style:none}
+.steps li{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--line-2)}
+.steps li:last-child{border-bottom:0}
+.steps .n{flex:none;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:600}
+.steps b{display:block;font-size:15px}
+.steps span{font-size:14px;line-height:1.65;color:#374151}
+.code-block{margin:0 0 12px;background:var(--navy);color:#E2E8F0;border-radius:6px;padding:20px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.65;white-space:pre}
+.tags{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.tags .lbl{font-size:13px;color:var(--muted);margin-right:4px}
+.empty{border:1px dashed #9CA3AF;border-radius:6px;padding:18px 20px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;background:#FAFAFB;margin-bottom:12px}
+.empty>span:last-child{flex:1 1 320px;font-size:14px;line-height:1.7}
+
+/* ---- 分析范围 / 归因 / 收尾 ---- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.tile{border:1px solid var(--line);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:4px}
+.tile .l,.tile .s{font-size:12px;color:var(--muted)}.tile .s{font-size:13px}
+.tile .v{font-weight:600;line-height:1.5}.tile .v.m{font-family:var(--mono);font-size:22px}
+.attrib{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.attrib>div{border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.attrib .yes{border:1px solid var(--blue-line);background:var(--blue-soft)}
+.attrib .no{border:1px solid var(--amber-line);background:var(--amber-soft)}
+.attrib .fam{font-size:18px;font-weight:700}
+.attrib p{margin:0;font-size:14px;line-height:1.65}
+.refs{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.refs li{display:flex;gap:12px;font-size:14px}
+.refs .n{font-family:var(--mono);font-size:12px;color:var(--faint);padding-top:2px}
+.refs a{font-family:var(--mono);font-size:12px;word-break:break-all;display:block}
+.final{background:var(--navy);border-color:var(--navy)}
+.final h2{color:var(--on-navy)}.final .sn{color:var(--on-navy-muted)}
+.final p{color:#E2E8F0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px}
+.chips span{background:var(--navy-2);color:#F1F5F9;border-radius:4px;padding:6px 10px;font-size:14px;font-weight:500}
+.chips span.key{background:var(--red)}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted);padding:8px 4px}
+
+@media (min-width:900px){
+  .toc{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto}
+}
+@media (max-width:720px){
+  .findings{padding-left:16px;padding-right:16px}
+  .fd{grid-template-columns:1fr;gap:4px}
+  .fmeta{white-space:normal}
+  .wrap{padding-left:16px;padding-right:16px}
+  .hero h1{font-size:30px;line-height:38px}
+  .sec,.flow{padding-left:16px;padding-right:16px}
+  .flow-scroll,.flow-stats{margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}
+  .kv{grid-template-columns:1fr}.kv dt{border-bottom:0}
+}
+@media print{
+  body{background:#fff;font-size:12pt}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .toc{display:none}
+  .page{padding-bottom:0}
+  .sec,.flow,.kpi{break-inside:avoid-page;border-color:#D1D5DB}
+  .findings{break-inside:avoid-page}
+  details::details-content{content-visibility:visible}
+  .ev-more summary,.tier-tip{display:none}
+  tr,.card,.steps li{break-inside:avoid}
+  .flow-scroll,.tbox{overflow:visible}
+  a{color:inherit;text-decoration:none}
+}
+
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap"><div class="hero-top"><span>合成样本 · 版式验收 · 显式提供的演示上下文 · HTML 预览</span><span>报告日期 2026-10-28</span></div><div class="hero-head"><div class="sample-line">合成输入，无实际样本文件 · synthetic-config-demo.exe · x64（演示字段）</div><div class="hero-title"><h1>配置解码、落地与条件提交样本（合成演示）</h1><span class="risk-badge" style="background:#A16207">中危 · MEDIUM</span><span class="audit audit-pass">证据审计通过 · 7 条引用</span></div><div class="hero-tags"><span class="htag">网络通信</span></div></div><p class="verdict">样本将资源配置落地，并由发送开关控制配置向外部端点提交；模式值还可选择附加处理。</p><div class="hero-grid"><dl class="hashes"><dt>SHA256</dt><dd>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</dd></dl><dl class="facts"><div><dt>家族归因</dt><dd>演示家族（合成）（仅验证版式，无归因效力）</dd></div><div><dt>分析方式</dt><dd>静态分析（基于提供的源码与结构化分析结果）</dd></div><div><dt>报告状态</dt><dd>HTML 预览</dd></div><div><dt>样本标识</dt><dd>SYNTHETIC-REPORT-1.1</dd></div></dl></div></div></header>
+<div class="wrap page">
+<div class="kpis"><div class="kpi"><span class="l">恶意行为</span><span class="v">0</span><span class="s">无</span></div><div class="kpi"><span class="l">可疑行为</span><span class="v" style=color:#B54708>1</span><span class="s">1 条已证实</span></div><div class="kpi"><span class="l">主机 IOC</span><span class="v">2</span><span class="s">其中 IOC 2 条</span></div><div class="kpi"><span class="l">网络 IOC</span><span class="v">1</span><span class="s">其中 IOC 1 条</span></div><div class="kpi"><span class="l">未决缺口</span><span class="v" style=color:#8A4B08>1</span><span class="s">均不阻塞报告</span></div></div>
+<section class="findings" aria-labelledby="findings-h"><div class="fhead"><div><div class="eyebrow">KEY FINDINGS</div><h2 id="findings-h">关键发现</h2><p>按规则表分档：恶意＝良性软件几乎不会做；可疑＝需结合上下文；信息＝背景操作。</p></div><div class="fcount"><span class="c-mal"><b>0</b>恶意</span><span class="c-sus"><b>1</b>可疑</span><span class="c-info"><b>2</b>信息</span></div></div><div class="tier tier-mal"><div class="tier-h">恶意<b>0</b></div><div class="fd fd-none">无恶意档发现</div></div><div class="tier tier-sus"><div class="tier-h">可疑<b>1</b></div><div class="fd"><span class="fcat" title="规则 NET-CONNECT">网络通信</span><div class="fmain"><span class="ft">按开关向端点提交配置</span><span class="st st-ok">已证实</span></div><div class="fmeta">1 条证据 · <a href="#mechanism-2">§04</a></div></div></div><details class="tier tier-info"><summary class="tier-h">信息<b>2</b><span class="tier-tip">展开</span></summary><div class="fd"><span class="fcat" title="规则 CONFIG-DECODE">配置与资源</span><div class="fmain"><span class="ft">解码资源配置并落地</span><span class="st st-ok">已证实</span></div><div class="fmeta">2 条证据 · <a href="#mechanism-1">§03</a></div></div><div class="fd"><span class="fcat">配置与资源</span><div class="fmain"><span class="ft">配置模式可能选择附加处理</span><span class="st st-part">部分证实</span><span class="fnote">目标例程尚未恢复，附加模式的用途待确认</span></div><div class="fmeta">1 条证据 · <a href="#mechanism-1">§03</a></div></div></details></section>
+<section class="flow" aria-labelledby="flow-h"><div class="flow-head"><div><div class="eyebrow">ATTACK FLOW · 3 STAGES</div><h2 id="flow-h">核心行为链</h2><p>展示有依据的关键行为关系，具体机制见下文章节。</p></div><div class="legend"><span class="dot"></span>核心危害环节</div></div><div class="flow-scroll"><div class="flow-grid" style="grid-template-columns:repeat(3,minmax(0,1fr));min-width:360px;max-width:720px"><div class="phase" style="grid-column:span 1"><b>配置准备</b><span>01</span></div><div class="phase" style="grid-column:span 1"><b>数据落地</b><span>02</span></div><div class="phase" style="grid-column:span 1"><b>外部提交</b><span>03</span></div><div class="track" style="grid-template-columns:repeat(3,minmax(0,1fr))"><div class="track-line" style="left:16.67%;right:16.67%"></div><div class="stop"><span class="node">01</span><span class="stop-name">解码资源</span><span class="stop-brief">解码资源配置</span></div><div class="stop"><span class="node">02</span><span class="stop-name">写出配置</span><span class="stop-brief">写入配置文件</span></div><div class="stop"><span class="node key">03</span><span class="stop-name">条件提交</span><span class="stop-brief">按开关提交</span></div></div></div></div><div class="flow-stats"><span><b>3</b>个执行阶段</span><span><b class="red">1</b>个核心危害环节</span><span><b>3</b>条证据引用</span></div></section>
+<div class="layout">
+<nav class="toc" aria-label="报告目录"><div class="t">目录</div><a href="#summary"><span>01</span>执行摘要</a><a href="#chain"><span>02</span>行为链详解</a><a href="#mechanism-1"><span>03</span>资源配置如何落地并驱动后续流程</a><a href="#mechanism-2"><span>04</span>发送开关如何控制配置提交</a><a href="#ioc"><span>05</span>IOC</a><a href="#attack"><span>06</span>MITRE ATT&amp;CK 映射</a><a href="#detection"><span>07</span>检测建议</a><a href="#response"><span>08</span>应急处置建议</a><a href="#attribution"><span>09</span>家族归因</a><a href="#gaps"><span>10</span>未决缺口与边界</a><a href="#functions"><span>11</span>关键函数证据索引</a><a href="#yara"><span>A</span>YARA 规则</a><a href="#final"><span>B</span>最终判断</a></nav>
+<main>
+<section id="summary" class="sec "><div class="sh"><span class="sn">01</span><h2>执行摘要</h2></div><p>配置资源解码后写入本地文件；发送开关开启时，程序读取该文件并提交至指定端点。</p><div class="callout callout-risk"><span class="tag t-risk">风险判断</span><div>网络提交使配置内容具备离开本机的路径；影响取决于配置内容与发送开关，应优先核对这两项。</div></div></section><section id="chain" class="sec "><div class="sh"><span class="sn">02</span><h2>行为链详解</h2></div><div class="tbox"><table><thead><tr><th>阶段</th><th>行为</th><th>证据</th></tr></thead><tbody><tr><td>01 解码资源</td><td>配置解码失败则返回；成功后继续处理。</td><td class="m">F-0010 L1-L3</td></tr><tr><td>02 写出配置</td><td>将解码后的配置缓冲区保存到本地路径。</td><td class="m">F-0010 L4-L7</td></tr><tr><td>03 条件提交</td><td>发送开关开启时读取已写出的文件并提交。</td><td class="m">F-0010 L8-L11</td></tr></tbody></table></div></section><section id="mechanism-1" class="sec "><div class="sh"><span class="sn">03</span><h2>资源配置如何落地并驱动后续流程</h2></div><p class="q">配置来自哪里，如何进入后续数据流？</p><div class="callout callout-info"><span class="tag t-ext">说明</span><div>主流程先读取具名资源并解码。只有配置解码成功才创建文件，写出的缓冲区随后成为网络提交的数据来源。</div></div><p>配置模式值为2时，程序还会解析并调用目标函数，可能扩展配置处理方式；该调用的具体用途尚未确定。</p><dl class="kv"><dt>配置资源</dt><dd class="m">HTML_PREVIEW_TEST</dd><dt>落地路径</dt><dd class="m">C:\HTML_PREVIEW_TEST\demo.cfg</dd></dl><h3>配置写入的关键步骤 · F-0010 L4-L7</h3><pre class="code-block"><code>L0004: path = &quot;C:\HTML_PREVIEW_TEST\demo.cfg&quot;;
+L0005: h = CreateFileA(path, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, 0, 0);
+L0006: WriteFile(h, config, config_size, &amp;written, 0);
+L0007: CloseHandle(h);</code></pre></section><section id="mechanism-2" class="sec "><div class="sh"><span class="sn">04</span><h2>发送开关如何控制配置提交</h2></div><p class="q">何时发送，发送的数据来自哪里？</p><div class="callout callout-info"><span class="tag t-ext">说明</span><div>提交逻辑位于 send_enabled 分支：请求体通过读取落地配置文件取得，目标端点在分支内指定。该条件将本地写出与网络提交连接起来。</div></div><ol class="steps"><li><span class="n">1</span><div><b>检查发送条件</b><span>config-&gt;send_enabled 为真</span></div></li><li><span class="n">2</span><div><b>读取待提交数据</b><span>C:\HTML_PREVIEW_TEST\demo.cfg</span></div></li><li><span class="n">3</span><div><b>提交至目标端点</b><span>https://collector.invalid/preview</span></div></li></ol><h3>开关、请求体与端点的对应关系 · F-0010 L8-L11</h3><pre class="code-block"><code>L0008: if (config-&gt;send_enabled) {
+L0009:   body = read_demo_file(path);
+L0010:   endpoint = &quot;https://collector.invalid/preview&quot;;
+L0011:   demo_http_post(endpoint, body);</code></pre></section><section id="ioc" class="sec "><div class="sh"><span class="sn">05</span><h2>IOC</h2></div><h3>文件哈希</h3><div class="tbox"><table><thead><tr><th>类型</th><th>值</th><th>来源</th></tr></thead><tbody><tr><td>SHA256</td><td class="m">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td><td class="dim">显式合成演示值，不是实际样本哈希</td></tr></tbody></table></div><h3>主机 IOC</h3><div class="ioc-sum"><span>按类型</span>file <b>1</b> · resource <b>1</b><span>按特异性</span>IOC <b>2</b></div><div class="ioc-t"><div class="tbox"><table><thead><tr><th>类型</th><th>值</th><th>角色</th><th>特异性</th><th>说明</th></tr></thead><tbody><tr><td>file</td><td class="m">C:\HTML_PREVIEW_TEST\demo.cfg</td><td>输出落地</td><td><span class="tag t-ext">IOC</span></td><td class="dim">本地配置输出，可关联后续读取与请求活动。</td></tr><tr><td>resource</td><td class="m">HTML_PREVIEW_TEST</td><td>配置标记</td><td><span class="tag t-ext">IOC</span></td><td class="dim">配置资源标记，用于关联资源解码路径。</td></tr></tbody></table></div></div><h3>网络 IOC</h3><div class="ioc-sum"><span>按类型</span>network <b>1</b><span>按特异性</span>IOC <b>1</b></div><div class="ioc-t"><div class="tbox"><table><thead><tr><th>类型</th><th>值</th><th>角色</th><th>特异性</th><th>说明</th></tr></thead><tbody><tr><td>network</td><td class="m">https://collector.invalid/preview</td><td>其他对象</td><td><span class="tag t-ext">IOC</span></td><td class="dim">配置提交目标，可与请求体及进程行为联合筛查。</td></tr></tbody></table></div></div></section><section id="attack" class="sec "><div class="sh"><span class="sn">06</span><h2>MITRE ATT&amp;CK 映射</h2></div><div class="tbox"><table><thead><tr><th>ID</th><th>技术</th><th>本样本证据</th><th>置信度</th></tr></thead><tbody><tr><td class="m">T1027</td><td>配置解码模块（合成映射）</td><td class="dim">仅验证 ATT&amp;CK 排版，不构成实际样本技术认定</td><td class="dim">—</td></tr></tbody></table></div></section><section id="detection" class="sec "><div class="sh"><span class="sn">07</span><h2>检测建议</h2></div><ol class="steps"><li><span class="n">1</span><div><b>关联本地配置与外部提交</b><span>关联同一进程的配置文件写入、随后读取与请求活动，重点核对发送开关及请求体来源。</span></div></li><li><span class="n">2</span><div><b>核对关联对象</b><span>结合配置资源名、落地路径及提交端点检索，按具体对象用途进行比对。</span></div></li></ol></section><section id="response" class="sec "><div class="sh"><span class="sn">08</span><h2>应急处置建议</h2></div><ol class="steps"><li><span class="n">1</span><div><b>保全配置与进程线索</b><span>保全落地配置，核对其内容、关联进程及写入时间。</span></div></li><li><span class="n">2</span><div><b>确认提交范围</b><span>结合发送开关与端点访问记录核查哪些配置数据具备外部提交路径。</span></div></li></ol></section><section id="attribution" class="sec "><div class="sh"><span class="sn">09</span><h2>家族归因</h2></div><div class="attrib"><div class="yes"><span class="tag t-ext" style="align-self:flex-start">外部情报支持</span><span class="fam">演示家族（合成） · 仅验证版式，无归因效力</span><p>显式提供的合成上下文，不代表实际家族情报</p></div><div class="no"><span class="tag t-empty" style="align-self:flex-start">归因 ≠ 静态事实</span><p>家族公开描述的以下能力，不能由本样本当前输入直接确认：</p><div class="tags" style="margin:0"><span class="tag t-neutral">不能据此推断本样本具有其他家族能力</span></div></div></div></section><section id="gaps" class="sec "><div class="sh"><span class="sn">10</span><h2>未决缺口与边界</h2></div><div class="tbox"><table><thead><tr><th>缺口</th><th>影响</th><th>阻塞报告</th></tr></thead><tbody><tr><td>附加模式的目标例程与具体用途尚未明确</td><td>不能将该路径认定为已经闭合的额外收集或外传能力</td><td class="dim">否</td></tr></tbody></table></div></section><section id="functions" class="sec "><div class="sh"><span class="sn">11</span><h2>关键函数证据索引</h2></div><div class="tbox"><table><thead><tr><th>函数</th><th>地址</th><th>作用</th><th>关键行</th></tr></thead><tbody><tr><td class="m">F-0010 sub_preview_main</td><td class="m">—</td><td>配置写入的关键步骤</td><td class="m">L0004-L0007</td></tr><tr><td class="m">F-0010 sub_preview_main</td><td class="m">—</td><td>开关、请求体与端点的对应关系</td><td class="m">L0008-L0011</td></tr></tbody></table></div></section><section id="yara" class="sec "><div class="sh"><span class="sn">A</span><h2>YARA 规则</h2></div><pre class="code-block"><code>/* 显式合成演示规则，仅验证附录排版，不用于检测 */
+rule Synthetic_Layout_Only { condition: false }</code></pre><p class="note">规则用于高特异性静态筛查，不替代哈希、行为和内存检测；部署前应在样本集与良性软件集上测试误报率。</p></section><section id="final" class="sec final"><div class="sh"><span class="sn">B</span><h2>最终判断</h2></div><div class="chips"><span>01 解码资源</span><span>02 写出配置</span><span class=key>03 条件提交</span></div><p style="margin:0">样本形成了资源解码、配置落地和条件网络提交的数据流，并存在可能扩展处理方式的模式调用。关联分析应优先结合配置文件、发送条件与目标端点。</p></section>
+<footer><span>行为结论与关键对象可通过函数及行号复核。</span><span class="mono">TLP:CLEAR · 模板 v1.1</span></footer>
+</main>
+</div>
+</div>
+<script type="application/json" id="report-data">
+{
+ "meta": {
+  "id": "SYNTHETIC-REPORT-1.1",
+  "title": "配置解码、落地与条件提交样本（合成演示）",
+  "date": "2026-10-28",
+  "product": "合成样本 · 版式验收",
+  "edition": "显式提供的演示上下文 · HTML 预览",
+  "tlp": "TLP:CLEAR",
+  "sample": {
+   "filename": "synthetic-config-demo.exe",
+   "filetype": "合成输入，无实际样本文件",
+   "arch": "x64（演示字段）"
+  },
+  "method": "静态分析（基于提供的源码与结构化分析结果）",
+  "status": "HTML 预览",
+  "risk": "medium",
+  "verdict": "样本将资源配置落地，并由发送开关控制配置向外部端点提交；模式值还可选择附加处理。",
+  "audit": {
+   "status": "passed",
+   "refs_total": 7,
+   "refs_invalid": 0
+  }
+ },
+ "hashes": [
+  {
+   "type": "SHA256",
+   "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "source": "显式合成演示值，不是实际样本哈希"
+  }
+ ],
+ "attack": [
+  {
+   "id": "T1027",
+   "name": "配置解码模块（合成映射）",
+   "evidence": "仅验证 ATT&CK 排版，不构成实际样本技术认定"
+  }
+ ],
+ "attribution": {
+  "family": "演示家族（合成）",
+  "confidence": "仅验证版式，无归因效力",
+  "support": [
+   "显式提供的合成上下文，不代表实际家族情报"
+  ],
+  "not_confirmed": [
+   "不能据此推断本样本具有其他家族能力"
+  ]
+ },
+ "yara": "/* 显式合成演示规则，仅验证附录排版，不用于检测 */\nrule Synthetic_Layout_Only { condition: false }",
+ "schema_version": "1.1",
+ "findings": [
+  {
+   "rule": "CONFIG-DECODE",
+   "title": "解码资源配置并落地",
+   "state": "confirmed",
+   "evidence": [
+    "F-0010 L1-L3",
+    "F-0010 L4-L7"
+   ],
+   "section": "mechanism-1"
+  },
+  {
+   "rule": "NET-CONNECT",
+   "title": "按开关向端点提交配置",
+   "state": "confirmed",
+   "evidence": [
+    "F-0010 L8-L11"
+   ],
+   "section": "mechanism-2"
+  },
+  {
+   "rule": "CUSTOM",
+   "title": "配置模式可能选择附加处理",
+   "state": "partial",
+   "evidence": [
+    "F-0020 L1-L5"
+   ],
+   "state_note": "目标例程尚未恢复，附加模式的用途待确认",
+   "section": "mechanism-1",
+   "tier": "info",
+   "category": "config",
+   "tier_reason": "仅能确认配置分支和间接调用，不能推定额外危害能力"
+  }
+ ],
+ "summary": [
+  "配置资源解码后写入本地文件；发送开关开启时，程序读取该文件并提交至指定端点。"
+ ],
+ "risk_judgement": "网络提交使配置内容具备离开本机的路径；影响取决于配置内容与发送开关，应优先核对这两项。",
+ "chain": [
+  {
+   "name": "解码资源",
+   "action": "配置解码失败则返回；成功后继续处理。",
+   "evidence": [
+    "F-0010 L1-L3"
+   ],
+   "key": false,
+   "phase": "配置准备",
+   "brief": "解码资源配置"
+  },
+  {
+   "name": "写出配置",
+   "action": "将解码后的配置缓冲区保存到本地路径。",
+   "evidence": [
+    "F-0010 L4-L7"
+   ],
+   "key": false,
+   "phase": "数据落地",
+   "brief": "写入配置文件"
+  },
+  {
+   "name": "条件提交",
+   "action": "发送开关开启时读取已写出的文件并提交。",
+   "evidence": [
+    "F-0010 L8-L11"
+   ],
+   "key": true,
+   "phase": "外部提交",
+   "brief": "按开关提交"
+  }
+ ],
+ "sections": [
+  {
+   "id": "mechanism-1",
+   "title": "资源配置如何落地并驱动后续流程",
+   "question": "配置来自哪里，如何进入后续数据流？",
+   "blocks": [
+    {
+     "type": "callout",
+     "text": "主流程先读取具名资源并解码。只有配置解码成功才创建文件，写出的缓冲区随后成为网络提交的数据来源。",
+     "tone": "info"
+    },
+    {
+     "type": "paragraph",
+     "text": "配置模式值为2时，程序还会解析并调用目标函数，可能扩展配置处理方式；该调用的具体用途尚未确定。"
+    },
+    {
+     "type": "kv",
+     "mono": true,
+     "items": [
+      {
+       "k": "配置资源",
+       "v": "HTML_PREVIEW_TEST"
+      },
+      {
+       "k": "落地路径",
+       "v": "C:\\HTML_PREVIEW_TEST\\demo.cfg"
+      }
+     ]
+    },
+    {
+     "type": "subheading",
+     "text": "配置写入的关键步骤 · F-0010 L4-L7"
+    },
+    {
+     "type": "code",
+     "language": "c",
+     "text": "L0004: path = \"C:\\HTML_PREVIEW_TEST\\demo.cfg\";\nL0005: h = CreateFileA(path, GENERIC_WRITE, 0, 0, CREATE_ALWAYS, 0, 0);\nL0006: WriteFile(h, config, config_size, &written, 0);\nL0007: CloseHandle(h);"
+    }
+   ]
+  },
+  {
+   "id": "mechanism-2",
+   "title": "发送开关如何控制配置提交",
+   "question": "何时发送，发送的数据来自哪里？",
+   "blocks": [
+    {
+     "type": "callout",
+     "text": "提交逻辑位于 send_enabled 分支：请求体通过读取落地配置文件取得，目标端点在分支内指定。该条件将本地写出与网络提交连接起来。",
+     "tone": "info"
+    },
+    {
+     "type": "steps",
+     "items": [
+      {
+       "title": "检查发送条件",
+       "text": "config->send_enabled 为真"
+      },
+      {
+       "title": "读取待提交数据",
+       "text": "C:\\HTML_PREVIEW_TEST\\demo.cfg"
+      },
+      {
+       "title": "提交至目标端点",
+       "text": "https://collector.invalid/preview"
+      }
+     ]
+    },
+    {
+     "type": "subheading",
+     "text": "开关、请求体与端点的对应关系 · F-0010 L8-L11"
+    },
+    {
+     "type": "code",
+     "language": "c",
+     "text": "L0008: if (config->send_enabled) {\nL0009:   body = read_demo_file(path);\nL0010:   endpoint = \"https://collector.invalid/preview\";\nL0011:   demo_http_post(endpoint, body);"
+    }
+   ]
+  }
+ ],
+ "ioc": {
+  "host": [
+   {
+    "type": "file",
+    "value": "C:\\HTML_PREVIEW_TEST\\demo.cfg",
+    "role": "输出落地",
+    "specificity": "high",
+    "note": "本地配置输出，可关联后续读取与请求活动。",
+    "evidence": [
+     "F-0010 L4-L7"
+    ]
+   },
+   {
+    "type": "resource",
+    "value": "HTML_PREVIEW_TEST",
+    "role": "配置标记",
+    "specificity": "high",
+    "note": "配置资源标记，用于关联资源解码路径。",
+    "evidence": [
+     "F-0010 L1-L3"
+    ]
+   }
+  ],
+  "network": [
+   {
+    "type": "network",
+    "value": "https://collector.invalid/preview",
+    "role": "其他对象",
+    "specificity": "high",
+    "note": "配置提交目标，可与请求体及进程行为联合筛查。",
+    "evidence": [
+     "F-0010 L8-L11"
+    ]
+   }
+  ]
+ },
+ "detection": [
+  {
+   "type": "steps",
+   "items": [
+    {
+     "title": "关联本地配置与外部提交",
+     "text": "关联同一进程的配置文件写入、随后读取与请求活动，重点核对发送开关及请求体来源。"
+    },
+    {
+     "title": "核对关联对象",
+     "text": "结合配置资源名、落地路径及提交端点检索，按具体对象用途进行比对。"
+    }
+   ]
+  }
+ ],
+ "response": [
+  {
+   "title": "保全配置与进程线索",
+   "text": "保全落地配置，核对其内容、关联进程及写入时间。"
+  },
+  {
+   "title": "确认提交范围",
+   "text": "结合发送开关与端点访问记录核查哪些配置数据具备外部提交路径。"
+  }
+ ],
+ "gaps": [
+  {
+   "gap": "附加模式的目标例程与具体用途尚未明确",
+   "impact": "不能将该路径认定为已经闭合的额外收集或外传能力",
+   "blocking": false
+  }
+ ],
+ "functions": [
+  {
+   "function": "F-0010 sub_preview_main",
+   "role": "配置写入的关键步骤",
+   "lines": "L0004-L0007"
+  },
+  {
+   "function": "F-0010 sub_preview_main",
+   "role": "开关、请求体与端点的对应关系",
+   "lines": "L0008-L0011"
+  }
+ ],
+ "final": "样本形成了资源解码、配置落地和条件网络提交的数据流，并存在可能扩展处理方式的模式调用。关联分析应优先结合配置文件、发送条件与目标端点。"
+}
+</script>
+</body>
+</html>

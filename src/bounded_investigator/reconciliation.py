@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Iterable
 
-from .artifact_normalization import split_artifact
+from .investigation.artifact_normalization import split_artifact
 
 from .schemas import (
     ArtifactFinding,
@@ -14,7 +14,6 @@ from .schemas import (
     EvidenceLevel,
     DetectionSpecificity,
     GlobalGap,
-    GapReconciliationDecisionResult,
     GlobalReconciliationDecisionResult,
     GlobalReconciliationResult,
     ReconciliationStatus,
@@ -89,7 +88,7 @@ def _highest_confidence(items: Iterable[Confidence]) -> Confidence:
 def _conservative_evidence_level(levels: Iterable[EvidenceLevel]) -> EvidenceLevel:
     """Reconcile explicit epistemic judgements; never infer them from confidence.
 
-    Old unclassified records do not override a real explicit judgement, but if
+    Unclassified records do not override a real explicit judgement, but if
     two explicit statuses disagree the weaker explicit conclusion wins.
     """
     explicit = [x for x in levels if x != EvidenceLevel.UNCLASSIFIED]
@@ -115,11 +114,7 @@ def _artifact_exact_key(artifact: ArtifactFinding) -> tuple[str, str]:
 
 
 def _collect_global_gaps(completed: dict[str, RunEnvelope]) -> list[GlobalGap]:
-    """Retain original gap types: investigation TODOs are NOT report gaps.
-
-    The legacy collector silently promoted every non-handoff gap to ``report``.
-    That was incorrect and made final assessments inherit investigation noise.
-    """
+    """Retain each gap's original type; handoffs remain investigation leads."""
     grouped: dict[tuple[str, str, str, str], set[str]] = {}
     for packet_id, env in sorted(completed.items()):
         result = env.result
@@ -177,7 +172,7 @@ def _build_original_maps(
             source_id = f"{packet_id}:A{idx:03d}"
             atomic = split_artifact(artifact)
             for j, item in enumerate(atomic, 1):
-                # Legacy v1.4 envelopes may have several values in one artifact.
+                # Split grouped values before exact-value reduction.
                 # Preserve the original artifact source ID with an item suffix.
                 item_id = source_id if len(atomic) == 1 else f"{source_id}:P{j:02d}"
                 artifacts[item_id] = item
@@ -297,7 +292,6 @@ def project_reconciliation_input(
         packet_ids=packet_ids,
         gaps=_collect_global_gaps(completed),
     )
-
 
 
 def projection_audit_dict(projection: ReconciliationProjection) -> dict[str, object]:
@@ -692,116 +686,3 @@ def validate_and_finalize_reconciliation(
     else:
         result.status = ReconciliationStatus.COMPLETE
     return result
-
-
-@dataclass(frozen=True)
-class GapReconciliationProjection:
-    text: str
-    gaps: dict[str, GlobalGap]
-
-
-def project_gap_reconciliation_input(
-    result: GlobalReconciliationResult,
-) -> GapReconciliationProjection:
-    """Build a compact, read-only view of canonical facts plus historical gaps."""
-    gaps: dict[str, GlobalGap] = {}
-    for idx, gap in enumerate(result.gaps, 1):
-        gap_id = gap.gap_id or f"R:G{idx:03d}"
-        copied = gap.model_copy(deep=True)
-        copied.gap_id = gap_id
-        gaps[gap_id] = copied
-
-    lines = [
-        "<canonical_claims>",
-        "These are already validated canonical facts. Use them only to decide whether a historical gap is resolved.",
-    ]
-    for claim in result.canonical_claims:
-        lines.extend([
-            f"- id: {claim.canonical_id}",
-            f"  behavior: {claim.behavior}",
-            f"  confidence: {claim.confidence.value}",
-            f"  condition: {claim.condition}",
-            f"  flow: {claim.source} -> {claim.action} -> {claim.sink}",
-        ])
-        if claim.limitations:
-            lines.append(f"  limitations: {'; '.join(claim.limitations)}")
-    lines.append("</canonical_claims>")
-
-    lines.extend([
-        "<canonical_artifacts>",
-        "Artifacts can resolve gaps about concrete paths/values, but do not infer behavior from them alone.",
-    ])
-    for artifact in result.canonical_artifacts:
-        lines.append(
-            f"- {artifact.canonical_id}: {artifact.kind} {artifact.value}; "
-            f"role={artifact.role}; specificity={artifact.detection_specificity.value}; "
-            f"meaning={artifact.meaning}"
-        )
-    lines.append("</canonical_artifacts>")
-
-    lines.extend([
-        "<historical_gaps>",
-        "Classify every gap id as resolved or still_open.",
-    ])
-    for gap_id, gap in gaps.items():
-        lines.extend([
-            f"- id: {gap_id}",
-            f"  type: {gap.gap_type}",
-            f"  impact: {gap.impact}",
-            f"  source_packets: {', '.join(gap.source_packets) if gap.source_packets else 'none'}",
-            f"  question: {gap.question}",
-            f"  reason: {gap.reason}",
-            f"  resolved_by_claim_ids: {", ".join(gap.resolved_by_claim_ids) if gap.resolved_by_claim_ids else 'none'}",
-        ])
-    lines.append("</historical_gaps>")
-    return GapReconciliationProjection(text="\n".join(lines), gaps=gaps)
-
-
-def gap_projection_audit_dict(projection: GapReconciliationProjection) -> dict[str, object]:
-    return {
-        "source_gap_count": len(projection.gaps),
-        "gap_ids": list(projection.gaps),
-    }
-
-
-def apply_gap_reconciliation(
-    result: GlobalReconciliationResult,
-    decisions: GapReconciliationDecisionResult,
-    projection: GapReconciliationProjection,
-) -> tuple[GlobalReconciliationResult, list[str], list[str]]:
-    """Apply ID-only decisions conservatively: omissions/duplicates remain open."""
-    known = set(projection.gaps)
-    resolved = set()
-    open_ids = set()
-    for decision in decisions.decisions:
-        if decision.gap_id not in known:
-            continue
-        if decision.status == "resolved":
-            resolved.add(decision.gap_id)
-        else:
-            open_ids.add(decision.gap_id)
-        if decision.resolved_by_claim_ids:
-            projection.gaps[decision.gap_id].resolved_by_claim_ids = list(decision.resolved_by_claim_ids)
-
-    # compatibility with old decision-only format
-    if not decisions.decisions:
-        resolved = {gap_id for gap_id in decisions.resolved_gap_ids if gap_id in known}
-        open_ids = {gap_id for gap_id in decisions.still_open_gap_ids if gap_id in known}
-
-    # Conflicting classification or resolver omission must never delete a real unknown.
-    ambiguous = resolved & open_ids
-    resolved -= ambiguous
-    open_ids |= ambiguous
-    omitted = known - resolved - open_ids
-    open_ids |= omitted
-
-    updated = result.model_copy(deep=True)
-    updated.gaps = []
-    for gap_id in projection.gaps:
-        if gap_id in open_ids:
-            updated.gaps.append(projection.gaps[gap_id])
-    updated.summary = (
-        f"{result.summary} Gap reconciliation resolved {len(resolved)} of {len(known)} "
-        f"historical gaps; still_open={len(open_ids)}."
-    )
-    return updated, sorted(resolved), sorted(open_ids)

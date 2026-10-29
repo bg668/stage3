@@ -5,22 +5,15 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
-import pytest
-
-from bounded_investigator.evidence_scope import EvidenceScope
-from bounded_investigator.final_assessment import (
-    FinalAssessmentProvenanceError, project_final_assessment_input, validate_assessment,
-)
-from bounded_investigator.material_inventory import (
+from bounded_investigator.reporting.material_suggestions import build_material_suggestions
+from bounded_investigator.evidence.inventory import (
     _function_lookup, build_input_inventory, build_automatic_scope,
-    collect_material_needs, merge_expert_scope,
 )
 from bounded_investigator.schemas import (
-    DeliveryStatus, EvidenceRef, FinalEvidenceAssessment, FinalUncertainty,
+    DeliveryStatus, EvidenceRef,
     HandoffItem, InvestigationResult, InvestigationStatus, MaterialNeed,
     RunEnvelope, UsageSummary,
 )
-from test_final_assessment import canonical
 
 
 def packet(tmp_path: Path, name: str, pieces: list[tuple[str, str, int, int, int]]) -> Path:
@@ -84,7 +77,6 @@ def test_material_needs_are_sample_discovered_not_preseeded(tmp_path):
     assert by_target["activity.etl"].status == "unknown"
     assert by_target["not-specified"].status == "unknown"
     assert all(x.requested_by_packets == ["J00"] for x in scope.materials)
-    assert all(not x.report_question for x in scope.materials)
 
 
 def test_sidecar_files_matched_only_by_actual_filename(tmp_path):
@@ -133,39 +125,20 @@ def test_fallback_handoffs_are_conservative_and_raw_only_not_trusted(tmp_path):
     assert reqs[0].source_field == "handoff"
 
 
-def test_assessment_does_not_confuse_input_absence_and_original_sample_absence(tmp_path):
+def test_material_hint_does_not_claim_original_sample_absence(tmp_path):
     p = packet(tmp_path, "J00", [("F-0101", "sub_4ABCD", 1, 2, 2)])
     inv = build_input_inventory([p])
     scope, _ = build_automatic_scope(inv, {"J00": result("J00", [need("function_code", "F-0150")])})
-    projection = project_final_assessment_input(canonical(), evidence_scope=scope)
     target_scope_id = scope.materials[0].scope_id
-    ok = FinalEvidenceAssessment(summary="Not supplied in this run", remaining_uncertainties=[
-        FinalUncertainty(impact="major", question="Need additional function code",
-                         reason="Not among supplied code sections", uncertainty_type="material_not_in_input",
-                         related_scope_ids=[target_scope_id])
-    ])
-    from bounded_investigator.final_assessment import (
-        separate_operational_uncertainties, build_material_suggestions,
-        FinalAssessmentProvenanceError,
-    )
-    clean, redirected = separate_operational_uncertainties(ok)
-    assert len(redirected) == 1
-    assert validate_assessment(clean, projection).remaining_uncertainties == []
     suggestions = build_material_suggestions(scope)
     assert [s.scope_id for s in suggestions] == [target_scope_id]
     assert "如后续能提供" in suggestions[0].recommendation
-    with pytest.raises(FinalAssessmentProvenanceError):
-        validate_assessment(ok, projection)
-    with pytest.raises(FinalAssessmentProvenanceError):
-        validate_assessment(FinalEvidenceAssessment(summary="wrong", remaining_uncertainties=[
-            FinalUncertainty(impact="major", question="Sample lacks function",
-                             reason="not in source sample", uncertainty_type="material_unavailable",
-                             related_scope_ids=[target_scope_id])
-        ]), projection)
-    assert "<observed_input_inventory>" in projection.text
+    assert "样本缺失" not in suggestions[0].recommendation
+    assert "this run's scoped input" in scope.materials[0].details
+    assert scope.inventory_summary["indexed_function_count"] == 1
 
 
-def test_existing_saved_result_with_no_material_needs_is_backward_compatible():
+def test_material_needs_remain_optional_for_current_model_results():
     old = result("J00").model_dump(mode="json")
     del old["result"]["material_needs"]
     loaded = RunEnvelope.model_validate(old)
@@ -183,44 +156,45 @@ def test_dag_saves_automatic_inventory_without_manual_scope(tmp_path, monkeypatc
     calls = []
 
     class FakeWorkflow:
-        def __init__(self, cfg):
-            pass
+        def __init__(self, cfg, *, harness):
+            assert harness.instructions('analyzer')
 
         async def run(self, **kwargs):
             return result("J00", [need("function_code", "F-0202")])
 
         async def run_global_reconciliation(self, **kwargs):
-            calls.append(kwargs["evidence_scope"])
+            calls.append(kwargs)
+            assert "evidence_scope" not in kwargs and "packet_coverage" not in kwargs
             return SimpleNamespace(
-                final_assessment=None, result=None, delivery_status=DeliveryStatus.SUCCESS,
+                result=None, delivery_status=DeliveryStatus.SUCCESS,
                 elapsed_seconds=0, provenance_valid=True, source_claim_count=0,
                 source_artifact_count=0, reduced_claim_count=0, reduced_artifact_count=0,
                 artifact_conflict_count=0, source_gap_count=0,
                 usage=UsageSummary(), model_dump_json=lambda **kw: '{}',
             )
 
-    # Offline CLI-level integration: stub only the unavailable external
-    # PydanticAI runtime, not the scheduler/indexer/serialization under test.
+    # Stub model execution while exercising the scheduler, indexer and serialization.
     stub = types.ModuleType("bounded_investigator.workflow")
     stub.BoundedInvestigationWorkflow = FakeWorkflow
     monkeypatch.setitem(sys.modules, "bounded_investigator.workflow", stub)
-    sys.modules.pop("bounded_investigator.cli", None)
-    cli = importlib.import_module("bounded_investigator.cli")
-    settings = SimpleNamespace(batch=SimpleNamespace(concurrency=1),
+    sys.modules.pop("bounded_investigator.orchestration.batch", None)
+    batch = importlib.import_module("bounded_investigator.orchestration.batch")
+    from bounded_investigator.logging_utils import get_logger
+    settings = SimpleNamespace(harness_dir=None, batch=SimpleNamespace(concurrency=1),
                                global_reconciliation=SimpleNamespace(enabled=True))
     output_dir = tmp_path / "result"
     output_dir.mkdir()
-    asyncio.run(cli._run_batch_dag(
+    asyncio.run(batch.run_batch_dag(
         packets=[packet_file], output_dir=output_dir, manifest_path=manifest,
-        config=settings, log=cli.get_logger("test"), evidence_scope=None,
+        config=settings, log=get_logger("test"), evidence_scope=None,
     ))
     saved = json.loads((output_dir / "_evidence_scope.json").read_text(encoding="utf-8"))
     assert len(saved["materials"]) == 1
     assert saved["materials"][0]["status"] == "not_in_input"
-    assert calls[0].materials[0].target == "F-0202"
+    assert calls[0]["completed_results"]["J00"].result.material_needs[0].target == "F-0202"
     assert (output_dir / "_evidence_inventory.json").exists()
     assert (output_dir / "_material_requests.json").exists()
-    sys.modules.pop("bounded_investigator.cli", None)
+    sys.modules.pop("bounded_investigator.orchestration.batch", None)
 
 
 def test_additional_exported_function_file_counts_as_available_not_submitted(tmp_path):
