@@ -14,7 +14,7 @@ OutputMode = Literal["tool", "native", "prompted"]
 ReasoningMode = Literal["omit", "disabled", "minimal", "low", "medium", "high", "xhigh"]
 StageName = Literal[
     "analyzer", "reviewer", "reviser", "format_repair",
-    "global_reconciliation", "report_composition"
+    "global_reconciliation", "report_composition", "planner"
 ]
 
 
@@ -94,6 +94,11 @@ class BatchConfig(BaseModel):
     concurrency: int = Field(default=4, ge=1, le=32)
 
 
+class ExplorationConfig(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    max_rounds: int = Field(default=6, ge=1, le=100)
+
+
 class LoggingConfig(BaseModel):
     level: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
     console: bool = True
@@ -112,6 +117,7 @@ class AppConfig(BaseModel):
     global_reconciliation: GlobalReconciliationConfig = GlobalReconciliationConfig()
     html_report: HtmlReportConfig = HtmlReportConfig()
     batch: BatchConfig = BatchConfig()
+    exploration: ExplorationConfig = ExplorationConfig()
     logging: LoggingConfig = LoggingConfig()
 
     @model_validator(mode="after")
@@ -128,6 +134,8 @@ class AppConfig(BaseModel):
             required_stages.append("global_reconciliation")
         if "report_composition" in self.stages:
             required_stages.append("report_composition")
+        if 'planner' in self.stages:
+            required_stages.append('planner')
         for stage in required_stages:
             if stage not in self.stages:
                 raise ValueError(f"Missing stages.{stage}")

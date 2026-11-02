@@ -117,9 +117,12 @@ async def run_batch_dag(
     evidence_scope: EvidenceScope | None = None,
     additional_input_dir: Path | None = None,
     harness: ResolvedHarness | None = None,
+    sample_budget=None,
 ) -> tuple[dict[str, RunEnvelope], dict[str, str]]:
     from ..workflow import BoundedInvestigationWorkflow
     harness = harness or load_harness(config.harness_dir)
+    if sample_budget is not None and config.batch.concurrency != 1:
+        raise ValueError('Sample-budget DAG execution requires concurrency=1')
     harness.save(output_dir)
     manifest = load_manifest(manifest_path)
     jobs = manifest.by_id()
@@ -143,6 +146,7 @@ async def run_batch_dag(
     semaphore = asyncio.Semaphore(config.batch.concurrency)
     completed_results: dict[str, RunEnvelope] = {}
     failures: dict[str, str] = {}
+    deferred: dict[str, str] = {}
     pending = set(jobs)
     running: dict[asyncio.Task, str] = {}
     total = len(jobs)
@@ -161,6 +165,10 @@ async def run_batch_dag(
         job = jobs[job_id]
         packet = packet_map[job_id]
         async with semaphore:
+            if sample_budget is not None and sample_budget.remaining('analysis') <= 0:
+                reason = 'Sample analysis budget exhausted; task not started'
+                deferred[job_id] = reason
+                raise RuntimeError(reason)
             name, text = read_packet(packet)
             dependency_context = render_dependency_handoffs(
                 job.depends_on, completed_results, failures
@@ -174,7 +182,8 @@ async def run_batch_dag(
                 len(dependency_context),
                 len(text),
             )
-            workflow = BoundedInvestigationWorkflow(config, harness=harness)
+            budget_kwargs = {'sample_budget': sample_budget} if sample_budget is not None else {}
+            workflow = BoundedInvestigationWorkflow(config, harness=harness, **budget_kwargs)
             result = await workflow.run(
                 packet_name=name,
                 packet_text=text,
@@ -251,7 +260,8 @@ async def run_batch_dag(
     if config.global_reconciliation.enabled:
         global_started = time.monotonic()
         try:
-            global_workflow = BoundedInvestigationWorkflow(config, harness=harness)
+            budget_kwargs = {'sample_budget': sample_budget} if sample_budget is not None else {}
+            global_workflow = BoundedInvestigationWorkflow(config, harness=harness, **budget_kwargs)
             global_result = await global_workflow.run_global_reconciliation(
                 completed_results=completed_results,
                 failures=failures,
@@ -307,6 +317,10 @@ async def run_batch_dag(
                 type(exc).__name__, exc, err.name,
             )
 
+    def budget_stages(envelope):
+        return [stage for stage, errors in envelope.validation_errors.items()
+                if any(error.get('type') == 'sample_budget_exceeded' for error in errors)]
+
     summary = {
         "manifest": str(manifest_path),
         "purpose": manifest.purpose,
@@ -318,10 +332,18 @@ async def run_batch_dag(
                 "title": job.title,
                 "depends_on": job.depends_on,
                 "status": (
-                    completed_results[job_id].delivery_status.value
+                    ('budget_partial' if sample_budget is not None and budget_stages(completed_results[job_id])
+                     else completed_results[job_id].delivery_status.value)
                     if job_id in completed_results
-                    else "failed"
+                    else 'budget_deferred' if job_id in deferred else "failed"
                 ),
+                'unavailable_dependencies': {dep: failures.get(dep, 'dependency has no validated result')
+                    for dep in job.depends_on if dep in failures or
+                    (dep in completed_results and completed_results[dep].result is None)},
+                'reason': deferred.get(job_id, failures.get(job_id)),
+                'review_completed': completed_results[job_id].review_completed if job_id in completed_results else False,
+                'revision_failed': completed_results[job_id].revision_failed if job_id in completed_results else False,
+                'budget_stopped_stages': budget_stages(completed_results[job_id]) if job_id in completed_results else [],
             }
             for job_id, job in jobs.items()
         },
@@ -333,6 +355,8 @@ async def run_batch_dag(
     (output_dir / "_dag_summary.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+    if sample_budget is not None:
+        sample_budget.save()
     return completed_results, failures
 
 

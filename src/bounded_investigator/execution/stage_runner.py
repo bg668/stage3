@@ -6,6 +6,7 @@ import asyncio
 import json
 import time
 from collections.abc import AsyncIterable
+from contextlib import nullcontext
 from dataclasses import dataclass, field
 from logging import Logger
 from pathlib import Path
@@ -30,6 +31,7 @@ from .repair import (
     validate_candidate,
 )
 from .usage_utils import usage_delta, usage_summary
+from .sample_budget import BudgetedModel, SampleBudget, SampleBudgetExceeded
 
 
 class _ModelOutputObserver:
@@ -131,11 +133,34 @@ class StageRunner:
     """Run stages using supplied agents; keep per-run repair state with the caller."""
 
     def __init__(self, *, config: AppConfig, format_repair: StageAgent | None, log: Logger,
-                 repair_limits: UsageLimits | None = None):
+                 repair_limits: UsageLimits | None = None, sample_budget: SampleBudget | None = None):
         self.config = config
         self.format_repair = format_repair
         self.log = log
         self.repair_limits = repair_limits
+        self.sample_budget = sample_budget
+
+    def _budget_override(self, stage_agent, packet_name: str, *, phase: str | None = None):
+        if self.sample_budget is None:
+            return nullcontext()
+        phase = phase or ('global' if packet_name == 'GLOBAL' or stage_agent.stage == 'global_reconciliation' else 'analysis')
+        self.sample_budget.check(phase, packet_name, stage_agent.stage)
+        return stage_agent.agent.override(model=BudgetedModel(
+            stage_agent.agent.model, budget=self.sample_budget, phase=phase,
+            packet_name=packet_name, stage=stage_agent.stage,
+        ))
+
+    def _budget_stopped(self, exc, *, stage_agent, artifact_dir, raw: str = '', raw_path=None):
+        if stage_agent.stage == 'global_reconciliation':
+            raise exc
+        errors = [{'type': 'sample_budget_exceeded', 'msg': str(exc)}]
+        save_validation_errors(artifact_dir, stage_agent.stage, errors)
+        partial = salvage_investigation_result(raw) if stage_agent.schema is InvestigationResult else None
+        if partial is not None:
+            partial = normalize_investigation_result(partial)
+            save_model(artifact_dir, stage_agent.stage, 'partial_result.json', partial)
+        return StageOutcome(status=DeliveryStatus.PARTIAL_VALIDATED if partial else DeliveryStatus.RAW_ONLY,
+                            partial=partial, raw_output_path=raw_path, validation_errors=errors)
 
     def _repair_limits(self) -> UsageLimits:
         if self.repair_limits is not None:
@@ -154,6 +179,7 @@ class StageRunner:
         packet_name: str,
         usage: RunUsage,
         limits: UsageLimits,
+        phase: str | None = None,
     ) -> Any:
         observer = _ModelOutputObserver(
             packet_name,
@@ -161,12 +187,13 @@ class StageRunner:
             print_stream=stage_agent.model_config.stream_output,
         )
         try:
-            return await stage_agent.agent.run(
-                prompt,
-                usage=usage,
-                usage_limits=limits,
-                event_stream_handler=observer.handle,
-            )
+            with self._budget_override(stage_agent, packet_name, phase=phase):
+                return await stage_agent.agent.run(
+                    prompt,
+                    usage=usage,
+                    usage_limits=limits,
+                    event_stream_handler=observer.handle,
+                )
         finally:
             observer.finish()
 
@@ -232,6 +259,9 @@ class StageRunner:
             # Multiple report passes share a repair budget. A rejected request
             # must not be recorded as another repair attempt.
             self._repair_limits().check_before_request(runtime.usage)
+            phase = 'global' if target_stage == 'global_reconciliation' or packet_name == 'GLOBAL' else 'analysis'
+            if self.sample_budget is not None:
+                self.sample_budget.check(phase, packet_name, 'format_repair')
             runtime.attempts += 1
             runtime.stage_attempts[target_stage] = runtime.stage_attempts.get(target_stage, 0) + 1
             before = usage_summary(runtime.usage)
@@ -261,6 +291,7 @@ class StageRunner:
                 packet_name=packet_name,
                 usage=runtime.usage,
                 limits=self._repair_limits(),
+                phase=phase,
             )
             candidate = str(repair_run.output).strip()
             repair_dir = stage_directory(artifact_dir, "format_repair")
@@ -346,12 +377,13 @@ class StageRunner:
         )
         prompt = ensure_json_keyword(prompt, stage_agent.model_config.output_mode)
         try:
-            run = await stage_agent.agent.run(
-                prompt,
-                usage=usage,
-                usage_limits=limits,
-                event_stream_handler=observer.handle,
-            )
+            with self._budget_override(stage_agent, packet_name):
+                run = await stage_agent.agent.run(
+                    prompt,
+                    usage=usage,
+                    usage_limits=limits,
+                    event_stream_handler=observer.handle,
+                )
             raw_path = save_raw_output(artifact_dir, stage_agent.stage, observer.raw_output)
             output = cast(BaseModel, run.output)
             if isinstance(output, InvestigationResult) and stage_agent.stage != "reviser":
@@ -368,11 +400,22 @@ class StageRunner:
         except Exception as exc:
             raw = observer.raw_output
             raw_path = save_raw_output(artifact_dir, stage_agent.stage, raw)
+            if isinstance(exc, SampleBudgetExceeded):
+                return self._budget_stopped(exc, stage_agent=stage_agent, artifact_dir=artifact_dir,
+                                            raw=raw, raw_path=raw_path)
             if not (
                 stage_agent.schema is not None
                 and is_repairable_output_failure(exc, raw)
             ):
                 raise
+
+            if self.sample_budget is not None:
+                phase = 'global' if packet_name == 'GLOBAL' or stage_agent.stage == 'global_reconciliation' else 'analysis'
+                try:
+                    self.sample_budget.check(phase, packet_name, stage_agent.stage)
+                except SampleBudgetExceeded as budget_exc:
+                    return self._budget_stopped(budget_exc, stage_agent=stage_agent, artifact_dir=artifact_dir,
+                                                raw=raw, raw_path=raw_path)
 
             error_text = exception_chain_text(exc)
             self.log.warning(
@@ -400,6 +443,9 @@ class StageRunner:
                     output=repaired,
                     raw_output_path=raw_path,
                 )
+            except SampleBudgetExceeded as budget_exc:
+                return self._budget_stopped(budget_exc, stage_agent=stage_agent, artifact_dir=artifact_dir,
+                                            raw=raw, raw_path=raw_path)
             except FormatRepairFailed as repair_exc:
                 errors = repair_exc.validation_errors
                 save_validation_errors(artifact_dir, stage_agent.stage, errors)

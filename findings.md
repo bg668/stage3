@@ -1,5 +1,13 @@
 # 梳理依据
 
+## 2026-11-02 动态探索实施证据
+
+- 新入口：cli.explore_command；核心循环：orchestration/exploration.py；候选/任务合同：exploration_models.py；取材：upstream/catalog.py、packets.prepare_task_packet。
+- 初项由 is_entry 元数据产生，后续选择绑定程序生成候选；未完成审阅或引用检查失败的任务不进入全局事实。支持材料不改变原保留集合分母。
+- 完整回归 576 passed / 1 skipped；独立安装资源验证通过。静态分包此前重生成与已保存 15 个材料/映射文件逐字节一致。
+- 样本 3 实际调用已获准且发向当前配置的本机服务，但入口分析、规划均返回 HTTP 502，用量未知。结果驱动选择的真实验收未通过，不能用离线测试或失败运行宣称业务收益。
+- 本轮来源、实际输入及实现指纹独立复核、196 行无损映射验证见 results/sample3-explore-20261102-01/implementation_verification.json；对照见同目录 comparison.md。
+
 ## 2026-10-21 harness2 v3 顺序反馈核实
 - 当前正常 DAG batch 会向 _save_final_outputs 传入材料目录；assess/report 与 reconcile 的 packets_dir 为可选。not_run 缺陷成立，但“影响每份生产报告”超出代码证据，应按实际入口与审计状态限定范围。
 - DagManifest/load_manifest 消费已有 manifest，当前目录没有第一二阶段产物生成链。样本准备应从一开始作为输入依赖推进，但不应把上游实现纳入本轮工作。
@@ -158,3 +166,47 @@
 - 依赖交接探针确认：保留 suspected，但丢失 claim.limitations、review_completed=false、revision_failed=true。
 - tests 目录本轮结果为470 passed/1 skipped；根目录pytest收集被test_1.py:5旧导入阻断，不宣称根目录完整测试通过。
 - 详细分析及建议写入 docs/content-studio-src-analysis.md。业务源码未修改；真实模型质量、规则简化和成本收益均未进行实验。
+
+# 2026-10-30 离线优化参考核实
+- 官方 harness2：https://github.com/google-research/harness2 。本次核实其提供双层递归、基准、demo、恢复及实验指南；这些是研究/复现依据，不足以直接认定本项目生产适用性。
+- 官方实验指南：https://github.com/google-research/harness2/blob/main/docs/EXPERIMENTS.md 。说明固定任务、executor、improver、judge、网络条件，支持任务分区和 base execution 的独立评分。与项目旧固定版本须重新对齐，不能把旧行为描述当成最新接口。
+- GEPA：https://github.com/gepa-ai/gepa 。作者示例：https://gepa-ai.github.io/gepa/blog/2026/02/18/introducing-optimize-anything/ 。可参考可编辑文本、执行反馈、候选搜索与未见任务验证合同。
+- Databricks 一手实验：https://www.databricks.com/blog/building-state-art-enterprise-agents-90x-cheaper-automated-prompt-optimization 。区分离线优化成本与服务成本，报告业务基准对照，不把其提升数字外推到恶意代码分析。
+- 工程验收经验：https://code.visualstudio.com/blogs/2026/05/15/agent-harnesses-github-copilot-vscode 。团队用产品相关离线任务验证 harness 修改，并比较正确率、tokens、耗时。
+- 专家错误分析：https://hamel.dev/blog/posts/evals-faq/ 。从实际失败归类、保留随机样本、对齐人工判断来建设评测。
+- 当前 tests/fixtures/revision_20261021、revision_20261026 和回放测试已含真实纠错素材；缺口是整理成专家确认且具有适用边界的优化案例，并准备按样本隔离的评测任务。
+- pyproject.toml 与 src 未发现 harness2 接入、learning/evaluation 运行模块。已有 harness_dir、指令指纹和阶段产物；完整实验轨迹、业务质量评分、候选基线比较及发布验收仍需补齐。knowledge_report.py 的 not_run/passed=true 分支仍存在。
+
+# 2026-10-30 综合实施优先级核对
+- 重新读取 LangChain design-agent 原文与 harness2 官方 README/EXPERIMENTS。综合分工：专家标准与反馈由项目积累，优化器提出/试验候选，独立验收决定发布。
+- 当前代码仍有 knowledge_report 无源码 not_run/passed=true，以及 dependency handoff 缺 limitations/review_completed/revision_failed。本轮合成探针再次复现。
+- 当前 HTML 已于2026-10-29增加 _audit_meta：未知/未运行显示未审计。方案针对底层判定，不沿用旧版本页面状态结论。
+- 真实冻结夹具区分历史输出和整理后的协议输入。三组离线回归（revision_replay、revision_integrity、upstream_contract）本次30 passed，1.03秒。
+- 综合方案写入 docs/harness-iteration-priorities.md：先统一实验判定与交接信息，整理专家案例和验收标准，固定基线，再做受限 harness2 试点和技能发布。新增模块仅建议，无真实模型试验或业务源码改动。
+
+# 2026-10-30 新输入对任务顺序的影响
+- 用户说明：已有IDA函数获取与材料整理流程，尚未连接当前第三阶段，已有3个案例，优先跑现有案例。
+- 当前源码确认消费UTF-8材料包、manifest任务DAG、稳定F函数编号与L行号；第一二阶段不在本目录实现。testdata/packets/J00.md明确为人工重建包，不能据此认为自动上游已贯通。
+- 调整首个里程碑：最小文件交接及离线预检 -> 单例实际贯通 -> 同基线剩余2例 -> 3例人工复核和问题归因。评价/学习根据实际失败逐步提炼，harness2在此后做受限试点。
+- 独立区分材料获取、选料分包、接口运行、分析策略、报告表达问题；避免将上游遗漏全部当作提示词缺陷。上游程序入口与3个案例路径尚未读取，不声称已完成连接或运行。
+
+# 2026-10-30 最新背景：人工材料是受控实验设计
+- 用户明确：阶段一、二筛选更可能与恶意判定、检测、关联溯源相关的函数，作为线索入口。实际阶段三处理效果不佳，因此人工提取确认函数材料包，作为最理想输入下的效果展示，隔离外部因素。
+- 撤回本会话上一轮“优先连接上游再跑三例”的顺序：当前应保持人工材料不变，先验证阶段三能力，再接入自动筛选结果做全流程及上游损失对照。
+- 当前首个里程碑：固定3例人工材料及运行条件，列三个业务目标的预期检查点，逐阶段追踪错误首次出现位置，针对一个主要问题修改并复验。已用于反复改进的案例不能再称为未见留出样本。
+- 已更新 docs/harness-iteration-priorities.md，替换上一轮材料贯通优先段落。人工确认入口不意味着所有语义关系/外部归因已闭合，具体结论仍要证据支持。
+
+# reference实证核查
+- 3个db函数数393/140/500；只有debug_03一组输出。sample3输入db SHA256与保存preprocess记录一致。
+- 第一阶段43保留/185跳过/272待判；第二阶段57保留/215跳过，forced=0。保留100函数/144816代码字符，总500函数/273895字符。
+- 旧planner-v4已做19owner/65context/11deferred和17区域18任务，不能说没有规划。后续46卡中26BLOCKING，40张rank50，已做32函数选择，但未证明优先级可靠。
+- 历史事实准备输出60742超过60000上限；10抽取2审阅，5review超时、2KeyError、1预算停止；汇总探针CONTEXT_LIMIT。旧执行器源码未提供，不能把错误归于当前src。
+- 保存triage模板r1.v2/r2.v1，当前源码r1.v3/r2.v2，需保留版本边界。人工16包123唯一函数，说明变量不止数量。
+- 详细结论及当前预算规划缺口见docs/reference-triage-resource-analysis.md，业务收益尚未通过重跑验证。
+
+## 2026-10-30 实施与真实基线证据
+自动材料100主体/144816字符、13包；支持29唯一/104次。人工材料16包，冻结与原文件哈希一致。预算拦截在供应商请求边界，覆盖SDK上层输出重试、修复和整合；基线关闭SDK隐藏重试。完整任务完成率与有效初稿比例分开。
+完整离线回归538通过1跳过；wheel由sdist构建，隔离加载127运行模块且上游固定响应链通过。正式运行gpt-5.6-luna：自动14、人工17请求均HTTP502，31次用量未知；记录0仅为已知下界，不能解释为零成本。报告无有效业务结论，三目标人工评价保持待评价。详见docs/sample3-baseline.md及results/sample3-baseline-20261030-01。
+
+## 2026-10-31 本轮真实效果
+403136字符自动材料对198060字符人工材料；自动支持函数29唯一/104次，重复源码62162字符，导航32403字符、路径24480字符。自动入口F-0500已保留但在J12预算暂缓；人工入口J00先执行，较早获得互斥体门控和固定输出上下文。自动实际J00/J02/J05，人工J00/J01/J02/J03。自动15条行为/22制品，人工14条行为/整合23制品，不能解读为准确率。当前主要证据指向实际输入体积与预算内任务覆盖；建议保持同100函数，先单独压缩非源码文本，再单独验证任务组织顺序。复验及三目标初步对照见docs/sample3-baseline-verification-20261031.md。

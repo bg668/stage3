@@ -11,6 +11,7 @@ from pydantic_ai.usage import RunUsage, UsageLimits
 from .config import AppConfig
 from .harness import ResolvedHarness, load_harness
 from .execution.stage_runner import RepairRuntime, StageRunner
+from .execution.sample_budget import SampleBudget
 from .execution.artifacts import save_model, save_sidecar_json
 from .execution.llm import StageAgent, build_stage_agent, build_text_stage_agent
 from .investigation.review_guard import constrain_reviewer_scope
@@ -54,7 +55,8 @@ from .execution.usage_utils import merge_usage_summaries, usage_delta, usage_sum
 class BoundedInvestigationWorkflow:
     """Bounded investigation with clean-context format repair and graceful result preservation."""
 
-    def __init__(self, config: AppConfig, *, harness: ResolvedHarness | None = None):
+    def __init__(self, config: AppConfig, *, harness: ResolvedHarness | None = None,
+                 sample_budget: SampleBudget | None = None):
         self.harness = harness or load_harness(config.harness_dir)
         self.config = config
         self.log = get_logger("workflow")
@@ -82,7 +84,8 @@ class BoundedInvestigationWorkflow:
                 schema=GlobalReconciliationDecisionResult,
                 instructions=global_reconciliation_instructions(),
             )
-        self.stage_runner = StageRunner(config=config, format_repair=self.format_repair, log=self.log)
+        self.stage_runner = StageRunner(config=config, format_repair=self.format_repair, log=self.log,
+                                        sample_budget=sample_budget)
 
     def _limits(self) -> UsageLimits:
         return UsageLimits(

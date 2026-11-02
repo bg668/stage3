@@ -15,6 +15,82 @@ from .reporting.html_report import create_html_report
 app = typer.Typer(add_completion=False, no_args_is_help=True)
 
 
+@app.command('explore')
+def explore_command(
+    preprocess: Path = typer.Option(..., '--preprocess', exists=True),
+    triage: Path = typer.Option(..., '--triage', exists=True),
+    config: Path = typer.Option(Path('config.yaml'), '--config', exists=True),
+    output_dir: Path = typer.Option(..., '--output-dir'),
+    total_tokens: int = typer.Option(200000, '--total-tokens', min=1),
+    env_file: Path | None = typer.Option(None, '--env-file'),
+) -> None:
+    """Explore a sample from entry points, planning one evidence-driven task at a time."""
+    from .orchestration.exploration import run_exploration
+    settings = load_config(config, env_file)
+    configure_logging(settings.logging)
+    asyncio.run(run_exploration(preprocess=preprocess, triage=triage, config=settings,
+                               output_dir=output_dir, total_tokens=total_tokens))
+    typer.echo(str(output_dir / 'results' / 'exploration_scope.json'))
+
+
+@app.command('preprocess')
+def preprocess_command(
+    sqlite: Path = typer.Option(..., '--sqlite', exists=True, dir_okay=False),
+    output_dir: Path = typer.Option(..., '--output-dir'),
+) -> None:
+    """Export first-stage materials from an IDA SQLite export."""
+    from .upstream import run_preprocess_pipeline
+    result = run_preprocess_pipeline(sqlite, output_dir)
+    if result.exit_code:
+        raise typer.Exit(result.exit_code)
+    typer.echo(str(output_dir / 'preprocess.json'))
+
+
+@app.command('triage')
+def triage_command(
+    preprocess: Path = typer.Option(..., '--preprocess', exists=True),
+    llm_config: Path = typer.Option(..., '--llm-config', exists=True, dir_okay=False),
+    output_dir: Path = typer.Option(..., '--output-dir'),
+) -> None:
+    """Run second-stage screening using the upstream JSON model registry."""
+    from .upstream import run_triage_pipeline
+    result = run_triage_pipeline(preprocess, llm_config, output_dir)
+    if result.exit_code:
+        raise typer.Exit(result.exit_code)
+    typer.echo(str(output_dir / 'triage.json'))
+
+
+@app.command('prepare-packets')
+def prepare_packets_command(
+    preprocess: Path = typer.Option(..., '--preprocess', exists=True),
+    triage: Path = typer.Option(..., '--triage', exists=True),
+    output_dir: Path = typer.Option(..., '--output-dir'),
+) -> None:
+    """Generate current investigation packets from saved screening decisions offline."""
+    from .upstream import prepare_packets
+    prepare_packets(preprocess, triage, output_dir)
+    typer.echo(str(output_dir / 'manifest.json'))
+
+
+@app.command('baseline')
+def baseline_command(
+    preprocess: Path = typer.Option(..., '--preprocess', exists=True),
+    triage: Path = typer.Option(..., '--triage', exists=True),
+    manual_dir: Path = typer.Option(..., '--manual-dir', exists=True, file_okay=False),
+    config: Path = typer.Option(Path('config.yaml'), '--config', exists=True),
+    output_dir: Path = typer.Option(..., '--output-dir'),
+    total_tokens: int = typer.Option(200000, '--total-tokens', min=1),
+    env_file: Path | None = typer.Option(None, '--env-file'),
+) -> None:
+    """Run fresh automatic/manual arms sequentially with independent sample budgets."""
+    from .orchestration.baseline import run_baseline
+    settings = load_config(config, env_file)
+    configure_logging(settings.logging)
+    asyncio.run(run_baseline(preprocess=preprocess, triage=triage, manual_dir=manual_dir,
+                            config=settings, output_dir=output_dir, total_tokens=total_tokens))
+    typer.echo(str(output_dir / 'comparison.md'))
+
+
 @app.command("version")
 def version() -> None:
     """Print the loaded code, schema and entrypoint paths to detect stale installs."""

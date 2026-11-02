@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
 from ..evidence.scope import (
     EvidenceScope,
@@ -38,6 +39,45 @@ def clear_report_outputs(output_dir: Path) -> None:
             path.unlink()
 
 
+def load_saved_exploration_scope(*source_directories: Path) -> dict[str, Any] | None:
+    """Read only explicitly supplied result roots and their immediate parents.
+
+    Saved execution state is separate from model facts. A recognized dynamic
+    run with absent or unreadable state stays unknown during report/replay.
+    """
+    roots = list(dict.fromkeys(root.resolve() for source in source_directories
+                               for root in (source, source.parent)))
+    for root in roots:
+        path = root / 'exploration_scope.json'
+        if not path.is_file():
+            continue
+        try:
+            scope = json.loads(path.read_text(encoding='utf-8'))
+            if not isinstance(scope, dict) or not scope:
+                raise ValueError('scope must be a nonempty object')
+            return scope
+        except (OSError, ValueError) as exc:
+            return {'coverage_status': 'unknown',
+                    'reason': f'保存的探索范围无法读取：{type(exc).__name__}',
+                    'source_file': str(path)}
+    for root in roots:
+        path = root / 'experiment_manifest.json'
+        if not path.is_file():
+            continue
+        try:
+            manifest = json.loads(path.read_text(encoding='utf-8'))
+        except (OSError, ValueError):
+            continue
+        if not isinstance(manifest, dict):
+            continue
+        modes = {manifest.get(key) for key in ('mode', 'execution_mode', 'experiment_type')
+                 if isinstance(manifest.get(key), str)}
+        if modes & {'explore', 'exploration', 'dynamic', 'bounded_dynamic_exploration'}:
+            return {'coverage_status': 'unknown', 'reason': '动态运行的探索范围记录缺失；不能恢复函数覆盖。',
+                    'source_manifest': str(path)}
+    return None
+
+
 def save_final_outputs(
     output_dir: Path,
     global_envelope: GlobalReconciliationEnvelope,
@@ -45,10 +85,18 @@ def save_final_outputs(
     evidence_scope: EvidenceScope | None = None,
     packet_coverage: list[PacketCoverage] | None = None,
     packet_source_dir: Path | None = None,
+    exploration_scope: dict[str, Any] | None = None,
 ) -> dict[str, object]:
     """Project validated knowledge to three report levels without model calls."""
     clear_report_outputs(output_dir)
     summary: dict[str, object] = {"mode": "deterministic", "completed": False}
+    if exploration_scope is not None:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        (output_dir / 'exploration_scope.json').write_text(
+            json.dumps(exploration_scope, ensure_ascii=False, indent=2), encoding='utf-8')
+        summary.update({'completion_scope': 'available_facts_only',
+                        'business_evaluation_status': 'pending_human_review',
+                        'exploration_coverage_status': exploration_scope.get('coverage_status', 'recorded')})
     if global_envelope.result is None or not global_envelope.provenance_valid:
         summary["reason"] = "canonical facts missing or provenance gate failed"
         return summary
@@ -62,6 +110,7 @@ def save_final_outputs(
         source_claim_count=global_envelope.source_claim_count or None,
         source_artifact_count=global_envelope.source_artifact_count or None,
         packet_source_dir=packet_source_dir,
+        exploration_scope=exploration_scope,
     )
     report_path, markdown_path, audit_path, audit = paths
     report_data = json.loads(report_path.read_text(encoding="utf-8"))
@@ -117,6 +166,7 @@ def report_saved_results(
     if evidence_dir is not None and packets_dir is None:
         raise ValueError("--evidence-dir requires --packets-dir when using assess to rebuild an index")
     source_result_dir = packet_results_dir if packet_results_dir is not None else global_result.parent
+    exploration_scope = load_saved_exploration_scope(source_result_dir, global_result.parent)
     packet_coverage = packet_coverage_from_directory(source_result_dir, canonical=envelope.result)
     saved_scope = global_result.parent / "_evidence_scope.json"
     if packets_dir is not None:
@@ -159,6 +209,7 @@ def report_saved_results(
     summary = save_final_outputs(
         output_dir, envelope, evidence_scope=scope, packet_coverage=packet_coverage,
         packet_source_dir=packets_dir,
+        exploration_scope=exploration_scope,
     )
     (output_dir / "_report_summary.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8"

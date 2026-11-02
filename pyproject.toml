@@ -14,6 +14,7 @@ dependencies = [
   "python-dotenv>=1.0,<2.0",
   "PyYAML>=6.0,<7.0",
   "typer>=0.16,<1.0",
+  "rich>=13,<15",
 ]
 
 [project.optional-dependencies]
@@ -36,6 +37,9 @@ include = [
   "malware-report-html.skill",
   "src/malware-report-html-1.1.zip",
   "docs/html-report.md",
+  "docs/explore.md",
+  "docs/verify-global.md",
+  "scripts/verify_global.py",
   "README.md",
   "config.example.yaml",
   ".env.example",

@@ -1,0 +1,42 @@
+你正在执行恶意代码分析流水线的第二轮快速分诊。第一轮已经明确认为当前 SUBJECT 信息不足，程序已根据上一轮 reason 补充了相关代码和关系材料。本轮必须把该 SUBJECT 收敛为 ANALYZE 或 SKIP，不能再输出 UNCERTAIN。
+
+判断对象只有 [SUBJECT]：
+- [SUPPLEMENT] 是程序按第一轮缺失原因补充的辅助材料，不是新的待判定函数。
+- 不要为 [SUPPLEMENT] 中的函数单独输出 verdict。
+- 每个输入包只有一个 SUBJECT，必须且只能输出该 SUBJECT 一条 verdict。
+
+决策含义：
+- ANALYZE：补充材料后，该 SUBJECT 仍值得下一阶段精读。它不是“已确认恶意”的结论。
+- SKIP：补充材料后，可以安全认为该 SUBJECT 对后续安全行为分析价值很低。
+
+SKIP reason：
+- S_WRAPPER：仅做薄包装/转发，本身没有值得独立精读的逻辑。
+- S_PURE_COMPUTE：纯计算或通用数据处理，没有可见的安全相关系统行为。
+- S_ERROR_PATH：主要是错误处理、清理或失败分支。
+- S_RUNTIME_HELPER：编译器/运行时辅助逻辑。
+
+ANALYZE reason：
+- anti-analysis：反调试、反虚拟化、规避分析。
+- collection：收集主机、用户、文件、凭据或其他信息。
+- communication：网络通信、协议、C2 或远程交互。
+- data-manipulation：编码、解码、加解密、压缩或关键数据变换，且值得后续追踪。
+- host-interaction：进程、线程、文件、注册表、服务、系统配置等主机交互。
+- impact：破坏、加密、删除、干扰等影响行为。
+- linking：把关键对象、数据或执行路径连接起来的逻辑。
+- load-code：加载、映射、注入或执行代码。
+- persistence：持久化相关行为。
+- other：明显值得精读但不属于以上类别。
+
+先区分“函数具备敏感能力”和“当前样本实际使用该能力”。危险 API、敏感字符串或通用库能力只是导航线索，不能单独证明恶意或核心行为。优先根据补充的 caller、callee、参数和数据流判断 SUBJECT 是否值得继续追踪；已确认是未修改的库/运行时实现且样本只把它当通用工具时，分析样本交界即可，不因其内部敏感能力扩大精读范围。ANALYZE 只表示仍值得追踪，不表示已经建立样本内恶意结论。
+
+如果补充材料仍然不充分，也不能猜测成 SKIP；保守选择 ANALYZE。note 仅用于一句很短的调度理由，不写行为报告、证据链或关系结论。
+
+结构化输出契约：
+- <verdicts>: <数组；当前 SUBJECT 恰好一项>
+- <ref>: <当前 SUBJECT 的 F-ref>
+- <decision>: [ANALYZE | SKIP]
+- <reason>: [S_WRAPPER | S_PURE_COMPUTE | S_ERROR_PATH | S_RUNTIME_HELPER | anti-analysis | collection | communication | data-manipulation | host-interaction | impact | linking | load-code | persistence | other]
+- <note>: <不超过120字符的一句调度理由>
+
+简短示例：
+{"verdicts":[{"ref":"F-0001","decision":"ANALYZE","reason":"host-interaction","note":"补充调用上下文显示该函数直接参与进程操作"}]}

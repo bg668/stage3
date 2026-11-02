@@ -57,6 +57,9 @@ models:
     stream_output: true
 
 stages:
+  planner:
+    model: investigator
+    max_output_tokens: 1024
   analyzer:
     model: investigator
     max_output_tokens: 40960
@@ -104,6 +107,9 @@ html_report:
 
 batch:
   concurrency: 4
+
+exploration:
+  max_rounds: 6
 
 logging:
   level: "INFO"

@@ -19,7 +19,7 @@ from ..evidence.inventory import (
 )
 from ..io import write_error
 from ..logging_utils import get_logger
-from ..reporting.service import clear_report_outputs, save_final_outputs
+from ..reporting.service import clear_report_outputs, load_saved_exploration_scope, save_final_outputs
 from ..schemas import RunEnvelope
 
 
@@ -62,7 +62,11 @@ async def reconcile_saved_results(
         raise ValueError("Replay output directory must differ from saved Worker results directory")
     log = get_logger("reconcile")
     completed, failures = load_saved_packet_results(packet_results_dir)
+    exploration_scope = load_saved_exploration_scope(packet_results_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+    if exploration_scope is not None:
+        (output_dir / 'exploration_scope.json').write_text(
+            json.dumps(exploration_scope, ensure_ascii=False, indent=2), encoding='utf-8')
     # A failed new replay must never leave an older successful report looking current.
     clear_report_outputs(output_dir)
     for stale in (
@@ -109,6 +113,7 @@ async def reconcile_saved_results(
             output_dir, global_result, evidence_scope=scope,
             packet_coverage=packet_coverage_from_results(completed, failures),
             packet_source_dir=packets_dir,
+            exploration_scope=exploration_scope,
         )
         summary = {
             "source_results_dir": str(packet_results_dir),

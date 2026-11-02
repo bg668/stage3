@@ -9,6 +9,7 @@ capability, absence or IOC is presumed here.
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -57,6 +58,7 @@ def project_knowledge(
     source_artifact_count: int | None = None,
     packet_source_dir: Path | None = None,
     packet_paths: list[Path] | None = None,
+    exploration_scope: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Normalize the final three levels and produce a per-source audit ledger.
 
@@ -270,6 +272,10 @@ def project_knowledge(
     }
     report["code_excerpts"] = report_code_excerpts(report, packet_source_dir, packet_paths=packet_paths)
     report["source_excerpts_available"] = bool(report["code_excerpts"])
+    if exploration_scope is not None:
+        report['exploration_scope'] = deepcopy(exploration_scope)
+        report['completion_scope'] = 'available_facts_only'
+        report['business_evaluation_status'] = 'pending_human_review'
     return report, audit
 
 
@@ -294,11 +300,43 @@ def _valuable_limitations(limitations: list[str]) -> list[str]:
     return [x for x in limitations if not any(phrase in x.lower() for phrase in boilerplate)]
 
 
+def _exploration_markdown(scope: dict[str, Any]) -> list[str]:
+    """Display recorded coverage without promoting supply or model stops to acceptance."""
+    def value(key: str) -> str:
+        item = scope.get(key)
+        if item is None:
+            return '未知'
+        if isinstance(item, (dict, list)):
+            return json.dumps(item, ensure_ascii=False)
+        return str(item)
+
+    lines = ['## 本轮探索范围', '',
+        '全局整合仅汇总已有事实，不代表全部候选函数已调查完成。',
+        '规划器停止理由是执行记录，不代表恶意判定、检测或关联溯源目标已经验收。',
+        '业务评价：待人工复核。', '']
+    if scope.get('coverage_status') == 'unknown':
+        lines.extend(['**覆盖范围未知：** ' + str(scope.get('reason', '原始探索范围记录缺失。')), ''])
+    for label, key in [('候选函数总数', 'candidate_count'), ('已供给函数', 'supplied_refs'),
+        ('已作为主体访问函数', 'primary_refs'),
+        ('已完成审阅函数', 'reviewed_refs'), ('仅有初稿函数', 'draft_refs'),
+        ('支持材料函数', 'support_refs'), ('保留集合内支持函数', 'selected_support_refs'),
+        ('非保留支持函数（不计入候选分母）', 'nonselected_support_refs'),
+        ('未作为主体访问函数', 'unvisited_refs'),
+        ('预算暂缓函数', 'deferred_refs'), ('重访记录', 'revisits'),
+        ('待查问题', 'pending_questions'), ('执行停止理由', 'stop_reason'),
+        ('模型停止理由', 'model_stop_reason')]:
+        lines.append(f'- {label}：{value(key)}')
+    lines.append('')
+    return lines
+
+
 def render_knowledge_markdown(report: dict[str, Any]) -> str:
     lines: list[str] = [
         "# 恶意代码调查报告", "",
         "## 一、核心已确认行为", "",
     ]
+    if report.get('exploration_scope') is not None:
+        lines[2:2] = _exploration_markdown(report['exploration_scope'])
     if report.get("audit_issues"):
         lines.extend(["**完整性警告：** " + "；".join(report["audit_issues"]), ""])
     core = report["core_behaviors"]
@@ -401,6 +439,7 @@ def save_knowledge_outputs(
     source_claim_count: int | None = None,
     source_artifact_count: int | None = None,
     packet_source_dir: Path | None = None,
+    exploration_scope: dict[str, Any] | None = None,
 ) -> tuple[Path, Path, Path, dict[str, Any]]:
     directory.mkdir(parents=True, exist_ok=True)
     report, audit = project_knowledge(
@@ -410,6 +449,7 @@ def save_knowledge_outputs(
         source_claim_count=source_claim_count,
         source_artifact_count=source_artifact_count,
         packet_source_dir=packet_source_dir,
+        exploration_scope=exploration_scope,
     )
     json_path = directory / "_report_ready.json"
     markdown_path = directory / "_final_report.md"
