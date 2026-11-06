@@ -11,6 +11,7 @@ from pydantic_ai.providers.deepseek import DeepSeekProvider
 from pydantic_ai.providers.openai import OpenAIProvider
 
 from ..config import AppConfig, ModelConfig, ProviderConfig, StageName
+from .pacing import PacedModel
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -47,8 +48,11 @@ def build_model(config: AppConfig, model_key: str):
         provider = OpenAIProvider(openai_client=client)
 
     if model_cfg.api_mode == "responses":
-        return OpenAIResponsesModel(model_cfg.model_name, provider=provider)
-    return OpenAIChatModel(model_cfg.model_name, provider=provider)
+        model = OpenAIResponsesModel(model_cfg.model_name, provider=provider)
+    else:
+        model = OpenAIChatModel(model_cfg.model_name, provider=provider)
+    return PacedModel(model, service_key=(provider_cfg.base_url or provider_cfg.type).rstrip('/'),
+                      interval=provider_cfg.min_request_interval_seconds)
 
 
 def build_model_settings(

@@ -22,3 +22,7 @@
 2026-11-02 09:36:40 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
 2026-11-02 17:30:26 | WARNING | command=assess missing_auto_inventory source=D:\Work\01_processing\bounded_investigator_mvp\.pytest_cache\global-script-full-final\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
 2026-11-02 17:30:26 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-11-03 09:01:14 | WARNING | command=assess missing_auto_inventory source=D:\Work\01_processing\bounded_investigator_mvp\.pytest_cache\interval-full\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-11-03 09:01:14 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0
+2026-11-03 09:02:32 | WARNING | command=assess missing_auto_inventory source=D:\Work\01_processing\bounded_investigator_mvp\.pytest_cache\interval-full-final\test_cli_report_is_offline_wit0; pass --packets-dir to rebuild
+2026-11-03 09:02:32 | INFO    | command=report completed=True confirmed=1 suspected=1 leads=4 model_requests=0

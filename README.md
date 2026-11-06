@@ -38,6 +38,8 @@ providers:
     base_url: "https://api.deepseek.com"
     api_key_env: "DEEPSEEK_API_KEY"
     sdk_max_retries: 0
+    # 上一次模型调用结束后，至少等待1秒再调用同一服务。
+    min_request_interval_seconds: 1
 
 models:
   investigator:

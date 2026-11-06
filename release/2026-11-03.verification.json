@@ -1,0 +1,21 @@
+{
+  "archive": "2026-11-03.zip",
+  "bytes": 2126485,
+  "sha256": "2446980567cf931ffe2ecfdd1a92b276c6383ee6a242a879cced6035a48785b3",
+  "checks": {
+    "zip_integrity": "passed",
+    "manifest_file_hashes": "passed",
+    "excluded_sensitive_paths": "passed",
+    "local_credential_scan": "passed",
+    "extracted_module_imports": 131,
+    "planner_and_html_resources": "passed",
+    "cli_help": "passed",
+    "config_tests_passed": 3
+  },
+  "limitations": [
+    "Third-party dependencies require network access or pre-existing cache.",
+    "A full model run was not repeated for packaging.",
+    "Missing examples/generate_html_preview.py is documented as a known regression-test limitation.",
+    "An additional async test run was not started because automatic approval review timed out; packaging checks and synchronous tests completed without escalation."
+  ]
+}

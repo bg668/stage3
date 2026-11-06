@@ -146,6 +146,9 @@ class PydanticAIProvider:
         settings_kwargs: dict[str, Any] = {
             "max_tokens": self.resolved.max_output_tokens,
         }
+        from ....execution.pacing import PacedModel
+        model = PacedModel(model, service_key=(self.resolved.base_url or self.resolved.model.split(':', 1)[0]).rstrip('/'),
+                           interval=self.resolved.min_request_interval_seconds)
         reasoning_effort = self.resolved.reasoning_effort
         if reasoning_effort is not None:
             settings_kwargs["openai_reasoning_effort"] = reasoning_effort

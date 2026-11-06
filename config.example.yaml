@@ -7,6 +7,8 @@ providers:
     api_key_env: "DEEPSEEK_API_KEY"
     request_timeout_seconds: 180
     sdk_max_retries: 0
+    # 同一服务上一次请求结束后，至少等待1秒；0为关闭。
+    min_request_interval_seconds: 1
 
   # 示例：内部 OpenAI-compatible 网关。未使用时可保留或删除。
   internal:
@@ -15,6 +17,7 @@ providers:
     api_key_env: "INTERNAL_API_KEY"
     request_timeout_seconds: 180
     sdk_max_retries: 0
+    min_request_interval_seconds: 1
 
 models:
   investigator:

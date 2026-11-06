@@ -24,6 +24,7 @@ class ProviderConfig(BaseModel):
     api_key_env: str = "LLM_API_KEY"
     request_timeout_seconds: float = Field(default=180, gt=0)
     sdk_max_retries: int = Field(default=0, ge=0, le=10)
+    min_request_interval_seconds: float = Field(default=1.0, ge=0, allow_inf_nan=False)
 
 
 class ModelConfig(BaseModel):

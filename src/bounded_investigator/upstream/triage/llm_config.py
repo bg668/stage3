@@ -29,6 +29,7 @@ class ProviderSpec(BaseModel):
     kind: ProviderKind
     base_url: str | None = None
     api_key_env: str | None = None
+    min_request_interval_seconds: float = Field(default=1.0, ge=0, allow_inf_nan=False)
 
     @model_validator(mode="after")
     def validate_kind_fields(self) -> "ProviderSpec":
@@ -130,6 +131,7 @@ class ResolvedModel(BaseModel):
     model: str
     base_url: str | None = None
     api_key_env: str | None = None
+    min_request_interval_seconds: float = Field(default=1.0, ge=0, allow_inf_nan=False)
     temperature: float = 0.0
     reasoning_effort: ReasoningEffort | None = None
     max_output_tokens: int | None = None
@@ -181,6 +183,7 @@ class LLMRegistry:
             model=profile.model,
             base_url=provider.base_url,
             api_key_env=provider.api_key_env,
+            min_request_interval_seconds=provider.min_request_interval_seconds,
             temperature=profile.temperature,
             reasoning_effort=profile.reasoning_effort,
             max_output_tokens=profile.max_output_tokens,
